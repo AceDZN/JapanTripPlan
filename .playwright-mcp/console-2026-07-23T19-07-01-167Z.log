@@ -1,0 +1,75 @@
+[    1128ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=90384d8d:14337
+[  708993ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=90384d8d:14337
+[  731815ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/.rsc?_rsc:0
+[  731816ms] [ERROR] [vinext] RSC HMR error: Error: Connection closed.
+    at close (http://localhost:3000/node_modules/.vite/deps/react-server-dom-webpack_client__browser.js?v=90384d8d:2364:36)
+    at progress (http://localhost:3000/node_modules/.vite/deps/react-server-dom-webpack_client__browser.js?v=90384d8d:2437:28) @ http://localhost:3000/@vite/client:509
+[  732039ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/.rsc?_rsc:0
+[  732039ms] [ERROR] [vinext] RSC HMR error: Error: Connection closed.
+    at close (http://localhost:3000/node_modules/.vite/deps/react-server-dom-webpack_client__browser.js?v=90384d8d:2364:36)
+    at progress (http://localhost:3000/node_modules/.vite/deps/react-server-dom-webpack_client__browser.js?v=90384d8d:2437:28) @ http://localhost:3000/@vite/client:509
+[  732219ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/.rsc?_rsc:0
+[  732219ms] [ERROR] [vinext] RSC HMR error: Error: Connection closed.
+    at close (http://localhost:3000/node_modules/.vite/deps/react-server-dom-webpack_client__browser.js?v=90384d8d:2364:36)
+    at progress (http://localhost:3000/node_modules/.vite/deps/react-server-dom-webpack_client__browser.js?v=90384d8d:2437:28) @ http://localhost:3000/@vite/client:509
+[  738901ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/app/_sites-preview/preview.css?t=1784834360017:0
+[  738901ms] [ERROR] [vite] Failed to reload /app/_sites-preview/preview.css. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:3000/@vite/client:509
+[  738927ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/app/_sites-preview/SkeletonPreview.tsx?t=1784834360018:0
+[  738927ms] [ERROR] [vite] Failed to reload /app/_sites-preview/SkeletonPreview.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:3000/@vite/client:509
+[  833881ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  833909ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/favicon.ico:0
+[  835211ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  835231ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/favicon.ico:0
+[  846971ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  846987ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/favicon.ico:0
+[  888872ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/_vinext/image?url=%2Fimages%2Ftokyo-sunset.jpg&w=640&q=75:0
+[  888889ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/_vinext/image?url=%2Fimages%2Fakihabara.jpg&w=640&q=75:0
+[  888890ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/_vinext/image?url=%2Fimages%2Fshibuya.jpg&w=640&q=75:0
+[  888891ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=90384d8d:14337
+[  888955ms] [ERROR] Failed to load resource: net::ERR_SSL_PROTOCOL_ERROR @ https://localhost:3000/favicon.svg:0
+[  888995ms] [ERROR] Failed to load resource: net::ERR_SSL_PROTOCOL_ERROR @ https://localhost:3000/favicon.svg:0
+[  889027ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:3000/node_modules/.vite/deps/lucide-react.js?v=53e15527:0
+[  889027ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:3000/node_modules/.vite/deps/next_link.js?v=fdee1e3d:0
+[  889031ms] [ERROR] TypeError: Failed to fetch dynamically imported module: http://localhost:3000/components/AppShell.tsx @ http://localhost:3000/@vite/client:509
+[  889031ms] [ERROR] The above error occurred in a React component:
+
+    at Lazy (<anonymous>)
+    at body (<anonymous>)
+    at html (<anonymous>)
+    at RootLayout [Server] (<anonymous>)
+    at default (about://React/Server/file:///Users/acedzn/dev/JapanTripPlan/web/app/layout.tsx?1:97:26)
+    at default (about://React/Server/file:///Users/acedzn/dev/JapanTripPlan/web/app/layout.tsx?1:97:26)
+    at Slot (http://localhost:3000/node_modules/vinext/dist/shims/slot.js?v=096ec873:42:17)
+    at LayoutSegmentProvider (http://localhost:3000/node_modules/vinext/dist/shims/layout-segment-context.js?v=096ec873:32:34)
+    at Slot (http://localhost:3000/node_modules/vinext/dist/shims/slot.js?v=096ec873:42:17)
+    at NavigationCommitSignal (http://localhost:3000/node_modules/vinext/dist/server/app-browser-navigation-controller.js?v=096ec873:184:36)
+    at RedirectErrorBoundary (http://localhost:3000/node_modules/vinext/dist/shims/error-boundary.js?v=096ec873:56:3)
+    at RedirectBoundary (http://localhost:3000/node_modules/vinext/dist/shims/error-boundary.js?v=096ec873:86:29)
+    at DevRecoveryBoundary (http://localhost:3000/node_modules/vinext/dist/shims/error-boundary.js?v=096ec873:268:3)
+    at BrowserRoot (http://localhost:3000/node_modules/vinext/dist/server/app-browser-entry.js?v=096ec873:209:24) @ http://localhost:3000/@vite/client:509
+[  889036ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:3000/node_modules/.vite/deps/next_image.js?v=87a795b0:0
+[  889099ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[  891550ms] [ERROR] TypeError: Failed to fetch dynamically imported module: http://localhost:3000/components/AppShell.tsx @ http://localhost:3000/@vite/client:509
+[  891550ms] [ERROR] The above error occurred in a React component:
+
+    at Lazy (<anonymous>)
+    at body (<anonymous>)
+    at html (<anonymous>)
+    at RootLayout [Server] (<anonymous>)
+    at default (about://React/Server/file:///Users/acedzn/dev/JapanTripPlan/web/app/layout.tsx?1:97:26)
+    at default (about://React/Server/file:///Users/acedzn/dev/JapanTripPlan/web/app/layout.tsx?1:97:26)
+    at Slot (http://localhost:3000/node_modules/vinext/dist/shims/slot.js?v=096ec873:42:17)
+    at LayoutSegmentProvider (http://localhost:3000/node_modules/vinext/dist/shims/layout-segment-context.js?v=096ec873:32:34)
+    at Slot (http://localhost:3000/node_modules/vinext/dist/shims/slot.js?v=096ec873:42:17)
+    at NavigationCommitSignal (http://localhost:3000/node_modules/vinext/dist/server/app-browser-navigation-controller.js?v=096ec873:184:36)
+    at RedirectErrorBoundary (http://localhost:3000/node_modules/vinext/dist/shims/error-boundary.js?v=096ec873:56:3)
+    at RedirectBoundary (http://localhost:3000/node_modules/vinext/dist/shims/error-boundary.js?v=096ec873:86:29)
+    at DevRecoveryBoundary (http://localhost:3000/node_modules/vinext/dist/shims/error-boundary.js?v=096ec873:268:3)
+    at BrowserRoot (http://localhost:3000/node_modules/vinext/dist/server/app-browser-entry.js?v=096ec873:209:24) @ http://localhost:3000/@vite/client:509
+[  918756ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:3000/@vite/client:968
+[  920085ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/_vinext/image?url=%2Fimages%2Ftokyo-sunset.jpg&w=640&q=75:0
+[  920102ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/_vinext/image?url=%2Fimages%2Fshibuya.jpg&w=640&q=75:0
+[  920105ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/_vinext/image?url=%2Fimages%2Fakihabara.jpg&w=640&q=75:0
+[  920116ms] [ERROR] Failed to load resource: net::ERR_SSL_PROTOCOL_ERROR @ https://localhost:3000/favicon.svg:0
+[  920119ms] [ERROR] Failed to load resource: net::ERR_SSL_PROTOCOL_ERROR @ https://localhost:3000/favicon.svg:0
+[  920273ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=75f28cf6:14337

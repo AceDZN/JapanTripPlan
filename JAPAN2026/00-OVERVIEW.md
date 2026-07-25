@@ -1,185 +1,111 @@
-# JAPAN 2026 — Family Trip Master Overview
+# 00 — Japan 2026: Complete Family Plan
 
-## Trip Summary
+**Travel:** October 1–18, 2026
+**Japan:** October 2–17 · 15 nights
+**Family:** 2 adults, daughter (16), son (12)
+**Stays:** Tokyo Oct 2–11 · Kyoto Oct 11–13 · Osaka Oct 13–15 · Tokyo Oct 15–17
+**Canonical daily route:** [09-DAILY-ITINERARY.md](./09-DAILY-ITINERARY.md)
 
-| Detail | Info |
-|--------|------|
-| **Dates** | October 1-17, 2026 (17 days, 16 nights) |
-| **Travelers** | 4 — 2 adults, 1 teen (daughter, 16), 1 child (son, 12) |
-| **Departure** | TLV (Ben Gurion Airport), Tel Aviv, Israel |
-| **Destination** | Tokyo + day trips (Kamakura, Yokohama) + Osaka side trip (USJ/Super Nintendo World) |
-| **Special Occasion** | Son's bar mitzvah celebration |
-| **Theme** | Anime (Pokemon, Hunter x Hunter, Demon Slayer, Ghibli) + Japanese culture |
-| **Budget Approach** | Budget-conscious — smart spending, family-friendly value |
-| **Special Year** | 2026 is Pokemon's 30th Anniversary! |
+## What This Trip Is
 
----
+This is a family trip built around **anime, gaming, Pokémon, Nintendo, ramen and kawaii experiences**. It is not a checklist of famous adult sights.
 
-## File Index
+Every scheduled block must deliver at least one of:
 
-| File | Title | Description |
-|------|-------|-------------|
-| [00-OVERVIEW.md](./00-OVERVIEW.md) | **Master Overview** | This file — trip summary, booking timeline, budget, emergency info |
-| [01-FLIGHTS.md](./01-FLIGHTS.md) | **Flights** | TLV-TYO flight options, airlines, layovers, booking strategy, luggage tips |
-| [02-ACCOMMODATION.md](./02-ACCOMMODATION.md) | **Accommodation** | Hotels by area — MIMARU Pokemon rooms, family-friendly options, Shinjuku/Ikebukuro bases |
-| [03-TRANSPORT.md](./03-TRANSPORT.md) | **Transport & Passes** | IC cards (Suica/PASMO), day passes, airport transfers, train tips for families |
-| [04-ANIME-ATTRACTIONS.md](./04-ANIME-ATTRACTIONS.md) | **Anime & Character Attractions** | Pokemon Center/Cafe/PokePark, Ghibli Park & Museum, Demon Slayer spots, Akihabara, J-World |
-| [05-CULTURAL-SIGHTSEEING.md](./05-CULTURAL-SIGHTSEEING.md) | **Cultural Sightseeing** | Temples, shrines, gardens, Meiji Jingu, Senso-ji, Nikko, Kamakura, TeamLab |
-| [06-FOOD-GUIDE.md](./06-FOOD-GUIDE.md) | **Food Guide** | Family-friendly restaurants, kosher-friendly options, ramen, sushi, street food, food halls |
-| [07-BAR-MITZVAH.md](./07-BAR-MITZVAH.md) | **Bar Mitzvah Planning** | Chabad Tokyo coordination, Torah reading schedule, celebration options, Sukkot timing |
-| [08-DAILY-ITINERARY.md](./08-DAILY-ITINERARY.md) | **Day-by-Day Itinerary** | Full 17-day schedule with morning/afternoon/evening breakdown |
-| [09-BUDGET-DETAIL.md](./09-BUDGET-DETAIL.md) | **Detailed Budget** | Line-item costs, per-person breakdowns, money-saving tips, payment methods |
-| [10-PACKING-PREP.md](./10-PACKING-PREP.md) | **Packing & Preparation** | Packing list, apps to download, eSIM setup, weather prep, cultural tips |
+- active play or a hands-on workshop;
+- anime, manga, gaming or character fandom;
+- ramen, street food or a memorable themed meal;
+- a short visual “wow” moment;
+- cute character culture or one welfare-conscious rescue-cat visit.
 
----
+Long museums, luxury-shopping streets, smoky nightlife alleys, repetitive viewpoints and temple marathons have been removed. Meiji Jingu, the Great Buddha and Senso-ji remain because each is iconic, visual and easy to keep short.
 
-## Critical Booking Timeline (MOST IMPORTANT)
+## The 17-Day Shape
 
-This is the single most important section. Several attractions have limited availability and sell out quickly. **Miss a booking window and you miss the experience.**
+| Date | Headline |
+|---|---|
+| Oct 1–2 | Flights, arrival and sleep |
+| Oct 3 | Akihabara gaming challenge + Neco Republic rescue cats |
+| Oct 4 | teamLab Planets + Odaiba Gundam + Joypolis |
+| Oct 5 | PokéPark KANTO; DisneySea if official PokéPark tickets fail |
+| Oct 6 | KAWAII MONSTER LAND + Shibuya Nintendo/Pokémon |
+| Oct 7 | Great Buddha + *Slam Dunk* coast + Enoshima |
+| Oct 8 | Ghibli Museum + compact Nakano/Shinjuku |
+| Oct 9 | Todoroki Ravine + Totoro cream puffs + Shimokitazawa Curry Festival |
+| Oct 10 | Tokyo Dome City family celebration |
+| Oct 11 | Early Kyoto transfer + Mizuekai + Awata Shrine night procession |
+| Oct 12 | UZUMASA Kyoto Village + DRUM TAO HIBIKI |
+| Oct 13 | Early Fushimi Inari + Kyoto-to-Osaka + shortened Den Den Town/Dotonbori |
+| Oct 14 | USJ / Super Nintendo World |
+| Oct 15 | Nintendo Museum lottery plan + return to Tokyo |
+| Oct 16 | Pokémon Café + Taiko-kan/bachi + Senso-ji finale |
+| Oct 17 | Local goodbye + Narita |
 
-| When to Book | What | Details | Priority |
-|-------------|------|---------|----------|
-| **NOW / ASAP** | Flights TLV-TYO | Best prices 3-6 months ahead. Prices rise sharply closer to departure. Check Turkish Airlines, Ethiopian Airlines, China Southern for budget options. | **CRITICAL** |
-| **NOW / ASAP** | MIMARU Hotel (Pokemon rooms) | MIMARU Ikebukuro or Shinjuku — themed Pokemon apartment-hotel rooms with kitchen. Extremely popular, book as early as possible. | **CRITICAL** |
-| **July 1-12, 2026** | PokePark Kanto lottery | Apply for October 5 visit via lottery on official Japanese site. Results late July. | **CRITICAL** |
-| **August 5, 2026 at 18:00 JST** | PokePark Kanto first-come tickets | Backup if lottery fails. English site: ticket-en.pokepark-kanto.co.jp. 2 tickets per transaction — need 2 purchases. 13:00 Israel time. | **CRITICAL** |
-| **NOW / ASAP** | Contact Chabad Tokyo | Email rabbi@chabad.jp to coordinate bar mitzvah — Torah reading, celebration, Sukkot services. They need advance notice. | **HIGH** |
-| **August 10, 2026** | Ghibli Park tickets | Tickets for October visits go on sale. Boo-no-Ouchi (warehouse area) and Grand Warehouse are the must-sees. Book via Boo-Woo Ticket or Lawson. | **CRITICAL** |
-| **September 1, 2026** | Pokemon Cafe reservations | Reservations open exactly 31 days before visit date. October 1 seats open September 1. Book at midnight JST — they sell out in minutes. | **CRITICAL** |
-| **September 10, 2026 at 10:00 JST** | Ghibli Museum tickets | Virtual queue/lottery at Lawson Ticket International (l-tike.com). 4:00 AM Israel time. Multiple devices ready. Only 2,400 tickets/day. | **CRITICAL** |
-| **ASAP / 2-3 months before** | USJ tickets + Express Pass 4 | Universal Studios Japan (Osaka). Buy Studio Pass + Express Pass 4 (guarantees Super Nintendo World entry). Book at usj.co.jp or Klook. Express Passes sell out! | **CRITICAL** |
-| **2-3 weeks before** | TeamLab Borderless/Planets tickets | Buy online in advance. Walk-ups sometimes possible but risky with a family of 4. | **MEDIUM** |
-| **1-2 weeks before** | Buy eSIMs | Ubigi, Airalo, or Mobal eSIMs. Buy 2 (one per parent phone). 15-day plans ~$15-25 each. | **MEDIUM** |
-| **1-2 weeks before** | Download apps | Google Maps (offline Tokyo maps), Suica app, Google Translate (offline Japanese), Navitime, Tabelog | **MEDIUM** |
-| **Before departure** | Travel adapters | Japan uses Type A plugs (same as US). If you only have Israeli/European plugs, buy adapters. | **LOW** |
-| **Before departure** | Travel insurance | Ensure coverage for family of 4, including medical evacuation. Check credit card coverage first. | **HIGH** |
+## Booking Control Center
 
----
+The family-wide operational list—including **new walking shoes for all four travelers**, apps, documents, tickets, weather checks and what to wear—is in the [Pre-Trip Action Checklist](./11-PRE-TRIP-CHECKLIST.md).
 
-## Calendar Highlights
+### Act now
 
-### Jewish Holidays & Bar Mitzvah
-| Date | Event | Notes |
-|------|-------|-------|
-| Oct 1-2 (Thu-Fri) | Sukkot (intermediate days) | Chol HaMoed — lighter observance, good for activities |
-| Oct 3 (Sat) | Shabbat during Sukkot | Shabbat services available at Chabad Tokyo |
-| Oct 4 (Sun) | Simchat Torah (observed) | Contact Chabad for celebration details |
-| **Oct 10 (Sat)** | **Recommended Bar Mitzvah Date** | **Shabbat — Torah portion reading at Chabad Tokyo. Parashat Bereishit (first week of new Torah cycle!)** |
+- **Nintendo Museum:** enter the October lottery by **July 31 at 23:59 JST**. Choose Oct 15 morning/early-afternoon. [Official lottery calendar](https://museum-tickets.nintendo.com/en/calendar?lang=en)
+- **USJ:** buy the Studio Pass, then a current Express Pass that explicitly includes the desired Nintendo rides and guaranteed area entry. Product names rotate. [Official tickets](https://www.usj.co.jp/web/en/us/tickets)
+- **KAWAII MONSTER LAND and teamLab Planets:** reserve timed entries before preferred slots disappear.
+- **Accommodation:** Tokyo Oct 2–11 and Fushimi Inari Oct 11–13 are booked. Complete both host-registration steps, then book Osaka Oct 13–15 and final Tokyo Oct 15–17.
 
-### Festivals & Events
-| Date | Event | Location | Cost |
-|------|-------|----------|------|
-| Oct 10-20 | Koishikawa Korakuen Autumn Illumination | Koishikawa Korakuen Garden | ~300 yen |
-| Oct 11-12 | Fukuro Matsuri / Tokyo Yosakoi | Ikebukuro | **FREE** |
-| Oct 12 | Oeshiki Festival | Ikegami Honmonji Temple (Ota) | **FREE** — spectacular nighttime lantern procession with thousands of participants |
-| All 2026 | Pokemon 30th Anniversary | Various locations | Special events, merchandise, and exhibits throughout the year |
+### Fixed future gates
 
-### Weather in Tokyo (October)
-- **Temperature**: 15-23C (59-73F) — pleasant autumn weather
-- **Rain**: Moderate chance, typhoon season winding down. Pack light rain jackets.
-- **What to wear**: Layers — t-shirt + light jacket. Comfortable walking shoes essential.
+- **PokéPark KANTO:** as of Jul 24, the official overseas store shows maintenance/changeover information and no Oct 5 purchase path. Monitor it for an official inventory re-release; the announced Aug 1 system change is for admissions from Nov 1, not a promised reopening for October. Use only the [official overseas store](https://ticket-en.pokepark-kanto.co.jp/) or a seller explicitly authorized by PokéPark. Do not pay a Fiverr buyer or unofficial reseller; keep [DisneySea](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/) as the Oct 5 fallback.
+- **Ghibli Museum:** buy for **Oct 8** when October tickets release **Sept 10 at 10:00 JST**. [Official tickets](https://www.ghibli-museum.jp/en/tickets/)
+- **Mizuekai:** target the **13:00 Oct 11** recital; the 16:00 performance conflicts with Awata. Official 2026 prices are JPY 10,000 on the first floor and JPY 8,000 on the second, age 10+. [Official page](https://www.miyagawacho.jp/mizuekai/)
+- **DRUM TAO HIBIKI:** target **19:00 on Oct 12**; doors open 18:15 and the show runs about 40 minutes. Ticket sales open two months before the performance. [Official tickets](https://drum-tao-kyoto.com/en/ticket/)
+- **Pokémon Café:** the previous “Sept 15” instruction is invalid. October’s release has not been announced; watch [official news](https://www.pokemon-cafe.jp/en/cafe/news/) and reserve immediately when published.
 
----
+## The Major Wins
 
-## Estimated Total Budget
+- **Best for the son:** PokéPark, Joypolis, Tokyo Dome rides, Super Nintendo World, Nintendo Museum.
+- **Best for the sister:** KAWAII MONSTER LAND, Harajuku, Shibuya PARCO, Ghibli, character shopping.
+- **Best shared fandom:** Akihabara, Nakano, UZUMASA, Den Den Town and Pokémon Centers.
+- **Best food memories:** Shimokitazawa Curry Festival, Totoro cream puffs, Ichiran/AFURI, tsukemen and Dotonbori.
+- **Best nature resets:** Meiji forest, Todoroki Ravine, the Kamakura/Enoshima coast and Inokashira Park.
+- **Best “cute” mix:** one rescue-cat café, Harajuku kawaii, the Shinjuku 3D cat, Kirby/Mofusand/Sanrio character stops.
+- **Best traditional moments:** Mizuekai, Awata Shrine’s night procession, UZUMASA, DRUM TAO, Fushimi Inari and the hands-on Taiko-kan finale.
 
-| Category | Estimated Cost (Family of 4) | Notes |
-|----------|------------------------------|-------|
-| Flights (TLV-NRT/HND round trip) | $3,600 - $5,200 | 1-stop options (Turkish, Ethiopian, China Southern) are cheapest |
-| Accommodation (16 nights) | $2,200 - $2,700 | Mix of MIMARU apartment-hotels and budget hotels |
-| Transport (17 days) | ~$370 - $440 (55-65K yen) | IC cards + day passes. No JR Pass needed for Tokyo-only. Shinkansen to Nagoya for Ghibli Park extra. |
-| Food (16 full days) | ~$1,050 (160K yen) | ~10,000 yen/day for family. Convenience stores, ramen, food courts, occasional splurge. |
-| Attractions & Activities | ~$650 - $800 | Pokemon, Ghibli, TeamLab, temples, day trips |
-| Osaka Side Trip (Days 13-14) | ~$1,100 - $1,330 | Shinkansen round trip, USJ + Express Pass, 1 night hotel, food |
-| Miscellaneous | ~$200 - $400 | eSIMs (~$40), adapter, coin lockers, souvenirs, shopping |
-| **TOTAL** | **~$9,170 - $11,870** | **~$2,300 - $2,970 per person** |
+## Pacing Rules
 
-### Budget-Saving Tips (Quick Reference)
-- **Convenience stores** (7-Eleven, Lawson, FamilyMart) have excellent cheap meals: onigiri (150 yen), bento (400-600 yen)
-- **Department store basement food halls** (depachika) discount prepared food 30-50% after 6-7 PM
-- **100-yen shops** (Daiso, Seria) for snacks, supplies, small souvenirs
-- **Free attractions**: Meiji Shrine, Senso-ji, Tokyo Metropolitan Government Building observation deck, shrine festivals
-- **IC card caps**: Tokyo Metro 24-hour passes (600 yen/adult) beat per-ride pricing on heavy days
-- **Kids discounts**: Children 6-11 ride trains at half price. Many attractions have child/student pricing.
+1. One headline per half-day; maximum two timed attractions in one day.
+2. Shopping areas get a wish list, a time box and a cash cap.
+3. Protect the slow start on Oct 10, the rest block between UZUMASA and HIBIKI on Oct 12, and the fallback recovery version of Oct 15.
+4. “Cut first” notes in the daily itinerary are real instructions, not suggestions to squeeze everything in.
+5. Day 7 cannot casually swap with Oct 8 after Ghibli is booked; use rain gear or a separate indoor backup instead.
 
----
+## Important Accuracy Corrections
 
-## Emergency Contacts
+- Todoroki Ravine’s full riverside path reopened on March 24, 2026. It has narrow, uneven and sometimes unfenced sections; skip it during or just after heavy rain. [Official Setagaya update](https://www.city.setagaya.lg.jp/02075/9082.html)
+- Recheck that official Todoroki page one to two weeks before Oct 9 for any temporary maintenance or construction restrictions.
+- The 2026 Shimokitazawa Curry Festival is confirmed for Oct 8–25, so Oct 9 lands on day two. Use mini portions for a family tasting game. [Official festival](https://shimokitazawa-curryfes.com/)
+- No capybara or other exotic-animal café is scheduled. A recent peer-reviewed assessment found consistently low welfare across Japanese exotic-animal cafés; the trip keeps the rescue/adoption-focused Neco Republic visit instead. [Study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
+- Akihabara’s pedestrian zone is Sunday-only in October, so it is not promised on Saturday Oct 3.
+- PokéPark October hours are 11:00–19:00 and limited-access app requests begin from 10:45.
+- Tokyo Yosakoi and Ikegami Oeshiki are no longer in the route; Kyoto’s fixed-date Mizuekai and Awata events replace them.
+- Pokémon Café release rules changed; no October date should be hardcoded until the official announcement.
+- Kyoto is now a two-night stay, not a day trip. Uji still appears on Oct 15 for Nintendo Museum only if the lottery succeeds.
+- Fushimi Inari replaces the optional Kyoto Manga Museum on Oct 13; keep the visit to the lower gates so Osaka still gets a relaxed arrival.
+- Taiko-kan’s official last admission is 15:00 on Oct 16; it comes before Senso-ji, and Character Street/Skytree are the cuts if the day slips.
+- PokéPark’s Aug 1 update applies to admissions from Nov 1 and is not an October sales date. Monitor only the official overseas store for Oct 5 inventory; unofficial paid ticket acquisition is not an approved fallback.
+- Mibu Kyogen is an optional Oct 12 swap. Do not stack it onto the full UZUMASA + HIBIKI baseline.
 
-| Contact | Number / Info |
-|---------|---------------|
-| **Israel Embassy in Tokyo** | +81-3-3264-0911 |
-| **Police** | 110 (English support available) |
-| **Ambulance / Fire** | 119 |
-| **Japan Tourist Helpline** | 050-3816-2787 (English, daily 24h) |
-| **Chabad Tokyo** | rabbi@chabad.jp / [www.chabadjapan.org](http://www.chabadjapan.org) |
-| **Japan Emergency (from mobile)** | 110 (police), 119 (medical) |
-| **Lost property (JR trains)** | +81-3-3231-1880 |
-| **Credit card lost** | Call your bank's international collect line |
+## Guide Map
 
-### Important Notes
-- **110 and 119** work from any phone, even without a SIM
-- Japanese hospitals may require upfront payment — keep travel insurance card accessible
-- Most pharmacies carry common medications but labels are in Japanese — use Google Translate camera
-- **7-Eleven ATMs** accept foreign cards (Visa/Mastercard) — best option for cash withdrawal
+- [Flights](./01-FLIGHTS.md)
+- [Accommodation](./02-ACCOMMODATION.md)
+- [Transport](./03-TRANSPORT.md)
+- [Anime, Pokémon, Gaming and Cute](./04-ANIME-POKEMON-GHIBLI.md)
+- [Ramen and Food](./05-FOOD-GUIDE.md)
+- [Kamakura and the Todoroki/Setagaya Green Day](./06-DAY-TRIPS.md)
+- [Family Celebration](./07-BAR-MITZVAH.md)
+- [Practical Tips](./08-PRACTICAL-TIPS.md)
+- [Complete Daily Itinerary](./09-DAILY-ITINERARY.md)
+- [Budget](./10-BUDGET.md)
+- [Pre-Trip Action Checklist](./11-PRE-TRIP-CHECKLIST.md)
 
----
-
-## Quick Phrases
-
-Essential Japanese phrases for the family. Practice a few before the trip — locals deeply appreciate the effort.
-
-| English | Japanese | Pronunciation |
-|---------|----------|---------------|
-| Thank you | ありがとうございます | Arigatou gozaimasu |
-| Thank you (casual) | ありがとう | Arigatou |
-| Excuse me / Sorry | すみません | Sumimasen |
-| Where is ...? | ...はどこですか？ | ...wa doko desu ka? |
-| How much? | いくらですか？ | Ikura desu ka? |
-| I don't eat pork | 豚肉は食べません | Butaniku wa tabemasen |
-| I don't eat shellfish | 甲殻類は食べません | Koukakurui wa tabemasen |
-| Is this kosher/halal? | ハラールですか？ | Haraaru desu ka? |
-| Delicious! | おいしい！ | Oishii! |
-| Help! | 助けて！ | Tasukete! |
-| Thank you for the meal | ごちそうさまでした | Gochisousama deshita |
-| Yes / No | はい / いいえ | Hai / Iie |
-| Good morning | おはようございます | Ohayou gozaimasu |
-| Good evening | こんばんは | Konbanwa |
-| Goodbye | さようなら | Sayounara |
-| I don't understand | わかりません | Wakarimasen |
-| Do you speak English? | 英語を話しますか？ | Eigo wo hanashimasu ka? |
-| The check, please | お会計お願いします | Okaikei onegai shimasu |
-| 4 people | 4人です | Yonin desu |
-| It's an allergy | アレルギーです | Arerugi desu |
-
----
-
-## Family-Specific Notes
-
-### For the Bar Mitzvah Boy (12)
-- Parashat Bereishit (Genesis 1:1-6:8) is the Torah portion for October 10 — the very first parasha of the new cycle. A beautiful symbol for a bar mitzvah!
-- Chabad Tokyo is welcoming and experienced with traveling families
-- Consider a small celebration dinner at a nice restaurant after Shabbat services
-
-### For the Anime Fan (12)
-- **Pokemon**: PokePark Kanto, Pokemon Center Mega Tokyo (Ikebukuro), Pokemon Cafe (Nihonbashi), Pokemon Center Shibuya, Pokemon 30th Anniversary events
-- **Ghibli**: Ghibli Park (Nagoya day trip or overnight), Ghibli Museum (Mitaka), Donguri Republic shops
-- **Demon Slayer**: Demon Slayer exhibits, Kimetsu no Yaiba merchandise at Animate/Akihabara
-- **Hunter x Hunter**: Jump Shop (Tokyo Station), Animate Ikebukuro, Shonen Jump merchandise
-
-### For the Teen (16)
-- Harajuku (Takeshita Street) — fashion, crepes, photo spots
-- Shibuya Crossing & Shibuya Sky observation deck
-- Purikura (photo booth) experiences
-- Shopping in Shimokitazawa (vintage/thrift)
-
-### For the Parents
-- Meiji Shrine and gardens for peaceful moments
-- Depachika (department store basements) for gourmet food experiences
-- Shinjuku Golden Gai for evening atmosphere (kids can walk through the area)
-- Onsen experience (family-friendly options available)
-
----
-
-*Last updated: February 2026*
-*This overview file is part of a 11-file trip planning guide (00-10). See File Index above for all documents.*
+*Research refreshed July 24, 2026. Recheck live opening hours, attraction maintenance, age/height limits and ticket inventory during the final week before travel.*

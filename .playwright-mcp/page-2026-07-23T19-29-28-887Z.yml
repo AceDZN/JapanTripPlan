@@ -1,0 +1,10 @@
+- main [ref=f10e2]:
+  - heading "You're almost in" [level=1] [ref=f10e4]
+  - paragraph [ref=f10e5]: This site uses ChatGPT to securely sign you in
+  - generic [ref=f10e6]:
+    - link "Continue with ChatGPT" [ref=f10e7] [cursor=pointer]:
+      - /url: https://japan-2026-family-trip.acedzn.chatgpt.site/signin-with-chatgpt?return_to=%2F
+    - generic [ref=f10e9]:
+      - text: You can review OpenAI's
+      - link "Privacy Policy" [ref=f10e10] [cursor=pointer]:
+        - /url: https://openai.com/policies/privacy-policy

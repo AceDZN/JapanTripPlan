@@ -1,587 +1,282 @@
-# Accommodation Guide: Tokyo Family Trip
-## October 1-17, 2026 | Family of 4 (Parents + Daughter 16 + Son 12) | 16 Nights
+# Accommodation Booking Plan — Japan 2026
 
----
+**Status:** PARTIALLY BOOKED — Tokyo Oct 2–11 and Kyoto Oct 11–13 are confirmed; Osaka and final Tokyo remain open
+**Travelers:** 4 (2 adults, daughter 16, son 12)
+**Physical nights in Japan:** 15
+**Priority:** one legal family room/apartment that genuinely sleeps four; station access; late arrival support; refundable rate; kitchen and laundry where the price makes sense
 
-## Table of Contents
+> The February research and its unverified 16-night estimates are preserved in [02-ACCOMMODATION-ARCHIVE-FEB2026.md](./02-ACCOMMODATION-ARCHIVE-FEB2026.md). Do not use that archive for booking.
 
-1. [Best Neighborhoods Analysis](#1-best-neighborhoods-analysis)
-2. [Top Pick: MIMARU Apartment Hotels](#2-top-pick-mimaru-apartment-hotels)
-3. [Budget Hotel Options](#3-budget-hotel-options)
-4. [Airbnb Analysis](#4-airbnb-analysis)
-5. [Full Price Comparison (16 Nights)](#5-full-price-comparison-16-nights)
-6. [Booking Strategies](#6-booking-strategies)
-7. [Booking Timeline](#7-booking-timeline)
+## 1. Fixed Accommodation Blocks
 
----
+| City | Check-in | Check-out | Nights | Operational constraint |
+|---|---|---|---:|---|
+| **Tokyo / Tabata — booked** | Fri, Oct 2, 16:00 | Sun, Oct 11, 11:00 | **9** | NRT lands 19:40; finish guest-ID submission and confirm late self-check-in |
+| **Kyoto / Fushimi Inari — booked** | Sun, Oct 11, 15:00 | Tue, Oct 13, 11:00 | **2** | No bag storage promised; use forwarding/lockers before 15:00 on Oct 11 |
+| **Osaka / Namba** | Tue, Oct 13 | Thu, Oct 15 | **2** | Keep one base for Dotonbori/Den Den Town and the full USJ day |
+| **Tokyo / Ueno-Nihonbashi** | Thu, Oct 15 | Sat, Oct 17 | **2** | Return from Osaka, one final Tokyo day, then NRT |
+| **Total** | | | **15** | 11 Tokyo + 2 Kyoto + 2 Osaka |
 
-## 1. Best Neighborhoods Analysis
+### Split-stay decision
 
-### Why Ueno/Asakusa Are Best for Families
+The split stay is now selected. Keeping a Tokyo apartment from **Oct 2-17** while also booking Kyoto and Osaka would create **19 paid room-nights** for 15 physical nights. Do not revive the overlap comparison unless the booked structure is deliberately cancelled and rebuilt.
 
-After researching all major Tokyo neighborhoods, **Ueno and Asakusa** stand out as the ideal base for a family of 4 on a 16-night stay. Here is the area-by-area breakdown:
+## 2. Tokyo Shortlist
 
-| Neighborhood | Family Score | Avg. Price/Night (4 pax) | Transit Access | Kid-Friendly | Budget-Friendly |
-|-------------|-------------|------------------------|----------------|-------------|----------------|
-| **Ueno** | 9.5/10 | $100-180 | Excellent | Excellent | Excellent |
-| **Asakusa** | 9/10 | $90-170 | Very Good | Excellent | Very Good |
-| Ikebukuro | 8/10 | $100-200 | Excellent | Good | Good |
-| Shinjuku | 7/10 | $150-300 | Excellent | Average | Poor |
-| Shibuya | 6/10 | $180-350 | Good | Average | Poor |
-| Ginza | 6/10 | $200-400 | Good | Average | Poor |
+### Confirmed — Airbnb: Marble Tokyo Base Tabata
 
-### Ueno: The Family Champion
+| Item | Confirmed reservation |
+|---|---|
+| Guests / stay | 4 guests · Oct 2–11 · 9 nights |
+| Check-in / checkout | **16:00 / 11:00** |
+| Reservation total | **ILS 3,638.99** |
+| Cancellation shown | Free before **Sep 2 at 16:00**; partial refund before **Sep 25 at 16:00** |
+| Area | Tabata, Kita City; use the exact address saved in Airbnb |
+| Access | Self-check-in with lockbox |
+| Host | Voyan Hotels |
 
-**Why Ueno wins for your family:**
+The reservation screen describes the selected product as a renovated multi-room apartment near Tabata Station for up to 11 guests. Save the exact bed, floor and bathroom layout from the house manual before travel so there is no arrival-night ambiguity.
 
-- **Ueno Park right outside your door** -- free zoo, museums, temples, and wide walking paths perfect for decompressing after busy sightseeing days
-- **JR Ueno Station** is a major hub: JR Yamanote Line (connects to Ikebukuro, Shinjuku, Shibuya, Akihabara), Ginza/Hibiya Metro Lines, Keisei Line direct to Narita Airport
-- **Ameyoko Market** is right there for cheap street food and snacks
-- **Akihabara is 2 stops away** on the JR Yamanote Line (5 minutes) -- critical for your son's anime shopping days
-- **Asakusa is 3 stops away** on the Tokyo Metro Ginza Line (5 minutes)
-- **Budget dining everywhere**: gyudon chains (Sukiya, Matsuya, Yoshinoya), ramen shops, konbini -- all within walking distance
-- **Flat terrain** -- easy walking with luggage, no steep hills
-- **Multiple apartment hotels with kitchens** -- MIMARU has 4 locations just in Ueno alone
-- **Keisei Ueno Station** offers direct trains to Narita Airport (Skyliner 41 min, or Access Express 60 min) -- ideal for arrival/departure days
+#### Host requirements and operating rules
 
-### Asakusa: The Cultural Alternative
+- Because this is an unmanned lodging, the host requires identity documents for **all four guests** before releasing check-in instructions. Overseas guests must send passport photos through the Airbnb chat.
+- Send approximate check-in and checkout times. The flight implies an arrival around **22:00–23:00**, but that late arrival should still be acknowledged by the host in writing.
+- No late checkout and no luggage storage after checkout.
+- If needed, luggage may be placed inside from **12:00 on arrival day**, grouped near the entrance, with no valuables left behind; return the key after placing it.
+- Early check-in is possible only if the preceding night is empty. Ask again after **20:00 JST on Oct 1**.
+- Amenities and linens are provided for the booked guest count.
+- Use Airbnb messages for normal communication; English telephone coverage is limited.
+- Watch Airbnb’s [official Japan etiquette video](https://youtu.be/osoPFmIO4FY?si=Gnylzu7lOzmE6sxW).
 
-**Why Asakusa is a strong second choice:**
+Keep the confirmation number, exact street address, lockbox details and passport images inside Airbnb/offline private copies. They are intentionally not reproduced in this web-synced guide.
 
-- **Traditional Tokyo atmosphere** -- Senso-ji Temple, Nakamise Street, old-town charm
-- **Quieter at night** -- more relaxed than Shinjuku/Shibuya, good for sleeping
-- **Tokyo Skytree** is a 20-minute walk away
-- **Multiple apartment-style hotels** including MIMARU SUITES Asakusa (2-bedroom suites)
-- **Great street food scene** -- cheaper than most tourist areas
-- **Sumida River walks** -- beautiful evening strolls
-- **Water bus** to Odaiba -- fun family transport option
+Sources:
 
-**The slight downside**: Asakusa requires one more train transfer to reach western Tokyo destinations (Shinjuku, Shibuya, Harajuku). From Ueno, you have direct JR Yamanote access.
+- [Booked dated listing](https://www.airbnb.com/rooms/1348289002107449827?adults=4&check_in=2026-10-02&check_out=2026-10-11)
+- Airbnb reservation screenshot and host message supplied July 24, 2026
 
-### Verdict: Stay in Ueno, Visit Asakusa Daily
+### Final Tokyo Lead — Airbnb: 4F Big Apartment in Ueno
 
-The optimal strategy is to base yourselves in the **Ueno area** (specifically near JR Ueno Station or Okachimachi Station) and walk or take a quick 5-minute train to Asakusa for sightseeing. You get the best of both neighborhoods.
+- Exact Oct 15-17 search result for four adults: **ILS 1,380 total**, with free cancellation shown
+- Entire 60 m² floor; 3 bedrooms; six single beds plus two sofa beds
+- Elevator, kitchen, washer, self check-in and pre/post-stay luggage room
+- 2 minutes to Inaricho Station; 9 minutes to JR Ueno
+- Guest Favourite: 4.83/5 from 298 reviews; Superhost
+- Licensed under the Hotels and Inns Business Act: `29台台健生環き第80号`
+- [Exact dated Airbnb listing](https://www.airbnb.com/rooms/17658962?adults=4&check_in=2026-10-15&check_out=2026-10-17)
 
----
+This is a much stronger two-night fit than paying for an eleven-night-style aparthotel: proper space, elevator and a luggage room without an extra hotel move.
 
-## 2. Top Pick: MIMARU Apartment Hotels
+### Licensed Aparthotel Airbnb Benchmark: Section L Ueno-Hirokoji
 
-### Why MIMARU Is the Best Option for Your Family
+- Old Oct 2-13 quote: **JPY 771,905 all-in — stale benchmark**
+- Oct 15-17: **JPY 116,300 all-in**
+- Old split total: **JPY 888,205 — no longer valid**
+- 35 m², four real beds, kitchen, in-suite washer/dryer
+- About 3 minutes to Ueno-Hirokoji and 5 minutes to the Yamanote line
+- 5.0/5 from 19 reviews; hotel licence `5台台健生環き第10026号`
+- Free cancellation until Oct 1 / Oct 14 for the respective blocks
+- [Reprice the first block for Oct 2–11](https://www.airbnb.com/rooms/993897629583686310?check_in=2026-10-02&check_out=2026-10-11&guests=4&adults=4&currency=JPY)
+- [Exact final block](https://www.airbnb.com/rooms/993897629583686310?check_in=2026-10-15&check_out=2026-10-17&guests=4&adults=4&currency=JPY)
 
-[MIMARU](https://mimaruhotels.com/en/) is a Japanese apartment hotel chain designed specifically for families and groups. They are the standout choice for a family of 4 on a multi-week stay.
+It is decision-grade and simple, but too expensive to beat the current value leads.
 
-**Key advantages over regular hotels:**
+### Hotel Benchmark: MONday Apart Premium Ueno
 
-- **Full kitchen** in every room: refrigerator, induction hob, microwave, electric kettle, cookware, dishes, utensils, dishwashing supplies
-- **Washing machine and dryer** in the room -- essential for a 16-night stay
-- **Separate living and sleeping areas** -- parents and kids have space
-- **Rooms designed for 4-6 guests** -- no need to book 2 separate hotel rooms
-- **39 sqm rooms** -- roughly 3x the size of a typical Tokyo hotel room
-- **Dining table** -- family meals, card games, trip planning
-- **Free WiFi** throughout
-- **Multilingual staff** praised in reviews
+**Why it fits:** the official calendar showed inventory across both Tokyo blocks; the Standard Family Room has two single beds plus a bunk bed, capacity four adults, kitchen, full-size refrigerator, microwave, rice cooker, and an in-room washer/dryer.
 
-### MIMARU Locations in Ueno/Asakusa (Ranked)
+| Item | Evidence |
+|---|---|
+| Room | Standard Family Room, about 30-31 m², sleeps 4 |
+| Location | About 6 minutes from Iriya Station; about 9 minutes to Ueno Park |
+| Old Oct 2-13 published member subtotal | **JPY 661,408 — stale benchmark** |
+| Former Oct 14-17 published member subtotal | **JPY 174,564** |
+| Revised Oct 15-17 subtotal | **Must be repriced** |
+| Continuous Oct 2-17 total | **JPY 869,850 — comparison only; creates four overlap nights** |
+| Cancellation | Weekly and 2-6-night plans charge 100% from 7 days before arrival; treat 8 days before as the safe cancellation deadline |
+| Confidence | **HIGH** room/inventory; **MEDIUM** total until the final 4-guest checkout screen is captured |
 
-MIMARU has **4 properties in Ueno** plus options in Asakusa. Here are the best ones for your family:
+Sources:
 
-#### 1. MIMARU Tokyo Ueno East (TOP RECOMMENDATION)
+- [Official Oct 2 target-date room page](https://reserve.489ban.net/client/ma-ueno/4/plan/room/26432/stay?date=2026-10-02&roomCount=1)
+- [Official first-block availability calendar](https://reserve.489ban.net/client/ma-ueno/4/plan/availability/room/stay?date=2026-09-30)
+- [Official second-block availability calendar](https://reserve.489ban.net/client/ma-ueno/4/plan/availability/room/stay?date=2026-10-12)
+- [Weekly-plan cancellation terms](https://reserve.489ban.net/client/ma-ueno/4/detail/1052803)
+- [2-6-night cancellation terms](https://reserve.489ban.net/client/ma-ueno/4/detail/1052782)
 
-| Detail | Info |
-|--------|------|
-| **Address** | Taito-ku, Tokyo (Ueno area) |
-| **Walk to JR Ueno Station** | 3 minutes (Iriya Exit) |
-| **Walk to Keisei Ueno** | 10 minutes (airport trains) |
-| **Walk to Ueno Park** | 5 minutes |
-| **Walk to Ameyoko Market** | 8 minutes |
-| **Metro access** | Hibiya Line + Ginza Line (Ueno Stn) |
-| **Room size** | 39 sqm |
-| **Estimated price** | $150-250/night (varies by date/platform) |
-| **Pokemon Room** | YES -- available at this location |
+**Booking gate:** enter **4 guests aged 7+** on the final screen, verify taxes are included, and record the exact JPY charge and cancellation timestamp. Do not book the non-refundable time-sale plan for a small saving.
 
-**Room types available:**
-- **Deluxe Family Apartment** -- 2 single beds + 1 bunk bed (sleeps 4 adults + 2 children)
-- **Deluxe Apartment** -- 4 single beds with separate living/sleeping areas
-- **Deluxe Apartment with Sofa Beds** -- 2 single beds + 2 sofa beds
-- **Japanese-Western Style Room** -- tatami mats, futons (authentic experience)
+### Backup A: MONday Apart Ueno Shin-Okachimachi
 
-**Why it is the best for your family:**
-- Stroller-friendly route from station (relevant for luggage on arrival)
-- Ueno Zoo and Tokyo National Museum within walking distance
-- Asakusa is only 3 Metro stops away
-- Pokemon Room available for at least one special night (your son's bar mitzvah treat!)
-- Consistently reviewed as the best MIMARU for families with kids
+- About 34-36 m²; two single beds plus bunk; capacity four
+- Kitchen and in-room washer/dryer
+- About 3 minutes from Shin-Okachimachi; useful access to Metro and JR lines
+- Target-date total was not captured; price and continuous inventory remain unverified
+- Sources: [official property](https://hotel-monday.com/apartment/shinokachimachi/?wovn=en), [Booking.com](https://www.booking.com/hotel/jp/hotel-monday-apart-shinokachimachi.en-gb.html)
+- Confidence: **HIGH** suitability, **LOW** current October price
 
-**Book at:**
-- [Official MIMARU site](https://mimaruhotels.com/en/hotel/ueno-east/)
-- [Booking.com](https://www.booking.com/hotel/jp/mimaru-tokyo-ueno-east.html)
-- [Expedia](https://www.expedia.com/Tokyo-Hotels-MIMARU-TOKYO-UENO-EAST.h24130945.Hotel-Information)
-
-#### 2. MIMARU Tokyo Ueno Okachimachi
-
-| Detail | Info |
-|--------|------|
-| **Walk to JR Okachimachi Station** | 3 minutes |
-| **Walk to JR Ueno Station** | 8 minutes |
-| **Walk to Ameyoko Market** | 2 minutes |
-| **Estimated price** | $170-280/night |
-| **Pokemon Room** | YES |
-
-Excellent location right next to Ameyoko Market for cheap food and shopping. Slightly pricier than Ueno East but closer to the market street.
-
-**Book at:**
-- [Official MIMARU site](https://mimaruhotels.com/en/hotel/ueno-okachimachi/)
-- [Booking.com](https://www.booking.com/hotel/jp/mimaru-tokyo-ueno-okachimachi.html)
-
-#### 3. MIMARU Tokyo Ueno Inaricho
-
-| Detail | Info |
-|--------|------|
-| **Walk to Inaricho Station** | 3 minutes |
-| **Walk to JR Ueno Station** | 10 minutes |
-| **Walk to Asakusa** | 15 minutes walk or 1 Metro stop |
-| **Estimated price** | $140-230/night |
-| **Pokemon Room** | YES |
-
-Positioned between Ueno and Asakusa, making both areas walkable. Slightly quieter neighborhood. Good value.
-
-**Book at:**
-- [Official MIMARU site](https://mimaruhotels.com/en/hotel/ueno-inaricho/)
-
-#### 4. MIMARU Tokyo Ueno North
-
-| Detail | Info |
-|--------|------|
-| **Walk to JR Ueno Station** | 5 minutes |
-| **Walk to Ueno Park** | Directly across the bridge |
-| **Estimated price** | $153-240/night |
-| **Pokemon Room** | YES |
-
-Right next to Ueno Park -- great for morning jogs or evening walks. The park view is a bonus.
-
-**Book at:**
-- [Official MIMARU site](https://mimaruhotels.com/en/hotel/ueno-north/)
-- [Kayak](https://www.kayak.com/Tokyo-Hotels-Mimaru-Tokyo-Ueno-North.3558054.ksp)
-
-#### 5. MIMARU SUITES Tokyo Asakusa (Premium Option)
-
-| Detail | Info |
-|--------|------|
-| **Walk to Asakusa Station** | 3 minutes |
-| **Room type** | ALL rooms are 2-bedroom suites |
-| **Bathrooms** | 2 bathrooms per suite |
-| **Estimated price** | $254-350/night |
-| **Pokemon Room** | Check availability |
-
-The luxury MIMARU option. Every room has 2 separate bedrooms and 2 full bathrooms -- perfect privacy for parents and teens. Full kitchen, washer/dryer. The price premium is significant but the space is worth it if budget allows.
-
-**Book at:**
-- [Official MIMARU site](https://mimaruhotels.com/en/hotel/suites-tokyo-asakusa/)
-- [Booking.com](https://www.booking.com/hotel/jp/mimaru-suites-dong-jing-qian-cao.html)
-
-### The Pokemon Room Experience
-
-MIMARU's [Pokemon Rooms](https://mimaruhotels.com/en/news/stay-pokemonroom/) are available at all 4 Ueno locations plus other Tokyo properties. Reservations are open through November 2026.
-
-**What is included:**
-- **100 Pokemon** hidden throughout the apartment -- walls, ceilings, furniture, bathroom
-- **Giant Snorlax** on the bed (your 12-year-old will lose his mind)
-- **Pokemon decorations** from floor to ceiling
-- **Original MIMARU x Pokemon novelty goods** -- exclusive set given to guests
-- **5 hidden Pokemon across 3 bags** -- a scavenger hunt in the room
-- All standard MIMARU amenities (kitchen, washer, WiFi, etc.)
-
-**Pokemon Room pricing:**
-- Approximately $250-321/night depending on location and date
-- The Ikebukuro location averages ~$321/night; Ueno locations tend to be slightly less
-
-**Strategy for your family:**
-- Book 1-2 nights in a Pokemon Room as a special bar mitzvah treat (October 10 celebration night)
-- Book the remaining 14-15 nights in a standard MIMARU apartment to save money
-- You can split your stay between Pokemon Room nights and regular nights at the same property
-
----
-
-## 3. Budget Hotel Options
-
-If MIMARU's pricing is above your budget for 16 nights, these alternatives offer family rooms in the Ueno/Asakusa area at lower price points. The tradeoff: smaller rooms, no kitchen (or shared kitchen), and you may need 2 rooms.
-
-### Option A: PLAYSIS Asakusa
-
-| Detail | Info |
-|--------|------|
-| **Type** | Budget hotel with bunk bed family rooms |
-| **Location** | Asakusa, 7 min walk from Asakusa Station |
-| **Room** | Bunk Bed Room -- 2 sets of bunk beds, fits 4 |
-| **Kitchen** | Shared kitchen with fridge, microwave, kettle |
-| **Laundry** | Coin laundry on-site |
-| **WiFi** | Free |
-| **Estimated price** | $70-120/night |
-| **16-night total** | $1,120-1,920 |
-| **Check-in** | Self check-in via tablet (codes sent in advance) |
-
-**Pros:** Cheapest family room option; modern facility; shared lounge area for kids
-**Cons:** No private kitchen; bunk beds may feel cramped for teens; basic amenities
-
-**Book at:**
-- [Booking.com](https://www.booking.com/hotel/jp/playsis-asakusa.html)
-- [Hotels.com](https://www.hotels.com/ho1161077472/playsis-asakusa-tokyo-japan/)
-
-### Option B: Centurion Hotel & Spa Ueno Station
-
-| Detail | Info |
-|--------|------|
-| **Type** | Mid-range hotel with large family rooms |
-| **Location** | Ueno, near Ueno Station |
-| **Room** | Family room fits up to 8 (2 doubles + 2 bunks) |
-| **Kitchen** | No in-room kitchen |
-| **Extras** | On-site hot springs bath, sauna, restaurant |
-| **Estimated price** | $120-180/night |
-| **16-night total** | $1,920-2,880 |
-
-**Pros:** Spacious rooms (much bigger than typical Tokyo hotels); onsen/sauna included; restaurant on-site
-**Cons:** No kitchen; can feel dated; some rooms face noisy streets
-
-**Book at:**
-- [Booking.com](https://www.booking.com/hotel/jp/centurion-ueno-station.html)
-- [Expedia](https://www.expedia.com/Tokyo-Hotels-Centurion-Hotel-Spa-Ueno-Station.h18573235.Hotel-Information)
-
-### Option C: MONday Apart Premium Ueno
-
-| Detail | Info |
-|--------|------|
-| **Type** | Apartment hotel (MIMARU competitor) |
-| **Location** | Ueno, 6 min walk from JR Ueno Station (Iriya Exit) |
-| **Room** | Family apartments with kitchenette, fits up to 6 |
-| **Kitchen** | Kitchenette with basic cooking facilities |
-| **Laundry** | In-room washing machine |
-| **WiFi** | Free |
-| **Estimated price** | $104-180/night |
-| **16-night total** | $1,664-2,880 |
-
-**Pros:** Kitchen and washer in room (like MIMARU); spacious; newer property; great reviews for cleanliness
-**Cons:** Kitchenette (not full kitchen); no Pokemon rooms; less character than MIMARU
-
-**Book at:**
-- [Official MONday site](https://hotel-monday.com/apartment/ueno/?wovn=en)
-- [Booking.com](https://www.booking.com/hotel/jp/monday-apart-premium-ueno.html)
-
-Also check **MONday Apart Premium Ueno Okachimachi** (3 min from JR Okachimachi):
-- [Official site](https://hotel-monday.com/apartment/uenookachimachi/?wovn=en)
-
-### Option D: Toyoko Inn (Ultra-Budget, 2 Rooms Required)
-
-| Detail | Info |
-|--------|------|
-| **Type** | Budget business hotel chain |
-| **Locations** | Toyoko Inn Ueno Tawaramachi / Toyoko Inn Asakusa Kuramae |
-| **Room** | Standard twin rooms (need 2 rooms for family of 4) |
-| **Kitchen** | None |
-| **Extras** | Free breakfast buffet, free WiFi, laundry |
-| **Estimated price** | $54-90/night per room x 2 rooms = $108-180/night |
-| **16-night total** | $1,728-2,880 (2 rooms) |
-
-**Pros:** Free breakfast saves ~$20/day for family; reliable chain; clean; good locations
-**Cons:** Need 2 separate rooms (family split up); tiny rooms; no kitchen; no dining space
-
-**Book at:**
-- [Official Toyoko Inn](https://www.toyoko-inn.com/eng/)
-- [Booking.com (Tawaramachi)](https://www.booking.com/hotel/jp/toyoko-inn-tokyo-ueno-tawaramachi-eki-tokyo.html)
-
-### Option E: Tosei Hotel Cocono Asakusa
-
-| Detail | Info |
-|--------|------|
-| **Type** | 3-star hotel with family bunk bed rooms |
-| **Location** | Asakusa, 7 min walk from Asakusa Station |
-| **Room** | Family room with bunk beds, fits 4 |
-| **Kitchen** | No |
-| **Estimated price** | $80-130/night |
-| **16-night total** | $1,280-2,080 |
-
-**Pros:** Purpose-built family rooms; good location; modern
-**Cons:** No kitchen; compact rooms; basic amenities
-
----
-
-## 4. Airbnb Analysis
-
-### Overview
-
-Airbnb in Tokyo is legal but heavily regulated. Since 2018, all Airbnb listings in Japan must have a registered license number (minpaku license). This limits supply but ensures quality and legality.
-
-### What to Expect
-
-| Factor | Details |
-|--------|---------|
-| **Typical 2BR apartment (Ueno/Asakusa)** | $70-120/night |
-| **16-night total** | $1,120-1,920 |
-| **Monthly discount** | Many hosts offer 10-20% off for stays of 14+ nights |
-| **Kitchen** | Most apartments have full kitchens |
-| **Washer** | Most apartments include a washing machine |
-| **WiFi** | Standard in virtually all listings |
-| **Size** | 40-60 sqm for a 2BR (larger than hotels) |
-
-### Pros of Airbnb for Your Trip
-
-- **Cheapest option per night** for a full apartment with kitchen
-- **Most space** -- 2 real bedrooms, living area, kitchen
-- **Long-stay discounts** -- 16 nights often triggers weekly/monthly rates
-- **Neighborhood immersion** -- shop at local supermarkets, live like locals
-- **Flexibility** -- check-in times, laundry schedules, meal timing
-
-### Cons of Airbnb for Your Trip
-
-- **No front desk** -- if something breaks (AC, plumbing), response times vary
-- **Self check-in only** -- lockboxes and codes, no one to help with luggage
-- **No daily cleaning** -- you manage your own housekeeping for 16 nights
-- **Language barrier** -- communication with hosts can be limited
-- **Cancellation risk** -- hosts can cancel (rare but devastating mid-trip)
-- **No Pokemon rooms** -- no themed experiences
-- **Quality varies** -- photos can be misleading; read reviews carefully
-- **Legality concerns** -- always verify the listing has a registered license number
-
-### Airbnb Search Strategy
-
-When searching [Airbnb for Ueno/Asakusa](https://www.airbnb.com/ueno-taito-city-japan/stays):
-
-1. **Filters to set:**
-   - Entire place
-   - 2+ bedrooms
-   - 4 guests
-   - Oct 1-17, 2026
-   - Price: up to $120/night
-
-2. **Must-have amenities:**
-   - Kitchen
-   - Washer (or washer/dryer)
-   - WiFi
-   - Air conditioning
-   - Within 10 min walk of a train station
-
-3. **Red flags to avoid:**
-   - No license number displayed
-   - Fewer than 10 reviews
-   - Reviews mentioning noise, bugs, or misleading photos
-   - "Self-guided" with no host responsiveness
-   - Top-floor walkup with no elevator (you have heavy luggage)
-
-4. **Look for:**
-   - Superhost status
-   - 4.8+ rating with 20+ reviews
-   - Specific mention of families/children welcome
-   - Clear photos of all rooms, kitchen, bathroom
-   - Responsive host (replies within a few hours)
-
-### Realistic Airbnb Budget
-
-| Quality Tier | Nightly Rate | 16-Night Total | What You Get |
-|-------------|-------------|----------------|-------------|
-| Budget | $65-85/night | $1,040-1,360 | Basic 2BR, small kitchen, older building |
-| Mid-range | $85-120/night | $1,360-1,920 | Nice 2BR, full kitchen, near station, modern |
-| Premium | $120-160/night | $1,920-2,560 | Spacious 2BR, designer apartment, great location |
-
----
-
-## 5. Full Price Comparison (16 Nights)
-
-### Side-by-Side Comparison
-
-| Option | Nightly Rate | 16-Night Total (USD) | 16-Night Total (ILS ~3.7) | Kitchen | Laundry | Pokemon Room | Family in 1 Room |
-|--------|-------------|---------------------|--------------------------|---------|---------|-------------|-----------------|
-| **MIMARU Ueno East (Standard)** | $150-250 | $2,400-4,000 | 8,880-14,800 | Full | In-room | Available | Yes |
-| **MIMARU Ueno East (Pokemon)** | $250-321 | $4,000-5,136 | 14,800-19,003 | Full | In-room | YES | Yes |
-| **MIMARU SUITES Asakusa** | $254-350 | $4,064-5,600 | 15,037-20,720 | Full | In-room | Check | Yes (2BR) |
-| **MONday Apart Ueno** | $104-180 | $1,664-2,880 | 6,157-10,656 | Kitchenette | In-room | No | Yes |
-| **PLAYSIS Asakusa** | $70-120 | $1,120-1,920 | 4,144-7,104 | Shared | Coin | No | Yes (bunks) |
-| **Centurion Hotel Ueno** | $120-180 | $1,920-2,880 | 7,104-10,656 | No | Coin | No | Yes |
-| **Toyoko Inn (x2 rooms)** | $108-180 | $1,728-2,880 | 6,394-10,656 | No | Coin | No | No (split) |
-| **Airbnb (Mid-range)** | $85-120 | $1,360-1,920 | 5,032-7,104 | Full | In-room | No | Yes |
-
-### Best Value Strategies by Budget
-
-#### Ultra-Budget: Under $1,500 for 16 nights ($94/night)
-- **PLAYSIS Asakusa** bunk bed room: ~$1,120-1,400
-- **Airbnb budget 2BR**: ~$1,040-1,360
-- Tradeoff: Smaller rooms, shared kitchen (PLAYSIS), or self-managed (Airbnb)
-
-#### Budget-Smart: $1,500-2,500 for 16 nights ($94-156/night)
-- **MONday Apart Premium Ueno**: ~$1,664-2,400
-- **Airbnb mid-range 2BR**: ~$1,360-1,920
-- Best balance of price, kitchen, space, and location
-
-#### Recommended: $2,400-3,500 for 16 nights ($150-219/night)
-- **MIMARU Ueno East standard room** (14 nights) + **1-2 nights Pokemon Room** for bar mitzvah
-- Estimated: ~$2,400-3,100 (standard) + $500-642 (Pokemon nights) = $2,900-3,742
-- Best overall experience for your anime-loving family
-
-#### Comfort: $3,500+ for 16 nights ($219+/night)
-- **MIMARU SUITES Asakusa** (2 bedrooms, 2 bathrooms throughout)
-- **Full 16 nights in Pokemon Room** at MIMARU Ueno East
-- Maximum comfort and privacy
-
-### Hybrid Strategy (OUR RECOMMENDATION)
-
-Split your stay for maximum value:
-
-| Nights | Where | Est. Cost | Purpose |
-|--------|-------|-----------|---------|
-| **Night 1** (Oct 1-2) | MIMARU Ueno East -- Standard | $180 | Arrival night, settle in |
-| **Nights 2-9** (Oct 2-9) | MIMARU Ueno East -- Standard | $1,440 | Tokyo exploration base |
-| **Night 10** (Oct 10) | MIMARU Ueno East -- **Pokemon Room** | $300 | BAR MITZVAH CELEBRATION! |
-| **Nights 11-12** (Oct 11-12) | Night bus + Osaka hotel | $170 | Osaka side trip |
-| **Nights 13-16** (Oct 13-17) | MIMARU Ueno East -- Standard | $720 | Final Tokyo days |
-| | | **TOTAL: ~$2,810** | |
-
-This gives you the Pokemon experience for the special day while keeping the overall budget reasonable at approximately **$176/night average**.
-
----
-
-## 6. Booking Strategies
-
-### Strategy 1: Book Early, Cancel Free
-
-Most MIMARU and hotel bookings on Booking.com offer free cancellation until 3-7 days before check-in.
-
-**Action plan:**
-1. Book your preferred MIMARU room NOW on Booking.com with free cancellation
-2. Continue monitoring prices -- hotel rates in Tokyo drop and spike unpredictably
-3. If you find a better rate on another platform, cancel and rebook
-4. Final commitment: 1-2 weeks before departure
-
-### Strategy 2: Platform Price Shopping
-
-The same MIMARU room can vary by 20-30% across platforms.
-
-**Check in this order:**
-1. [Official MIMARU website](https://mimaruhotels.com/en/) -- sometimes has exclusive rates and package deals
-2. [Booking.com](https://www.booking.com/) -- largest selection, good cancellation policies, Genius discounts for members
-3. [Agoda](https://www.agoda.com/) -- often cheapest for Asian hotels, stackable coupons
-4. [Expedia](https://www.expedia.com/) -- bundle with flights for potential savings
-5. [Kayak](https://www.kayak.com/) -- meta-search, compares all platforms
-6. [Klook](https://www.klook.com/) -- sometimes has flash deals on MIMARU
-
-### Strategy 3: Day-of-Week Optimization
-
-Tokyo hotel prices vary significantly by day of the week:
-
-| Day | Price Level | Savings vs. Peak |
-|-----|------------|-----------------|
-| Tuesday | Lowest | Save 20-30% |
-| Wednesday | Low | Save 15-25% |
-| Monday | Low-Medium | Save 10-20% |
-| Thursday | Medium | Save 5-15% |
-| Friday | Medium-High | Save 0-5% |
-| Saturday | HIGHEST | Peak pricing |
-| Sunday | High | Peak pricing |
-
-Since you are staying 16 consecutive nights, this matters less -- but if you are splitting between properties or booking individual nights, aim for Tuesday/Wednesday check-ins.
-
-### Strategy 4: October Pricing Patterns
-
-October in Tokyo is "shoulder-to-peak" season:
-- **Early October (Oct 1-10)**: Moderate pricing, still comfortable weather
-- **Mid-October (Oct 10-20)**: Prices start rising as autumn foliage begins
-- **Late October (Oct 20-31)**: Peak season pricing as fall colors arrive
-
-Your dates (Oct 1-17) catch mostly moderate pricing with a slight uptick at the end. This is favorable.
-
-### Strategy 5: Long-Stay Discounts
-
-- **MIMARU**: Some properties offer reduced rates for stays over 7 nights -- ask when booking directly
-- **Airbnb**: Most hosts offer automatic weekly (7+ nights, ~5-10% off) and monthly (28+ nights, ~15-20% off) discounts. Your 16 nights will trigger weekly discounts
-- **Booking.com**: Look for "Long Stay" badges and use the Genius loyalty discount (free membership, instant 10% off)
-- **Direct booking**: Email MIMARU directly at their [contact page](https://mimaruhotels.com/en/) explaining you want 14-16 nights. They may offer a custom rate
-
-### Strategy 6: The Cancellation Monitoring Trick
-
-Japanese hotels commonly get cancellations at these intervals before check-in:
-- 10 days before
-- 7 days before
-- 5 days before
-- 3 days before
-
-**Action**: Set calendar reminders to re-check prices on September 21, 24, 26, and 28, 2026. Rooms that were sold out may suddenly reappear at good rates due to cancellations.
-
-### Strategy 7: Points and Loyalty Programs
-
-- **Booking.com Genius Level 2+**: 10-15% off listed rates (earn by completing 5+ stays)
-- **Hotels.com Rewards**: Stay 10 nights, get 1 free (retroactive -- count past stays)
-- **IHG/Marriott/Hilton**: MIMARU is not part of these chains, but if you split Osaka nights at a chain hotel, use points
-- **Credit card travel portals**: Some Israeli credit cards offer travel booking portals with additional cashback
-
----
-
-## 7. Booking Timeline
-
-### NOW (February 2026)
-- [ ] Research MIMARU Ueno East availability for Oct 1-17
-- [ ] Make a preliminary Booking.com reservation (free cancellation)
-- [ ] Set up price alerts on Kayak and Google Hotels for "MIMARU Tokyo Ueno"
-- [ ] Browse Airbnb for Ueno/Asakusa 2BR listings -- favorite the best ones but do not book yet
-
-### March-April 2026
-- [ ] Compare MIMARU prices across all platforms (official, Booking, Agoda, Expedia)
-- [ ] If prices are good, lock in your booking
-- [ ] For Airbnb: message top-rated hosts to ask about long-stay discounts
-- [ ] Book Osaka accommodation for Oct 11-12 (Toyoko Inn Namba or similar, ~$85/night)
-
-### May-June 2026
-- [ ] Final decision: MIMARU vs Airbnb vs budget hotel
-- [ ] Book the Pokemon Room for Oct 10 (bar mitzvah night) -- these fill up
-- [ ] Confirm all reservations
-
-### September 2026
-- [ ] Check for cancellation deals (Sep 21, 24, 26, 28)
-- [ ] Confirm all check-in procedures and addresses
-- [ ] Print hotel addresses in Japanese for taxi drivers
-- [ ] Download offline Google Maps with hotel locations pinned
-
-### Key Contact Information
-
-| Property | Website | Booking Link |
-|----------|---------|-------------|
-| MIMARU Official | [mimaruhotels.com](https://mimaruhotels.com/en/) | [Book direct](https://mimaruhotels.com/en/hotel/) |
-| MIMARU Ueno East | [Property page](https://mimaruhotels.com/en/hotel/ueno-east/) | [Booking.com](https://www.booking.com/hotel/jp/mimaru-tokyo-ueno-east.html) |
-| MIMARU Ueno Okachimachi | [Property page](https://mimaruhotels.com/en/hotel/ueno-okachimachi/) | [Booking.com](https://www.booking.com/hotel/jp/mimaru-tokyo-ueno-okachimachi.html) |
-| MIMARU Ueno North | [Property page](https://mimaruhotels.com/en/hotel/ueno-north/) | [Kayak](https://www.kayak.com/Tokyo-Hotels-Mimaru-Tokyo-Ueno-North.3558054.ksp) |
-| MIMARU SUITES Asakusa | [Property page](https://mimaruhotels.com/en/hotel/suites-tokyo-asakusa/) | [Booking.com](https://www.booking.com/hotel/jp/mimaru-suites-dong-jing-qian-cao.html) |
-| MIMARU Pokemon Rooms | [Info page](https://mimaruhotels.com/en/news/stay-pokemonroom/) | Book via property pages |
-| MONday Apart Ueno | [Official](https://hotel-monday.com/apartment/ueno/?wovn=en) | [Booking.com](https://www.booking.com/hotel/jp/monday-apart-premium-ueno.html) |
-| PLAYSIS Asakusa | [Official](https://www.playsis-easttokyo.com/enasakusa) | [Booking.com](https://www.booking.com/hotel/jp/playsis-asakusa.html) |
-| Toyoko Inn Ueno | [Official](https://www.toyoko-inn.com/eng/) | [Booking.com](https://www.booking.com/hotel/jp/toyoko-inn-tokyo-ueno-tawaramachi-eki-tokyo.html) |
-| Airbnb Ueno search | -- | [Airbnb Ueno](https://www.airbnb.com/ueno-taito-city-japan/stays) |
-
----
-
-## Quick Decision Guide
-
-**Choose MIMARU Ueno East if:**
-- You want the best family experience with kitchen, laundry, space
-- Your son will love the Pokemon Room for his bar mitzvah night
-- You value having a front desk and consistent quality
-- Budget: $2,400-3,500 for 16 nights
-
-**Choose MONday Apart Ueno if:**
-- You want apartment-style living at a lower price than MIMARU
-- Kitchen and laundry are important
-- You do not need Pokemon rooms
-- Budget: $1,664-2,500 for 16 nights
-
-**Choose Airbnb if:**
-- You want maximum space for the lowest price
-- You are comfortable with self-managed accommodation
-- You want to live in a residential neighborhood
-- Budget: $1,040-1,920 for 16 nights
-
-**Choose PLAYSIS Asakusa if:**
-- Budget is the top priority
-- You do not need a private kitchen
-- Your teens are OK with bunk beds
-- Budget: $1,120-1,600 for 16 nights
-
----
-
-*Prices researched February 2026. All prices are estimates based on current market data and may fluctuate. Verify current rates on booking platforms before committing. Exchange rate used: $1 = ~3.70 ILS.*
-
-*Sources: [MIMARU Official](https://mimaruhotels.com/en/), [The Tokyo Chapter](https://www.thetokyochapter.com/), [Booking.com](https://www.booking.com/), [Expedia](https://www.expedia.com/), [Kayak](https://www.kayak.com/), [TripAdvisor](https://www.tripadvisor.com/), [Tokyo Cheapo](https://tokyocheapo.com/), [Japan Guide](https://www.japan-guide.com/)*
+### Backup B: KOKO HOTEL Residence Asakusa Tawaramachi
+
+- Family apartment format with kitchen/kitchenette and washer/dryer
+- Better value candidate if Asakusa is acceptable instead of Ueno
+- Target-date total and exact refundable inventory were not captured
+- Sources: [Booking.com](https://www.booking.com/hotel/jp/koko-residence-qian-cao-tian-yuan-ting.en-gb.html), [Expedia](https://www.expedia.com/Tokyo-Hotels-KOKO-HOTEL-Residence-Asakusa-Tawaramachi.h82939385.Hotel-Information)
+- Confidence: **HIGH** general suitability, **LOW** current October price
+
+### MIMARU Reality Check
+
+The official MIMARU engine returned **no four-bed availability at MIMARU Tokyo Ueno East for the old Oct 2-13 block**. The old nearby totals below are retained only as pricing benchmarks and must be rerun for Oct 2–11:
+
+| Property | Old official “from” total, Oct 2-13 | Notes |
+|---|---:|---|
+| [MIMARU Tokyo Ueno Inaricho](https://mimaruhotels.com/en/hotel/ueno-inaricho/) | **JPY 739,211** | 11 nights |
+| [MIMARU Tokyo Asakusa Station](https://mimaruhotels.com/en/hotel/asakusa-station/) | **JPY 963,460** | 11 nights |
+| [MIMARU SUITES Tokyo Asakusa](https://mimaruhotels.com/en/hotel/suites-tokyo-asakusa/) | **JPY 1,245,020** | 11 nights |
+
+MIMARU Ueno East has a full kitchen but **coin laundry, not an in-room washer/dryer**. Its [official room page](https://mimaruhotels.com/en/hotel/ueno-east/) confirms this. Confidence: **HIGH** for the live availability signal and published official totals as observed July 23; rates can change.
+
+## 3. Confirmed Kyoto Stay — Oct 11-13
+
+### Airbnb: bliss Kyoto Fushimi Inari — Room D
+
+| Item | Confirmed reservation |
+|---|---|
+| Guests / stay | 4 guests · Oct 11–13 · 2 nights |
+| Check-in / checkout | **15:00 / 11:00** |
+| Amount paid | **ILS 796.37** |
+| Cancellation shown | Free before **Oct 6 at 15:00**; partial refund before **Oct 11 at 15:00** |
+| Area | Fukakusa/Fushimi Inari; the listing describes it as about 3 minutes from the shrine |
+| Room | **Room D**, second floor |
+| Host | Teruyuki / Sakura host team |
+
+#### Before arrival
+
+- Complete the host-supplied guest-registration Google Form before check-in, then tell the host in Airbnb chat that it is complete.
+- Open the form only from the original Airbnb host message. Do not copy the form, confirmation number, exact address or access credentials into this web-synced guide.
+- Read the host’s access guide and save it offline.
+- The host has **not** offered pre-check-in or post-checkout luggage storage. Forward the main suitcases to Osaka if accepted there, and keep the two-night bags in Kyoto Station lockers/storage until check-in.
+
+#### Check-in and locking
+
+- The building entrance is unlocked; proceed to Room D on the second floor.
+- The room uses a dial keypad. Retrieve the code and button sequence from the Airbnb host message.
+- The door does **not** lock automatically. Lock it manually after entering and every time the family leaves.
+- Free Wi-Fi is available; retrieve the network details from the Airbnb message rather than publishing them here.
+- Late-night messages may not be answered until morning, so keep the full guide and credentials offline on both adults’ phones.
+
+#### Checkout
+
+1. Bag the rubbish and leave it inside the room; do not use the facility collection box.
+2. Turn off the lights and air conditioner.
+3. Close the door and lock it with the keypad.
+4. Message the host after checkout.
+
+#### Itinerary effect
+
+- **Oct 11:** the 15:00 check-in is too late for the 13:00 Mizuekai. Use luggage forwarding or Kyoto Station storage, then check in after the Awata procession.
+- **Oct 12:** allow cross-city travel from Fushimi Inari to UZUMASA and back; the evening HIBIKI venue at Kyoto Avanti is comparatively convenient via the JR Nara Line.
+- **Oct 13:** visit Fushimi Inari early, return to the apartment for bags, and check out by 11:00. No post-checkout storage is required for the recommended sequence.
+
+Source: Airbnb reservation screenshot and host instructions supplied July 24, 2026.
+
+## 4. Osaka Shortlist — Oct 13-15
+
+### Recommended: ESLEAD HOTEL Namba East
+
+This is currently stronger than both the Airbnb and MIMARU alternatives:
+
+- Exact Oct 13-15 direct total for four adults: **JPY 35,184**
+- 34.2 m² with **four separate single beds**
+- Full kitchen, in-room washer, detergent and bathroom drying
+- Separate bath and toilet
+- Free self-service chain-lock cloakroom
+- About 7 minutes to Ebisucho; 10 minutes to Nankai Namba; 11 minutes to Nipponbashi
+- About 15 minutes' walk to Dotonbori and roughly 35 minutes to USJ
+- Free cancellation through four days before arrival; 100% within three days
+- Licensed hotel business at Nippombashi 4-1-11
+
+Sources:
+
+- [Official property](https://www.eslead-hotel.com/en/namba-east/)
+- [Exact direct Oct 13-15 search](https://beds24.com/booking2.php?propid=313408&checkin=2026-10-13&checkout=2026-10-15&numnight=2&numadult=4&numchild=0&lang=en&cur=JPY)
+- [Osaka licensed-accommodation register](https://www.city.osaka.lg.jp/kenko/cmsfiles/contents/0000382/382418/20260531ketsugo.pdf)
+
+Confidence: **HIGH** for room, exact-date availability, total and licensing as observed July 23.
+
+### Roomier Upgrade: ESLEAD HOTEL Namba Kuromon
+
+- Exact direct room total: **JPY 45,376**
+- Budget up to **JPY 1,600 additional Osaka accommodation tax**, for a conservative total of JPY 46,976
+- 48 m²; two double beds, one single and one sofa bed
+- Full kitchen, in-room washer, bathroom drying and separate bath/toilet
+- 5 minutes to Nipponbashi; about 16 minutes' walk to Dotonbori
+- [Official property](https://www.eslead-hotel.com/en/kuromon/)
+- [Exact direct Oct 13-15 search](https://beds24.com/booking2.php?propid=283747&checkin=2026-10-13&checkout=2026-10-15&numnight=2&numadult=4&numchild=0&lang=en&cur=JPY)
+
+### True Airbnb Lead — Price Still Hidden
+
+- [Room for 4 near Dotonbori](https://www.airbnb.com/rooms/991812853248404117?check_in=2026-10-13&check_out=2026-10-15&guests=4&adults=4&currency=JPY)
+- Licensed Special Zone Minpaku: `大阪市指令 大保環第18-2201号`
+- Four single beds, full kitchen, shared 1F washer and free unmanned luggage storage
+- 5 minutes to Kuromon/Den Den Town; 10 minutes to Dotonbori
+- 4.67/5 from 30 reviews
+- Exact availability and total did not surface, so it is not a bookable winner yet
+
+### USJ Hotel Alternative: Hotel Universal Port
+
+The exact Oct 13-15 official search for four adults shows inventory and a lowest eligible rate of **JPY 63,200 room-only** before Osaka accommodation tax. At JPY 7,900 per person/night, budget JPY 1,600 tax, for a likely total of **JPY 64,800**. That is about JPY 29,616 above ESLEAD Namba East.
+
+- About 4 minutes' walk from the USJ entrance
+- Free 24-hour pre/post-stay luggage lockers
+- Coin laundry, but no kitchen or in-room washer
+- A general official-hotel stay does **not** include park admission, Express Pass or early park entry
+- Breakfast from Oct 2 costs JPY 3,600 for each guest aged 13+ and JPY 2,100 for age 7-12: **JPY 12,900 per family breakfast**
+- [Exact official Oct 13-15 search](https://go-ohr.reservation.jp/ja/hotels/ohr-port/plans?checkin_date=20261013&checkout_date=20261015&adults=4&child1=0&child2=0&child3=0&child4=0&child5=0&children=0&rooms=1&dayuseFlg=0&sort=2)
+- [Official hotel access](https://global-universalport.orixhotelsandresorts.com/LUC2ORIUNV/cdata/luc2oriunv_12_jaen.html)
+- [Official luggage information](https://global-universalport.orixhotelsandresorts.com/LUC2ORIUNV/cdata/luc2oriunv_9_jaen.html)
+
+**Decision:** this normal-room premium is reasonable if maximizing the USJ day matters more than the Oct 13 Namba evening. If chosen, use the hotel for both nights; do not add a one-night hotel move.
+
+### Concept-Room Upgrades
+
+- [Hotel Universal Port Minions Room 3](https://global-universalport.orixhotelsandresorts.com/LUC2ORIUNV/cdata/luc2oriunv_29_jaen.html): 40 m² with four actual 102 cm roller-coaster beds. A published benchmark is about **JPY 176,000 for four people/two nights with breakfast**; current public plan ranges imply roughly JPY 106,912-223,280 depending on rate. Treat it as an entertainment splurge, not a lodging value. [Exact dated room-only plan](https://go-ohr.reservation.jp/ja/hotels/ohr-port/plans/10067568?checkin_date=20261013&checkout_date=20261015&adults=4&child1=0&child2=0&child3=0&child4=0&child5=0&children=0&rooms=1)
+- [Hotel Universal Port Ocean Deluxe](https://go-ohr.reservation.jp/ja/hotels/ohr-port/rooms/10022312?checkin_date=20261013&checkout_date=20261015&adults=4&child1=0&child2=0&child3=0&child4=0&child5=0&children=0&rooms=1): 40 m², top-floor park view, two singles plus one stacking bed and one sofa bed. This is the sensible USJ-themed compromise if its final total is close to the JPY 64,800 base rate.
+- [MIMARU Osaka Namba North Pokémon Room](https://mimaruhotels.com/en/hotel/namba-north/): 41 m², four real beds, kitchen and coin laundry. Best Pokémon/Namba fit, but exact two-night total remains hidden.
+
+Keep one Namba/Nipponbashi base for both nights; do not split the stay with Universal City.
+
+## 5. Booking Recommendation
+
+1. **Tokyo Oct 2-11 — booked:** submit all four passport images in Airbnb chat, send the approximate late-arrival time and obtain written confirmation that late self-check-in is fine.
+2. **Kyoto Oct 11-13 — booked:** complete the host’s registration form, save the access guide offline and solve the Oct 11 bag gap with forwarding or Kyoto Station storage.
+3. **Osaka Oct 13-15 — open:** choose between ESLEAD Namba East at the previously observed JPY 35,184 and Hotel Universal Port at about JPY 64,800 after estimated tax, then recheck the live checkout.
+4. **Tokyo Oct 15-17 — open:** hold the 60 m² Ueno Airbnb as the practical lead. Recheck the ILS 1,380 total and cancellation text on the payment screen.
+5. **Concept stay:** only pay the Pokémon/Minions premium if the room itself is a family priority. The cleanest option is a single themed block that does not create an additional hotel move.
+
+## 6. Questions to Send Each Property Before Final Commitment
+
+- **Booked Tokyo:** We land at NRT at 19:40 on Oct 2. Please confirm that arrival around 22:00–23:00 is permitted and explain what to do if transport is delayed.
+- **Booked Tokyo:** Please confirm the exact private rooms, floors, usable beds and bathrooms included in this reservation.
+- **Booked Tokyo:** Can your team help send the main suitcases to the Osaka property at checkout on Oct 11? We understand you cannot store them after checkout.
+- **Booked Kyoto:** Is any luggage drop possible before 15:00 on Oct 11? If not, we will use Kyoto Station storage.
+- **Booked Kyoto:** Please confirm that the registration form in the Airbnb message is the correct secure form for all four guests.
+- **Open stays:** Does this exact room and rate sleep four guests aged 12+ without extra fees or sofa-bed surprises?
+- **Open stays:** Are consumption tax, local accommodation tax and service fees included in the displayed total?
+- **Open stays:** What is the exact cancellation deadline in Japan local time?
+- Can the Osaka property receive forwarded luggage from Tokyo before Oct 13?
+- Can the final Tokyo property receive forwarded luggage before check-in on Oct 15?
+- If returning from Osaka in the afternoon/evening on Oct 15, is self check-in or late check-in supported?
+
+## 7. Decision Ledger
+
+| Decision | Status | Next evidence needed |
+|---|---|---|
+| Tokyo area | **Tabata booked** | Complete IDs and confirm late arrival/layout |
+| Tokyo Oct 2-11 | **Booked · ILS 3,638.99** | Guest documents and final check-in instructions |
+| Kyoto Oct 11-13 | **Booked · ILS 796.37 paid** | Registration form, offline guide and Oct 11 luggage |
+| Split vs continuous Tokyo | **Four-block split selected** | No further comparison needed |
+| Osaka Oct 13-15 | **ESLEAD value / Universal Port convenience** | Family decides whether USJ proximity is worth ~JPY 29,600 |
+| Tokyo Oct 15-17 | **4F Big Apartment Ueno lead** | Final checkout total/cancellation |
+| Pokémon/Minions room | **Optional splurge** | Exact two-night total and family preference |
+
+*Tokyo and Kyoto booking evidence was supplied July 24, 2026. Remaining live price observations were made July 23 and can change; only a fresh exact-date checkout can control the Osaka and final-Tokyo decisions.*

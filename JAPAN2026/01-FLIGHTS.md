@@ -1,11 +1,47 @@
-# Flights Research: Tel Aviv (TLV) to Tokyo (NRT/HND)
+# Flights — BOOKED: Tel Aviv (TLV) to Tokyo Narita (NRT)
 
-**Trip:** Family of 4 (2 adults + 2 children)
-**Outbound:** October 1, 2026
-**Return:** October 17, 2026
-**Route:** Ben Gurion Airport (TLV) to Tokyo Narita (NRT) or Haneda (HND)
+**Status:** BOOKED — Ethiopian Airlines via Addis Ababa
+**Trip:** Family of 4 (2 adults + daughter 16 + son 12)
+**Outbound:** October 1-2, 2026
+**Return:** October 17-18, 2026
+**Route:** Ben Gurion Airport (TLV) → Addis Ababa (ADD) → Tokyo Narita (NRT), round trip
 **Distance:** 5,716 miles / 9,199 km
-**Time Zone Difference:** Tokyo is UTC+9, 7 hours ahead of Tel Aviv
+**Time Zone Difference during this trip:** Tokyo is 6 hours ahead of Tel Aviv
+
+> **Source of truth:** the purchased-ticket itinerary screenshot supplied on July 23, 2026. The screenshot contains flight numbers and local times, but not the fare, baggage allowance, booking reference, operating terminal, or ticket conditions.
+
+## Confirmed Itinerary
+
+| Leg | Date | Flight | Route | Depart | Arrive | Connection |
+|---|---|---|---|---:|---:|---:|
+| Outbound 1 | Thu, Oct 1 | **ET419** | TLV → ADD | 15:35 | 19:50 | **2h 45m** in ADD |
+| Outbound 2 | Thu-Fri, Oct 1-2 | **ET672** | ADD → NRT | 22:35 | 19:40 (+1 day) | — |
+| Return 1 | Sat-Sun, Oct 17-18 | **ET673** | NRT → ADD | 20:40 | 05:50 (+1 day) | **4h 35m** in ADD |
+| Return 2 | Sun, Oct 18 | **ET418** | ADD → TLV | 10:25 | 14:35 | — |
+
+All times are local. Approximate total scheduled journey time is **22h 05m outbound** and **23h 55m return**.
+
+## Planning Consequences
+
+- The family reaches Narita at **19:40 on Friday, October 2**. Allowing for immigration, bags, and travel to Ueno, the hotel arrival is likely around **22:00-23:00**.
+- Tokyo accommodation must therefore start on **October 2**, with late check-in guaranteed in writing.
+- The return flight leaves Narita at **20:40 on Saturday, October 17**. Keep the room through the night of October 16, check out on October 17, store luggage, and leave central Tokyo around **15:30-16:00**.
+- The trip has **15 physical nights in Japan**: October 2 through October 16.
+- Neither Addis connection is long enough for the stopover-hotel plan described in the earlier research.
+
+## Still to Confirm From the E-ticket
+
+- [ ] Booking reference / PNR and e-ticket numbers saved offline
+- [ ] Operating terminals at TLV, ADD, and NRT
+- [ ] Checked and cabin baggage allowance for the purchased fare
+- [ ] Seat assignments and meal requests
+- [ ] Family ticket total added to [10-BUDGET.md](./10-BUDGET.md)
+- [ ] Ethiopian Airlines contact details and disruption policy saved
+- [ ] Reconfirm schedule 72 hours before each departure
+
+---
+
+## Pre-booking Research Archive (Superseded)
 
 > **Exchange Rate Reference (Feb 2026):** 1 USD = ~3.6 NIS. Prices below shown in both USD and NIS where possible. All "Family of 4" totals assume 4 adult-equivalent tickets unless noted.
 
@@ -280,31 +316,9 @@ This lets you enjoy a stopover on the way there while flying more directly on th
 
 ---
 
-## Final Recommendation
+## Booking Decision
 
-### For This Trip: Etihad Airways via Abu Dhabi
-
-**Why Etihad is the recommended choice for your family:**
-
-1. **Price:** ~$3,800-4,000 for 4 passengers (~13,700-14,400 NIS) is competitive
-2. **Free Stopover:** 2-night Abu Dhabi stopover breaks up the journey and adds a bonus destination
-3. **Frequency:** 28 flights per week means maximum scheduling flexibility around October 1
-4. **Family-Friendly:** Priority boarding, kids' meals, entertainment packs
-5. **Comfort:** Modern fleet, good service, manageable 15.5-hour fastest connection
-
-**Suggested Itinerary:**
-- **Sep 30 or Oct 1:** Depart TLV evening -> Abu Dhabi
-- **Oct 1-2:** Enjoy Abu Dhabi (Yas Island, Louvre, beach) -- FREE hotel
-- **Oct 2-3:** Abu Dhabi -> Tokyo NRT (arrive evening)
-- **Oct 17:** Tokyo NRT -> Abu Dhabi -> TLV (direct return)
-
-### Action Plan
-
-1. **Now (February 2026):** Set up price alerts on Google Flights, Skyscanner, and KAYAK for TLV-NRT, October 1-17
-2. **Monitor:** Check prices weekly; watch for flash sales
-3. **April-May 2026:** Watch for Israir's Tokyo route pricing announcement
-4. **July 2026 (target):** Book when prices are in the $850-950/person range
-5. **Backup:** If Etihad prices spike, pivot to Ethiopian Airlines (cheapest) or Turkish Airlines (best stopover)
+The family booked the Ethiopian Airlines option. The former Etihad recommendation and price-alert action plan are now obsolete; the confirmed itinerary at the top of this file controls all accommodation, airport-transfer, and daily-itinerary decisions.
 
 ---
 
