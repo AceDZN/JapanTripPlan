@@ -25,9 +25,12 @@
 - Den Den Town / Ota Road
 - Shimokitazawa’s vintage/music streets and fixed-date Curry Festival
 
+### Added anchor
+
+- **Mundo Pixar on Oct 4** is a must-do between teamLab and Odaiba; protect its timed entry and shorten Gundam Base/mall browsing and the sunset first.
+
 ### Bonuses, never anchors
 
-- **Mundo Pixar on Oct 4** only if the family accepts the extra cost and shortens Gundam/Joypolis;
 - **Pokémon Card Game: TOKYO LUMINOUS NIGHT on Oct 10** only if it appears in the official weekend rotation;
 - temporary anime cafés or pop-ups not yet confirmed for October;
 - extra Pokémon Centers after the family has already visited the planned three;
@@ -46,7 +49,7 @@
 | USJ | Admission and Express are separate. Buy only an Express product that explicitly lists the Nintendo rides/entry wanted. [Official Express page](https://www.usj.co.jp/web/en/us/tickets/express-pass) |
 | Pokémon Café | October release date not announced. Monitor [official news](https://www.pokemon-cafe.jp/en/cafe/news/) rather than using the old rolling-date formula. |
 | KAWAII MONSTER LAND | Reserve a timed 60-minute experience from the [official page](https://contents.gendagigo.jp/kawaii-monster-land/en). |
-| Mundo Pixar | Optional Oct 4 route upgrade. The exhibition runs through Oct 12 at CREVIA BASE Tokyo, requires a timed reservation and takes about 45–55 minutes. Oct 4 daytime D-price tickets for three age-16+ guests and one age-12 guest total about JPY 20,100 before fees. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official prices/calendar](https://t.pia.jp/en/pia/events/mundopixar) |
+| Mundo Pixar | **Must-do on Oct 4.** The exhibition runs through Oct 12 at CREVIA BASE Tokyo, requires a timed reservation and takes about 45–55 minutes. Buy an 11:45/12:00 entry; Oct 4 daytime D-price tickets for three age-16+ guests and one age-12 guest total about JPY 20,100 before fees. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official prices/calendar](https://t.pia.jp/en/pia/events/mundopixar) |
 | Tokyo Night & Light | The overall projection program is free and runs daily except severe weather, but the Pokémon work rotates on selected weekend/holiday slots. Recheck the Oct 10 work order; do not copy Instagram’s generic times. [Official timetable](https://tokyoprojectionmappingproject.jp/en/) |
 
 ## Day 3 — Akihabara: Play, Hunt, Cats
@@ -78,12 +81,12 @@ Do not promise the Chuo-dori pedestrian zone on Oct 3—it runs on Sundays in Oc
 This pairing works geographically: Toyosu, Shin-Toyosu and Odaiba connect naturally by Yurikamome.
 
 - teamLab Planets early;
-- optional timed Mundo Pixar at Shijō-mae, between teamLab and Odaiba;
+- timed Mundo Pixar at Shijō-mae, between teamLab and Odaiba;
 - Unicorn Gundam and Gundam Base;
 - **3–4 hours of Tokyo Joypolis**;
 - waterfront sunset.
 
-Mundo Pixar is a **squeeze, not a free extra**. If booked, cut most Gundam Base browsing and the sunset, or replace part of Joypolis. Skip Madame Tussauds, Fuji TV and aimless mall time. Check Joypolis ride restrictions before buying passports. [Official Joypolis guide](https://tokyo-joypolis.com/language/english/index.html)
+Mundo Pixar is a **protected anchor, not an optional extra**. The day now has three deliberate experiences: teamLab, Pixar and Joypolis. Cut most Gundam Base browsing, the sunset, Madame Tussauds, Fuji TV and aimless mall time before shortening Pixar. Check Joypolis ride restrictions before buying passports. [Official Joypolis guide](https://tokyo-joypolis.com/language/english/index.html)
 
 ## Day 5 — PokéPark KANTO
 

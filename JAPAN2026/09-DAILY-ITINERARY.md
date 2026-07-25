@@ -27,7 +27,7 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 | **Nintendo Museum · Oct 15** | Enter the October lottery by **July 31 at 23:59 JST** on the [official ticket calendar](https://museum-tickets.nintendo.com/en/calendar?lang=en). Choose a morning or early-afternoon slot. | Recovery morning in Osaka, then a direct return to Tokyo. |
 | **PokéPark KANTO · Oct 5** | The lottery is closed. As of Jul 24, the official overseas store has no Oct 5 purchase path. Monitor it for official inventory; the **Aug 1** system update is for admissions from Nov 1 and does not promise an October reopening. Use only the [official international store](https://ticket-en.pokepark-kanto.co.jp/) or a seller explicitly authorized by PokéPark; do not use Fiverr or an unofficial paid buyer. | **DisneySea** is the first fallback; Sanrio Puroland is secondary if the family prefers kawaii characters. |
 | **teamLab Planets · Oct 4** | Buy a morning timed entry from the [official store](https://teamlabplanets.dmm.com/en). | Spend the full day in Odaiba at Joypolis + Gundam Base. |
-| **Mundo Pixar · optional Oct 4** | Decide first whether Pixar is worth making Oct 4 a three-ticket day. A daytime D-price slot costs about **JPY 20,100 for this family plus fees**; buy a timed 11:45/12:00 entry only from the [official event/ticket page](https://t.pia.jp/en/pia/events/mundopixar). | Keep the calmer teamLab + Joypolis baseline. If booked, cut most Gundam Base browsing and the waterfront sunset—or replace part of Joypolis. |
+| **Mundo Pixar · must-do Oct 4** | Buy a timed **11:45/12:00** entry from the [official event/ticket page](https://t.pia.jp/en/pia/events/mundopixar). A daytime D-price slot costs about **JPY 20,100 for this family plus fees**. | If the preferred slot is gone, choose the nearest slot that preserves the teamLab → Pixar → Odaiba route. Cut extended Gundam Base/mall browsing and the waterfront sunset first. |
 | **KAWAII MONSTER LAND · Oct 6** | Buy a timed 60-minute entry from the [official attraction page](https://contents.gendagigo.jp/kawaii-monster-land/en). | Takeshita Street + purikura + Kiddy Land; no cross-city replacement. |
 | **Ghibli Museum · Oct 8** | October tickets release **Sept 10 at 10:00 JST** through the [official ticket page](https://www.ghibli-museum.jp/en/tickets/). Target 10:00. | Kichijoji + Inokashira Park, then the same compact Nakano/Shinjuku route. |
 | **Mizuekai · Oct 11** | Target the **13:00** performance; official sales method is still TBA. JPY 10,000 first floor / JPY 8,000 second floor, age 10+. | Skip the recital, keep a calm Kyoto arrival and meet the Awata procession at 17:00. |
@@ -37,7 +37,7 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 
 ## Interest and Energy Rules
 
-- One headline experience per half-day; no more than two ticketed attractions in one day.
+- One headline experience per half-day; normally no more than two ticketed attractions in one day. Oct 4 is the deliberate exception because teamLab, Pixar and Joypolis sit on one continuous waterfront route, with lower-priority browsing removed.
 - Every shopping district gets a **wish list, time box and spending cap**.
 - For arcades and gachapon, load a fixed cash envelope before entering.
 - After three active days, the next day starts later or ends earlier.
@@ -107,10 +107,10 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 
 ---
 
-## Day 4 — Sun, Oct 4: teamLab Planets + Odaiba Game Day
+## Day 4 — Sun, Oct 4: teamLab Planets + Mundo Pixar + Odaiba
 
-**Theme:** immersive art, Gundam and real play—not mall wandering
-**Route:** Toyosu → Shin-Toyosu → Odaiba on the Yurikamome
+**Theme:** immersive art, Pixar worlds and real play—not mall wandering
+**Route:** Toyosu → Shin-Toyosu → Shijō-mae → Odaiba on the Yurikamome
 
 ### Morning · 09:00–12:00
 
@@ -120,8 +120,8 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 
 ### Afternoon · 12:00–17:30
 
-- **Optional paid squeeze:** after teamLab, continue one stop to Shijō-mae for a timed **Mundo Pixar** entry around 11:45/12:00. CREVIA BASE is about three minutes from the station, the experience takes about 45–55 minutes, and Oct 4 is currently a D-price day: three age-16+ tickets plus one age-4–15 ticket total about **JPY 20,100 before fees**. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official calendar and prices](https://t.pia.jp/en/pia/events/mundopixar)
-- If Pixar is booked, make it a deliberate swap: shorten Gundam Base/mall browsing and drop the waterfront sunset, or reduce Joypolis. Do not attempt three full-length headline attractions.
+- **Must-do:** after teamLab, continue one stop to Shijō-mae for the timed **Mundo Pixar** entry around 11:45/12:00. CREVIA BASE is about three minutes from the station, the experience takes about 45–55 minutes, and Oct 4 is currently a D-price day: three age-16+ tickets plus one age-4–15 ticket total about **JPY 20,100 before fees**. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official calendar and prices](https://t.pia.jp/en/pia/events/mundopixar)
+- Treat teamLab, Pixar and a meaningful Joypolis block as the day’s three anchors. Pixar is not the cut: shorten Gundam Base/mall browsing and drop the waterfront sunset before reducing Joypolis.
 - Continue by Yurikamome to Odaiba; front or rear seats turn transport into an attraction.
 - Lunch at DiverCity.
 - **Unicorn Gundam statue** + **Gundam Base Tokyo**.
@@ -129,10 +129,9 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 
 ### Evening
 
-- Odaiba waterfront sunset and Rainbow Bridge.
-- Dinner nearby, then the night Yurikamome back.
+- Dinner near Joypolis or DiverCity, then the night Yurikamome back.
 
-**Cut first:** extra malls, Madame Tussauds and Fuji TV. If Pixar is added, cut extended Gundam Base browsing and sunset before cutting the protected Joypolis play block.
+**Cut first:** extra malls, Madame Tussauds, Fuji TV, extended Gundam Base browsing and the waterfront sunset. Protect teamLab, Pixar and the Joypolis play block.
 **Rain-proof:** almost the entire day is indoors.
 
 ---
@@ -514,7 +513,7 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 | **Ghibli** | Ghibli Museum with Kichijoji backup |
 | **Nature resets** | Meiji forest, Todoroki Ravine, Kamakura/Enoshima coast and Inokashira Park |
 | **Culture that earns its time** | Great Buddha/Hasedera cave, Mizuekai, Awata, UZUMASA, DRUM TAO, Fushimi Inari, Yūzen engraving and Taiko-kan |
-| **Optional screen worlds** | Mundo Pixar only as an explicit Oct 4 time/cost tradeoff |
+| **Screen worlds** | Mundo Pixar is a protected Oct 4 anchor between teamLab and Odaiba |
 | **Recovery** | light celebration structure, Kyoto reset blocks, optional Manga cut, slow return Day 15 |
 
 ## Official Verification Links

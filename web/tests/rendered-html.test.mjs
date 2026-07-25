@@ -46,7 +46,7 @@ test("server-renders the updated 17-day itinerary", async () => {
   assert.match(html, /Neco Republic/);
   assert.match(html, /KAWAII MONSTER LAND/);
   assert.match(html, /Tokyo Joypolis/);
-  assert.match(html, /Mundo Pixar נכנס בדיוק/);
+  assert.match(html, /Mundo Pixar הוא עוגן קבוע/);
   assert.match(html, /Pokémon Card Game על בניין עיריית טוקיו/);
   assert.match(html, /ערוץ טודורוקי/);
   assert.match(html, /פחזניות טוטורו/);
@@ -72,7 +72,7 @@ test("server-renders the preparation tracker, weather and walking-shoe action", 
   assert.match(html, /לקנות נעלי הליכה חדשות לכולם/);
   assert.match(html, /Nintendo Museum/);
   assert.match(html, /Safety Tips/);
-  assert.match(html, /להחליט אם מוסיפים Mundo Pixar/);
+  assert.match(html, /לקנות Mundo Pixar ל־4\.10/);
   assert.match(html, /22\.0°/);
   assert.match(html, /23\.4°/);
   assert.match(html, /23\.7°/);

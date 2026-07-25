@@ -41,7 +41,7 @@ Why the attraction range is wide:
 - USJ Express inventory and products rotate.
 - Nintendo Museum is lottery-dependent.
 - Joypolis, Tokyo Dome City and Odaiba can use either individual tickets or passports.
-- Optional Mundo Pixar would add about JPY 20,100 plus ticket fees and must replace time in the Oct 4 baseline.
+- Mundo Pixar is now a must-do and adds about JPY 20,100 plus ticket fees. The attraction budget must include it; Oct 4 saves time by cutting lower-priority browsing rather than Pixar.
 - Shopping is deliberately excluded from “attractions” so it cannot hide inside the plan.
 
 ### Kyoto traditional-experience subtotal
@@ -66,7 +66,7 @@ Fill the actual charged amount immediately after every purchase.
 |---|---|---|---:|
 | Neco Republic Ochanomizu | Oct 3 | Reserve | — |
 | teamLab Planets | Oct 4 | Timed ticket | — |
-| Mundo Pixar | Optional Oct 4 | Family decision, then timed ticket | About JPY 20,100 + fees at current D pricing |
+| Mundo Pixar | Oct 4 must-do | Buy timed 11:45/12:00 entry | About JPY 20,100 + fees at current D pricing |
 | Joypolis | Oct 4 | Decide passport vs individual | — |
 | PokéPark KANTO / DisneySea fallback | Oct 5 | Monitor official PokéPark inventory; otherwise buy DisneySea officially | Record selected park total |
 | KAWAII MONSTER LAND | Oct 6 | Timed ticket | — |
@@ -104,7 +104,7 @@ A normal ramen meal for four is roughly JPY 4,000–6,500 before extras. Pokémo
 | Day | Main variable spend | Control rule |
 |---|---|---|
 | Oct 3 | Anime shopping + arcades | One wish list and cash envelope per child |
-| Oct 4 | Joypolis + optional Pixar | Price Joypolis against the rides the family will truly do; add Pixar only with an explicit time cut |
+| Oct 4 | teamLab + Pixar + Joypolis | Pixar is funded and protected; price Joypolis against the rides the family will truly do and cut extended Gundam/mall time |
 | Oct 5 | PokéPark / DisneySea fallback | Buy through an official channel only; never budget a Fiverr/reseller premium |
 | Oct 6 | Kawaii/character goods | One cute purchase target each |
 | Oct 8 | Ghibli + Nakano | Protect Ghibli; compare before buying and stop Nakano after 60–90 minutes |

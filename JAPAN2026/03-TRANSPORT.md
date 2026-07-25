@@ -84,11 +84,11 @@ Use a one-direction route and return through Fujisawa. This avoids repeating the
 - Continue one stop cluster east to Shinjuku for the 3D cat, Godzilla photo and dinner.
 - namco TOKYO is the first transport-saving cut if the day runs late.
 
-### Optional Mundo Pixar inside the waterfront route — Oct 4
+### Mundo Pixar inside the waterfront route — Oct 4
 
 - CREVIA BASE Tokyo is by Shijō-mae, between teamLab’s Shin-Toyosu area and Odaiba on the Yurikamome.
-- If booked, use a timed entry around 11:45/12:00, allow about one hour and continue east; there is no reason to return to central Tokyo.
-- The route is efficient, but the day becomes crowded. Cut Gundam/mall browsing and sunset—or part of Joypolis—rather than allowing the extra ticket to make the whole day late.
+- Treat Pixar as a fixed stop: buy a timed entry around 11:45/12:00, allow about one hour and continue east; there is no reason to return to central Tokyo.
+- Protect teamLab, Pixar and a meaningful Joypolis block. Cut extended Gundam Base/mall browsing and the waterfront sunset first rather than allowing the three-anchor day to run late.
 
 ### Todoroki → Setagaya-Daita → Shimokitazawa — Oct 9
 

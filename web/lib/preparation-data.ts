@@ -90,11 +90,12 @@ export const preparationTasks: PreparationTask[] = [
   },
   {
     id: "mundo-pixar-decision",
-    title: "להחליט אם מוסיפים Mundo Pixar ל־4.10",
-    timing: "עד 10.8",
-    where: "כ־¥20,100 למשפחה + עמלות; אם מזמינים, בוחרים 11:45/12:00 ומקצרים את יום אודאיבה",
-    owner: "המשפחה מחליטה; מבוגר מזמין",
+    title: "לקנות Mundo Pixar ל־4.10",
+    timing: "עכשיו",
+    where: "לכוון ל־11:45/12:00; כ־¥20,100 למשפחה + עמלות. Pixar מוגן ומקצרים את Gundam/הקניונים והשקיעה",
+    owner: "מבוגר מוביל",
     category: "tickets",
+    priority: "urgent",
     href: "https://t.pia.jp/en/pia/events/mundopixar",
   },
   {
