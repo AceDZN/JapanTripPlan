@@ -47,16 +47,16 @@ Check terminal and train status on the day.
 | Day | Main route |
 |---|---|
 | Oct 3 | Base → Akihabara/Ochanomizu → base |
-| Oct 4 | Base → Toyosu/Shin-Toyosu → Yurikamome to Odaiba → base |
+| Oct 4 | Base → Toyosu/Shin-Toyosu → optional Shijō-mae/CREVIA BASE → Yurikamome to Odaiba → base |
 | Oct 5 | Base → Shinjuku → Keio-Yomiuriland → gondola/bus → reverse |
 | Oct 6 | Base → Harajuku/Meiji-jingumae → walk toward Shibuya → base |
 | Oct 7 | Base → Kamakura → Hase → Kamakurakōkōmae → Enoshima → Fujisawa → base |
 | Oct 8 | Base → Mitaka/Kichijoji → Nakano → Shinjuku → base |
 | Oct 9 | Base → Oimachi → Todoroki → Jiyūgaoka/Shibuya → Shimokitazawa/Setagaya-Daita → Hanegi Park → Shimokitazawa → base |
-| Oct 10 | Base → Suidobashi/Tokyo Dome City → base |
+| Oct 10 | Base → Suidobashi/Tokyo Dome City → optional Kasuga–Tochomae projection → base |
 | Oct 11 | Tabata → Tokyo Station → Kyoto Station storage → Miyagawacho → Awata → Fushimi Inari apartment |
 | Oct 12 | Fushimi Inari base → UZUMASA → base/rest → Kyoto Avanti → base |
-| Oct 13 | Fushimi Inari base → shrine lower gates → base/checkout → Kyoto/Shin-Osaka → Namba → Dotonbori |
+| Oct 13 | Fushimi Inari base → shrine lower gates → Yūzen at 09:30 → base/checkout → Kyoto/Shin-Osaka → Namba → Dotonbori |
 | Oct 14 | Namba → Universal City → same Namba hotel |
 | Oct 15 | Namba → Uji → Kyoto → Tokyo if Nintendo Museum succeeds; otherwise Namba → Shin-Osaka → Tokyo |
 | Oct 16 | Final base → Nihonbashi → Tokyo Station → Taiko-kan/Nishi-Asakusa → Senso-ji → base |
@@ -84,6 +84,12 @@ Use a one-direction route and return through Fujisawa. This avoids repeating the
 - Continue one stop cluster east to Shinjuku for the 3D cat, Godzilla photo and dinner.
 - namco TOKYO is the first transport-saving cut if the day runs late.
 
+### Optional Mundo Pixar inside the waterfront route — Oct 4
+
+- CREVIA BASE Tokyo is by Shijō-mae, between teamLab’s Shin-Toyosu area and Odaiba on the Yurikamome.
+- If booked, use a timed entry around 11:45/12:00, allow about one hour and continue east; there is no reason to return to central Tokyo.
+- The route is efficient, but the day becomes crowded. Cut Gundam/mall browsing and sunset—or part of Joypolis—rather than allowing the extra ticket to make the whole day late.
+
 ### Todoroki → Setagaya-Daita → Shimokitazawa — Oct 9
 
 - Reach Todoroki through Oimachi for the morning ravine walk.
@@ -106,11 +112,19 @@ Use a one-direction route and return through Fujisawa. This avoids repeating the
 - Kyoto Avanti is by Kyoto Station. Be at the theatre before doors at 18:15 for the 19:00 HIBIKI show.
 - The optional Mibu Kyogen route is a swap that requires leaving UZUMASA around 13:15; it is not an extra stop on the baseline.
 
+### Tokyo Dome → optional Pokémon projection — Oct 10
+
+- Kasuga Station by Tokyo Dome City and Tochomae Station are on the Toei Oedo Line; this is the lowest-friction way to add Tokyo Night & Light.
+- Use the earliest practical Pokémon slot only if it appears in the official Oct 10 rotation, then eat in West Shinjuku.
+- Do not use Instagram’s 19:30/20:30/21:00 list as the October work order. The official site publishes multiple general screening slots, while individual works rotate.
+- Skip the projection if the listing changes, weather cancels the outdoor show or it would force a late night before the early Kyoto train.
+
 ### Fushimi Inari departure morning — Oct 13
 
 - The apartment is about three minutes from Fushimi Inari, so walk to the shrine rather than starting at Kyoto Station. [Official access guide](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
 - Leave the bags locked in the apartment and carry only daypacks.
 - Spend 60–90 minutes around the lower torii route and turn back before the mountain climb becomes the day’s headline.
+- Yūzen Fushimi is one minute from JR Inari and lists a 09:30 opening. Visit only after the early shrine loop; allow 20–30 minutes for choosing/engraving and confirm Tuesday hours in the final week.
 - Return for breakfast and bags, complete the host’s checkout steps by 11:00, then continue to Namba. Fushimi replaces the Manga Museum; it is not added before it.
 
 ### Taiko-kan deadline — Oct 16
@@ -157,10 +171,24 @@ Take the recovery morning and a direct reserved Shin-Osaka → Tokyo train after
 
 ## Pass Decisions
 
-- **Nationwide JR Pass:** no; the route does not justify it.
+- **Nationwide JR Pass:** no; the route does not justify it. The official web price is currently JPY 50,000 per adult for seven days; overseas-agency purchase rises to JPY 53,000 from Oct 1, 2026. This family has four adult rail fares, so the pass alone is **JPY 200,000–212,000**.
+- The planned long-distance rail is essentially Tokyo → Kyoto and Kansai/Uji → Tokyo plus short local hops. The existing budget envelope for all reserved Shinkansen legs is only JPY 110,000–125,000 for the family. A JR Pass would therefore cost roughly **JPY 75,000–102,000 more**, before any JPY 4,960-per-person-per-ride Nozomi supplements.
+- The Instagram USD comparison is not a quote for this itinerary. Compare exact yen fares in the chosen official booking flow before purchase; do not buy a pass “for convenience” without doing the route math.
 - **Tokyo subway pass:** buy only if the actual next 24/48/72 hours are subway-heavy. Several key days use JR/private rail.
 - **Enoshima/Kamakura pass:** compare against the final starting station; convenience can matter more than a small saving.
 - **Joypolis/Tokyo Dome:** these are attraction passes, not transport; price them against the actual rides wanted.
+
+[Official JR Pass prices](https://japanrailpass.net/en/purchase/price/) · [official Nozomi supplement information](https://global.jr-central.co.jp/en/onlinebooking/contents/jrp_nozomi/index.html)
+
+## Rush-Hour Strategy
+
+The Instagram “golden hours” are useful as a rough Tokyo warning, not a universal Japan timetable.
+
+- Tokyo’s approximate commuter peaks are **07:30–09:30** and **17:30–19:30**, with the morning usually tighter. Avoid moving luggage then when the itinerary allows. [Official Tokyo travel guide](https://www.gotokyo.org/en/plan/getting-around/subways/index.html)
+- Do not delay a timed attraction merely to obey a generic crowd chart. On early-entry days, travel earlier, use live congestion/route information and wait for the next train if a carriage is visibly packed.
+- Oct 11 and Oct 15 are reserved Shinkansen transfers, not ordinary commuter improvisation. Reserve family seats and required oversized-baggage space; station crowding matters more than a social-media color block.
+- The Oct 13 checkout transfer should begin after 10:30/11:00, naturally outside the morning peak. Keep luggage compact and avoid optional stops after checkout.
+- Evening city returns can overlap the second peak. Eat locally or wait over a snack instead of forcing four people with bags into the first arriving train.
 
 ## Final-Week Checks
 
@@ -178,5 +206,7 @@ Take the recovery morning and a direct reserved Shin-Osaka → Tokyo train after
 - [ ] Nintendo Museum result and assigned time.
 - [ ] Tokyo/Kyoto/Osaka/Uji luggage solution.
 - [ ] Last train options saved offline.
+- [ ] Oct 10 Pokémon projection work order and weather status, if retained.
+- [ ] Oct 13 Yūzen 09:30 Tuesday opening and engraving timing.
 
 *Use live official route planners for exact departure times and fares; fixed minute-by-minute rail promises months ahead are less accurate than this route structure.*

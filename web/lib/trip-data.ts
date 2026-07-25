@@ -317,6 +317,12 @@ export const bookingTasks = [
     detail: "לסגור כניסות מתוזמנות ל־4.10 ול־6.10 בשעות שמתאימות למסלול.",
   },
   {
+    status: "next",
+    date: "החלטה עד 10.8",
+    title: "Mundo Pixar — כן או לא",
+    detail: "כ־¥20,100 למשפחה + עמלות. אם מוסיפים ל־4.10, מקצרים במפורש את Gundam/Joypolis ולא מעמיסים הכול.",
+  },
+  {
     status: "urgent",
     date: "עכשיו",
     title: "לינה לארבעת הבלוקים",

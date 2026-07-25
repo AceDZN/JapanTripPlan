@@ -27,6 +27,7 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 | **Nintendo Museum · Oct 15** | Enter the October lottery by **July 31 at 23:59 JST** on the [official ticket calendar](https://museum-tickets.nintendo.com/en/calendar?lang=en). Choose a morning or early-afternoon slot. | Recovery morning in Osaka, then a direct return to Tokyo. |
 | **PokéPark KANTO · Oct 5** | The lottery is closed. As of Jul 24, the official overseas store has no Oct 5 purchase path. Monitor it for official inventory; the **Aug 1** system update is for admissions from Nov 1 and does not promise an October reopening. Use only the [official international store](https://ticket-en.pokepark-kanto.co.jp/) or a seller explicitly authorized by PokéPark; do not use Fiverr or an unofficial paid buyer. | **DisneySea** is the first fallback; Sanrio Puroland is secondary if the family prefers kawaii characters. |
 | **teamLab Planets · Oct 4** | Buy a morning timed entry from the [official store](https://teamlabplanets.dmm.com/en). | Spend the full day in Odaiba at Joypolis + Gundam Base. |
+| **Mundo Pixar · optional Oct 4** | Decide first whether Pixar is worth making Oct 4 a three-ticket day. A daytime D-price slot costs about **JPY 20,100 for this family plus fees**; buy a timed 11:45/12:00 entry only from the [official event/ticket page](https://t.pia.jp/en/pia/events/mundopixar). | Keep the calmer teamLab + Joypolis baseline. If booked, cut most Gundam Base browsing and the waterfront sunset—or replace part of Joypolis. |
 | **KAWAII MONSTER LAND · Oct 6** | Buy a timed 60-minute entry from the [official attraction page](https://contents.gendagigo.jp/kawaii-monster-land/en). | Takeshita Street + purikura + Kiddy Land; no cross-city replacement. |
 | **Ghibli Museum · Oct 8** | October tickets release **Sept 10 at 10:00 JST** through the [official ticket page](https://www.ghibli-museum.jp/en/tickets/). Target 10:00. | Kichijoji + Inokashira Park, then the same compact Nakano/Shinjuku route. |
 | **Mizuekai · Oct 11** | Target the **13:00** performance; official sales method is still TBA. JPY 10,000 first floor / JPY 8,000 second floor, age 10+. | Skip the recital, keep a calm Kyoto arrival and meet the Awata procession at 17:00. |
@@ -119,7 +120,9 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 
 ### Afternoon · 12:00–17:30
 
-- Ride the Yurikamome to Odaiba; front or rear seats turn transport into an attraction.
+- **Optional paid squeeze:** after teamLab, continue one stop to Shijō-mae for a timed **Mundo Pixar** entry around 11:45/12:00. CREVIA BASE is about three minutes from the station, the experience takes about 45–55 minutes, and Oct 4 is currently a D-price day: three age-16+ tickets plus one age-4–15 ticket total about **JPY 20,100 before fees**. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official calendar and prices](https://t.pia.jp/en/pia/events/mundopixar)
+- If Pixar is booked, make it a deliberate swap: shorten Gundam Base/mall browsing and drop the waterfront sunset, or reduce Joypolis. Do not attempt three full-length headline attractions.
+- Continue by Yurikamome to Odaiba; front or rear seats turn transport into an attraction.
 - Lunch at DiverCity.
 - **Unicorn Gundam statue** + **Gundam Base Tokyo**.
 - **Tokyo Joypolis** for indoor rides, Sonic-themed play and arcade experiences. Check ride restrictions; choose a passport only if the family will do enough rides.
@@ -129,7 +132,7 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 - Odaiba waterfront sunset and Rainbow Bridge.
 - Dinner nearby, then the night Yurikamome back.
 
-**Cut first:** extra malls, Madame Tussauds and Fuji TV.
+**Cut first:** extra malls, Madame Tussauds and Fuji TV. If Pixar is added, cut extended Gundam Base browsing and sunset before cutting the protected Joypolis play block.
 **Rain-proof:** almost the entire day is indoors.
 
 ---
@@ -304,12 +307,14 @@ Setagaya reopened the full path on March 24, 2026. Recheck for temporary works o
 
 ### Evening
 
-- Reserve a special dinner near Tokyo Dome, Kagurazaka or the Tokyo base.
+- **Tentative free finale:** if the official Oct 10 program lists **Pokémon Card Game: TOKYO LUMINOUS NIGHT**, finish rides around 17:15 and take the Oedo Line from Kasuga to Tochomae. Choose the earliest practical Pokémon slot, arrive 15–20 minutes early at Citizens’ Plaza and reserve dinner in West Shinjuku afterward. The projection is outdoors and weather-dependent. [Official timetable](https://tokyoprojectionmappingproject.jp/en/) · [official current works](https://tokyoprojectionmappingproject.jp/en/contents/)
+- The Instagram times are not the October timetable. General October screenings begin at several half-hour slots from 18:00, while the Pokémon work rotates only in selected weekend/holiday positions; recheck the exact work order during the final week.
+- If Pokémon is not listed or the family wants a slower celebration, reserve a special dinner near Tokyo Dome, Kagurazaka or the Tokyo base and keep the original one-area evening.
 - Ask ahead for a dessert message.
 - Do not add the Tokyo Yosakoi preview. Tomorrow starts with an early Kyoto transfer and two fixed-time cultural events.
 
-**Why this wins:** rides, Jump fandom and karaoke can all happen in one compact area.
-**Cut first:** any extra shopping after the keepsake is chosen.
+**Why this wins:** rides, Jump fandom and karaoke remain compact; the projection is a direct Kasuga → Tochomae add-on, not a cross-city zigzag.
+**Cut first:** bowling/arcade and extra shopping if the projection is confirmed. Never use the late 21:00-era option before the early Kyoto transfer.
 
 ---
 
@@ -386,7 +391,9 @@ If the family strongly prefers the historic masked theatre, leave UZUMASA around
 - Leave the bags locked in the apartment and walk about three minutes to the shrine area. [Official access guide](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
 - Spend 60–90 minutes around the lower vermilion torii route.
 - Turn back before the full mountain climb. This is the trip’s one iconic classical-Kyoto sight, not a hiking day.
-- Return for breakfast and bags, complete the host’s checkout steps by 11:00, then travel through Kyoto/Shin-Osaka to Namba. Retrieve the main suitcases if they were forwarded.
+- At **09:30**, stop at **Handmade Chopstick Workshop Yūzen Fushimi**, one minute from JR Inari. Eligible pairs can be engraved on the spot in roughly five minutes each; prepare the exact Roman-letter or katakana spelling before entering. The shop lists 09:30–17:30 with seasonal variation, so reconfirm Tuesday opening by phone during the final week. [Official shop account](https://page.line.me/xat.0000115429.mcu)
+- Do not promise the Instagram post’s JPY 1,100 starting price; no current official price list confirms it. Choose by actual product price and confirm whether each pair includes engraving.
+- Return for final packing, complete the host’s checkout steps by 11:00, then travel through Kyoto/Shin-Osaka to Namba. Retrieve the main suitcases if they were forwarded.
 
 ### Afternoon
 
@@ -400,7 +407,7 @@ If the family strongly prefers the historic masked theatre, leave UZUMASA around
 - Street-food scorecard: takoyaki, okonomiyaki, kushikatsu and dessert; share portions.
 
 **Removed:** Osaka Castle on arrival day. It added cross-city travel and museum time before the trip’s best Osaka neighborhood.
-**Cut first:** another Pokémon Center, then duplicate Den Den Town browsing. Protect the short Fushimi visit and do not move it onto an already full Kyoto day.
+**Cut first:** another Pokémon Center, then duplicate Den Den Town browsing. Protect the short Fushimi visit and the nearby 09:30 souvenir stop; never risk the 11:00 checkout.
 
 ---
 
@@ -500,13 +507,14 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 |---|---|
 | **Anime / manga** | Akihabara, Shibuya PARCO, Nakano Broadway, Den Den Town, JUMP SHOP |
 | **Gaming** | GiGO/HEY, Nintendo TOKYO, Joypolis, Tokyo Dome City, UZUMASA, Super Nintendo World |
-| **Pokémon** | PokéPark KANTO, three deliberately different Pokémon Centers, Pokémon Café if secured |
+| **Pokémon** | PokéPark KANTO, three deliberately different Pokémon Centers, Pokémon Café if secured, optional Oct 10 projection if officially scheduled |
 | **Cute** | KAWAII MONSTER LAND, Harajuku, rescue-cat café, 3D Shinjuku cat, character stores |
 | **Ramen / food play** | Ichiran/AFURI, tsukemen, Shimokitazawa Curry Festival, Totoro cream puffs and Dotonbori |
 | **Nintendo** | Nintendo TOKYO, Super Nintendo World and Nintendo Museum if the lottery succeeds |
 | **Ghibli** | Ghibli Museum with Kichijoji backup |
 | **Nature resets** | Meiji forest, Todoroki Ravine, Kamakura/Enoshima coast and Inokashira Park |
-| **Culture that earns its time** | Great Buddha/Hasedera cave, Mizuekai, Awata, UZUMASA, DRUM TAO, Fushimi Inari and Taiko-kan |
+| **Culture that earns its time** | Great Buddha/Hasedera cave, Mizuekai, Awata, UZUMASA, DRUM TAO, Fushimi Inari, Yūzen engraving and Taiko-kan |
+| **Optional screen worlds** | Mundo Pixar only as an explicit Oct 4 time/cost tradeoff |
 | **Recovery** | light celebration structure, Kyoto reset blocks, optional Manga cut, slow return Day 15 |
 
 ## Official Verification Links
@@ -518,6 +526,10 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 - [Pokémon Café news](https://www.pokemon-cafe.jp/en/cafe/news/)
 - [KAWAII MONSTER LAND official page](https://contents.gendagigo.jp/kawaii-monster-land/en)
 - [teamLab Planets official store](https://teamlabplanets.dmm.com/en)
+- [Mundo Pixar official exhibition](https://mundopixar.com/en/cities/tokyo)
+- [Mundo Pixar official calendar and prices](https://t.pia.jp/en/pia/events/mundopixar)
+- [Tokyo Night & Light official timetable](https://tokyoprojectionmappingproject.jp/en/)
+- [Tokyo Night & Light current works](https://tokyoprojectionmappingproject.jp/en/contents/)
 - [Tokyo Joypolis](https://tokyo-joypolis.com/language/english/)
 - [Ghibli Museum tickets](https://www.ghibli-museum.jp/en/tickets/)
 - [Mizuekai official page](https://www.miyagawacho.jp/mizuekai/)
@@ -525,6 +537,7 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 - [UZUMASA Kyoto Village hours and tickets](https://en.eigamura.com/hours-tickets/)
 - [DRUM TAO Kyoto tickets](https://drum-tao-kyoto.com/en/ticket/)
 - [Fushimi Inari access](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
+- [Yūzen Fushimi official shop account](https://page.line.me/xat.0000115429.mcu)
 - [Taiko-kan](https://www.miyamoto-unosuke.co.jp/pages/museum)
 - [Miyamoto Nishi-Asakusa store](https://www.miyamoto-unosuke.co.jp/pages/store)
 - [Mibu Kyogen event listing](https://www.kyoto-kankou.or.jp/event/1288)
@@ -535,4 +548,4 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 - [Neco Republic Ochanomizu](https://www.neco-republic.jp/shop/shop-necorepublic-ochanomizu/)
 - [USJ tickets](https://www.usj.co.jp/web/en/us/tickets)
 
-*Last research pass: July 24, 2026. Recheck live hours, prices and maintenance closures during the final week before travel.*
+*Last research pass: July 25, 2026. Recheck live hours, prices, projection work order and maintenance closures during the final week before travel.*

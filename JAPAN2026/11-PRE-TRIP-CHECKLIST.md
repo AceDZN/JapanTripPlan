@@ -24,6 +24,7 @@
 | Done | What | When | Where / how | Who |
 |---|---|---|---|---|
 | [ ] | Buy teamLab Planets timed entry for Oct 4 morning | Now | [Official teamLab store](https://teamlabplanets.dmm.com/en) | Adult lead |
+| [ ] | Decide whether Mundo Pixar is worth making Oct 4 a three-ticket day; if yes, buy a timed 11:45/12:00 slot | By Aug 10 | [Official exhibition calendar/prices](https://t.pia.jp/en/pia/events/mundopixar); current family total about JPY 20,100 plus fees | Whole family decides; adult books |
 | [ ] | Buy KAWAII MONSTER LAND timed entry for Oct 6 | Now | [Official attraction page](https://contents.gendagigo.jp/kawaii-monster-land/en) | Adult lead |
 | [ ] | Buy USJ Studio Pass + a current Express product that names the wanted Nintendo rides and guaranteed area entry | Now | [Official USJ tickets](https://www.usj.co.jp/web/en/us/tickets) | Adults + children choose rides |
 | [ ] | Monitor only official PokéPark inventory for Oct 5 | Weekly; decide fallback by mid-September | [Official overseas store](https://ticket-en.pokepark-kanto.co.jp/); no Fiverr, broker or unofficial reseller | Adult lead |
@@ -60,6 +61,7 @@
 | [ ] | Decide cash and IC-card plan | By Sept 15 | Bank + mobile wallet/physical IC decision; never depend on one payment method | Adults |
 | [ ] | Resolve Oct 15 luggage handling for Nintendo Museum day | By Sept 15 | Hotel/locker/forwarding confirmation in writing | Adults |
 | [ ] | Decide PokéPark vs DisneySea and lock the Oct 5 ticket | By Sept 15 | Official channel only | Family |
+| [ ] | Prepare exact Roman/katakana spellings for four Yūzen chopstick engravings | By Sept 15 | Shared family note; do not assume the unverified JPY 1,100 Instagram price | All 4 |
 
 ## Essential Apps
 
@@ -108,6 +110,8 @@ Do not plan around a heavy winter coat. Pack layers that can be removed on train
 | [ ] | Adjust layers and rain gear from the real forecast | Sept 27–29 | At home; pack one modular system per person | All 4 |
 | [ ] | Check typhoon, heavy-rain and transport notices | Daily from Sept 24 | JMA, airline, JR/SmartEX and attraction official notices | Adults |
 | [ ] | Recheck attraction closures, maintenance, age/height rules and festival timing | Sept 24–28 | Official sites only | Adults |
+| [ ] | Check whether the Oct 10 Tokyo Night & Light rotation includes the Pokémon work and record the earliest practical slot | Sept 24–Oct 9 | [Official timetable](https://tokyoprojectionmappingproject.jp/en/); ignore Instagram times | Adult lead |
+| [ ] | Confirm Yūzen Fushimi is open Tue Oct 13 at 09:30 and that four engravings fit before checkout | Sept 24–Oct 9 | [Official shop account](https://page.line.me/xat.0000115429.mcu) / 075-641-5744 | Adult lead |
 | [ ] | Complete Visit Japan Web if the family chooses to use it | Final week | [Official Visit Japan Web](https://www.vjw.digital.go.jp/) only; keep backup travel details available | Adults |
 | [ ] | Download all QR codes and PDFs; screenshot timed entries | By Sept 28 | Offline ticket folder on both adult phones | Adults |
 | [ ] | Verify names against passports where required | By Sept 28 | Ticket folder + physical passports | Adults |
@@ -129,4 +133,4 @@ Do not plan around a heavy winter coat. Pack layers that can be removed on train
 
 A purchase is not “done” until the confirmation is saved offline. An app is not “done” until it is installed, logged in and tested. A shoe is not “done” until it has passed a long walk without hot spots.
 
-*Research refreshed July 24, 2026. Replace climate normals with the real JMA forecast during the final week.*
+*Research refreshed July 25, 2026. Replace climate normals with the real JMA forecast during the final week.*

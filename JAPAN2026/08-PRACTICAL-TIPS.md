@@ -43,6 +43,40 @@ Install/update before travel:
 
 Keep screenshots/PDFs for every timed ticket. Each adult should have the full family set offline.
 
+### Three phrases worth memorizing
+
+| Japanese | Use |
+|---|---|
+| **Sumimasen** (すみません) | Excuse me / sorry / politely get someone’s attention |
+| **Arigatō gozaimasu** (ありがとうございます) | Polite “thank you” |
+| **[item] onegaishimasu** ([item] お願いします) | “This/item, please” when ordering or making a simple request |
+
+`Onegaishimasu` is not a magic ending for every sentence. Point to the item or show the translated sentence, say the phrase calmly, and thank the person afterward. Also save `wakarimasen` (“I don’t understand”), `… wa doko desu ka?` (“Where is …?”) and `ikura desu ka?` (“How much is it?”). [JNTO language guide](https://www.japan.travel/en/plan/japanese-language/)
+
+### Translation workflow
+
+- Download Japanese inside Google Translate on every family phone and test it in airplane mode.
+- Use the camera for menus/signs, but confirm important allergy, medical, ticket and station information with a person; machine translation can miss context.
+- Save accommodation addresses, key dietary sentences and the four chopstick-name spellings as starred phrases.
+- For a longer exchange, use conversation mode and let the other person read the Japanese screen rather than repeatedly speaking louder.
+
+[Google Translate official feature guide](https://support.google.com/translate/answer/10421057)
+
+### Connectivity without influencer risk
+
+- Choose eSIM, physical SIM or roaming by coverage, data allowance, hotspot rules and total price—not an Instagram referral code.
+- Confirm each phone is carrier-unlocked and eSIM-compatible before paying.
+- Install on stable home Wi-Fi according to the provider’s activation policy; save QR/APN/setup instructions offline before departure.
+- Keep two independent adult phones. Ideally use different fallback paths so one activation or provider problem does not strand the family.
+- Disable data roaming on the home SIM; follow the travel eSIM provider’s exact roaming setting. Make one real test call/message and route search after landing.
+- The code `MATAN5087` from the post was not independently verified and is not part of this plan.
+
+[JNTO connectivity guide](https://www.japan.travel/en/plan/wifi-and-connectivity/)
+
+### IC-card boundary
+
+Suica or another major IC card is the default for ordinary urban rail, buses and many shops, with one card/device per traveler. It does **not** replace reserved Shinkansen tickets. If SmartEX is linked to an IC card, that card acts as the gate token while the Shinkansen purchase remains a separate booking. Do not assume IC cards cover every rural/highway service or cross all regional boundaries. [JNTO IC-card guide](https://www.japan.travel/en/plan/ic-card/) · [SmartEX IC boarding](https://smart-ex.jp/en/entraining/iccard/)
+
 ## Family Ticket Folder
 
 Use one cloud folder plus offline copies:
@@ -84,6 +118,16 @@ File names should start with the date and include the lead guest name.
 - Stop shopping when the wish-list target or time cap is reached.
 - After a festival or park block, protect the next rest window.
 - Carry a konbini snack so a hungry queue does not derail the whole day.
+
+## Train Crowd Reality
+
+The Instagram crowd chart is a useful warning, not a timetable guarantee.
+
+- Tokyo’s approximate commuter peaks are **07:30–09:30** and **17:30–19:30**; the weekday morning is usually the tighter squeeze. [Official Tokyo guide](https://www.gotokyo.org/en/plan/getting-around/subways/index.html)
+- “10:00–16:00 is empty” and “after 20:00 is always quiet” are false promises around attractions, events and nightlife areas.
+- Weekend/public-holiday crowd patterns differ from weekday commuting. Oct 10–12 can still be busy around attractions even without a normal office rush.
+- Keep timed entries and reserved Shinkansen seats. Travel earlier when practical, use live crowd/route information, and let one packed urban train leave rather than forcing four people into it.
+- The Oct 9 morning departure toward Todoroki crosses the weekday peak. Prefer about 07:00 or after 09:30; if the itinerary retains 08:00, treat a crowded ride as an intentional tradeoff.
 
 ## Cat-Café Rules
 
@@ -168,6 +212,7 @@ The canonical family-wide action tracker is [11-PRE-TRIP-CHECKLIST.md](./11-PRE-
 - [ ] Kyoto registration form accepted; access guide and credentials saved offline.
 - [ ] All timed tickets downloaded.
 - [ ] Attraction maintenance/closure notices.
+- [ ] Oct 10 Tokyo Night & Light work order and weather status if the Pokémon projection remains in the plan.
 - [ ] PokePark and USJ apps logged in.
 - [ ] Ghibli/USJ/PokéPark entry names match passports where required.
 - [ ] PokéPark purchased only through an official/explicitly authorized channel; DisneySea fallback decision recorded.
@@ -176,6 +221,7 @@ The canonical family-wide action tracker is [11-PRE-TRIP-CHECKLIST.md](./11-PRE-
 - [ ] Mizuekai 13:00 ticket method and seat level.
 - [ ] UZUMASA October show schedule and HIBIKI tickets/QR codes.
 - [ ] Fushimi Inari lower-gates plan and apartment return before 11:00 checkout.
+- [ ] Yūzen Fushimi Tuesday 09:30 opening, four exact spellings and current prices.
 - [ ] Taiko-kan arrival before 15:00 and bachi purchase plan.
 - [ ] Kyoto Station locker/storage fallback and Tokyo-to-Osaka forwarding confirmations.
 - [ ] Cat-café reservation and socks.

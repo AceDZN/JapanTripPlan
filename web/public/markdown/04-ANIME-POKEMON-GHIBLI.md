@@ -27,6 +27,8 @@
 
 ### Bonuses, never anchors
 
+- **Mundo Pixar on Oct 4** only if the family accepts the extra cost and shortens Gundam/Joypolis;
+- **Pokémon Card Game: TOKYO LUMINOUS NIGHT on Oct 10** only if it appears in the official weekend rotation;
 - temporary anime cafés or pop-ups not yet confirmed for October;
 - extra Pokémon Centers after the family has already visited the planned three;
 - repeat arcades without a specific game challenge;
@@ -44,6 +46,8 @@
 | USJ | Admission and Express are separate. Buy only an Express product that explicitly lists the Nintendo rides/entry wanted. [Official Express page](https://www.usj.co.jp/web/en/us/tickets/express-pass) |
 | Pokémon Café | October release date not announced. Monitor [official news](https://www.pokemon-cafe.jp/en/cafe/news/) rather than using the old rolling-date formula. |
 | KAWAII MONSTER LAND | Reserve a timed 60-minute experience from the [official page](https://contents.gendagigo.jp/kawaii-monster-land/en). |
+| Mundo Pixar | Optional Oct 4 route upgrade. The exhibition runs through Oct 12 at CREVIA BASE Tokyo, requires a timed reservation and takes about 45–55 minutes. Oct 4 daytime D-price tickets for three age-16+ guests and one age-12 guest total about JPY 20,100 before fees. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official prices/calendar](https://t.pia.jp/en/pia/events/mundopixar) |
+| Tokyo Night & Light | The overall projection program is free and runs daily except severe weather, but the Pokémon work rotates on selected weekend/holiday slots. Recheck the Oct 10 work order; do not copy Instagram’s generic times. [Official timetable](https://tokyoprojectionmappingproject.jp/en/) |
 
 ## Day 3 — Akihabara: Play, Hunt, Cats
 
@@ -74,11 +78,12 @@ Do not promise the Chuo-dori pedestrian zone on Oct 3—it runs on Sundays in Oc
 This pairing works geographically: Toyosu, Shin-Toyosu and Odaiba connect naturally by Yurikamome.
 
 - teamLab Planets early;
+- optional timed Mundo Pixar at Shijō-mae, between teamLab and Odaiba;
 - Unicorn Gundam and Gundam Base;
 - **3–4 hours of Tokyo Joypolis**;
 - waterfront sunset.
 
-Skip Madame Tussauds, Fuji TV and aimless mall time. Check Joypolis ride restrictions before buying passports. [Official Joypolis guide](https://tokyo-joypolis.com/language/english/index.html)
+Mundo Pixar is a **squeeze, not a free extra**. If booked, cut most Gundam Base browsing and the sunset, or replace part of Joypolis. Skip Madame Tussauds, Fuji TV and aimless mall time. Check Joypolis ride restrictions before buying passports. [Official Joypolis guide](https://tokyo-joypolis.com/language/english/index.html)
 
 ## Day 5 — PokéPark KANTO
 
@@ -129,6 +134,8 @@ Keep the family in one playful zone:
 - optional bowling/arcade if weather affects rides;
 - reserved celebration dinner.
 
+If the official Oct 10 timetable lists **Pokémon Card Game: TOKYO LUMINOUS NIGHT**, use the direct Oedo Line from Kasuga to Tochomae after the rides, choose the earliest practical slot and eat the celebration dinner in West Shinjuku. Cut bowling and extra shopping first. The general show is outdoors and free; the exact Pokémon time is not yet confirmed for October. [Official current works](https://tokyoprojectionmappingproject.jp/en/contents/)
+
 ## Day 12 — UZUMASA Kyoto Village
 
 This is the strongest kid-friendly bridge between traditional Japan and the family’s fandom/play style:
@@ -147,9 +154,13 @@ Fushimi replaces the optional Manga Museum and supplies one iconic Kyoto image w
 - travel about nine minutes by JR from Kyoto Station to JR Inari;
 - spend 60–90 minutes around the lower torii route;
 - turn back rather than climbing the full mountain;
-- collect hotel bags and continue to Osaka.
+- visit **Handmade Chopstick Workshop Yūzen Fushimi** at its listed 09:30 opening;
+- prepare exact spellings; eligible pairs take roughly five minutes each to engrave;
+- collect hotel bags, check out by 11:00 and continue to Osaka.
 
-[Official access guide](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
+[Official access guide](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/) · [official Yūzen Fushimi account](https://page.line.me/xat.0000115429.mcu)
+
+The Instagram JPY 1,100 starting price is unverified. Confirm the Tuesday opening, product price and engraving eligibility in the final week; cut duplicate Osaka shopping if the stop runs long.
 
 ## Day 14 — USJ
 
@@ -204,4 +215,4 @@ Taiko-kan is open 11:00–16:00 on Friday, with last admission at 15:00. Exhibit
 - Set cash envelopes for crane games and gachapon.
 - Three focused stores plus real game time is better than eight nearly identical stores.
 
-*Verified July 24, 2026. Recheck pop-ups, operating calendars, age/height rules and maintenance closures closer to travel.*
+*Verified July 25, 2026. Recheck pop-ups, projection work order, operating calendars, age/height rules and maintenance closures closer to travel.*

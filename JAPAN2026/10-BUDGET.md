@@ -41,6 +41,7 @@ Why the attraction range is wide:
 - USJ Express inventory and products rotate.
 - Nintendo Museum is lottery-dependent.
 - Joypolis, Tokyo Dome City and Odaiba can use either individual tickets or passports.
+- Optional Mundo Pixar would add about JPY 20,100 plus ticket fees and must replace time in the Oct 4 baseline.
 - Shopping is deliberately excluded from “attractions” so it cannot hide inside the plan.
 
 ### Kyoto traditional-experience subtotal
@@ -65,6 +66,7 @@ Fill the actual charged amount immediately after every purchase.
 |---|---|---|---:|
 | Neco Republic Ochanomizu | Oct 3 | Reserve | — |
 | teamLab Planets | Oct 4 | Timed ticket | — |
+| Mundo Pixar | Optional Oct 4 | Family decision, then timed ticket | About JPY 20,100 + fees at current D pricing |
 | Joypolis | Oct 4 | Decide passport vs individual | — |
 | PokéPark KANTO / DisneySea fallback | Oct 5 | Monitor official PokéPark inventory; otherwise buy DisneySea officially | Record selected park total |
 | KAWAII MONSTER LAND | Oct 6 | Timed ticket | — |
@@ -75,6 +77,7 @@ Fill the actual charged amount immediately after every purchase.
 | UZUMASA Kyoto Village | Oct 12 | Admission; recheck show calendar | JPY 10,000 before extras |
 | DRUM TAO HIBIKI · 19:00 | Oct 12 | Buy when two-month window opens | JPY 40,000 |
 | Fushimi Inari | Oct 13 | No ticket; lower-gates visit | Free |
+| Yūzen engraved chopsticks | Oct 13 | Walk-in after 09:30; reconfirm hours | Record actual product total; JPY 1,100 floor unverified |
 | USJ Studio Pass | Oct 14 | Buy | — |
 | USJ Express product | Oct 14 | Buy exact current product | — |
 | Nintendo Museum | Oct 15 | Lottery by July 31 | — |
@@ -101,15 +104,15 @@ A normal ramen meal for four is roughly JPY 4,000–6,500 before extras. Pokémo
 | Day | Main variable spend | Control rule |
 |---|---|---|
 | Oct 3 | Anime shopping + arcades | One wish list and cash envelope per child |
-| Oct 4 | Joypolis | Price passport against the rides the family will truly do |
+| Oct 4 | Joypolis + optional Pixar | Price Joypolis against the rides the family will truly do; add Pixar only with an explicit time cut |
 | Oct 5 | PokéPark / DisneySea fallback | Buy through an official channel only; never budget a Fiverr/reseller premium |
 | Oct 6 | Kawaii/character goods | One cute purchase target each |
 | Oct 8 | Ghibli + Nakano | Protect Ghibli; compare before buying and stop Nakano after 60–90 minutes |
 | Oct 9 | Curry Festival + vintage | Ravine/parks are free; share mini curries and set one shopping target each |
-| Oct 10 | Celebration | Hold one inclusive day envelope excluding the gift |
+| Oct 10 | Celebration + optional free projection | Hold one inclusive day envelope excluding the gift; the projection is free, but moving dinner to West Shinjuku may change the reservation |
 | Oct 11 | Mizuekai/Awata | Choose one Mizuekai seat tier; do not add paid sightseeing |
 | Oct 12 | UZUMASA/HIBIKI | Choose only the paid UZUMASA extras the children will use; Mibu is a swap |
-| Oct 13 | Fushimi/Dotonbori | Fushimi is free and time-boxed; share Osaka portions rather than buying four of every snack |
+| Oct 13 | Fushimi/Yūzen/Dotonbori | Fushimi is free and time-boxed; set a chopstick ceiling before choosing, then share Osaka portions |
 | Oct 14 | USJ | Buy exact Express value; do not assume a generic bundle |
 | Oct 15 | Nintendo Museum | Budget only after lottery success |
 | Oct 16 | Taiko + final shopping | Protect the bachi budget; cut duplicate character shopping first |
