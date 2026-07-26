@@ -97,7 +97,7 @@ Kinryu’s dragon is a fun Dotonbori photo marker, not one of the trip’s serio
 - Reserve Totoro cream puffs for the Oct 9 Setagaya picnic.
 - Sanrio or Mofusand only if it fits naturally; do not add another cross-city reservation.
 - During the protected 45–60-minute [Tokyo Station First Avenue](https://www.tokyoeki-1bangai.co.jp/en/) stop on Oct 16, choose at most one quick take-away target such as Kirby Café Petit or Mofusand. Character Street comes first; Okashi Land is a bonus, and Tokyo Ramen Street remains the meal backup if the Pokémon Café fails.
-- Keep the live-animal experience to the rescue-cat café. We considered a capybara café and deliberately skipped it: no current Tokyo operator had independent welfare verification strong enough to outweigh the systemic concerns around keeping a social, semi-aquatic wild species in a touch-and-feed café. [Peer-reviewed welfare study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
+- The scheduled live-animal experience is the Oct 8 cat café — Temari no Oshiro at Kichijōji Petit Mura. The Kyoto/Osaka animal side quests (otters, small animals, snakes) are optional cut-first walk-ins listed in the daily itinerary, added knowing the welfare tradeoffs. We considered a capybara café and skipped it: no current Tokyo operator had independent welfare verification strong enough to outweigh the systemic concerns around keeping a social, semi-aquatic wild species in a touch-and-feed café. [Peer-reviewed welfare study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
 
 ## Family Ordering Notes
 

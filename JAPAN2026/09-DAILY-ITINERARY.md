@@ -93,8 +93,7 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
   - **GiGO** for crane/rhythm games.
   - **HEY Taito** for playable arcade games.
   - **Super Potato** for retro consoles and the small top-floor arcade.
-- Finish with a controlled gachapon session.
-- **Neco Republic Ochanomizu:** reserve a 16:30–17:30 rescue-cat visit. It is a short walk from Akihabara, closes at 18:00 on Saturday, and requires opaque socks; the 12-year-old must enter with a guardian.
+- Finish with a controlled gachapon session. With the cat café moved to Oct 8, the afternoon has extra slack — spend it on arcade play, not more shops.
 
 ### Evening
 
@@ -103,7 +102,7 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 
 **Play budget:** JPY 1,500–2,000 per child.
 **Shopping rule:** photograph expensive items; do not buy the first version seen.
-**Cut first:** an extra shop. Protect the arcade play and the cat-café booking.
+**Cut first:** an extra shop. Protect the arcade play.
 
 ---
 
@@ -233,8 +232,9 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 - Allow 2–2.5 hours for the exclusive short film, building, rooftop and shop.
 - Walk through Inokashira Park toward Kichijoji and eat an early, simple lunch.
 
-### Afternoon · 14:00–16:30
+### Afternoon · 13:00–16:30
 
+- **Kichijōji Petit Mura · 13:00–14:00:** a fairy-tale micro-village five minutes north of Kichijoji Station. Visit **Cat Cafe Temari no Oshiro** — a two-story cat castle with about 20 cats and no time limit. Ages 10+, about JPY 1,200 + tax per person on Thursdays; reserve ahead. [Official site](https://temarinooshiro.com/)
 - Continue by JR Chuo to Nakano.
 - **Nakano Broadway scavenger hunt:** cap it at 60–90 minutes, because many stores duplicate Akihabara.
 - Each child gets three targets and a spending ceiling; compare Mandarake branches before purchasing.
@@ -245,7 +245,7 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 - Watch the free **Cross Shinjuku Vision 3D cat**, take the Godzilla Head photo and eat dinner.
 - **namco TOKYO** is optional only if everyone still has energy; it is no longer a protected long play block.
 
-**Cut first:** namco TOKYO, then extra Nakano shops. Protect Ghibli and an unhurried lunch.
+**Cut first:** namco TOKYO, then extra Nakano shops. Protect Ghibli, the Petit Mura cat visit and an unhurried lunch.
 **Ghibli backup:** Kichijoji + Inokashira Park, then the same compact Nakano/Shinjuku route.
 **Removed:** Golden Gai and Omoide Yokocho are adult-first, cramped and not worth using family energy.
 
@@ -282,7 +282,7 @@ Setagaya reopened the full path on March 24, 2026. Recheck for temporary works o
 
 **Cut first:** Hanegi Park, then vintage shopping. Protect the Curry Festival and, in dry weather, Todoroki Ravine.
 **Heavy-rain version:** skip Todoroki and Hanegi; start with the reserved Shiro-Hige pickup, then use the festival’s indoor restaurants, Mikan, Reload and cafés.
-**Animal-café decision:** keep the Oct 3 rescue-cat café. Do not add a capybara café; current operators lack independent welfare verification strong enough to overcome the documented systemic risks in Japanese exotic-animal cafés.
+**Animal-café decision:** the scheduled stop is the Oct 8 Petit Mura cat café. The Kyoto/Osaka exotic-animal side quests (LOUTRE otters Oct 11, Rock Star and the America-mura snake café Oct 13) are deliberate, eyes-open exceptions — the welfare research still flags such venues, so they stay optional walk-ins that are cut first.
 
 ---
 
@@ -338,6 +338,8 @@ Setagaya reopened the full path on March 24, 2026. Recheck for temporary works o
 
 - Have a late lunch, hydrate and sit down near the recital/Awata route. The apartment is not a practical rest stop before the procession.
 - Reach the Awata area before the procession rather than chasing its full route.
+
+**Side quest — only with real spare time:** the **LOUTRE otter café** on Teramachi (about 10 minutes' walk from the recital area) runs walk-in visits 13:00–19:00 with no advance booking. Added deliberately despite the exotic-café welfare research — treat it as a skip-first extra, and leave if the animals look stressed. [Official site](https://www.loutre-kyoto.com/)
 
 ### Evening · from 17:00
 
@@ -404,6 +406,8 @@ If the family strongly prefers the historic masked theatre, leave UZUMASA around
 
 - Dotonbori neon and Glico sign.
 - Street-food scorecard: takoyaki, okonomiyaki, kushikatsu and dessert; share portions.
+
+**Side quests — only with real spare time:** two walk-in animal stops sit on this route, added deliberately despite the exotic-café welfare research; skip them without guilt. **Small Animal Cafe Rock Star** in Namba (hedgehogs, meerkats, chinchillas, sugar gliders and more; 11:00–22:00; about JPY 1,100 + a drink for up to two hours) and the **America-mura Snake Café** in Nishi-Shinsaibashi (12:00–21:00, closed Wednesdays — Oct 13 is a Tuesday; about JPY 2,000). [Rock Star](https://animalcafes.com/v/25554.html) · [Snake Café](https://americamura.snakecafe.xyz/)
 
 **Removed:** Osaka Castle on arrival day. It added cross-city travel and museum time before the trip’s best Osaka neighborhood.
 **Cut first:** another Pokémon Center, then duplicate Den Den Town browsing. Protect the short Fushimi visit and the nearby 09:30 souvenir stop; never risk the 11:00 checkout.
@@ -474,13 +478,14 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 - Visit **Miyamoto Unosuke Shoten** in the same building after the museum. Let the staff help choose one suitable in-stock bachi pair; name engraving takes about a week and is not a same-day option.
 - Continue to **Senso-ji** in late afternoon when day crowds begin to thin.
 - Quick Nakamise snack and Kaminarimon family photo.
+- **Optional goldfish finale — Sumida Aquarium:** inside Skytree Town, 15 minutes' walk from Senso-ji, with a large Edo-style goldfish gallery. Friday hours run to 20:00; from Feb 2026 tickets are JPY 2,700 adult / 2,000 high school / 1,400 elementary-junior high — about JPY 8,800 for the family. Only if packing and energy comfortably allow. [Official prices](https://www.sumida-aquarium.com/en/about/price/index.html)
 
 ### Evening
 
 - Return early for packing and a favorite-neighborhood dinner. Solamachi is only a bonus if the museum, temple and packing are all comfortably complete.
 - Farewell dinner: Kura Sushi for the plate game, yakiniku for a splurge, or one final excellent ramen.
 
-**Cut first:** Solamachi/Skytree, extra Nakamise time and First Avenue browsing beyond one hour. Protect the focused First Avenue visit, Taiko-kan, the bachi and Senso-ji.
+**Cut first:** the optional Sumida Aquarium stop, then Solamachi browsing, extra Nakamise time and First Avenue browsing beyond one hour. Protect the focused First Avenue visit, Taiko-kan, the bachi and Senso-ji.
 **Pack tonight.**
 
 ---
@@ -509,7 +514,7 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 | **Anime / manga** | Akihabara, Shibuya PARCO, Nakano Broadway, Den Den Town, JUMP SHOP |
 | **Gaming** | GiGO/HEY, Nintendo TOKYO, Joypolis, Tokyo Dome City, UZUMASA, Super Nintendo World |
 | **Pokémon** | PokéPark KANTO, three deliberately different Pokémon Centers, Pokémon Café if secured, optional Oct 10 projection if officially scheduled |
-| **Cute** | KAWAII MONSTER LAND, Harajuku, rescue-cat café, 3D Shinjuku cat, character stores |
+| **Cute** | KAWAII MONSTER LAND, Harajuku, Petit Mura cat castle, 3D Shinjuku cat, character stores, optional animal side quests (otters, small animals, snakes) and a goldfish-aquarium finale |
 | **Ramen / food play** | Ichiran/AFURI, tsukemen, Shimokitazawa Curry Festival, Totoro cream puffs and Dotonbori |
 | **Nintendo** | Nintendo TOKYO, Super Nintendo World and Nintendo Museum if the lottery succeeds |
 | **Ghibli** | Ghibli Museum with Kichijoji backup |
@@ -546,7 +551,11 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 - [Shimokitazawa Curry Festival 2026](https://shimokitazawa-curryfes.com/)
 - [Shiro-Hige’s Cream Puff Factory](https://shiro-hige.net/)
 - [Hanegi Park](https://www.city.setagaya.lg.jp/02075/9123.html)
-- [Neco Republic Ochanomizu](https://www.neco-republic.jp/shop/shop-necorepublic-ochanomizu/)
+- [Cat Cafe Temari no Oshiro · Kichijōji Petit Mura](https://temarinooshiro.com/)
+- [LOUTRE otter café, Kyoto](https://www.loutre-kyoto.com/)
+- [Small Animal Cafe Rock Star, Namba](https://animalcafes.com/v/25554.html)
+- [America-mura Snake Café, Osaka](https://americamura.snakecafe.xyz/)
+- [Sumida Aquarium prices](https://www.sumida-aquarium.com/en/about/price/index.html)
 - [USJ tickets](https://www.usj.co.jp/web/en/us/tickets)
 
 *Last research pass: July 25, 2026. Recheck live hours, prices, projection work order and maintenance closures during the final week before travel.*
