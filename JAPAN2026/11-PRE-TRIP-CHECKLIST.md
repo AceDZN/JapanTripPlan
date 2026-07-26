@@ -18,6 +18,7 @@
 | [ ] | Book Osaka Oct 13–15 and final Tokyo Oct 15–17 | Now | Chosen booking platform; refundable option preferred until the route is fully locked | Adults |
 | [ ] | Buy/confirm family travel insurance | Now | Insurer site; include medical care, disruption and booked-ticket cancellation where available | Adults |
 | [ ] | Check all four passports and names | Now | At home against airline and booking records; record expiry dates privately | Adults |
+| [ ] | Complete the Ethiopian e-ticket record | Now | Save PNR/e-ticket numbers, terminals, purchased baggage, seats/meals, paid total and disruption contacts in the private flight folder | Adults |
 
 ## Bookings and Tickets
 
@@ -58,7 +59,7 @@
 | [ ] | Download Japanese for offline translation | By Sept 10 | Google Translate | All family phones |
 | [ ] | Make the private family ticket folder and naming scheme | By Sept 10 | Shared cloud drive; offline on both adult phones | Adult lead |
 | [ ] | Save passport copies, insurance, prescriptions and emergency contacts offline | By Sept 10 | Encrypted/private folder, separate from originals | Adults |
-| [ ] | Decide cash and IC-card plan | By Sept 15 | Bank + mobile wallet/physical IC decision; never depend on one payment method | Adults |
+| [ ] | Prepare cash and the agreed IC-card plan | By Sept 15 | Buy four TOURIST PASMO cards at Narita; prepare cash for small reloads and keep two independent payment cards | Adults |
 | [ ] | Resolve Oct 15 luggage handling for Nintendo Museum day | By Sept 15 | Hotel/locker/forwarding confirmation in writing | Adults |
 | [ ] | Decide PokéPark vs DisneySea and lock the Oct 5 ticket | By Sept 15 | Official channel only | Family |
 | [ ] | Prepare exact Roman/katakana spellings for four Yūzen chopstick engravings | By Sept 15 | Shared family note; do not assume the unverified JPY 1,100 Instagram price | All 4 |

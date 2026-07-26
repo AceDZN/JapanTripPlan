@@ -20,7 +20,9 @@ The first Tokyo stay is confirmed in **Tabata**, not Ueno. Never reuse “walk b
 
 Flight arrival is 19:40, so keep the route flexible:
 
-- Keisei to **Nippori**, then JR Yamanote one stop to Tabata is usually the cleanest rail structure.
+- After immigration and bags, buy four adult **TOURIST PASMO** cards at the SKYLINER & KEISEI INFORMATION CENTER in the Terminal 1 or Terminal 2 station. Each costs JPY 2,000 with the full JPY 2,000 available as stored value, has no service charge/deposit and remains valid for 28 days. Keep each card’s reference paper with it. The unused balance is not refundable, so reload in small amounts. [Official TOURIST PASMO purchase points and terms](https://www.pasmo.co.jp/tourist-pasmo/)
+- Buy the next practical combined-fare **Skyliner** ticket to **Nippori** only after collecting the bags; do not reserve an arrival train that a flight delay could invalidate. All seats are reserved. The combined paper fare is JPY 2,580 per person and major credit cards are accepted at the Skyliner machine/counter. [Official purchase guide](https://new-www.keisei.co.jp/keisei/tetudou/skyliner/us/skyliner/purchase.php) · [official fare explanation](https://new-www.keisei.co.jp/keisei/tetudou/skyliner/us/faq/index.php)
+- At Nippori, leave the Keisei gates with the Skyliner ticket, follow signs to JR, then tap PASMO into the JR Yamanote/Keihin-Tohoku service for the one-stop ride to Tabata. The revised JR IC fare is JPY 155. Expected family rail cost: **JPY 10,940**.
 - Use a direct airport bus or taxi only when late baggage clearance, exhausted children or a difficult self-check-in make the extra cost worthwhile.
 
 Do not pre-plan sightseeing. Send the host an arrival message after landing and follow the lockbox instructions saved in Airbnb.
@@ -29,25 +31,60 @@ Do not pre-plan sightseeing. Send the host an arrival message after landing and 
 
 - Keep the day local.
 - Collect luggage by 15:15.
-- Use a reserved Keisei service or the best verified same-day alternative around 15:30.
-- Target the correct Narita terminal by roughly 17:30 for the 20:40 flight.
+- If the current Inaricho apartment lead is booked, take a short metered taxi to **Keisei-Ueno** if the luggage will not roll comfortably for 15–20 minutes. One ordinary taxi may not hold four people plus four large cases; use forwarded luggage, a larger vehicle or two taxis if needed. If a different final stay is chosen, recalculate this feeder leg before reserving the airport train.
+- Reserve a Skyliner around 15:45–16:00 when sales open one month before travel, then recheck the exact Oct 17 timetable and terminal. The combined fare is JPY 2,580 each / **JPY 10,320 for four**.
+- Target the correct Narita terminal by roughly 16:45–17:15 for the 20:40 flight.
 
 Check terminal and train status on the day.
 
 ## IC Cards
 
-- One IC card/device per traveler.
-- Top up in smaller increments.
-- Do not lock all family transit money into non-refundable visitor cards.
-- Keep some cash for machines that reject foreign cards.
-- The same major IC card can be used in Tokyo, Kamakura, Kyoto/Uji and Osaka.
+- Use **one physical TOURIST PASMO per traveler**. All four travelers pay adult rail fares; a card cannot be shared through a gate.
+- Use PASMO for ordinary JR, Tokyo Metro, Toei, Keio, Tokyu, Odakyu, Enoden, Yurikamome and local-bus rides. The same cards continue to work in Kyoto/Uji and Osaka.
+- Start with the included JPY 2,000. Add roughly JPY 5,000 per card on Oct 3, then reload JPY 1,000–2,000 at a time before Kamakura and Kansai. Physical IC-card reloads are most reliably done with cash at station machines or convenience-store counters.
+- Always tap **in and out**. When changing operators—JR to Keio at Shinjuku, JR to Yurikamome at Shimbashi, JR to Tokyu at Oimachi—exit one company’s gates and enter the next company’s gates.
+- Do not tap PASMO when using a separate paper/QR day pass. Use only the pass at that operator’s gates.
+- A bank card’s contactless transit feature is not the family default: coverage is still less universal than PASMO and does not remove the need for separate reserved/limited-express tickets.
+- Keep cash for IC reloads and small ticket machines. Pay Skyliner and Shinkansen reservations separately by credit card.
+
+JR East changed its fare structure on **March 14, 2026**. The amounts below use the new fares, not older Tokyo guides. [Official JR East revision](https://www.jreast.co.jp/2026unchin-kaitei/) · [current fare bands](https://www.jreast.co.jp/2026unchin-kaitei/pamphlet/pageindices/index18.html)
+
+## Tokyo Base-to-Place Operating Sheet
+
+Times below are sensible **leave-the-apartment windows**, not train reservations. Check the live route after breakfast and add the private walk from the Airbnb to its station. Costs are current planning totals per adult and for the family of four; a different gate, an extra stop or exiting during a transfer can change a total slightly.
+
+| Date | Leave base | Exact route structure | What to use / buy | Approx. fare |
+|---|---:|---|---|---:|
+| **Oct 3 · Akihabara/Ochanomizu** | 09:00 | Tabata → direct JR Yamanote or Keihin-Tohoku toward Ueno/Tokyo → Akihabara. Walk to Ochanomizu; return by JR through Akihabara or walk back to Akihabara first. | PASMO only | **JPY 398 pp / 1,592 family** |
+| **Oct 4 · teamLab/Pixar/Odaiba** | 07:45 for a 09:00 teamLab slot | Tabata → JR direct to Shimbashi → Yurikamome to Shin-Toyosu → Shijō-mae → Daiba/Odaiba → Shimbashi → JR to Tabata. | PASMO on JR. Before the first Yurikamome ride, buy its **JPY 820 one-day pass** at Shimbashi; it is cheaper than these four planned Yurikamome legs. [Official pass/fare](https://www.yurikamome.co.jp/en/ride-guidance/fare.html) | **JPY 1,238 pp / 4,952 family** |
+| **Oct 5 · PokéPark/Yomiuriland** | 08:45–09:00 | Tabata → JR Yamanote toward Ikebukuro/Shinjuku → Shinjuku. Exit JR; enter **Keio Line**, use an express to Chofu, then the Sagamihara Line to Keio-yomiuri-land → gondola to the park. Reverse at night. | PASMO for JR + Keio. Keio is JPY 314 IC each way. Buy the **JPY 500 round-trip Sky Shuttle** ticket separately; it is not included in the park pass. [Official Keio fare](https://www.keio.co.jp/global/routes/stations/shinjuku/) · [official gondola fare](https://www.yomiuriland.com/en/charge/) | **JPY 1,546 pp / 6,184 family** |
+| **Oct 6 · Harajuku/Shibuya** | 08:00 | Tabata → direct JR Yamanote toward Ikebukuro/Shinjuku → Harajuku. Walk the day south to Shibuya; return Shibuya → direct JR Yamanote through Shinjuku/Ikebukuro → Tabata. | PASMO only | **JPY 506 pp / 2,024 family** |
+| **Oct 7 · Kamakura/Enoshima** | 07:30 | Tabata → JR via Tokyo/Shimbashi → Yokosuka/Tokaido connection to Kamakura, staying inside JR gates. At Kamakura use Enoden: Hase → Kamakurakōkōmae → Enoshima → Fujisawa. Return Fujisawa → JR Tokaido to Tokyo → Yamanote/Keihin-Tohoku to Tabata. | PASMO for JR. Buy the **JPY 800 Enoden Noriorikun** at Kamakura before the first Enoden ride. [Official pass](https://www.enoden.co.jp/en/tourism/ticket/noriorikun/) | **about JPY 2,604 pp / 10,416 family** |
+| **Oct 8 · Ghibli/Nakano/Shinjuku** | 08:35 for 10:00 entry | Tabata → JR Yamanote to Shinjuku → JR Chuo Rapid to Mitaka, without leaving JR gates. Bus or 15-minute walk to Ghibli; walk through the park to Kichijoji → JR Chuo to Nakano → JR to Shinjuku → Yamanote to Tabata. | PASMO only. Museum bus is JPY 230 adult. [Official museum access](https://www.ghibli-museum.jp/en/hours-and-directions/) | **about JPY 1,287 pp / 5,148 family** |
+| **Oct 9 · Todoroki/Setagaya/Shimokitazawa** | 08:00 | Tabata → direct JR Keihin-Tohoku to Oimachi → Tokyu Oimachi Line to Todoroki → Tokyu to Jiyūgaoka and Shibuya → Keio Inokashira to Shimokitazawa. Walk to Shiro-Hige/Setagaya-Daita/Hanegi where energy permits. Return Shimokitazawa → Odakyu to Shinjuku → JR to Tabata. | PASMO throughout, but expect separate charges each time an operator’s gates are crossed. | **about JPY 1,404 pp / 5,616 family** |
+| **Oct 10 · Tokyo Dome City** | After brunch | Tabata → JR to Akihabara → cross-platform/within-gates transfer to westbound Chuo-Sobu Local → Suidobashi. Reverse to return. If the projection is confirmed, walk to Kasuga → Toei Oedo to Tochomae → walk to JR Shinjuku → Tabata. | PASMO only | **JPY 418 pp / 1,672 family** without projection; **about JPY 596 pp / 2,384 family** with it |
+| **Oct 11 · Tokyo Station** | Set by the reserved Nozomi | Tabata → direct JR to Tokyo Station. Follow Shinkansen signs without leaving the station unnecessarily. | JPY 209 on PASMO for the local leg; reserved Shinkansen ticket separately | **JPY 209 pp / 836 family**, before Shinkansen |
+
+### Planned final Ueno/Inaricho lead — Oct 15–17
+
+The apartment described here is the current accommodation lead, **not a confirmed booking**. These routes become operational only if that stay is booked; otherwise preserve the same day structure and recalculate the short base-to-station legs.
+
+- **Oct 15 arrival if this lead is booked:** if the family has large luggage, a taxi from Tokyo Station to the apartment is the lowest-friction choice; expect roughly JPY 2,500–3,500 total depending on traffic and the exact address. If traveling light, use JR Tokyo → Ueno and walk about nine minutes, or Metro Marunouchi Tokyo → Ginza and change to the Ginza Line for Inaricho. SmartEX fares do not automatically include the same conventional-line benefits as every paper long-distance ticket, so follow the actual ticket’s gate instructions rather than assuming the Ueno leg is free.
+- **Oct 16 outbound:** walk about two minutes to Inaricho and take the **Ginza Line direct to Nihombashi**—roughly 10–12 minutes, JPY 178 IC each. Walk to Tokyo Station First Avenue on the Yaesu side.
+- **Oct 16 First Avenue → Taiko-kan:** the cheap route is to walk back to Nihombashi Station and take the Ginza Line direct to **Tawaramachi**, JPY 178 IC each, then walk about five minutes. If the café/Character Street timing leaves less than 45 minutes before Taiko-kan’s 15:00 last admission, take a metered taxi from Tokyo Station instead; allow roughly JPY 1,800–2,500 total depending on traffic.
+- **Oct 16 return:** Taiko-kan → Senso-ji is a straightforward walk. From Senso-ji, walk roughly 20–25 minutes to the Inaricho apartment, or return to Tawaramachi and pay JPY 178 each for the one-stop Ginza Line ride to Inaricho. The public-transport baseline is **JPY 356–534 per person / JPY 1,424–2,136 for four**. A JPY 700 Tokyo Metro 24-hour ticket does not pay off. [Official Metro fares](https://www.tokyometro.jp/lang_en/ticket/types/regular/index.html) · [official 24-hour ticket price](https://www.tokyometro.jp/en/ticket/1day/index.html)
+- **Oct 17 airport:** taxi or walk to Keisei-Ueno, then the reserved Skyliner described above.
+
+### Tokyo transport envelope
+
+Using the baseline routes above, allow approximately **JPY 15,300–15,500 per person / JPY 61,200–62,000 for four** for both Skyliner trips, Tokyo city rides, Yurikamome, Yomiuriland gondola and the Kamakura/Enoden day. This excludes taxis, Shinkansen, Kyoto/Osaka local transport and attraction admission. The DisneySea fallback is cheaper to reach than PokéPark: allow roughly JPY 700 per person round trip from Tabata by JR, versus about JPY 1,546 for the PokéPark rail-and-gondola route.
 
 ## Route Sheet
 
 | Day | Main route |
 |---|---|
 | Oct 3 | Base → Akihabara/Ochanomizu → base |
-| Oct 4 | Base → Toyosu/Shin-Toyosu → optional Shijō-mae/CREVIA BASE → Yurikamome to Odaiba → base |
+| Oct 4 | Base → Toyosu/Shin-Toyosu → Shijō-mae/CREVIA BASE for Mundo Pixar → Yurikamome to Odaiba → base |
 | Oct 5 | Base → Shinjuku → Keio-Yomiuriland → gondola/bus → reverse |
 | Oct 6 | Base → Harajuku/Meiji-jingumae → walk toward Shibuya → base |
 | Oct 7 | Base → Kamakura → Hase → Kamakurakōkōmae → Enoshima → Fujisawa → base |
@@ -59,7 +96,7 @@ Check terminal and train status on the day.
 | Oct 13 | Fushimi Inari base → shrine lower gates → Yūzen at 09:30 → base/checkout → Kyoto/Shin-Osaka → Namba → Dotonbori |
 | Oct 14 | Namba → Universal City → same Namba hotel |
 | Oct 15 | Namba → Uji → Kyoto → Tokyo if Nintendo Museum succeeds; otherwise Namba → Shin-Osaka → Tokyo |
-| Oct 16 | Final base → Nihonbashi → Tokyo Station → Taiko-kan/Nishi-Asakusa → Senso-ji → base |
+| Oct 16 | Planned Ueno/Inaricho base → Nihonbashi → Tokyo Station First Avenue → Taiko-kan/Nishi-Asakusa → Senso-ji → base |
 | Oct 17 | Local morning → Narita |
 
 ## High-Friction Days
@@ -129,9 +166,12 @@ Use a one-direction route and return through Fujisawa. This avoids repeating the
 
 ### Taiko-kan deadline — Oct 16
 
+- If the current final-Tokyo lead is booked, Tokyo Station First Avenue is easy from the Ueno/Inaricho apartment. Walk about two minutes to Inaricho, take the Ginza Line directly to Nihombashi in roughly 10–12 minutes, and use exit B2 for the Pokémon Café building. First Avenue is a short onward walk at Tokyo Station’s Yaesu side and is outside the JR ticket gates. The JR alternative is a roughly nine-minute walk to Ueno Station followed by a direct train to Tokyo Station.
+- Protect 45–60 minutes for [First Avenue](https://www.tokyoeki-1bangai.co.jp/en/): Character Street first, then Okashi Land only if time remains. Tokyo Ramen Street remains the meal backup if the café fails.
+- Preferred order with a 10:30–11:00 café booking: Pokémon Café → First Avenue → Taiko-kan. With a later café booking, reverse the anchors: Taiko-kan at 11:00 → Pokémon Café → First Avenue → Senso-ji.
 - Reach Taiko-kan around 14:00 and no later than its official **15:00 last admission**.
 - The Nishi-Asakusa store is in the same building; choose the bachi after the museum.
-- Continue to Senso-ji toward dusk. Cut Character Street browsing and Skytree first if the Pokémon Café slot runs late.
+- Continue to Senso-ji toward dusk. Cut Skytree, extra Nakamise time and First Avenue browsing beyond one hour before dropping the First Avenue stop itself.
 
 ## Tokyo → Kyoto → Osaka / Uji
 

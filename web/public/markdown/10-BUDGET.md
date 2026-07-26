@@ -25,7 +25,7 @@ These are control ranges, not quotes:
 
 | Envelope | Family range |
 |---|---:|
-| Local Tokyo/Kamakura transport + airport trains | JPY 75,000–100,000 |
+| Local Tokyo/Kamakura transport + both Skyliner trips | JPY 65,000–75,000 |
 | Tokyo ↔ Osaka/Kyoto reserved Shinkansen | JPY 110,000–125,000 |
 | Food and non-ticketed snacks | JPY 190,000–260,000 |
 | Major attractions and workshops excluding USJ | JPY 150,000–260,000 |
@@ -115,7 +115,7 @@ A normal ramen meal for four is roughly JPY 4,000–6,500 before extras. Pokémo
 | Oct 13 | Fushimi/Yūzen/Dotonbori | Fushimi is free and time-boxed; set a chopstick ceiling before choosing, then share Osaka portions |
 | Oct 14 | USJ | Buy exact Express value; do not assume a generic bundle |
 | Oct 15 | Nintendo Museum | Budget only after lottery success |
-| Oct 16 | Taiko + final shopping | Protect the bachi budget; cut duplicate character shopping first |
+| Oct 16 | First Avenue + Taiko + final shopping | Protect the bachi budget; use a two-or-three-shop First Avenue target list and cap duplicate purchases |
 
 ## Celebration Envelope
 
@@ -130,6 +130,7 @@ A normal ramen meal for four is roughly JPY 4,000–6,500 before extras. Pokémo
 ## Transport Notes
 
 - The 12-year-old uses adult rail fares during the trip.
+- The detailed July 25 route audit in [03-TRANSPORT.md](./03-TRANSPORT.md) produces a baseline of about JPY 61,200–62,000 for four, including both Skyliner trips, Yurikamome, the Yomiuriland gondola and Enoden. The JPY 65,000–75,000 envelope leaves room for the final-base taxi, one timing-saving taxi on Oct 16 and minor live-route changes.
 - Individual reserved Nozomi tickets remain more appropriate than a nationwide JR Pass for this route.
 - The Oct 15 return may start in Uji/Kyoto if Nintendo Museum succeeds; reserve the long-distance train only after the museum slot is known.
 - Do not budget a Hakone or Fuji day: neither is in the complete plan.

@@ -1,19 +1,34 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Heebo, Noto_Serif_Hebrew } from "next/font/google";
 import { AppShell } from "@/components/AppShell";
+import { ServiceWorkerRegistrar } from "@/components/chat/ServiceWorkerRegistrar";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
 
+/**
+ * Fonts are downloaded at build time and served from our own origin
+ * (no runtime CDN request), so the app stays fast and offline-friendly.
+ */
 const heebo = Heebo({
   variable: "--font-heebo",
   subsets: ["hebrew", "latin"],
+  display: "swap",
 });
 
 const notoSerif = Noto_Serif_Hebrew({
   variable: "--font-noto-serif",
   subsets: ["hebrew", "latin"],
+  display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf7f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f1120" },
+  ],
+  colorScheme: "light dark",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -30,9 +45,12 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description:
       "תוכנית המשפחה ליפן 2026: אנימה, גיימינג, פוקימון, נינטנדו, ראמן וקוואי במסלול מדויק של 17 ימים.",
+    manifest: "/manifest.webmanifest",
+    appleWebApp: { capable: true, title: "יפן 2026", statusBarStyle: "default" },
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
+      apple: "/icons/apple-touch-icon.png",
     },
     openGraph: {
       title: "יפן 2026 — המסע המשפחתי שלנו",
@@ -59,6 +77,7 @@ export default function RootLayout({
     <html lang="he" dir="rtl">
       <body className={`${heebo.variable} ${notoSerif.variable}`}>
         <AppShell>{children}</AppShell>
+        <ServiceWorkerRegistrar />
       </body>
     </html>
   );

@@ -56,7 +56,7 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 - Use the 2h45 connection for the gate transfer, meal, bathrooms and stretching.
 - Board **ET672** at 22:35 for Narita.
 
-**Carry-on:** passports, medicines, chargers, power banks, one change of clothes each, hotel address in Japanese and late-check-in instructions.
+**Carry-on:** passports, medicines, chargers, power banks, one change of clothes each, the Tabata apartment address in Japanese and late-check-in instructions.
 
 ---
 
@@ -67,11 +67,11 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 
 - **19:40:** ET672 arrives at Narita.
 - Allow roughly 90 minutes for immigration, bags and customs.
-- Take the best operating Keisei connection for the actual baggage-clearance time; keep an airport-bus/taxi fallback.
-- Message the accommodation after landing and use only the late-check-in instructions already confirmed in writing.
+- Buy the next practical Skyliner to Nippori after collecting bags, then connect by JR to Tabata; keep an airport-bus/taxi fallback.
+- Message the accommodation after landing and follow the late self-check-in instructions saved offline.
 - Buy a simple konbini dinner and breakfast. No sightseeing.
 
-**Must complete:** send passport images for all four guests in Airbnb chat and obtain written confirmation that arrival around 22:00–23:00 is permitted.
+**Pre-trip gate — not an arrival-day task:** before departure, send passport images for all four guests in Airbnb chat, obtain written confirmation that arrival around 22:00–23:00 is permitted and save the released instructions offline.
 
 ---
 
@@ -364,7 +364,7 @@ Setagaya reopened the full path on March 24, 2026. Recheck for temporary works o
 
 ### Reset · roughly 16:00–18:00
 
-- Return to the hotel, sit down and eat an early dinner near Kyoto Station.
+- Return to the apartment, sit down and eat an early dinner near Kyoto Station.
 - Be at Kyoto Avanti before the **18:15 doors**.
 
 ### Evening · 19:00
@@ -454,20 +454,22 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 
 ---
 
-## Day 16 — Fri, Oct 16: Pokémon Café + Taiko + Asakusa Finale
+## Day 16 — Fri, Oct 16: Pokémon Café + First Avenue + Taiko + Asakusa Finale
 
-**Theme:** final fandom meal, a personal drumming stop and classic Tokyo at dusk
-**Route:** Nihonbashi → Tokyo Station → Nishi-Asakusa → Senso-ji → base
+**Theme:** final fandom meal, Tokyo Station’s character-and-food hub, a personal drumming stop and classic Tokyo at dusk
+**Route:** planned Ueno/Inaricho base → Nihonbashi → Tokyo Station First Avenue → Nishi-Asakusa → Senso-ji → base
 
 ### Morning and lunch
 
+- **Accommodation dependency:** the current Ueno/Inaricho apartment is still a lead, not a confirmed booking. If it is booked, walk about two minutes to Inaricho, ride the Ginza Line directly to Nihombashi in roughly 10–12 minutes and use exit B2 for the café building. If another final stay is chosen, preserve this day order and recalculate only the short feeder legs.
 - **Pokémon Café Tokyo** if secured; arrive 15 minutes early and allow 90 minutes.
 - Pokémon Center Tokyo DX is in the same building.
-- If the café is unavailable, eat at **Tokyo Ramen Street** and still visit the Center.
+- Protect **45–60 minutes at [Tokyo Station First Avenue](https://www.tokyoeki-1bangai.co.jp/en/)**, outside the JR gates on the Yaesu side. Start on B1 at **Tokyo Character Street** and choose two or three preselected shops; add Okashi Land only if time remains.
+- If the café is unavailable, eat at **Tokyo Ramen Street** inside First Avenue and still visit the Center.
 
 ### Afternoon
 
-- **Tokyo Character Street:** use only if the café time leaves a safe margin; target at most one missing character.
+- **Timing rule:** prefer a 10:30–11:00 café booking, then walk to First Avenue and continue to Taiko-kan. If the café booking is later, go to Taiko-kan at its 11:00 opening first, then return to Nihombashi/First Avenue before Senso-ji.
 - Reach **Taiko-kan** around 14:00 and before its official **15:00 last admission**. The museum is open 11:00–16:00 on Friday, and marked instruments may be played.
 - Visit **Miyamoto Unosuke Shoten** in the same building after the museum. Let the staff help choose one suitable in-stock bachi pair; name engraving takes about a week and is not a same-day option.
 - Continue to **Senso-ji** in late afternoon when day crowds begin to thin.
@@ -478,7 +480,7 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 - Return early for packing and a favorite-neighborhood dinner. Solamachi is only a bonus if the museum, temple and packing are all comfortably complete.
 - Farewell dinner: Kura Sushi for the plate game, yakiniku for a splurge, or one final excellent ramen.
 
-**Cut first:** Character Street browsing, then Solamachi/Skytree. Protect Taiko-kan, the bachi and Senso-ji.
+**Cut first:** Solamachi/Skytree, extra Nakamise time and First Avenue browsing beyond one hour. Protect the focused First Avenue visit, Taiko-kan, the bachi and Senso-ji.
 **Pack tonight.**
 
 ---
@@ -486,13 +488,13 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 ## Day 17 — Sat, Oct 17: Local Goodbye + Narita
 
 **Theme:** relaxed farewell, no risky cross-city detour
-**Route:** Ueno/Asakusa → NRT
+**Route:** planned Ueno/Inaricho area → NRT
 
-- Check out and store bags.
+- Check out and store bags only at a facility confirmed by the final property; make luggage storage a booking requirement if the current lead changes.
 - Keep 11:00–15:00 local: Ameyoko snacks, Ueno Park or any Asakusa piece missed yesterday.
 - Collect luggage by 15:15.
-- Take a reserved Keisei service or the best verified same-day alternative around 15:30.
-- Target the correct Narita terminal by roughly 17:30.
+- Reserve a Skyliner around **15:45–16:00** when sales open, then recheck the exact timetable and terminal.
+- Target the correct Narita terminal by roughly **16:45–17:15** for the 20:40 flight.
 - **ET673:** NRT 20:40 → ADD 05:50 on Oct 18.
 - **ET418:** ADD 10:25 → TLV 14:35.
 

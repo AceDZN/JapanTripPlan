@@ -61,7 +61,7 @@ Never buy a reservation from a reseller.
 | Oct 13 | Fushimi Inari → Osaka | Konbini/train breakfast + Dotonbori scorecard | Earlier Namba restaurant |
 | Oct 14 | USJ | Early/late Kinopio meal if practical | Mobile-order/quick service |
 | Oct 15 | Uji transfer | Train-friendly meal/ekiben | Kyoto Station meal |
-| Oct 16 | Nihonbashi → Nishi-Asakusa | Pokémon Café + light Asakusa snack | Tokyo Ramen Street if the café fails |
+| Oct 16 | Nihonbashi → Tokyo Station First Avenue → Nishi-Asakusa | Pokémon Café + light Asakusa snack | Tokyo Ramen Street if the café fails |
 | Oct 17 | Ueno | Favorite repeat or simple lunch | Station meal before Narita |
 
 ## Oct 9 Street-Food Game
@@ -96,7 +96,7 @@ Kinryu’s dragon is a fun Dotonbori photo marker, not one of the trip’s serio
 - One character snack inside KAWAII MONSTER LAND.
 - Reserve Totoro cream puffs for the Oct 9 Setagaya picnic.
 - Sanrio or Mofusand only if it fits naturally; do not add another cross-city reservation.
-- Kirby Café Petit or Mofusand at Character Street on Oct 16 only as quick take-away targets if the café timing still protects Taiko-kan’s 15:00 last admission.
+- During the protected 45–60-minute [Tokyo Station First Avenue](https://www.tokyoeki-1bangai.co.jp/en/) stop on Oct 16, choose at most one quick take-away target such as Kirby Café Petit or Mofusand. Character Street comes first; Okashi Land is a bonus, and Tokyo Ramen Street remains the meal backup if the Pokémon Café fails.
 - Keep the live-animal experience to the rescue-cat café. We considered a capybara café and deliberately skipped it: no current Tokyo operator had independent welfare verification strong enough to outweigh the systemic concerns around keeping a social, semi-aquatic wild species in a touch-and-feed café. [Peer-reviewed welfare study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
 
 ## Family Ordering Notes
@@ -108,4 +108,4 @@ Kinryu’s dragon is a fun Dotonbori photo marker, not one of the trip’s serio
 - Keep cash for ticket-machine restaurants.
 - Avoid promising exact wait times—queues change by weather, events and social-media popularity.
 
-*Prices and operating rules checked July 24, 2026. Recheck menus and opening hours during the final week.*
+*Plan consistency audited July 25, 2026. Recheck menus, prices and opening hours during the final week.*

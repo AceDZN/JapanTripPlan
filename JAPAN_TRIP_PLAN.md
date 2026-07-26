@@ -12,7 +12,7 @@
 | Oct 1 | Fly TLV → Addis Ababa |
 | Oct 2 | Arrive Narita, transfer, eat and sleep |
 | Oct 3 | Akihabara play/collect challenge + rescue-cat café |
-| Oct 4 | teamLab Planets + Odaiba Gundam + Joypolis |
+| Oct 4 | teamLab Planets + Mundo Pixar + Odaiba/Joypolis |
 | Oct 5 | PokéPark KANTO; DisneySea only if official PokéPark tickets fail |
 | Oct 6 | Harajuku KAWAII MONSTER LAND + Shibuya gaming/fandom |
 | Oct 7 | Kamakura Great Buddha + *Slam Dunk* coast + Enoshima |
@@ -24,7 +24,7 @@
 | Oct 13 | Early Fushimi Inari + Kyoto-to-Osaka + shortened Den Den Town/Dotonbori |
 | Oct 14 | USJ / Super Nintendo World |
 | Oct 15 | Nintendo Museum lottery plan + return to Tokyo |
-| Oct 16 | Pokémon Café + Taiko-kan/bachi + Senso-ji finale |
+| Oct 16 | Pokémon Café + Tokyo Station First Avenue + Taiko-kan/bachi + Senso-ji finale |
 | Oct 17 | Local goodbye + Narita |
 | Oct 18 | Addis Ababa connection + home |
 
@@ -72,4 +72,4 @@ The complete what/when/where tracker is the [Pre-Trip Action Checklist](./JAPAN2
 - [Working Budget](./JAPAN2026/10-BUDGET.md)
 - [Pre-Trip Action Checklist](./JAPAN2026/11-PRE-TRIP-CHECKLIST.md)
 
-*Research refreshed July 24, 2026. Recheck live tickets, hours, age/height rules and attraction maintenance before travel.*
+*Plan consistency audited July 25, 2026. Recheck live tickets, hours, age/height rules and attraction maintenance before travel.*

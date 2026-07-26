@@ -1,190 +1,319 @@
 import Link from "next/link";
 import {
+  AlarmClock,
   ArrowLeft,
   CalendarDays,
-  CheckCircle2,
-  CircleAlert,
-  ClipboardCheck,
-  Clock3,
-  Hotel,
+  Compass,
+  ExternalLink,
   MapPinned,
-  Users,
+  Sparkles,
+  Ticket,
 } from "lucide-react";
 import { Countdown } from "@/components/Countdown";
-import { bookingTasks, tripDays } from "@/lib/trip-data";
+import { DayCard } from "@/components/cards";
+import { Photo, StatusChip } from "@/components/visuals";
+import { bookingGates, dueTone, formatDueHe } from "@/components/booking-gates";
+import { nextDeadline } from "@/lib/checklist-data";
+import {
+  daysUntilTrip,
+  getTodayTripDay,
+  routeChapters,
+  tripDays,
+} from "@/lib/trip-data";
 import { tripGuides } from "@/app/generated/trip-content";
 
+const cityImages: Record<string, string> = {
+  tokyo: "/images/cities/tokyo.jpg",
+  kyoto: "/images/cities/kyoto.jpg",
+  osaka: "/images/cities/osaka.jpg",
+  kamakura: "/images/cities/kamakura.jpg",
+};
+
 export default function Home() {
-  const nextDays = tripDays.slice(2, 6);
+  const now = new Date();
+  const today = getTodayTripDay(now);
+  const until = daysUntilTrip(now);
+  const deadline = nextDeadline(now);
+  const gates = bookingGates()
+    .filter((gate) => gate.status !== "booked")
+    .slice(0, 6);
+  const previewDays = tripDays.filter((day) => day.day >= 3).slice(0, 8);
 
   return (
     <>
-      <section className="home-hero">
-        <img
-          src="/images/tokyo-sunset.jpg"
-          alt="קו הרקיע של טוקיו בשקיעה"
-          fetchPriority="high"
-        />
+      <section className="hero">
+        <div className="hero-media">
+          <img
+            src="/images/cities/tokyo.jpg"
+            alt="קו הרקיע של טוקיו"
+            fetchPriority="high"
+            width={1600}
+            height={900}
+          />
+        </div>
         <div className="hero-wash" />
-        <div className="hero-japan">日本</div>
-        <div className="hero-content">
-          <p className="hero-kicker">TOKYO · KYOTO · OSAKA · 2026</p>
+        <div className="hero-jp" aria-hidden>
+          日本
+        </div>
+        <div className="container hero-body">
+          <p className="eyebrow eyebrow-ltr">TOKYO · KYOTO · OSAKA · 2026</p>
           <h1>
             המסע המשפחתי
-            <span>שלנו ליפן</span>
+            <em>שלנו ליפן</em>
           </h1>
-          <p className="hero-subtitle">
-            17 ימים שנבנו סביב אנימה, גיימינג, פוקימון, נינטנדו, ראמן וקוואי —
-            בקצב שמתאים באמת למשפחה שלנו.
+          <p className="hero-sub">
+            17 ימים סביב אנימה, גיימינג, פוקימון, נינטנדו, ראמן וקוואי — בקצב
+            שמתאים באמת לארבעה אנשים עם רגליים.
           </p>
-          <Countdown />
+          {today ? (
+            <p className="hero-sub" style={{ color: "#f2b134", fontWeight: 700 }}>
+              אנחנו ביפן · יום {today.day} מתוך 17
+            </p>
+          ) : (
+            <Countdown />
+          )}
           <div className="hero-actions">
-            <Link href="/itinerary">
-              <CalendarDays size={19} />
-              למסלול המלא
+            <Link className="btn btn-primary" href={today ? `/day/${today.day}` : "/itinerary"}>
+              <CalendarDays size={18} />
+              {today ? "התוכנית להיום" : "למסלול המלא"}
             </Link>
-            <Link href="/map" className="secondary">
-              <MapPinned size={19} />
-              לפתיחת המפה
+            <Link className="btn btn-glass" href="/map">
+              <MapPinned size={18} />
+              המפה
             </Link>
-            <Link href="/prepare" className="secondary">
-              <ClipboardCheck size={19} />
-              להכנות
+            <Link className="btn btn-glass" href="/around">
+              <Compass size={18} />
+              מה יש סביבי
             </Link>
           </div>
-        </div>
-        <div className="hero-stats">
-          <div>
-            <strong>17</strong>
-            <span>ימי מסע</span>
-          </div>
-          <div>
-            <strong>4</strong>
-            <span>מטיילים</span>
-          </div>
-          <div>
-            <strong>15</strong>
-            <span>לילות ביפן</span>
+          <div className="hero-stats">
+            <div>
+              <strong>17</strong>
+              <span>ימי מסע</span>
+            </div>
+            <div>
+              <strong>4</strong>
+              <span>מטיילים</span>
+            </div>
+            <div>
+              <strong>15</strong>
+              <span>לילות ביפן</span>
+            </div>
+            <div>
+              <strong>4</strong>
+              <span>ערים</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="overview-strip">
-        <div>
-          <span className="strip-icon">
-            <Users size={20} />
-          </span>
-          <p>המשפחה</p>
-          <strong>2 הורים · בת 16 · בן 12</strong>
-        </div>
-        <div>
-          <span className="strip-icon">
-            <Hotel size={20} />
-          </span>
-          <p>מבנה הלינה</p>
-          <strong>טוקיו · 2 לילות קיוטו · 2 לילות אוסקה · טוקיו</strong>
-        </div>
-        <div>
-          <span className="strip-icon">
-            <CheckCircle2 size={20} />
-          </span>
-          <p>המסנן שלנו</p>
-          <strong>משחק · פאנדום · טעם · וואו · קוואי</strong>
-        </div>
-      </section>
-
-      <section className="home-section section-grid">
-        <div className="section-copy">
-          <p className="section-label">מה חייבים לעשות עכשיו</p>
-          <h2>לפני שהכרטיסים נעלמים</h2>
-          <p>
-            אלה ההחלטות הקרובות שמחזיקות את כל הטיול. הקבצים המלאים נשארים
-            מקור האמת; כאן רואים רק את מה שצריך לפעול עליו.
-          </p>
-          <Link className="text-link" href="/prepare">
-            לרשימת ההכנות המלאה
-            <ArrowLeft size={17} />
-          </Link>
-        </div>
-        <div className="booking-list">
-          {bookingTasks.slice(0, 4).map((task) => (
-            <article key={task.title} data-status={task.status}>
-              <div className="task-status">
-                {task.status === "urgent" ? (
-                  <CircleAlert size={18} />
-                ) : (
-                  <Clock3 size={18} />
-                )}
+      {today ? (
+        <section className="today" aria-labelledby="today-title">
+          <div className="container today-inner">
+            <Link href={`/day/${today.day}`} aria-label={`יום ${today.day} · ${today.title}`}>
+              <Photo
+                className="today-photo"
+                src={today.heroImage}
+                alt={today.title}
+                tone={today.color}
+                priority
+              />
+            </Link>
+            <div className="today-copy">
+              <p className="eyebrow">
+                <Sparkles size={14} />
+                היום במסע · {today.dateHe}
+              </p>
+              <h2 id="today-title">{today.title}</h2>
+              <p>
+                {today.area} · {today.theme}
+              </p>
+              <ul className="today-blocks">
+                {today.blocks.slice(0, 4).map((block) => (
+                  <li key={block.title}>
+                    <time>{block.time ?? "—"}</time>
+                    <span>{block.title}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="hero-actions">
+                <Link className="btn btn-primary" href={`/day/${today.day}`}>
+                  כל היום במלואו
+                  <ArrowLeft size={17} />
+                </Link>
               </div>
-              <div>
-                <span>{task.date}</span>
-                <h3>{task.title}</h3>
-                <p>{task.detail}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className="section-tight container" aria-labelledby="next-title">
+          <div className="next-up" data-reveal>
+            <div>
+              <p className="eyebrow">
+                <AlarmClock size={14} />
+                הדבר הבא שצריך לסגור
+              </p>
+              <h3 id="next-title">{deadline ? deadline.title : "הכול סגור — נשאר רק לארוז"}</h3>
+              <small>
+                {deadline?.due
+                  ? `עד ${formatDueHe(deadline.due)}${
+                      dueTone(deadline.due, now) === "past" ? " · התאריך עבר" : ""
+                    }`
+                  : "עוברים על רשימת ההכנות ומוודאים שלא נשכח דבר"}
+                {until > 0 ? ` · ${until} ימים להמראה` : ""}
+              </small>
+            </div>
+            <div className="prep-actions">
+              {deadline?.url ? (
+                <a className="btn btn-primary btn-sm" href={deadline.url} target="_blank" rel="noreferrer">
+                  לאתר הרשמי
+                  <ExternalLink size={14} />
+                </a>
+              ) : null}
+              <Link className="btn btn-ghost btn-sm" href="/prepare">
+                לרשימת ההכנות
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
-      <section className="visual-route">
-        <div className="visual-route-copy">
-          <p className="section-label">טעימה מהמסלול</p>
-          <h2>כל יום הוא עולם אחר</h2>
-          <p>
-            מאקיהברה ובית קפה לחתולי הצלה ל־PokePark, מערוץ ירוק בלב טוקיו
-            לפחזניות טוטורו ופסטיבל קארי, ועד Super Nintendo World ו־Nintendo Museum.
-          </p>
-          <Link href="/itinerary">
+      <section className="section container" aria-labelledby="route-title">
+        <div className="section-head with-action">
+          <div>
+            <p className="eyebrow">
+              <MapPinned size={14} />
+              המסלול הגדול
+            </p>
+            <h2 className="display" id="route-title">
+              ארבעה פרקים, עיר אחרי עיר
+            </h2>
+          </div>
+          <Link className="text-link" href="/itinerary">
             כל 17 הימים
-            <ArrowLeft size={17} />
+            <ArrowLeft size={16} />
           </Link>
         </div>
-        <div className="route-collage">
-          {nextDays.map((day, index) => (
+        <div className="route-strip">
+          {routeChapters.map((chapter, index) => (
             <Link
-              href="/itinerary"
-              className={`route-image route-image-${index + 1}`}
-              key={day.day}
+              className="route-card"
+              href={`/day/${chapter.days[0]}`}
+              key={`${chapter.city}-${chapter.dates}`}
+              data-reveal
             >
               <img
-                src={day.image}
-                alt=""
+                src={cityImages[chapter.city] ?? cityImages.tokyo}
+                alt={chapter.label}
                 loading="lazy"
               />
-              <span>יום {day.day}</span>
-              <strong>{day.title}</strong>
-              <small>{day.shortDate}</small>
+              <span className="route-card-body">
+                <span>פרק {index + 1}</span>
+                <strong>{chapter.label}</strong>
+                <small>{chapter.dates} · {chapter.days.length} ימים</small>
+              </span>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="home-section guide-preview">
-        <div className="guide-preview-heading">
-          <div>
-            <p className="section-label">מחברת המסע</p>
-            <h2>כל התכנון, מסודר ונגיש</h2>
-          </div>
-          <p>
-            {tripGuides.length} מדריכים שמתעדכנים אוטומטית מתוך קובצי ה־Markdown.
-          </p>
-        </div>
-        <div className="guide-links">
-          {tripGuides.slice(0, 6).map((guide, index) => (
-            <Link href={`/guide/${guide.slug}`} key={guide.slug}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>{guide.title}</h3>
-                <p>{guide.description}</p>
-              </div>
-              <ArrowLeft size={18} />
+      <section className="section section-tint" aria-labelledby="gates-title">
+        <div className="container">
+          <div className="section-head with-action">
+            <div>
+              <p className="eyebrow">
+                <Ticket size={14} />
+                שערי הזמנה
+              </p>
+              <h2 className="display" id="gates-title">
+                לפני שהכרטיסים נעלמים
+              </h2>
+            </div>
+            <Link className="text-link" href="/prepare">
+              לרשימת ההכנות המלאה
+              <ArrowLeft size={16} />
             </Link>
+          </div>
+          <div className="gates">
+            {gates.map((gate) => (
+              <article className="card gate" key={gate.key} data-reveal>
+                <div className="gate-top">
+                  <StatusChip status={gate.status} />
+                  {gate.day ? <span className="gate-day">יום {gate.day}</span> : null}
+                </div>
+                <h3>{gate.title}</h3>
+                {gate.detail ? <p>{gate.detail}</p> : null}
+                {gate.due ? (
+                  <span className="gate-due">
+                    <AlarmClock size={13} />
+                    עד {formatDueHe(gate.due)}
+                  </span>
+                ) : null}
+                {gate.url ? (
+                  <a className="text-link" href={gate.url} target="_blank" rel="noreferrer">
+                    לעמוד ההזמנה
+                    <ExternalLink size={13} />
+                  </a>
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section container" aria-labelledby="days-title">
+        <div className="section-head with-action">
+          <div>
+            <p className="eyebrow">
+              <CalendarDays size={14} />
+              טעימה מהימים
+            </p>
+            <h2 className="display" id="days-title">
+              כל יום הוא עולם אחר
+            </h2>
+          </div>
+          <Link className="text-link" href="/itinerary">
+            לציר הזמן המלא
+            <ArrowLeft size={16} />
+          </Link>
+        </div>
+        <div className="day-grid">
+          {previewDays.map((day) => (
+            <DayCard day={day} key={day.day} />
           ))}
         </div>
-        <Link className="all-guides-link" href="/guides">
-          לכל המדריכים
-          <ArrowLeft size={17} />
-        </Link>
+      </section>
+
+      <section className="section section-tint" aria-labelledby="guides-title">
+        <div className="container">
+          <div className="section-head with-action">
+            <div>
+              <p className="eyebrow">מחברת המסע</p>
+              <h2 className="display" id="guides-title">
+                כל התכנון, מסודר ונגיש
+              </h2>
+            </div>
+            <p className="lede" style={{ maxWidth: 360 }}>
+              {tripGuides.length} מדריכים שמתעדכנים אוטומטית מקובצי המקור של הטיול.
+            </p>
+          </div>
+          <div className="guide-rail" data-reveal>
+            {tripGuides.slice(0, 6).map((guide, index) => (
+              <Link href={`/guide/${guide.slug}`} key={guide.slug}>
+                <span className="num">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{guide.title}</h3>
+                  <p>{guide.description}</p>
+                </div>
+                <ArrowLeft size={18} />
+              </Link>
+            ))}
+          </div>
+          <Link className="text-link" href="/guides" style={{ marginTop: 18 }}>
+            לכל המדריכים
+            <ArrowLeft size={16} />
+          </Link>
+        </div>
       </section>
     </>
   );

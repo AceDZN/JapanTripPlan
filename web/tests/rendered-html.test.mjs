@@ -23,60 +23,188 @@ async function render(pathname = "/") {
   );
 }
 
-test("server-renders the family-first home page and urgent booking gates", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
+async function html(pathname) {
+  const response = await render(pathname);
+  assert.equal(response.status, 200, `${pathname} must render`);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  return response.text();
+}
 
-  const html = await response.text();
-  assert.match(html, /המסע המשפחתי/);
-  assert.match(html, /אנימה, גיימינג, פוקימון, נינטנדו, ראמן וקוואי/);
-  assert.match(html, /Nintendo Museum/);
-  assert.match(html, /PokePark Kanto/);
-  assert.match(html, /DisneySea/);
-  assert.match(html, /USJ \+ Express מדויק/);
+test("renders the RTL shell with the five-item bottom nav and the chat bubble", async () => {
+  const page = await html("/");
+  assert.match(page, /<html lang="he" dir="rtl"/);
+  assert.match(page, /class="tabbar"/);
+  for (const label of ["בית", "מסלול", "מפה", "סביבי", "עוד"]) {
+    assert.match(page, new RegExp(`>${label}<`), `bottom nav must show ${label}`);
+  }
+  assert.match(page, /class="chat-fab"/);
+  assert.match(page, /href="\/chat"/);
+  // never ship an empty image source — components fall back instead
+  assert.doesNotMatch(page, /<img[^>]*src=""/);
 });
 
-test("server-renders the updated 17-day itinerary", async () => {
-  const response = await render("/itinerary");
-  assert.equal(response.status, 200);
+test("home page renders the hero, the next gate to close and the trip previews", async () => {
+  const page = await html("/");
 
-  const html = await response.text();
-  assert.match(html, /כל יום עבר את מבחן המשפחה/);
-  assert.match(html, /Neco Republic/);
-  assert.match(html, /KAWAII MONSTER LAND/);
-  assert.match(html, /Tokyo Joypolis/);
-  assert.match(html, /Mundo Pixar הוא עוגן קבוע/);
-  assert.match(html, /Pokémon Card Game על בניין עיריית טוקיו/);
-  assert.match(html, /ערוץ טודורוקי/);
-  assert.match(html, /פחזניות טוטורו/);
-  assert.match(html, /Shimokitazawa Curry Festival/);
-  assert.match(html, /קיוטו: מיזואקאי ואוואטה/);
-  assert.match(html, /UZUMASA ו־DRUM TAO/);
-  assert.match(html, /שערי הטוריאי התחתונים/);
-  assert.match(html, /מקלות אכילה עם שם ב־Yūzen Fushimi/);
-  assert.match(html, /Taiko-kan לפני 15:00/);
-  assert.match(html, /Nintendo Museum וטוקיו/);
-  assert.match(html, /Pokémon Café, תופים ואסאקוסה/);
-  assert.doesNotMatch(html, /Osaka Castle/);
-  assert.doesNotMatch(html, /Tokyo Yosakoi/);
-  assert.doesNotMatch(html, /Oeshiki/);
+  assert.match(page, /המסע המשפחתי/);
+  assert.match(page, /אנימה, גיימינג, פוקימון, נינטנדו, ראמן וקוואי/);
+  assert.match(page, /\/images\/cities\/tokyo\.jpg/);
+
+  // before the trip: countdown + nearest checklist deadline; during: today mode
+  const beforeTrip = /class="countdown"/.test(page);
+  if (beforeTrip) {
+    assert.match(page, /הדבר הבא שצריך לסגור/);
+    assert.match(page, /ימים<\/span>/);
+  } else {
+    assert.match(page, /היום במסע/);
+  }
+
+  // route strip, booking gates and day previews
+  assert.match(page, /ארבעה פרקים, עיר אחרי עיר/);
+  assert.match(page, /class="route-card"/);
+  for (const city of ["טוקיו", "קיוטו", "אוסקה"]) {
+    assert.match(page, new RegExp(`<strong>${city}</strong>`));
+  }
+  assert.match(page, /שערי הזמנה/);
+  assert.match(page, /status-chip st-/);
+  assert.match(page, /Nintendo Museum/);
+  assert.match(page, /class="day-card"/);
+  assert.match(page, /href="\/day\/3"/);
+  assert.match(page, /לכל המדריכים/);
 });
 
-test("server-renders the preparation tracker, weather and walking-shoe action", async () => {
-  const response = await render("/prepare");
-  assert.equal(response.status, 200);
+test("home switches to today mode during the trip", async () => {
+  const RealDate = Date;
+  const frozen = new RealDate("2026-10-05T09:00:00+09:00").getTime();
+  class FrozenDate extends RealDate {
+    constructor(...args) {
+      if (args.length === 0) super(frozen);
+      else super(...args);
+    }
+    static now() {
+      return frozen;
+    }
+  }
+  globalThis.Date = FrozenDate;
 
-  const html = await response.text();
-  assert.match(html, /מגיעים מוכנים/);
-  assert.match(html, /לקנות נעלי הליכה חדשות לכולם/);
-  assert.match(html, /Nintendo Museum/);
-  assert.match(html, /Safety Tips/);
-  assert.match(html, /לקנות Mundo Pixar ל־4\.10/);
-  assert.match(html, /22\.0°/);
-  assert.match(html, /23\.4°/);
-  assert.match(html, /23\.7°/);
-  assert.match(html, /WHAT · WHEN · WHERE/);
+  try {
+    const page = await html("/");
+    assert.match(page, /היום במסע/);
+    assert.match(page, /PokéPark KANTO/);
+    assert.match(page, /class="today-blocks"/);
+    assert.match(page, /href="\/day\/5"/);
+    assert.doesNotMatch(page, /הדבר הבא שצריך לסגור/);
+  } finally {
+    globalThis.Date = RealDate;
+  }
+});
+
+test("itinerary renders city chapters and all seventeen day cards", async () => {
+  const page = await html("/itinerary");
+
+  assert.match(page, /המסלול שלנו, יום אחרי יום/);
+  assert.match(page, /class="chapter"/);
+  assert.match(page, /בדרך/);
+  assert.match(page, /11–13\.10/);
+  assert.match(page, /13–15\.10/);
+
+  for (let day = 1; day <= 17; day += 1) {
+    assert.match(page, new RegExp(`href="/day/${day}"`), `day ${day} must be linked`);
+  }
+
+  assert.match(page, /PokéPark KANTO/);
+  assert.match(page, /Nintendo Museum/);
+  assert.match(page, /class="tl-highlights"/);
+});
+
+test("day page renders blocks, cut-first chips, booking status and the day map", async () => {
+  const page = await html("/day/4");
+
+  assert.match(page, /teamLab|Mundo Pixar/);
+  assert.match(page, /איך היום נראה/);
+  assert.match(page, /class="block-time"/);
+  assert.match(page, /לוותר בקלות/);
+  assert.match(page, /status-chip st-(buy-now|booked|monitor|on-sale-soon|lottery|fallback)/);
+  assert.match(page, /class="mini-map"/);
+  assert.match(page, /אם יורד גשם/);
+  assert.match(page, /עוגני אוכל/);
+  assert.match(page, /המקומות של היום/);
+  assert.match(page, /https:\/\/www\.google\.com\/maps\/search\/\?api=1&amp;query=/);
+  assert.match(page, /href="\/day\/3"/);
+  assert.match(page, /href="\/day\/5"/);
+});
+
+test("day five keeps the PokéPark plan with its official-only monitoring gate", async () => {
+  const page = await html("/day/5");
+
+  assert.match(page, /PokéPark/);
+  assert.match(page, /Sky Shuttle|רכבל/);
+  assert.match(page, /DisneySea/);
+  assert.match(page, /status-chip st-monitor/);
+  assert.match(page, /status-chip st-fallback/);
+});
+
+test("prepare renders every checklist group, deadlines and booking gates", async () => {
+  const page = await html("/prepare");
+
+  assert.match(page, /מגיעים מוכנים/);
+  for (const group of [
+    "כרטיסים ואטרקציות",
+    "לינה, מסמכים וכסף",
+    "אפליקציות ותקשורת",
+    "בריאות והליכה",
+    "ציוד ואריזה",
+    "שבוע אחרון",
+    "48 שעות ויום היציאה",
+  ]) {
+    assert.match(page, new RegExp(group.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+
+  assert.match(page, /לקנות נעלי הליכה חדשות לארבעתנו/);
+  assert.match(page, /Nintendo Museum/);
+  assert.match(page, /Safety Tips/);
+  assert.match(page, /לקנות Mundo Pixar ל־4\.10/);
+  assert.match(page, /class="prep-check"/);
+  assert.match(page, /class="due due-/);
+  assert.match(page, /ייצוא/);
+  assert.match(page, /22\.0°/);
+  assert.match(page, /23\.4°/);
+  assert.match(page, /23\.7°/);
+});
+
+test("guides index and a rendered guide keep the canonical documents readable", async () => {
+  const index = await html("/guides");
+  assert.match(index, /מחברת המסע/);
+  assert.match(index, /class="guide-card"/);
+  assert.match(index, /href="\/guide\/daily-itinerary"/);
+  assert.match(index, /href="\/guide\/pre-trip-checklist"/);
+
+  const guide = await html("/guide/flights");
+  assert.match(guide, /class="guide-content"/);
+  assert.match(guide, /BOOKED: Tel Aviv \(TLV\) to Tokyo Narita \(NRT\)/);
+  assert.match(guide, /ET419/);
+  assert.match(guide, /ET672/);
+  assert.match(guide, /ET673/);
+  assert.match(guide, /ET418/);
+  assert.match(guide, /Tabata/);
+  assert.doesNotMatch(guide, /travel to Ueno/);
+  assert.doesNotMatch(guide, /Pre-booking Research Archive/);
+  assert.doesNotMatch(guide, /Best Value: Etihad Airways/);
+  assert.doesNotMatch(guide, /TARGET BOOKING WINDOW/);
+});
+
+test("map, around and chat render their full experiences", async () => {
+  const map = await html("/map");
+  assert.match(map, /מפת הטיול/);
+  assert.match(map, /MapExplorer/);
+
+  const around = await html("/around");
+  assert.match(around, /מה יש סביבי/);
+  assert.match(around, /AroundExplorer/);
+
+  const chat = await html("/chat");
+  assert.match(chat, /צ׳אט הטיול/);
+  assert.match(chat, /ChatView/);
 });
 
 test("keeps all generated guides synchronized with the canonical Markdown", async () => {

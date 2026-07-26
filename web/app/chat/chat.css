@@ -1,0 +1,410 @@
+/* =========================================================================
+   /chat — streaming concierge UI.
+   Scoped to .chat-* classes; reuses the design tokens from globals.css.
+   ========================================================================= */
+
+.chat-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  height: calc(100svh - var(--header-h) - var(--tabbar-h));
+  margin-inline: auto;
+  max-width: 860px;
+  min-height: 460px;
+  padding-inline: var(--gutter);
+  width: 100%;
+}
+
+@media (min-width: 1001px) {
+  .chat-shell {
+    height: calc(100svh - var(--header-h));
+  }
+}
+
+/* ------------------------------------------------------------------ head */
+
+.chat-head {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  justify-content: space-between;
+  padding-block: 16px 14px;
+}
+
+.chat-head-title {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.chat-head-mark {
+  align-items: center;
+  background: linear-gradient(140deg, var(--vermillion), var(--vermillion-deep));
+  border-radius: 14px;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--vermillion) 32%, transparent);
+  color: #fff;
+  display: flex;
+  flex: 0 0 auto;
+  font-family: var(--font-jp);
+  font-size: 21px;
+  height: 42px;
+  justify-content: center;
+  width: 42px;
+}
+
+.chat-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(21px, 3vw, 27px);
+  letter-spacing: -0.035em;
+}
+
+.chat-head p {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+/* --------------------------------------------------------------- thread */
+
+.chat-scroller {
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+}
+
+.chat-thread {
+  display: grid;
+  gap: 14px;
+  padding-block: 20px 12px;
+}
+
+.chat-bubble {
+  border-radius: var(--r-lg);
+  font-size: 15.5px;
+  line-height: 1.75;
+  max-width: min(92%, 660px);
+  padding: 13px 17px;
+  animation: chat-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.chat-bubble-user {
+  background: linear-gradient(150deg, var(--vermillion), var(--vermillion-deep));
+  border-end-end-radius: 8px;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--vermillion) 26%, transparent);
+  color: #fff;
+  justify-self: end;
+  white-space: pre-wrap;
+}
+
+.chat-bubble-assistant {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-end-start-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  justify-self: start;
+}
+
+@keyframes chat-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* typing indicator */
+
+.chat-typing {
+  align-items: center;
+  display: inline-flex;
+  gap: 5px;
+  padding-block: 5px;
+}
+
+.chat-typing i {
+  animation: chat-blink 1.15s ease-in-out infinite;
+  background: var(--text-faint);
+  border-radius: 50%;
+  display: block;
+  height: 7px;
+  width: 7px;
+}
+
+.chat-typing i:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.chat-typing i:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes chat-blink {
+  0%,
+  70%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* ----------------------------------------------------- markdown-lite body */
+
+.chat-md > * + * {
+  margin-top: 0.7em;
+}
+
+.chat-md a {
+  color: var(--vermillion);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.chat-md strong {
+  font-weight: 700;
+}
+
+.chat-md code {
+  background: var(--surface-2);
+  border-radius: 5px;
+  direction: ltr;
+  font-size: 0.88em;
+  padding: 2px 5px;
+  unicode-bidi: embed;
+}
+
+.chat-md ul,
+.chat-md ol {
+  display: grid;
+  gap: 5px;
+  padding-inline-start: 1.3em;
+}
+
+.chat-md ul {
+  list-style: disc;
+}
+
+.chat-md ol {
+  list-style: decimal;
+}
+
+.chat-md li::marker {
+  color: var(--vermillion);
+}
+
+.chat-md blockquote {
+  background: var(--surface-2);
+  border-inline-start: 3px solid var(--gold);
+  border-radius: var(--r-sm);
+  color: var(--text-muted);
+  padding: 9px 13px;
+}
+
+.chat-md hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.chat-md-heading {
+  font-size: 1.02em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ----------------------------------------------------------- empty state */
+
+.chat-empty {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  padding-block: clamp(24px, 6vh, 60px);
+  text-align: center;
+}
+
+.chat-empty-mark {
+  align-items: center;
+  background: linear-gradient(140deg, color-mix(in srgb, var(--vermillion) 18%, var(--surface-2)), var(--surface-2));
+  border-radius: 24px;
+  color: var(--vermillion);
+  display: flex;
+  height: 70px;
+  justify-content: center;
+  width: 70px;
+}
+
+.chat-empty h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4vw, 34px);
+  letter-spacing: -0.04em;
+}
+
+.chat-empty p {
+  color: var(--text-muted);
+  font-size: 14.5px;
+  line-height: 1.7;
+  max-width: 44ch;
+}
+
+.chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.chat-suggestion {
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 13px;
+  min-height: 40px;
+  padding: 8px 14px;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.chat-suggestion:hover {
+  background: var(--surface-2);
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------------- errors */
+
+.chat-error {
+  align-items: start;
+  background: color-mix(in srgb, var(--vermillion) 9%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--vermillion) 30%, transparent);
+  border-radius: var(--r);
+  display: flex;
+  gap: 11px;
+  font-size: 14px;
+  line-height: 1.65;
+  padding: 13px 15px;
+}
+
+.chat-error-setup {
+  background: color-mix(in srgb, var(--gold) 12%, var(--surface));
+  border-color: color-mix(in srgb, var(--gold) 40%, transparent);
+}
+
+.chat-error-icon {
+  color: var(--vermillion);
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.chat-error-setup .chat-error-icon {
+  color: color-mix(in srgb, var(--gold) 65%, var(--text));
+}
+
+.chat-error strong {
+  display: block;
+  font-weight: 600;
+}
+
+.chat-error code {
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  direction: ltr;
+  display: block;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 8px;
+  overflow-x: auto;
+  padding: 8px 10px;
+  text-align: start;
+  unicode-bidi: embed;
+  white-space: pre-wrap;
+}
+
+/* -------------------------------------------------------------- composer */
+
+.chat-composer {
+  align-items: flex-end;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 7px 7px 7px 7px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.chat-composer:focus-within {
+  border-color: color-mix(in srgb, var(--vermillion) 55%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--vermillion) 12%, transparent);
+}
+
+.chat-input {
+  background: none;
+  border: 0;
+  flex: 1;
+  font-size: 16px;
+  line-height: 1.6;
+  max-height: 168px;
+  min-height: 28px;
+  outline: none;
+  padding: 8px 10px;
+  resize: none;
+}
+
+.chat-send {
+  align-items: center;
+  background: var(--vermillion);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  height: 42px;
+  justify-content: center;
+  transition: transform 160ms ease, opacity 160ms ease, background 160ms ease;
+  width: 42px;
+}
+
+.chat-send:hover:not(:disabled) {
+  transform: scale(1.06);
+}
+
+.chat-send:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.chat-send-stop {
+  background: var(--ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  .chat-send-stop {
+    background: var(--surface-3);
+  }
+}
+
+.chat-note {
+  color: var(--text-faint);
+  font-size: 11.5px;
+  padding-block: 8px 12px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .chat-bubble {
+    max-width: 96%;
+  }
+
+  .chat-head p {
+    display: none;
+  }
+}

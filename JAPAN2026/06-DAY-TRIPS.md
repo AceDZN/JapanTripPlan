@@ -43,7 +43,7 @@ Keep the Great Buddha, coastal train and one enjoyable Enoshima block.
 
 ### Morning · 08:00–10:45
 
-1. Leave the Ueno/Tokyo base around 08:00 and change at Oimachi for the Tokyu Oimachi Line.
+1. Leave the booked Tabata base around 08:00 and change at Oimachi for the Tokyu Oimachi Line.
 2. From Todoroki Station, walk about three minutes to the Golf Bridge entrance.
 3. Follow the reopened riverside path to Todoroki Fudoson and the Japanese Garden.
 4. Allow 60–90 minutes rather than treating the ravine as a hike.

@@ -1,119 +1,120 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { Map as LeafletMap } from "leaflet";
-import { ExternalLink, MapPin } from "lucide-react";
-import type { mapPlaces } from "@/lib/trip-data";
 
-type Place = (typeof mapPlaces)[number];
+export type MapPoint = {
+  id: string;
+  lat: number;
+  lng: number;
+  label: string;
+  title: string;
+  area?: string;
+  color?: string;
+  mapsUrl?: string;
+};
 
-export function TripMap({ places }: { places: Place[] }) {
-  const mapElement = useRef<HTMLDivElement>(null);
-  const mapInstance = useRef<LeafletMap | null>(null);
-  const markers = useRef<Map<number, L.Marker>>(new Map());
-  const [selected, setSelected] = useState(places[0]);
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/**
+ * Client-only Leaflet canvas. Numbered markers, an optional route polyline and
+ * RTL-safe popups that hand off to Google Maps.
+ */
+export function TripMap({
+  points,
+  color = "#e34234",
+  route = false,
+  className = "mini-map",
+  ariaLabel = "מפה",
+}: {
+  points: MapPoint[];
+  color?: string;
+  route?: boolean;
+  className?: string;
+  ariaLabel?: string;
+}) {
+  const element = useRef<HTMLDivElement>(null);
+  const instance = useRef<LeafletMap | null>(null);
 
   useEffect(() => {
     let disposed = false;
 
     async function createMap() {
-      if (!mapElement.current || mapInstance.current) return;
+      if (!element.current || instance.current || points.length === 0) return;
       const L = await import("leaflet");
-      if (disposed || !mapElement.current) return;
+      if (disposed || !element.current) return;
 
-      const map = L.map(mapElement.current, {
+      const map = L.map(element.current, {
         zoomControl: false,
         scrollWheelZoom: false,
-      }).setView([35.6762, 139.6503], 9);
-
-      L.control.zoom({ position: "bottomleft" }).addTo(map);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "© OpenStreetMap",
-        maxZoom: 18,
-      }).addTo(map);
-
-      places.forEach((place) => {
-        const icon = L.divIcon({
-          className: "trip-map-marker-wrap",
-          html: `<span class="trip-map-marker" style="--marker:${place.color}">${place.day}</span>`,
-          iconSize: [38, 46],
-          iconAnchor: [19, 42],
-        });
-        const marker = L.marker([place.lat, place.lng], { icon }).addTo(map);
-        marker.on("click", () => setSelected(place));
-        markers.current.set(place.day, marker);
       });
 
-      mapInstance.current = map;
-      window.setTimeout(() => map.invalidateSize(), 100);
+      L.control.zoom({ position: "bottomright" }).addTo(map);
+      // CARTO Voyager renders Latin/English labels (default OSM tiles label Japan in Japanese).
+      L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+        {
+          attribution: "© OpenStreetMap © CARTO",
+          subdomains: "abcd",
+          maxZoom: 19,
+        },
+      ).addTo(map);
+
+      if (route && points.length > 1) {
+        L.polyline(
+          points.map((point) => [point.lat, point.lng] as [number, number]),
+          { color, weight: 3, opacity: 0.65, dashArray: "6 8" },
+        ).addTo(map);
+      }
+
+      points.forEach((point) => {
+        const icon = L.divIcon({
+          className: "map-marker-wrap",
+          html: `<span class="map-num" style="--marker:${point.color ?? color}">${escapeHtml(point.label)}</span>`,
+          iconSize: [28, 28],
+          iconAnchor: [14, 14],
+        });
+        const link = point.mapsUrl
+          ? `<a href="${point.mapsUrl}" target="_blank" rel="noreferrer">ניווט ב־Google Maps</a>`
+          : "";
+        L.marker([point.lat, point.lng], { icon, title: point.title })
+          .addTo(map)
+          .bindPopup(
+            `<div dir="rtl" style="text-align:right"><strong>${escapeHtml(point.title)}</strong>${
+              point.area ? `<br><span>${escapeHtml(point.area)}</span>` : ""
+            }${link ? `<br>${link}` : ""}</div>`,
+          );
+      });
+
+      const bounds = L.latLngBounds(points.map((point) => [point.lat, point.lng]));
+      map.fitBounds(bounds, { padding: [34, 34], maxZoom: 14 });
+
+      instance.current = map;
+      window.setTimeout(() => map.invalidateSize(), 120);
     }
 
     createMap();
-    const markerStore = markers.current;
+
     return () => {
       disposed = true;
-      mapInstance.current?.remove();
-      mapInstance.current = null;
-      markerStore.clear();
+      instance.current?.remove();
+      instance.current = null;
     };
-  }, [places]);
+  }, [points, color, route]);
 
-  const selectPlace = (place: Place) => {
-    setSelected(place);
-    mapInstance.current?.flyTo([place.lat, place.lng], place.day >= 13 ? 11 : 13, {
-      duration: 0.8,
-    });
-    markers.current.get(place.day)?.openPopup();
-  };
+  if (points.length === 0) {
+    return (
+      <div className={className}>
+        <div className="mini-map-fallback">אין נקודות ממופות ליום הזה</div>
+      </div>
+    );
+  }
 
-  return (
-    <div className="map-workspace">
-      <div className="map-canvas" ref={mapElement} aria-label="מפת המסלול ביפן" />
-      <aside className="map-panel">
-        <div className="map-panel-heading">
-          <span>מפת המסע</span>
-          <strong>{places.length} תחנות</strong>
-        </div>
-        <div className="place-list">
-          {places.map((place) => (
-            <button
-              className={selected.day === place.day ? "active" : ""}
-              key={place.day}
-              onClick={() => selectPlace(place)}
-            >
-              <span
-                className="place-dot"
-                style={{ "--marker": place.color } as React.CSSProperties}
-              >
-                {place.day}
-              </span>
-              <span>
-                <strong>{place.title}</strong>
-                <small>{place.area}</small>
-              </span>
-            </button>
-          ))}
-        </div>
-      </aside>
-      <article className="map-place-card">
-        <div className="map-place-image">
-          <img src={selected.image} alt="" loading="lazy" />
-        </div>
-        <div>
-          <span>יום {selected.day}</span>
-          <h2>{selected.title}</h2>
-          <p>{selected.area}</p>
-          <a
-            href={`https://www.google.com/maps/search/?api=1&query=${selected.lat},${selected.lng}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <MapPin size={16} />
-            ניווט ב־Google Maps
-            <ExternalLink size={14} />
-          </a>
-        </div>
-      </article>
-    </div>
-  );
+  return <div className={className} ref={element} role="application" aria-label={ariaLabel} />;
 }

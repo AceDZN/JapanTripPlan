@@ -75,7 +75,7 @@ Keep screenshots/PDFs for every timed ticket. Each adult should have the full fa
 
 ### IC-card boundary
 
-Suica or another major IC card is the default for ordinary urban rail, buses and many shops, with one card/device per traveler. It does **not** replace reserved Shinkansen tickets. If SmartEX is linked to an IC card, that card acts as the gate token while the Shinkansen purchase remains a separate booking. Do not assume IC cards cover every rural/highway service or cross all regional boundaries. [JNTO IC-card guide](https://www.japan.travel/en/plan/ic-card/) · [SmartEX IC boarding](https://smart-ex.jp/en/entraining/iccard/)
+Buy one physical **TOURIST PASMO** for each traveler after collecting bags at Narita, as detailed in the [transport guide](./03-TRANSPORT.md). Use it for ordinary urban rail, buses and many shops in Tokyo, Kamakura, Kyoto/Uji and Osaka; reload in small cash amounts because unused stored value is not refundable. It does **not** replace reserved Skyliner or Shinkansen tickets. If SmartEX is linked to an IC card, that card is only the gate token while the Shinkansen purchase remains separate. Do not assume IC cards cover every rural/highway service or cross all regional boundaries. [Official TOURIST PASMO terms](https://www.pasmo.co.jp/tourist-pasmo/) · [SmartEX IC boarding](https://smart-ex.jp/en/entraining/iccard/)
 
 ## Family Ticket Folder
 
@@ -101,6 +101,19 @@ Japan 2026/
 ```
 
 File names should start with the date and include the lead guest name.
+
+### Booked-flight record
+
+The Ethiopian flights are purchased, but the itinerary screenshot did not show every operating detail. Copy the following from the full e-ticket into the private `01 Flights` folder:
+
+- booking reference / PNR and all four e-ticket numbers;
+- operating terminal for every airport;
+- checked- and cabin-baggage allowance for the purchased fare;
+- seat assignments and meal requests;
+- actual family total for the budget ledger;
+- airline contact and disruption-policy details.
+
+Reconfirm the schedule 72 hours before both departures and save the final boarding documents offline on both adult phones.
 
 ## Confirmed Lodging Setup
 

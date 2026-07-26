@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Download, FileText } from "lucide-react";
 import { tripGuides } from "@/app/generated/trip-content";
-import { guideImages } from "@/lib/trip-data";
+import { guideImage } from "@/components/guide-images";
 
 export function generateStaticParams() {
   return tripGuides.map((guide) => ({ slug: guide.slug }));
@@ -32,42 +32,48 @@ export default async function GuidePage({
   if (!guide) notFound();
 
   return (
-    <article className="guide-document">
-      <header className="guide-hero">
-        <img
-          src={guideImages[guide.category]}
-          alt=""
-          fetchPriority="high"
-        />
-        <div className="guide-hero-overlay" />
-        <div className="guide-hero-copy">
-          <Link href="/guides">
-            <ArrowRight size={17} />
+    <article>
+      <header className="guide-doc-hero">
+        <div className="hero-media">
+          <img
+            src={guideImage(guide.category)}
+            alt=""
+            fetchPriority="high"
+            width={1600}
+            height={900}
+          />
+        </div>
+        <div className="hero-wash" />
+        <div className="container guide-doc-body">
+          <Link className="text-link" href="/guides" style={{ color: "#fff" }}>
+            <ArrowRight size={16} />
             חזרה למחברת
           </Link>
-          <span className="document-source">
-            <FileText size={15} />
+          <span className="eyebrow eyebrow-ltr" style={{ color: "#f2b134" }}>
+            <FileText size={14} />
             {guide.file}
           </span>
           <h1>{guide.title}</h1>
           <p>{guide.description}</p>
-          <a href={`/markdown/${guide.file}`} download>
-            <Download size={17} />
+          <a className="btn btn-glass btn-sm" href={`/markdown/${guide.file}`} download>
+            <Download size={16} />
             הורדת קובץ המקור
           </a>
         </div>
       </header>
-      <div className="document-note">
+
+      <div className="doc-note">
         <strong>המסמך המקורי נשאר מקור האמת.</strong>
-        <span>
-          התוכן המפורט מופיע בשפת המקור ומתעדכן אוטומטית בכל בנייה של האתר.
-        </span>
+        <span>התוכן מופיע בשפת המקור ומתעדכן אוטומטית בכל בנייה של האתר.</span>
       </div>
-      <div
-        className="markdown-body"
-        dir="ltr"
-        dangerouslySetInnerHTML={{ __html: guide.html }}
-      />
+
+      <div className="container">
+        <div
+          className="guide-content"
+          dir="ltr"
+          dangerouslySetInnerHTML={{ __html: guide.html }}
+        />
+      </div>
     </article>
   );
 }

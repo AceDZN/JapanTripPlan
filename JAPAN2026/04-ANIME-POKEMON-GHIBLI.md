@@ -159,7 +159,7 @@ Fushimi replaces the optional Manga Museum and supplies one iconic Kyoto image w
 - turn back rather than climbing the full mountain;
 - visit **Handmade Chopstick Workshop Yūzen Fushimi** at its listed 09:30 opening;
 - prepare exact spellings; eligible pairs take roughly five minutes each to engrave;
-- collect hotel bags, check out by 11:00 and continue to Osaka.
+- collect the apartment bags, check out by 11:00 and continue to Osaka.
 
 [Official access guide](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/) · [official Yūzen Fushimi account](https://page.line.me/xat.0000115429.mcu)
 
@@ -200,13 +200,13 @@ If the lottery fails, keep the original recovery morning and return directly to 
 
 - Pokémon Café Tokyo if secured;
 - Pokémon Center Tokyo DX;
-- Character Street only if the café time leaves enough margin;
+- a protected 45–60-minute [**Tokyo Station First Avenue**](https://www.tokyoeki-1bangai.co.jp/en/) visit, with Character Street first and two or three preselected shops rather than open-ended browsing;
 - **Taiko-kan around 14:00**, before its 15:00 last admission;
 - choose a suitable Miyamoto bachi in the same-building shop;
 - Senso-ji at dusk;
 - Solamachi only if energy remains.
 
-The café requires a reservation, gives a 90-minute seating period and expects every guest age six or older to order. There is no legitimate reservation fee; never pay a reseller.
+The café requires a reservation, gives a 90-minute seating period and expects every guest age six or older to order. There is no legitimate reservation fee; never pay a reseller. Prefer a 10:30–11:00 reservation so the order can be café → First Avenue → Taiko-kan. If only a later café slot is available, visit Taiko-kan at its 11:00 opening and move the café/First Avenue block afterward.
 
 Taiko-kan is open 11:00–16:00 on Friday, with last admission at 15:00. Exhibits marked for interaction may be played. The shop is open until 18:00; buy an in-stock pair because name engraving takes about one week. [Official museum](https://www.miyamoto-unosuke.co.jp/pages/museum) · [Official store](https://www.miyamoto-unosuke.co.jp/pages/store) · [Bachi collection](https://www.miyamoto-unosuke.co.jp/collections/forlongtrunkdrum)
 

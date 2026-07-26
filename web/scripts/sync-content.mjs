@@ -70,4 +70,32 @@ export const tripGuides: TripGuide[] = ${JSON.stringify(guides, null, 2)};
 `;
 
 await writeFile(path.join(generatedDir, "trip-content.ts"), output, "utf8");
-console.log(`Synced ${guides.length} Markdown guides.`);
+
+// ---------------------------------------------------------------------------
+// AI context: every guide's raw Markdown, for the /api/chat system prompt.
+// Uses the same file set as the guides (ARCHIVE files are already excluded).
+// ---------------------------------------------------------------------------
+
+const aiContext = guides.map(({ file, title, markdown }) => ({ file, title, markdown }));
+
+const aiContextText = aiContext
+  .map((entry) => `## FILE: ${entry.file}\n\n${entry.markdown}`)
+  .join("\n\n---\n\n");
+
+const aiOutput = `// Generated from ../JAPAN2026/*.md — do not edit by hand.
+export type AiContextFile = {
+  file: string;
+  title: string;
+  markdown: string;
+};
+
+export const aiContext: AiContextFile[] = ${JSON.stringify(aiContext, null, 2)};
+
+export const aiContextText: string = ${JSON.stringify(aiContextText)};
+`;
+
+await writeFile(path.join(generatedDir, "ai-context.ts"), aiOutput, "utf8");
+
+console.log(
+  `Synced ${guides.length} Markdown guides (trip-content.ts + ai-context.ts, ${aiContextText.length} context chars).`,
+);

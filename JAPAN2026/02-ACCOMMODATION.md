@@ -14,7 +14,7 @@
 | **Tokyo / Tabata — booked** | Fri, Oct 2, 16:00 | Sun, Oct 11, 11:00 | **9** | NRT lands 19:40; finish guest-ID submission and confirm late self-check-in |
 | **Kyoto / Fushimi Inari — booked** | Sun, Oct 11, 15:00 | Tue, Oct 13, 11:00 | **2** | No bag storage promised; use forwarding/lockers before 15:00 on Oct 11 |
 | **Osaka / Namba** | Tue, Oct 13 | Thu, Oct 15 | **2** | Keep one base for Dotonbori/Den Den Town and the full USJ day |
-| **Tokyo / Ueno-Nihonbashi** | Thu, Oct 15 | Sat, Oct 17 | **2** | Return from Osaka, one final Tokyo day, then NRT |
+| **Tokyo / Ueno-Inaricho** | Thu, Oct 15 | Sat, Oct 17 | **2** | Return from Osaka, one final Tokyo day, then NRT; current apartment lead is not yet booked |
 | **Total** | | | **15** | 11 Tokyo + 2 Kyoto + 2 Osaka |
 
 ### Split-stay decision

@@ -26,7 +26,7 @@ Long museums, luxury-shopping streets, smoky nightlife alleys, repetitive viewpo
 |---|---|
 | Oct 1–2 | Flights, arrival and sleep |
 | Oct 3 | Akihabara gaming challenge + Neco Republic rescue cats |
-| Oct 4 | teamLab Planets + Odaiba Gundam + Joypolis |
+| Oct 4 | teamLab Planets + Mundo Pixar + Odaiba/Joypolis |
 | Oct 5 | PokéPark KANTO; DisneySea if official PokéPark tickets fail |
 | Oct 6 | KAWAII MONSTER LAND + Shibuya Nintendo/Pokémon |
 | Oct 7 | Great Buddha + *Slam Dunk* coast + Enoshima |
@@ -38,7 +38,7 @@ Long museums, luxury-shopping streets, smoky nightlife alleys, repetitive viewpo
 | Oct 13 | Early Fushimi Inari + Kyoto-to-Osaka + shortened Den Den Town/Dotonbori |
 | Oct 14 | USJ / Super Nintendo World |
 | Oct 15 | Nintendo Museum lottery plan + return to Tokyo |
-| Oct 16 | Pokémon Café + Taiko-kan/bachi + Senso-ji finale |
+| Oct 16 | Pokémon Café + Tokyo Station First Avenue + Taiko-kan/bachi + Senso-ji finale |
 | Oct 17 | Local goodbye + Narita |
 
 ## Booking Control Center
@@ -90,7 +90,7 @@ The family-wide operational list—including **new walking shoes for all four tr
 - Pokémon Café release rules changed; no October date should be hardcoded until the official announcement.
 - Kyoto is now a two-night stay, not a day trip. Uji still appears on Oct 15 for Nintendo Museum only if the lottery succeeds.
 - Fushimi Inari replaces the optional Kyoto Manga Museum on Oct 13; keep the visit to the lower gates so Osaka still gets a relaxed arrival.
-- Taiko-kan’s official last admission is 15:00 on Oct 16; it comes before Senso-ji, and Character Street/Skytree are the cuts if the day slips.
+- Tokyo Station First Avenue is a protected 45–60-minute Oct 16 stop, including a focused pass through Character Street. If the Pokémon Café slot is later than 11:00, visit Taiko-kan at opening and move the café/First Avenue block afterward; cut Skytree and extra shopping first.
 - PokéPark’s Aug 1 update applies to admissions from Nov 1 and is not an October sales date. Monitor only the official overseas store for Oct 5 inventory; unofficial paid ticket acquisition is not an approved fallback.
 - Mibu Kyogen is an optional Oct 12 swap. Do not stack it onto the full UZUMASA + HIBIKI baseline.
 
@@ -108,4 +108,4 @@ The family-wide operational list—including **new walking shoes for all four tr
 - [Budget](./10-BUDGET.md)
 - [Pre-Trip Action Checklist](./11-PRE-TRIP-CHECKLIST.md)
 
-*Research refreshed July 24, 2026. Recheck live opening hours, attraction maintenance, age/height limits and ticket inventory during the final week before travel.*
+*Plan consistency audited July 25, 2026. Recheck live opening hours, attraction maintenance, age/height limits and ticket inventory during the final week before travel.*

@@ -1,101 +1,140 @@
 import type { Metadata } from "next";
 import {
+  AlarmClock,
   CloudRain,
-  Footprints,
-  Layers3,
-  ShieldCheck,
+  ExternalLink,
   SunMedium,
+  Ticket,
 } from "lucide-react";
-import { PreparationPlanner } from "@/components/PreparationPlanner";
-import { weatherCities } from "@/lib/preparation-data";
+import { ChecklistBoard } from "@/components/ChecklistBoard";
+import { StatusChip } from "@/components/visuals";
+import { bookingGates, formatDueHe } from "@/components/booking-gates";
+import {
+  checklistItems,
+  criticalItems,
+  datedItems,
+  weatherCities,
+} from "@/lib/checklist-data";
+import { daysUntilTrip } from "@/lib/trip-data";
 
 export const metadata: Metadata = {
   title: "הכנות לטיול",
   description:
-    "רשימת ההכנות המשפחתית ליפן: מה עושים, מתי, איפה, כרטיסים, אפליקציות, מזג אוויר וציוד.",
+    "רשימת ההכנות המשפחתית ליפן: כרטיסים, מסמכים, אפליקציות, ציוד ומזג אוויר — עם סימון שנשמר במכשיר.",
 };
 
 export default function PreparePage() {
+  const now = new Date();
+  const until = daysUntilTrip(now);
+  const gates = bookingGates().filter((gate) => gate.status !== "booked");
+  const openDated = datedItems.filter((item) => item.due! >= now.toISOString().slice(0, 10));
+
   return (
-    <div className="page-surface prepare-page">
-      <header className="prepare-heading">
-        <div>
-          <p>READY FOR JAPAN · OCTOBER 2026</p>
-          <h1>מגיעים מוכנים</h1>
+    <div className="container section">
+      <header className="prep-hero" data-reveal>
+        <div className="section-head" style={{ marginBottom: 0 }}>
+          <p className="eyebrow eyebrow-ltr">READY FOR JAPAN · OCTOBER 2026</p>
+          <h1 className="display">מגיעים מוכנים</h1>
+          <p className="lede">
+            כל מה שצריך לסגור לפני ההמראה, מקובץ לפי נושא. הסימון נשמר במכשיר
+            הזה, ואפשר לייצא אותו כדי לשתף עם השאר.
+          </p>
         </div>
-        <p>
-          כל מה שצריך לעשות לפני הטיסה — עם תאריך, ערוץ ביצוע ואחריות. הסימון
-          נשמר במכשיר הזה.
-        </p>
+        <div className="prep-stats">
+          <div className="stat">
+            <strong>{until > 0 ? until : 0}</strong>
+            <span>ימים להמראה</span>
+          </div>
+          <div className="stat">
+            <strong>{checklistItems.length}</strong>
+            <span>משימות</span>
+          </div>
+          <div className="stat">
+            <strong>{criticalItems.length}</strong>
+            <span>קריטיות</span>
+          </div>
+        </div>
       </header>
 
-      <section className="weather-brief" aria-labelledby="weather-title">
-        <div className="weather-intro">
-          <span>
-            <CloudRain size={19} />
-            תנאי אוקטובר
-          </span>
-          <h2 id="weather-title">נעים להליכה, ערוכים לגשם</h2>
-          <p>
-            אלה ממוצעי אקלים של JMA ל־1991–2020, לא תחזית לטיול. את התחזית
-            האמיתית בודקים מדי יום החל מ־24.9.
+      <section className="section-tight" aria-labelledby="gates-title">
+        <div className="section-head">
+          <p className="eyebrow">
+            <Ticket size={14} />
+            שערי הזמנה
           </p>
-          <a
-            href="https://www.jma.go.jp/bosai/map.html#contents=forecast"
-            target="_blank"
-            rel="noreferrer"
-          >
-            תחזית JMA הרשמית
-          </a>
+          <h2 className="display-sm" id="gates-title">
+            מה עוד לא נעול
+          </h2>
         </div>
-        <div className="weather-cities">
+        <div className="gates">
+          {gates.map((gate) => (
+            <article className="card gate" key={gate.key} data-reveal>
+              <div className="gate-top">
+                <StatusChip status={gate.status} />
+                {gate.day ? <span className="gate-day">יום {gate.day}</span> : null}
+              </div>
+              <h3>{gate.title}</h3>
+              {gate.detail ? <p>{gate.detail}</p> : null}
+              {gate.due ? (
+                <span className="gate-due">
+                  <AlarmClock size={13} />
+                  עד {formatDueHe(gate.due)}
+                </span>
+              ) : null}
+              {gate.url ? (
+                <a className="text-link" href={gate.url} target="_blank" rel="noreferrer">
+                  לעמוד ההזמנה
+                  <ExternalLink size={13} />
+                </a>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-tight" aria-labelledby="weather-title">
+        <div className="section-head">
+          <p className="eyebrow">
+            <CloudRain size={14} />
+            תנאי אוקטובר
+          </p>
+          <h2 className="display-sm" id="weather-title">
+            נעים להליכה, ערוכים לגשם
+          </h2>
+          <p className="lede">
+            ממוצעי אקלים של JMA ל־1991–2020, לא תחזית. את התחזית האמיתית בודקים
+            כל יום מ־24.9.
+          </p>
+        </div>
+        <div className="prep-stats" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
           {weatherCities.map((city) => (
-            <div key={city.city}>
+            <div className="stat" key={city.city}>
               <strong>{city.city}</strong>
-              <p>
-                <SunMedium size={17} />
-                <span>{city.high}</span>
-                <small>יום</small>
-              </p>
-              <p>
-                <span>{city.low}</span>
-                <small>לילה</small>
-              </p>
-              <p>
-                <CloudRain size={17} />
-                <span>{city.rain}</span>
-                <small>בחודש</small>
-              </p>
+              <span>
+                <SunMedium size={13} style={{ display: "inline", verticalAlign: "-2px" }} /> יום{" "}
+                {city.high} · לילה {city.low}
+              </span>
+              <span>
+                <CloudRain size={13} style={{ display: "inline", verticalAlign: "-2px" }} /> משקעים{" "}
+                {city.rain}
+              </span>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="wear-system" aria-labelledby="wear-title">
-        <div>
-          <p className="section-label">מערכת לבוש לכל אחד</p>
-          <h2 id="wear-title">שכבות קלות. נעליים מוכחות.</h2>
+      <section className="section-tight" aria-labelledby="checklist-title">
+        <div className="section-head">
+          <p className="eyebrow">
+            <AlarmClock size={14} />
+            {openDated.length} תאריכי יעד פתוחים
+          </p>
+          <h2 className="display-sm" id="checklist-title">
+            רשימת ההכנות
+          </h2>
         </div>
-        <div className="wear-list">
-          <article>
-            <Footprints size={22} />
-            <strong>בסיס להליכה</strong>
-            <span>נעליים שבורות, גרביים מנדפות ומכנס נוח.</span>
-          </article>
-          <article>
-            <Layers3 size={22} />
-            <strong>שכבה משתנה</strong>
-            <span>חולצה קלה + קרדיגן, overshirt או פליז דק בתיק.</span>
-          </article>
-          <article>
-            <ShieldCheck size={22} />
-            <strong>מעטפת לגשם</strong>
-            <span>מעיל גשם מתקפל; מטרייה קומפקטית נוחה בימים עירוניים.</span>
-          </article>
-        </div>
+        <ChecklistBoard />
       </section>
-
-      <PreparationPlanner />
     </div>
   );
 }
