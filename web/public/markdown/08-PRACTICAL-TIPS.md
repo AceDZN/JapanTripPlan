@@ -11,7 +11,7 @@ JMA October climate normals are about **22.0/14.8°C in Tokyo, 23.4/14.4°C in K
 - small daypacks;
 - refillable bottles;
 - power banks;
-- opaque socks for the rescue-cat café;
+- clean socks for the cat café;
 - medicines in carry-on with prescription copies;
 - one change of clothes in carry-on for the long flight.
 
@@ -144,15 +144,15 @@ The Instagram crowd chart is a useful warning, not a timetable guarantee.
 
 ## Cat-Café Rules
 
-The only scheduled live-animal café is **Neco Republic Ochanomizu**, a rescue/adoption-focused cat café.
+The only scheduled live-animal café is **Cat Cafe Temari no Oshiro** inside **Kichijōji Petit Mura** (Oct 8) — a fairy-tale cat castle with about 20 cats and no time limit.
 
-- Reserve ahead.
-- Wear opaque socks.
-- The 12-year-old enters with a guardian.
+- Reserve ahead; weekends sell out.
+- Children are admitted from age 10, so both kids qualify.
+- Wear clean socks.
 - Do not wake, hold or chase cats.
 - Leave if the room is too crowded or the cats show stress.
 
-Do not add owl, otter, hedgehog, capybara or micro-pig cafés. A peer-reviewed study of Japanese exotic-animal cafés found consistently low welfare and documented problems with solitary capybaras, insufficient submersion water and lack of retreat from visitors. Use Totoro cream puffs, Mofusand, Sanrio, Kirby, the lucky-cat imagery around Setagaya and the Shinjuku 3D cat for the rest of the “cute” quota. [Study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
+Three exotic-animal **side quests** are deliberate, eyes-open exceptions to the original no-exotics rule: the LOUTRE otter café in Kyoto (Oct 11), and Small Animal Cafe Rock Star plus the America-mura snake café in Osaka (Oct 13). A peer-reviewed study of Japanese exotic-animal cafés found consistently low welfare, so these follow strict side-quest rules: walk-in only when there is genuine spare time; they are always the first thing cut; wash hands before and after; no flash photography; leave immediately if any animal looks stressed. No owl, capybara or micro-pig cafés were added. [Study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
 
 ## Arcade and Shopping Rules
 

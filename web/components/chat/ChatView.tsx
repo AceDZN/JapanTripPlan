@@ -1,22 +1,45 @@
 "use client";
 
 import type { ReactNode, RefObject } from "react";
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import {
   AlertTriangle,
   ArrowUp,
+  Check,
   MessageCirclePlus,
+  Mic,
   Sparkles,
   Square,
+  Volume2,
+  VolumeX,
   WifiOff,
 } from "lucide-react";
 import { Markdown } from "./Markdown";
+import { messageText, toolActivity } from "./tool-labels";
+import type { TripUIMessage } from "./agent";
+import type { EveBubble } from "./eve-protocol";
+import { fetchAgentEnabled } from "./eve-client";
+import { useEveChat, type SendInput, type VoiceAttachment } from "./useEveChat";
+import { MAX_RECORDING_SECONDS, useVoiceRecorder } from "./useVoiceRecorder";
+import { useSpeech } from "./speech";
 
-type Role = "user" | "assistant";
-type Message = { id: string; role: Role; content: string };
-type ChatError = { message: string; hint?: string; kind: "offline" | "setup" | "generic" };
+/**
+ * Two transports, one UI.
+ *
+ * - **eve mode** (when `/api/agent/enabled` says yes): durable server-side
+ *   sessions proxied by the Worker. History is rebuilt from the session stream,
+ *   so it survives a reload on the same device, and voice notes are supported.
+ * - **fallback mode**: the original `useChat` → `POST /api/chat` AI SDK agent,
+ *   unchanged, with the transcript in sessionStorage.
+ *
+ * Everything below `ChatSurface` is shared between them.
+ */
 
-const STORAGE_KEY = "japan2026.chat.v1";
+/** v2: UIMessage shape. v1 held the old {role,content} records — dropped on load. */
+const STORAGE_KEY = "japan2026.chat.v2";
+const LEGACY_STORAGE_KEYS = ["japan2026.chat.v1"];
 
 const SUGGESTIONS = [
   "מה התוכנית ל־5 באוקטובר?",
@@ -25,39 +48,57 @@ const SUGGESTIONS = [
   "מה עושים אם יורד גשם ביום 7?",
 ];
 
-let idCounter = 0;
-const nextId = () => {
-  idCounter += 1;
-  return `m${Date.now().toString(36)}-${idCounter}`;
-};
+const OFFLINE_MESSAGE =
+  "אין חיבור לאינטרנט, אז אי אפשר לשאול כרגע. המסלול והמדריכים עדיין זמינים אופליין.";
 
-function loadStored(): Message[] {
+type TransportError = { message: string; hint?: string };
+
+/** Reads persisted UIMessages, discarding anything that is not the current shape. */
+function loadStored(): TripUIMessage[] {
   if (typeof window === "undefined") return [];
   try {
+    LEGACY_STORAGE_KEYS.forEach((key) => window.sessionStorage.removeItem(key));
+
     const raw = window.sessionStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
+
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
-    return parsed.flatMap((entry): Message[] => {
-      if (typeof entry !== "object" || entry === null) return [];
-      const { role, content } = entry as { role?: unknown; content?: unknown };
-      if ((role !== "user" && role !== "assistant") || typeof content !== "string") return [];
-      return [{ id: nextId(), role, content }];
+
+    return parsed.filter((entry): entry is TripUIMessage => {
+      if (typeof entry !== "object" || entry === null) return false;
+      const { id, role, parts } = entry as Partial<TripUIMessage>;
+      return (
+        typeof id === "string" && (role === "user" || role === "assistant") && Array.isArray(parts)
+      );
     });
   } catch {
     return [];
   }
 }
 
-/* Lets the conversation mount client-only, so its state can be seeded straight
-   from sessionStorage without an SSR mismatch (and without setState-in-effect). */
+/** Parses the JSON body the worker returns on 4xx/5xx into a renderable error. */
+function parseTransportError(error: Error | undefined): TransportError | null {
+  if (!error) return null;
+  try {
+    const parsed = JSON.parse(error.message) as { error?: string; hint?: string };
+    if (parsed.error) return { message: parsed.error, hint: parsed.hint };
+  } catch {
+    // not our JSON envelope — fall through
+  }
+  return { message: error.message || "משהו השתבש בדרך לצ׳אט. נסו שוב בעוד רגע." };
+}
+
+/* Client-only mount, so state can be seeded straight from storage without an
+   SSR mismatch (and without setState-in-effect). */
 const subscribeNoop = () => () => {};
 const onClient = () => true;
 const onServer = () => false;
 
 export function ChatView() {
   const ready = useSyncExternalStore(subscribeNoop, onClient, onServer);
-  if (ready) return <ChatConversation />;
+
+  if (ready) return <ChatRuntime />;
 
   // Server render / first hydration pass. Same chrome as the live view, so
   // swapping in the real conversation costs no layout shift.
@@ -75,6 +116,143 @@ export function ChatView() {
     />
   );
 }
+
+/** Picks the transport once, then never re-renders across it. */
+function ChatRuntime() {
+  const [mode, setMode] = useState<"resolving" | "eve" | "sdk">("resolving");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    void fetchAgentEnabled(controller.signal).then((enabled) => {
+      if (!controller.signal.aborted) setMode(enabled ? "eve" : "sdk");
+    });
+    return () => controller.abort();
+  }, []);
+
+  if (mode === "resolving") {
+    return (
+      <ChatShell
+        head={<ChatHeader />}
+        composer={
+          <div className="chat-composer">
+            <textarea className="chat-input" rows={1} placeholder="שאלו כל דבר על הטיול…" disabled />
+            <span className="chat-send" aria-hidden="true">
+              <ArrowUp size={19} />
+            </span>
+          </div>
+        }
+      />
+    );
+  }
+
+  return mode === "eve" ? <EveConversation /> : <SdkConversation />;
+}
+
+/* ========================================================== eve transport */
+
+function EveConversation() {
+  const chat = useEveChat();
+  const [voiceError, setVoiceError] = useState<string | null>(null);
+
+  const submit = useCallback(
+    (input: SendInput) => {
+      setVoiceError(null);
+      void chat.send(input);
+    },
+    [chat],
+  );
+
+  const error: TransportError | null = chat.error ? { message: chat.error } : null;
+
+  return (
+    <ChatSurface
+      messages={chat.messages}
+      busy={chat.busy}
+      hydrating={chat.hydrating}
+      error={voiceError ? { message: voiceError } : error}
+      onSubmit={submit}
+      onStop={chat.cancel}
+      onReset={chat.messages.length > 0 || chat.hasSession ? chat.newChat : undefined}
+      onVoiceError={setVoiceError}
+      voiceEnabled
+    />
+  );
+}
+
+/* ============================================= AI SDK fallback transport */
+
+function SdkConversation() {
+  const initialMessages = useMemo(() => loadStored(), []);
+  const transport = useMemo(() => new DefaultChatTransport<TripUIMessage>({ api: "/api/chat" }), []);
+
+  const { messages, sendMessage, status, error, stop, setMessages, clearError } =
+    useChat<TripUIMessage>({ transport, messages: initialMessages });
+
+  const busy = status === "submitted" || status === "streaming";
+
+  useEffect(() => {
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    } catch {
+      // sessionStorage can be unavailable (private mode); the chat still works.
+    }
+  }, [messages]);
+
+  const bubbles = useMemo<EveBubble[]>(
+    () =>
+      messages.map((message, index) => {
+        const text = messageText(message);
+        const last = index === messages.length - 1;
+        return {
+          id: message.id,
+          role: message.role === "user" ? "user" : "assistant",
+          text,
+          audio: false,
+          activity: message.role === "user" ? [] : toolActivity(message),
+          streaming: message.role === "assistant" && last && busy,
+          final: message.role === "assistant" && !(last && busy) && text.trim().length > 0,
+        };
+      }),
+    [messages, busy],
+  );
+
+  const submit = useCallback(
+    (input: SendInput) => {
+      const question = input.text?.trim();
+      if (!question) return;
+      clearError();
+      void sendMessage({ text: question });
+    },
+    [clearError, sendMessage],
+  );
+
+  const reset = useCallback(() => {
+    stop();
+    setMessages([]);
+    clearError();
+    try {
+      window.sessionStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // ignore
+    }
+  }, [clearError, setMessages, stop]);
+
+  return (
+    <ChatSurface
+      messages={bubbles}
+      busy={busy}
+      error={parseTransportError(error)}
+      onSubmit={submit}
+      onStop={stop}
+      onReset={bubbles.length > 0 ? reset : undefined}
+      // No mic here: /api/chat runs Claude through the Gateway, which does not
+      // take audio input. Voice questions need eve mode.
+      voiceEnabled={false}
+    />
+  );
+}
+
+/* ============================================================ shared shell */
 
 /** Header + scroller + composer chrome, shared by the skeleton and the real view. */
 function ChatShell({
@@ -102,7 +280,15 @@ function ChatShell({
   );
 }
 
-function ChatHeader({ onReset }: { onReset?: () => void }) {
+function ChatHeader({
+  onReset,
+  autoSpeak,
+  onToggleSpeak,
+}: {
+  onReset?: () => void;
+  autoSpeak?: boolean;
+  onToggleSpeak?: () => void;
+}) {
   return (
     <header className="chat-head">
       <div className="chat-head-title">
@@ -111,42 +297,100 @@ function ChatHeader({ onReset }: { onReset?: () => void }) {
         </span>
         <div>
           <h1>צ׳אט הטיול</h1>
-          <p>שואלים בעברית — התשובות מגיעות ממסמכי התכנון של המסע.</p>
+          <p>שואלים בעברית — הסוכן קורא ממסמכי התכנון של המסע.</p>
         </div>
       </div>
-      {onReset ? (
-        <button type="button" className="btn btn-ghost btn-sm" onClick={onReset}>
-          <MessageCirclePlus size={16} />
-          שיחה חדשה
-        </button>
-      ) : null}
+      <div className="chat-head-actions">
+        {onToggleSpeak ? (
+          <button
+            type="button"
+            className={`btn btn-ghost btn-sm chat-speak-toggle${autoSpeak ? " is-on" : ""}`}
+            onClick={onToggleSpeak}
+            aria-pressed={autoSpeak}
+            aria-label={autoSpeak ? "כיבוי הקראה אוטומטית" : "הקראה אוטומטית של התשובות"}
+            title={autoSpeak ? "הקראה אוטומטית פועלת" : "הקראה אוטומטית כבויה"}
+          >
+            {autoSpeak ? <Volume2 size={16} /> : <VolumeX size={16} />}
+            הקראה
+          </button>
+        ) : null}
+        {onReset ? (
+          <button type="button" className="btn btn-ghost btn-sm" onClick={onReset}>
+            <MessageCirclePlus size={16} />
+            שיחה חדשה
+          </button>
+        ) : null}
+      </div>
     </header>
   );
 }
 
-function ChatConversation() {
-  const [messages, setMessages] = useState<Message[]>(loadStored);
+function ChatSurface({
+  messages,
+  busy,
+  error,
+  hydrating = false,
+  onSubmit,
+  onStop,
+  onReset,
+  onVoiceError,
+  voiceEnabled,
+}: {
+  messages: EveBubble[];
+  busy: boolean;
+  error: TransportError | null;
+  hydrating?: boolean;
+  onSubmit: (input: SendInput) => void;
+  onStop: () => void;
+  onReset?: () => void;
+  onVoiceError?: (message: string) => void;
+  voiceEnabled: boolean;
+}) {
   const [input, setInput] = useState("");
-  const [streaming, setStreaming] = useState(false);
-  const [error, setError] = useState<ChatError | null>(null);
+  const [offline, setOffline] = useState(false);
 
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const abortRef = useRef<AbortController | null>(null);
   const stickToBottom = useRef(true);
 
-  /* -------------------------------------------------- session persistence */
+  const speech = useSpeech();
+
+  /* ------------------------------------------------------------- send path */
+
+  const guardedSubmit = useCallback(
+    (payload: SendInput) => {
+      if (busy) return;
+      if (typeof navigator !== "undefined" && navigator.onLine === false) {
+        setOffline(true);
+        return;
+      }
+      setOffline(false);
+      stickToBottom.current = true;
+      onSubmit(payload);
+    },
+    [busy, onSubmit],
+  );
+
+  const submitText = useCallback(
+    (text: string) => {
+      const question = text.trim();
+      if (!question) return;
+      setInput("");
+      guardedSubmit({ text: question });
+    },
+    [guardedSubmit],
+  );
+
+  const onRecorded = useCallback(
+    (audio: VoiceAttachment) => guardedSubmit({ audio }),
+    [guardedSubmit],
+  );
+
+  const recorder = useVoiceRecorder(onRecorded);
 
   useEffect(() => {
-    try {
-      window.sessionStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(messages.map(({ role, content }) => ({ role, content }))),
-      );
-    } catch {
-      // sessionStorage can be unavailable (private mode); the chat still works.
-    }
-  }, [messages]);
+    if (recorder.error) onVoiceError?.(recorder.error);
+  }, [recorder.error, onVoiceError]);
 
   /* ------------------------------------------------------------ autoscroll */
 
@@ -160,159 +404,25 @@ function ChatConversation() {
     const el = scrollerRef.current;
     if (!el || !stickToBottom.current) return;
     el.scrollTop = el.scrollHeight;
-  }, [messages, streaming]);
+  }, [messages, busy]);
 
-  /* ---------------------------------------------------------------- send */
+  /* ------------------------------------------------------------ auto-speak */
 
-  const send = useCallback(
-    async (text: string) => {
-      const question = text.trim();
-      if (!question || streaming) return;
+  const spokenRef = useRef<string | null>(null);
+  const { autoSpeak, speak } = speech;
 
-      setError(null);
+  useEffect(() => {
+    if (!autoSpeak) return;
 
-      if (typeof navigator !== "undefined" && navigator.onLine === false) {
-        setMessages((prev) => [...prev, { id: nextId(), role: "user", content: question }]);
-        setInput("");
-        setError({
-          kind: "offline",
-          message: "אין חיבור לאינטרנט, אז אי אפשר לשאול כרגע. המסלול והמדריכים עדיין זמינים אופליין.",
-        });
-        return;
-      }
+    const last = messages[messages.length - 1];
+    if (!last || last.role !== "assistant" || !last.final || last.streaming) return;
+    if (spokenRef.current === last.id || !last.text.trim()) return;
 
-      const userMessage: Message = { id: nextId(), role: "user", content: question };
-      const history = [...messages, userMessage];
-      const assistantId = nextId();
+    spokenRef.current = last.id;
+    void speak(last.id, last.text);
+  }, [messages, autoSpeak, speak]);
 
-      setMessages([...history, { id: assistantId, role: "assistant", content: "" }]);
-      setInput("");
-      setStreaming(true);
-      stickToBottom.current = true;
-
-      const controller = new AbortController();
-      abortRef.current = controller;
-
-      const appendChunk = (chunk: string) => {
-        setMessages((prev) =>
-          prev.map((m) => (m.id === assistantId ? { ...m, content: m.content + chunk } : m)),
-        );
-      };
-
-      const dropEmptyAssistant = () => {
-        setMessages((prev) => prev.filter((m) => !(m.id === assistantId && !m.content)));
-      };
-
-      try {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          signal: controller.signal,
-          body: JSON.stringify({
-            messages: history.map(({ role, content }) => ({ role, content })),
-          }),
-        });
-
-        if (!response.ok || !response.body) {
-          let payload: { error?: string; hint?: string } = {};
-          try {
-            payload = (await response.json()) as { error?: string; hint?: string };
-          } catch {
-            // non-JSON error body — fall through to the generic message
-          }
-          dropEmptyAssistant();
-          setError({
-            kind: response.status === 503 ? "setup" : "generic",
-            message: payload.error ?? "משהו השתבש בדרך לצ׳אט. נסו שוב בעוד רגע.",
-            hint: payload.hint,
-          });
-          return;
-        }
-
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = "";
-        let received = false;
-
-        for (;;) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-
-          let newline = buffer.indexOf("\n");
-          while (newline !== -1) {
-            const line = buffer.slice(0, newline).trim();
-            buffer = buffer.slice(newline + 1);
-            newline = buffer.indexOf("\n");
-
-            if (!line.startsWith("data:")) continue;
-            const raw = line.slice(5).trim();
-            if (!raw) continue;
-
-            let event: { type?: string; text?: string; message?: string };
-            try {
-              event = JSON.parse(raw) as typeof event;
-            } catch {
-              continue;
-            }
-
-            if (event.type === "delta" && event.text) {
-              received = true;
-              appendChunk(event.text);
-            } else if (event.type === "error") {
-              setError({
-                kind: "generic",
-                message: event.message ?? "משהו השתבש באמצע התשובה.",
-              });
-            }
-          }
-        }
-
-        if (!received) {
-          dropEmptyAssistant();
-          setError((prev) =>
-            prev ?? {
-              kind: "generic",
-              message: "לא הגיעה תשובה מהצ׳אט. נסו לשאול שוב.",
-            },
-          );
-        }
-      } catch (caught) {
-        if ((caught as Error)?.name === "AbortError") {
-          dropEmptyAssistant();
-          return;
-        }
-        dropEmptyAssistant();
-        setError({
-          kind: "offline",
-          message: "החיבור נקטע. בדקו את האינטרנט ונסו שוב.",
-        });
-      } finally {
-        abortRef.current = null;
-        setStreaming(false);
-      }
-    },
-    [messages, streaming],
-  );
-
-  const stop = useCallback(() => {
-    abortRef.current?.abort();
-  }, []);
-
-  const reset = useCallback(() => {
-    abortRef.current?.abort();
-    setMessages([]);
-    setError(null);
-    setInput("");
-    try {
-      window.sessionStorage.removeItem(STORAGE_KEY);
-    } catch {
-      // ignore
-    }
-    textareaRef.current?.focus();
-  }, []);
-
-  /* ------------------------------------------------------------ composer */
+  /* --------------------------------------------------------------- composer */
 
   const autosize = useCallback(() => {
     const el = textareaRef.current;
@@ -325,50 +435,95 @@ function ChatConversation() {
     autosize();
   }, [input, autosize]);
 
-  const isEmpty = messages.length === 0;
+  const isEmpty = messages.length === 0 && !hydrating;
+  const transportError: TransportError | null = offline ? { message: OFFLINE_MESSAGE } : error;
+  const errorKind = offline ? "offline" : transportError?.hint ? "setup" : "generic";
+
+  const showMic = voiceEnabled && recorder.supported;
 
   return (
     <ChatShell
-      head={<ChatHeader onReset={isEmpty ? undefined : reset} />}
+      head={
+        <ChatHeader
+          onReset={onReset}
+          autoSpeak={speech.autoSpeak}
+          onToggleSpeak={speech.toggleAutoSpeak}
+        />
+      }
       scrollerRef={scrollerRef}
       onScroll={handleScroll}
       composer={
-        <form
-          className="chat-composer"
-          onSubmit={(event) => {
-            event.preventDefault();
-            void send(input);
-          }}
-        >
-          <textarea
-            ref={textareaRef}
-            className="chat-input"
-            value={input}
-            rows={1}
-            placeholder="שאלו כל דבר על הטיול…"
-            onChange={(event) => setInput(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
-                event.preventDefault();
-                void send(input);
-              }
+        <>
+          {recorder.recording ? (
+            <div className="chat-recording" role="status">
+              <span className="chat-recording-dot" aria-hidden="true" />
+              <span>מקליט… {formatElapsed(recorder.elapsed)}</span>
+              <span className="chat-recording-max">
+                עד {MAX_RECORDING_SECONDS} שניות
+              </span>
+              <button type="button" className="chat-recording-cancel" onClick={recorder.cancel}>
+                ביטול
+              </button>
+            </div>
+          ) : null}
+
+          <form
+            className="chat-composer"
+            onSubmit={(event) => {
+              event.preventDefault();
+              submitText(input);
             }}
-          />
-          {streaming ? (
-            <button
-              type="button"
-              className="chat-send chat-send-stop"
-              onClick={stop}
-              aria-label="עצירת התשובה"
-            >
-              <Square size={16} fill="currentColor" />
-            </button>
-          ) : (
-            <button type="submit" className="chat-send" disabled={!input.trim()} aria-label="שליחה">
-              <ArrowUp size={19} />
-            </button>
-          )}
-        </form>
+          >
+            <textarea
+              ref={textareaRef}
+              className="chat-input"
+              value={input}
+              rows={1}
+              placeholder={recorder.recording ? "מקליט הודעה קולית…" : "שאלו כל דבר על הטיול…"}
+              disabled={recorder.recording}
+              onChange={(event) => setInput(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
+                  event.preventDefault();
+                  submitText(input);
+                }
+              }}
+            />
+
+            {showMic && !busy ? (
+              <button
+                type="button"
+                className={`chat-mic${recorder.recording ? " is-recording" : ""}`}
+                onClick={() => (recorder.recording ? recorder.stop() : void recorder.start())}
+                aria-label={recorder.recording ? "סיום הקלטה ושליחה" : "הקלטת הודעה קולית"}
+                aria-pressed={recorder.recording}
+                disabled={recorder.status === "requesting"}
+              >
+                {recorder.recording ? <Square size={15} fill="currentColor" /> : <Mic size={18} />}
+              </button>
+            ) : null}
+
+            {busy ? (
+              <button
+                type="button"
+                className="chat-send chat-send-stop"
+                onClick={onStop}
+                aria-label="עצירת התשובה"
+              >
+                <Square size={16} fill="currentColor" />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="chat-send"
+                disabled={!input.trim() || recorder.recording}
+                aria-label="שליחה"
+              >
+                <ArrowUp size={19} />
+              </button>
+            )}
+          </form>
+        </>
       }
     >
       {isEmpty ? (
@@ -378,8 +533,8 @@ function ChatConversation() {
           </span>
           <h2>מה בא לכם לדעת?</h2>
           <p>
-            המדריך מכיר את כל 17 הימים, ההזמנות, המסעדות והתחבורה — ומצטט מהמסמכים עצמם.
-            הוא לא ימציא מחירים או אישורי הזמנה.
+            הסוכן קורא בעצמו את המדריכים, את לוח 17 הימים ואת רשימת ההזמנות — ומצטט מהם. הוא
+            לא ימציא מחירים או אישורי הזמנה.
           </p>
           <ul className="chat-suggestions">
             {SUGGESTIONS.map((suggestion) => (
@@ -387,7 +542,7 @@ function ChatConversation() {
                 <button
                   type="button"
                   className="chip chat-suggestion"
-                  onClick={() => void send(suggestion)}
+                  onClick={() => submitText(suggestion)}
                 >
                   {suggestion}
                 </button>
@@ -397,42 +552,133 @@ function ChatConversation() {
         </div>
       ) : null}
 
-      {messages.map((message) => (
-        <article
-          key={message.id}
-          className={`chat-bubble chat-bubble-${message.role}`}
-          aria-live={message.role === "assistant" ? "polite" : undefined}
-        >
-          {message.role === "assistant" ? (
-            message.content ? (
-              <Markdown text={message.content} />
-            ) : (
-              <span className="chat-typing" aria-label="כותב תשובה">
-                <i />
-                <i />
-                <i />
-              </span>
-            )
-          ) : (
-            <p>{message.content}</p>
-          )}
+      {hydrating && messages.length === 0 ? (
+        <article className="chat-bubble chat-bubble-assistant">
+          <span className="chat-typing" aria-label="טוען את השיחה">
+            <i />
+            <i />
+            <i />
+          </span>
         </article>
+      ) : null}
+
+      {messages.map((message) => (
+        <ChatMessage
+          key={message.id}
+          message={message}
+          speaking={speech.speakingId === message.id}
+          onSpeak={() =>
+            speech.speakingId === message.id
+              ? speech.stop()
+              : void speech.speak(message.id, message.text)
+          }
+        />
       ))}
 
-      {error ? (
+      {busy && !messages.some((message) => message.role === "assistant" && message.streaming) ? (
+        <article className="chat-bubble chat-bubble-assistant">
+          <span className="chat-typing" aria-label="חושב">
+            <i />
+            <i />
+            <i />
+          </span>
+        </article>
+      ) : null}
+
+      {transportError ? (
         <div
-          className={`chat-error${error.kind === "setup" ? " chat-error-setup" : ""}`}
+          className={`chat-error${errorKind === "setup" ? " chat-error-setup" : ""}`}
           role="alert"
         >
           <span className="chat-error-icon" aria-hidden="true">
-            {error.kind === "offline" ? <WifiOff size={17} /> : <AlertTriangle size={17} />}
+            {errorKind === "offline" ? <WifiOff size={17} /> : <AlertTriangle size={17} />}
           </span>
           <div>
-            <strong>{error.message}</strong>
-            {error.hint ? <code>{error.hint}</code> : null}
+            <strong>{transportError.message}</strong>
+            {transportError.hint ? <code>{transportError.hint}</code> : null}
           </div>
         </div>
       ) : null}
     </ChatShell>
+  );
+}
+
+function formatElapsed(seconds: number): string {
+  const minutes = Math.floor(seconds / 60);
+  return `${minutes}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+/** One bubble: user text, or assistant tool activity + markdown answer. */
+function ChatMessage({
+  message,
+  speaking,
+  onSpeak,
+}: {
+  message: EveBubble;
+  speaking: boolean;
+  onSpeak: () => void;
+}) {
+  if (message.role === "user") {
+    return (
+      <article className={`chat-bubble chat-bubble-user${message.audio ? " is-voice" : ""}`}>
+        <p>{message.text}</p>
+      </article>
+    );
+  }
+
+  const activity = message.activity;
+  const answered = message.text.trim().length > 0;
+
+  return (
+    <article className="chat-bubble chat-bubble-assistant" aria-live="polite">
+      {activity.length > 0 ? (
+        answered ? (
+          // Collapses into a source count once the answer starts streaming.
+          <details className="chat-tools chat-tools-done">
+            <summary>
+              <Check size={13} />
+              {activity.length === 1 ? "מקור אחד" : `${activity.length} מקורות`}
+            </summary>
+            <ul>
+              {activity.map((item) => (
+                <li key={item.id}>{item.label}</li>
+              ))}
+            </ul>
+          </details>
+        ) : (
+          <ul className="chat-tools chat-tools-live">
+            {activity.map((item) => (
+              <li key={item.id} className={item.done ? "is-done" : undefined}>
+                {item.done ? <Check size={13} /> : <span className="chat-tool-spinner" />}
+                {item.label}
+                {item.done ? null : "…"}
+              </li>
+            ))}
+          </ul>
+        )
+      ) : null}
+
+      {answered ? (
+        <Markdown text={message.text} />
+      ) : activity.length === 0 ? (
+        <span className="chat-typing" aria-label="כותב תשובה">
+          <i />
+          <i />
+          <i />
+        </span>
+      ) : null}
+
+      {answered && !message.streaming ? (
+        <button
+          type="button"
+          className={`chat-speak${speaking ? " is-speaking" : ""}`}
+          onClick={onSpeak}
+          aria-label={speaking ? "עצירת ההקראה" : "הקראת התשובה"}
+        >
+          {speaking ? <VolumeX size={14} /> : <Volume2 size={14} />}
+          {speaking ? "עצירה" : "הקראה"}
+        </button>
+      ) : null}
+    </article>
   );
 }

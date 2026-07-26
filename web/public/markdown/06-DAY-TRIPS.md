@@ -74,7 +74,7 @@ Recheck that page one to two weeks before the visit for temporary maintenance or
 
 - **Cut first:** Hanegi Park, then extra vintage shopping, then the third curry stop.
 - **Heavy rain or rising water:** do not enter Todoroki Ravine. Start later with the Shiro-Hige pickup and use Curry Festival restaurants, Mikan, Reload and cafés as the indoor core.
-- **Animal-café decision:** the trip keeps one rescue-cat visit and skips capybara/exotic-animal cafés because no current Tokyo option has independent welfare verification strong enough to overcome the documented systemic risks.
+- **Animal-café decision:** the scheduled visit is the cat café (Temari no Oshiro at Kichijōji Petit Mura, Oct 8). The Kyoto/Osaka exotic-animal side quests (otters, small animals, snakes) are optional, cut-first walk-ins added with the welfare tradeoffs acknowledged; no exotic-animal café is a scheduled anchor.
 
 ## Weather Logic
 

@@ -70,9 +70,8 @@ Each child chooses:
 3. Mandarake after noon.
 4. One modern arcade: GiGO, namco or Taito.
 5. HEY or Super Potato for actual play, not just photos.
-6. **Neco Republic Ochanomizu** at 16:30–17:30.
 
-Neco Republic is rescue/adoption-focused. On Saturdays it closes at 18:00; junior-high age and younger need a guardian, and opaque socks are required. Reserve ahead. [Official Ochanomizu page](https://www.neco-republic.jp/shop/shop-necorepublic-ochanomizu/)
+The cat café moved to Day 8: **Cat Cafe Temari no Oshiro** at Kichijōji Petit Mura sits on the Ghibli route, so Oct 3 stays a pure play-and-collect day with more arcade time.
 
 Do not promise the Chuo-dori pedestrian zone on Oct 3—it runs on Sundays in October. Do not call a current GiGO location “SEGA Arcade.”
 
@@ -119,6 +118,7 @@ Shibuya Sky is weather-dependent and expendable. The fandom floor is not.
 ## Day 8 — Ghibli + Nakano + Shinjuku
 
 - Start with the 10:00 Ghibli Museum slot, then lunch in Kichijoji.
+- **Kichijōji Petit Mura** after lunch: a fairy-tale micro-village five minutes from Kichijoji Station. Enter **Cat Cafe Temari no Oshiro** — a cat castle with about 20 cats, no time limit, ages 10+ (both kids qualify), about JPY 1,200 + tax per person on weekdays. Reserve ahead. [Official site](https://temarinooshiro.com/)
 - Cap Nakano at 60–90 minutes.
 - Use a precise collectible wish list.
 - Watch the free Cross Shinjuku Vision 3D cat.

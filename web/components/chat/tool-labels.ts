@@ -32,20 +32,40 @@ const FALLBACKS: Record<string, string> = {
 
 type AnyInput = Record<string, unknown> | undefined;
 
+/**
+ * Normalizes a tool name to the camelCase keys used here.
+ *
+ * The AI SDK agent exposes `readGuide`; the eve agent names the same tool
+ * `read_guide`. Both transports render the same Hebrew status line.
+ */
+function normalizeToolName(toolName: string): string {
+  return toolName.replace(/[-_]([a-z])/g, (_, letter: string) => letter.toUpperCase());
+}
+
+/** First string-valued key that is present, so both tool schemas are covered. */
+function pickString(input: AnyInput, keys: string[]): string | undefined {
+  for (const key of keys) {
+    const value = input?.[key];
+    if (typeof value === "string" && value.trim().length > 0) return value.trim();
+  }
+  return undefined;
+}
+
 /** Human label for one tool call, using its input when it has already streamed. */
 export function toolStatusLabel(toolName: string, input: AnyInput): string {
-  switch (toolName) {
+  switch (normalizeToolName(toolName)) {
     case "readGuide": {
-      const file = typeof input?.file === "string" ? input.file : undefined;
-      const label = file ? GUIDE_LABELS[file] : undefined;
+      const file = pickString(input, ["file", "guide", "name", "slug"]);
+      const label = file ? (GUIDE_LABELS[file] ?? GUIDE_LABELS[`${file}.md`]) : undefined;
       return label ? `קורא את ${label}` : FALLBACKS.readGuide;
     }
     case "getDay": {
-      const day = typeof input?.day === "number" ? input.day : undefined;
-      return day ? `בודק את יום ${day}` : FALLBACKS.getDay;
+      const raw = input?.day ?? input?.dayNumber;
+      const day = typeof raw === "number" ? raw : Number.parseInt(String(raw ?? ""), 10);
+      return Number.isFinite(day) && day > 0 ? `בודק את יום ${day}` : FALLBACKS.getDay;
     }
     case "searchPlaces": {
-      const query = typeof input?.query === "string" ? input.query.trim() : "";
+      const query = pickString(input, ["query", "q", "text"]);
       return query ? `מחפש ״${query}״` : FALLBACKS.searchPlaces;
     }
     case "getChecklist":
