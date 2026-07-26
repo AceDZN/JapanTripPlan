@@ -603,3 +603,47 @@
 .chat-recording-cancel:hover {
   color: var(--vermillion);
 }
+
+/* ------------------------------------------------------- location context */
+
+/* Subtle pin in the composer: on = location rides with the next question,
+   live = the last send actually carried coordinates. */
+.chat-geo {
+  align-items: center;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  color: var(--text-faint);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  height: 38px;
+  justify-content: center;
+  position: relative;
+  transition: color 160ms ease, background 160ms ease;
+  width: 38px;
+}
+
+.chat-geo:hover {
+  background: var(--surface-2);
+}
+
+.chat-geo.is-on {
+  color: color-mix(in srgb, var(--matcha) 80%, var(--text-muted));
+}
+
+.chat-geo.is-live {
+  color: var(--matcha);
+}
+
+.chat-geo.is-live::after {
+  background: var(--matcha);
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  content: "";
+  height: 8px;
+  inset-block-start: 6px;
+  inset-inline-end: 5px;
+  position: absolute;
+  width: 8px;
+}

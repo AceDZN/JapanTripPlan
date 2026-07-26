@@ -13,11 +13,20 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  CONTEXT_PREFIX,
   EVE_INITIAL_STATE,
+  GEO_FRESH_MS,
   VOICE_BUBBLE_LABEL,
   VOICE_TEXT_PART,
+  buildContextLine,
+  contextTimeZone,
+  isContextPart,
+  isFreshFix,
+  isoWithOffset,
   parseNdjson,
+  readUserMessage,
   reduceEve,
+  stripContextLines,
   visibleMessages,
 } from "../components/chat/eve-protocol.ts";
 
@@ -283,4 +292,122 @@ test("parses NDJSON across chunk boundaries and skips malformed lines", () => {
 
   const { events } = parseNdjson('{"type":"turn.started"}\n{ broken\n\n{"type":"turn.completed"}\n');
   assert.deepEqual(events.map((event) => event.type), ["turn.started", "turn.completed"]);
+});
+
+/* ========================================================================== */
+/* Location + time context                                                     */
+/* ========================================================================== */
+
+/** Mid-trip: 2026-10-05, 14:32:10 Tokyo time. */
+const DURING_TRIP = new Date("2026-10-05T05:32:10.000Z");
+/** Long before the trip. */
+const BEFORE_TRIP = new Date("2026-07-26T09:00:00.000Z");
+
+const TOKYO_FIX = { lat: 35.6585805, lng: 139.7454329, accuracy: 18.4, at: Date.now() };
+
+test("stamps the context line in Tokyo time during the trip", () => {
+  assert.equal(contextTimeZone(DURING_TRIP), "Asia/Tokyo");
+  assert.equal(
+    buildContextLine({ now: DURING_TRIP }),
+    "[הקשר: 2026-10-05T14:32:10+09:00]",
+    "time clause is always present, location clause is not",
+  );
+});
+
+test("falls back to the device zone outside the trip window", () => {
+  assert.equal(contextTimeZone(BEFORE_TRIP), undefined, "no Tokyo clock before the trip");
+
+  // The device offset is whatever this machine runs on, so assert the shape
+  // plus a zone the test can pin down exactly.
+  assert.match(buildContextLine({ now: BEFORE_TRIP }), /^\[הקשר: [\d-]{10}T[\d:]{8}[+-]\d{2}:\d{2}\]$/);
+  assert.equal(isoWithOffset(BEFORE_TRIP, "America/New_York"), "2026-07-26T05:00:00-04:00");
+  assert.equal(isoWithOffset(DURING_TRIP, "Asia/Tokyo"), "2026-10-05T14:32:10+09:00");
+});
+
+test("appends the location clause with five decimals and rounded accuracy", () => {
+  assert.equal(
+    buildContextLine({ now: DURING_TRIP, location: TOKYO_FIX }),
+    "[הקשר: 2026-10-05T14:32:10+09:00; מיקום: 35.65858,139.74543 דיוק 18מ׳]",
+  );
+});
+
+test("omits the location clause when sharing is off or the fix is missing", () => {
+  // `useGeoContext` resolves to `null` when the toggle is off, denied, or the
+  // lookup timed out — all four collapse to the same wire shape.
+  for (const location of [null, undefined]) {
+    const line = buildContextLine({ now: DURING_TRIP, location });
+    assert.equal(line.includes("מיקום"), false);
+    assert.equal(line, "[הקשר: 2026-10-05T14:32:10+09:00]");
+  }
+});
+
+test("reuses a cached fix for five minutes and no longer", () => {
+  const now = 1_800_000_000_000;
+  assert.equal(isFreshFix({ ...TOKYO_FIX, at: now - 1_000 }, now), true);
+  assert.equal(isFreshFix({ ...TOKYO_FIX, at: now - (GEO_FRESH_MS - 1) }, now), true);
+  assert.equal(isFreshFix({ ...TOKYO_FIX, at: now - GEO_FRESH_MS }, now), false);
+  assert.equal(isFreshFix(null, now), false);
+});
+
+test("recognises and peels the context prefix", () => {
+  const line = buildContextLine({ now: DURING_TRIP, location: TOKYO_FIX });
+
+  assert.equal(isContextPart(line), true);
+  assert.equal(isContextPart(`  ${line}`), true, "leading whitespace still counts");
+  assert.equal(isContextPart("מה יש לאכול פה?"), false);
+  assert.equal(isContextPart(`שאלה על ${CONTEXT_PREFIX} משהו`), false, "only a prefix, not a substring");
+
+  // The AI SDK fallback carries the line inside the message text.
+  assert.equal(stripContextLines(`${line}\nמה יש לאכול פה?`), "מה יש לאכול פה?");
+  // The flattened `message.received` summary may join parts inline.
+  assert.equal(stripContextLines(`${line} מה יש לאכול פה?`), "מה יש לאכול פה?");
+  assert.equal(stripContextLines("מה יש לאכול פה?"), "מה יש לאכול פה?");
+});
+
+test("never renders the context part in a replayed user bubble", () => {
+  const line = buildContextLine({ now: DURING_TRIP, location: TOKYO_FIX });
+
+  // Exactly what the send path puts on the wire: context part, then the words.
+  const state = play([
+    { type: "turn.started", data: { turnId: "turn_ctx" } },
+    {
+      type: "message.received",
+      data: {
+        message: `${line} מה יש לאכול פה?`,
+        parts: [
+          { type: "text", text: line },
+          { type: "text", text: "מה יש לאכול פה?" },
+        ],
+        sequence: 2,
+        turnId: "turn_ctx",
+      },
+    },
+  ]);
+
+  const bubble = state.messages[0];
+  assert.equal(bubble.text, "מה יש לאכול פה?");
+  assert.equal(bubble.text.includes("הקשר"), false);
+  assert.equal(bubble.text.includes("35.65858"), false, "coordinates never reach the UI");
+});
+
+test("a voice turn keeps its 🎤 bubble even with a context part attached", () => {
+  const line = buildContextLine({ now: DURING_TRIP, location: TOKYO_FIX });
+
+  const { text, audio } = readUserMessage({
+    message: `${line} ${VOICE_TEXT_PART}`,
+    parts: [
+      { type: "text", text: line },
+      { type: "text", text: VOICE_TEXT_PART },
+      { type: "file", mediaType: "audio/webm", filename: "voice.webm", size: 20480 },
+    ],
+  });
+
+  assert.equal(audio, true);
+  assert.equal(text, VOICE_BUBBLE_LABEL);
+});
+
+test("hides the context part when only the flattened summary survived", () => {
+  const line = buildContextLine({ now: DURING_TRIP });
+  const { text } = readUserMessage({ message: `${line}\nמה התוכנית להיום?` });
+  assert.equal(text, "מה התוכנית להיום?");
 });

@@ -8,6 +8,8 @@ import {
   AlertTriangle,
   ArrowUp,
   Check,
+  MapPin,
+  MapPinOff,
   MessageCirclePlus,
   Mic,
   Sparkles,
@@ -19,8 +21,9 @@ import {
 import { Markdown } from "./Markdown";
 import { messageText, toolActivity } from "./tool-labels";
 import type { TripUIMessage } from "./agent";
-import type { EveBubble } from "./eve-protocol";
+import { stripContextLines, type EveBubble } from "./eve-protocol";
 import { fetchAgentEnabled } from "./eve-client";
+import { useGeoContext, type GeoContext } from "./useGeoContext";
 import { useEveChat, type SendInput, type VoiceAttachment } from "./useEveChat";
 import { MAX_RECORDING_SECONDS, useVoiceRecorder } from "./useVoiceRecorder";
 import { useSpeech } from "./speech";
@@ -151,7 +154,10 @@ function ChatRuntime() {
 /* ========================================================== eve transport */
 
 function EveConversation() {
-  const chat = useEveChat();
+  const geo = useGeoContext();
+  // Every turn leads with a `[הקשר: …]` part, so the agent knows when and where
+  // the family is without them having to say so.
+  const chat = useEveChat({ resolveContext: geo.resolveContextLine });
   const [voiceError, setVoiceError] = useState<string | null>(null);
 
   const submit = useCallback(
@@ -174,6 +180,7 @@ function EveConversation() {
       onStop={chat.cancel}
       onReset={chat.messages.length > 0 || chat.hasSession ? chat.newChat : undefined}
       onVoiceError={setVoiceError}
+      geo={geo}
       voiceEnabled
     />
   );
@@ -182,6 +189,7 @@ function EveConversation() {
 /* ============================================= AI SDK fallback transport */
 
 function SdkConversation() {
+  const geo = useGeoContext();
   const initialMessages = useMemo(() => loadStored(), []);
   const transport = useMemo(() => new DefaultChatTransport<TripUIMessage>({ api: "/api/chat" }), []);
 
@@ -201,7 +209,10 @@ function SdkConversation() {
   const bubbles = useMemo<EveBubble[]>(
     () =>
       messages.map((message, index) => {
-        const text = messageText(message);
+        const raw = messageText(message);
+        // The context line rides inside the user's text here, so it has to be
+        // peeled off again before the bubble is drawn.
+        const text = message.role === "user" ? stripContextLines(raw) : raw;
         const last = index === messages.length - 1;
         return {
           id: message.id,
@@ -221,9 +232,12 @@ function SdkConversation() {
       const question = input.text?.trim();
       if (!question) return;
       clearError();
-      void sendMessage({ text: question });
+      // `/api/chat` takes a plain UIMessage, so the same bracketed metadata
+      // rides as the first line of the text instead of as its own part. It is
+      // read with `peek`, never awaited: the fallback must not gain a GPS wait.
+      void sendMessage({ text: `${geo.peekContextLine()}\n${question}` });
     },
-    [clearError, sendMessage],
+    [clearError, geo, sendMessage],
   );
 
   const reset = useCallback(() => {
@@ -245,6 +259,7 @@ function SdkConversation() {
       onSubmit={submit}
       onStop={stop}
       onReset={bubbles.length > 0 ? reset : undefined}
+      geo={geo}
       // No mic here: /api/chat runs Claude through the Gateway, which does not
       // take audio input. Voice questions need eve mode.
       voiceEnabled={false}
@@ -334,6 +349,7 @@ function ChatSurface({
   onStop,
   onReset,
   onVoiceError,
+  geo,
   voiceEnabled,
 }: {
   messages: EveBubble[];
@@ -344,6 +360,7 @@ function ChatSurface({
   onStop: () => void;
   onReset?: () => void;
   onVoiceError?: (message: string) => void;
+  geo?: GeoContext;
   voiceEnabled: boolean;
 }) {
   const [input, setInput] = useState("");
@@ -489,6 +506,21 @@ function ChatSurface({
                 }
               }}
             />
+
+            {geo?.supported ? (
+              <button
+                type="button"
+                className={`chat-geo${geo.enabled ? " is-on" : ""}${
+                  geo.enabled && geo.attached ? " is-live" : ""
+                }`}
+                onClick={geo.toggle}
+                aria-pressed={geo.enabled}
+                aria-label={geo.enabled ? "כיבוי שיתוף מיקום עם הסוכן" : "שיתוף מיקום עם הסוכן"}
+                title="המיקום מצורף כדי שהסוכן ידע מה קרוב אליך"
+              >
+                {geo.enabled ? <MapPin size={16} /> : <MapPinOff size={16} />}
+              </button>
+            ) : null}
 
             {showMic && !busy ? (
               <button

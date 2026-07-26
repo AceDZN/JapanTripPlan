@@ -58,6 +58,139 @@ export type LabelFn = (toolName: string, input: Record<string, unknown> | undefi
 /** Rendered in place of the transcript for a voice message. */
 export const VOICE_BUBBLE_LABEL = "🎤 הודעה קולית";
 
+/* -------------------------------------------------- outbound context part */
+
+/**
+ * Every outgoing turn leads with a metadata text part telling the agent when
+ * and where the family is:
+ *
+ *   [הקשר: 2026-10-05T14:32:10+09:00; מיקום: 35.65858,139.74543 דיוק 18מ׳]
+ *
+ * The trip-agent instructions treat this exact bracketed prefix as trusted
+ * context (not as something the user typed), and the chat never renders it —
+ * see `isContextPart` / `stripContextLines`, applied to both optimistic
+ * bubbles and `message.received` replay.
+ */
+export const CONTEXT_PREFIX = "[הקשר:";
+
+/** During the trip the family reads clocks in Japan, not at home. */
+const TRIP_TIME_ZONE = "Asia/Tokyo";
+/** Mirrors lib/trip-data.ts, extended to the Oct 18 flight home. */
+const TRIP_FIRST_DAY = "2026-10-01";
+const TRIP_LAST_DAY = "2026-10-18";
+
+/** A cached position older than this is refreshed before the next send. */
+export const GEO_FRESH_MS = 5 * 60_000;
+
+export type GeoFix = {
+  lat: number;
+  lng: number;
+  /** Radius in metres, as reported by the device. */
+  accuracy: number;
+  /** Epoch ms when the fix was taken. */
+  at: number;
+};
+
+function pad2(value: number): string {
+  return String(value).padStart(2, "0");
+}
+
+/** Minutes east of UTC for `date` in `timeZone` (handles DST correctly). */
+function zoneOffsetMinutes(date: Date, timeZone: string): number {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    hour12: false,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).formatToParts(date);
+
+  const get = (type: string): number =>
+    Number(parts.find((part) => part.type === type)?.value ?? "0");
+
+  const asUtc = Date.UTC(
+    get("year"),
+    get("month") - 1,
+    get("day"),
+    get("hour") % 24,
+    get("minute"),
+    get("second"),
+  );
+
+  return Math.round((asUtc - date.getTime()) / 60_000);
+}
+
+/** ISO-8601 local time with an explicit offset, e.g. 2026-10-05T14:32:10+09:00. */
+export function isoWithOffset(date: Date, timeZone?: string): string {
+  const offset = timeZone ? zoneOffsetMinutes(date, timeZone) : -date.getTimezoneOffset();
+  const stamp = new Date(date.getTime() + offset * 60_000).toISOString().slice(0, 19);
+  const abs = Math.abs(offset);
+  return `${stamp}${offset < 0 ? "-" : "+"}${pad2(Math.floor(abs / 60))}:${pad2(abs % 60)}`;
+}
+
+/** Asia/Tokyo while the trip is running, otherwise the device's own zone. */
+export function contextTimeZone(now: Date): string | undefined {
+  try {
+    const key = new Intl.DateTimeFormat("en-CA", {
+      timeZone: TRIP_TIME_ZONE,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(now);
+    return key >= TRIP_FIRST_DAY && key <= TRIP_LAST_DAY ? TRIP_TIME_ZONE : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/** True while a cached fix is still worth reusing instead of re-asking the GPS. */
+export function isFreshFix(fix: GeoFix | null | undefined, now = Date.now()): boolean {
+  return Boolean(fix) && now - fix!.at < GEO_FRESH_MS;
+}
+
+/**
+ * Builds the context part. The time clause is always present; the location
+ * clause is omitted whenever sharing is off, denied, or unavailable.
+ */
+export function buildContextLine(input: { now?: Date; location?: GeoFix | null } = {}): string {
+  const now = input.now ?? new Date();
+  const stamp = isoWithOffset(now, contextTimeZone(now));
+  const fix = input.location;
+
+  const where = fix
+    ? `; מיקום: ${fix.lat.toFixed(5)},${fix.lng.toFixed(5)} דיוק ${Math.round(fix.accuracy)}מ׳`
+    : "";
+
+  return `${CONTEXT_PREFIX} ${stamp}${where}]`;
+}
+
+/** True when a text part is client-injected metadata rather than user words. */
+export function isContextPart(text: string): boolean {
+  return text.trimStart().startsWith(CONTEXT_PREFIX);
+}
+
+/** A line that is nothing but context metadata. */
+const CONTEXT_WHOLE_LINE = /^\s*\[הקשר:[^\]]*\]\s*$/;
+/** Context metadata sitting in front of the user's words on the same line. */
+const CONTEXT_LEADING = /^\s*\[הקשר:[^\]]*\]\s*/;
+
+/**
+ * Removes context metadata from a flattened message body — used for the
+ * `message.received` compatibility summary (where eve joins the parts) and for
+ * the AI SDK fallback (where the line rides inside the message text).
+ */
+export function stripContextLines(text: string): string {
+  return text
+    .split("\n")
+    .filter((line) => !CONTEXT_WHOLE_LINE.test(line))
+    .join("\n")
+    .replace(CONTEXT_LEADING, "")
+    .trim();
+}
+
 /** Text part that rides along with an audio attachment, so the flattened
  *  `message.received.data.message` is never empty. */
 export const VOICE_TEXT_PART = "(הודעה קולית)";
@@ -168,7 +301,10 @@ export function readUserMessage(data: Record<string, unknown> | undefined): {
     if (!part) continue;
 
     if (part.type === "text") {
-      text += str(part.text) ?? "";
+      const value = str(part.text) ?? "";
+      // The leading context part is ours, not the user's — never rendered.
+      if (isContextPart(value)) continue;
+      text += value;
     } else if (part.type === "file") {
       const mediaType = str(part.mediaType) ?? "";
       if (mediaType.startsWith("audio/")) audio = true;
@@ -176,7 +312,8 @@ export function readUserMessage(data: Record<string, unknown> | undefined): {
   }
 
   if (parts.length === 0) text = str(data?.message) ?? "";
-  text = text.trim();
+  // Also covers the flattened summary, where the context rides inline.
+  text = stripContextLines(text);
 
   if (audio) {
     text = text && text !== VOICE_TEXT_PART ? `${VOICE_BUBBLE_LABEL} — ${text}` : VOICE_BUBBLE_LABEL;

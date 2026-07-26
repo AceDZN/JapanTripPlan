@@ -18,6 +18,7 @@ import {
   sendFollowUp,
   streamSession,
   type EveMessage,
+  type EveMessagePart,
 } from "./eve-client";
 import { toolStatusLabel } from "./tool-labels";
 
@@ -118,20 +119,31 @@ function audioFilename(mediaType: string): string {
  * (eve/docs/guides/client/messages.mdx — "Send attachments"): the message is an
  * AI SDK `UserContent` array whose file part carries a base64 `data:` URL,
  * `mediaType` and `filename`.
+ *
+ * Part order is fixed: context metadata, then the user's words, then audio.
  */
-function buildMessage(input: SendInput): EveMessage {
-  const text = input.text?.trim() ?? "";
-  if (!input.audio) return text;
+function buildMessage(input: SendInput, contextLine: string | null): EveMessage {
+  const typed = input.text?.trim() ?? "";
+  const body = typed || (input.audio ? VOICE_TEXT_PART : "");
+  if (!body) return "";
 
-  return [
-    { type: "text", text: text || VOICE_TEXT_PART },
-    {
+  // A plain typed turn with no context stays a plain string, as before.
+  if (!contextLine && !input.audio) return body;
+
+  const parts: EveMessagePart[] = [];
+  if (contextLine) parts.push({ type: "text", text: contextLine });
+  parts.push({ type: "text", text: body });
+
+  if (input.audio) {
+    parts.push({
       type: "file",
       data: input.audio.dataUrl,
       mediaType: input.audio.mediaType,
       filename: audioFilename(input.audio.mediaType),
-    },
-  ];
+    });
+  }
+
+  return parts;
 }
 
 function sleep(ms: number, signal: AbortSignal): Promise<void> {
@@ -148,7 +160,16 @@ function sleep(ms: number, signal: AbortSignal): Promise<void> {
   });
 }
 
-export function useEveChat() {
+export type UseEveChatOptions = {
+  /**
+   * Resolves the `[הקשר: …]` metadata part for the next turn. Awaited after the
+   * optimistic bubble is already on screen, so a slow GPS never delays what the
+   * user sees.
+   */
+  resolveContext?: () => Promise<string>;
+};
+
+export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   const [state, dispatch] = useReducer(reducer, INITIAL);
   // Read once, lazily: this hook runs client-side only, behind the chat's
   // client-only gate, so there is no SSR markup to mismatch.
@@ -160,10 +181,15 @@ export function useEveChat() {
   const tokenRef = useRef<string | null>(null);
   const cursorRef = useRef(0);
   const streamRef = useRef<AbortController | null>(null);
+  const contextRef = useRef(resolveContext);
 
   useEffect(() => {
     tokenRef.current = state.eve.continuationToken;
   }, [state.eve.continuationToken]);
+
+  useEffect(() => {
+    contextRef.current = resolveContext;
+  }, [resolveContext]);
 
   /* ------------------------------------------------------------- streaming */
 
@@ -238,21 +264,26 @@ export function useEveChat() {
 
   const send = useCallback(
     async (input: SendInput) => {
-      const message = buildMessage(input);
-      if (message.length === 0) return;
+      const typed = input.text?.trim() ?? "";
+      if (!typed && !input.audio) return;
 
+      // The bubble lands first; the context lookup happens behind it.
       dispatch({
         kind: "optimistic",
         bubble: {
           id: `pending:${Date.now()}`,
           role: "user",
-          text: input.audio ? VOICE_BUBBLE_LABEL : (input.text?.trim() ?? ""),
+          text: input.audio ? VOICE_BUBBLE_LABEL : typed,
           audio: Boolean(input.audio),
           activity: [],
           streaming: false,
           final: true,
         },
       });
+
+      const contextLine = (await contextRef.current?.()) ?? null;
+      const message = buildMessage(input, contextLine);
+      if (message.length === 0) return;
 
       try {
         if (!sessionRef.current) {

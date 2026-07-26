@@ -342,6 +342,32 @@ test("the chat ships a mic button and a read-aloud toggle", async () => {
   assert.match(styles, /\.chat-speak\b/);
 });
 
+test("the composer carries a location toggle wired to both transports", async () => {
+  const view = await readFile(new URL("../components/chat/ChatView.tsx", import.meta.url), "utf8");
+
+  assert.match(view, /title="המיקום מצורף כדי שהסוכן ידע מה קרוב אליך"/);
+  assert.match(view, /aria-label=\{geo\.enabled \? "כיבוי שיתוף מיקום עם הסוכן" : "שיתוף מיקום עם הסוכן"\}/);
+  assert.match(view, /aria-pressed=\{geo\.enabled\}/);
+  assert.match(view, /className=\{`chat-geo/);
+
+  // The durable path awaits a fix; the fallback peeks at the cache so it never
+  // gains a GPS wait, and strips the line back out before drawing the bubble.
+  assert.match(view, /useEveChat\(\{ resolveContext: geo\.resolveContextLine \}\)/);
+  assert.match(view, /geo\.peekContextLine\(\)/);
+  assert.match(view, /stripContextLines\(raw\)/);
+
+  const geo = await readFile(new URL("../components/chat/useGeoContext.ts", import.meta.url), "utf8");
+  assert.match(geo, /"japan2026\.chat\.geo\.v1"/);
+  assert.match(geo, /"japan2026\.chat\.geo\.enabled\.v1"/);
+  // Lazily on send, short timeout, and a recent platform fix is good enough.
+  assert.match(geo, /LOOKUP_TIMEOUT_MS = 4_000/);
+  assert.match(geo, /POSITION_MAX_AGE_MS = 2 \* 60_000/);
+  assert.doesNotMatch(geo, /useEffect\([^)]*getCurrentPosition/s, "never requested on mount");
+
+  const styles = await readFile(new URL("../app/chat/chat.css", import.meta.url), "utf8");
+  assert.match(styles, /\.chat-geo\b/);
+});
+
 /* ========================================================================== */
 /* API routes                                                                  */
 /* ========================================================================== */
