@@ -68,17 +68,34 @@ defaults.
 
 ## Data bundling
 
-Vercel uploads only `trip-agent/`, so `../JAPAN2026` and `../web/data` do not exist during a
-deployment build. `scripts/sync-data.mjs` therefore generates `agent/data/content.ts` as
-plain TypeScript literals, and that file is **committed**. On Vercel the script detects the
-missing sources and keeps the committed bundle instead of failing.
+`scripts/sync-data.mjs` generates `agent/data/content.ts` — the guides and places as plain
+TypeScript literals — so the agent never touches the filesystem at runtime. It runs on
+`predev` / `prebuild` / `pretypecheck`, and the generated file is **committed**.
+
+The project is git-connected to `github.com/AceDZN/JapanTripPlan` with **Root Directory
+`trip-agent`**, and a Vercel git build clones the *whole* repo. So `../JAPAN2026` and
+`../web/data/places.json` **are** present during a deployment build and the bundle is genuinely
+regenerated from source on every deploy. Verified in the build log:
+
+```
+> trip-agent@0.0.0 prebuild
+> npm run sync-data
+sync-data: 12 guides + 154 places -> agent/data/content.ts (266 KB)
+```
+
+The committed bundle is only a **fallback** for an upload that does not carry the repo root; the
+script then logs `sync-data: repo sources not present (deployment build?)` and keeps the
+checked-in file. If you ever see that line in a Vercel build log, the agent's knowledge is
+frozen at whatever was last committed — treat it as a bug in the deployment setup, not as
+normal behaviour.
+
+**Whenever a `JAPAN2026/*.md` file or `web/data/places.json` changes outside a deploy, re-run
+`npm run sync-data` and commit the regenerated `agent/data/content.ts`** so local runs and the
+fallback stay honest.
 
 ```bash
 npm run sync-data     # also runs automatically via predev / prebuild / pretypecheck
 ```
-
-**Whenever a `JAPAN2026/*.md` file or `web/data/places.json` changes, re-run
-`npm run sync-data` and commit the regenerated `agent/data/content.ts`.**
 
 ## עריכת התוכנית מהצ׳אט — editing the plan from the chat
 
@@ -279,11 +296,38 @@ webapp can call the channel directly from the browser.
 
 ## Deploy
 
+The Vercel project `japan-trip-agent` is **git-connected** to
+`github.com/AceDZN/JapanTripPlan` (production branch `main`, Root Directory `trip-agent`), so
+the normal path is simply to push:
+
+| Push to | Result |
+|---|---|
+| `main` | production deploy of the agent |
+| any other branch / PR | preview deploy |
+
+The sibling project `japan-2026-trip` (the webapp) is connected to the same repo with Root
+Directory `web`, so one commit — including a commit the agent itself makes from the chat —
+rebuilds both.
+
+### Deploying by CLI
+
+Because the Root Directory is `trip-agent`, the CLI must be run from the **repo root**, not
+from `trip-agent/` (from inside `trip-agent/` it looks for `trip-agent/trip-agent` and fails):
+
 ```bash
-vercel link --yes --project japan-trip-agent   # once
-vercel env pull .env.development.local          # provisions VERCEL_OIDC_TOKEN
-vercel deploy --prod --yes
+cd /path/to/JapanTripPlan
+VERCEL_ORG_ID=team_pt2iOXAJxsY57zIvHgYHzgzR \
+VERCEL_PROJECT_ID=prj_pRpjwRuydEd1ePSu0kBtHG31CNxn \
+  npx vercel deploy --prod --yes
 ```
+
+This also uploads `JAPAN2026/`, so `sync-data` regenerates the bundle exactly as a git build
+does. `vercel env pull .env.development.local` (from `trip-agent/`) still provisions
+`VERCEL_OIDC_TOKEN` for local runs.
+
+> **While PR #1 is open:** `trip-agent/` does not exist on `main` yet, so any push to `main`
+> before the merge fails the agent build with *"The specified Root Directory `trip-agent` does
+> not exist"*. It resolves itself the moment the PR lands.
 
 Production: **https://japan-trip-agent.vercel.app**
 
