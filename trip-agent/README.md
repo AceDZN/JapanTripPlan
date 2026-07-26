@@ -19,11 +19,15 @@ trip-agent/
 │   ├── channels/eve.ts        # HTTP API + auth walk (Basic → Vercel OIDC → localhost)
 │   ├── data/content.ts        # GENERATED — do not edit (npm run sync-data)
 │   ├── lib/trip.ts            # shared helpers over the bundled content
+│   ├── lib/github.ts          # GitHub Contents API write path (edit + commit)
 │   └── tools/
 │       ├── read_guide.ts      # read a full JAPAN2026 guide
 │       ├── get_day.ts         # one day (1–17) of the canonical itinerary
+│       ├── get_now.ts         # current time in Japan + Israel, and today's trip day
 │       ├── search_places.ts   # search the 154-place database (Hebrew + English)
 │       ├── nearby_places.ts   # what's near a coordinate, with walk time + directions
+│       ├── edit_plan_doc.ts   # edit a canonical doc + commit  (approval-gated)
+│       ├── mark_done.ts       # tick a checklist item with ✅   (approval-gated)
 │       └── {bash,read_file,write_file,glob,grep,agent}.ts   # disableTool() sentinels
 └── scripts/sync-data.mjs      # regenerates agent/data/content.ts
 ```
@@ -34,8 +38,25 @@ trip-agent/
 |---|---|
 | `get_day` | The full plan for trip day 1–17, sliced out of `09-DAILY-ITINERARY.md`, plus that day's places. The default for "what do we do on day N". |
 | `read_guide` | Any of the 12 canonical guides in full (enum of real filenames). |
+| `get_now` | Current date/time in `Asia/Tokyo` and `Asia/Jerusalem` (ISO + Hebrew strings) and which trip day today is. The model has no clock; anything that depends on "now" starts here. |
 | `search_places` | Substring search over Hebrew + English names/descriptions/areas, filterable by `category`, `city`, `day`, `plannedOnly`. Capped at 15 results. |
 | `nearby_places` | Haversine-ranked places near `{lat,lng}`, with an 80 m/min walking estimate and a Google Maps walking-directions URL. |
+| `edit_plan_doc` | Exact-substring edit of one canonical `JAPAN2026/*.md` doc, committed to the repo. **Approval-gated.** |
+| `mark_done` | Marks a `11-PRE-TRIP-CHECKLIST.md` item done with a ✅ (plus an optional note), committed to the repo. **Approval-gated.** |
+
+### Where and when the family is
+
+The concierge is used on a phone, mid-trip, so "now" and "here" matter constantly.
+
+- **Time** comes from `get_now` — the model has no clock of its own.
+- **Location** comes from the webapp, which prefixes a user message with a bracketed context
+  line when it has permission, e.g.
+  `[הקשר: 14:32 בטוקיו; מיקום: 35.6812,139.7671 דיוק 30מ']`. `instructions.md` tells the model
+  to treat that line as trusted metadata, never to echo it back, and to ask where they are when
+  it is missing and the question is location-sensitive.
+- **"מה יש לידי"** is answered from both sides: `nearby_places` for the curated 154-place
+  database, plus `web_search` for what the database cannot know — events today, current opening
+  hours, closures.
 
 **Default harness decisions.** The shell/filesystem tools (`bash`, `read_file`,
 `write_file`, `glob`, `grep`) and the root `agent` delegation tool are disabled with
@@ -58,6 +79,136 @@ npm run sync-data     # also runs automatically via predev / prebuild / pretypec
 
 **Whenever a `JAPAN2026/*.md` file or `web/data/places.json` changes, re-run
 `npm run sync-data` and commit the regenerated `agent/data/content.ts`.**
+
+## עריכת התוכנית מהצ׳אט — editing the plan from the chat
+
+The concierge can **change the plan**, not just read it. This is the feature that makes the
+agent useful mid-trip on a phone: "we bought the teamLab tickets", "we're leaving at 08:30
+instead of 08:00 on day 9".
+
+### How it works
+
+`JAPAN2026/*.md` stays the single source of truth. An edit is a real commit to this repo,
+made by the agent through the **GitHub Contents API** (`GET` for the blob sha → `PUT` with the
+new content) on the branch in `GITHUB_BRANCH` (default `main`). Everything downstream rebuilds
+from that commit:
+
+```
+chat message
+  └─ tool call (edit_plan_doc | mark_done)
+       └─ approval prompt in the chat  ← nothing happens before the user confirms
+            └─ commit "Trip update: <summary>" on main
+                 ├─ japan-2026-trip  → webapp rebuild: guide pages + AI context regenerate
+                 └─ japan-trip-agent → agent rebuild: agent/data/content.ts regenerates
+```
+
+Commit messages are exactly `Trip update: <summary>` — no co-author or attribution trailers.
+
+### The ✅ convention
+
+**A checklist line carrying ✅ is done; a line without one is still open.** That is the whole
+convention, and it is what the model reads completion state from.
+`11-PRE-TRIP-CHECKLIST.md` holds its items in markdown tables whose first column is `Done`, so
+`mark_done` replaces the `[ ]` in that cell rather than prefixing the row — the table keeps
+rendering everywhere. An optional note rides in the same cell:
+
+```
+| [ ] | Buy/confirm family travel insurance | Now | … | Adults |
+| ✅ — אמא, פוליסה 12345 | Buy/confirm family travel insurance | Now | … | Adults |
+```
+
+On a non-table line (plain bullet or free text) the ✅ is prefixed to the line and the note is
+appended. `mark_done` is idempotent: an item that already carries ✅ is reported as already
+done and nothing is committed.
+
+### The approval flow
+
+Both write tools use eve's `approval: always()`, so **every** call pauses the run at
+`session.waiting` and emits an `input.requested` event before anything is fetched, replaced or
+committed. The request carries the full tool input, so the user sees exactly what will change:
+
+```jsonc
+{
+  "type": "input.requested",
+  "data": { "requests": [{
+    "requestId": "aitxt-4M2M0pIy7yZtavFViWW6JYUF",
+    "prompt": "Approve tool call: edit_plan_doc",
+    "display": "confirmation",
+    "allowFreeform": false,
+    "options": [{ "id": "approve", "label": "Yes" }, { "id": "deny", "label": "No" }],
+    "action": { "kind": "tool-call", "toolName": "edit_plan_doc",
+                "input": { "file": "09-DAILY-ITINERARY.md", "old_string": "…", "new_string": "…",
+                           "summary": "עדכון שעת יציאה ביום 9 ל-08:30" } }
+  }] }
+}
+```
+
+Two ways to answer, both verified end to end:
+
+- **Structured** — `POST /eve/v1/session/:id` with
+  `{ continuationToken, inputResponses: [{ requestId, optionId: "approve" }] }`.
+- **Plain text** — `POST /eve/v1/session/:id` with `{ continuationToken, message: "approve" }`.
+  eve resolves a follow-up whose text matches an option id (`approve` / `deny`) or label
+  (`Yes` / `No`). This is what the webapp chat uses, since it renders the request as text.
+  Unrelated follow-up text does **not** deny the call — eve holds it and keeps the approval
+  pending.
+
+A denied approval commits nothing at all: the tool never executes.
+
+### Staleness — read this before trusting a reply
+
+The commit is live in the repo immediately, but the **agent's own bundled knowledge**
+(`agent/data/content.ts`) only refreshes on its next deployment, a few minutes later. So for
+the remainder of the conversation that made an edit, `read_guide` and `get_day` still return
+the pre-edit text. `instructions.md` instructs the model to trust what it just changed over
+those tools until the redeploy lands, and every successful edit returns an explicit
+`staleness` field saying so.
+
+### What auto-updates, and what does not
+
+| Surface | Regenerates from the md? |
+|---|---|
+| Webapp guide pages (`/guide/[slug]`) | **Yes** — `web/scripts/sync-content.mjs` runs on `prebuild`. |
+| Webapp AI context (`web/app/generated/ai-context.ts`) | **Yes** — same prebuild step. |
+| Agent knowledge (`agent/data/content.ts`) | **Yes** — `scripts/sync-data.mjs` runs on `prebuild`. |
+| Webapp **structured** day/place data (`web/lib/trip-data.ts`, `web/data/places.json`) | **No.** |
+
+That last row is the honest caveat. The map pins, the day cards and the place database are
+hand-curated TypeScript/JSON, not derived from the markdown. An edit that moves an activity to
+a different day, renames a place, or adds/removes a stop will make the **prose and the
+structured data disagree** — the guide page will say one thing and the itinerary/map another.
+Nothing breaks, but it drifts. The resync path is a Claude session: ask it to reconcile
+`web/lib/trip-data.ts` and `web/data/places.json` against the changed `JAPAN2026/*.md`, then
+re-run `npm run sync-data` in `trip-agent/` and commit. Small wording, time and status edits
+(what the chat is mostly for) do not drift anything.
+
+### Setup — the one manual step
+
+Production deliberately ships **without** `GITHUB_TOKEN`. Until it is set the tools fail
+closed with a clear Hebrew message ("עריכת התוכנית לא מחוברת עדיין…") and the agent explains
+what is missing instead of pretending to save. To turn editing on:
+
+1. **Create a fine-grained GitHub PAT** — GitHub → Settings → Developer settings →
+   *Personal access tokens* → *Fine-grained tokens* → **Generate new token**:
+   - Resource owner: `AceDZN`
+   - Repository access: **Only select repositories** → `AceDZN/JapanTripPlan`
+   - Repository permissions: **Contents: Read and write** (nothing else)
+   - Expiration: around **December 2026** (after the trip)
+2. **Add it to the agent's Vercel project**, from `trip-agent/`:
+
+   ```bash
+   npx vercel env add GITHUB_TOKEN production      # paste the token when prompted
+   ```
+
+3. **Redeploy** so the running deployment picks it up:
+
+   ```bash
+   npx vercel deploy --prod --yes
+   ```
+
+Optional overrides, both with sensible defaults: `GITHUB_REPO` (default
+`AceDZN/JapanTripPlan`) and `GITHUB_BRANCH` (default `main`). Point `GITHUB_BRANCH` at a
+scratch branch to rehearse edits without touching the real plan.
 
 ## Run locally
 
