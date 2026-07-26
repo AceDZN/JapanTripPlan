@@ -51,7 +51,8 @@ The concierge is used on a phone, mid-trip, so "now" and "here" matter constantl
 - **Time** comes from `get_now` — the model has no clock of its own.
 - **Location** comes from the webapp, which prefixes a user message with a bracketed context
   line when it has permission, e.g.
-  `[הקשר: 14:32 בטוקיו; מיקום: 35.6812,139.7671 דיוק 30מ']`. `instructions.md` tells the model
+  `[הקשר: 2026-10-05T14:32:10+09:00; מיקום: 35.65858,139.74543 דיוק 18מ׳]`
+  (see `web/components/chat/eve-protocol.ts`). `instructions.md` tells the model
   to treat that line as trusted metadata, never to echo it back, and to ask where they are when
   it is missing and the question is location-sensitive.
 - **"מה יש לידי"** is answered from both sides: `nearby_places` for the curated 154-place
