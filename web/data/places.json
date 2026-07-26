@@ -44,6 +44,7 @@
     "planned": true,
     "descriptionHe": "הבסיס הראשון בטוקיו — דירה משופצת ליד תחנת טבטה, 2–11.10, צ׳ק־אין עצמי עם לוקבוקס.",
     "tips": "לשלוח תמונות דרכון של כל ארבעת האורחים ב־Airbnb chat ולקבל אישור כתוב לצ׳ק־אין מאוחר סביב 22:00–23:00. אין אחסון מזוודות אחרי הצ׳ק־אאוט.",
+    "image": "/images/places/tabata-base.jpg",
     "mapsQuery": "Tabata Station, Kita City, Tokyo",
     "indoor": true
   },
@@ -122,6 +123,7 @@
     ],
     "planned": true,
     "descriptionHe": "חנות הדגל לסחורה של סדרות עכשוויות — הכי טוב לדמויות שהילדים באמת עוקבים אחריהן.",
+    "image": "/images/places/animate-akihabara.jpg",
     "mapsQuery": "Animate Akihabara, Sotokanda, Tokyo",
     "priceLevel": 2,
     "indoor": true
@@ -141,6 +143,7 @@
     "planned": true,
     "descriptionHe": "שמונה קומות של יד־שנייה: פיגורות ישנות, מנגה ומציאות של Hunter × Hunter ופוקימון.",
     "tips": "נפתח רק אחרי 12:00 — לכן הוא אחרי Radio Kaikan ו־Animate.",
+    "image": "/images/places/mandarake-complex.jpg",
     "mapsQuery": "Mandarake Complex Akihabara",
     "priceLevel": 2,
     "indoor": true,
@@ -161,6 +164,7 @@
     "planned": true,
     "descriptionHe": "ארקייד מודרני עם מכונות צובט ומשחקי קצב — בוחרים אחד מבין GiGO ל־HEY ולא מנסים את כולם.",
     "tips": "מעטפת מזומן קבועה לכל ילד לפני הכניסה. לא קוראים ל־GiGO של היום ״SEGA Arcade״.",
+    "image": "/images/places/gigo-akihabara.jpg",
     "mapsQuery": "GiGO Akihabara, Sotokanda, Tokyo",
     "priceLevel": 1,
     "indoor": true
@@ -179,6 +183,7 @@
     ],
     "planned": true,
     "descriptionHe": "ארקייד לשחקנים אמיתיים — קומות של משחקי ארקייד קלאסיים ומשחקי יריות שאפשר באמת לשחק בהם.",
+    "image": "/images/places/hey-taito.jpg",
     "mapsQuery": "Taito HEY Akihabara",
     "priceLevel": 1,
     "indoor": true
@@ -217,32 +222,33 @@
     ],
     "planned": true,
     "descriptionHe": "רשת קארי יפני עם התאמת חריפות וכמות אורז — פתרון בטוח וזול לצהריים עם ילדים.",
+    "image": "/images/places/coco-ichibanya-akihabara.jpg",
     "mapsQuery": "CoCo Ichibanya Akihabara Chuo-dori",
     "priceLevel": 1,
     "indoor": true
   },
   {
-    "id": "neco-republic",
-    "nameHe": "Neco Republic אוצ׳נומיזו",
-    "nameEn": "Neco Republic Tokyo Ochanomizu",
+    "id": "petit-mura",
+    "nameHe": "Kichijōji Petit Mura — טירת החתולים",
+    "nameEn": "Cat Cafe Temari no Oshiro, Kichijoji Petit Mura",
     "category": "kawaii",
-    "area": "יושימה / אוצ׳נומיזו",
+    "area": "קיצ׳יג׳וג׳י",
     "city": "tokyo",
-    "lat": 35.7031,
-    "lng": 139.7669,
+    "lat": 35.706,
+    "lng": 139.5768,
     "days": [
-      3
+      8
     ],
     "planned": true,
-    "descriptionHe": "בית קפה של חתולי הצלה שמחפשים בית — ביקור מודע לרווחת בעלי חיים במקום קפה חיות אקזוטיות.",
-    "tips": "להזמין מראש 16:30–17:30. בשבת סוגרים ב־18:00, חובה גרביים אטומות, וילד בן 12 נכנס רק עם מבוגר. עולים במדרגות לקומה 4 — אין מעלית.",
-    "image": "/images/places/neco-republic.jpg",
-    "officialUrl": "https://www.neco-republic.jp/shop/shop-necorepublic-ochanomizu/",
-    "mapsQuery": "Neco Republic Tokyo Ochanomizu, Yushima, Bunkyo",
+    "descriptionHe": "כפר אגדות קטן ומטופס בירק, חמש דקות מתחנת קיצ׳יג׳וג׳י. בפנים: Cat Cafe Temari no Oshiro — טירה דו־קומתית עם כ־20 חתולים ובלי הגבלת זמן.",
+    "tips": "להזמין מראש. גיל 10+ — שני הילדים עוברים. כ־¥1,200 + מס לאדם ביום חול (¥1,600 בסופ״ש), ומביאים גרביים נקיות.",
+    "image": "/images/places/petit-mura.jpg",
+    "officialUrl": "https://temarinooshiro.com/",
+    "mapsQuery": "Kichijoji Petit Mura, 2-33-2 Kichijoji Honcho, Musashino",
     "priceLevel": 1,
     "mustDo": true,
     "indoor": true,
-    "openingHours": "בסופ״ש 11:00–18:00"
+    "openingHours": "10:00–21:00"
   },
   {
     "id": "teamlab-planets",
@@ -321,6 +327,7 @@
     "planned": true,
     "descriptionHe": "הקניון שבחזיתו עומד הגונדם — פודקורט נוח לצהריים ו־Gundam Base בקומה 7.",
     "tips": "שיטוט מורחב בקניון הוא הדבר הראשון לוותר עליו.",
+    "image": "/images/places/divercity-tokyo-plaza.jpg",
     "mapsQuery": "DiverCity Tokyo Plaza, Odaiba",
     "priceLevel": 2,
     "indoor": true
@@ -358,6 +365,7 @@
     "planned": true,
     "descriptionHe": "חנות הדגל של ערכות הגאנפלה, עם דגמים בלעדיים ואזור בנייה.",
     "tips": "לוותר בקלות: מקצרים כאן לפני שמקצרים את Joypolis או את Pixar.",
+    "image": "/images/places/gundam-base-tokyo.jpg",
     "mapsQuery": "The Gundam Base Tokyo, DiverCity",
     "priceLevel": 2,
     "indoor": true
@@ -420,6 +428,7 @@
     "planned": true,
     "descriptionHe": "פארק השעשועים שבתוכו נמצא PokéPark, עם רכבל Sky Shuttle נוף בדרך פנימה.",
     "tips": "כרטיס Sky Shuttle הלוך־חזור עולה ¥500 ואינו כלול בכרטיס הפארק. מתקנים של Yomiuriland רק אחרי שסיימנו את סדרי העדיפויות ב־PokéPark.",
+    "image": "/images/places/yomiuriland.jpg",
     "officialUrl": "https://www.yomiuriland.com/en/charge/",
     "mapsQuery": "Yomiuriland, Inagi, Tokyo",
     "priceLevel": 2
@@ -519,6 +528,7 @@
     ],
     "planned": true,
     "descriptionHe": "חמש קומות של סנריו, סטודיו ג׳יבלי, סנומו ומופוסנד — מעבר מהיר, לא ביקור ארוך.",
+    "image": "/images/places/kiddy-land.jpg",
     "mapsQuery": "Kiddy Land Harajuku, Jingumae",
     "priceLevel": 2,
     "indoor": true
@@ -537,6 +547,7 @@
     ],
     "planned": true,
     "descriptionHe": "רחוב הליכה נעים בין הרג׳וקו לשיבויה עם חנויות סטריט וקפה — הדרך הטבעית בין שני חצאי היום.",
+    "image": "/images/places/cat-street.jpg",
     "mapsQuery": "Cat Street Harajuku Shibuya"
   },
   {
@@ -571,6 +582,7 @@
     ],
     "planned": true,
     "descriptionHe": "הכלב הנאמן ביותר ביפן — תמונה חובה של דקה, ליד מעבר החצייה.",
+    "image": "/images/places/hachiko.jpg",
     "mapsQuery": "Hachiko Statue, Shibuya Station",
     "priceLevel": 0
   },
@@ -649,6 +661,7 @@
     ],
     "planned": true,
     "descriptionHe": "מונסטר האנטר, סטריט פייטר ורזידנט איוויל — חנות קטנה וממוקדת באותה קומה.",
+    "image": "/images/places/capcom-store-tokyo.jpg",
     "mapsQuery": "Capcom Store Tokyo, Shibuya PARCO",
     "priceLevel": 2,
     "indoor": true
@@ -667,6 +680,7 @@
     ],
     "planned": true,
     "descriptionHe": "כל עולם Shonen Jump — Hunter × Hunter, Demon Slayer, One Piece — במקום אחד.",
+    "image": "/images/places/jump-shop-shibuya.jpg",
     "mapsQuery": "Jump Shop Shibuya PARCO",
     "priceLevel": 2,
     "indoor": true
@@ -686,6 +700,7 @@
     "planned": true,
     "descriptionHe": "מרפסת תצפית פתוחה בגובה 229 מטר מעל שיבויה — יפה בשקיעה, אבל תלוי מזג אוויר.",
     "tips": "לוותר בקלות: רק אם הוזמן חריץ שקיעה ומזג האוויר בהיר.",
+    "image": "/images/places/shibuya-sky.jpg",
     "mapsQuery": "Shibuya Sky, Shibuya Scramble Square",
     "priceLevel": 3
   },
@@ -704,6 +719,7 @@
     "planned": true,
     "descriptionHe": "ראמן טונקוצו בתאים אישיים עם טופס התאמה אישית — טקס ששווה לעשות פעם אחת.",
     "tips": "הקערה הבסיסית ¥1,180 לפני תוספות, ישיבה בדלפק בלבד וייתכן שלא נשב יחד. עדיף להגיע מחוץ לשעות השיא.",
+    "image": "/images/places/ichiran-shibuya.jpg",
     "mapsQuery": "Ichiran Shibuya, Jinnan",
     "priceLevel": 2,
     "indoor": true
@@ -722,6 +738,7 @@
     ],
     "planned": false,
     "descriptionHe": "ראמן יוזו־שיו קליל ובהיר — הגיבוי הנוח יותר ל־Ichiran, ואפשר לשבת יחד.",
+    "image": "/images/places/afuri-harajuku.jpg",
     "mapsQuery": "AFURI Harajuku ramen",
     "priceLevel": 2,
     "indoor": true
@@ -761,6 +778,7 @@
     "planned": true,
     "descriptionHe": "מערה תת־קרקעית עם פסלים מגולפים, גנים וטרסת תצפית על מפרץ סאגאמי.",
     "tips": "כשעה. קודם המערה, הנוף והגנים — לא סיור מקדשים מלא.",
+    "image": "/images/places/hasedera.jpg",
     "mapsQuery": "Hasedera Temple, Kamakura",
     "priceLevel": 1
   },
@@ -837,6 +855,7 @@
     "planned": true,
     "descriptionHe": "מגדל תצפית בגן Samuel Cocking עם נוף לחוף ולפוג׳י ביום בהיר.",
     "tips": "בסדר החיתוך: אחרי הטיפוס העמוק, לפני תוספות של האסה־דרה.",
+    "image": "/images/places/enoshima-sea-candle.jpg",
     "mapsQuery": "Enoshima Sea Candle observation tower",
     "priceLevel": 1
   },
@@ -855,6 +874,7 @@
     "planned": true,
     "descriptionHe": "מערות ים בקצה האי שאליהן נכנסים עם פנס — מפחיד־כיפי ומאוד ״יפן אחרת״.",
     "tips": "פתוחות רק אם מזג האוויר והגאות מאפשרים; לבדוק ביום עצמו.",
+    "image": "/images/places/iwaya-caves.jpg",
     "mapsQuery": "Enoshima Iwaya Caves",
     "priceLevel": 1
   },
@@ -873,6 +893,7 @@
     "planned": true,
     "descriptionHe": "רחוב עולה מלא דוכני חטיפים — קרקר תמנון ענק, שירסו ומתוקים.",
     "tips": "שירסו רק אם כולם רוצים; מחלקים מנות במקום להזמין ארבע.",
+    "image": "/images/places/enoshima-nakamise.jpg",
     "mapsQuery": "Enoshima Nakamise Street snacks",
     "priceLevel": 1
   },
@@ -931,6 +952,7 @@
     "planned": true,
     "descriptionHe": "השכונה הכי נעימה ממערב לטוקיו: סמטאות אוכל, Sun Road ומקום טוב לצהריים פשוטים ומוקדמים.",
     "tips": "גם התוכנית החלופית אם ג׳יבלי לא נסגר.",
+    "image": "/images/places/kichijoji.jpg",
     "mapsQuery": "Kichijoji, Musashino, Tokyo",
     "priceLevel": 1
   },
@@ -987,6 +1009,7 @@
     ],
     "planned": true,
     "descriptionHe": "ראש גודזילה בגודל טבעי שמציץ מגג מלון גרייסרי — תמונה משפחתית קלאסית של טוקיו.",
+    "image": "/images/places/godzilla-head.jpg",
     "mapsQuery": "Godzilla Head Shinjuku Toho Building",
     "priceLevel": 0
   },
@@ -1005,6 +1028,7 @@
     "planned": true,
     "descriptionHe": "ארקייד גדול במגדל קבוקיצ׳ו עם גאצ׳ה, מכונות צובט ובר משחקים.",
     "tips": "לוותר בקלות: רק אם נשארה אנרגיה. זה כבר לא בלוק משחק מוגן.",
+    "image": "/images/places/namco-tokyo.jpg",
     "mapsQuery": "namco TOKYO Kabukicho Tower",
     "priceLevel": 1,
     "indoor": true
@@ -1024,6 +1048,7 @@
     "planned": false,
     "descriptionHe": "צוקמן מפורסם עם מרק דגים־עוף סמיך — טעים מאוד, אבל דלפק קטן וללא הזמנות.",
     "tips": "אופציונלי בלבד אחרי ג׳יבלי ונקאנו; לא בונים את הערב סביב תור משוער. אם חשוב לשבת ארבעה — לבחור ראמן משפחתי גדול יותר.",
+    "image": "/images/places/fuunji.jpg",
     "mapsQuery": "Fuunji ramen Shinjuku",
     "priceLevel": 1,
     "indoor": true
@@ -1062,6 +1087,7 @@
     ],
     "planned": true,
     "descriptionHe": "מקדש קטן מעל הערוץ עם מפל, גן במבוק ובית תה — סוף השביל הירוק.",
+    "image": "/images/places/todoroki-fudoson.jpg",
     "mapsQuery": "Todoroki Fudoson Temple Setagaya",
     "priceLevel": 0
   },
@@ -1080,6 +1106,7 @@
     "planned": true,
     "descriptionHe": "בית תה בתוך הערוץ עם קוזו־מוצ׳י ומאצ׳ה — עצירה משותפת, לא ארוחה.",
     "tips": "רק אם פתוח. חולקים מנה במקום להפוך את זה לארוחה שלמה.",
+    "image": "/images/places/setsugekka.jpg",
     "mapsQuery": "Setsugekka teahouse Todoroki Ravine",
     "priceLevel": 1
   },
@@ -1098,6 +1125,7 @@
     "planned": true,
     "descriptionHe": "החנות היחידה בעולם שמורשית לאפות פחזניות בצורת טוטורו — מתוק שהוא גם מזכרת ג׳יבלי.",
     "tips": "להזמין קופסה מראש ולאסוף אחרי הפתיחה ב־10:30. פתוח 10:30–18:00.",
+    "image": "/images/places/shiro-hige-cream-puff.jpg",
     "officialUrl": "https://shiro-hige.net/",
     "mapsQuery": "Shiro-Hige Cream Puff Factory Daita Setagaya",
     "priceLevel": 1,
@@ -1119,6 +1147,7 @@
     "planned": true,
     "descriptionHe": "פארק שכונתי עם מדשאות ומגרשים — פיקניק קצר של פחזניות טוטורו ואיפוס אנרגיה.",
     "tips": "לוותר בקלות. חלק מהפארק בשיפוצים ב־2026, אז משתמשים במה שפתוח ולא רודפים אחרי מתקן מסוים.",
+    "image": "/images/places/hanegi-park.jpg",
     "officialUrl": "https://www.city.setagaya.lg.jp/02075/9123.html",
     "mapsQuery": "Hanegi Park Setagaya Tokyo",
     "priceLevel": 0
@@ -1157,6 +1186,7 @@
     "planned": true,
     "descriptionHe": "עשרות מסעדות מגישות מנות קארי מוקטנות ברחבי השכונה — משחק טעימות משפחתי אמיתי.",
     "tips": "הפסטיבל רץ 8–25.10, כך ש־9.10 הוא היום השני. שלוש מנות מיני: אחת מוכרת, אחת הרפתקנית ואחת שהילדים בוחרים. להוריד את המפה הרשמית הסופית לפני הנסיעה.",
+    "image": "/images/places/shimokitazawa-curry-festival.jpg",
     "officialUrl": "https://shimokitazawa-curryfes.com/",
     "mapsQuery": "Shimokitazawa Curry Festival",
     "priceLevel": 1,
@@ -1176,6 +1206,7 @@
     ],
     "planned": true,
     "descriptionHe": "מתחם מתחת למסילה עם חנויות, אוכל אסייתי ואזור משחקים — גם מקלט טוב בגשם.",
+    "image": "/images/places/mikan-shimokita.jpg",
     "mapsQuery": "Mikan Shimokita",
     "priceLevel": 1,
     "indoor": true
@@ -1194,6 +1225,7 @@
     ],
     "planned": true,
     "descriptionHe": "מתחם לבן של חנויות בוטיק וקפה בקומות נמוכות — נעים לשוטט בו גם כשהילדים עייפים.",
+    "image": "/images/places/reload-shimokitazawa.jpg",
     "mapsQuery": "Reload Shimokitazawa",
     "priceLevel": 2
   },
@@ -1233,6 +1265,7 @@
     "planned": true,
     "descriptionHe": "רכבת הרים שעוברת דרך חור בבניין ובתוך הגלגל הענק — המתקן הגדול של יום החגיגה.",
     "tips": "לבדוק מגבלות גובה/גיל; מי שלא רוצה — לא חייב.",
+    "image": "/images/places/thunder-dolphin.jpg",
     "mapsQuery": "Thunder Dolphin Tokyo Dome City",
     "priceLevel": 2
   },
@@ -1251,6 +1284,7 @@
     "planned": true,
     "descriptionHe": "גלגל ענק בלי ציר מרכזי, עם תאי קריוקי — סיבוב שיר משפחתי מעל טוקיו.",
     "tips": "לבקש תא קריוקי אם זמין.",
+    "image": "/images/places/big-o-ferris-wheel.jpg",
     "mapsQuery": "Big-O Ferris Wheel Tokyo Dome City",
     "priceLevel": 1
   },
@@ -1269,6 +1303,7 @@
     "planned": true,
     "descriptionHe": "אחד מסניפי JUMP SHOP הגדולים — מזכרת אחת מתוכננת ליום החגיגה.",
     "tips": "תקציב מוסכם מראש למזכרת אחת.",
+    "image": "/images/places/jump-shop-tokyo-dome.jpg",
     "mapsQuery": "Jump Shop Tokyo Dome City",
     "priceLevel": 2,
     "indoor": true
@@ -1307,6 +1342,7 @@
     "planned": true,
     "descriptionHe": "הקרנת ענק חינמית על חזית בניין העירייה; לפעמים ברוטציה מופיע Pokémon Card Game: TOKYO LUMINOUS NIGHT.",
     "tips": "רק אם הלוח הרשמי מציג את היצירה של פוקימון ב־10.10. מסיימים מתקנים סביב 17:15, Oedo מ־Kasuga ל־Tochomae, ומגיעים 15–20 דקות מראש. חיצוני ותלוי מזג אוויר; לא מסתמכים על שעות מאינסטגרם.",
+    "image": "/images/places/tokyo-metropolitan-government-building.jpg",
     "officialUrl": "https://tokyoprojectionmappingproject.jp/en/",
     "mapsQuery": "Tokyo Metropolitan Government Building, Nishi-Shinjuku",
     "priceLevel": 0
@@ -1329,6 +1365,7 @@
     "planned": true,
     "descriptionHe": "מבנה פלדה וזכוכית עצום שמשמש גם כשער העיר, קניון, מסעדות ואחסון מזוודות.",
     "tips": "ב־11.10 מאחסנים כאן את תיקי שני הלילות עד אחרי התהלוכה — הדירה בפושימי נפתחת רק ב־15:00.",
+    "image": "/images/places/kyoto-station.jpg",
     "mapsQuery": "Kyoto Station",
     "indoor": true
   },
@@ -1347,6 +1384,7 @@
     "planned": true,
     "descriptionHe": "רסיטל הסתיו של גיישות וגייקו של רובע מיאגאווה־צ׳ו — נגינה וריקוד קלאסי בתיאטרון היסטורי.",
     "tips": "לכוון להופעת 13:00 — 16:00 מתנגשת עם אוואטה. ¥10,000 קומה ראשונה / ¥8,000 קומה שנייה, כניסה מגיל 10. שיטת המכירה הרשמית טרם פורסמה.",
+    "image": "/images/places/mizuekai.jpg",
     "officialUrl": "https://www.miyagawacho.jp/mizuekai/",
     "mapsQuery": "Miyagawacho Kaburenjo Theatre, Higashiyama, Kyoto",
     "priceLevel": 3,
@@ -1386,6 +1424,7 @@
     "planned": true,
     "descriptionHe": "תהלוכת פנסים ענקיים, מוזיקה ומסורת חיה שיוצאת ממקדש אוואטה — האירוע החזק של ערב קיוטו.",
     "tips": "מתחילה רשמית ב־17:00. להגיע לאזור מראש, להישאר לפתיחה ולחלק סביר מהמסלול, ולעזוב סביב 19:30 לפני העומס הכי כבד.",
+    "image": "/images/places/awata-shrine.jpg",
     "officialUrl": "https://awatajinja.jp/event/",
     "mapsQuery": "Awata Shrine, Higashiyama, Kyoto",
     "priceLevel": 0,
@@ -1408,6 +1447,7 @@
     "planned": true,
     "descriptionHe": "הבסיס בקיוטו, 11–13.10, כשלוש דקות הליכה מהמקדש. חדר D בקומה השנייה.",
     "tips": "צ׳ק־אין 15:00 וצ׳ק־אאוט 11:00. אין אחסון מזוודות לפני או אחרי. הדלת לא ננעלת אוטומטית — נועלים ידנית בכל יציאה. למלא את טופס רישום האורחים לפני ההגעה.",
+    "image": "/images/places/fushimi-inari-apartment.jpg",
     "mapsQuery": "Fushimi Inari Taisha, Fukakusa, Kyoto",
     "indoor": true
   },
@@ -1447,6 +1487,7 @@
     "planned": true,
     "descriptionHe": "תיאטרון ייעודי לתופי טאיקו בקומה 9 של בניין אבנטי, כדקה הליכה מיציאת האצ׳יג׳ו של תחנת קיוטו.",
     "tips": "מופע HIBIKI ב־19:00, דלתות 18:15, אורך כ־40 דקות, ¥10,000 לאדם — ¥40,000 למשפחה, מגיל 6. הכרטיסים נפתחים חודשיים לפני.",
+    "image": "/images/places/kyoto-avanti.jpg",
     "officialUrl": "https://drum-tao-kyoto.com/en/ticket/",
     "mapsQuery": "Kyoto Avanti, Higashikujo, Minami-ku, Kyoto",
     "priceLevel": 3,
@@ -1467,6 +1508,7 @@
     "planned": false,
     "descriptionHe": "תיאטרון מסכות אילם בן 700 שנה — החלפה אופציונלית בלבד למי שמעדיף מסורת על פני יום הסמוראים.",
     "tips": "לוותר בקלות: זה swap ולא תוספת. המופע הסתווי רץ 10–12.10, חמש הצגות בין 13:00 ל־17:30, כניסה ביום עצמו ללא הזמנה. דורש לעזוב את אוזומאסה סביב 13:15.",
+    "image": "/images/places/mibu-dera.jpg",
     "officialUrl": "https://www.kyoto-kankou.or.jp/event/1288",
     "mapsQuery": "Mibu-dera Temple, Nakagyo, Kyoto",
     "priceLevel": 1
@@ -1507,6 +1549,7 @@
     "planned": true,
     "descriptionHe": "חנות מקלות אכילה שמחרטת שם על המקום — מזכרת אישית לכל אחד מארבעת בני המשפחה.",
     "tips": "דקה מ־JR Inari, פתוח לפי הרישום 09:30–17:30 עם שינויים עונתיים. החריטה כחמש דקות לזוג; מכינים מראש איות מדויק באותיות לטיניות או קטקנה. מחיר הפתיחה ¥1,100 מהאינסטגרם לא אומת — בוחרים לפי מחיר בפועל.",
+    "image": "/images/places/yuzen-fushimi.jpg",
     "officialUrl": "https://page.line.me/xat.0000115429.mcu",
     "mapsQuery": "Handmade Chopstick Workshop Yuzen, JR Inari Station, Kyoto",
     "priceLevel": 1,
@@ -1530,6 +1573,7 @@
     "planned": true,
     "descriptionHe": "בסיס אחד לשני הלילות באוסקה — קרוב ל־Dotonbori, ל־Den Den Town ולנסיעה ל־USJ.",
     "tips": "עדיין לא הוזמן. המועמד המוביל: ESLEAD HOTEL Namba East, ¥35,184 לשני לילות עם ארבע מיטות יחיד. לא מפצלים את השהות עם Universal City.",
+    "image": "/images/places/namba-base.jpg",
     "mapsQuery": "Nipponbashi, Namba, Osaka",
     "indoor": true
   },
@@ -1566,6 +1610,7 @@
     ],
     "planned": true,
     "descriptionHe": "הרחוב המקביל ל־Den Den Town עם חנויות דוג׳ינשי, קוספליי ובתי קפה נושאיים.",
+    "image": "/images/places/ota-road.jpg",
     "mapsQuery": "Ota Road Nipponbashi Osaka",
     "priceLevel": 2
   },
@@ -1584,6 +1629,7 @@
     "planned": true,
     "descriptionHe": "סניף DX בקומה 13 של דאימארו אומדה, עם קפה פוקימון ופריטים אזוריים.",
     "tips": "לוותר בקלות: רק אם המשפחה עדיין רוצה סחורה ייחודית לאזור. אחרת מוותרים לטובת דוטונבורי.",
+    "image": "/images/places/pokemon-center-osaka-dx.jpg",
     "mapsQuery": "Pokemon Center Osaka DX, Daimaru Umeda",
     "priceLevel": 2,
     "indoor": true
@@ -1622,6 +1668,7 @@
     ],
     "planned": true,
     "descriptionHe": "הרץ הניאוני של אוסקה מעל גשר Ebisubashi — התמונה המשפחתית של הערב.",
+    "image": "/images/places/glico-sign.jpg",
     "mapsQuery": "Glico Sign Ebisubashi Dotonbori",
     "priceLevel": 0
   },
@@ -1705,6 +1752,7 @@
     "planned": true,
     "descriptionHe": "הבסיס האחרון בטוקיו, 15–17.10 — דירת קומה שלמה של 60 מ״ר, שתי דקות מתחנת אינאריצ׳ו.",
     "tips": "עדיין ליד ולא הזמנה סגורה. תנאי סף: חדר מזוודות לפני ואחרי השהות. אם נבחרת לינה אחרת — שומרים על סדר היום של 16.10 ומחשבים מחדש רק את הרגליים הקצרות.",
+    "image": "/images/places/ueno-inaricho-base.jpg",
     "mapsQuery": "Inaricho Station, Taito, Tokyo",
     "indoor": true
   },
@@ -1743,6 +1791,7 @@
     ],
     "planned": true,
     "descriptionHe": "החנות הגדולה של פוקימון בטוקיו, באותו בניין של בית הקפה — גם אם ה־Café לא יסתדר.",
+    "image": "/images/places/pokemon-center-tokyo-dx.jpg",
     "mapsQuery": "Pokemon Center Tokyo DX, Nihonbashi",
     "priceLevel": 2,
     "indoor": true
@@ -1784,6 +1833,7 @@
     "planned": true,
     "descriptionHe": "שורת מסעדות ראמן נבחרות מתחת לתחנת טוקיו — הגיבוי לארוחה אם Pokémon Café לא יסתדר.",
     "tips": "לא מתכננים גם קפה וגם ראמן סטריט כשתי ארוחות מלאות. בוחרים חנות ביום עצמו מהמדריך הרשמי.",
+    "image": "/images/places/tokyo-ramen-street.jpg",
     "officialUrl": "https://www.tokyoeki-1bangai.co.jp/street/ramen/en/",
     "mapsQuery": "Tokyo Ramen Street, Tokyo Station",
     "priceLevel": 1,
@@ -1804,6 +1854,7 @@
     "planned": true,
     "descriptionHe": "שלוש חנויות של יצרניות הממתקים הגדולות של יפן עם טעמים בלעדיים לתחנה.",
     "tips": "בונוס בלבד — רק אם נשאר זמן אחרי Character Street.",
+    "image": "/images/places/okashi-land.jpg",
     "mapsQuery": "Tokyo Okashi Land, Tokyo Station First Avenue",
     "priceLevel": 1,
     "indoor": true
@@ -1823,6 +1874,7 @@
     "planned": true,
     "descriptionHe": "מוזיאון של כ־900 תופים מכל העולם — ועל חלקם מותר באמת לנגן. עצירה אישית ליום האחרון.",
     "tips": "פתוח בשישי 11:00–16:00 עם כניסה אחרונה ב־15:00 — להגיע סביב 14:00. רק כלים המסומנים לנגינה.",
+    "image": "/images/places/taiko-kan.jpg",
     "officialUrl": "https://www.miyamoto-unosuke.co.jp/pages/museum",
     "mapsQuery": "Taikokan Drum Museum, Nishi-Asakusa, Tokyo",
     "priceLevel": 1,
@@ -1845,6 +1897,7 @@
     "planned": true,
     "descriptionHe": "יצרנית תופים ומקדשים ניידים מאז 1861, באותו בניין — כאן קונים את זוג ה־bachi.",
     "tips": "החנות פתוחה עד 18:00. לבחור זוג במלאי — חריטת שם לוקחת כשבוע ואינה אפשרית באותו יום.",
+    "image": "/images/places/miyamoto-unosuke-store.jpg",
     "officialUrl": "https://www.miyamoto-unosuke.co.jp/pages/store",
     "mapsQuery": "Miyamoto Unosuke Shoten Nishi-Asakusa",
     "priceLevel": 2,
@@ -1903,6 +1956,7 @@
     ],
     "planned": true,
     "descriptionHe": "שער הרעם עם הפנס האדום בגובה כמעט 4 מטר — התמונה המשפחתית האחרונה של הטיול.",
+    "image": "/images/places/kaminarimon.jpg",
     "mapsQuery": "Kaminarimon Gate Asakusa",
     "priceLevel": 0
   },
@@ -1940,6 +1994,7 @@
     "planned": true,
     "descriptionHe": "הקניון שלמרגלות ה־Skytree, עם חנויות דמויות ומסעדות.",
     "tips": "בונוס בלבד — רק אם המוזיאון, המקדש והאריזה כבר סגורים בנוח.",
+    "image": "/images/places/solamachi.jpg",
     "mapsQuery": "Tokyo Solamachi, Skytree Town",
     "priceLevel": 2,
     "indoor": true
@@ -1959,6 +2014,7 @@
     "planned": true,
     "descriptionHe": "שוק רחוב הומה מתחת למסילת אואנו — חטיפים, ממתקים וקניות אחרונות של רגע לפני הטיסה.",
     "tips": "בוקר מקומי בלבד 11:00–15:00; לא מוסיפים אטרקציה מתוזמנת ביום היציאה.",
+    "image": "/images/places/ameyoko.jpg",
     "mapsQuery": "Ameyoko Market, Ueno, Tokyo",
     "priceLevel": 1
   },
@@ -1976,6 +2032,7 @@
     ],
     "planned": true,
     "descriptionHe": "פארק ענק עם אגם, מקדשים ומוזיאונים — מקום נעים לשעתיים אחרונות עם מזוודות באחסון.",
+    "image": "/images/places/ueno-park.jpg",
     "mapsQuery": "Ueno Park, Taito, Tokyo",
     "priceLevel": 0
   },
@@ -1994,6 +2051,7 @@
     "planned": true,
     "descriptionHe": "תחנת המוצא של ה־Skyliner לנריטה — מכאן יוצאים סביב 15:45–16:00 ביום האחרון.",
     "tips": "אם המזוודות לא מתגלגלות בנוח 15–20 דקות — מונית קצרה מהדירה. מונית אחת עשויה לא להכיל ארבעה אנשים וארבע מזוודות.",
+    "image": "/images/places/keisei-ueno.jpg",
     "mapsQuery": "Keisei-Ueno Station, Tokyo",
     "indoor": true
   },
@@ -2010,6 +2068,7 @@
     "planned": false,
     "descriptionHe": "חדר עם מאות מכונות גאצ׳ה מכל נושא שאפשר לדמיין — כיף טהור בתקציב של כמה מטבעות.",
     "tips": "מעטפת מזומן קטנה מראש; אחרת זה בור ללא תחתית.",
+    "image": "/images/places/gachapon-kaikan.jpg",
     "mapsQuery": "Gachapon Kaikan Akihabara",
     "priceLevel": 1,
     "indoor": true
@@ -2026,6 +2085,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "תשע קומות של אלקטרוניקה, צעצועים, דגמים ומחלקת משחקים ענקית — מקלט מושלם בגשם.",
+    "image": "/images/places/yodobashi-akiba.jpg",
     "mapsQuery": "Yodobashi Camera Akiba, Akihabara",
     "priceLevel": 2,
     "indoor": true
@@ -2042,6 +2102,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "המקדש שמברך גיקים וטכנולוגיה — מוכר קמעות לאבטחת מידע ומשתף פעולה עם אנימה. חמש דקות מאקיהברה.",
+    "image": "/images/places/kanda-myojin.jpg",
     "mapsQuery": "Kanda Myojin Shrine, Tokyo",
     "priceLevel": 0
   },
@@ -2057,6 +2118,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "כלבו כאוטי פתוח עד מאוחר — חטיפים, קיטים משונים ומזכרות זולות בקומות צפופות.",
+    "image": "/images/places/don-quijote-akihabara.jpg",
     "mapsQuery": "Don Quijote Akihabara",
     "priceLevel": 1,
     "indoor": true
@@ -2073,6 +2135,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "פארק על גג קניון עם סקייטפארק, מגרש בולדרינג ורחוב אוכל — הפסקה טובה בין חנויות בשיבויה.",
+    "image": "/images/places/miyashita-park.jpg",
     "mapsQuery": "Miyashita Park, Shibuya",
     "priceLevel": 1
   },
@@ -2088,6 +2151,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "כלבו ענק פתוח 24 שעות — קיט־קט בטעמים יפניים, מסכות פנים ומזכרות משעשעות.",
+    "image": "/images/places/mega-donki-shibuya.jpg",
     "mapsQuery": "MEGA Don Quijote Shibuya",
     "priceLevel": 1,
     "indoor": true
@@ -2104,6 +2168,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "דוכן הקרפים הוותיק של רחוב טקשיטה — עשרות מילויים בוויטרינה, קרפ אחד לכל אחד.",
+    "image": "/images/places/marion-crepes-harajuku.jpg",
     "mapsQuery": "Marion Crepes Takeshita Street Harajuku",
     "priceLevel": 1
   },
@@ -2119,6 +2184,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "צמר גפן מתוק בגודל ראש בצבעי קשת — התמונה הכי הרג׳וקו שיש.",
+    "image": "/images/places/totti-candy-factory.jpg",
     "mapsQuery": "Totti Candy Factory Takeshita Street",
     "priceLevel": 1
   },
@@ -2134,6 +2200,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "תשע קומות של מוזיקה, J-pop, אנימה ופופ־אפים של אמנים — גן עדן לבת בת ה־16.",
+    "image": "/images/places/tower-records-shibuya.jpg",
     "mapsQuery": "Tower Records Shibuya",
     "priceLevel": 2,
     "indoor": true
@@ -2151,6 +2218,7 @@
     "planned": false,
     "descriptionHe": "מוזיאון מיניאטורות ענק ונע עם אזורי אוונגליון וסיילור מון — מרתק גם למבוגרים, וכולו מקורה.",
     "tips": "אלטרנטיבה מצוינת ליום גשום באזור טויוסו/אודאיבה.",
+    "image": "/images/places/small-worlds-tokyo.jpg",
     "officialUrl": "https://smallworlds.jp/en/",
     "mapsQuery": "SMALL WORLDS TOKYO, Ariake, Koto",
     "priceLevel": 2,
@@ -2168,6 +2236,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "קניון על הטיילת עם רחוב ראמן, פסל חירות קטן ונוף לגשר הקשת.",
+    "image": "/images/places/aqua-city-odaiba.jpg",
     "mapsQuery": "Aqua City Odaiba",
     "priceLevel": 2,
     "indoor": true
@@ -2184,6 +2253,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "חוף עירוני עם נוף לגשר הקשת ולקו הרקיע — מקום נוח לשקיעה אם נשארת אנרגיה.",
+    "image": "/images/places/odaiba-kaihin-park.jpg",
     "mapsQuery": "Odaiba Kaihin Park",
     "priceLevel": 0
   },
@@ -2199,6 +2269,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "רחוב אוכל בסגנון עידן אדו ליד שוק טויוסו — סושי, סקיילנס ודוכני חטיפים, ממש בדרך ל־Mundo Pixar.",
+    "image": "/images/places/toyosu-senkyaku-banrai.jpg",
     "mapsQuery": "Toyosu Senkyaku Banrai",
     "priceLevel": 2,
     "indoor": true
@@ -2215,6 +2286,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "רשת סמטאות זעירות עם דוכני אוכל ובארים קטנים ליד תחנת קיצ׳יג׳וג׳י — ביום זה מקום חטיפים מצוין.",
+    "image": "/images/places/harmonica-yokocho.jpg",
     "mapsQuery": "Harmonica Yokocho Kichijoji",
     "priceLevel": 1
   },
@@ -2230,6 +2302,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "קציצת בשר וואגיו מטוגנת שנמכרת מחלון ברחוב — התור מהיר וזה אחד החטיפים הכי טובים בטוקיו.",
+    "image": "/images/places/satou-menchi-katsu.jpg",
     "mapsQuery": "Satou Kichijoji menchi katsu",
     "priceLevel": 1
   },
@@ -2245,6 +2318,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "גן חיות קטן ורגוע בתוך הפארק, עם בית סנאים שנכנסים אליו — נחמד אחרי מוזיאון ג׳יבלי.",
+    "image": "/images/places/inokashira-park-zoo.jpg",
     "mapsQuery": "Inokashira Park Zoo Mitaka",
     "priceLevel": 1
   },
@@ -2260,6 +2334,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "שדרת קניות מקורה עם חנויות ממתקים, ספרים וצעצועים — נוחה בגשם ובקצב איטי.",
+    "image": "/images/places/kichijoji-sunroad.jpg",
     "mapsQuery": "Kichijoji Sun Road shopping street",
     "priceLevel": 1,
     "indoor": true
@@ -2276,6 +2351,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "מתחם חנויות וקפה עם חצר פתוחה בין שימוקיטזאווה לסטגאיה־דאיטה — בדיוק על הדרך לפחזניות הטוטורו.",
+    "image": "/images/places/bonus-track.jpg",
     "mapsQuery": "Bonus Track Shimokitazawa",
     "priceLevel": 1
   },
@@ -2291,6 +2367,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "חנות ספרים־צעצועים־בדיחות עמוסה עד התקרה — קלאסיקה של שימוקיטזאווה ומצחיקה לנוער.",
+    "image": "/images/places/village-vanguard-shimokitazawa.jpg",
     "mapsQuery": "Village Vanguard Shimokitazawa",
     "priceLevel": 1,
     "indoor": true
@@ -2307,6 +2384,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "פנקייק סופלה רועד ומפורסם — קינוח מושלם אחרי מסלול הקארי, אם עוד נשאר מקום.",
+    "image": "/images/places/flippers-shimokitazawa.jpg",
     "mapsQuery": "Flipper's Shimokitazawa souffle pancake",
     "priceLevel": 2,
     "indoor": true
@@ -2323,6 +2401,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "פארק השעשועים הוותיק ביפן (1853) — קטנטן, מקסים ומצחיק, שתי דקות מסנסו־ג׳י.",
+    "image": "/images/places/hanayashiki.jpg",
     "mapsQuery": "Asakusa Hanayashiki amusement park",
     "priceLevel": 2
   },
@@ -2339,6 +2418,7 @@
     "planned": false,
     "descriptionHe": "רחוב כלי המטבח של טוקיו — כאן קונים את דגמי האוכל מפלסטיק ומחזיקי מפתחות של סושי.",
     "tips": "בדיוק בין Taiko-kan לסנסו־ג׳י.",
+    "image": "/images/places/kappabashi.jpg",
     "mapsQuery": "Kappabashi Kitchen Town, Tokyo",
     "priceLevel": 1
   },
@@ -2354,6 +2434,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "גלידת מאצ׳ה בשבע דרגות עוצמה, כולל החזקה בעולם — משחק טעימות מצוין לילדים.",
+    "image": "/images/places/suzukien-asakusa.jpg",
     "mapsQuery": "Suzukien Asakusa matcha gelato",
     "priceLevel": 1
   },
@@ -2369,6 +2450,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "כלבו לילי ליד קמינרימון — נוח לקניות אחרונות בערב האריזה.",
+    "image": "/images/places/don-quijote-asakusa.jpg",
     "mapsQuery": "Don Quijote Asakusa",
     "priceLevel": 1,
     "indoor": true
@@ -2385,6 +2467,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "גג חינמי מול תחנת טוקיו עם נוף ישיר לרציפי השינקנסן — כיף לחובבי רכבות, ובלי כרטיס.",
+    "image": "/images/places/kitte-marunouchi.jpg",
     "mapsQuery": "KITTE Marunouchi rooftop garden Tokyo",
     "priceLevel": 0
   },
@@ -2401,6 +2484,7 @@
     "planned": false,
     "descriptionHe": "יותר מ־200 סוגי ארוחות רכבת (אקיבן) מכל יפן במקום אחד — קונים לפני שינקנסן.",
     "tips": "בתוך שערי JR. מושלם לבוקר של 11.10 לפני הנסיעה לקיוטו.",
+    "image": "/images/places/ekibenya-matsuri.jpg",
     "mapsQuery": "Ekibenya Matsuri Tokyo Station",
     "priceLevel": 1,
     "indoor": true
@@ -2417,6 +2501,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "מוזיאון קטן וממוזג בתוך מתחם הדום — גיבוי טוב אם גשם משבית את המתקנים ביום החגיגה.",
+    "image": "/images/places/baseball-hall-of-fame.jpg",
     "mapsQuery": "Japanese Baseball Hall of Fame Tokyo Dome",
     "priceLevel": 1,
     "indoor": true
@@ -2433,6 +2518,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "גן יפני מהמאה ה־17 ממש ליד Tokyo Dome — עשרים דקות של שקט בין המתקנים.",
+    "image": "/images/places/koishikawa-korakuen.jpg",
     "mapsQuery": "Koishikawa Korakuen Garden Tokyo",
     "priceLevel": 1
   },
@@ -2448,6 +2534,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "רחוב החטיפים והמזכרות של קמקורה, מיד ליד התחנה — קרוקט, דנגו וגלידה בדרך לאנודן.",
+    "image": "/images/places/komachi-dori.jpg",
     "mapsQuery": "Komachi-dori Kamakura",
     "priceLevel": 1
   },
@@ -2463,6 +2550,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "אקווריום נחמד מול החוף עם מדוזות ומופע דולפינים — הצלה מושלמת ליום גשום בקמקורה.",
+    "image": "/images/places/enoshima-aquarium.jpg",
     "mapsQuery": "Enoshima Aquarium Enosui Fujisawa",
     "priceLevel": 2,
     "indoor": true
@@ -2479,6 +2567,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "חוף רחב ליד תחנת האנודן — עצירת חול ושקיעה בלי לטפס לשום מקום.",
+    "image": "/images/places/yuigahama-beach.jpg",
     "mapsQuery": "Yuigahama Beach Kamakura",
     "priceLevel": 0
   },
@@ -2494,6 +2583,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "עוגיות חמאה בצורת יונה משנת 1894 — המזכרת הקלאסית של קמקורה, וקופסה יפה לפינוק בדרך.",
+    "image": "/images/places/toshimaya-hato-sable.jpg",
     "mapsQuery": "Toshimaya Hato Sable Kamakura",
     "priceLevel": 1
   },
@@ -2509,6 +2599,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "״המטבח של קיוטו״ — סמטה מקורה של דוכני טעימות: מוצ׳י, טמפורה, סויה ומקלות דגים.",
+    "image": "/images/places/nishiki-market.jpg",
     "mapsQuery": "Nishiki Market Kyoto",
     "priceLevel": 1,
     "indoor": true
@@ -2525,6 +2616,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "נקודת ציון מול התחנה עם תצפית וקומת אוכל תת־קרקעית — נוח בין רכבות.",
+    "image": "/images/places/kyoto-tower.jpg",
     "mapsQuery": "Kyoto Tower",
     "priceLevel": 2,
     "indoor": true
@@ -2542,6 +2634,7 @@
     "planned": false,
     "descriptionHe": "סניף פוקימון בעיצוב קיוטו עם פיקאצ׳ו בקימונו — סמוך לגיון, אם הילדים מבקשים עוד אחד.",
     "tips": "המסלול כבר כולל שלושה מרכזי פוקימון שונים; זה תוספת ולא חובה.",
+    "image": "/images/places/pokemon-center-kyoto.jpg",
     "mapsQuery": "Pokemon Center Kyoto, Takashimaya",
     "priceLevel": 2,
     "indoor": true
@@ -2559,6 +2652,7 @@
     "planned": false,
     "descriptionHe": "בית ספר ישן שהפך לספרייה של 300 אלף כרכי מנגה שאפשר לקרוא על הדשא.",
     "tips": "הוחלף בפושימי אינארי במסלול הרשמי — נשמר כאפשרות ליום גשום בקיוטו.",
+    "image": "/images/places/kyoto-manga-museum.jpg",
     "mapsQuery": "Kyoto International Manga Museum",
     "priceLevel": 1,
     "indoor": true
@@ -2575,6 +2669,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "תעלה קטנה עם ערבות בוכיות ובתי עץ מוארים — הפינה הכי יפה של גיון בערב.",
+    "image": "/images/places/gion-shirakawa.jpg",
     "mapsQuery": "Gion Shirakawa, Kyoto",
     "priceLevel": 0
   },
@@ -2590,6 +2685,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "שוק מקורה עם דוכני סקאלופ צלוי, וואגיו על שיפוד ופירות — חמש דקות מ־Den Den Town.",
+    "image": "/images/places/kuromon-market.jpg",
     "mapsQuery": "Kuromon Ichiba Market Osaka",
     "priceLevel": 2,
     "indoor": true
@@ -2606,6 +2702,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "במה בצורת ראש אריה ענק בגובה 12 מטר שבולעת מזל רע — עצירת ״וואו״ של עשר דקות.",
+    "image": "/images/places/namba-yasaka-shrine.jpg",
     "mapsQuery": "Namba Yasaka Shrine Osaka",
     "priceLevel": 0
   },
@@ -2621,6 +2718,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "מתחם משחקים ענק עם ארקייד, באולינג וספורט מקורה — טוב לערב גשום באוסקה.",
+    "image": "/images/places/round1-sennichimae.jpg",
     "mapsQuery": "Round1 Stadium Sennichimae Osaka",
     "priceLevel": 2,
     "indoor": true
@@ -2637,6 +2735,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "גלגל ענק אליפטי צהוב שמטפס בחזית בניין הדונקי מעל התעלה — קצר, מוזר ומאוד אוסקה.",
+    "image": "/images/places/don-quijote-ebisubashi.jpg",
     "mapsQuery": "Don Quijote Ebisu Tower Ferris Wheel Dotonbori",
     "priceLevel": 1
   },
@@ -2652,6 +2751,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "שדרת קניות מקורה באורך 600 מטר צפונית לדוטונבורי — נוחה מאוד בגשם.",
+    "image": "/images/places/shinsaibashi-suji.jpg",
     "mapsQuery": "Shinsaibashi-suji Shopping Street Osaka",
     "priceLevel": 2,
     "indoor": true
@@ -2669,6 +2769,7 @@
     "planned": false,
     "descriptionHe": "אולם הפניקס שמופיע על מטבע ה־10 ין, משתקף באגם — עשר דקות הליכה מתחנת אוג׳י.",
     "tips": "רק אם חריץ Nintendo Museum משאיר זמן ורכבת נוחה לטוקיו.",
+    "image": "/images/places/byodoin.jpg",
     "mapsQuery": "Byodo-in Temple Uji",
     "priceLevel": 1
   },
@@ -2684,6 +2785,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "בית תה מאצ׳ה מ־1854 באוג׳י — קינוחי מאצ׳ה וג׳לי במקום שבו התה הכי טוב ביפן גדל.",
+    "image": "/images/places/nakamura-tokichi.jpg",
     "mapsQuery": "Nakamura Tokichi Honten Uji",
     "priceLevel": 2,
     "indoor": true
@@ -2700,6 +2802,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "גן החיות הוותיק ביפן, בתוך פארק אואנו — אפשרות נעימה לבוקר האחרון אם רוצים משהו קליל.",
+    "image": "/images/places/ueno-zoo.jpg",
     "mapsQuery": "Ueno Zoo Tokyo",
     "priceLevel": 1
   },
@@ -2715,6 +2818,7 @@
     "days": [],
     "planned": false,
     "descriptionHe": "שש קומות של צעצועים, פיגורות ודמויות מול תחנת אואנו — מושלם לקנייה אחרונה לפני נריטה.",
+    "image": "/images/places/yamashiroya-toys.jpg",
     "mapsQuery": "Yamashiroya toy store Ueno",
     "priceLevel": 2,
     "indoor": true
@@ -2731,8 +2835,91 @@
     "days": [],
     "planned": false,
     "descriptionHe": "דינוזאורים, לווייתן כחול בגודל מלא ותיאטרון כדור — מקלט מקורה ומצוין בפארק אואנו.",
+    "image": "/images/places/national-museum-nature-science.jpg",
     "mapsQuery": "National Museum of Nature and Science Ueno",
     "priceLevel": 1,
     "indoor": true
+  },
+  {
+    "id": "loutre",
+    "nameHe": "LOUTRE — קפה הלוטרות של קיוטו",
+    "nameEn": "LOUTRE Otter Cafe Kyoto",
+    "category": "kawaii",
+    "area": "טרמאצ׳י / נאקאגיו",
+    "city": "kyoto",
+    "lat": 35.0068,
+    "lng": 135.7673,
+    "days": [],
+    "planned": false,
+    "descriptionHe": "קפה הלוטרות היחיד בקיוטו — שש לוטרות במרחק 10 דקות הליכה ממיאגאווה־צ׳ו. סייד־קווסט מודע: מחקר הרווחה מסמן קפה חיות אקזוטיות, ולכן זו תוספת אופציונלית שמוותרים עליה ראשונה.",
+    "tips": "כניסה ללא הזמנה, 13:00–19:00 (כניסה אחרונה 18:00). מתאים לחלון של 11.10 בין מיזואקאי לאוואטה. עוזבים אם החיות נראות בלחץ.",
+    "image": "/images/places/loutre.jpg",
+    "officialUrl": "https://www.loutre-kyoto.com/",
+    "mapsQuery": "LOUTRE otter cafe Teramachi Kyoto",
+    "priceLevel": 2,
+    "indoor": true,
+    "openingHours": "13:00–19:00"
+  },
+  {
+    "id": "rock-star",
+    "nameHe": "Rock Star — קפה חיות קטנות",
+    "nameEn": "Small Animal Cafe Rock Star",
+    "category": "kawaii",
+    "area": "נמבה",
+    "city": "osaka",
+    "lat": 34.6659,
+    "lng": 135.505,
+    "days": [],
+    "planned": false,
+    "descriptionHe": "קיפודים, סוריקטות, צ׳ינצ׳ילות, סוגר־גליידרים ועוד — הצוות מביא את החיות לשולחן ומחליפים כמה שרוצים. סייד־קווסט מודע לערב של 13.10 בנמבה.",
+    "tips": "פתוח כל יום 11:00–22:00, בלי הזמנה. שעתיים תמורת ¥1,100 + שתייה. רק עם זמן פנוי אמיתי — מוותרים ראשון.",
+    "image": "/images/places/rock-star.jpg",
+    "officialUrl": "https://animalcafes.com/v/25554.html",
+    "mapsQuery": "Small Animal Cafe Rock Star Namba Osaka",
+    "priceLevel": 1,
+    "indoor": true,
+    "openingHours": "11:00–22:00"
+  },
+  {
+    "id": "amemura-snake-cafe",
+    "nameHe": "קפה הנחשים באמריקה־מורה",
+    "nameEn": "America-mura Snake Cafe",
+    "category": "kawaii",
+    "area": "אמריקה־מורה / נישי־שינסאיבאשי",
+    "city": "osaka",
+    "lat": 34.6724,
+    "lng": 135.4977,
+    "days": [],
+    "planned": false,
+    "descriptionHe": "מפגש קרוב עם נחשים לא ארסיים בלב אמריקה־מורה. סייד־קווסט מודע ל־13.10 — כ־5 דקות מתחנת שינסאיבאשי.",
+    "tips": "12:00–21:00, סגור בימי רביעי (13.10 הוא יום ג׳ — פתוח). כ־¥2,000 לאדם. בלי פלאש, ורק עם זמן פנוי.",
+    "image": "/images/places/amemura-snake-cafe.jpg",
+    "officialUrl": "https://americamura.snakecafe.xyz/",
+    "mapsQuery": "Snake Cafe Amerikamura Nishi-Shinsaibashi Osaka",
+    "priceLevel": 1,
+    "indoor": true,
+    "openingHours": "12:00–21:00, סגור ברביעי"
+  },
+  {
+    "id": "sumida-aquarium",
+    "nameHe": "אקווריום סומידה — דגי זהב ב־Skytree Town",
+    "nameEn": "Sumida Aquarium",
+    "category": "attraction",
+    "area": "אסאקוסה / Skytree Town",
+    "city": "tokyo",
+    "lat": 35.7101,
+    "lng": 139.8107,
+    "days": [
+      16
+    ],
+    "planned": true,
+    "descriptionHe": "אקווריום קומפקטי ויפהפה בתוך Skytree Town עם גלריית דגי זהב בסגנון אדו — גמר אופציונלי ורגוע אחרי סנסו־ג׳י, רבע שעה הליכה.",
+    "tips": "אופציונלי — רק אם האריזה והאנרגיה מאפשרות. בשישי פתוח עד 20:00. כ־¥8,800 למשפחה (¥2,700 מבוגר / ¥2,000 תיכון / ¥1,400 יסודי־חטיבה).",
+    "image": "/images/places/sumida-aquarium.jpg",
+    "officialUrl": "https://www.sumida-aquarium.com/en/",
+    "mapsQuery": "Sumida Aquarium Tokyo Skytree Town",
+    "priceLevel": 2,
+    "indoor": true,
+    "openingHours": "שישי 10:00–20:00"
   }
 ]

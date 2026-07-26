@@ -35,7 +35,8 @@
 | [ ] | Reserve Shiro-Hige Totoro cream-puff pickup for Oct 9 | When the October window opens | Official store contact listed in the food guide | Adult lead |
 | [ ] | Buy Ghibli Museum entry for Oct 8 at 10:00 | **Sept 10 at 10:00 JST / 04:00 Israel time** | [Official Ghibli ticket page](https://www.ghibli-museum.jp/en/tickets/) | One adult books; second adult ready as backup |
 | [ ] | Reserve Pokémon Café for Oct 16 | When October booking rules are announced | [Official café news](https://www.pokemon-cafe.jp/en/cafe/news/); never pay a reservation reseller | Adult lead |
-| [ ] | Reserve Neco Republic Ochanomizu | 2–4 weeks before | Official café channel; confirm child-entry rule and bring opaque socks | Adult lead |
+| [ ] | Reserve Cat Cafe Temari no Oshiro at Kichijōji Petit Mura for Oct 8 | 2–4 weeks before | [Official site](https://temarinooshiro.com/); ages 10+, about JPY 1,200 + tax per person on weekdays | Adult lead |
+| [ ] | Optional: decide on the Oct 16 Sumida Aquarium finale | Final week, by energy | [Official tickets](https://en.sumida-aquarium.com/about/ticket/); no advance commitment needed — the animal side quests (otters/small animals/snakes) are walk-ins and need no booking | Family vote |
 | [ ] | Record every ticket, entry name, cancellation rule and backup | Immediately after each purchase | Shared cloud folder + offline copy on both adults’ phones | Buyer |
 
 ## 6–8 Weeks Before — August
@@ -101,7 +102,7 @@ These are monthly climate normals, **not the 2026 forecast**. October is general
 - cap and sunscreen for exposed park/coast days;
 - optional warmer layer for Enoshima sunset, Awata night procession and late theme-park hours.
 
-Do not plan around a heavy winter coat. Pack layers that can be removed on trains and indoors. For teamLab, follow the attraction’s clothing guidance separately. For Neco Republic, carry opaque socks.
+Do not plan around a heavy winter coat. Pack layers that can be removed on trains and indoors. For teamLab, follow the attraction’s clothing guidance separately. For the Petit Mura cat café, carry clean socks.
 
 ## Final 7 Days — September 24–30
 

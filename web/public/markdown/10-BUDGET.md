@@ -64,7 +64,7 @@ Fill the actual charged amount immediately after every purchase.
 
 | Experience | Date | Booking state | Actual family charge |
 |---|---|---|---:|
-| Neco Republic Ochanomizu | Oct 3 | Reserve | — |
+| Cat Cafe Temari no Oshiro (Kichijōji Petit Mura) | Oct 8 | Reserve · about JPY 5,300 for four at the weekday rate | — |
 | teamLab Planets | Oct 4 | Timed ticket | — |
 | Mundo Pixar | Oct 4 must-do | Buy timed 11:45/12:00 entry | About JPY 20,100 + fees at current D pricing |
 | Joypolis | Oct 4 | Decide passport vs individual | — |
@@ -74,15 +74,18 @@ Fill the actual charged amount immediately after every purchase.
 | Tokyo Dome City | Oct 10 | Live ride choice | — |
 | Ghibli Museum | Oct 8 | Release Sept 10 | — |
 | Mizuekai · 13:00 | Oct 11 | Purchase method TBA | JPY 32,000–40,000 |
+| LOUTRE otter café (side quest) | Oct 11 | Optional walk-in; no reservation | — |
 | UZUMASA Kyoto Village | Oct 12 | Admission; recheck show calendar | JPY 10,000 before extras |
 | DRUM TAO HIBIKI · 19:00 | Oct 12 | Buy when two-month window opens | JPY 40,000 |
 | Fushimi Inari | Oct 13 | No ticket; lower-gates visit | Free |
 | Yūzen engraved chopsticks | Oct 13 | Walk-in after 09:30; reconfirm hours | Record actual product total; JPY 1,100 floor unverified |
+| Rock Star + America-mura snake café (side quests) | Oct 13 | Optional walk-ins; about JPY 1,100 + drink and JPY 2,000 per person | — |
 | USJ Studio Pass | Oct 14 | Buy | — |
 | USJ Express product | Oct 14 | Buy exact current product | — |
 | Nintendo Museum | Oct 15 | Lottery by July 31 | — |
 | Pokémon Café | Oct 16 | Release not announced | Meal total, no reservation fee |
 | Taiko-kan + one bachi pair | Oct 16 | Museum walk-in; buy in shop | About JPY 3,150–3,750 |
+| Sumida Aquarium (optional finale) | Oct 16 | Decide on the day; buy at door or online | About JPY 8,800 for the family |
 
 ## Food Budget
 

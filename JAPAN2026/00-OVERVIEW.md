@@ -16,7 +16,7 @@ Every scheduled block must deliver at least one of:
 - anime, manga, gaming or character fandom;
 - ramen, street food or a memorable themed meal;
 - a short visual “wow” moment;
-- cute character culture or one welfare-conscious rescue-cat visit.
+- cute character culture or one welfare-conscious cat-café visit.
 
 Long museums, luxury-shopping streets, smoky nightlife alleys, repetitive viewpoints and temple marathons have been removed. Meiji Jingu, the Great Buddha and Senso-ji remain because each is iconic, visual and easy to keep short.
 
@@ -25,12 +25,12 @@ Long museums, luxury-shopping streets, smoky nightlife alleys, repetitive viewpo
 | Date | Headline |
 |---|---|
 | Oct 1–2 | Flights, arrival and sleep |
-| Oct 3 | Akihabara gaming challenge + Neco Republic rescue cats |
+| Oct 3 | Akihabara gaming challenge |
 | Oct 4 | teamLab Planets + Mundo Pixar + Odaiba/Joypolis |
 | Oct 5 | PokéPark KANTO; DisneySea if official PokéPark tickets fail |
 | Oct 6 | KAWAII MONSTER LAND + Shibuya Nintendo/Pokémon |
 | Oct 7 | Great Buddha + *Slam Dunk* coast + Enoshima |
-| Oct 8 | Ghibli Museum + compact Nakano/Shinjuku |
+| Oct 8 | Ghibli Museum + Kichijōji Petit Mura cat castle + compact Nakano/Shinjuku |
 | Oct 9 | Todoroki Ravine + Totoro cream puffs + Shimokitazawa Curry Festival |
 | Oct 10 | Tokyo Dome City family celebration |
 | Oct 11 | Early Kyoto transfer + Mizuekai + Awata Shrine night procession |
@@ -67,7 +67,7 @@ The family-wide operational list—including **new walking shoes for all four tr
 - **Best shared fandom:** Akihabara, Nakano, UZUMASA, Den Den Town and Pokémon Centers.
 - **Best food memories:** Shimokitazawa Curry Festival, Totoro cream puffs, Ichiran/AFURI, tsukemen and Dotonbori.
 - **Best nature resets:** Meiji forest, Todoroki Ravine, the Kamakura/Enoshima coast and Inokashira Park.
-- **Best “cute” mix:** one rescue-cat café, Harajuku kawaii, the Shinjuku 3D cat, Kirby/Mofusand/Sanrio character stops.
+- **Best “cute” mix:** the Petit Mura fairy-tale cat castle, Harajuku kawaii, the Shinjuku 3D cat, Kirby/Mofusand/Sanrio character stops.
 - **Best traditional moments:** Mizuekai, Awata Shrine’s night procession, UZUMASA, DRUM TAO, Fushimi Inari and the hands-on Taiko-kan finale.
 
 ## Pacing Rules
@@ -83,7 +83,7 @@ The family-wide operational list—including **new walking shoes for all four tr
 - Todoroki Ravine’s full riverside path reopened on March 24, 2026. It has narrow, uneven and sometimes unfenced sections; skip it during or just after heavy rain. [Official Setagaya update](https://www.city.setagaya.lg.jp/02075/9082.html)
 - Recheck that official Todoroki page one to two weeks before Oct 9 for any temporary maintenance or construction restrictions.
 - The 2026 Shimokitazawa Curry Festival is confirmed for Oct 8–25, so Oct 9 lands on day two. Use mini portions for a family tasting game. [Official festival](https://shimokitazawa-curryfes.com/)
-- No capybara or other exotic-animal café is scheduled. A recent peer-reviewed assessment found consistently low welfare across Japanese exotic-animal cafés; the trip keeps the rescue/adoption-focused Neco Republic visit instead. [Study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
+- The scheduled animal stop is a conventional cat café — **Cat Cafe Temari no Oshiro** inside the fairy-tale **Kichijōji Petit Mura** complex on Oct 8. Three exotic-animal **side quests** (LOUTRE otters in Kyoto Oct 11; Rock Star small animals and the America-mura snake café in Osaka Oct 13) were added deliberately as optional walk-ins, knowing a peer-reviewed assessment found consistently low welfare across Japanese exotic-animal cafés — they are eyes-open, cut-first extras. [Study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
 - Akihabara’s pedestrian zone is Sunday-only in October, so it is not promised on Saturday Oct 3.
 - PokéPark October hours are 11:00–19:00 and limited-access app requests begin from 10:45.
 - Tokyo Yosakoi and Ikegami Oeshiki are no longer in the route; Kyoto’s fixed-date Mizuekai and Awata events replace them.

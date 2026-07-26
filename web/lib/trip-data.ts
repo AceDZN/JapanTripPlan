@@ -145,8 +145,8 @@ export const tripDays: TripDay[] = [
     dateHe: "שבת, 3 באוקטובר",
     shortDate: "3.10",
     title: "אקיהברה: לשחק ולאסוף",
-    area: "אקיהברה ← אוצ׳נומיזו",
-    theme: "אנימה, משחקי רטרו, ארקייד וחתולי הצלה",
+    area: "אקיהברה",
+    theme: "אנימה, משחקי רטרו וארקייד",
     city: "tokyo",
     color: "#8b5cf6",
     lat: 35.6992,
@@ -155,7 +155,7 @@ export const tripDays: TripDay[] = [
       "Radio Kaikan עם רשימת ציד",
       "Mandarake אחרי 12:00",
       "ארקייד אחד + Super Potato",
-      "Neco Republic ב־16:30",
+      "סשן גאצ׳פון מבוקר",
     ],
     note: "תקציב משחק ¥1,500–2,000 לילד. כלל קניות: מצלמים פריט יקר ולא קונים את הגרסה הראשונה שרואים. אזור ההולכים של Chuo-dori פועל רק בימי ראשון באוקטובר — לא מבטיחים אותו בשבת.",
     foodAnchors: ["coco-ichibanya-akihabara"],
@@ -206,20 +206,8 @@ export const tripDays: TripDay[] = [
         time: "16:00",
         title: "חנות נוספת",
         placeIds: ["akihabara-electric-town"],
-        detail: "לוותר בקלות. מגינים על זמן הארקייד ועל ההזמנה בבית הקפה.",
+        detail: "לוותר בקלות. מגינים על זמן הארקייד — קפה החתולים עבר ליום ג׳יבלי (8.10).",
         cutFirst: true,
-      },
-      {
-        time: "16:30–17:30",
-        title: "Neco Republic — חתולי הצלה",
-        placeIds: ["neco-republic"],
-        detail:
-          "הליכה קצרה מאקיהברה. סוגרים ב־18:00 בשבת, חובה גרביים אטומות, ובן ה־12 נכנס עם מבוגר.",
-        booking: {
-          label: "להזמין ביקור מראש",
-          url: "https://www.neco-republic.jp/shop/shop-necorepublic-ochanomizu/",
-          status: "buy-now",
-        },
       },
       {
         time: "ערב",
@@ -569,6 +557,7 @@ export const tripDays: TripDay[] = [
     highlights: [
       "ג׳יבלי ב־10:00",
       "פארק אינוקשירה וצהריים בקיצ׳יג׳וג׳י",
+      "טירת החתולים ב־Petit Mura",
       "Nakano Broadway 60–90 דקות",
       "חתול 3D וגודזילה",
     ],
@@ -600,7 +589,19 @@ export const tripDays: TripDay[] = [
         detail: "הולכים דרך הפארק לכיוון קיצ׳יג׳וג׳י ואוכלים משהו פשוט.",
       },
       {
-        time: "14:00–16:30",
+        time: "13:00–14:00",
+        title: "Kichijōji Petit Mura — טירת החתולים",
+        placeIds: ["petit-mura"],
+        detail:
+          "כפר אגדות קטן חמש דקות מתחנת קיצ׳יג׳וג׳י. נכנסים ל־Cat Cafe Temari no Oshiro — טירה דו־קומתית עם כ־20 חתולים, בלי הגבלת זמן. גיל 10+, כ־¥1,200 + מס לאדם ביום חול.",
+        booking: {
+          label: "להזמין ביקור מראש",
+          url: "https://temarinooshiro.com/",
+          status: "buy-now",
+        },
+      },
+      {
+        time: "14:15–16:30",
         title: "ציד אוצרות ב־Nakano Broadway",
         placeIds: ["nakano-broadway"],
         detail:
@@ -616,7 +617,7 @@ export const tripDays: TripDay[] = [
         time: "—",
         title: "namco TOKYO, ואז חנויות נוספות בנקאנו",
         placeIds: ["namco-tokyo"],
-        detail: "לוותר בקלות. מגינים על ג׳יבלי ועל ארוחת צהריים לא לחוצה.",
+        detail: "לוותר בקלות. מגינים על ג׳יבלי, על טירת החתולים ועל ארוחת צהריים לא לחוצה.",
         cutFirst: true,
       },
     ],
@@ -639,7 +640,7 @@ export const tripDays: TripDay[] = [
       "פיקניק קצר ב־Hanegi",
       "מסלול שלוש מנות קארי",
     ],
-    note: "החלטת קפה חיות: נשארים עם חתולי ההצלה של 3.10 ולא מוסיפים קפה קפיברות — לאף מפעיל בטוקיו אין אימות רווחה עצמאי מספיק חזק.",
+    note: "החלטת קפה חיות: העצירה המתוכננת היא קפה החתולים ב־Petit Mura (8.10). סייד־קווסטים אקזוטיים בקיוטו/אוסקה (לוטרות, חיות קטנות, נחשים) נוספו במודע כאופציה בלבד — מחקר הרווחה עדיין מסמן אותם, אז נכנסים רק עם זמן פנוי אמיתי ועוזבים אם החיות בלחץ.",
     rainPlan:
       "בגשם כבד: מדלגים על טודורוקי ועל Hanegi, מתחילים באיסוף המוזמן ב־Shiro-Hige וממשיכים למסעדות המקורות של הפסטיבל, ל־Mikan, ל־Reload ולבתי קפה.",
     foodAnchors: ["setsugekka", "shiro-hige-cream-puff", "shimokitazawa-curry-festival"],
@@ -834,6 +835,14 @@ export const tripDays: TripDay[] = [
         detail: "יושבים, שותים ונחים ליד הרסיטל/אוואטה. הדירה אינה תחנת מנוחה מעשית לפני התהלוכה.",
       },
       {
+        time: "15:30–16:30",
+        title: "סייד־קווסט: LOUTRE — קפה הלוטרות",
+        placeIds: ["loutre"],
+        detail:
+          "רק אם נשאר זמן פנוי אמיתי לפני אוואטה. כניסה ללא הזמנה (13:00–19:00), כ־10 דקות הליכה ממיאגאווה־צ׳ו. נוסף במודע למרות מחקר הרווחה על קפה חיות אקזוטיות — מוותרים ראשון, ועוזבים אם החיות בלחץ.",
+        cutFirst: true,
+      },
+      {
         time: "מ־17:00",
         title: "תהלוכת הלילה של מקדש אוואטה",
         placeIds: ["awata-shrine"],
@@ -995,6 +1004,14 @@ export const tripDays: TripDay[] = [
         title: "Pokémon Center Osaka DX",
         placeIds: ["pokemon-center-osaka-dx"],
         detail: "לוותר בקלות. רק אם המשפחה עדיין רוצה סחורה ייחודית לאזור.",
+        cutFirst: true,
+      },
+      {
+        time: "—",
+        title: "סייד־קווסטים: Rock Star וקפה הנחשים",
+        placeIds: ["rock-star", "amemura-snake-cafe"],
+        detail:
+          "רק עם זמן פנוי אמיתי: Rock Star בנמבה (קיפודים, סוריקטות, צ׳ינצ׳ילות; 11:00–22:00, ¥1,100 + שתייה לשעתיים) וקפה הנחשים באמריקה־מורה (12:00–21:00, פתוח ביום ג׳; כ־¥2,000). נוספו במודע למרות מחקר הרווחה — מוותרים בלי רגשות אשם.",
         cutFirst: true,
       },
       {
@@ -1221,6 +1238,19 @@ export const tripDays: TripDay[] = [
         title: "סנסו־ג׳י כשהקהל מתפזר",
         placeIds: ["sensoji", "nakamise", "kaminarimon"],
         detail: "חטיף מהיר בנקמיסה ותמונה משפחתית בקמינרימון.",
+      },
+      {
+        time: "17:45",
+        title: "אקווריום סומידה — גמר דגי הזהב (אופציונלי)",
+        placeIds: ["sumida-aquarium"],
+        detail:
+          "רבע שעה הליכה מסנסו־ג׳י, בתוך Skytree Town, עם גלריית דגי זהב בסגנון אדו. בשישי פתוח עד 20:00; כ־¥8,800 למשפחה (¥2,700 מבוגר / ¥2,000 תיכון / ¥1,400 יסודי־חטיבה). רק אם האריזה והאנרגיה מאפשרות בנוחות.",
+        cutFirst: true,
+        booking: {
+          label: "כרטיסים ומחירים רשמיים",
+          url: "https://www.sumida-aquarium.com/en/about/price/index.html",
+          status: "monitor",
+        },
       },
       {
         time: "ערב",

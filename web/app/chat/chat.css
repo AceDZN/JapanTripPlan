@@ -155,6 +155,80 @@
   }
 }
 
+/* ------------------------------------------------------- tool activity */
+
+.chat-tools {
+  display: grid;
+  font-size: 13px;
+  gap: 5px;
+}
+
+.chat-tools-live {
+  color: var(--text-muted);
+}
+
+.chat-tools-live li {
+  align-items: center;
+  animation: chat-in 200ms ease both;
+  display: flex;
+  gap: 7px;
+}
+
+.chat-tools-live li.is-done {
+  color: var(--matcha);
+}
+
+.chat-tool-spinner {
+  animation: chat-spin 700ms linear infinite;
+  border: 2px solid color-mix(in srgb, var(--vermillion) 30%, transparent);
+  border-radius: 50%;
+  border-top-color: var(--vermillion);
+  display: block;
+  flex: 0 0 auto;
+  height: 13px;
+  width: 13px;
+}
+
+@keyframes chat-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* collapsed summary, once the answer is streaming */
+.chat-tools-done {
+  margin-bottom: 9px;
+}
+
+.chat-tools-done summary {
+  align-items: center;
+  color: var(--text-faint);
+  cursor: pointer;
+  display: flex;
+  font-size: 12px;
+  gap: 5px;
+  list-style: none;
+  width: fit-content;
+}
+
+.chat-tools-done summary::-webkit-details-marker {
+  display: none;
+}
+
+.chat-tools-done summary:hover {
+  color: var(--text-muted);
+}
+
+.chat-tools-done ul {
+  border-inline-start: 2px solid var(--line);
+  color: var(--text-muted);
+  display: grid;
+  font-size: 12.5px;
+  gap: 3px;
+  margin-top: 6px;
+  padding-inline-start: 10px;
+}
+
 /* ----------------------------------------------------- markdown-lite body */
 
 .chat-md > * + * {
@@ -407,4 +481,169 @@
   .chat-head p {
     display: none;
   }
+}
+
+/* ------------------------------------------------- header actions + voice */
+
+.chat-head-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chat-speak-toggle.is-on {
+  border-color: color-mix(in srgb, var(--matcha) 55%, transparent);
+  color: var(--matcha);
+}
+
+/* Per-answer read-aloud control. */
+.chat-speak {
+  align-items: center;
+  background: none;
+  border: 0;
+  color: var(--text-faint);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 12px;
+  gap: 5px;
+  margin-top: 8px;
+  padding: 3px 0;
+  transition: color 160ms ease;
+}
+
+.chat-speak:hover,
+.chat-speak.is-speaking {
+  color: var(--vermillion);
+}
+
+/* Voice note bubble — the transcript lives on the agent side, not here. */
+.chat-bubble-user.is-voice p {
+  font-variant-emoji: text;
+  letter-spacing: 0.01em;
+}
+
+/* --------------------------------------------------------- mic + recording */
+
+.chat-mic {
+  align-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  height: 42px;
+  justify-content: center;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  width: 42px;
+}
+
+.chat-mic:hover:not(:disabled) {
+  color: var(--vermillion);
+  transform: scale(1.06);
+}
+
+.chat-mic:disabled {
+  cursor: progress;
+  opacity: 0.5;
+}
+
+.chat-mic.is-recording {
+  animation: chat-pulse 1.4s ease-in-out infinite;
+  background: var(--vermillion);
+  border-color: transparent;
+  color: #fff;
+}
+
+@keyframes chat-pulse {
+  50% {
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--vermillion) 18%, transparent);
+  }
+}
+
+.chat-recording {
+  align-items: center;
+  background: color-mix(in srgb, var(--vermillion) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--vermillion) 30%, transparent);
+  border-radius: var(--r);
+  display: flex;
+  font-size: 13px;
+  gap: 9px;
+  margin-top: 6px;
+  padding: 9px 13px;
+}
+
+.chat-recording-dot {
+  animation: chat-blink 1.15s ease-in-out infinite;
+  background: var(--vermillion);
+  border-radius: 50%;
+  flex: 0 0 auto;
+  height: 9px;
+  width: 9px;
+}
+
+.chat-recording-max {
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.chat-recording-cancel {
+  background: none;
+  border: 0;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12.5px;
+  margin-inline-start: auto;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.chat-recording-cancel:hover {
+  color: var(--vermillion);
+}
+
+/* ------------------------------------------------------- location context */
+
+/* Subtle pin in the composer: on = location rides with the next question,
+   live = the last send actually carried coordinates. */
+.chat-geo {
+  align-items: center;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  color: var(--text-faint);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  height: 38px;
+  justify-content: center;
+  position: relative;
+  transition: color 160ms ease, background 160ms ease;
+  width: 38px;
+}
+
+.chat-geo:hover {
+  background: var(--surface-2);
+}
+
+.chat-geo.is-on {
+  color: color-mix(in srgb, var(--matcha) 80%, var(--text-muted));
+}
+
+.chat-geo.is-live {
+  color: var(--matcha);
+}
+
+.chat-geo.is-live::after {
+  background: var(--matcha);
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  content: "";
+  height: 8px;
+  inset-block-start: 6px;
+  inset-inline-end: 5px;
+  position: absolute;
+  width: 8px;
 }

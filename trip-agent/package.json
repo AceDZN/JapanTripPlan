@@ -1,0 +1,36 @@
+{
+  "name": "trip-agent",
+  "version": "0.0.0",
+  "type": "module",
+  "imports": {
+    "#*": "./agent/*",
+    "#evals/*": "./evals/*"
+  },
+  "scripts": {
+    "sync-data": "node scripts/sync-data.mjs",
+    "prebuild": "npm run sync-data",
+    "build": "eve build",
+    "predev": "npm run sync-data",
+    "dev": "eve dev",
+    "start": "eve start",
+    "pretypecheck": "npm run sync-data",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@vercel/connect": "0.4.2",
+    "ai": "^7.0.34",
+    "eve": "^0.27.6",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.x",
+    "typescript": "7.0.2"
+  },
+  "overrides": {
+    "ai": "^7.0.34"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+
+}

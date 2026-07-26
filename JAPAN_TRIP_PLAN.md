@@ -11,12 +11,12 @@
 |---|---|
 | Oct 1 | Fly TLV → Addis Ababa |
 | Oct 2 | Arrive Narita, transfer, eat and sleep |
-| Oct 3 | Akihabara play/collect challenge + rescue-cat café |
+| Oct 3 | Akihabara play/collect challenge |
 | Oct 4 | teamLab Planets + Mundo Pixar + Odaiba/Joypolis |
 | Oct 5 | PokéPark KANTO; DisneySea only if official PokéPark tickets fail |
 | Oct 6 | Harajuku KAWAII MONSTER LAND + Shibuya gaming/fandom |
 | Oct 7 | Kamakura Great Buddha + *Slam Dunk* coast + Enoshima |
-| Oct 8 | Ghibli Museum + compact Nakano/Shinjuku |
+| Oct 8 | Ghibli Museum + Kichijōji Petit Mura + compact Nakano/Shinjuku |
 | Oct 9 | Todoroki Ravine + Totoro cream puffs + Shimokitazawa Curry Festival |
 | Oct 10 | Tokyo Dome City family celebration |
 | Oct 11 | Early Kyoto transfer + Mizuekai + Awata Shrine night procession |

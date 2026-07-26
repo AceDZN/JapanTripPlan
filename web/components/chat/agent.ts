@@ -52,23 +52,24 @@ function nowBlock(now: Date): string {
 }
 
 /**
- * Builds the trip agent. The Gateway key is passed explicitly rather than read
- * from `process.env`, because on Cloudflare Workers the bindings live on the
- * per-request `env` object and `process.env` is not populated.
+ * Builds the trip agent.
+ *
+ * `apiKey` is optional: on Vercel the AI SDK authenticates to the Gateway with
+ * the request's OIDC token, so the plain model slug resolves through the
+ * default provider. An explicit key (local `.env.local`, or an override) wins
+ * when it is present.
  */
 export function createTripAgent({
   apiKey,
   model = DEFAULT_CHAT_MODEL,
   now = new Date(),
 }: {
-  apiKey: string;
+  apiKey?: string;
   model?: string;
   now?: Date;
 }) {
-  const gateway = createGateway({ apiKey });
-
   return new ToolLoopAgent({
-    model: gateway(model),
+    model: apiKey ? createGateway({ apiKey })(model) : model,
     instructions: PERSONA + nowBlock(now),
     tools: tripTools,
     stopWhen: stepCountIs(8),

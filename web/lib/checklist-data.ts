@@ -119,11 +119,11 @@ export const checklistItems: ChecklistItem[] = [
     url: "https://shiro-hige.net/",
   },
   {
-    id: "neco-republic",
+    id: "petit-mura",
     group: "כרטיסים ואטרקציות",
-    title: "להזמין Neco Republic אוצ׳נומיזו ל־3.10 ב־16:30",
-    detail: "2–4 שבועות מראש. לאמת את כלל כניסת הילדים ולהביא גרביים אטומות. בשבת סוגרים ב־18:00.",
-    url: "https://www.neco-republic.jp/shop/shop-necorepublic-ochanomizu/",
+    title: "להזמין Cat Cafe Temari no Oshiro (Petit Mura, קיצ׳יג׳וג׳י) ל־8.10",
+    detail: "2–4 שבועות מראש. גיל 10+ — שני הילדים עוברים. כ־¥1,200 + מס לאדם ביום חול, ולהביא גרביים נקיות.",
+    url: "https://temarinooshiro.com/",
   },
   {
     id: "tokyo-dome-city",
@@ -131,6 +131,13 @@ export const checklistItems: ChecklistItem[] = [
     title: "לבדוק הפעלה ותחזוקה ב־Tokyo Dome City ל־10.10",
     detail: "קונים מתקנים בודדים או פספורט רק אחרי בדיקה חיה, ומאמתים מגבלות גובה וגיל.",
     url: "https://www.at-raku.com/",
+  },
+  {
+    id: "sumida-aquarium",
+    group: "כרטיסים ואטרקציות",
+    title: "אופציונלי: להחליט על אקווריום סומידה ל־16.10",
+    detail: "גמר דגי הזהב אחרי סנסו־ג׳י — מחליטים בשבוע האחרון לפי אנרגיה. ¥2,700 מבוגר / ¥2,000 תיכון / ¥1,400 יסודי־חטיבה. סייד־קווסטים של החיות (לוטרות/חיות קטנות/נחשים) הם כניסה חופשית בלי הזמנה.",
+    url: "https://en.sumida-aquarium.com/about/ticket/",
   },
   {
     id: "ticket-records",
@@ -310,7 +317,7 @@ export const checklistItems: ChecklistItem[] = [
     id: "special-clothing",
     group: "ציוד ואריזה",
     title: "פריטים ייעודיים לאטרקציות",
-    detail: "ל־teamLab: בגדים שאפשר להפשיל מעל הברך לפי הנחיות האטרקציה. ל־Neco Republic: גרביים אטומות. שכבה חמה יותר לשקיעה באנושימה, לתהלוכת אוואטה ולשעות מאוחרות בפארקים.",
+    detail: "ל־teamLab: בגדים שאפשר להפשיל מעל הברך לפי הנחיות האטרקציה. לקפה החתולים ב־Petit Mura: גרביים נקיות. שכבה חמה יותר לשקיעה באנושימה, לתהלוכת אוואטה ולשעות מאוחרות בפארקים.",
   },
   {
     id: "yuzen-spellings",
