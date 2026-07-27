@@ -18,6 +18,17 @@ const MODEL = process.env.EVE_MODEL ?? "google/gemini-3.6-flash";
 export default defineAgent({
   model: MODEL,
 
+  // Gemini occasionally returns transient 500s through the Gateway. Fail over
+  // instead of parking the session: retry on 2.5-flash, then Claude Sonnet
+  // (both verified working on this account).
+  modelOptions: {
+    providerOptions: {
+      gateway: {
+        models: ["google/gemini-2.5-flash", "anthropic/claude-sonnet-5"],
+      },
+    },
+  },
+
   // Family app: a runaway loop should stop and ask instead of quietly burning
   // budget. Hitting a limit pauses the session and offers approve / stop.
   limits: {
