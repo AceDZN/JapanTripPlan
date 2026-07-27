@@ -19,12 +19,19 @@ export default defineAgent({
   model: MODEL,
 
   // Gemini occasionally returns transient 500s through the Gateway. Fail over
-  // instead of parking the session: retry on 2.5-flash, then Claude Sonnet
-  // (both verified working on this account).
+  // instead of parking the session. Gemini-family first (user preference);
+  // GPT only as the very last resort. Paid-tier-only entries simply 403 and
+  // cascade to the next while the account is on free credits.
   modelOptions: {
     providerOptions: {
       gateway: {
-        models: ["google/gemini-2.5-flash", "anthropic/claude-sonnet-5"],
+        models: [
+          "google/gemini-2.5-flash",
+          "google/gemini-3.5-flash",
+          "google/gemini-3-flash",
+          "openai/gpt-5.6-luna",
+          "openai/gpt-5-mini",
+        ],
       },
     },
   },
