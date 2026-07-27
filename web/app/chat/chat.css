@@ -647,3 +647,34 @@
   position: absolute;
   width: 8px;
 }
+
+/* Retry affordance inside the error card — a failed turn parks the session,
+   so asking again is genuinely the next step, not a refresh. */
+.chat-retry {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 6px;
+  margin-top: 10px;
+  min-height: 34px;
+  padding: 6px 14px;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.chat-retry:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--vermillion);
+  color: var(--vermillion);
+  transform: translateY(-1px);
+}
+
+.chat-retry:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

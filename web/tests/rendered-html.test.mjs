@@ -368,6 +368,30 @@ test("the composer carries a location toggle wired to both transports", async ()
   assert.match(styles, /\.chat-geo\b/);
 });
 
+test("a failed turn offers to ask again instead of dead-ending", async () => {
+  const view = await readFile(new URL("../components/chat/ChatView.tsx", import.meta.url), "utf8");
+
+  assert.match(view, /className="chat-retry"/);
+  assert.match(view, /נסה שוב/);
+  // Durable path resends on the parked session; the fallback replays the turn.
+  assert.match(view, /onRetry=\{chat\.canRetry/);
+  assert.match(view, /void regenerate\(\)/);
+
+  const hook = await readFile(new URL("../components/chat/useEveChat.ts", import.meta.url), "utf8");
+  // The failed bubble is reused, never duplicated by the resend.
+  assert.match(hook, /dropSupersededUser/);
+  assert.match(hook, /kind: "retrying"/);
+  // Model failure and lost signal read differently.
+  assert.match(hook, /errorKind: failed\?\.status === NETWORK_FAILURE \? "offline" : "agent"/);
+
+  const client = await readFile(new URL("../components/chat/eve-client.ts", import.meta.url), "utf8");
+  // Recovers the resume handle when the failure outran `session.waiting`.
+  assert.match(client, /streamSession\(sessionId, -1\)/);
+
+  const styles = await readFile(new URL("../app/chat/chat.css", import.meta.url), "utf8");
+  assert.match(styles, /\.chat-retry\b/);
+});
+
 /* ========================================================================== */
 /* API routes                                                                  */
 /* ========================================================================== */

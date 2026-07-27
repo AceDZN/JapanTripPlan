@@ -12,6 +12,7 @@ import {
   MapPinOff,
   MessageCirclePlus,
   Mic,
+  RotateCw,
   Sparkles,
   Square,
   Volume2,
@@ -54,7 +55,12 @@ const SUGGESTIONS = [
 const OFFLINE_MESSAGE =
   "אין חיבור לאינטרנט, אז אי אפשר לשאול כרגע. המסלול והמדריכים עדיין זמינים אופליין.";
 
-type TransportError = { message: string; hint?: string };
+type TransportError = {
+  message: string;
+  hint?: string;
+  /** Overrides the icon/tone the card picks from the hint. */
+  kind?: "offline" | "agent";
+};
 
 /** Reads persisted UIMessages, discarding anything that is not the current shape. */
 function loadStored(): TripUIMessage[] {
@@ -168,7 +174,9 @@ function EveConversation() {
     [chat],
   );
 
-  const error: TransportError | null = chat.error ? { message: chat.error } : null;
+  const error: TransportError | null = chat.error
+    ? { message: chat.error, kind: chat.errorKind ?? "agent" }
+    : null;
 
   return (
     <ChatSurface
@@ -180,6 +188,8 @@ function EveConversation() {
       onStop={chat.cancel}
       onReset={chat.messages.length > 0 || chat.hasSession ? chat.newChat : undefined}
       onVoiceError={setVoiceError}
+      // A failed turn parks the session; the same question goes back on it.
+      onRetry={chat.canRetry && !voiceError ? () => void chat.retry() : undefined}
       geo={geo}
       voiceEnabled
     />
@@ -193,7 +203,7 @@ function SdkConversation() {
   const initialMessages = useMemo(() => loadStored(), []);
   const transport = useMemo(() => new DefaultChatTransport<TripUIMessage>({ api: "/api/chat" }), []);
 
-  const { messages, sendMessage, status, error, stop, setMessages, clearError } =
+  const { messages, sendMessage, status, error, stop, setMessages, clearError, regenerate } =
     useChat<TripUIMessage>({ transport, messages: initialMessages });
 
   const busy = status === "submitted" || status === "streaming";
@@ -259,6 +269,16 @@ function SdkConversation() {
       onSubmit={submit}
       onStop={stop}
       onReset={bubbles.length > 0 ? reset : undefined}
+      // `regenerate` replays the last user turn against /api/chat, which is the
+      // same "ask it again" the durable path offers.
+      onRetry={
+        error && bubbles.length > 0
+          ? () => {
+              clearError();
+              void regenerate();
+            }
+          : undefined
+      }
       geo={geo}
       // No mic here: /api/chat runs Claude through the Gateway, which does not
       // take audio input. Voice questions need eve mode.
@@ -349,6 +369,7 @@ function ChatSurface({
   onStop,
   onReset,
   onVoiceError,
+  onRetry,
   geo,
   voiceEnabled,
 }: {
@@ -360,6 +381,7 @@ function ChatSurface({
   onStop: () => void;
   onReset?: () => void;
   onVoiceError?: (message: string) => void;
+  onRetry?: () => void;
   geo?: GeoContext;
   voiceEnabled: boolean;
 }) {
@@ -374,13 +396,18 @@ function ChatSurface({
 
   /* ------------------------------------------------------------- send path */
 
+  const blockedRef = useRef<SendInput | null>(null);
+
   const guardedSubmit = useCallback(
     (payload: SendInput) => {
       if (busy) return;
       if (typeof navigator !== "undefined" && navigator.onLine === false) {
+        // Held so the card's retry can send it once the signal is back.
+        blockedRef.current = payload;
         setOffline(true);
         return;
       }
+      blockedRef.current = null;
       setOffline(false);
       stickToBottom.current = true;
       onSubmit(payload);
@@ -453,8 +480,28 @@ function ChatSurface({
   }, [input, autosize]);
 
   const isEmpty = messages.length === 0 && !hydrating;
-  const transportError: TransportError | null = offline ? { message: OFFLINE_MESSAGE } : error;
-  const errorKind = offline ? "offline" : transportError?.hint ? "setup" : "generic";
+  const transportError: TransportError | null = offline
+    ? { message: OFFLINE_MESSAGE, kind: "offline" }
+    : error;
+
+  const errorKind = transportError?.hint
+    ? "setup"
+    : (transportError?.kind ?? (offline ? "offline" : "generic"));
+
+  /** Retry means "send that question again", whoever blocked it. */
+  const retry = useCallback(() => {
+    const blocked = blockedRef.current;
+    if (blocked) {
+      blockedRef.current = null;
+      setOffline(false);
+      guardedSubmit(blocked);
+      return;
+    }
+    setOffline(false);
+    onRetry?.();
+  }, [guardedSubmit, onRetry]);
+
+  const showRetry = Boolean(transportError) && (offline || Boolean(onRetry));
 
   const showMic = voiceEnabled && recorder.supported;
 
@@ -628,6 +675,12 @@ function ChatSurface({
           <div>
             <strong>{transportError.message}</strong>
             {transportError.hint ? <code>{transportError.hint}</code> : null}
+            {showRetry ? (
+              <button type="button" className="chat-retry" onClick={retry} disabled={busy}>
+                <RotateCw size={14} />
+                נסה שוב
+              </button>
+            ) : null}
           </div>
         </div>
       ) : null}

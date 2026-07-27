@@ -13,8 +13,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  AGENT_FAILURE_MESSAGE,
   CONTEXT_PREFIX,
   EVE_INITIAL_STATE,
+  dropSupersededUser,
   GEO_FRESH_MS,
   VOICE_BUBBLE_LABEL,
   VOICE_TEXT_PART,
@@ -410,4 +412,194 @@ test("hides the context part when only the flattened summary survived", () => {
   const line = buildContextLine({ now: DURING_TRIP });
   const { text } = readUserMessage({ message: `${line}\nמה התוכנית להיום?` });
   assert.equal(text, "מה התוכנית להיום?");
+});
+
+/* ========================================================================== */
+/* Turn failure and retry                                                      */
+/* ========================================================================== */
+
+const FAILED_TURN = "turn_boom";
+
+/**
+ * The failure seen in the wild: the model call died upstream (Gemini 500),
+ * eve reported `turn.failed`, then parked the session for the user to retry.
+ */
+const UPSTREAM_FAILURE = [
+  { type: "turn.started", data: { sequence: 1, turnId: FAILED_TURN } },
+  {
+    type: "message.received",
+    data: {
+      message: "מה יש לאכול פה?",
+      parts: [{ type: "text", text: "מה יש לאכול פה?" }],
+      sequence: 2,
+      turnId: FAILED_TURN,
+    },
+  },
+  { type: "step.started", data: { sequence: 3, stepIndex: 0, turnId: FAILED_TURN } },
+  {
+    type: "message.appended",
+    data: { messageDelta: "רגע", messageSoFar: "רגע", sequence: 4, stepIndex: 0, turnId: FAILED_TURN },
+  },
+  {
+    type: "step.failed",
+    data: {
+      code: "model_error",
+      message: "google/gemini-3-pro: 500 Internal Server Error",
+      sequence: 5,
+      stepIndex: 0,
+      turnId: FAILED_TURN,
+    },
+  },
+  {
+    type: "turn.failed",
+    data: {
+      code: "model_error",
+      message: "google/gemini-3-pro: 500 Internal Server Error",
+      sequence: 6,
+      turnId: FAILED_TURN,
+    },
+  },
+  { type: "session.waiting", data: { continuationToken: "eve:after-failure", wait: "next-user-message" } },
+];
+
+test("a failed turn raises a retryable card and never strands the typing indicator", () => {
+  const state = play(UPSTREAM_FAILURE);
+
+  assert.equal(state.status, "waiting", "the session parked and accepts the next message");
+  assert.equal(state.error, AGENT_FAILURE_MESSAGE);
+  assert.equal(state.error, "הסוכן נתקל בתקלה זמנית");
+  assert.equal(state.retryable, true);
+
+  // Nothing may still claim to be streaming once the turn died.
+  assert.equal(
+    state.messages.every((message) => !message.streaming),
+    true,
+    "a mid-stream failure must settle every bubble",
+  );
+
+  // The question the user asked stays on screen.
+  assert.equal(visibleMessages(state.messages)[0].text, "מה יש לאכול פה?");
+});
+
+test("the post-failure session.waiting supplies the token the retry sends on", () => {
+  const state = play(UPSTREAM_FAILURE);
+
+  assert.equal(state.continuationToken, "eve:after-failure");
+  assert.equal(state.error, AGENT_FAILURE_MESSAGE, "parking must not dismiss the card");
+  assert.equal(state.retryable, true, "the retry button survives the park");
+});
+
+test("a recoverable step.failure alone paints no error card", () => {
+  // Model failover retries the step and the turn carries on; a card here would
+  // flash a failure that never happened.
+  const recovered = play([
+    ...UPSTREAM_FAILURE.slice(0, 5),
+    {
+      type: "message.appended",
+      data: { messageDelta: "יש ראמן", messageSoFar: "יש ראמן", sequence: 6, stepIndex: 1, turnId: FAILED_TURN },
+    },
+    {
+      type: "message.completed",
+      data: { finishReason: "stop", message: "יש ראמן ממש קרוב.", sequence: 7, stepIndex: 1, turnId: FAILED_TURN },
+    },
+    { type: "turn.completed", data: { sequence: 8, turnId: FAILED_TURN } },
+    { type: "session.waiting", data: { continuationToken: "eve:ok", wait: "next-user-message" } },
+  ]);
+
+  assert.equal(recovered.error, null);
+  assert.equal(recovered.retryable, false);
+  assert.equal(recovered.messages.at(-1).text, "יש ראמן ממש קרוב.");
+});
+
+test("retrying resends the question and replaces its bubble instead of duplicating", () => {
+  const failed = play(UPSTREAM_FAILURE);
+  assert.equal(visibleMessages(failed.messages).filter((m) => m.role === "user").length, 1);
+
+  // eve confirms the resend with a second `message.received` on a new turn.
+  const resent = play(
+    [
+      { type: "turn.started", data: { sequence: 7, turnId: "turn_retry" } },
+      {
+        type: "message.received",
+        data: {
+          message: "מה יש לאכול פה?",
+          parts: [{ type: "text", text: "מה יש לאכול פה?" }],
+          sequence: 8,
+          turnId: "turn_retry",
+        },
+      },
+    ],
+    failed,
+  );
+
+  assert.equal(resent.error, null, "starting the retry turn dismisses the card");
+  assert.equal(resent.retryable, false);
+
+  // Two identical user bubbles are on the raw list until the retry collapses them.
+  assert.equal(resent.messages.filter((message) => message.role === "user").length, 2);
+  const collapsed = dropSupersededUser(resent.messages);
+  const users = collapsed.filter((message) => message.role === "user");
+  assert.equal(users.length, 1, "the failed copy is replaced, not stacked");
+  assert.equal(users[0].text, "מה יש לאכול פה?");
+});
+
+test("supersede only collapses an identical, immediately preceding question", () => {
+  const bubble = (id, role, text, audio = false) => ({
+    id,
+    role,
+    text,
+    audio,
+    activity: [],
+    streaming: false,
+    final: true,
+  });
+
+  // A different question is a real follow-up, not a resend.
+  const distinct = [bubble("u1", "user", "מה התוכנית?"), bubble("u2", "user", "ומחר?")];
+  assert.equal(dropSupersededUser(distinct).length, 2);
+
+  // An answered exchange in between means the repeat was deliberate.
+  const answered = [
+    bubble("u1", "user", "מה התוכנית?"),
+    bubble("a1", "assistant", "יום ארוך."),
+    bubble("u2", "user", "מה התוכנית?"),
+  ];
+  assert.equal(dropSupersededUser(answered).length, 2, "the assistant turn is kept");
+  assert.equal(dropSupersededUser(answered).filter((m) => m.role === "user").length, 1);
+
+  // A voice note never collapses into a typed question that reads the same.
+  const mixed = [
+    bubble("u1", "user", VOICE_BUBBLE_LABEL, true),
+    bubble("u2", "user", VOICE_BUBBLE_LABEL, false),
+  ];
+  assert.equal(dropSupersededUser(mixed).length, 2);
+
+  // Trailing assistant bubble: nothing to supersede.
+  assert.equal(dropSupersededUser([bubble("a1", "assistant", "שלום")]).length, 1);
+  assert.equal(dropSupersededUser([]).length, 0);
+});
+
+test("maps upstream failure codes to actionable Hebrew", () => {
+  const of = (code, message) =>
+    play([
+      { type: "turn.started", data: { turnId: "t" } },
+      { type: "turn.failed", data: { code, message, turnId: "t" } },
+    ]).error;
+
+  assert.equal(of("model_error", "500 Internal Server Error"), AGENT_FAILURE_MESSAGE);
+  assert.match(of("rate_limit_exceeded", "429"), /יותר מדי בקשות/);
+  assert.match(of("insufficient_credit", "quota exhausted"), /קרדיט/);
+  assert.match(of("unauthorized", "401"), /EVE_SHARED_SECRET/);
+  assert.match(of("timeout", "timed out"), /יותר מדי זמן/);
+});
+
+test("a terminal session.failed is retryable too", () => {
+  const state = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    { type: "session.failed", data: { code: "internal", message: "boom", sessionId: "ses_1" } },
+  ]);
+
+  assert.equal(state.status, "failed");
+  assert.equal(state.retryable, true);
+  assert.equal(state.messages.every((message) => !message.streaming), true);
 });

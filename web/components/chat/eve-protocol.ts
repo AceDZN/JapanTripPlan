@@ -47,6 +47,11 @@ export type EveState = {
   continuationToken: string | null;
   status: EveStatus;
   error: string | null;
+  /**
+   * The last turn died on the agent side and the session parked for retry, so
+   * the error card can offer to re-send the question.
+   */
+  retryable: boolean;
   /** Absolute count of events consumed — the reconnect `startIndex`. */
   cursor: number;
   /** How many `message.received` events landed; drops optimistic bubbles. */
@@ -200,6 +205,7 @@ export const EVE_INITIAL_STATE: EveState = {
   continuationToken: null,
   status: "idle",
   error: null,
+  retryable: false,
   cursor: 0,
   received: 0,
 };
@@ -322,9 +328,18 @@ export function readUserMessage(data: Record<string, unknown> | undefined): {
   return { text, audio };
 }
 
-/** Turns a failure payload into something a Hebrew-speaking family can act on. */
+/** What a transient upstream/model failure reads like. Paired with a retry button. */
+export const AGENT_FAILURE_MESSAGE = "הסוכן נתקל בתקלה זמנית";
+
+/**
+ * Turns a failure payload into something a Hebrew-speaking family can act on.
+ *
+ * The default is deliberately the transient-upstream wording: a `turn.failed`
+ * is by definition the agent side giving up, and the session parks afterwards
+ * so the very next thing to try is simply asking again.
+ */
 export function failureMessage(data: Record<string, unknown> | undefined): string {
-  const message = str(data?.message) ?? "";
+  const message = `${str(data?.code) ?? ""} ${str(data?.message) ?? ""}`;
 
   if (/quota|credit|payment|insufficient|balance/i.test(message)) {
     return "נגמר הקרדיט של הסוכן. אפשר לטעון עוד בלוח הבקרה.";
@@ -336,9 +351,9 @@ export function failureMessage(data: Record<string, unknown> | undefined): strin
     return "הסוכן דחה את הבקשה. בדקו את הגדרות החיבור (EVE_SHARED_SECRET).";
   }
   if (/timeout|timed out|abort/i.test(message)) {
-    return "התשובה לקחה יותר מדי זמן. נסו לשאול שוב.";
+    return "התשובה לקחה יותר מדי זמן. אפשר לנסות שוב.";
   }
-  return "משהו השתבש בדרך לסוכן. נסו שוב בעוד רגע.";
+  return AGENT_FAILURE_MESSAGE;
 }
 
 /* ------------------------------------------------------------------ reducer */
@@ -359,7 +374,8 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
 
     case "turn.started":
       // No bubble yet — `message.received` must render above the answer.
-      return { ...base, status: "streaming", error: null };
+      // A new turn is also what dismisses the previous turn's error card.
+      return { ...base, status: "streaming", error: null, retryable: false };
 
     case "message.received": {
       const { text, audio } = readUserMessage(data);
@@ -486,14 +502,22 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
     case "turn.cancelled":
       return { ...base, messages: settle(base.messages) };
 
+    // A step can fail and still be recovered by the harness (model failover,
+    // for one), and no `turn.failed` follows. Painting an error card here would
+    // flash a lie, so the terminal turn/session failure is what the user sees.
     case "step.failed":
+      return base;
+
     case "turn.failed":
     case "session.failed":
       return {
         ...base,
+        // Clears every `streaming` flag, so a mid-stream failure cannot strand
+        // the typing indicator.
         messages: settle(base.messages),
         status: "failed",
         error: failureMessage(data),
+        retryable: true,
       };
 
     case "session.waiting":
@@ -512,6 +536,32 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
     default:
       return base;
   }
+}
+
+/**
+ * Removes the user bubble a retry just replaced.
+ *
+ * Re-sending after `turn.failed` puts the same question on the wire again, and
+ * eve confirms it with a second `message.received`. Rather than showing the
+ * question twice, the earlier copy is dropped so the thread reads as one
+ * question that eventually got answered. Only the immediately preceding user
+ * turn can be superseded, and only when it matches word for word.
+ */
+export function dropSupersededUser(messages: EveBubble[]): EveBubble[] {
+  const latest = messages[messages.length - 1];
+  if (!latest || latest.role !== "user") return messages;
+
+  for (let index = messages.length - 2; index >= 0; index -= 1) {
+    const candidate = messages[index];
+    if (candidate.role !== "user") continue;
+
+    if (candidate.text === latest.text && candidate.audio === latest.audio) {
+      return [...messages.slice(0, index), ...messages.slice(index + 1)];
+    }
+    return messages;
+  }
+
+  return messages;
 }
 
 /** Drops turn placeholders that never produced text or a status line. */
