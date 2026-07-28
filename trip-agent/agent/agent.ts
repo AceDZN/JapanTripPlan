@@ -18,6 +18,24 @@ const MODEL = process.env.EVE_MODEL ?? "google/gemini-3.6-flash";
 export default defineAgent({
   model: MODEL,
 
+  // Gemini occasionally returns transient 500s through the Gateway. Fail over
+  // instead of parking the session. Gemini-family first (user preference);
+  // GPT only as the very last resort. Paid-tier-only entries simply 403 and
+  // cascade to the next while the account is on free credits.
+  modelOptions: {
+    providerOptions: {
+      gateway: {
+        models: [
+          "google/gemini-2.5-flash",
+          "google/gemini-3.5-flash",
+          "google/gemini-3-flash",
+          "openai/gpt-5.6-luna",
+          "openai/gpt-5-mini",
+        ],
+      },
+    },
+  },
+
   // Family app: a runaway loop should stop and ask instead of quietly burning
   // budget. Hitting a limit pauses the session and offers approve / stop.
   limits: {

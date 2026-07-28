@@ -86,6 +86,8 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 2. **Animate Akihabara** for current series and character goods.
 3. **Mandarake Complex** after its noon opening for used figures and older Hunter × Hunter / Pokémon finds.
 
+**Optional flea-market swap:** the current 2026 calendar lists the **Oi Racecourse Tokyo City Flea Market** on Oct 3, marked with an asterisk, from 09:00–14:30 with free entry. If vintage bags, used character goods and bargain hunting excite the family more than a full Akihabara morning, replace—not add to—the morning block, leave the market by about 12:30/13:00 and run only a focused Akihabara list afterward. It is weather-sensitive, so check the organizer’s feed the night before and again that morning. [Organizer Instagram](https://www.instagram.com/tokyocity_fleamarket/) · [2026 date listing](https://odekakeoffice.jp/blog/2026/06/20/tokyo-city-flea-market/) · [independent venue guide](https://www.timeout.com/tokyo/shopping/oi-racecourse-flea-market)
+
 ### Afternoon · 12:30–17:30
 
 - Lunch: **CoCo Ichibanya** or a nearby ramen shop. A maid café is optional only if both children actively want the performance.
@@ -385,7 +387,7 @@ If the family strongly prefers the historic masked theatre, leave UZUMASA around
 ## Day 13 — Tue, Oct 13: Fushimi Inari + Osaka Neon
 
 **Theme:** one iconic Kyoto image, then a compact Osaka food-and-anime evening
-**Route:** Fushimi Inari apartment → shrine → apartment/checkout → Kyoto/Shin-Osaka → Namba/Nipponbashi
+**Route:** Fushimi Inari apartment → shrine → apartment/checkout → live best rail route → Namba/Nipponbashi
 
 ### Early morning
 
@@ -394,7 +396,8 @@ If the family strongly prefers the historic masked theatre, leave UZUMASA around
 - Turn back before the full mountain climb. This is the trip’s one iconic classical-Kyoto sight, not a hiking day.
 - At **09:30**, stop at **Handmade Chopstick Workshop Yūzen Fushimi**, one minute from JR Inari. Eligible pairs can be engraved on the spot in roughly five minutes each; prepare the exact Roman-letter or katakana spelling before entering. The shop lists 09:30–17:30 with seasonal variation, so reconfirm Tuesday opening by phone during the final week. [Official shop account](https://page.line.me/xat.0000115429.mcu)
 - Do not promise the Instagram post’s JPY 1,100 starting price; no current official price list confirms it. Choose by actual product price and confirm whether each pair includes engraving.
-- Return for final packing, complete the host’s checkout steps by 11:00, then travel through Kyoto/Shin-Osaka to Namba. Retrieve the main suitcases if they were forwarded.
+- Return for final packing, complete the host’s checkout steps by 11:00, then continue to Namba and retrieve the main suitcases if they were forwarded.
+- Do **not** default to the Shinkansen for this short transfer. Kyoto → Osaka by JR Special Rapid is currently about 28–29 minutes and JPY 580; Kyoto → Shin-Osaka by unreserved Shinkansen is about 14–15 minutes and JPY 1,450. The latter saves only about 13–15 train minutes, costs JPY 870 more per person (**JPY 3,480 for four**) and still leaves a longer Shin-Osaka → Namba subway ride. If the live route goes through Kyoto Station, use the Special Rapid to Osaka/Umeda and then the Midosuji Line; if the final hotel makes a Keihan route from Fushimi-inari toward central Osaka faster, take that instead. Re-run the exact apartment → hotel route after the Osaka booking is fixed. [JR West routes/timetables](https://www.westjr.co.jp/travel-information/en/plan-your-trip/routes-schedule/) · [current Kyoto–Shin-Osaka comparison](https://transit.yahoo.co.jp/search/result?all=1&from=%E4%BA%AC%E9%83%BD&stype=&to=%E6%96%B0%E5%A4%A7%E9%98%AA) · [official Keihan Fushimi-inari station](https://www.keihan.co.jp/traffic/station/151/info.html)
 
 ### Afternoon
 

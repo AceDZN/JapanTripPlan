@@ -5,6 +5,7 @@ import {
   EVE_INITIAL_STATE,
   VOICE_BUBBLE_LABEL,
   VOICE_TEXT_PART,
+  dropSupersededUser,
   reduceEve,
   visibleMessages,
   type EveBubble,
@@ -13,8 +14,10 @@ import {
 } from "./eve-protocol";
 import {
   EveTransportError,
+  NETWORK_FAILURE,
   cancelTurn,
   createSession,
+  fetchContinuationToken,
   sendFollowUp,
   streamSession,
   type EveMessage,
@@ -42,42 +45,98 @@ export type VoiceAttachment = { dataUrl: string; mediaType: string };
 
 export type SendInput = { text?: string; audio?: VoiceAttachment };
 
+/** How the visible error card should read and which icon it gets. */
+export type ChatErrorKind = "offline" | "agent";
+
 type ChatState = {
   eve: EveState;
   /** Optimistic user bubble, dropped as soon as `message.received` confirms it. */
   pending: EveBubble[];
   sending: boolean;
+  /** A resend is in flight; the next `message.received` replaces its predecessor. */
+  retrying: boolean;
   localError: string | null;
+  localErrorKind: ChatErrorKind | null;
 };
 
 type Action =
   | { kind: "event"; event: EveEvent }
   | { kind: "optimistic"; bubble: EveBubble }
-  | { kind: "error"; message: string }
+  | { kind: "retrying" }
+  | { kind: "error"; message: string; errorKind: ChatErrorKind }
   | { kind: "clearError" }
   | { kind: "reset" };
 
-const INITIAL: ChatState = { eve: EVE_INITIAL_STATE, pending: [], sending: false, localError: null };
+const INITIAL: ChatState = {
+  eve: EVE_INITIAL_STATE,
+  pending: [],
+  sending: false,
+  retrying: false,
+  localError: null,
+  localErrorKind: null,
+};
 
-const SETTLES = new Set(["session.waiting", "session.failed", "session.completed", "turn.failed"]);
+const SETTLES = new Set([
+  "session.waiting",
+  "session.failed",
+  "session.completed",
+  "turn.failed",
+  "turn.cancelled",
+]);
 
 function reducer(state: ChatState, action: Action): ChatState {
   switch (action.kind) {
     case "event": {
       const eve = reduceEve(state.eve, action.event, toolStatusLabel);
+      const confirmed = action.event.type === "message.received";
+
       return {
-        eve,
-        pending: action.event.type === "message.received" ? [] : state.pending,
+        eve:
+          confirmed && state.retrying
+            ? { ...eve, messages: dropSupersededUser(eve.messages) }
+            : eve,
+        pending: confirmed ? [] : state.pending,
+        retrying: confirmed ? false : state.retrying,
         sending: SETTLES.has(action.event.type) ? false : state.sending,
         localError: eve.error ? null : state.localError,
+        localErrorKind: eve.error ? null : state.localErrorKind,
       };
     }
     case "optimistic":
-      return { ...state, pending: [action.bubble], sending: true, localError: null };
+      return {
+        ...state,
+        pending: [action.bubble],
+        sending: true,
+        retrying: false,
+        localError: null,
+        localErrorKind: null,
+      };
+    case "retrying":
+      // The failed bubble stays on screen; no optimistic copy is added.
+      return {
+        ...state,
+        sending: true,
+        retrying: true,
+        localError: null,
+        localErrorKind: null,
+        eve: { ...state.eve, error: null, retryable: false },
+      };
     case "error":
-      return { ...state, pending: [], sending: false, localError: action.message };
+      return {
+        ...state,
+        pending: [],
+        sending: false,
+        retrying: false,
+        localError: action.message,
+        localErrorKind: action.errorKind,
+      };
     case "clearError":
-      return { ...state, localError: null, eve: { ...state.eve, error: null } };
+      return {
+        ...state,
+        localError: null,
+        localErrorKind: null,
+        eve: { ...state.eve, error: null, retryable: false },
+      };
     case "reset":
       return INITIAL;
   }
@@ -182,6 +241,10 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   const cursorRef = useRef(0);
   const streamRef = useRef<AbortController | null>(null);
   const contextRef = useRef(resolveContext);
+  /** The last thing the family asked, so a failed turn can be tried again. */
+  const lastInputRef = useRef<SendInput | null>(null);
+  /** Render-safe mirror of `lastInputRef` — refs must not be read during render. */
+  const [hasLastInput, setHasLastInput] = useState(false);
 
   useEffect(() => {
     tokenRef.current = state.eve.continuationToken;
@@ -225,6 +288,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
             dispatch({
               kind: "error",
               message: "השיחה הקודמת כבר לא זמינה אצל הסוכן. אפשר להתחיל שיחה חדשה.",
+              errorKind: "agent",
             });
             return;
           }
@@ -234,6 +298,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
             dispatch({
               kind: "error",
               message: "החיבור לסוכן נפל ולא הצליח לחזור. בדקו את החיבור לאינטרנט ונסו שוב.",
+              errorKind: "offline",
             });
             return;
           }
@@ -262,25 +327,10 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
 
   /* ------------------------------------------------------------------ send */
 
-  const send = useCallback(
+  /** Puts one turn on the wire. Shared by a fresh send and by a retry. */
+  const deliver = useCallback(
     async (input: SendInput) => {
-      const typed = input.text?.trim() ?? "";
-      if (!typed && !input.audio) return;
-
-      // The bubble lands first; the context lookup happens behind it.
-      dispatch({
-        kind: "optimistic",
-        bubble: {
-          id: `pending:${Date.now()}`,
-          role: "user",
-          text: input.audio ? VOICE_BUBBLE_LABEL : typed,
-          audio: Boolean(input.audio),
-          activity: [],
-          streaming: false,
-          final: true,
-        },
-      });
-
+      // Re-resolved per attempt, so a retry carries the current time and place.
       const contextLine = (await contextRef.current?.()) ?? null;
       const message = buildMessage(input, contextLine);
       if (message.length === 0) return;
@@ -296,7 +346,11 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
           return;
         }
 
-        const token = tokenRef.current;
+        // A failed turn parks the session and rotates the token on the
+        // `session.waiting` that follows. If the retry beat that event, read
+        // the stream tail to recover the handle rather than dead-ending.
+        let token = tokenRef.current;
+        if (!token) token = await fetchContinuationToken(sessionRef.current);
         if (!token) {
           throw new EveTransportError("השיחה עוד נטענת מהסוכן. נסו שוב בעוד רגע.", 409);
         }
@@ -306,15 +360,56 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
         const rotated = await sendFollowUp(sessionRef.current, token, message);
         if (rotated) tokenRef.current = rotated;
       } catch (error) {
-        const message_ =
-          error instanceof EveTransportError && error.message
-            ? error.message
-            : "לא הצלחנו לשלוח את ההודעה לסוכן. נסו שוב בעוד רגע.";
-        dispatch({ kind: "error", message: message_ });
+        const failed = error instanceof EveTransportError ? error : null;
+        dispatch({
+          kind: "error",
+          message: failed?.message || "לא הצלחנו לשלוח את ההודעה לסוכן. נסו שוב בעוד רגע.",
+          errorKind: failed?.status === NETWORK_FAILURE ? "offline" : "agent",
+        });
       }
     },
     [startStream],
   );
+
+  const send = useCallback(
+    async (input: SendInput) => {
+      const typed = input.text?.trim() ?? "";
+      if (!typed && !input.audio) return;
+
+      lastInputRef.current = input;
+      setHasLastInput(true);
+
+      // The bubble lands first; the context lookup happens behind it.
+      dispatch({
+        kind: "optimistic",
+        bubble: {
+          id: `pending:${Date.now()}`,
+          role: "user",
+          text: input.audio ? VOICE_BUBBLE_LABEL : typed,
+          audio: Boolean(input.audio),
+          activity: [],
+          streaming: false,
+          final: true,
+        },
+      });
+
+      await deliver(input);
+    },
+    [deliver],
+  );
+
+  /**
+   * Re-sends the last question on the same parked session. The failed user
+   * bubble stays on screen and is replaced — not duplicated — once eve confirms
+   * the resend with a new `message.received`.
+   */
+  const retry = useCallback(async () => {
+    const last = lastInputRef.current;
+    if (!last) return;
+
+    dispatch({ kind: "retrying" });
+    await deliver(last);
+  }, [deliver]);
 
   const cancel = useCallback(() => {
     if (sessionRef.current) void cancelTurn(sessionRef.current);
@@ -326,6 +421,8 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
     sessionRef.current = null;
     tokenRef.current = null;
     cursorRef.current = 0;
+    lastInputRef.current = null;
+    setHasLastInput(false);
     writeStoredSession(null);
     setSessionId(null);
     setHydrating(false);
@@ -347,8 +444,13 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
     /** True while the transcript is still being rebuilt from the durable stream. */
     hydrating: hydrating && Boolean(sessionId),
     error: state.localError ?? state.eve.error,
+    /** "offline" for a rejected fetch, "agent" for a failure eve reported. */
+    errorKind: state.localErrorKind ?? (state.eve.error ? "agent" : null),
+    /** The error card can offer to send the question again. */
+    canRetry: hasLastInput && !busy && Boolean(state.eve.retryable || state.localError),
     hasSession: Boolean(sessionId),
     send,
+    retry,
     cancel,
     newChat,
     clearError,

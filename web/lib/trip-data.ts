@@ -152,12 +152,19 @@ export const tripDays: TripDay[] = [
     lat: 35.6992,
     lng: 139.7716,
     highlights: [
+      "שוק הפשפשים Oi כאופציית החלפה",
       "Radio Kaikan עם רשימת ציד",
       "Mandarake אחרי 12:00",
       "ארקייד אחד + Super Potato",
-      "סשן גאצ׳פון מבוקר",
     ],
     note: "תקציב משחק ¥1,500–2,000 לילד. כלל קניות: מצלמים פריט יקר ולא קונים את הגרסה הראשונה שרואים. אזור ההולכים של Chuo-dori פועל רק בימי ראשון באוקטובר — לא מבטיחים אותו בשבת.",
+    discovery: {
+      label: "טיפ מאומת מהרשת",
+      title: "שוק הפשפשים Oi — החלפת בוקר אפשרית",
+      detail:
+        "לוח 2026 מציג את 3.10, 09:00–14:30, כניסה חינם, עם כוכבית ותלות במזג האוויר. אם בוחרים בו, הוא מחליף את בוקר אקיהברה ולא נוסף אליו; בודקים שוב בלילה שלפני ובאותו בוקר.",
+      href: "https://www.instagram.com/tokyocity_fleamarket/",
+    },
     foodAnchors: ["coco-ichibanya-akihabara"],
     blocks: [
       {
@@ -951,10 +958,17 @@ export const tripDays: TripDay[] = [
     highlights: [
       "שערי הטוריאי התחתונים מוקדם",
       "חריטת מקלות אכילה ב־09:30",
+      "רכבת רגילה לאוסקה — בלי שינקנסן",
       "Den Den Town מקוצר",
-      "כרטיס ניקוד אוכל בדוטונבורי",
     ],
     note: "טירת אוסקה הוסרה מיום ההגעה — היא הוסיפה נסיעה חוצת עיר וזמן מוזיאון לפני השכונה הכי טובה של אוסקה.",
+    discovery: {
+      label: "עדכון תחבורה מאומת",
+      title: "לא לוקחים שינקנסן כברירת מחדל",
+      detail:
+        "קיוטו→אוסקה ב־JR Special Rapid הוא כ־28–29 דקות ו־¥580; שינקנסן לקיוטו→שין־אוסקה הוא כ־14–15 דקות ו־¥1,450. לנמבה ההחלפות מוחקות כמעט את כל יתרון הזמן, והפער למשפחה הוא ¥3,480.",
+      href: "https://transit.yahoo.co.jp/search/result?all=1&from=%E4%BA%AC%E9%83%BD&stype=&to=%E6%96%B0%E5%A4%A7%E9%98%AA",
+    },
     foodAnchors: ["dotonbori"],
     blocks: [
       {
@@ -984,9 +998,10 @@ export const tripDays: TripDay[] = [
       },
       {
         time: "11:30",
-        title: "קיוטו / שין־אוסקה ← נמבה",
-        placeIds: ["kyoto-station", "namba-base"],
-        detail: "מורידים מזוודות בבסיס בנמבה לפני Den Den Town, ואוספים את המזוודות הגדולות אם שוגרו.",
+        title: "פושימי אינארי ← נמבה ברכבת רגילה",
+        placeIds: ["namba-base"],
+        detail:
+          "ברירת המחדל היא JR/Metro או Keihan, לא שינקנסן. אם המסלול החי עובר בתחנת קיוטו: JR Inari ← Kyoto ← Special Rapid לאוסקה/Umeda ← Midosuji לנמבה. אם המלון הסופי הופך את Keihan מפושימי למהיר יותר — בוחרים בו. מורידים מזוודות לפני Den Den Town ואוספים את הגדולות אם שוגרו.",
         booking: {
           label: "לינה 13–15.10 · עדיין לא הוזמן",
           url: "https://www.eslead-hotel.com/en/namba-east/",

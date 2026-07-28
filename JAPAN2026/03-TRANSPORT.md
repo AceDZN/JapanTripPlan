@@ -163,6 +163,8 @@ Use a one-direction route and return through Fujisawa. This avoids repeating the
 - Spend 60–90 minutes around the lower torii route and turn back before the mountain climb becomes the day’s headline.
 - Yūzen Fushimi is one minute from JR Inari and lists a 09:30 opening. Visit only after the early shrine loop; allow 20–30 minutes for choosing/engraving and confirm Tuesday hours in the final week.
 - Return for breakfast and bags, complete the host’s checkout steps by 11:00, then continue to Namba. Fushimi replaces the Manga Museum; it is not added before it.
+- Do not buy a Kyoto → Shin-Osaka Shinkansen ticket by reflex. The current comparison is about **14–15 minutes / JPY 1,450** by unreserved Shinkansen versus about **28–29 minutes / JPY 580** by JR Special Rapid to Osaka. Those are different arrival stations: Namba is farther from Shin-Osaka, and the Shinkansen also adds a ticket/gate transfer at Kyoto. The JPY 870 segment premium is **JPY 3,480 for this four-adult-fare family** for little or no useful door-to-door saving. [JR West route and timetable tools](https://www.westjr.co.jp/travel-information/en/plan-your-trip/routes-schedule/) · [live fare/time cross-check](https://transit.yahoo.co.jp/search/result?all=1&from=%E4%BA%AC%E9%83%BD&stype=&to=%E6%96%B0%E5%A4%A7%E9%98%AA)
+- Once the Osaka hotel is booked, compare two complete routes: **JR Inari → Kyoto → Special Rapid to Osaka/Umeda → Midosuji to Namba**, and a **Keihan Fushimi-inari → central Osaka** route. Use the winner for the actual hotel and luggage load; do not optimize only the Kyoto–Osaka headline time. [Keihan Fushimi-inari station](https://www.keihan.co.jp/traffic/station/151/info.html) · [Osaka Metro Namba](https://subway.osakametro.co.jp/en/station_guide/M/m20/index.php/map.php)
 
 ### Taiko-kan deadline — Oct 16
 
@@ -185,7 +187,7 @@ Use a one-direction route and return through Fujisawa. This avoids repeating the
 ### Oct 13
 
 - Leave luggage in the apartment during the early Fushimi Inari visit, then return and check out by 11:00.
-- Use the quickest live route from Fushimi Inari through Kyoto/Shin-Osaka to Namba and drop luggage before Den Den Town.
+- Use the quickest live route from the Fushimi Inari apartment to the final Osaka hotel. The baseline is ordinary JR/Metro or Keihan—not the Shinkansen—unless a live door-to-door comparison unusually proves otherwise.
 - Protect the short Fushimi visit. If the morning slips, shorten duplicate Den Den Town/Pokémon shopping after arrival in Osaka rather than moving Fushimi to another day.
 
 ### Oct 15 if Nintendo Museum succeeds

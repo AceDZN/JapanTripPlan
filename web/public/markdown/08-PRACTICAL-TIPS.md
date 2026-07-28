@@ -163,6 +163,12 @@ Three exotic-animal **side quests** are deliberate, eyes-open exceptions to the 
 - Carry fragile figures in hand luggage.
 - Do not schedule tax-free paperwork near a timed attraction.
 
+## Flea-Market Reality Check
+
+- **Useful trip match — Tokyo, Oct 3:** the 2026 listing includes the **Oi Racecourse Tokyo City Flea Market** on Oct 3, marked with an asterisk, from 09:00–14:30 with free entry. It can replace the first part of the Akihabara day if the family wants vintage/used treasure hunting more than a long anime-store morning. It is not an extra stop, and rain can cancel it. Check the [organizer’s Instagram](https://www.instagram.com/tokyocity_fleamarket/) the night before and morning of the event; the [dated listing](https://odekakeoffice.jp/blog/2026/06/20/tokyo-city-flea-market/) and [independent guide](https://www.timeout.com/tokyo/shopping/oi-racecourse-flea-market) support the time, venue and free entry.
+- **Real, but not on this trip — Kyoto:** To-ji’s large Kobo-ichi market is held on the **21st of each month**, while Kitano Tenmangu’s Tenjin market is on the **25th**. The family leaves Japan on Oct 17, so neither fits. [Official To-ji explanation](https://toji.or.jp/smp/mieku/) · [official Kitano Tenmangu calendar](https://kitanotenmangu.or.jp/event/)
+- **Not a standing market — Osaka:** Omatsuri Hiroba is an event space inside Expo ’70 Commemorative Park in Suita. It sometimes hosts flea markets and festivals, but there is no recurring market to assume; it is also outside the compact Namba/USJ route. Add it only if the [official venue](https://www.expo70-park.jp/facility/reserve/nature-09/) publishes a specific Oct 13–15 event worth replacing an existing anchor.
+
 ## PokéPark Ticket-Sourcing Rule
 
 - As of Jul 24, the overseas store shows maintenance/changeover information and no Oct 5 purchase path. Monitor it for official inventory re-release.
@@ -231,6 +237,7 @@ The canonical family-wide action tracker is [11-PRE-TRIP-CHECKLIST.md](./11-PRE-
 - [ ] PokéPark purchased only through an official/explicitly authorized channel; DisneySea fallback decision recorded.
 - [ ] Restaurant dietary requests reconfirmed.
 - [ ] Festival schedules and transit controls checked.
+- [ ] If using the Oct 3 Oi flea-market swap, organizer confirms it is running and weather is suitable.
 - [ ] Mizuekai 13:00 ticket method and seat level.
 - [ ] UZUMASA October show schedule and HIBIKI tickets/QR codes.
 - [ ] Fushimi Inari lower-gates plan and apartment return before 11:00 checkout.

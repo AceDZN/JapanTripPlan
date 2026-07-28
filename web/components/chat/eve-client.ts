@@ -42,6 +42,25 @@ export class EveTransportError extends Error {
 
 const BASE = "/api/agent";
 
+/**
+ * Status stamped on a rejected `fetch` — the request never reached the relay.
+ * Distinguishes "the phone lost signal" from "the agent said no".
+ */
+export const NETWORK_FAILURE = 0;
+
+/** `fetch` with transport rejections normalized into an `EveTransportError`. */
+async function request(url: string, init?: RequestInit): Promise<Response> {
+  try {
+    return await fetch(url, init);
+  } catch (error) {
+    if ((error as Error)?.name === "AbortError") throw error;
+    throw new EveTransportError(
+      "אין חיבור לסוכן. בדקו את החיבור לאינטרנט ונסו שוב.",
+      NETWORK_FAILURE,
+    );
+  }
+}
+
 async function failure(response: Response): Promise<EveTransportError> {
   let detail = "";
   try {
@@ -71,7 +90,7 @@ export async function createSession(
   message: EveMessage,
   signal?: AbortSignal,
 ): Promise<EveSessionHandles> {
-  const response = await fetch(`${BASE}/session`, {
+  const response = await request(`${BASE}/session`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ message }),
@@ -97,7 +116,7 @@ export async function sendFollowUp(
   message: EveMessage,
   signal?: AbortSignal,
 ): Promise<string | null> {
-  const response = await fetch(`${BASE}/session/${encodeURIComponent(sessionId)}`, {
+  const response = await request(`${BASE}/session/${encodeURIComponent(sessionId)}`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ continuationToken, message }),
@@ -120,7 +139,7 @@ export async function sendFollowUp(
  */
 export async function cancelTurn(sessionId: string): Promise<void> {
   try {
-    await fetch(`${BASE}/session/${encodeURIComponent(sessionId)}/cancel`, {
+    await request(`${BASE}/session/${encodeURIComponent(sessionId)}/cancel`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: "{}",
@@ -128,6 +147,28 @@ export async function cancelTurn(sessionId: string): Promise<void> {
   } catch {
     // The stream still settles on `turn.cancelled`; a failed POST is not fatal.
   }
+}
+
+/**
+ * Recovers the session's current continuation token by reading the stream tail.
+ *
+ * `startIndex=-1` reads the latest event, which for a parked session is
+ * `session.waiting` — the documented lightweight way for a consumer holding
+ * only a `sessionId` to get its resume handle back
+ * (eve/docs/concepts/sessions-runs-and-streaming.md, "Reconnect and rewind").
+ * Used by the retry path when the failure arrived before the token did.
+ */
+export async function fetchContinuationToken(sessionId: string): Promise<string | null> {
+  try {
+    for await (const event of streamSession(sessionId, -1)) {
+      const token = (event.data as { continuationToken?: unknown } | undefined)?.continuationToken;
+      // A tail read is one event and out: it never advances the stored cursor.
+      return typeof token === "string" && token.length > 0 ? token : null;
+    }
+  } catch {
+    // Retry will surface its own error if this was the only way through.
+  }
+  return null;
 }
 
 /**
@@ -143,7 +184,7 @@ export async function* streamSession(
   signal?: AbortSignal,
 ): AsyncGenerator<EveEvent> {
   const url = `${BASE}/session/${encodeURIComponent(sessionId)}/stream?startIndex=${startIndex}`;
-  const response = await fetch(url, { signal, headers: { accept: "application/x-ndjson" } });
+  const response = await request(url, { signal, headers: { accept: "application/x-ndjson" } });
 
   if (!response.ok) throw await failure(response);
   if (!response.body) throw new EveTransportError("הסוכן לא החזיר זרם אירועים.", 502);
