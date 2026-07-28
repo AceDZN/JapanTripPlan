@@ -5,6 +5,7 @@ import type { CSSProperties } from "react";
 import {
   ArrowLeft,
   ArrowRight,
+  BadgeCheck,
   CloudRain,
   ExternalLink,
   Info,
@@ -177,6 +178,26 @@ export default async function DayPage({
               route
               ariaLabel={`מפת יום ${day.day}`}
             />
+
+            {day.discovery ? (
+              <section className="panel discovery-panel" data-reveal>
+                <p className="discovery-kicker">
+                  <BadgeCheck size={15} />
+                  {day.discovery.label}
+                </p>
+                <h2>{day.discovery.title}</h2>
+                <p>{day.discovery.detail}</p>
+                <a
+                  className="text-link"
+                  href={day.discovery.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  למקור ולבדיקה
+                  <ExternalLink size={13} />
+                </a>
+              </section>
+            ) : null}
 
             <section className="panel">
               <h2>

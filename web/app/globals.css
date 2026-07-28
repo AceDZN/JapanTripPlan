@@ -1517,6 +1517,35 @@ a.status-chip:hover {
   line-height: 1.7;
 }
 
+.discovery-panel {
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--gold) 12%, var(--surface)),
+      var(--surface) 62%
+    );
+  border-inline-start: 4px solid var(--gold);
+}
+
+.discovery-panel .discovery-kicker {
+  align-items: center;
+  color: color-mix(in srgb, var(--vermillion) 78%, var(--text));
+  display: flex;
+  font-size: 11px;
+  font-weight: 800;
+  gap: 7px;
+  letter-spacing: 0.08em;
+}
+
+.discovery-panel h2 {
+  font-size: 17px;
+}
+
+.discovery-panel .text-link {
+  font-size: 12.5px;
+  justify-self: start;
+}
+
 .panel-list {
   display: grid;
   gap: 8px;

@@ -230,6 +230,7 @@ test("itinerary renders city chapters and all seventeen day cards", async () => 
 
   assert.match(page, /PokéPark KANTO/);
   assert.match(page, /Nintendo Museum/);
+  assert.match(page, /שוק הפשפשים Oi/);
   assert.match(page, /class="tl-highlights"/);
 });
 
@@ -258,6 +259,20 @@ test("day five keeps the PokéPark plan with its official-only monitoring gate",
   assert.match(page, /DisneySea/);
   assert.match(page, /status-chip st-monitor/);
   assert.match(page, /status-chip st-fallback/);
+});
+
+test("verified online updates reach the structured Day 3 and Day 13 pages", async () => {
+  const [dayThree, dayThirteen] = await Promise.all([html("/day/3"), html("/day/13")]);
+
+  assert.match(dayThree, /טיפ מאומת מהרשת/);
+  assert.match(dayThree, /שוק הפשפשים Oi/);
+  assert.match(dayThree, /09:00–14:30/);
+
+  assert.match(dayThirteen, /עדכון תחבורה מאומת/);
+  assert.match(dayThirteen, /JR Special Rapid/);
+  assert.match(dayThirteen, /¥3,480/);
+  assert.match(dayThirteen, /פושימי אינארי ← נמבה ברכבת רגילה/);
+  assert.doesNotMatch(dayThirteen, /קיוטו \/ שין־אוסקה ← נמבה/);
 });
 
 test("prepare renders every checklist group, deadlines and booking gates", async () => {
