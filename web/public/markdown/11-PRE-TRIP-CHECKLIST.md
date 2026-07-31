@@ -24,8 +24,9 @@
 
 | Done | What | When | Where / how | Who |
 |---|---|---|---|---|
-| [ ] | Buy teamLab Planets timed entry for Oct 4 morning | Now | [Official teamLab store](https://teamlabplanets.dmm.com/en) | Adult lead |
-| [ ] | Buy Mundo Pixar for Oct 4, targeting a timed 11:45/12:00 slot | **Now** | [Official exhibition calendar/prices](https://t.pia.jp/en/pia/events/mundopixar); current family total about JPY 20,100 plus fees | Adult lead |
+| ✅ | Buy teamLab Planets timed entry for Oct 4 morning | Done Aug 1 | Bought from the official DMM store: Entrance Pass for four, admission **09:30–10:00**, **JPY 16,800**. Save the confirmation e-mail and My Tickets link in the private `06 teamLab` folder | Adult lead |
+| [ ] | Load the four teamLab QR codes on Oct 4 morning | **Oct 4, before leaving Tabata** | My Tickets link from the private ticket folder; QR codes only appear after 00:00 on Oct 4. Screenshot all four — the confirmation e-mail is not an admission document | Adult lead |
+| [ ] | Buy Mundo Pixar for Oct 4, targeting a timed **12:30–13:00** slot | **Now** | [Official exhibition calendar/prices](https://t.pia.jp/en/pia/events/mundopixar); current family total about JPY 20,100 plus fees. The booked 09:30 teamLab entry rules out the old 11:45/12:00 target | Adult lead |
 | [ ] | Buy KAWAII MONSTER LAND timed entry for Oct 6 | Now | [Official attraction page](https://contents.gendagigo.jp/kawaii-monster-land/en) | Adult lead |
 | [ ] | Buy USJ Studio Pass + a current Express product that names the wanted Nintendo rides and guaranteed area entry | Now | [Official USJ tickets](https://www.usj.co.jp/web/en/us/tickets) | Adults + children choose rides |
 | [ ] | Monitor only official PokéPark inventory for Oct 5 | Weekly; decide fallback by mid-September | [Official overseas store](https://ticket-en.pokepark-kanto.co.jp/); no Fiverr, broker or unofficial reseller | Adult lead |

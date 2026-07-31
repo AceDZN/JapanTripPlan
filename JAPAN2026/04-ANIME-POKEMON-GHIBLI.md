@@ -27,7 +27,7 @@
 
 ### Added anchor
 
-- **Mundo Pixar on Oct 4** is a must-do between teamLab and Odaiba; protect its timed entry and shorten Gundam Base/mall browsing and the sunset first.
+- **Mundo Pixar on Oct 4** is a must-do between teamLab and Odaiba; protect its timed entry — now aimed at **12:30–13:00** because teamLab is booked for 09:30–10:00 — and shorten Gundam Base/mall browsing and the sunset first.
 
 ### Bonuses, never anchors
 
@@ -44,12 +44,12 @@
 | Nintendo Museum | Apply for Oct 15 by **July 31 at 23:59 JST**. Foreign visitors should bring passports. [Official site](https://museum.nintendo.com/en/index.html) |
 | PokéPark KANTO | Lottery closed. As of Jul 24, the official overseas store has no Oct 5 purchase path. Monitor it for official inventory; the **Aug 1** system update concerns admissions from Nov 1 and is not a promised October reopening. Use only the [official international store](https://ticket-en.pokepark-kanto.co.jp/) or an explicitly authorized seller. Do not use Fiverr or an unofficial paid buyer. |
 | Ghibli Museum | Buy Oct 8 tickets **Sept 10 at 10:00 JST**. Advance reservation only. [Official tickets](https://www.ghibli-museum.jp/en/tickets/) |
-| UZUMASA Kyoto Village | Oct 12 is the main family-samurai day. Current admission is JPY 2,800 for age 13+ and JPY 1,600 for ages 3–12. Recheck the [official show schedule](https://en.eigamura.com/hours-tickets/) close to travel. |
+| UZUMASA Kyoto Village | **BOOKED for Oct 12** — four Kyoto Yokai Festival 2026 1-Day tickets with exclusive merchandise, JPY 3,800 each (JPY 15,200), plus a 13:30 tea ceremony for four and coupons for the Ninja Escape Room (4) and 3D Maze the Ninja Fort (2). Smartphone-only entry. [Official site](https://en.eigamura.com/hours-tickets/) |
 | DisneySea fallback | Use only if official PokéPark tickets cannot be secured. Oct 5 is currently 09:00–21:00 with Halloween, but Tower of Terror and Indiana Jones are scheduled closed. [Official Oct 5 calendar](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/) |
 | USJ | Admission and Express are separate. Buy only an Express product that explicitly lists the Nintendo rides/entry wanted. [Official Express page](https://www.usj.co.jp/web/en/us/tickets/express-pass) |
 | Pokémon Café | October release date not announced. Monitor [official news](https://www.pokemon-cafe.jp/en/cafe/news/) rather than using the old rolling-date formula. |
 | KAWAII MONSTER LAND | Reserve a timed 60-minute experience from the [official page](https://contents.gendagigo.jp/kawaii-monster-land/en). |
-| Mundo Pixar | **Must-do on Oct 4.** The exhibition runs through Oct 12 at CREVIA BASE Tokyo, requires a timed reservation and takes about 45–55 minutes. Buy an 11:45/12:00 entry; Oct 4 daytime D-price tickets for three age-16+ guests and one age-12 guest total about JPY 20,100 before fees. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official prices/calendar](https://t.pia.jp/en/pia/events/mundopixar) |
+| Mundo Pixar | **Must-do on Oct 4.** The exhibition runs through Oct 12 at CREVIA BASE Tokyo, requires a timed reservation and takes about 45–55 minutes. Buy a **12:30–13:00** entry — the booked 09:30–10:00 teamLab admission rules out the old 11:45/12:00 target; Oct 4 daytime D-price tickets for three age-16+ guests and one age-12 guest total about JPY 20,100 before fees. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official prices/calendar](https://t.pia.jp/en/pia/events/mundopixar) |
 | Tokyo Night & Light | The overall projection program is free and runs daily except severe weather, but the Pokémon work rotates on selected weekend/holiday slots. Recheck the Oct 10 work order; do not copy Instagram’s generic times. [Official timetable](https://tokyoprojectionmappingproject.jp/en/) |
 
 ## Day 3 — Akihabara: Play, Hunt, Cats
@@ -79,8 +79,8 @@ Do not promise the Chuo-dori pedestrian zone on Oct 3—it runs on Sundays in Oc
 
 This pairing works geographically: Toyosu, Shin-Toyosu and Odaiba connect naturally by Yurikamome.
 
-- teamLab Planets early;
-- timed Mundo Pixar at Shijō-mae, between teamLab and Odaiba;
+- teamLab Planets early — **booked, admission 09:30–10:00**;
+- timed Mundo Pixar at Shijō-mae around **12:30–13:00**, between teamLab and Odaiba;
 - Unicorn Gundam and Gundam Base;
 - **3–4 hours of Tokyo Joypolis**;
 - waterfront sunset.
@@ -144,11 +144,14 @@ If the official Oct 10 timetable lists **Pokémon Card Game: TOKYO LUMINOUS NIGH
 This is the strongest kid-friendly bridge between traditional Japan and the family’s fandom/play style:
 
 - Edo-period film sets rather than a static history lesson;
-- samurai and ninja shows, subject to the final October timetable;
-- interactive ninja attractions and optional costume experiences;
-- a seasonal Yokai Festival during the trip dates.
+- samurai and ninja shows;
+- the booked Ninja Escape Room and 3D Maze the Ninja Fort;
+- a booked 13:30 tea ceremony for all four;
+- the **Kyoto Yokai Festival 2026**, which runs Sept 12 – Nov 29 and hits its full holiday programme on Oct 12 (Sports Day).
 
-Protect the 10:00–15:00/15:30 block and the apartment rest before HIBIKI. A private samurai lesson would duplicate this theme and is no longer part of the route.
+Booked: four 1-Day admissions with the festival’s exclusive merchandise — guidebook plus a random postcard each — for JPY 15,200. The yokai parades at 17:30 and 19:30 are deliberately skipped for DRUM TAO HIBIKI; the Yokai ☆Dance Live shows at 10:30 and 14:30 and the 15:30 Kaikai Greeting all fit inside the daytime block instead.
+
+Protect the 10:00–15:45 block, the 13:30 tea ceremony and the apartment rest before HIBIKI. A private samurai lesson would duplicate this theme and is no longer part of the route.
 
 ## Day 13 — Fushimi Inari before Osaka
 

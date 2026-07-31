@@ -65,8 +65,8 @@ Fill the actual charged amount immediately after every purchase.
 | Experience | Date | Booking state | Actual family charge |
 |---|---|---|---:|
 | Cat Cafe Temari no Oshiro (Kichijōji Petit Mura) | Oct 8 | Reserve · about JPY 5,300 for four at the weekday rate | — |
-| teamLab Planets | Oct 4 | Timed ticket | — |
-| Mundo Pixar | Oct 4 must-do | Buy timed 11:45/12:00 entry | About JPY 20,100 + fees at current D pricing |
+| teamLab Planets | Oct 4 | **BOOKED** · Entrance Pass, admission 09:30–10:00 · 2 adults at JPY 5,600 + 2 junior-high/high-school at JPY 2,800 | **JPY 16,800 paid** |
+| Mundo Pixar | Oct 4 must-do | Buy timed **12:30–13:00** entry (the booked 09:30 teamLab slot rules out 11:45/12:00) | About JPY 20,100 + fees at current D pricing |
 | Joypolis | Oct 4 | Decide passport vs individual | — |
 | PokéPark KANTO / DisneySea fallback | Oct 5 | Monitor official PokéPark inventory; otherwise buy DisneySea officially | Record selected park total |
 | KAWAII MONSTER LAND | Oct 6 | Timed ticket | — |
@@ -107,7 +107,7 @@ A normal ramen meal for four is roughly JPY 4,000–6,500 before extras. Pokémo
 | Day | Main variable spend | Control rule |
 |---|---|---|
 | Oct 3 | Anime shopping + arcades | One wish list and cash envelope per child |
-| Oct 4 | teamLab + Pixar + Joypolis | Pixar is funded and protected; price Joypolis against the rides the family will truly do and cut extended Gundam/mall time |
+| Oct 4 | teamLab + Pixar + Joypolis | teamLab is paid at JPY 16,800; Pixar is funded and protected; price Joypolis against the rides the family will truly do and cut extended Gundam/mall time |
 | Oct 5 | PokéPark / DisneySea fallback | Buy through an official channel only; never budget a Fiverr/reseller premium |
 | Oct 6 | Kawaii/character goods | One cute purchase target each |
 | Oct 8 | Ghibli + Nakano | Protect Ghibli; compare before buying and stop Nakano after 60–90 minutes |

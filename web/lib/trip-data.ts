@@ -236,57 +236,57 @@ export const tripDays: TripDay[] = [
     color: "#12a5a0",
     lat: 35.6355,
     lng: 139.7815,
-    highlights: ["teamLab Planets בבוקר", "Mundo Pixar ב־11:45/12:00", "Unicorn Gundam", "Tokyo Joypolis"],
+    highlights: ["teamLab Planets 09:30 · מוזמן", "Mundo Pixar ב־12:30", "Unicorn Gundam", "Tokyo Joypolis"],
     note: "היום היחיד שחורג מכלל שתי האטרקציות המתוזמנות — teamLab, Pixar ו־Joypolis יושבים על אותו קו Yurikamome רציף. שלושת העוגנים מוגנים.",
     rainPlan: "כמעט כל היום מקורה — היום הזה עובד גם בגשם.",
     foodAnchors: ["divercity-tokyo-plaza"],
     blocks: [
       {
-        time: "07:45",
-        title: "יוצאים מטבטה לחריץ 09:00",
+        time: "08:15",
+        title: "יוצאים מטבטה לכניסה המוזמנת ב־09:30",
         placeIds: ["tabata-base"],
         detail:
-          "JR ישיר לשימבאשי, ואז Yurikamome. לפני הנסיעה הראשונה קונים כרטיס יומי של Yurikamome ב־¥820 — זול יותר מארבע הנסיעות המתוכננות.",
+          "לפני היציאה: פותחים את My Tickets וטוענים את ארבעת קודי ה־QR (הם מופיעים רק אחרי חצות של 4.10) ומצלמים מסך. JR ישיר לשימבאשי, ואז Yurikamome — להיות בשין־טויוסו בערך ב־09:15. לא באוטובוסים מתחנת טוקיו/גינזה/צוקיג׳י — יש שם עומס. לפני הנסיעה הראשונה קונים כרטיס יומי של Yurikamome ב־¥820 — זול יותר מארבע הנסיעות המתוכננות.",
       },
       {
-        time: "09:00–12:00",
-        title: "teamLab Planets",
+        time: "09:30–12:00",
+        title: "teamLab Planets — מוזמן",
         placeIds: ["teamlab-planets"],
         detail:
-          "החריץ המתוזמן הכי מוקדם שאפשר. ללבוש בגדים שאפשר להפשיל מעל הברך — יש מים ורצפות מראה. 2–2.5 שעות, לוקרים חינם.",
+          "חלון כניסה 09:30–10:00 — נכנסים ב־09:30, לא בסוף החלון. שולם ¥16,800 לארבעה (2 מבוגרים ¥5,600 + 2 חטיבה/תיכון ¥2,800). ללבוש בגדים שאפשר להפשיל מעל הברך — יש מים ורצפות מראה. 2–2.5 שעות, לוקרים חינם. אפשר לשנות תאריך/שעה עד 3 פעמים, לא יאוחר משעתיים לפני הכניסה.",
         booking: {
-          label: "כניסה מתוזמנת לבוקר",
+          label: "כניסה 09:30–10:00 · מוזמן · ¥16,800",
           url: "https://teamlabplanets.dmm.com/en",
-          status: "buy-now",
+          status: "booked",
         },
       },
       {
-        time: "11:45/12:00",
+        time: "12:30",
         title: "Mundo Pixar ב־CREVIA BASE",
         placeIds: ["mundo-pixar"],
         detail:
-          "תחנה אחת מ־teamLab ל־Shijō-mae. CREVIA BASE כשלוש דקות מהתחנה והחוויה 45–55 דקות. 4.10 הוא יום מחיר D: כ־¥20,100 למשפחה לפני עמלות.",
+          "תחנה אחת מ־teamLab ל־Shijō-mae. CREVIA BASE כשלוש דקות מהתחנה והחוויה 45–55 דקות. 4.10 הוא יום מחיר D: כ־¥20,100 למשפחה לפני עמלות. לקנות מול 12:30–13:00 — הכניסה המוזמנת ל־teamLab ב־09:30 מוציאה מהמשחק את החריץ הישן של 11:45/12:00.",
         booking: {
-          label: "חובה · לקנות כניסה מתוזמנת",
+          label: "חובה · לקנות כניסה מתוזמנת ל־12:30–13:00",
           url: "https://t.pia.jp/en/pia/events/mundopixar",
           status: "buy-now",
         },
       },
       {
-        time: "13:00",
+        time: "13:45",
         title: "Yurikamome לאודאיבה + צהריים",
         placeIds: ["odaiba", "divercity-tokyo-plaza"],
         detail: "מושבים קדמיים או אחוריים הופכים את הנסיעה לאטרקציה. צהריים ב־DiverCity.",
       },
       {
-        time: "14:00",
+        time: "14:45",
         title: "Unicorn Gundam ו־Gundam Base",
         placeIds: ["unicorn-gundam", "gundam-base-tokyo"],
         detail: "מצלמים את הפסל; שיטוט מורחב ב־Gundam Base הוא מהדברים הראשונים לקצר.",
         cutFirst: true,
       },
       {
-        time: "15:00–17:30",
+        time: "15:30–18:00",
         title: "Tokyo Joypolis — בלוק משחק אמיתי",
         placeIds: ["tokyo-joypolis"],
         detail:

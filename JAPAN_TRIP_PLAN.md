@@ -40,7 +40,7 @@
 - A short Fushimi Inari lower-gates walk adds one iconic Kyoto sight without creating another sightseeing day.
 - Taiko-kan and a Miyamoto bachi turn the final Asakusa block into a personal drumming experience.
 - Nintendo Museum is included on the only logical date, subject to its lottery.
-- UZUMASA and HIBIKI form the main traditional-family day; Mibu Kyogen and a private samurai lesson remain swaps, not add-ons.
+- UZUMASA and HIBIKI form the main traditional-family day. UZUMASA is booked with yokai-festival tickets, a 13:30 tea ceremony and two ninja-attraction coupons; Mibu Kyogen and a private samurai lesson are no longer possible add-ons.
 
 ## Do These First
 
@@ -51,7 +51,7 @@ The complete what/when/where tracker is the [Pre-Trip Action Checklist](./JAPAN2
 3. Complete the booked Tokyo and Kyoto guest-registration steps, then book Osaka Oct 13–15 and final Tokyo Oct 15–17.
 4. Monitor PokéPark’s official international store for any Oct 5 inventory re-release. The announced Aug 1 system change is for admissions from Nov 1, not a promised reopening for October. Do not use paid resellers or Fiverr ticket buyers; keep DisneySea as the Oct 5 fallback.
 5. Buy USJ admission and an Express product that explicitly covers the Nintendo experiences wanted.
-6. Reserve KAWAII MONSTER LAND and teamLab Planets.
+6. Reserve KAWAII MONSTER LAND. teamLab Planets is **booked** — Oct 4, admission 09:30–10:00, JPY 16,800 for four — so buy Mundo Pixar for **12:30–13:00** rather than the old 11:45/12:00 target.
 7. Buy Ghibli Museum tickets for **Oct 8** on **Sept 10 at 10:00 JST**.
 8. Buy Mizuekai’s **13:00 Oct 11** performance when sales open, then HIBIKI for **19:00 Oct 12** when its two-month window opens.
 9. Reserve a Shiro-Hige Totoro cream-puff pickup for Oct 9 when the preferred pickup window opens.

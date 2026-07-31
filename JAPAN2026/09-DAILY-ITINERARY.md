@@ -26,8 +26,8 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 |---|---|---|
 | **Nintendo Museum · Oct 15** | Enter the October lottery by **July 31 at 23:59 JST** on the [official ticket calendar](https://museum-tickets.nintendo.com/en/calendar?lang=en). Choose a morning or early-afternoon slot. | Recovery morning in Osaka, then a direct return to Tokyo. |
 | **PokéPark KANTO · Oct 5** | The lottery is closed. As of Jul 24, the official overseas store has no Oct 5 purchase path. Monitor it for official inventory; the **Aug 1** system update is for admissions from Nov 1 and does not promise an October reopening. Use only the [official international store](https://ticket-en.pokepark-kanto.co.jp/) or a seller explicitly authorized by PokéPark; do not use Fiverr or an unofficial paid buyer. | **DisneySea** is the first fallback; Sanrio Puroland is secondary if the family prefers kawaii characters. |
-| **teamLab Planets · Oct 4** | Buy a morning timed entry from the [official store](https://teamlabplanets.dmm.com/en). | Spend the full day in Odaiba at Joypolis + Gundam Base. |
-| **Mundo Pixar · must-do Oct 4** | Buy a timed **11:45/12:00** entry from the [official event/ticket page](https://t.pia.jp/en/pia/events/mundopixar). A daytime D-price slot costs about **JPY 20,100 for this family plus fees**. | If the preferred slot is gone, choose the nearest slot that preserves the teamLab → Pixar → Odaiba route. Cut extended Gundam Base/mall browsing and the waterfront sunset first. |
+| **teamLab Planets · Oct 4** | **BOOKED.** Entrance Pass for four, admission **Sun Oct 4, 09:30–10:00 JST**, **JPY 16,800 paid**. QR codes appear on My Tickets only after 00:00 on Oct 4 — load all four before leaving Tabata. The admission date/time can still be changed up to three times, no later than two hours before the slot. | Not needed; the slot is held. |
+| **Mundo Pixar · must-do Oct 4** | Buy a timed entry from the [official event/ticket page](https://t.pia.jp/en/pia/events/mundopixar), now targeting **12:30–13:00** rather than 11:45/12:00 — the booked 09:30 teamLab entry plus 2–2.5 hours inside means the family is not out of teamLab before roughly 11:45–12:00. A daytime D-price slot costs about **JPY 20,100 for this family plus fees**. | If the preferred slot is gone, choose the nearest slot after 12:15 that preserves the teamLab → Pixar → Odaiba route. Cut extended Gundam Base/mall browsing and the waterfront sunset first. |
 | **KAWAII MONSTER LAND · Oct 6** | Buy a timed 60-minute entry from the [official attraction page](https://contents.gendagigo.jp/kawaii-monster-land/en). | Takeshita Street + purikura + Kiddy Land; no cross-city replacement. |
 | **Ghibli Museum · Oct 8** | October tickets release **Sept 10 at 10:00 JST** through the [official ticket page](https://www.ghibli-museum.jp/en/tickets/). Target 10:00. | Kichijoji + Inokashira Park, then the same compact Nakano/Shinjuku route. |
 | **Mizuekai · Oct 11** | Target the **13:00** performance; official sales method is still TBA. JPY 10,000 first floor / JPY 8,000 second floor, age 10+. | Skip the recital, keep a calm Kyoto arrival and meet the Awata procession at 17:00. |
@@ -113,15 +113,17 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 **Theme:** immersive art, Pixar worlds and real play—not mall wandering
 **Route:** Toyosu → Shin-Toyosu → Shijō-mae → Odaiba on the Yurikamome
 
-### Morning · 09:00–12:00
+### Morning · 09:30–12:00
 
-- **teamLab Planets** at the earliest practical timed entry.
+- **teamLab Planets — booked.** Entrance Pass for four, admission window **09:30–10:00**, JPY 16,800 paid (2 adults at JPY 5,600, 2 junior-high/high-school at JPY 2,800). Enter at 09:30, not at the end of the window.
+- QR codes only become visible on My Tickets after **00:00 on Oct 4**. Open the link the night before, then load and screenshot all four QR codes before leaving Tabata. The e-mail itself is not an admission document.
 - Wear clothes that roll above the knee; the experience includes water and mirrored floors.
 - Allow 2–2.5 hours and use the free lockers.
+- Reach Shin-Toyosu on the **Yurikamome**, not by bus. teamLab warns of heavy congestion on the public buses from Tokyo Station, Ginza and Tsukiji toward Shin-Toyosu; the paid GINZA SIX shuttle is irrelevant to our Tabata → Shimbashi → Yurikamome route.
 
 ### Afternoon · 12:00–17:30
 
-- **Must-do:** after teamLab, continue one stop to Shijō-mae for the timed **Mundo Pixar** entry around 11:45/12:00. CREVIA BASE is about three minutes from the station, the experience takes about 45–55 minutes, and Oct 4 is currently a D-price day: three age-16+ tickets plus one age-4–15 ticket total about **JPY 20,100 before fees**. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official calendar and prices](https://t.pia.jp/en/pia/events/mundopixar)
+- **Must-do:** after teamLab, continue one stop to Shijō-mae for the timed **Mundo Pixar** entry, now targeting **12:30–13:00**. The booked 09:30 teamLab admission makes the old 11:45/12:00 slot unrealistic — buy the Pixar ticket against 12:30, not against the earlier plan. CREVIA BASE is about three minutes from the station, the experience takes about 45–55 minutes, and Oct 4 is currently a D-price day: three age-16+ tickets plus one age-4–15 ticket total about **JPY 20,100 before fees**. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official calendar and prices](https://t.pia.jp/en/pia/events/mundopixar)
 - Treat teamLab, Pixar and a meaningful Joypolis block as the day’s three anchors. Pixar is not the cut: shorten Gundam Base/mall browsing and drop the waterfront sunset before reducing Joypolis.
 - Continue by Yurikamome to Odaiba; front or rear seats turn transport into an attraction.
 - Lunch at DiverCity.
@@ -359,14 +361,34 @@ Setagaya reopened the full path on March 24, 2026. Recheck for temporary works o
 **Theme:** samurai-film play by day and explosive taiko at night
 **Route:** Fushimi Inari base → UZUMASA Kyoto Village → apartment/rest → Kyoto Avanti
 
-### Daytime · 10:00–15:00/15:30
+**Oct 12 is Sports Day, a public holiday.** UZUMASA runs its full holiday programme and will be busy, so enter at opening. The village is **closed on Oct 13**, so nothing here can slip to the next day.
 
-- Enter **UZUMASA Kyoto Village** near opening and treat it as the day’s main family attraction.
-- Prioritize the Edo film-set streets, live samurai/ninja shows and two or three participatory attractions. The exact October show timetable is not yet published.
-- General admission is currently JPY 2,800 for age 13+ and JPY 1,600 for ages 3–12: **JPY 10,000 for this family**, before paid attractions or costumes.
-- The seasonal Yokai Festival overlaps the trip dates; confirm its day-specific program close to travel.
+### Daytime · 10:00–15:45
 
-### Reset · roughly 16:00–18:00
+**BOOKED.** Four **KYOTO YOKAI FESTIVAL 2026 1-Day Admission tickets with exclusive merchandise**, JPY 3,800 each — **JPY 15,200** — plus a booked tea ceremony and two attraction coupons. Each ticket includes the event guidebook (B5 landscape, Japanese and English) and one random postcard from three designs.
+
+| Time | Block |
+|---|---|
+| 10:00 | Enter at opening. Edo film-set streets first, while the park is still thin |
+| 10:30 | **Yokai ☆Dance Live!** — holiday-only performance |
+| ~11:00 | **Ninja Escape Room** — the coupon covers all four |
+| ~11:45 | **3D Maze the Ninja Fort** — the coupon covers **only two people** |
+| 12:15 | Lunch inside the park; finish by 13:15 |
+| **13:30** | **Cultural experience Sado (tea ceremony) × 4 — fixed timed slot** |
+| 14:30 | **Yokai ☆Dance Live!**, second show |
+| 15:30 | **Kaikai Greeting** — runs daily |
+| 15:45 | Leave for the apartment |
+
+- The 13:30 tea ceremony is the day’s anchor. Be at the venue early; a missed slot is not refunded.
+- Decide before the day who takes the two **3D Maze** places, or buy two more on site.
+- All four admissions were issued as “13 and over”. That is above the child rate, so the gate accepts it for the 12-year-old — no action needed.
+- **Tickets are smartphone-only.** Open the ticket URL from the purchase e-mail on a phone, or share each ticket to the right phone in advance. Make sure the data plan is live before reaching the gate.
+- Record the admission, tea-ceremony and coupon IDs in the private ticket folder, not in this repo.
+- Tickets are non-refundable. The date can be changed until the day before, never on the day.
+
+**Yokai parades are given up on purpose.** The KAIKAI YOKAI Parade (17:30) and the Uzumasa Hyakki Yakō night procession (19:30) run on holidays but both collide with HIBIKI. Do not try to add one. Attractions close at 18:00 with last entry 17:30, which the daytime plan clears comfortably.
+
+### Reset · roughly 16:15–18:00
 
 - Return to the apartment, sit down and eat an early dinner near Kyoto Station.
 - Be at Kyoto Avanti before the **18:15 doors**.
@@ -376,11 +398,11 @@ Setagaya reopened the full path on March 24, 2026. Recheck for temporary works o
 - See **DRUM TAO HIBIKI**, a roughly 40-minute show designed to work well even after a full daytime attraction.
 - Current official price is JPY 10,000 per person: **JPY 40,000 for the family**. The show admits ages 6+ and tickets open two months before the performance.
 
-### Optional Mibu Kyogen swap
+### Mibu Kyogen — no longer available
 
-If the family strongly prefers the historic masked theatre, leave UZUMASA around 13:15, sample one or two **Mibu Kyogen** plays from roughly 14:00–16:00, then continue to HIBIKI. The official autumn run is Oct 10–12, five plays between 13:00 and 17:30, with day-of unreserved admission. This is a compressed alternative—not part of the recommended baseline.
+The old swap required leaving UZUMASA around 13:15, which now collides with the booked 13:30 tea ceremony. Mibu Kyogen is off the table for this trip.
 
-**Cut first:** Mibu Kyogen, then extra paid UZUMASA attractions. Protect the rest and HIBIKI.
+**Cut first:** the 3D Maze top-up for the other two, then any extra paid UZUMASA attraction. Protect the tea ceremony, the rest block and HIBIKI.
 
 ---
 

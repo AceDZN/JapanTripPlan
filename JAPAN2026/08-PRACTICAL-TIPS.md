@@ -115,6 +115,16 @@ The Ethiopian flights are purchased, but the itinerary screenshot did not show e
 
 Reconfirm the schedule 72 hours before both departures and save the final boarding documents offline on both adult phones.
 
+### Booked teamLab Planets record
+
+teamLab Planets TOKYO is purchased: an Entrance Pass for four, admission **Sunday Oct 4, 09:30–10:00 JST**, **JPY 16,800** (2 adults at JPY 5,600, 2 junior-high/high-school at JPY 2,800). Handling rules:
+
+- The purchase e-mail is **not** an admission document. Entry is by QR code from the personal My Tickets page.
+- QR codes only render **after 00:00 on Oct 4**. Open My Tickets that morning, display all four and screenshot them before leaving Tabata.
+- The My Tickets link is a bearer link — anyone holding it can display the tickets. Keep it in the private `06 teamLab` folder and off any shared or web-synced document.
+- The admission date and time can be changed up to **three times**, no later than **two hours before** the slot, from the "Change admission date and time" button on My Tickets. This is the escape hatch if Oct 4 goes wrong; coupon-purchased tickets do not have it, ours were bought directly.
+- If a QR code will not scan on the day because of a cracked screen or similar, go to venue staff or the support desk rather than trying to re-buy.
+
 ## Confirmed Lodging Setup
 
 - **Tokyo / Oct 2–11:** send passport images for all four guests through Airbnb chat. The host will not release check-in details until this is complete. Send the approximate 22:00–23:00 arrival time and obtain written confirmation that late self-check-in is permitted.

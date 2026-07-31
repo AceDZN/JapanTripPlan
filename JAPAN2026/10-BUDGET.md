@@ -50,13 +50,13 @@ Why the attraction range is wide:
 |---|---:|
 | Mizuekai · second-floor seats | JPY 32,000 |
 | Mizuekai · first-floor seats | JPY 40,000 |
-| UZUMASA admission | JPY 10,000 |
+| UZUMASA admission · **BOOKED** | JPY 15,200 |
 | DRUM TAO HIBIKI | JPY 40,000 |
 | Fushimi Inari lower-gates visit | Free |
 | Awata Shrine procession | Free |
-| **Recommended Kyoto total** | **JPY 82,000–90,000** |
+| **Recommended Kyoto total** | **JPY 87,200–95,200** |
 
-The total excludes UZUMASA paid attractions, food and transport. Optional Mibu Kyogen would add about JPY 3,000 for the family and should replace part of UZUMASA, not extend the day.
+UZUMASA admission is the booked actual: four Kyoto Yokai Festival 2026 1-Day tickets with exclusive merchandise at JPY 3,800 each. The same order added a 13:30 tea ceremony for four and coupons for the Ninja Escape Room and 3D Maze the Ninja Fort — **record those amounts from the purchase e-mail and add them here**. The subtotal still excludes food, transport and any on-site top-up for the two uncovered 3D Maze places. Mibu Kyogen is no longer a possible swap.
 
 ## Booking Ledger
 
@@ -65,8 +65,8 @@ Fill the actual charged amount immediately after every purchase.
 | Experience | Date | Booking state | Actual family charge |
 |---|---|---|---:|
 | Cat Cafe Temari no Oshiro (Kichijōji Petit Mura) | Oct 8 | Reserve · about JPY 5,300 for four at the weekday rate | — |
-| teamLab Planets | Oct 4 | Timed ticket | — |
-| Mundo Pixar | Oct 4 must-do | Buy timed 11:45/12:00 entry | About JPY 20,100 + fees at current D pricing |
+| teamLab Planets | Oct 4 | **BOOKED** · Entrance Pass, admission 09:30–10:00 · 2 adults at JPY 5,600 + 2 junior-high/high-school at JPY 2,800 | **JPY 16,800 paid** |
+| Mundo Pixar | Oct 4 must-do | Buy timed **12:30–13:00** entry (the booked 09:30 teamLab slot rules out 11:45/12:00) | About JPY 20,100 + fees at current D pricing |
 | Joypolis | Oct 4 | Decide passport vs individual | — |
 | PokéPark KANTO / DisneySea fallback | Oct 5 | Monitor official PokéPark inventory; otherwise buy DisneySea officially | Record selected park total |
 | KAWAII MONSTER LAND | Oct 6 | Timed ticket | — |
@@ -75,7 +75,7 @@ Fill the actual charged amount immediately after every purchase.
 | Ghibli Museum | Oct 8 | Release Sept 10 | — |
 | Mizuekai · 13:00 | Oct 11 | Purchase method TBA | JPY 32,000–40,000 |
 | LOUTRE otter café (side quest) | Oct 11 | Optional walk-in; no reservation | — |
-| UZUMASA Kyoto Village | Oct 12 | Admission; recheck show calendar | JPY 10,000 before extras |
+| UZUMASA Kyoto Village | Oct 12 | **BOOKED** — 4 × yokai-festival 1-Day ticket with merchandise, plus 13:30 tea ceremony ×4 and two attraction coupons | JPY 15,200 admission; add-ons to be recorded |
 | DRUM TAO HIBIKI · 19:00 | Oct 12 | Buy when two-month window opens | JPY 40,000 |
 | Fushimi Inari | Oct 13 | No ticket; lower-gates visit | Free |
 | Yūzen engraved chopsticks | Oct 13 | Walk-in after 09:30; reconfirm hours | Record actual product total; JPY 1,100 floor unverified |
@@ -107,14 +107,14 @@ A normal ramen meal for four is roughly JPY 4,000–6,500 before extras. Pokémo
 | Day | Main variable spend | Control rule |
 |---|---|---|
 | Oct 3 | Anime shopping + arcades | One wish list and cash envelope per child |
-| Oct 4 | teamLab + Pixar + Joypolis | Pixar is funded and protected; price Joypolis against the rides the family will truly do and cut extended Gundam/mall time |
+| Oct 4 | teamLab + Pixar + Joypolis | teamLab is paid at JPY 16,800; Pixar is funded and protected; price Joypolis against the rides the family will truly do and cut extended Gundam/mall time |
 | Oct 5 | PokéPark / DisneySea fallback | Buy through an official channel only; never budget a Fiverr/reseller premium |
 | Oct 6 | Kawaii/character goods | One cute purchase target each |
 | Oct 8 | Ghibli + Nakano | Protect Ghibli; compare before buying and stop Nakano after 60–90 minutes |
 | Oct 9 | Curry Festival + vintage | Ravine/parks are free; share mini curries and set one shopping target each |
 | Oct 10 | Celebration + optional free projection | Hold one inclusive day envelope excluding the gift; the projection is free, but moving dinner to West Shinjuku may change the reservation |
 | Oct 11 | Mizuekai/Awata | Choose one Mizuekai seat tier; do not add paid sightseeing |
-| Oct 12 | UZUMASA/HIBIKI | Choose only the paid UZUMASA extras the children will use; Mibu is a swap |
+| Oct 12 | UZUMASA/HIBIKI | Admission, tea ceremony and two coupons are prepaid; the only open spend is lunch and an optional top-up for the two uncovered 3D Maze places |
 | Oct 13 | Fushimi/Yūzen/Dotonbori | Fushimi is free and time-boxed; set a chopstick ceiling before choosing, then share Osaka portions |
 | Oct 14 | USJ | Buy exact Express value; do not assume a generic bundle |
 | Oct 15 | Nintendo Museum | Budget only after lottery success |

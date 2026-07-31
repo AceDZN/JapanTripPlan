@@ -49,7 +49,9 @@ The family-wide operational list—including **new walking shoes for all four tr
 
 - **Nintendo Museum:** enter the October lottery by **July 31 at 23:59 JST**. Choose Oct 15 morning/early-afternoon. [Official lottery calendar](https://museum-tickets.nintendo.com/en/calendar?lang=en)
 - **USJ:** buy the Studio Pass, then a current Express Pass that explicitly includes the desired Nintendo rides and guaranteed area entry. Product names rotate. [Official tickets](https://www.usj.co.jp/web/en/us/tickets)
-- **KAWAII MONSTER LAND and teamLab Planets:** reserve timed entries before preferred slots disappear.
+- **teamLab Planets:** **BOOKED** — Oct 4, admission 09:30–10:00, JPY 16,800 for four. Nothing left to buy; just load the QR codes on the morning itself.
+- **Mundo Pixar:** buy the Oct 4 timed entry for **12:30–13:00**, not 11:45/12:00 — the booked teamLab slot moved the day.
+- **KAWAII MONSTER LAND:** reserve the timed entry before preferred slots disappear.
 - **Accommodation:** Tokyo Oct 2–11 and Fushimi Inari Oct 11–13 are booked. Complete both host-registration steps, then book Osaka Oct 13–15 and final Tokyo Oct 15–17.
 
 ### Fixed future gates

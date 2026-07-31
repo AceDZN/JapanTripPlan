@@ -49,7 +49,10 @@ The family-wide operational list—including **new walking shoes for all four tr
 
 - **Nintendo Museum:** enter the October lottery by **July 31 at 23:59 JST**. Choose Oct 15 morning/early-afternoon. [Official lottery calendar](https://museum-tickets.nintendo.com/en/calendar?lang=en)
 - **USJ:** buy the Studio Pass, then a current Express Pass that explicitly includes the desired Nintendo rides and guaranteed area entry. Product names rotate. [Official tickets](https://www.usj.co.jp/web/en/us/tickets)
-- **KAWAII MONSTER LAND and teamLab Planets:** reserve timed entries before preferred slots disappear.
+- **teamLab Planets:** **BOOKED** — Oct 4, admission 09:30–10:00, JPY 16,800 for four. Nothing left to buy; just load the QR codes on the morning itself.
+- **UZUMASA Kyoto Village:** **BOOKED** — Oct 12, four Kyoto Yokai Festival 2026 1-Day tickets with exclusive merchandise, JPY 3,800 each (JPY 15,200), plus a 13:30 tea ceremony for four and coupons for the Ninja Escape Room (4 places) and 3D Maze the Ninja Fort (2 places). Entry is smartphone-only — get each ticket onto the right phone before the gate.
+- **Mundo Pixar:** buy the Oct 4 timed entry for **12:30–13:00**, not 11:45/12:00 — the booked teamLab slot moved the day.
+- **KAWAII MONSTER LAND:** reserve the timed entry before preferred slots disappear.
 - **Accommodation:** Tokyo Oct 2–11 and Fushimi Inari Oct 11–13 are booked. Complete both host-registration steps, then book Osaka Oct 13–15 and final Tokyo Oct 15–17.
 
 ### Fixed future gates
@@ -92,7 +95,7 @@ The family-wide operational list—including **new walking shoes for all four tr
 - Fushimi Inari replaces the optional Kyoto Manga Museum on Oct 13; keep the visit to the lower gates so Osaka still gets a relaxed arrival.
 - Tokyo Station First Avenue is a protected 45–60-minute Oct 16 stop, including a focused pass through Character Street. If the Pokémon Café slot is later than 11:00, visit Taiko-kan at opening and move the café/First Avenue block afterward; cut Skytree and extra shopping first.
 - PokéPark’s Aug 1 update applies to admissions from Nov 1 and is not an October sales date. Monitor only the official overseas store for Oct 5 inventory; unofficial paid ticket acquisition is not an approved fallback.
-- Mibu Kyogen is an optional Oct 12 swap. Do not stack it onto the full UZUMASA + HIBIKI baseline.
+- Mibu Kyogen is off the table: the booked 13:30 UZUMASA tea ceremony rules out the early departure the swap required.
 
 ## Guide Map
 

@@ -24,12 +24,16 @@
 
 | Done | What | When | Where / how | Who |
 |---|---|---|---|---|
-| [ ] | Buy teamLab Planets timed entry for Oct 4 morning | Now | [Official teamLab store](https://teamlabplanets.dmm.com/en) | Adult lead |
-| [ ] | Buy Mundo Pixar for Oct 4, targeting a timed 11:45/12:00 slot | **Now** | [Official exhibition calendar/prices](https://t.pia.jp/en/pia/events/mundopixar); current family total about JPY 20,100 plus fees | Adult lead |
+| ✅ | Buy teamLab Planets timed entry for Oct 4 morning | Done Aug 1 | Bought from the official DMM store: Entrance Pass for four, admission **09:30–10:00**, **JPY 16,800**. Save the confirmation e-mail and My Tickets link in the private `06 teamLab` folder | Adult lead |
+| [ ] | Load the four teamLab QR codes on Oct 4 morning | **Oct 4, before leaving Tabata** | My Tickets link from the private ticket folder; QR codes only appear after 00:00 on Oct 4. Screenshot all four — the confirmation e-mail is not an admission document | Adult lead |
+| [ ] | Buy Mundo Pixar for Oct 4, targeting a timed **12:30–13:00** slot | **Now** | [Official exhibition calendar/prices](https://t.pia.jp/en/pia/events/mundopixar); current family total about JPY 20,100 plus fees. The booked 09:30 teamLab entry rules out the old 11:45/12:00 target | Adult lead |
 | [ ] | Buy KAWAII MONSTER LAND timed entry for Oct 6 | Now | [Official attraction page](https://contents.gendagigo.jp/kawaii-monster-land/en) | Adult lead |
 | [ ] | Buy USJ Studio Pass + a current Express product that names the wanted Nintendo rides and guaranteed area entry | Now | [Official USJ tickets](https://www.usj.co.jp/web/en/us/tickets) | Adults + children choose rides |
 | [ ] | Monitor only official PokéPark inventory for Oct 5 | Weekly; decide fallback by mid-September | [Official overseas store](https://ticket-en.pokepark-kanto.co.jp/); no Fiverr, broker or unofficial reseller | Adult lead |
 | [ ] | If PokéPark fails, buy DisneySea for Oct 5 | At the fallback decision | [Official DisneySea calendar](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/) | Adults |
+| ✅ | Buy UZUMASA Kyoto Village entry for Oct 12 | Done Aug 1 | Four **KYOTO YOKAI FESTIVAL 2026 1-Day Admission tickets with exclusive merchandise**, JPY 3,800 each — **JPY 15,200** — plus **cultural experience Sado (tea ceremony) × 4 at 13:30** and coupons for **Ninja Escape Room (4)** and **3D Maze the Ninja Fort (2)**. Save the ticket URL and all IDs in the private ticket folder | Adult lead |
+| [ ] | Get all UZUMASA tickets onto the right phones | **Before Oct 12** | Entry is smartphone-only. Open the ticket URL from the purchase e-mail on a phone, or use “Share this ticket” per person in advance. Confirm the data plan is live before reaching the gate | Adult lead |
+| [ ] | Decide who takes the two 3D Maze the Ninja Fort places | Before Oct 12 | The coupon covers only two of four; the other two pay on site or skip | Family vote |
 | [ ] | Buy DRUM TAO HIBIKI for Oct 12 at 19:00 | When the two-month window opens; start checking Aug 12 | [Official HIBIKI tickets](https://drum-tao-kyoto.com/en/ticket/) | Adult lead |
 | [ ] | Buy Mizuekai for Oct 11 at 13:00 | As soon as the official sales method is published | [Official Miyagawacho page](https://www.miyagawacho.jp/mizuekai/) | Adult lead |
 | [ ] | Reserve Shiro-Hige Totoro cream-puff pickup for Oct 9 | When the October window opens | Official store contact listed in the food guide | Adult lead |
