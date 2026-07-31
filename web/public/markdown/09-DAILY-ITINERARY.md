@@ -361,14 +361,34 @@ Setagaya reopened the full path on March 24, 2026. Recheck for temporary works o
 **Theme:** samurai-film play by day and explosive taiko at night
 **Route:** Fushimi Inari base → UZUMASA Kyoto Village → apartment/rest → Kyoto Avanti
 
-### Daytime · 10:00–15:00/15:30
+**Oct 12 is Sports Day, a public holiday.** UZUMASA runs its full holiday programme and will be busy, so enter at opening. The village is **closed on Oct 13**, so nothing here can slip to the next day.
 
-- Enter **UZUMASA Kyoto Village** near opening and treat it as the day’s main family attraction.
-- Prioritize the Edo film-set streets, live samurai/ninja shows and two or three participatory attractions. The exact October show timetable is not yet published.
-- General admission is currently JPY 2,800 for age 13+ and JPY 1,600 for ages 3–12: **JPY 10,000 for this family**, before paid attractions or costumes.
-- The seasonal Yokai Festival overlaps the trip dates; confirm its day-specific program close to travel.
+### Daytime · 10:00–15:45
 
-### Reset · roughly 16:00–18:00
+**BOOKED.** Four **KYOTO YOKAI FESTIVAL 2026 1-Day Admission tickets with exclusive merchandise**, JPY 3,800 each — **JPY 15,200** — plus a booked tea ceremony and two attraction coupons. Each ticket includes the event guidebook (B5 landscape, Japanese and English) and one random postcard from three designs.
+
+| Time | Block |
+|---|---|
+| 10:00 | Enter at opening. Edo film-set streets first, while the park is still thin |
+| 10:30 | **Yokai ☆Dance Live!** — holiday-only performance |
+| ~11:00 | **Ninja Escape Room** — the coupon covers all four |
+| ~11:45 | **3D Maze the Ninja Fort** — the coupon covers **only two people** |
+| 12:15 | Lunch inside the park; finish by 13:15 |
+| **13:30** | **Cultural experience Sado (tea ceremony) × 4 — fixed timed slot** |
+| 14:30 | **Yokai ☆Dance Live!**, second show |
+| 15:30 | **Kaikai Greeting** — runs daily |
+| 15:45 | Leave for the apartment |
+
+- The 13:30 tea ceremony is the day’s anchor. Be at the venue early; a missed slot is not refunded.
+- Decide before the day who takes the two **3D Maze** places, or buy two more on site.
+- All four admissions were issued as “13 and over”. That is above the child rate, so the gate accepts it for the 12-year-old — no action needed.
+- **Tickets are smartphone-only.** Open the ticket URL from the purchase e-mail on a phone, or share each ticket to the right phone in advance. Make sure the data plan is live before reaching the gate.
+- Record the admission, tea-ceremony and coupon IDs in the private ticket folder, not in this repo.
+- Tickets are non-refundable. The date can be changed until the day before, never on the day.
+
+**Yokai parades are given up on purpose.** The KAIKAI YOKAI Parade (17:30) and the Uzumasa Hyakki Yakō night procession (19:30) run on holidays but both collide with HIBIKI. Do not try to add one. Attractions close at 18:00 with last entry 17:30, which the daytime plan clears comfortably.
+
+### Reset · roughly 16:15–18:00
 
 - Return to the apartment, sit down and eat an early dinner near Kyoto Station.
 - Be at Kyoto Avanti before the **18:15 doors**.
@@ -378,11 +398,11 @@ Setagaya reopened the full path on March 24, 2026. Recheck for temporary works o
 - See **DRUM TAO HIBIKI**, a roughly 40-minute show designed to work well even after a full daytime attraction.
 - Current official price is JPY 10,000 per person: **JPY 40,000 for the family**. The show admits ages 6+ and tickets open two months before the performance.
 
-### Optional Mibu Kyogen swap
+### Mibu Kyogen — no longer available
 
-If the family strongly prefers the historic masked theatre, leave UZUMASA around 13:15, sample one or two **Mibu Kyogen** plays from roughly 14:00–16:00, then continue to HIBIKI. The official autumn run is Oct 10–12, five plays between 13:00 and 17:30, with day-of unreserved admission. This is a compressed alternative—not part of the recommended baseline.
+The old swap required leaving UZUMASA around 13:15, which now collides with the booked 13:30 tea ceremony. Mibu Kyogen is off the table for this trip.
 
-**Cut first:** Mibu Kyogen, then extra paid UZUMASA attractions. Protect the rest and HIBIKI.
+**Cut first:** the 3D Maze top-up for the other two, then any extra paid UZUMASA attraction. Protect the tea ceremony, the rest block and HIBIKI.
 
 ---
 
