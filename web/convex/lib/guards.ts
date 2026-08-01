@@ -1,36 +1,55 @@
 import type { MutationCtx, QueryCtx } from "../_generated/server";
+import { familyMemberFor, type FamilyMember } from "./family";
 
 /**
  * Who is making this call.
  *
- * "family"  — a signed-in family member (Convex Auth session).
- * "service" — eve or a local Claude Code skill, holding AGENT_SERVICE_KEY.
+ * "family"  — a signed-in family member, identified by the e-mail claim in a
+ *             Clerk JWT and matched against the allowlist in `family.ts`.
+ * "service" — eve or a local Claude Code skill holding AGENT_SERVICE_KEY.
  *             Acts with full access, as the trip owner.
  */
 export type Actor = {
   kind: "family" | "service";
   /** Display name for `updatedBy` / `doneBy` attribution. */
   name: string;
+  email?: string;
+  role?: FamilyMember["role"];
 };
 
 /**
  * Gate for every write, and for every read that touches private data.
  *
  * Public trip content (days, blocks, places, checklist items, guides) is
- * deliberately readable without auth — the site is already public. What this
- * protects is (a) mutating the plan and (b) reading `privateRecords`,
- * `chatThreads` and `chatMessages`.
+ * deliberately readable without auth — the site is already public, and that is
+ * what lets every page be server-rendered and precached for offline use in
+ * Japan. What this protects is (a) mutating the plan and (b) reading
+ * `privateRecords`, `chatThreads` and `chatMessages`.
+ *
+ * Note the allowlist is enforced here as well as in Clerk. Clerk decides who
+ * may hold an account; this decides who may change the trip. Defence in depth,
+ * and it keeps the rule visible in the codebase rather than only in a
+ * dashboard setting.
  */
 export async function requireFamily(ctx: QueryCtx | MutationCtx): Promise<Actor> {
   const identity = await ctx.auth.getUserIdentity();
   if (!identity) {
     throw new Error(
-      "Not authorized. Sign in as a family member, or call the /agent HTTP routes with AGENT_SERVICE_KEY.",
+      "Not signed in. Sign in with a family account, or call the /agent HTTP routes with AGENT_SERVICE_KEY.",
     );
   }
+
+  const email = typeof identity.email === "string" ? identity.email : undefined;
+  const member = familyMemberFor(email);
+  if (!member) {
+    throw new Error("This account is not on the family list.");
+  }
+
   return {
     kind: "family",
-    name: identity.name ?? identity.email ?? "family",
+    name: member.name,
+    email: email?.trim().toLowerCase(),
+    role: member.role,
   };
 }
 
@@ -51,7 +70,7 @@ function secretsMatch(a: string, b: string): boolean {
  * The agent bypass: `Authorization: Bearer <AGENT_SERVICE_KEY>`.
  *
  * Returns null when the header is missing or wrong, so the caller can 401.
- * The key lives in Convex env + trip-agent's Vercel env + your local .env,
+ * The key lives in Convex env, trip-agent's Vercel env and your local .env,
  * and never reaches the browser.
  */
 export function serviceActorFromRequest(request: Request): Actor | null {

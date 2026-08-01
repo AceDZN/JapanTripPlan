@@ -20,8 +20,7 @@
   "dependencies": {
     "@ai-sdk/gateway": "^4.0.28",
     "@ai-sdk/react": "^4.0.40",
-    "@auth/core": "^0.41.3",
-    "@convex-dev/auth": "^0.0.94",
+    "@clerk/nextjs": "^7.6.4",
     "ai": "^7.0.37",
     "convex": "^1.43.0",
     "leaflet": "^1.9.4",

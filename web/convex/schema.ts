@@ -1,4 +1,3 @@
-import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
@@ -59,10 +58,12 @@ export const booking = v.object({
   status: bookingStatus,
 });
 
+/**
+ * No users/sessions tables: Clerk owns identity. A request's identity arrives
+ * as a verified JWT and is matched against the allowlist in `lib/family.ts`,
+ * so there is no account state for this app to store or keep in sync.
+ */
 export default defineSchema({
-  // Convex Auth: users, sessions, accounts, verification codes.
-  ...authTables,
-
   /** The 17 trip days. `n` is 1..17 and is the stable public key. */
   days: defineTable({
     n: v.number(),

@@ -1,13 +1,11 @@
 import { httpRouter } from "convex/server";
 import { httpAction } from "./_generated/server";
 import { api, internal } from "./_generated/api";
-import { auth } from "./auth";
 import { serviceActorFromRequest } from "./lib/guards";
 
+// No sign-in routes here: Clerk handles the whole auth flow in the Next.js
+// app and Convex only verifies the resulting JWT (see convex/auth.config.ts).
 const http = httpRouter();
-
-// Convex Auth's own routes (sign-in, sign-out, token refresh).
-auth.addHttpRoutes(http);
 
 /**
  * Machine API for eve and the local Claude Code skills.
