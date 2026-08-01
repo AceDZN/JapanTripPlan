@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as checklist from "../checklist.js";
 import type * as http from "../http.js";
 import type * as importData from "../importData.js";
 import type * as lib_family from "../lib/family.js";
@@ -24,6 +25,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  checklist: typeof checklist;
   http: typeof http;
   importData: typeof importData;
   "lib/family": typeof lib_family;

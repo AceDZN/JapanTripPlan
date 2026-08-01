@@ -334,6 +334,28 @@ test("guides index and a rendered guide keep the canonical documents readable", 
   assert.doesNotMatch(guide, /TARGET BOOKING WINDOW/);
 });
 
+test("the suggestion queue shows a signed-out visitor no proposals", async () => {
+  // Approving a change to the shared plan is the one act gated on being the
+  // owner, so the queue is where a leak would matter most: it carries what each
+  // person asked for, including the exact text of edits they proposed. A
+  // signed-out request must reveal none of it.
+  const page = await html("/suggestions");
+
+  assert.match(page, /הצעות לשינוי/);
+  assert.match(page, /ממתין להחלטה/);
+  // Server-side, Convex auth is still resolving, so the queue renders its
+  // loading state and the sign-in card only appears once Clerk answers on the
+  // client — same as /wishes. What matters is that the server ships no rows
+  // either way.
+  assert.match(page, /בודק כניסה/);
+
+  // No proposal content, no proposer identities, no decision controls.
+  assert.doesNotMatch(page, /proposedByEmail/);
+  assert.doesNotMatch(page, /acedzn\.com/);
+  assert.doesNotMatch(page, /לאשר/);
+  assert.doesNotMatch(page, /לדחות/);
+});
+
 test("the wish list shows a signed-out visitor nothing but the sign-in prompt", async () => {
   // The whole feature rests on one rule: shared wishes go to the family, and a
   // private wish goes only to its owner. A signed-out request is the strongest

@@ -1626,6 +1626,7 @@ a.status-chip:hover {
 }
 
 .place-card-body {
+  align-content: start;
   display: grid;
   gap: 7px;
   padding: 14px 15px;
@@ -2916,6 +2917,7 @@ a.status-chip:hover {
 }
 
 .wish-card {
+  align-content: start;
   display: grid;
   gap: 7px;
   padding: 15px 16px;
@@ -2935,6 +2937,7 @@ a.status-chip:hover {
 }
 
 .wish-card-head {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;

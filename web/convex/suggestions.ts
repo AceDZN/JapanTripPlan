@@ -460,3 +460,23 @@ export const internalListPending = internalQuery({
     return rows.map(toSuggestion);
   },
 });
+
+/**
+ * Who is looking, and may they decide?
+ *
+ * The list is readable by the whole family, but only the owner sees decision
+ * controls. Deriving that here rather than in the client keeps one definition
+ * of "owner" — the UI asking "am I allowed?" gets the same answer the mutation
+ * will enforce, so the buttons never promise something `approve` then refuses.
+ */
+export const viewer = query({
+  args: {},
+  handler: async (ctx) => {
+    const actor = await requireFamily(ctx);
+    return {
+      name: actor.name,
+      role: actor.role ?? null,
+      isOwner: actor.kind === "family" && actor.role === "owner",
+    };
+  },
+});

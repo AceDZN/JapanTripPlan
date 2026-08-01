@@ -1,162 +1,122 @@
 // Tick a pre-trip checklist item off from the chat.
 //
-// Convention (shared with instructions.md and the README): a checklist item is
-// DONE when its line carries a ✅. In 11-PRE-TRIP-CHECKLIST.md the items live in
-// markdown tables whose first column is "Done", so the ✅ replaces the `[ ]` in
-// that cell and the table keeps rendering; on a plain bullet or free line the ✅
-// is prefixed to the line instead. An optional note is recorded next to the ✅.
+// ## What changed, and why
 //
-// Same write path and same safety as edit_plan_doc: GitHub Contents API,
-// "Trip update: <summary>" commit message, approval `always()`.
+// This used to rewrite `11-PRE-TRIP-CHECKLIST.md` in GitHub — replacing `[ ]`
+// with ✅ — and commit it. That was the real state of the checklist while the
+// markdown was the source of truth.
 //
-// Staleness: the ✅ is live in the repo immediately, but this agent's bundled
-// copy of the checklist only refreshes on the next deploy (a few minutes). For
-// the rest of the conversation the model must trust the item it just ticked over
-// what read_guide returns.
+// It is not any more. Those files are Convex's export now, so a commit into
+// them is written to a build artefact and disappears at the next
+// `npm run export:md`. A tick recorded that way would silently vanish, which is
+// the worst possible failure for a checklist: it would read "not done" for
+// something the family had already bought.
+//
+// Progress therefore lives in the `checklistState` table, which is also what
+// the /prepare page renders — so ticking here and ticking in the app are now
+// the same act, visible to everyone, instead of two different records.
+//
+// ## Why this is not gated like edit_plan_doc
+//
+// Ticking "we bought the teamLab tickets" reports a fact about the world. It
+// does not change what the family plans to do, so it does not go through the
+// owner's approval queue the way a change to a guide or a day does. It still
+// asks the user in chat first, because a wrong tick is annoying to find.
 
 import { defineTool } from "eve/tools";
 import { always } from "eve/tools/approval";
 import { z } from "zod";
-import {
-  commitDoc,
-  githubConfig,
-  LIVE_IN_MINUTES_NOTE,
-  MISSING_TOKEN_ERROR,
-  readDoc,
-} from "../lib/github";
-
-const CHECKLIST_FILE = "11-PRE-TRIP-CHECKLIST.md";
-const DONE_MARK = "✅";
-
-/** Markdown table row: capture the leading pipe, the "Done" cell, the next pipe. */
-const TABLE_DONE_CELL = /^(\s*\|\s*)([^|]*?)(\s*\|)/;
-/** Leading bullet / checkbox on a non-table line. */
-const LIST_PREFIX = /^(\s*(?:[-*+]\s+)?)(?:\[[ xX]\]\s*)?/;
-
-function normalize(text: string): string {
-  return text.replace(/\s+/g, " ").trim().toLowerCase();
-}
-
-/** Skip table headers and `|---|---|` separators when searching for the item. */
-function isTableChrome(line: string): boolean {
-  return /^\s*\|[\s:|-]*\|\s*$/.test(line);
-}
-
-function markLineDone(line: string, note?: string): string {
-  const suffix = note ? ` — ${note}` : "";
-
-  const table = TABLE_DONE_CELL.exec(line);
-  if (table) {
-    // `| [ ] | ...` -> `| ✅ — note | ...`; the note rides in the Done cell so
-    // the rest of the row (What / When / Where / Who) stays untouched.
-    return (
-      table[1] + DONE_MARK + suffix + table[3] + line.slice(table[0].length)
-    );
-  }
-
-  const prefix = LIST_PREFIX.exec(line);
-  const lead = prefix ? prefix[0] : "";
-  return `${lead}${DONE_MARK} ${line.slice(lead.length)}${suffix}`;
-}
+import { CONVEX_UNCONFIGURED, convexConfigured, convexPost } from "../lib/convex";
 
 export default defineTool({
   description: [
-    `Mark a pre-trip checklist item as completed in ${CHECKLIST_FILE} and commit it to the repo.`,
-    `The convention across the whole trip is a ${DONE_MARK} on the item's line: an item carrying ${DONE_MARK} is done,`,
-    "an item without one is still open. Read and report completion state from those marks.",
+    "Mark a pre-trip checklist item as done, or reopen one that was ticked by mistake.",
+    "The tick is shared: everyone in the family sees it, in the app and here.",
     "",
     "Give `item_text` as a distinctive fragment of the item's wording, copied from the checklist",
-    "(e.g. 'Buy teamLab Planets timed entry'). It must match exactly one line — if it matches several,",
-    "the tool refuses and asks for a longer fragment. Matching ignores case and extra whitespace.",
+    "(e.g. 'לקנות נעלי הליכה חדשות'). It must identify exactly one item — if it matches several,",
+    "the tool refuses and asks for a longer fragment.",
     "",
-    "`note` is optional and is recorded next to the mark — use it for things like who bought it,",
-    "a confirmation number reference, or the date.",
+    "Use this when someone reports that something is done ('קנינו את הכרטיסים ל-teamLab').",
+    "Do NOT use edit_plan_doc to tick items off — that proposes a change to the plan, which is",
+    "a different thing and needs Alex's approval.",
     "",
-    "If the item is already marked, the tool says so and commits nothing. The user must approve",
-    "the call before anything is written.",
+    "The user must approve the call before anything is recorded.",
   ].join("\n"),
 
   inputSchema: z.object({
+    actorEmail: z
+      .string()
+      .describe("Exactly the address from the `משתמש:` clause of this turn's context line."),
     item_text: z
       .string()
       .min(3)
-      .describe(
-        "Distinctive fragment of the checklist item's text. Must identify exactly one line.",
-      ),
-    note: z
-      .string()
+      .describe("Distinctive fragment of the checklist item's text. Must identify exactly one item."),
+    done: z
+      .boolean()
       .optional()
-      .describe("Optional short note recorded next to the ✅ (who/when/reference)."),
+      .describe("Defaults to true. Pass false to reopen an item ticked by mistake."),
   }),
 
-  // Commits to the family's real checklist — always ask first.
+  // Writes to the family's shared checklist — always ask first.
   approval: always(),
 
-  async execute({ item_text, note }) {
-    const cfg = githubConfig();
-    if (!cfg) return { ok: false as const, error: MISSING_TOKEN_ERROR };
+  async execute({ actorEmail, item_text, done }) {
+    if (!convexConfigured()) return { ok: false as const, error: CONVEX_UNCONFIGURED };
 
-    const read = await readDoc(cfg, CHECKLIST_FILE);
-    if (!read.ok) return { ok: false as const, error: read.error };
-
-    const lines = read.doc.content.split("\n");
-    const needle = normalize(item_text);
-    const hits = lines
-      .map((line, index) => ({ line, index }))
-      .filter(({ line }) => !isTableChrome(line) && normalize(line).includes(needle));
-
-    if (hits.length === 0) {
+    // Without a verified speaker there is nobody to record as having done it,
+    // and "someone ticked this" is not much better than no record at all.
+    if (!actorEmail.includes("@")) {
       return {
         ok: false as const,
         error:
-          `לא מצאתי פריט כזה בצ'קליסט (${CHECKLIST_FILE}), ולכן לא סימנתי כלום. ` +
-          "אפשר לקרוא את הצ'קליסט עם read_guide ולנסות שוב עם ניסוח שמופיע בו.",
-      };
-    }
-    if (hits.length > 1) {
-      return {
-        ok: false as const,
-        error:
-          `הניסוח הזה מתאים ל-${hits.length} פריטים בצ'קליסט, אז לא סימנתי כלום. ` +
-          "צריך קטע טקסט ארוך וייחודי יותר.",
-        matches: hits.slice(0, 8).map(({ line }) => line.trim()),
+          "אין לי כתובת מזוהה של מי שמדווח, אז אי אפשר לרשום מי סימן. " +
+          "צריך להיות מחוברים לחשבון משפחתי.",
       };
     }
 
-    const hit = hits[0]!;
-    if (hit.line.includes(DONE_MARK)) {
+    try {
+      const body = (await convexPost("/agent/checklist/done", {
+        actorEmail,
+        itemText: item_text,
+        done: done ?? true,
+      })) as { ok?: boolean; error?: string; itemSlug?: string; changed?: boolean };
+
+      if (body?.ok === false) {
+        const error = String(body.error ?? "");
+        if (error.includes("No checklist item matches")) {
+          return {
+            ok: false as const,
+            error:
+              `לא מצאתי פריט בצ׳קליסט שמתאים ל"${item_text}", ולכן לא סימנתי כלום. ` +
+              "צריך לצטט קטע מדויק מהניסוח של הפריט.",
+          };
+        }
+        if (error.includes("matches")) {
+          return {
+            ok: false as const,
+            error:
+              `"${item_text}" מתאים ליותר מפריט אחד, אז לא ברור מה לסמן ולא נגעתי בכלום. ` +
+              "צריך לצטט קטע ארוך יותר.",
+          };
+        }
+        return { ok: false as const, error };
+      }
+
+      const marked = done ?? true;
       return {
         ok: true as const,
-        alreadyDone: true as const,
-        file: CHECKLIST_FILE,
-        line: hit.line.trim(),
-        note: "הפריט הזה כבר מסומן כבוצע, אז לא שיניתי כלום.",
+        itemSlug: body?.itemSlug,
+        done: marked,
+        // `changed: false` means it was already in this state. Worth passing on
+        // so the model says "כבר היה מסומן" instead of implying it did something.
+        alreadyInThatState: body?.changed === false,
+        note: marked
+          ? "הפריט סומן כבוצע ומופיע ככה לכל המשפחה."
+          : "הפריט נפתח מחדש ומופיע ככה לכל המשפחה.",
       };
+    } catch (error) {
+      return { ok: false as const, error: String(error) };
     }
-
-    const updated = markLineDone(hit.line, note);
-    lines[hit.index] = updated;
-
-    const summary = `mark done — ${item_text.replace(/\s+/g, " ").trim()}`;
-    const commit = await commitDoc(cfg, {
-      doc: read.doc,
-      content: lines.join("\n"),
-      summary,
-    });
-    if (!commit.ok) return { ok: false as const, error: commit.error };
-
-    return {
-      ok: true as const,
-      alreadyDone: false as const,
-      file: CHECKLIST_FILE,
-      branch: cfg.branch,
-      before: hit.line.trim(),
-      after: updated.trim(),
-      commitUrl: commit.commitUrl,
-      note: LIVE_IN_MINUTES_NOTE,
-      staleness:
-        "Your bundled copy of the checklist is now out of date for the rest of this conversation: " +
-        "treat this item as done even if read_guide still shows it open.",
-    };
   },
 });

@@ -14,7 +14,7 @@
  * Bump VERSION whenever the precache list or a caching rule changes.
  */
 
-const VERSION = "japan2026-v2";
+const VERSION = "japan2026-v3";
 const SHELL_CACHE = `${VERSION}-shell`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 const IMAGE_CACHE = `${VERSION}-images`;
@@ -225,6 +225,24 @@ self.addEventListener("fetch", (event) => {
 
   // Never cache or intercept the API — the chat must always hit the network.
   if (url.pathname.startsWith("/api/")) return;
+
+  /*
+   * Never cache an RSC payload.
+   *
+   * These are the Flight streams Next fetches for client-side navigation. They
+   * are BUILD-COUPLED — a payload carries the client-component module ids of
+   * the build that produced it — but their URL is stable across builds. So a
+   * cached payload from an older build gets replayed against the current JS
+   * bundle, the Flight client cannot resolve those ids, and it throws
+   * "Cannot read properties of null (reading 'enqueueModel')" or
+   * "the module factory is not available". Both look like application bugs and
+   * are not.
+   *
+   * Nothing is lost offline: `navigationHandler` already serves the precached
+   * document for a real navigation, and a failed RSC prefetch degrades to a
+   * full browser navigation, which is the fallback Next logs and handles.
+   */
+  if (request.headers.get("RSC") === "1" || url.searchParams.has("_rsc")) return;
 
   // Photos: cache-first, populated as the user browses.
   if (url.pathname.startsWith("/images/") || url.pathname === "/_vinext/image") {

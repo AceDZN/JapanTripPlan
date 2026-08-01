@@ -44,6 +44,21 @@ const SESSION_KEY = "japan2026.eve.session.v1";
 const MAX_RECONNECTS = 5;
 
 /**
+ * How long a resumed session may stay silent before we stop believing in it.
+ *
+ * A session the agent no longer knows about does not 404 — it accepts the
+ * stream and then sends nothing, so the relay sits on an open body until it
+ * times out minutes later and 500s. The client reads that as a transient drop
+ * and reconnects behind the loading skeleton, so the chat looks like it is
+ * thinking, forever. (Seen for real: 5.6 minutes on a session created against
+ * a different agent deployment.)
+ *
+ * Replaying a durable transcript is fast, so silence this long means the
+ * session is gone, not slow.
+ */
+const RESUME_SILENCE_MS = 20_000;
+
+/**
  * One turn's payload.
  *
  * `spoken` marks a turn whose `text` came from an audio-native model listening
@@ -259,6 +274,11 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   const [resumable] = useState<string | null>(readStoredSession);
   const [sessionId, setSessionId] = useState<string | null>(resumable);
   const [hydrating, setHydrating] = useState<boolean>(Boolean(resumable));
+  /** Mirrors `hydrating` for the silence timer, which outlives its closure. */
+  const hydratingRef = useRef(Boolean(resumable));
+  useEffect(() => {
+    hydratingRef.current = hydrating;
+  }, [hydrating]);
 
   const sessionRef = useRef<string | null>(resumable);
   const tokenRef = useRef<string | null>(null);
@@ -344,7 +364,25 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
     // for live events. Nothing but the session id is kept locally.
     startStream(resumable, 0);
 
+    // A resume that never yields an event is a dead session, not a slow one.
+    // Say so and drop the stored id, so the next turn opens a fresh session
+    // instead of retrying a ghost behind the skeleton.
+    const silent = setTimeout(() => {
+      if (!hydratingRef.current) return;
+      streamRef.current?.abort();
+      writeStoredSession(null);
+      sessionRef.current = null;
+      setSessionId(null);
+      setHydrating(false);
+      dispatch({
+        kind: "error",
+        message: "לא הצלחנו לטעון את השיחה הקודמת. אפשר להתחיל שיחה חדשה.",
+        errorKind: "agent",
+      });
+    }, RESUME_SILENCE_MS);
+
     return () => {
+      clearTimeout(silent);
       streamRef.current?.abort();
     };
   }, [resumable, startStream]);

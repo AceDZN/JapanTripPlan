@@ -270,6 +270,48 @@ http.route({
   }),
 });
 
+/* ---------------------------------------------------------------- checklist */
+
+/**
+ * Tick a pre-trip checklist item off, on behalf of a named family member.
+ *
+ * Open to the service key on purpose. Recording that the shoes were bought is
+ * a fact about the world, not a change to the plan — the gate in
+ * `/agent/suggestions/*` exists for the latter. See `convex/checklist.ts`.
+ */
+http.route({
+  path: "/agent/checklist/done",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+    const hasTarget = typeof row.itemSlug === "string" || typeof row.itemText === "string";
+    if (!hasTarget || typeof row.actorEmail !== "string") {
+      return json(
+        { ok: false, error: "expected { actorEmail, itemSlug|itemText, done? }" },
+        400,
+      );
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.checklist.internalSetDoneFor, {
+        itemSlug: typeof row.itemSlug === "string" ? row.itemSlug : undefined,
+        itemText: typeof row.itemText === "string" ? row.itemText : undefined,
+        actorEmail: row.actorEmail,
+        done: row.done === undefined ? true : row.done === true,
+      });
+      return json({ ...result, ok: true });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
 /* -------------------------------------------------------------- suggestions */
 
 /**
