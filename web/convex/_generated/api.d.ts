@@ -11,6 +11,7 @@
 import type * as auth from "../auth.js";
 import type * as http from "../http.js";
 import type * as importData from "../importData.js";
+import type * as lib_family from "../lib/family.js";
 import type * as lib_guards from "../lib/guards.js";
 import type * as trip from "../trip.js";
 
@@ -24,6 +25,7 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   http: typeof http;
   importData: typeof importData;
+  "lib/family": typeof lib_family;
   "lib/guards": typeof lib_guards;
   trip: typeof trip;
 }>;

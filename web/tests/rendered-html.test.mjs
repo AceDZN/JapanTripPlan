@@ -198,7 +198,12 @@ test("home page renders the hero, the next gate to close and the trip previews",
   }
   assert.match(page, /שערי הזמנה/);
   assert.match(page, /status-chip st-/);
-  assert.match(page, /Nintendo Museum/);
+  // Deliberately structural. This used to assert /Nintendo Museum/, which
+  // broke on 2026-08-01 when that item's 2026-07-31 deadline passed and it
+  // dropped out of the home page's top-6 gates — a false failure that says
+  // nothing about the rendering. Expiring content belongs in the data, not
+  // in an assertion.
+  assert.match(page, /class="card gate"/);
   assert.match(page, /class="day-card"/);
   assert.match(page, /href="\/day\/3"/);
   assert.match(page, /לכל המדריכים/);
