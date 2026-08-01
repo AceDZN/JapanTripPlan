@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Download, FileText } from "lucide-react";
-import { tripGuides } from "@/app/generated/trip-content";
+import { getGuide, getGuides } from "@/lib/trip-source";
+import { isRtl, renderGuideHtml } from "@/lib/markdown";
 import { guideImage } from "@/components/guide-images";
 
-export function generateStaticParams() {
-  return tripGuides.map((guide) => ({ slug: guide.slug }));
+export async function generateStaticParams() {
+  const guides = await getGuides();
+  return guides.map((guide) => ({ slug: guide.slug }));
 }
 
 export async function generateMetadata({
@@ -15,7 +17,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const guide = tripGuides.find((item) => item.slug === slug);
+  const guide = await getGuide(slug);
   return {
     title: guide?.title ?? "מדריך",
     description: guide?.description,
@@ -28,8 +30,13 @@ export default async function GuidePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const guide = tripGuides.find((item) => item.slug === slug);
+  const guide = await getGuide(slug);
   if (!guide) notFound();
+
+  // Direction follows the document, not the section: the guides are being
+  // translated to Hebrew one at a time, and a half-translated set needs both.
+  const rtl = isRtl(guide.body);
+  const html = renderGuideHtml(guide.body);
 
   return (
     <article>
@@ -62,16 +69,18 @@ export default async function GuidePage({
         </div>
       </header>
 
-      <div className="doc-note">
-        <strong>המסמך המקורי נשאר מקור האמת.</strong>
-        <span>התוכן מופיע בשפת המקור ומתעדכן אוטומטית בכל בנייה של האתר.</span>
-      </div>
+      {rtl ? null : (
+        <div className="doc-note">
+          <strong>המדריך הזה עדיין באנגלית.</strong>
+          <span>התרגום לעברית בעבודה. התוכן המבצעי של כל יום כבר מופיע בעברית בעמודי הימים.</span>
+        </div>
+      )}
 
       <div className="container">
         <div
           className="guide-content"
-          dir="ltr"
-          dangerouslySetInnerHTML={{ __html: guide.html }}
+          dir={rtl ? "rtl" : "ltr"}
+          dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
     </article>

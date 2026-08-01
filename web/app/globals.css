@@ -44,6 +44,10 @@
   --st-on-sale-soon: #2f6fd0;
   --st-fallback: #6c7192;
 
+  /* ops accents — warnings and confirmations in the day's operational layer */
+  --ops-warn-ink: var(--vermillion-deep);
+  --ops-ok-ink: #17705a;
+
   /* shape */
   --r-sm: 12px;
   --r: 16px;
@@ -80,6 +84,10 @@
     --line-strong: rgba(255, 255, 255, 0.24);
     --vermillion: #ff5c4a;
     --vermillion-deep: #e34234;
+    /* Lifted well above the brand colours: both sit on tinted dark surfaces,
+       where #e34234 and the light-mode matcha both fall under 4.5:1. */
+    --ops-warn-ink: #ff9182;
+    --ops-ok-ink: #57d6ab;
     --st-buy-now: #ff5c4a;
     --st-booked: #3bbd93;
     --st-lottery: #efb547;
@@ -2422,4 +2430,735 @@ a.status-chip:hover {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ------------------------------------------------------------------ ops --
+   The operational layer of a day: routes, fares, deadlines, addresses.
+
+   Visually subordinate to the block heading but denser than prose — these
+   are scanned standing up, so every row is a short line with a leading icon
+   rather than a paragraph to read.
+*/
+
+.ops {
+  border-radius: var(--r-sm);
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.ops-head {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  font-weight: 800;
+  gap: 6px;
+  letter-spacing: 0.02em;
+}
+
+.ops-head-aside {
+  color: var(--text-faint);
+  font-weight: 600;
+  margin-inline-start: auto;
+}
+
+.ops-route {
+  background: color-mix(in srgb, var(--day-color, var(--indigo)) 7%, var(--surface-2));
+}
+
+.ops-cost {
+  background: var(--surface-2);
+}
+
+.ops-needs {
+  background: color-mix(in srgb, var(--matcha) 8%, var(--surface-2));
+}
+
+.ops-warn {
+  background: color-mix(in srgb, var(--vermillion) 9%, var(--surface-2));
+}
+
+.ops-warn .ops-head {
+  color: var(--ops-warn-ink);
+}
+
+.ops-bullets {
+  display: grid;
+  gap: 5px;
+  font-size: 13px;
+  line-height: 1.6;
+  padding-inline-start: 16px;
+}
+
+.ops-bullets li {
+  list-style: disc;
+}
+
+/* --- legs */
+
+.legs {
+  display: grid;
+  gap: 10px;
+}
+
+.leg {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 24px 1fr;
+}
+
+.leg-icon {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--day-color, var(--indigo)) 70%, var(--text));
+  display: inline-flex;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
+}
+
+.leg-body {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.leg-route {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 6px;
+  line-height: 1.45;
+}
+
+.leg-arrow {
+  color: var(--text-faint);
+}
+
+.name-label {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.name-foreign {
+  color: var(--text-faint);
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.leg-line,
+.leg-times,
+.leg-meta,
+.leg-exit,
+.leg-note,
+.leg-gotcha {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  gap: 4px 8px;
+}
+
+.leg-line {
+  color: var(--text-muted);
+}
+
+.leg-mode {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+}
+
+.leg-direction {
+  align-items: center;
+  color: var(--text-faint);
+  display: inline-flex;
+  gap: 4px;
+}
+
+.leg-times {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.leg-meta {
+  color: var(--text-faint);
+}
+
+.leg-meta span:not(:last-child)::after {
+  content: "·";
+  padding-inline-start: 8px;
+}
+
+.leg-exit {
+  color: var(--ops-ok-ink);
+  font-weight: 600;
+}
+
+.leg-note {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.leg-gotcha {
+  align-items: flex-start;
+  background: color-mix(in srgb, var(--vermillion) 10%, transparent);
+  border-radius: var(--r-sm);
+  color: var(--ops-warn-ink);
+  line-height: 1.55;
+  padding: 6px 8px;
+}
+
+.leg-gotcha svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+/* --- costs */
+
+.cost-lines {
+  display: grid;
+  gap: 5px;
+  font-size: 13px;
+}
+
+.cost-lines li {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.cost-label {
+  display: grid;
+}
+
+.cost-label small,
+.cost-amount small {
+  color: var(--text-faint);
+  font-size: 11px;
+}
+
+.cost-amount {
+  align-items: baseline;
+  display: flex;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.cost-total {
+  border-top: 1px solid var(--line);
+  font-weight: 800;
+  margin-top: 3px;
+  padding-top: 6px;
+}
+
+/* --- links */
+
+.ops-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ops-link {
+  align-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 12px;
+  gap: 6px;
+  padding: 4px 10px;
+  transition: background 160ms ease;
+}
+
+.ops-link:hover {
+  background: var(--surface-3);
+}
+
+.ops-link-kind {
+  color: var(--text-faint);
+  font-size: 10.5px;
+  font-weight: 800;
+}
+
+/* --- stay + day total panels */
+
+.stay-label {
+  font-weight: 700;
+}
+
+.stay-times {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.stay-address,
+.place-address {
+  align-items: center;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--font-jp);
+  font-size: 13px;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 8px 10px;
+}
+
+.stay-note {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.copy-btn {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  gap: 5px;
+  padding: 4px 10px;
+}
+
+.copy-btn:hover {
+  background: var(--surface-3);
+}
+
+.day-total {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.day-total-panel small {
+  color: var(--text-faint);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* --- place facts */
+
+.place-facts {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.place-facts li {
+  align-items: flex-start;
+  color: var(--text-muted);
+  display: flex;
+  gap: 6px;
+  line-height: 1.5;
+}
+
+.place-facts li svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.place-facts li span {
+  display: grid;
+}
+
+.place-facts li[data-tone="warn"] {
+  color: var(--ops-warn-ink);
+  font-weight: 600;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+@media (max-width: 620px) {
+  .leg {
+    grid-template-columns: 20px 1fr;
+  }
+
+  .ops-head-aside {
+    margin-inline-start: 0;
+    width: 100%;
+  }
+}
+
+/* ---------------------------------------------------------------- wishes --
+   The family wish list. Shared items feed planning; "רק אני" items are
+   visible only to their owner and are marked clearly enough that nobody
+   posts a surprise into the shared column by accident.
+*/
+
+.wish-board {
+  display: grid;
+  gap: 16px;
+}
+
+.wish-signed-in {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.wish-form {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.wish-form-row {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.wish-form label {
+  display: grid;
+  gap: 5px;
+}
+
+.wish-form input,
+.wish-form select,
+.wish-form textarea {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 9px 11px;
+  width: 100%;
+}
+
+.wish-form textarea {
+  resize: vertical;
+}
+
+.wish-private-toggle {
+  align-content: end;
+}
+
+.wish-error {
+  color: var(--ops-warn-ink);
+  font-size: 13px;
+}
+
+.wish-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.wish-filters .chip {
+  background: none;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.wish-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.wish-card {
+  display: grid;
+  gap: 7px;
+  padding: 15px 16px;
+}
+
+.wish-card[data-status="done"] {
+  opacity: 0.72;
+}
+
+.wish-card[data-status="dropped"] {
+  opacity: 0.5;
+}
+
+.wish-card h3 {
+  font-size: 16.5px;
+  line-height: 1.35;
+}
+
+.wish-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wish-private {
+  background: color-mix(in srgb, var(--indigo) 22%, var(--surface-2));
+  font-weight: 700;
+}
+
+.wish-pri-must {
+  background: color-mix(in srgb, var(--vermillion) 18%, var(--surface-2));
+  font-weight: 700;
+}
+
+.wish-foreign {
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.wish-owner,
+.wish-note {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.wish-owner {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+
+.wish-actions {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.wish-actions select {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  padding: 5px 10px;
+}
+
+@media (max-width: 620px) {
+  .wish-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- wishes on a day page */
+
+.day-wish-list {
+  display: grid;
+  gap: 10px;
+}
+
+.day-wish {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto 1fr;
+}
+
+.day-wish > img {
+  border-radius: var(--r-sm);
+  height: 52px;
+  object-fit: cover;
+  width: 52px;
+}
+
+.day-wish-body {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.day-wish-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 6px;
+}
+
+.day-wish-busy {
+  background: color-mix(in srgb, var(--indigo) 22%, var(--surface-2));
+  font-size: 10.5px;
+}
+
+.day-wish-owner {
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.day-wish-shops {
+  display: grid;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.day-wish-shops li {
+  align-items: center;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 6px;
+  padding: 5px 8px;
+}
+
+.day-wish-area,
+.day-wish-price {
+  align-items: center;
+  color: var(--text-faint);
+  display: inline-flex;
+  gap: 3px;
+}
+
+.day-wish-price {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  margin-inline-start: auto;
+}
+
+/* --- eve intake + research results on a wish */
+
+.wish-add-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wish-ask {
+  border-color: color-mix(in srgb, var(--vermillion) 40%, var(--line));
+}
+
+.wish-ask-lede {
+  align-items: flex-start;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 13.5px;
+  gap: 7px;
+  line-height: 1.6;
+}
+
+.wish-ask-lede svg {
+  color: var(--vermillion);
+  flex: none;
+  margin-top: 3px;
+}
+
+.wish-ask-note {
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.wish-ask-note a {
+  text-decoration: underline;
+}
+
+.wish-busy {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 12.5px;
+  gap: 6px;
+}
+
+.wish-busy svg {
+  animation: wish-spin 1.4s linear infinite;
+}
+
+@keyframes wish-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wish-busy svg {
+    animation: none;
+  }
+}
+
+.wish-images {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.wish-images img {
+  border-radius: var(--r-sm);
+  height: 64px;
+  object-fit: cover;
+  width: 64px;
+}
+
+.wish-shops {
+  display: grid;
+  gap: 4px;
+}
+
+.wish-shops li {
+  align-items: center;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 6px;
+  padding: 5px 8px;
+}
+
+.wish-shop-area {
+  align-items: center;
+  color: var(--text-faint);
+  display: inline-flex;
+  gap: 3px;
+}
+
+.wish-shop-price {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  margin-inline-start: auto;
+}
+
+.wish-sources {
+  color: var(--text-faint);
+  font-size: 11.5px;
+}
+
+.wish-sources a {
+  text-decoration: underline;
+}
+
+/**
+ * The shared/private control.
+ *
+ * It used `.btn-glass`, which is white text on translucent white — correct on
+ * the dark hero images, invisible on the light wish page. Given this is the
+ * control that decides whether a surprise stays a surprise, it now gets an
+ * explicit width and border so it always reads as a real, legible toggle.
+ */
+.wish-vis {
+  justify-content: center;
+  min-width: 132px;
 }

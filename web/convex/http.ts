@@ -193,6 +193,133 @@ http.route({
   }),
 });
 
+/**
+ * Seed a wish for a family member, by e-mail.
+ *
+ * Service-key only. `convex/wishes.ts` refuses any address that is not on the
+ * allowlist, so this cannot create a wish for someone outside the family.
+ */
+http.route({
+  path: "/agent/wishes/create",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+    if (typeof row.ownerEmail !== "string" || typeof row.title !== "string") {
+      return json(
+        { ok: false, error: "expected { ownerEmail, title, kind, priority, visibility }" },
+        400,
+      );
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.wishes.internalCreateFor, row as never);
+      return json({ ...result, ok: true });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+http.route({
+  path: "/agent/wishes/seed",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+    if (typeof row.ownerEmail !== "string" || typeof row.title !== "string") {
+      return json({ ok: false, error: "expected { ownerEmail, title, kind, priority, visibility }" }, 400);
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.wishes.internalCreateFor, row as never);
+      return json({ ok: true, ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/**
+ * The agent's window onto the wish list.
+ *
+ * `/list` returns every wish INCLUDING private ones, which is the one place
+ * that happens. That is deliberate and it is the reason the service key never
+ * reaches a browser: eve needs to research a private wish (that is the whole
+ * point of noting a surprise) but must never surface one to the wrong person.
+ * eve's replies go back to a single family chat, so its instructions forbid
+ * discussing a private wish that is not the asker's own.
+ */
+http.route({
+  path: "/agent/wishes/list",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+    const wishes = await ctx.runQuery(internal.wishes.internalListAll, {});
+    return json({ ok: true, wishes });
+  }),
+});
+
+/** Write research back onto a wish. Cannot change ownership or visibility. */
+http.route({
+  path: "/agent/wishes/research",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    if (typeof (body as Record<string, unknown>).id !== "string") {
+      return json({ ok: false, error: "expected { id, ...research }" }, 400);
+    }
+
+    try {
+      const result = await ctx.runMutation(
+        internal.wishes.internalApplyResearch,
+        body as never,
+      );
+      return json({ ...result, ok: true });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/**
+ * Store an image eve found, and return its storage id.
+ *
+ * The agent sends the bytes; Convex owns the file. Passing a remote URL
+ * straight through to the client instead would leave the wish depending on
+ * some shop's CDN still being up in October.
+ */
+http.route({
+  path: "/agent/wishes/image",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const contentType = request.headers.get("content-type") ?? "";
+    if (!contentType.startsWith("image/")) {
+      return json({ ok: false, error: "expected an image/* body" }, 400);
+    }
+
+    const storageId = await ctx.storage.store(await request.blob());
+    return json({ ok: true, storageId });
+  }),
+});
+
 /** One guide with its full body — kept separate so /agent/snapshot stays small. */
 http.route({
   path: "/agent/guide",

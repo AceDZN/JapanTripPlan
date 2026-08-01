@@ -1,97 +1,97 @@
-# 06 — Day Trips That Earn Their Time
+# 06 — טיולי יום שמצדיקים את הזמן שלהם
 
-The plan keeps one full day trip, **Kamakura/Enoshima**, plus one Tokyo neighborhood day built around **Todoroki Ravine, Setagaya parks and the Shimokitazawa Curry Festival**. Hakone and a dedicated Fuji day are not stacked into this trip; they would displace higher-priority family experiences.
+התוכנית שומרת על טיול יום מלא אחד, **קמקורה/אנושימה**, ועוד יום שכונות בטוקיו שנבנה סביב **ערוץ טודורוקי, פארקי סטגאיה ופסטיבל הקארי של שימוקיטזאווה**. האקונה (箱根) ויום פוג׳י (富士) ייעודי לא נדחסים לטיול הזה; הם היו דוחקים חוויות משפחתיות בעדיפות גבוהה יותר.
 
-## Oct 7 — Kamakura + Enoshima
+## 7.10 — קמקורה + אנושימה
 
-**Family theme:** giant Buddha, *Slam Dunk* coast, small trains, island views and caves.
-**Route:** Tokyo → Kamakura → Hase → Kamakurakōkōmae → Enoshima → Fujisawa → Tokyo
+**הנושא המשפחתי:** בודהה ענק, החוף של *Slam Dunk*, רכבות קטנות, נופי אי ומערות.
+**המסלול:** טוקיו ← קמקורה (鎌倉) ← האסה (長谷) ← Kamakurakōkōmae (鎌倉高校前) ← אנושימה (江ノ島) ← פוג׳יסאווה (藤沢) ← טוקיו
 
-### Morning
+### בוקר
 
-1. Travel to Kamakura.
-2. Continue quickly to Hase.
-3. **Kotoku-in Great Buddha:** 30–40 minutes.
-4. **Hasedera:** prioritize the cave, garden and view; about one hour.
+1. נסיעה לקמקורה.
+2. להמשיך מהר להאסה.
+3. **הבודהה הגדול ב־Kotoku-in** (高徳院): 30–40 דקות.
+4. **Hasedera** (長谷寺): לתעדף את המערה, הגן והתצפית; כשעה.
 
-The day does not include a full shrine circuit. Tsurugaoka Hachimangu is removed to prevent temple fatigue.
+היום לא כולל סבב מקדשים מלא. Tsurugaoka Hachimangu (鶴岡八幡宮) הוסר כדי למנוע עייפות מקדשים.
 
-### Afternoon
+### אחר הצהריים
 
-1. Ride the Enoden along the coast.
-2. Make a brief, respectful stop at **Kamakurakōkōmae** for the *Slam Dunk* crossing view.
-3. Do not stand in the road, block residents or chase a perfect train photo.
-4. Continue to Enoshima for snacks, views and the Iwaya caves if weather and operations allow.
-5. Use the escalator when it protects family energy.
+1. לנסוע ב־Enoden (江ノ電) לאורך החוף.
+2. לעצור עצירה קצרה ומכבדת ב־**Kamakurakōkōmae** בשביל נוף המפגש מ־*Slam Dunk*.
+3. לא לעמוד בכביש, לא לחסום תושבים ולא לרדוף אחרי תמונת הרכבת המושלמת.
+4. להמשיך לאנושימה לחטיפים, לנופים ולמערות Iwaya (岩屋) אם מזג האוויר וההפעלה מאפשרים.
+5. להשתמש בדרגנוע כשזה חוסך אנרגיה משפחתית.
 
-### Return
+### חזרה
 
-Exit through Fujisawa instead of retracing the entire Enoden route.
+לצאת דרך פוג׳יסאווה במקום לחזור על כל מסלול ה־Enoden אחורה.
 
-### Cut order
+### סדר החיתוך
 
-1. deepest island climb;
+1. הטיפוס העמוק ביותר באי;
 2. Sea Candle;
-3. Hasedera extras.
+3. התוספות ב־Hasedera.
 
-Keep the Great Buddha, coastal train and one enjoyable Enoshima block.
+לשמור על הבודהה הגדול, רכבת החוף ובלוק מהנה אחד באנושימה.
 
-## Oct 9 — Todoroki, Totoro and Curry Festival
+## 9.10 — טודורוקי, טוטורו ופסטיבל הקארי
 
-**Family theme:** forest and water, a cute picnic, then a real neighborhood food festival.
-**Route:** Tokyo → Todoroki → Setagaya-Daita → Hanegi Park → Shimokitazawa → Tokyo
+**הנושא המשפחתי:** יער ומים, פיקניק חמוד, ואז פסטיבל אוכל שכונתי אמיתי.
+**המסלול:** טוקיו ← טודורוקי (等々力) ← סטגאיה־דאיטה ← פארק Hanegi ← שימוקיטזאווה (下北沢) ← טוקיו
 
-### Morning · 08:00–10:45
+### בוקר · 08:00–10:45
 
-1. Leave the booked Tabata base around 08:00 and change at Oimachi for the Tokyu Oimachi Line.
-2. From Todoroki Station, walk about three minutes to the Golf Bridge entrance.
-3. Follow the reopened riverside path to Todoroki Fudoson and the Japanese Garden.
-4. Allow 60–90 minutes rather than treating the ravine as a hike.
-5. Share tea and kuzu-mochi at Setsugekka if it is open.
+1. לצאת מהבסיס המוזמן בטבטה (田端) סביב 08:00 ולהחליף באואימאצ׳י (大井町) לקו Tokyu Oimachi.
+2. מתחנת טודורוקי, כשלוש דקות הליכה לכניסה שליד גשר הגולף.
+3. ללכת בשביל הנחל שנפתח מחדש עד Todoroki Fudoson (等々力不動尊) והגן היפני.
+4. להקצות 60–90 דקות במקום להתייחס לערוץ כמסלול טיול.
+5. לחלוק תה ו־kuzu-mochi (葛餅) ב־Setsugekka אם פתוח.
 
-The full riverside path reopened on March 24, 2026. It is free and has no fixed opening slot, but parts are narrow, uneven and unfenced, there is no night lighting, and the river can rise quickly in heavy rain. [Official Setagaya status and safety notice](https://www.city.setagaya.lg.jp/02075/9082.html)
+שביל הנחל המלא נפתח מחדש ב־24 במרץ 2026. הכניסה חינם ואין חלון פתיחה קבוע, אבל יש קטעים צרים, לא אחידים וללא מעקה, אין תאורת לילה, והנחל יכול לעלות מהר בגשם חזק. [הסטטוס והודעת הבטיחות הרשמיים של סטגאיה](https://www.city.setagaya.lg.jp/02075/9082.html)
 
-Recheck that page one to two weeks before the visit for temporary maintenance or construction restrictions.
+לבדוק את העמוד הזה שוב שבוע-שבועיים לפני הביקור, לאיתור הגבלות תחזוקה או עבודות זמניות.
 
-### Midday · 10:45–13:30
+### צהריים · 10:45–13:30
 
-- Continue through Jiyūgaoka and Shibuya to Shimokitazawa/Setagaya-Daita.
-- Collect a reserved box from **Shiro-Hige’s Cream Puff Factory**; the Daita shop is open 10:30–18:00. [Official shop](https://shiro-hige.net/)
-- Walk to **Hanegi Park** for a short Totoro picnic and rest.
-- Do not promise a specific Hanegi lawn or play facility: renovation work is scheduled during 2026. Use the open rest area that works on the day. [Official park](https://www.city.setagaya.lg.jp/02075/9123.html)
+- להמשיך דרך ג׳יוגאוקה (自由が丘) ושיבויה (渋谷) לשימוקיטזאווה/סטגאיה־דאיטה.
+- לאסוף קופסה שמורה מראש מ־**Shiro-Hige's Cream Puff Factory**; החנות בדאיטה פתוחה 10:30–18:00. [החנות הרשמית](https://shiro-hige.net/)
+- ללכת ל**פארק Hanegi** לפיקניק טוטורו קצר ומנוחה.
+- לא להבטיח מדשאה או מתקן משחקים מסוימים ב־Hanegi: עבודות שיפוץ מתוכננות במהלך 2026. להשתמש באזור המנוחה שיהיה פתוח ביום עצמו. [הפארק הרשמי](https://www.city.setagaya.lg.jp/02075/9123.html)
 
-### Afternoon and evening · 13:30–19:00
+### אחר הצהריים והערב · 13:30–19:00
 
-- Walk into Shimokitazawa after lunch, when the neighborhood is fully awake.
-- Oct 9 is day two of the **2026 Shimokitazawa Curry Festival**, confirmed for Oct 8–25.
-- Use the final official map to choose three contrasting mini portions and share them as a family.
-- Between portions, each child chooses one stop: vintage, music/books, Mikan or Reload.
-- Add a normal ramen dinner only if the curry portions were genuinely small and everyone is still hungry.
+- להיכנס לשימוקיטזאווה אחרי הצהריים, כשהשכונה ערה לגמרי.
+- 9.10 הוא היום השני של **פסטיבל הקארי של שימוקיטזאווה 2026**, שאושר ל־8–25 באוקטובר.
+- להשתמש במפה הרשמית הסופית כדי לבחור שלוש מנות מיני מנוגדות ולחלוק אותן כמשפחה.
+- בין המנות, כל ילד בוחר עצירה אחת: וינטג׳, מוזיקה/ספרים, Mikan או Reload.
+- להוסיף ארוחת ראמן רגילה רק אם מנות הקארי היו באמת קטנות וכולם עדיין רעבים.
 
-[Official Curry Festival](https://shimokitazawa-curryfes.com/)
+[פסטיבל הקארי הרשמי](https://shimokitazawa-curryfes.com/)
 
-### Cut and weather rules
+### כללי חיתוך ומזג אוויר
 
-- **Cut first:** Hanegi Park, then extra vintage shopping, then the third curry stop.
-- **Heavy rain or rising water:** do not enter Todoroki Ravine. Start later with the Shiro-Hige pickup and use Curry Festival restaurants, Mikan, Reload and cafés as the indoor core.
-- **Animal-café decision:** the scheduled visit is the cat café (Temari no Oshiro at Kichijōji Petit Mura, Oct 8). The Kyoto/Osaka exotic-animal side quests (otters, small animals, snakes) are optional, cut-first walk-ins added with the welfare tradeoffs acknowledged; no exotic-animal café is a scheduled anchor.
+- **חותכים ראשון:** פארק Hanegi, אחר כך קניות וינטג׳ נוספות, אחר כך עצירת הקארי השלישית.
+- **גשם חזק או עליית מים:** לא להיכנס לערוץ טודורוקי. להתחיל מאוחר יותר עם האיסוף ב־Shiro-Hige, ולהשתמש במסעדות הפסטיבל, ב־Mikan, ב־Reload ובבתי הקפה כליבה מקורה.
+- **החלטת בית קפה החיות:** הביקור המתוכנן הוא בית קפה החתולים (Temari no Oshiro ב־Petit Mura בקיצ׳יג׳וג׳י, 8.10). הסייד־קווסטים של חיות אקזוטיות בקיוטו ובאוסקה (לוטרות, חיות קטנות, נחשים) הם כניסות ספונטניות אופציונליות שנחתכות ראשונות ונוספו מתוך הכרה בפשרה ברווחת בעלי החיים; שום בית קפה של חיות אקזוטיות אינו עוגן מתוכנן.
 
-## Weather Logic
+## היגיון מזג האוויר
 
-- Severe rain on Oct 7: use a separate Tokyo indoor fallback. Do not swap with Oct 8 after the Ghibli ticket is booked.
-- Light rain: Kamakura can still work with waterproof shoes, but skip caves/coastal sunset if unsafe.
-- Heavy rain on Oct 9: skip Todoroki and Hanegi; keep the reserved sweets pickup and indoor Curry Festival route.
+- גשם עז ב־7.10: להשתמש בגיבוי מקורה נפרד בטוקיו. לא להחליף עם 8.10 אחרי שכרטיס ג׳יבלי הוזמן.
+- גשם קל: קמקורה עדיין עובדת עם נעליים אטומות למים, אבל מוותרים על המערות ועל השקיעה בחוף אם זה לא בטוח.
+- גשם חזק ב־9.10: לוותר על טודורוקי ועל Hanegi; לשמור על איסוף המתוקים השמור ועל מסלול הפסטיבל המקורה.
 
-## Why Fuji and Hakone Are Not Scheduled
+## למה פוג׳י והאקונה לא בתוכנית
 
-The family already has:
+למשפחה כבר יש:
 
-- two long ticketed theme-park days;
-- one full day trip and one Tokyo green/food day;
-- a Tokyo-to-Kyoto transfer and a Kyoto-to-Osaka transfer;
-- a possible Uji Nintendo Museum transfer;
-- two fixed-time Kyoto performance/festival days.
+- שני ימי פארק שעשועים ארוכים עם כרטיסים;
+- טיול יום מלא אחד ויום ירוק־ואוכל אחד בטוקיו;
+- מעבר מטוקיו לקיוטו ומעבר מקיוטו לאוסקה;
+- מעבר דרך אוג׳י (宇治) למוזיאון נינטנדו ב־15.10 — כבר לא ״אולי״, אלא חלון זכייה קבוע ב־14:30–15:00;
+- שני ימי הופעה/פסטיבל בקיוטו בשעות קבועות.
 
-A Fuji/Hakone day would cost a high-energy fandom day or the Kyoto performance structure. Keep it as a future Japan trip, not an anxious “maybe” squeezed into this one.
+יום פוג׳י/האקונה היה עולה ביום פאנדום עתיר אנרגיה או במבנה ההופעות בקיוטו. לשמור אותו לטיול יפן עתידי, לא בתור ״אולי״ לחוץ שנדחס לזה.
 
-*Verify live weather, attraction maintenance and workshop reservations before departure.*
+*לאמת מזג אוויר חי, תחזוקת אטרקציות והזמנות לסדנאות לפני היציאה.*

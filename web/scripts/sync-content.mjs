@@ -55,21 +55,12 @@ for (const file of files) {
   await writeFile(path.join(publicDir, file), markdown, "utf8");
 }
 
-const output = `// Generated from ../JAPAN2026/*.md — do not edit by hand.
-export type TripGuide = {
-  slug: string;
-  file: string;
-  title: string;
-  description: string;
-  category: string;
-  html: string;
-  markdown: string;
-};
-
-export const tripGuides: TripGuide[] = ${JSON.stringify(guides, null, 2)};
-`;
-
-await writeFile(path.join(generatedDir, "trip-content.ts"), output, "utf8");
+// `trip-content.ts` used to be written here: every guide's Markdown AND its
+// rendered HTML, checked in as TypeScript. The guide pages read Convex now and
+// render the Markdown themselves (`lib/markdown.ts`), so that file was a third
+// copy of the trip that could silently disagree with the other two. This script
+// keeps writing `public/markdown/*.md` (the download links) and `ai-context.ts`
+// (the chat system prompt), both of which are genuinely derived artefacts.
 
 // ---------------------------------------------------------------------------
 // AI context: every guide's raw Markdown, for the /api/chat system prompt.
@@ -97,5 +88,5 @@ export const aiContextText: string = ${JSON.stringify(aiContextText)};
 await writeFile(path.join(generatedDir, "ai-context.ts"), aiOutput, "utf8");
 
 console.log(
-  `Synced ${guides.length} Markdown guides (trip-content.ts + ai-context.ts, ${aiContextText.length} context chars).`,
+  `Synced ${guides.length} Markdown guides (public/markdown + ai-context.ts, ${aiContextText.length} context chars).`,
 );

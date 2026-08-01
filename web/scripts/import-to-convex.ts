@@ -1,21 +1,39 @@
 /**
- * Phase 1 — import the current hand-maintained trip data into Convex, then
- * prove nothing was lost.
+ * Phase 1 — SEED Convex from the hand-maintained trip data, then prove nothing
+ * was lost.
  *
- *   npm run import:convex
+ *   npm run import:convex -- --seed
  *
- * Sources (all still authoritative at this point in the migration):
+ * ⚠️  THE CUTOVER HAS HAPPENED. Convex is the source of truth now.
+ *
+ * This script writes markdown INTO Convex. That was correct while the files
+ * were canonical; it is destructive now that they are not. Every guide body it
+ * uploads overwrites `guides.bodyHe` — including any edit the family or the eve
+ * agent has made since the last export. Running it unguarded after an agent
+ * edit silently reverts that edit and leaves no trace, because the upsert has
+ * nothing to conflict with.
+ *
+ * So it refuses to run without an explicit `--seed`. Reach for it only when
+ * re-seeding a fresh or wiped deployment (a new preview backend, a restored
+ * dev instance). For ordinary work the flow runs the other way:
+ *
+ *   Convex --(npm run export:md)--> JAPAN2026/*.md   (git-tracked backup)
+ *
+ * Sources this seeds from:
  *   web/lib/trip-data.ts       17 days with their ordered blocks
  *   web/data/places.json       154 places
  *   web/lib/checklist-data.ts  59 checklist items + their group order
  *   ../JAPAN2026/*.md          the 12 guide documents, verbatim
  *
- * The script is idempotent — every mutation upserts on the natural key — so it
- * can be re-run freely while we iterate.
+ * The script is idempotent — every mutation upserts on the natural key — so a
+ * re-seed of an empty deployment is safe to repeat.
  *
  * It finishes by reading the whole trip back out of Convex and deep-comparing
- * it against those same sources. That comparison is the migration's safety
- * net: until it passes clean, nothing downstream is allowed to switch over.
+ * it against those same sources. Note what that gate means POST-cutover: it
+ * asserts "Convex matches the files I just pushed", which is a check on this
+ * script, not a check on the trip. The gate that matters now is
+ * `npm run export:md -- --check`, which asserts the files still faithfully
+ * mirror Convex.
  */
 
 import { readFile } from "node:fs/promises";
@@ -35,6 +53,36 @@ const KEY = process.env.AGENT_SERVICE_KEY;
 
 if (!SITE_URL) throw new Error("NEXT_PUBLIC_CONVEX_SITE_URL is not set (check web/.env.local)");
 if (!KEY) throw new Error("AGENT_SERVICE_KEY is not set — export it or add it to web/.env.local");
+
+/**
+ * The guard. See the header: this script overwrites Convex from the markdown
+ * files, and the markdown files are now build output rather than the truth.
+ *
+ * Deliberately a required flag and not a prompt: this runs in scripts and CI as
+ * often as it runs by hand, and a prompt would either block those or get piped
+ * a blind `yes`. A flag is impossible to trip over by accident and shows up in
+ * shell history as an intent.
+ */
+if (!process.argv.includes("--seed")) {
+  console.error(
+    [
+      "",
+      "  Refusing to run: this would overwrite Convex from JAPAN2026/*.md.",
+      "",
+      "  Convex is the source of truth. The markdown files are a generated",
+      "  backup, so importing them back in reverts anything the family or the",
+      "  eve agent changed since the last export — silently.",
+      "",
+      "  If you want the files refreshed FROM Convex:",
+      "      npm run export:md",
+      "",
+      "  If you are genuinely seeding an empty or wiped deployment:",
+      "      npm run import:convex -- --seed",
+      "",
+    ].join("\n"),
+  );
+  process.exit(1);
+}
 
 /** Same metadata table `sync-content.mjs` uses, so titles/categories carry over unchanged. */
 const guideMeta: Record<string, [string, string, string]> = {
@@ -102,6 +150,7 @@ async function importAll() {
         note: d.note,
         rainPlan: d.rainPlan,
         foodAnchorIds: d.foodAnchors ?? [],
+        stay: d.stay,
         discovery: d.discovery,
       }),
     ),
@@ -119,6 +168,11 @@ async function importAll() {
         placeIds: b.placeIds,
         cutFirst: b.cutFirst,
         booking: b.booking,
+        legs: b.legs,
+        costs: b.costs,
+        links: b.links,
+        needs: b.needs,
+        warnings: b.warnings,
       }),
     );
     await post("blocks", rows, { dayN: day.day });
@@ -126,13 +180,16 @@ async function importAll() {
   }
   console.log(`  blocks            ${blockCount}`);
 
-  // `officialUrl` and `priceLevel` are deliberately dropped — the exploration
-  // confirmed nothing in the app or the agent reads them.
+  // `officialUrl` and `priceLevel` were dropped here on the grounds that
+  // nothing read them. Both are now read: the day page links the official site
+  // for every stop, which is precisely the "where do I check this myself"
+  // answer the pages were missing.
   const places = (placesJson as Record<string, unknown>[]).map((p) =>
     clean({
       slug: p.id as string,
       nameHe: p.nameHe,
       nameEn: p.nameEn,
+      nameJa: p.nameJa,
       category: p.category,
       area: p.area,
       city: p.city,
@@ -147,6 +204,17 @@ async function importAll() {
       mustDo: p.mustDo,
       indoor: p.indoor,
       openingHours: p.openingHours,
+      officialUrl: p.officialUrl,
+      priceLevel: p.priceLevel,
+      addressEn: p.addressEn,
+      addressJa: p.addressJa,
+      phone: p.phone,
+      nearestStation: p.nearestStation,
+      stationExit: p.stationExit,
+      walkMinutes: p.walkMinutes,
+      closedDays: p.closedDays,
+      lastEntry: p.lastEntry,
+      ticketNote: p.ticketNote,
     }),
   );
   for (const batch of chunk(places, 40)) await post("places", batch);
@@ -277,6 +345,7 @@ async function verify(): Promise<Diff[]> {
       note: expected.note,
       rainPlan: expected.rainPlan,
       foodAnchors: expected.foodAnchors ?? [],
+      stay: expected.stay,
       discovery: expected.discovery,
       blocks: expected.blocks.map((b) => clean({
         time: b.time,
@@ -285,6 +354,11 @@ async function verify(): Promise<Diff[]> {
         detail: b.detail,
         cutFirst: b.cutFirst,
         booking: b.booking,
+        legs: b.legs,
+        costs: b.costs,
+        links: b.links,
+        needs: b.needs,
+        warnings: b.warnings,
       })),
     }), clean({
       day: actual.day,
@@ -301,6 +375,7 @@ async function verify(): Promise<Diff[]> {
       note: actual.note,
       rainPlan: actual.rainPlan,
       foodAnchors: actual.foodAnchors,
+      stay: actual.stay,
       discovery: actual.discovery,
       blocks: (actual.blocks as Record<string, unknown>[]).map(clean),
     }), diffs);
@@ -316,8 +391,8 @@ async function verify(): Promise<Diff[]> {
       diffs.push({ what: "place", key: raw.id as string, expected: "present", actual: "missing" });
       continue;
     }
-    const { officialUrl, priceLevel, ...expected } = raw;
-    compare("place", raw.id as string, clean(expected), clean(actual), diffs);
+    // Every authored field now crosses, so the gate compares the whole record.
+    compare("place", raw.id as string, clean(raw), clean(actual), diffs);
   }
 
   // --- checklist

@@ -1,143 +1,143 @@
-# 11 — Pre-Trip Action Checklist
+# 11 — רשימת הפעולות לפני הטיול
 
-**Trip:** October 1–18, 2026  
-**Family:** 2 adults, daughter (16), son (12)  
-**Purpose:** one operational list for what to do, when to do it and where to do it.
+**הטיול:** 1–18 באוקטובר 2026  
+**המשפחה:** 2 מבוגרים, בת (16), בן (12)  
+**המטרה:** רשימה תפעולית אחת — מה עושים, מתי ואיפה.
 
-> Check items here as the family completes them. Ticket dates and official booking links remain governed by the detailed guides; the [daily itinerary](./09-DAILY-ITINERARY.md) remains the route source of truth.
+> לסמן כאן פריטים ככל שהמשפחה משלימה אותם. תאריכי הכרטיסים והקישורים הרשמיים נשלטים במדריכים המפורטים; [המסלול היומי](./09-DAILY-ITINERARY.md) נשאר מקור האמת למסלול.
 
-## This Week — July 24–31
+## השבוע הזה — 1–7 באוגוסט
 
-| Done | What | When | Where / how | Who |
+| בוצע | מה | מתי | איפה / איך | מי |
 |---|---|---|---|---|
-| [ ] | **Buy new walking shoes for everyone** | **By July 31** | Local running/outdoor shop; fit late in the day with the socks each person will use in Japan | All 4 |
-| [ ] | Start breaking in the new shoes | From the first week after purchase | Three short walks, then one 8–10 km family test; exchange immediately if there are hot spots | All 4 |
-| ✅ | Enter Nintendo Museum lottery for Oct 15 | Done — entry drawn Aug 1 | Awarded window **Oct 15, 14:30–15:00 JST**, not changeable | Adult lead |
-| [ ] | **Pay for the Nintendo Museum tickets** | **By Aug 7, 23:59 JST — the win lapses otherwise** | Drawing page link in the family safe. 2 adult + 2 youth, JPY 11,000. Card payments may be down for maintenance on the first Tuesday of the month, so avoid leaving it to Aug 4 | Adult lead |
-| [ ] | Confirm Tokyo late self-check-in in writing | Now — awaiting host reply | Passports for all four **sent Aug 1** in the Airbnb chat, with the 21:30–23:00 arrival window, the no-lift/floor question and the bed-and-bathroom questions. Still need the host's written acceptance plus lockbox details and a night contact; save both in the private lodging folder | Adult lead |
-| [ ] | Tell the Kyoto host the registration is done | Now | Google Form **submitted Aug 1** with all four passports. Drafted Airbnb reply still to send; it also asks what Room D shares with Rooms A–C, and asks the host to re-confirm the entry code. Keep the door code out of the public itinerary | Adult lead |
-| [ ] | Book Osaka Oct 13–15 and final Tokyo Oct 15–17 | Now | Chosen booking platform; refundable option preferred until the route is fully locked | Adults |
-| [ ] | Buy/confirm family travel insurance | Now | Insurer site; include medical care, disruption and booked-ticket cancellation where available | Adults |
-| [ ] | Check all four passports and names | Now | Passport side verified Aug 1: all four data pages agree with their MRZ lines, surname is **SINDALOVSKY** on all four, and the earliest expiry (Maya, Tommy) is Jul 3, 2027 — clear of the Oct 18 return. Still to do: match these spellings against the ISSTA e-ticket and every named ticket | Adults |
-| [ ] | Complete the Ethiopian e-ticket record | Now | Save PNR/e-ticket numbers, terminals, purchased baggage, seats/meals, paid total and disruption contacts in the private flight folder | Adults |
+| [ ] | **לקנות נעלי הליכה חדשות לכולם** | **היה 31 ביולי — באיחור, לסגור מיד** | חנות ריצה/שטח מקומית; למדוד בשעה מאוחרת ביום, עם הגרביים שכל אחד ילבש ביפן | כל ה־4 |
+| [ ] | להתחיל לרכך את הנעליים החדשות | מהשבוע הראשון אחרי הקנייה | שלוש הליכות קצרות, ואז מבחן משפחתי אחד של 8–10 ק״מ; להחליף מיד אם יש נקודות חיכוך | כל ה־4 |
+| ✅ | להירשם להגרלת מוזיאון נינטנדו ל־15.10 | בוצע — ההגרלה נערכה ב־1 באוגוסט | חלון הזכייה **15.10, 14:30–15:00 שעון יפן**, לא ניתן לשינוי | מבוגר אחראי |
+| [ ] | **לשלם על כרטיסי מוזיאון נינטנדו** | **עד 7 באוגוסט, 23:59 שעון יפן — אחרת הזכייה פוקעת** | קישור עמוד ההגרלה בכספת המשפחתית. 2 מבוגרים + 2 נוער, ¥11,000. ייתכן שתשלומי כרטיס מושבתים לתחזוקה ביום שלישי הראשון בחודש, ולכן לא להשאיר את זה ל־4 באוגוסט | מבוגר אחראי |
+| [ ] | לאשר בכתב צ׳ק־אין עצמי מאוחר בטוקיו | עכשיו — ממתינים לתשובת המארח | דרכונים של כל הארבעה **נשלחו ב־1 באוגוסט** בצ׳אט Airbnb, עם חלון ההגעה 21:30–23:00, שאלת היעדר המעלית והקומה ושאלות המיטות וחדרי הרחצה. עדיין חסרים אישור בכתב מהמארח, פרטי הלוקבוקס ואיש קשר לילה; לשמור את שניהם בתיקיית הלינה הפרטית | מבוגר אחראי |
+| [ ] | להודיע למארח בקיוטו שהרישום הושלם | עכשיו | טופס Google **הוגש ב־1 באוגוסט** עם כל ארבעת הדרכונים. התשובה המנוסחת ב־Airbnb עוד לא נשלחה; היא גם שואלת מה חדר D חולק עם חדרים A–C, ומבקשת מהמארח לאשר מחדש את קוד הכניסה. להשאיר את קוד הדלת מחוץ למסלול הפומבי | מבוגר אחראי |
+| [ ] | להזמין אוסקה 13–15.10 וטוקיו הסופית 15–17.10 | עכשיו | פלטפורמת ההזמנות שנבחרה; עדיפות לאפשרות עם ביטול עד שהמסלול נעול לגמרי | מבוגרים |
+| [ ] | לקנות/לאשר ביטוח נסיעות משפחתי | עכשיו | אתר המבטח; לכלול טיפול רפואי, שיבושים וביטול כרטיסים שהוזמנו, היכן שזמין | מבוגרים |
+| [ ] | לבדוק את כל ארבעת הדרכונים ואת השמות | עכשיו | צד הדרכונים אומת ב־1 באוגוסט: כל ארבעת עמודי הנתונים תואמים לשורות ה־MRZ שלהם, שם המשפחה הוא **SINDALOVSKY** בכל הארבעה, והתפוגה המוקדמת ביותר (מאיה, תומי) היא 3 ביולי 2027 — מרווח נקי מהחזרה ב־18.10. עוד נשאר: להצליב את האיותים האלה מול ה־e-ticket של איסתא ומול כל כרטיס נקוב בשם | מבוגרים |
+| [ ] | להשלים את רשומת ה־e-ticket של Ethiopian | עכשיו | לשמור בתיקיית הטיסות הפרטית: PNR/מספרי e-ticket, טרמינלים, הכבודה שנרכשה, מושבים/ארוחות, הסכום ששולם ואנשי קשר לשיבושים | מבוגרים |
 
-## Bookings and Tickets
+## הזמנות וכרטיסים
 
-| Done | What | When | Where / how | Who |
+| בוצע | מה | מתי | איפה / איך | מי |
 |---|---|---|---|---|
-| ✅ | Buy teamLab Planets timed entry for Oct 4 morning | Done Aug 1 | Bought from the official DMM store: Entrance Pass for four, admission **09:30–10:00**, **JPY 16,800**. Save the confirmation e-mail and My Tickets link in the private `06 teamLab` folder | Adult lead |
-| [ ] | Load the four teamLab QR codes on Oct 4 morning | **Oct 4, before leaving Tabata** | My Tickets link from the private ticket folder; QR codes only appear after 00:00 on Oct 4. Screenshot all four — the confirmation e-mail is not an admission document | Adult lead |
-| [ ] | Buy Mundo Pixar for Oct 4, targeting a timed **12:30–13:00** slot | **Now** | [Official exhibition calendar/prices](https://t.pia.jp/en/pia/events/mundopixar); current family total about JPY 20,100 plus fees. The booked 09:30 teamLab entry rules out the old 11:45/12:00 target | Adult lead |
-| [ ] | Buy KAWAII MONSTER LAND timed entry for Oct 6 | Now | [Official attraction page](https://contents.gendagigo.jp/kawaii-monster-land/en) | Adult lead |
-| [ ] | Buy USJ Studio Pass + a current Express product that names the wanted Nintendo rides and guaranteed area entry | Now | [Official USJ tickets](https://www.usj.co.jp/web/en/us/tickets) | Adults + children choose rides |
-| [ ] | Monitor only official PokéPark inventory for Oct 5 | Weekly; decide fallback by mid-September | [Official overseas store](https://ticket-en.pokepark-kanto.co.jp/); no Fiverr, broker or unofficial reseller | Adult lead |
-| [ ] | If PokéPark fails, buy DisneySea for Oct 5 | At the fallback decision | [Official DisneySea calendar](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/) | Adults |
-| ✅ | Buy UZUMASA Kyoto Village entry for Oct 12 | Done Aug 1 | **JPY 29,600 paid by card**: admission ×4 at JPY 3,800 (**JPY 15,200**, yokai-festival tickets with exclusive merchandise), **cultural experience Sado (tea ceremony) × 4 at 13:30** JPY 10,800, **Ninja Escape Room ×4** JPY 2,400, **3D Maze the Ninja Fort ×2** JPY 1,200. Everything is valid only on Oct 12. Save the ticket URL and all IDs in the private ticket folder | Adult lead |
-| [ ] | Get all UZUMASA tickets onto the right phones | **Before Oct 12** | Entry is smartphone-only — display from [the ticket page](https://ticket.eigamura.com/ticket/purchased) and show the screen at reception; printing is not required. Use “Share this ticket” per person in advance and confirm the data plan is live before reaching the gate | Adult lead |
-| [ ] | Decide who takes the two prepaid 3D Maze places | On the day | The coupon covers two of four; the other two pay JPY 600 each at the attraction. Trivial money — don’t let it slow the day down | Family vote |
-| [ ] | Buy DRUM TAO HIBIKI for Oct 12 at 19:00 | When the two-month window opens; start checking Aug 12 | [Official HIBIKI tickets](https://drum-tao-kyoto.com/en/ticket/) | Adult lead |
-| [ ] | Buy Mizuekai for Oct 11 at 13:00 | As soon as the official sales method is published | [Official Miyagawacho page](https://www.miyagawacho.jp/mizuekai/) | Adult lead |
-| [ ] | Reserve Shiro-Hige Totoro cream-puff pickup for Oct 9 | When the October window opens | Official store contact listed in the food guide | Adult lead |
-| [ ] | Buy Ghibli Museum entry for Oct 8 at 10:00 | **Sept 10 at 10:00 JST / 04:00 Israel time** | [Official Ghibli ticket page](https://www.ghibli-museum.jp/en/tickets/) | One adult books; second adult ready as backup |
-| [ ] | Reserve Pokémon Café for Oct 16 | When October booking rules are announced | [Official café news](https://www.pokemon-cafe.jp/en/cafe/news/); never pay a reservation reseller | Adult lead |
-| [ ] | Reserve Cat Cafe Temari no Oshiro at Kichijōji Petit Mura for Oct 8 | 2–4 weeks before | [Official site](https://temarinooshiro.com/); ages 10+, about JPY 1,200 + tax per person on weekdays | Adult lead |
-| [ ] | Optional: decide on the Oct 16 Sumida Aquarium finale | Final week, by energy | [Official tickets](https://en.sumida-aquarium.com/about/ticket/); no advance commitment needed — the animal side quests (otters/small animals/snakes) are walk-ins and need no booking | Family vote |
-| [ ] | Record every ticket, entry name, cancellation rule and backup | Immediately after each purchase | Shared cloud folder + offline copy on both adults’ phones | Buyer |
+| ✅ | לקנות כניסה מתוזמנת ל־teamLab Planets לבוקר 4.10 | בוצע ב־1 באוגוסט | נקנה בחנות DMM הרשמית: Entrance Pass לארבעה, כניסה **09:30–10:00**, **¥16,800**. לשמור את מייל האישור ואת קישור My Tickets בתיקייה הפרטית `06 teamLab` | מבוגר אחראי |
+| [ ] | לטעון את ארבעת קודי ה־QR של teamLab בבוקר 4.10 | **4.10, לפני היציאה מטבטה** | קישור My Tickets מתיקיית הכרטיסים הפרטית; קודי ה־QR מופיעים רק אחרי 00:00 ב־4.10. לצלם מסך של כל הארבעה — מייל האישור אינו מסמך כניסה | מבוגר אחראי |
+| [ ] | לקנות Mundo Pixar ל־4.10, ביעד חלון מתוזמן **12:30–13:00** | **עכשיו** | [לוח השנה והמחירים הרשמיים](https://t.pia.jp/en/pia/events/mundopixar); הסכום המשפחתי הנוכחי כ־¥20,100 בתוספת עמלות. הכניסה המוזמנת ל־teamLab ב־09:30 פוסלת את היעד הישן 11:45/12:00 | מבוגר אחראי |
+| [ ] | לקנות כניסה מתוזמנת ל־KAWAII MONSTER LAND ל־6.10 | עכשיו | [עמוד האטרקציה הרשמי](https://contents.gendagigo.jp/kawaii-monster-land/en) | מבוגר אחראי |
+| [ ] | לקנות USJ Studio Pass + מוצר Express עדכני שמפרט את מתקני נינטנדו הרצויים ואת הכניסה המובטחת לאזור | עכשיו | [כרטיסי USJ רשמיים](https://www.usj.co.jp/web/en/us/tickets) | מבוגרים + הילדים בוחרים מתקנים |
+| [ ] | לעקוב רק אחרי המלאי הרשמי של PokéPark ל־5.10 | שבועי; להכריע על הגיבוי עד אמצע ספטמבר | [החנות הבינלאומית הרשמית](https://ticket-en.pokepark-kanto.co.jp/); בלי Fiverr, בלי ברוקר ובלי מתווך לא רשמי | מבוגר אחראי |
+| [ ] | אם PokéPark נופל — לקנות DisneySea ל־5.10 | במועד החלטת הגיבוי | [לוח השנה הרשמי של DisneySea](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/) | מבוגרים |
+| ✅ | לקנות כניסה ל־UZUMASA Kyoto Village ל־12.10 | בוצע ב־1 באוגוסט | **¥29,600 שולמו בכרטיס**: כניסה ×4 ב־¥3,800 (**¥15,200**, כרטיסי פסטיבל היוקאי עם מרצ׳נדייז בלעדי), **חוויית התרבות Sado (טקס תה) ×4 ב־13:30** ¥10,800, **Ninja Escape Room ×4** ¥2,400, **3D Maze the Ninja Fort ×2** ¥1,200. הכול תקף רק ב־12.10. לשמור את כתובת הכרטיסים ואת כל המזהים בתיקיית הכרטיסים הפרטית | מבוגר אחראי |
+| [ ] | להעביר את כל כרטיסי UZUMASA לטלפונים הנכונים | **לפני 12.10** | הכניסה מהסמארטפון בלבד — להציג מ[עמוד הכרטיסים](https://ticket.eigamura.com/ticket/purchased) ולהראות את המסך בקבלה; אין צורך בהדפסה. להשתמש מראש ב־"Share this ticket" לכל אדם ולוודא שחבילת הגלישה פעילה לפני שמגיעים לשער | מבוגר אחראי |
+| [ ] | להחליט מי לוקח את שני המקומות המשולמים מראש ב־3D Maze | ביום עצמו | הקופון מכסה שניים מארבעה; השניים האחרים משלמים ¥600 כל אחד באטרקציה. כסף זניח — לא לתת לזה להאט את היום | הצבעה משפחתית |
+| [ ] | לקנות DRUM TAO HIBIKI ל־12.10 בשעה 19:00 | כשנפתח חלון החודשיים; להתחיל לבדוק ב־12 באוגוסט | [כרטיסי HIBIKI רשמיים](https://drum-tao-kyoto.com/en/ticket/) | מבוגר אחראי |
+| [ ] | לקנות Mizuekai ל־11.10 בשעה 13:00 | ברגע שדרך המכירה הרשמית מתפרסמת | [עמוד Miyagawacho הרשמי](https://www.miyagawacho.jp/mizuekai/) | מבוגר אחראי |
+| [ ] | להזמין איסוף פחזניות טוטורו מ־Shiro-Hige ל־9.10 | כשנפתח חלון אוקטובר | פרטי הקשר של החנות הרשמית מופיעים במדריך האוכל | מבוגר אחראי |
+| [ ] | לקנות כניסה למוזיאון ג׳יבלי ל־8.10 בשעה 10:00 | **10 בספטמבר בשעה 10:00 שעון יפן / 04:00 שעון ישראל** | [עמוד הכרטיסים הרשמי של ג׳יבלי](https://www.ghibli-museum.jp/en/tickets/) | מבוגר אחד מזמין; המבוגר השני מוכן כגיבוי |
+| [ ] | להזמין Pokémon Café ל־16.10 | כשכללי ההזמנה לאוקטובר יוכרזו | [חדשות הקפה הרשמיות](https://www.pokemon-cafe.jp/en/cafe/news/); אף פעם לא לשלם למתווך הזמנות | מבוגר אחראי |
+| [ ] | להזמין Cat Cafe Temari no Oshiro ב־Petit Mura בקיצ׳יג׳וג׳י ל־8.10 | 2–4 שבועות מראש | [האתר הרשמי](https://temarinooshiro.com/); מגיל 10 ומעלה, כ־¥1,200 + מס לאדם בימי חול | מבוגר אחראי |
+| [ ] | אופציונלי: להחליט על סיום באקווריום סומידה ב־16.10 | בשבוע האחרון, לפי אנרגיה | [כרטיסים רשמיים](https://en.sumida-aquarium.com/about/ticket/); אין צורך בהתחייבות מראש — הסייד־קווסטים של בעלי החיים (לוטרות/חיות קטנות/נחשים) הם כניסות ספונטניות ולא דורשים הזמנה | הצבעה משפחתית |
+| [ ] | לתעד כל כרטיס, שם נרשם, כלל ביטול וגיבוי | מיד אחרי כל רכישה | תיקיית ענן משותפת + עותק אופליין בשני הטלפונים של המבוגרים | הקונה |
 
-## 6–8 Weeks Before — August
+## 6–8 שבועות לפני — אוגוסט
 
-| Done | What | When | Where / how | Who |
+| בוצע | מה | מתי | איפה / איך | מי |
 |---|---|---|---|---|
-| [ ] | Choose eSIM/SIM/roaming plan for two independent adult phones | By Aug 20 | Provider site; confirm Japan coverage, hotspot allowance and activation steps | Adults |
-| [ ] | Decide how to book the Tokyo–Kyoto and Kyoto–Tokyo Shinkansen legs | By Aug 20 | SmartEX or station purchase; use the transport guide’s luggage rules | Adults |
-| [ ] | Confirm international payment setup | By Aug 20 | Bank/card apps: travel notice if required, PINs known, two separate cards, fee check | Adults |
-| [ ] | Check regular medicines and obtain prescription copies | By Aug 31 | Family doctor/pharmacy; keep medicines in original packaging and carry-on | Each traveler |
-| [ ] | Test the full walking kit | By Aug 31 | 8–10 km family day wearing new shoes, socks and daypacks | All 4 |
-| [ ] | Decide luggage-forwarding plan and verify each apartment can receive bags | By Aug 31 | Ask hosts in writing; do not assume unstaffed lodging accepts takkyubin | Adults |
+| [ ] | לבחור תוכנית eSIM/SIM/נדידה לשני טלפוני מבוגרים עצמאיים | עד 20 באוגוסט | אתר הספק; לאמת כיסוי ביפן, מכסת hotspot ושלבי הפעלה | מבוגרים |
+| [ ] | להחליט איך מזמינים את קטעי השינקנסן טוקיו–קיוטו וקיוטו–טוקיו | עד 20 באוגוסט | SmartEX או רכישה בתחנה; לפי כללי המזוודות שבמדריך התחבורה | מבוגרים |
+| [ ] | לאשר את מערך התשלומים הבינלאומי | עד 20 באוגוסט | אפליקציות הבנק/הכרטיס: הודעת נסיעה אם נדרש, קודי PIN ידועים, שני כרטיסים נפרדים, בדיקת עמלות | מבוגרים |
+| [ ] | לבדוק תרופות קבועות ולהשיג העתקי מרשמים | עד 31 באוגוסט | רופא המשפחה/בית מרקחת; לשמור תרופות באריזה המקורית ובכבודת יד | כל נוסע |
+| [ ] | לבדוק את ערכת ההליכה המלאה | עד 31 באוגוסט | יום משפחתי של 8–10 ק״מ עם הנעליים החדשות, הגרביים והתיקים | כל ה־4 |
+| [ ] | להחליט על תוכנית שילוח מזוודות ולאמת שכל דירה יכולה לקבל מזוודות | עד 31 באוגוסט | לשאול את המארחים בכתב; לא להניח שלינה ללא איוש מקבלת takkyubin | מבוגרים |
 
-## 3–4 Weeks Before — Early September
+## 3–4 שבועות לפני — תחילת ספטמבר
 
-| Done | What | When | Where / how | Who |
+| בוצע | מה | מתי | איפה / איך | מי |
 |---|---|---|---|---|
-| [ ] | Install/update essential apps | By Sept 10 | App Store / Google Play; list below | All phones as assigned |
-| [ ] | Log in and test every attraction app | By Sept 10 | Home Wi-Fi; verify passwords and ticket/account visibility | Adults |
-| [ ] | Download offline Tokyo, Kyoto and Osaka maps | By Sept 10 | Google Maps | Both adults |
-| [ ] | Download Japanese for offline translation | By Sept 10 | Google Translate | All family phones |
-| [ ] | Make the private family ticket folder and naming scheme | By Sept 10 | Shared cloud drive; offline on both adult phones | Adult lead |
-| [ ] | Save passport copies, insurance, prescriptions and emergency contacts offline | By Sept 10 | Encrypted/private folder, separate from originals | Adults |
-| [ ] | Prepare cash and the agreed IC-card plan | By Sept 15 | Buy four TOURIST PASMO cards at Narita; prepare cash for small reloads and keep two independent payment cards | Adults |
-| [ ] | Resolve Oct 15 luggage handling for Nintendo Museum day | By Sept 15 | Hotel/locker/forwarding confirmation in writing | Adults |
-| [ ] | Decide PokéPark vs DisneySea and lock the Oct 5 ticket | By Sept 15 | Official channel only | Family |
-| [ ] | Prepare exact Roman/katakana spellings for four Yūzen chopstick engravings | By Sept 15 | Shared family note; do not assume the unverified JPY 1,100 Instagram price | All 4 |
+| [ ] | להתקין/לעדכן את האפליקציות ההכרחיות | עד 10 בספטמבר | App Store / Google Play; הרשימה למטה | כל טלפון לפי ההקצאה |
+| [ ] | להתחבר ולבדוק כל אפליקציית אטרקציה | עד 10 בספטמבר | Wi-Fi ביתי; לאמת סיסמאות ונראות של כרטיסים/חשבון | מבוגרים |
+| [ ] | להוריד מפות אופליין של טוקיו, קיוטו ואוסקה | עד 10 בספטמבר | Google Maps | שני המבוגרים |
+| [ ] | להוריד יפנית לתרגום אופליין | עד 10 בספטמבר | Google Translate | כל טלפוני המשפחה |
+| [ ] | להקים את תיקיית הכרטיסים המשפחתית הפרטית ואת שיטת השמות | עד 10 בספטמבר | כונן ענן משותף; אופליין בשני טלפוני המבוגרים | מבוגר אחראי |
+| [ ] | לשמור אופליין העתקי דרכונים, ביטוח, מרשמים ואנשי קשר לחירום | עד 10 בספטמבר | תיקייה מוצפנת/פרטית, בנפרד מהמקור | מבוגרים |
+| [ ] | להכין מזומן ואת תוכנית כרטיסי ה־IC שסוכמה | עד 15 בספטמבר | לקנות ארבעה כרטיסי TOURIST PASMO בנריטה; להכין מזומן לטעינות קטנות ולשמור שני אמצעי תשלום עצמאיים | מבוגרים |
+| [ ] | לפתור את נושא המזוודות ב־15.10, יום מוזיאון נינטנדו | עד 15 בספטמבר | אישור בכתב על מלון/לוקר/שילוח | מבוגרים |
+| [ ] | להכריע בין PokéPark ל־DisneySea ולנעול את הכרטיס ל־5.10 | עד 15 בספטמבר | ערוץ רשמי בלבד | המשפחה |
+| [ ] | להכין איות לטיני/קטקאנה מדויק לארבע חריטות מקלות ב־Yūzen | עד 15 בספטמבר | פתק משפחתי משותף; לא להניח את מחיר ה־¥1,100 הלא מאומת מאינסטגרם | כל ה־4 |
 
-## Essential Apps
+## אפליקציות הכרחיות
 
-| Done | App / service | Why | Install on |
+| בוצע | אפליקציה / שירות | למה | להתקין על |
 |---|---|---|---|
-| [ ] | Airline app | Check-in, disruption alerts and boarding passes | Both adults |
-| [ ] | Google Maps | Navigation and offline city maps | All family phones |
-| [ ] | Google Translate | Camera/menu translation + offline Japanese | All family phones |
-| [ ] | [Safety Tips](https://www.jnto.go.jp/safety-tips/eng/app.html) | Officially supervised English alerts for earthquakes, tsunami and severe weather | Both adults; notifications on |
-| [ ] | Official USJ app | Park map, waits and timed-area handling | Both adults |
-| [ ] | Official PokéPark app | Required trip-day functions if tickets succeed | Both adults |
-| [ ] | SmartEX or chosen rail service | Shinkansen booking/changes | Booking adult + backup adult |
-| [ ] | Shared family notes/list app | Next-day plan, meeting point and “cut first” item | All family phones |
+| [ ] | אפליקציית חברת התעופה | צ׳ק־אין, התראות שיבוש וכרטיסי עלייה | שני המבוגרים |
+| [ ] | Google Maps | ניווט ומפות עיר אופליין | כל טלפוני המשפחה |
+| [ ] | Google Translate | תרגום מצלמה/תפריט + יפנית אופליין | כל טלפוני המשפחה |
+| [ ] | [Safety Tips](https://www.jnto.go.jp/safety-tips/eng/app.html) | התראות באנגלית בפיקוח רשמי לרעידות אדמה, צונאמי ומזג אוויר קיצוני | שני המבוגרים; עם התראות פעילות |
+| [ ] | האפליקציה הרשמית של USJ | מפת פארק, זמני המתנה וטיפול באזורים מתוזמנים | שני המבוגרים |
+| [ ] | האפליקציה הרשמית של PokéPark | פונקציות חובה ביום הביקור, אם הכרטיסים יושגו | שני המבוגרים |
+| [ ] | SmartEX או שירות הרכבת שנבחר | הזמנה ושינויים בשינקנסן | המבוגר המזמין + מבוגר גיבוי |
+| [ ] | אפליקציית פתקים/רשימות משפחתית משותפת | תוכנית המחר, נקודת מפגש והפריט ״חותכים ראשון״ | כל טלפוני המשפחה |
 
-Do not install a large bundle of speculative travel apps. Use the smallest set that supports this itinerary, review permissions and remove trip-only apps afterward.
+לא להתקין חבילה גדולה של אפליקציות נסיעה ספקולטיביות. להשתמש בסט הקטן ביותר שתומך במסלול הזה, לעבור על ההרשאות ולהסיר אחר כך את האפליקציות שנועדו לטיול בלבד.
 
-## Weather and What to Wear
+## מזג אוויר ומה ללבוש
 
-October is usually comfortable for walking, but the route needs both warm-day and wet/cool-evening options. Japan Meteorological Agency 1991–2020 October normals are:
+אוקטובר בדרך כלל נוח להליכה, אבל המסלול צריך גם אפשרות ליום חם וגם לערב רטוב/קריר. הנורמלים של אוקטובר 1991–2020 לפי סוכנות המטאורולוגיה היפנית (JMA):
 
-| City | Typical daytime high | Typical nighttime low | October rainfall |
+| עיר | מקסימום יומי טיפוסי | מינימום לילי טיפוסי | משקעים באוקטובר |
 |---|---:|---:|---:|
-| Tokyo | 22.0°C | 14.8°C | 234.8 mm |
-| Kyoto | 23.4°C | 14.4°C | 143.2 mm |
-| Osaka | 23.7°C | 16.0°C | 136.0 mm |
+| טוקיו | 22.0°C | 14.8°C | 234.8 מ״מ |
+| קיוטו | 23.4°C | 14.4°C | 143.2 מ״מ |
+| אוסקה | 23.7°C | 16.0°C | 136.0 מ״מ |
 
-These are monthly climate normals, **not the 2026 forecast**. October is generally fair, but rain and an occasional typhoon can still affect transport. Sources: [JMA Tokyo normals](https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_ym.php?prec_no=44&block_no=47662&year=&month=&day=&view=), [JMA Kyoto normals](https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_ym.php?block_no=47759&day=15&month=10&prec_no=61&view=&year=), [JMA Osaka normals](https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_ym.php?block_no=47772&prec_no=62), [JNTO October guide](https://www.japan.travel/en/guide/october/), [JMA typhoon normals](https://www.data.jma.go.jp/typhoon/statistics/average/average.html). Confidence: **HIGH**.
+אלה נורמלים אקלימיים חודשיים, **לא התחזית ל־2026**. אוקטובר בדרך כלל נאה, אבל גשם וטייפון מזדמן עדיין יכולים להשפיע על התחבורה. מקורות: [נורמלים של JMA לטוקיו](https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_ym.php?prec_no=44&block_no=47662&year=&month=&day=&view=), [נורמלים של JMA לקיוטו](https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_ym.php?block_no=47759&day=15&month=10&prec_no=61&view=&year=), [נורמלים של JMA לאוסקה](https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_ym.php?block_no=47772&prec_no=62), [מדריך אוקטובר של JNTO](https://www.japan.travel/en/guide/october/), [נורמלים של טייפונים לפי JMA](https://www.data.jma.go.jp/typhoon/statistics/average/average.html). רמת ביטחון: **גבוהה**.
 
-### Wear system per person
+### מערכת הלבוש לאדם
 
-- one breathable T-shirt or light base;
-- one light overshirt, cardigan or thin fleece that fits in the daypack;
-- long trousers or comfortable travel bottoms;
-- **broken-in walking shoes** plus moisture-managing socks;
-- packable waterproof rain shell; compact umbrella is useful in cities;
-- cap and sunscreen for exposed park/coast days;
-- optional warmer layer for Enoshima sunset, Awata night procession and late theme-park hours.
+- חולצת טי נושמת אחת או שכבת בסיס קלה;
+- חולצה פתוחה קלה, קרדיגן או פליז דק שנכנס לתיק היום;
+- מכנסיים ארוכים או תחתונית נסיעה נוחה;
+- **נעלי הליכה מרוככות** ועוד גרביים מנקזי לחות;
+- מעיל גשם אטום שנארז קטן; מטרייה קומפקטית שימושית בערים;
+- כובע וקרם הגנה לימי פארק/חוף חשופים;
+- שכבה חמה יותר, אופציונלית, לשקיעה באנושימה, לתהלוכת הלילה ב־Awata ולשעות המאוחרות בפארקים.
 
-Do not plan around a heavy winter coat. Pack layers that can be removed on trains and indoors. For teamLab, follow the attraction’s clothing guidance separately. For the Petit Mura cat café, carry clean socks.
+לא לתכנן סביב מעיל חורף כבד. לארוז שכבות שאפשר להוריד ברכבות ובפנים. ל־teamLab לפעול לפי הנחיות הלבוש של האטרקציה בנפרד. לבית קפה החתולים ב־Petit Mura — לשאת גרביים נקיות.
 
-## Final 7 Days — September 24–30
+## 7 הימים האחרונים — 24–30 בספטמבר
 
-| Done | What | When | Where / how | Who |
+| בוצע | מה | מתי | איפה / איך | מי |
 |---|---|---|---|---|
-| [ ] | Check the real forecast for Tokyo, Kamakura/Enoshima, Kyoto and Osaka | Daily from Sept 24 | [JMA weather](https://www.jma.go.jp/bosai/map.html#contents=forecast) + Safety Tips alerts | Adult lead |
-| [ ] | Adjust layers and rain gear from the real forecast | Sept 27–29 | At home; pack one modular system per person | All 4 |
-| [ ] | Check typhoon, heavy-rain and transport notices | Daily from Sept 24 | JMA, airline, JR/SmartEX and attraction official notices | Adults |
-| [ ] | Recheck attraction closures, maintenance, age/height rules and festival timing | Sept 24–28 | Official sites only | Adults |
-| [ ] | Check whether the Oct 10 Tokyo Night & Light rotation includes the Pokémon work and record the earliest practical slot | Sept 24–Oct 9 | [Official timetable](https://tokyoprojectionmappingproject.jp/en/); ignore Instagram times | Adult lead |
-| [ ] | Confirm Yūzen Fushimi is open Tue Oct 13 at 09:30 and that four engravings fit before checkout | Sept 24–Oct 9 | [Official shop account](https://page.line.me/xat.0000115429.mcu) / 075-641-5744 | Adult lead |
-| [ ] | Complete Visit Japan Web if the family chooses to use it | Final week | [Official Visit Japan Web](https://www.vjw.digital.go.jp/) only; keep backup travel details available | Adults |
-| [ ] | Download all QR codes and PDFs; screenshot timed entries | By Sept 28 | Offline ticket folder on both adult phones | Adults |
-| [ ] | Verify names against passports where required | By Sept 28 | Ticket folder + physical passports | Adults |
-| [ ] | Confirm Narita terminal, departure train and airport arrival time | Sept 29 | Airline + rail planner | Adults |
-| [ ] | Pack medicines, chargers, power banks and one change of clothes in carry-on | Sept 29–30 | Home | Each traveler |
-| [ ] | Photograph/scan the final luggage contents | Sept 30 | Family cloud folder | One adult |
+| [ ] | לבדוק את התחזית האמיתית לטוקיו, לקמקורה/אנושימה, לקיוטו ולאוסקה | יומי מ־24 בספטמבר | [מזג האוויר של JMA](https://www.jma.go.jp/bosai/map.html#contents=forecast) + התראות Safety Tips | מבוגר אחראי |
+| [ ] | להתאים שכבות וציוד גשם לפי התחזית האמיתית | 27–29 בספטמבר | בבית; לארוז מערכת מודולרית אחת לאדם | כל ה־4 |
+| [ ] | לבדוק הודעות על טייפונים, גשם חזק ותחבורה | יומי מ־24 בספטמבר | JMA, חברת התעופה, JR/SmartEX והודעות רשמיות של אטרקציות | מבוגרים |
+| [ ] | לבדוק שוב סגירות, תחזוקה, כללי גיל/גובה ותזמון פסטיבלים | 24–28 בספטמבר | אתרים רשמיים בלבד | מבוגרים |
+| [ ] | לבדוק אם רוטציית Tokyo Night & Light ב־10.10 כוללת את יצירת הפוקימון, ולתעד את החלון המעשי המוקדם ביותר | 24 בספטמבר–9 באוקטובר | [לוח הזמנים הרשמי](https://tokyoprojectionmappingproject.jp/en/); להתעלם משעות באינסטגרם | מבוגר אחראי |
+| [ ] | לאמת ש־Yūzen Fushimi פתוח ביום שלישי 13.10 בשעה 09:30 ושארבע חריטות נכנסות לפני הצ׳ק־אאוט | 24 בספטמבר–9 באוקטובר | [חשבון החנות הרשמי](https://page.line.me/xat.0000115429.mcu) / 075-641-5744 | מבוגר אחראי |
+| [ ] | להשלים Visit Japan Web אם המשפחה בוחרת להשתמש בו | השבוע האחרון | רק [Visit Japan Web הרשמי](https://www.vjw.digital.go.jp/); לשמור פרטי נסיעה זמינים כגיבוי | מבוגרים |
+| [ ] | להוריד את כל קודי ה־QR וקובצי ה־PDF; לצלם מסך של כניסות מתוזמנות | עד 28 בספטמבר | תיקיית כרטיסים אופליין בשני טלפוני המבוגרים | מבוגרים |
+| [ ] | לאמת שמות מול הדרכונים היכן שנדרש | עד 28 בספטמבר | תיקיית הכרטיסים + הדרכונים הפיזיים | מבוגרים |
+| [ ] | לאשר את הטרמינל בנריטה, את רכבת היציאה ואת שעת ההגעה לשדה | 29 בספטמבר | חברת התעופה + מתכנן הרכבות | מבוגרים |
+| [ ] | לארוז בכבודת יד תרופות, מטענים, סוללות ניידות והחלפת בגדים אחת | 29–30 בספטמבר | בבית | כל נוסע |
+| [ ] | לצלם/לסרוק את תכולת המזוודות הסופית | 30 בספטמבר | תיקיית הענן המשפחתית | מבוגר אחד |
 
-## 48 Hours and Departure Day
+## 48 שעות ויום היציאה
 
-- [ ] Check in with the airline when available and save boarding passes offline.
-- [ ] Charge phones, power banks, earbuds and trackers; pack charging cables and plug adapters.
-- [ ] Put passports, payment cards, medicines and all first-night essentials in carry-on.
-- [ ] Confirm the Tokyo host has accepted the arrival window and that late entry instructions work offline.
-- [ ] Set one family meeting point for each airport and make sure both children have both adults’ numbers.
-- [ ] Wear the broken-in walking shoes on the flight or keep one proven pair in carry-on.
-- [ ] Recheck JMA/airline notices before leaving home.
+- [ ] לעשות צ׳ק־אין בחברת התעופה כשזה נפתח ולשמור את כרטיסי העלייה אופליין.
+- [ ] להטעין טלפונים, סוללות ניידות, אוזניות ואיתוריות; לארוז כבלי טעינה ומתאמי שקע.
+- [ ] לשים בכבודת יד דרכונים, כרטיסי תשלום, תרופות וכל ההכרחי ללילה הראשון.
+- [ ] לאשר שהמארח בטוקיו קיבל את חלון ההגעה ושהוראות הכניסה המאוחרת עובדות אופליין.
+- [ ] לקבוע נקודת מפגש משפחתית אחת בכל שדה תעופה ולוודא ששני הילדים מחזיקים את המספרים של שני המבוגרים.
+- [ ] ללבוש את נעלי ההליכה המרוככות בטיסה, או להחזיק זוג אחד מוכח בכבודת יד.
+- [ ] לבדוק שוב הודעות JMA/חברת התעופה לפני היציאה מהבית.
 
-## Completion Rule
+## כלל ההשלמה
 
-A purchase is not “done” until the confirmation is saved offline. An app is not “done” until it is installed, logged in and tested. A shoe is not “done” until it has passed a long walk without hot spots.
+רכישה אינה ״בוצעה״ עד שהאישור שמור אופליין. אפליקציה אינה ״בוצעה״ עד שהיא מותקנת, מחוברת ונבדקה. נעל אינה ״בוצעה״ עד שעברה הליכה ארוכה בלי נקודות חיכוך.
 
-*Research refreshed July 25, 2026. Replace climate normals with the real JMA forecast during the final week.*
+*המחקר רוענן ב־25 ביולי 2026. להחליף את הנורמלים האקלימיים בתחזית JMA אמיתית בשבוע האחרון.*

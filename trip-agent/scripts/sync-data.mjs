@@ -118,6 +118,17 @@ export type Place = {
   mustDo?: boolean;
   indoor?: boolean;
   openingHours?: string;
+  /** Trilingual + operational fields added with the day-page rebuild. */
+  nameJa?: string;
+  addressEn?: string;
+  addressJa?: string;
+  phone?: string;
+  nearestStation?: { he: string; en?: string; ja?: string };
+  stationExit?: { he: string; en?: string; ja?: string };
+  walkMinutes?: number;
+  closedDays?: string;
+  lastEntry?: string;
+  ticketNote?: string;
 };
 `;
 

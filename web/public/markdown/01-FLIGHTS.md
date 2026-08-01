@@ -1,50 +1,50 @@
-# Flights — BOOKED: Tel Aviv (TLV) to Tokyo Narita (NRT)
+# טיסות — מוזמן: תל אביב (TLV) לטוקיו נריטה (NRT)
 
-- **Status:** BOOKED — Ethiopian Airlines via Addis Ababa
-- **Travelers:** Family of 4 (2 adults, daughter 16, son 12)
-- **Outbound:** October 1–2, 2026
-- **Return:** October 17–18, 2026
-- **Route:** Ben Gurion Airport (TLV) → Addis Ababa (ADD) → Tokyo Narita (NRT), round trip
-- **Time-zone difference during this trip:** Tokyo is 6 hours ahead of Tel Aviv
+- **סטטוס:** מוזמן — Ethiopian Airlines דרך אדיס אבבה
+- **נוסעים:** משפחה של 4 (2 מבוגרים, בת 16, בן 12)
+- **הלוך:** 1–2 באוקטובר 2026
+- **חזור:** 17–18 באוקטובר 2026
+- **מסלול:** נמל התעופה בן־גוריון (TLV) ← אדיס אבבה (ADD) ← טוקיו נריטה (NRT), הלוך ושוב
+- **הפרש שעות בזמן הטיול:** טוקיו מקדימה את תל אביב ב־6 שעות
 
-> **Source of truth:** the full ISSTA e-ticket issued February 9, 2026, read from the confirmation e-mail. It supersedes the July 23 screenshot, which had the Addis arrival on the return leg an hour early and therefore overstated that connection.
+> **מקור האמת:** כרטיס ה־e-ticket המלא של איסתא (ISSTA) שהונפק ב־9 בפברואר 2026, כפי שנקרא ממייל האישור. הוא גובר על צילום המסך מ־23 ביולי, שבו הנחיתה באדיס בקטע החזרה הופיעה שעה מוקדם מדי ולכן הציג את הקונקשן כארוך מכפי שהוא.
 
-**Booking references:** airline (Ethiopian) **GHZBPP** · agency (ISSTA Yashir Online) **7MA3B6**. The four e-ticket numbers, agency contact and full leg detail live in the family safe, not here.
+**אסמכתאות הזמנה:** חברת התעופה (Ethiopian) **GHZBPP** · הסוכנות (איסתא ישיר אונליין · ISSTA) **7MA3B6**. ארבעת מספרי ה־e-ticket, פרטי הקשר של הסוכנות ופירוט הקטעים המלא נמצאים בכספת המשפחתית, לא כאן.
 
-## Confirmed Itinerary
+## המסלול המאושר
 
-| Leg | Date | Flight | Route | Depart | Arrive | Stops | Connection |
+| קטע | תאריך | טיסה | מסלול | המראה | נחיתה | עצירות | קונקשן |
 |---|---|---|---|---:|---:|---|---:|
-| Outbound 1 | Thu, Oct 1 | **ET419** | TLV T3 → ADD | 15:35 | 19:50 | Non-stop, 4h 15m | **2h 45m** in ADD |
-| Outbound 2 | Thu–Fri, Oct 1–2 | **ET672** | ADD T2 → NRT T1 | 22:35 | 19:40 (+1 day) | **1 stop**, 15h 05m | — |
-| Return 1 | Sat–Sun, Oct 17–18 | **ET673** | NRT T1 → ADD T2 | 20:40 | 06:55 (+1 day) | **1 stop**, 16h 15m | **3h 30m** in ADD |
-| Return 2 | Sun, Oct 18 | **ET418** | ADD → TLV T3 | 10:25 | 14:35 | Non-stop, 4h 10m | — |
+| הלוך 1 | ה׳, 1.10 | **ET419** | TLV T3 ← ADD | 15:35 | 19:50 | ישיר, 4 ש׳ 15 ד׳ | **2 ש׳ 45 ד׳** באדיס |
+| הלוך 2 | ה׳–ו׳, 1–2.10 | **ET672** | ADD T2 ← NRT T1 | 22:35 | 19:40 (למחרת) | **עצירה אחת**, 15 ש׳ 05 ד׳ | — |
+| חזור 1 | ש׳–א׳, 17–18.10 | **ET673** | NRT T1 ← ADD T2 | 20:40 | 06:55 (למחרת) | **עצירה אחת**, 16 ש׳ 15 ד׳ | **3 ש׳ 30 ד׳** באדיס |
+| חזור 2 | א׳, 18.10 | **ET418** | ADD ← TLV T3 | 10:25 | 14:35 | ישיר, 4 ש׳ 10 ד׳ | — |
 
-All times are local. Approximate total scheduled journey time is **22h 05m outbound** and **23h 55m return**.
+כל השעות מקומיות. זמן הנסיעה הכולל המתוכנן הוא כ־**22 ש׳ 05 ד׳ בהלוך** ו־**23 ש׳ 55 ד׳ בחזור**.
 
-**Both long legs make an intermediate stop.** ET672 and ET673 are not single hops to and from Tokyo — each touches down once en route, and passengers normally stay on board. Brief the children on this before departure: the long leg is two flights' worth of sitting with a landing in the middle, not one uninterrupted stretch. Confirm the stop airport and whether disembarking is required at online check-in.
+**שני הקטעים הארוכים כוללים עצירת ביניים.** ET672 ו־ET673 אינן קפיצה אחת רצופה מטוקיו ואליה — כל אחת נוחתת פעם אחת בדרך, והנוסעים בדרך כלל נשארים במטוס. להסביר לילדים לפני היציאה: הקטע הארוך הוא שתי טיסות של ישיבה עם נחיתה באמצע, לא מקטע אחד רצוף. לאמת בצ׳ק־אין המקוון באיזה שדה תעופה העצירה ואם צריך לרדת.
 
-**Fare basis:** Economy M outbound, Economy V on the return. Baggage is **2 pieces per passenger on every leg**, all four travellers. All four legs are Confirmed.
+**בסיס הכרטיס:** Economy M בהלוך, Economy V בחזור. הכבודה היא **שתי מזוודות לנוסע בכל קטע**, לכל ארבעת הנוסעים. כל ארבעת הקטעים במצב Confirmed.
 
-## Planning Consequences
+## השלכות על התכנון
 
-- The family reaches Narita at **19:40 on Friday, October 2**. After immigration and bags, use the next practical Skyliner to Nippori and JR connection to the booked **Tabata** apartment. Arrival is likely around **22:00–23:00**.
-- The Tokyo reservation must begin on **October 2**, with late self-check-in confirmed in writing and the instructions saved offline.
-- The return flight leaves Narita at **20:40 on Saturday, October 17**. Keep the room through the night of October 16, check out on October 17 and collect luggage by about 15:15.
-- Reserve a Skyliner around **15:45–16:00** when sales open, then recheck the exact Oct 17 timetable and terminal. Target Narita around **16:45–17:15**.
-- The trip has **15 physical nights in Japan**, October 2 through October 16.
-- Neither Addis connection is long enough for a stopover-hotel plan.
+- המשפחה מגיעה לנריטה ב־**19:40 ביום ו׳, 2 באוקטובר**. אחרי ההגירה והמזוודות — ה־Skyliner המעשי הבא לניפורי (日暮里) והמשך ב־JR לדירה המוזמנת ב־**טבטה** (田端). ההגעה צפויה סביב **22:00–23:00**.
+- ההזמנה בטוקיו חייבת להתחיל ב־**2 באוקטובר**, עם צ׳ק־אין עצמי מאוחר מאושר בכתב והוראות ששמורות אופליין.
+- טיסת החזרה יוצאת מנריטה ב־**20:40 ביום שבת, 17 באוקטובר**. שומרים על החדר ללילה של 16 באוקטובר, מתפנים ב־17 באוקטובר ואוספים את המזוודות עד סביבות 15:15.
+- להזמין Skyliner סביב **15:45–16:00** כשהמכירה נפתחת, ואז לבדוק שוב את הלוח והטרמינל המדויקים ל־17.10. היעד הוא להיות בנריטה סביב **16:45–17:15**.
+- בטיול יש **15 לילות פיזיים ביפן**, מ־2 באוקטובר עד 16 באוקטובר.
+- אף אחד משני הקונקשנים באדיס אינו ארוך מספיק לתוכנית מלון עצירה.
 
-## Still to Confirm From the Full E-ticket
+## מה עוד צריך לאמת מול ה־e-ticket המלא
 
-- [x] Booking reference / PNR and all four e-ticket numbers saved offline — in the family safe
-- [x] Operating terminals at TLV, ADD and NRT — TLV 3, ADD 2, NRT 1
-- [x] Checked-baggage allowance for the purchased fare — 2 pieces per passenger, every leg
-- [ ] Cabin-baggage allowance for the purchased fare
-- [ ] Seat assignments and meal requests
-- [ ] Actual family ticket total added to [10-BUDGET.md](./10-BUDGET.md)
-- [ ] Ethiopian Airlines contact details and disruption policy saved
-- [ ] Which airport ET672/ET673 stop at, and whether passengers must disembark
-- [ ] Schedule reconfirmed 72 hours before each departure
+- [x] אסמכתה / PNR וארבעת מספרי ה־e-ticket שמורים אופליין — בכספת המשפחתית
+- [x] הטרמינלים הפעילים ב־TLV, ב־ADD וב־NRT — TLV 3, ADD 2, NRT 1
+- [x] קצובת הכבודה הרשומה לכרטיס שנרכש — שתי מזוודות לנוסע, בכל קטע
+- [ ] קצובת כבודת היד לכרטיס שנרכש
+- [ ] הושבה ובקשות ארוחה
+- [ ] סכום הכרטיסים בפועל למשפחה, להוספה ל־[10-BUDGET.md](./10-BUDGET.md)
+- [ ] פרטי הקשר של Ethiopian Airlines ומדיניות השיבושים, שמורים
+- [ ] באיזה שדה תעופה עוצרות ET672/ET673 והאם חובה לרדת
+- [ ] אימות הלוח 72 שעות לפני כל המראה
 
-> The pre-booking airline comparison has been removed from this active guide because the flights are purchased. Historical alternatives remain available in Git history if they are ever needed.
+> השוואת חברות התעופה שקדמה להזמנה הוסרה מהמדריך הפעיל הזה מפני שהטיסות נרכשו. החלופות ההיסטוריות עדיין זמינות בהיסטוריית ה־Git אם אי פעם יידרשו.

@@ -42,6 +42,41 @@ function toBlock(doc: Doc<"blocks">) {
     detail: doc.detail,
     cutFirst: doc.cutFirst,
     booking: doc.booking,
+    legs: doc.legs,
+    costs: doc.costs,
+    links: doc.links,
+    needs: doc.needs,
+    warnings: doc.warnings,
+  };
+}
+
+/**
+ * Day fields, in one place.
+ *
+ * `listDays` and `getDay` returned the same object literal spelled out twice,
+ * which is exactly how `stay` would have shipped on one and not the other.
+ */
+function toDay(doc: Doc<"days">, blocks: Doc<"blocks">[]) {
+  return {
+    day: doc.n,
+    date: doc.date,
+    dateHe: doc.dateHe,
+    shortDate: doc.shortDate,
+    title: doc.title,
+    area: doc.area,
+    theme: doc.theme,
+    city: doc.city,
+    heroImage: doc.heroImage,
+    // Legacy alias kept while the pre-redesign components still read `image`.
+    image: doc.heroImage,
+    color: doc.color,
+    highlights: doc.highlights,
+    note: doc.note,
+    rainPlan: doc.rainPlan,
+    foodAnchors: doc.foodAnchorIds,
+    stay: doc.stay,
+    discovery: doc.discovery,
+    blocks: [...blocks].sort((a, b) => a.order - b.order).map(toBlock),
   };
 }
 
@@ -71,28 +106,7 @@ export const listDays = query({
       byDay.set(block.dayN, list);
     }
 
-    return days.map((day) => ({
-      day: day.n,
-      date: day.date,
-      dateHe: day.dateHe,
-      shortDate: day.shortDate,
-      title: day.title,
-      area: day.area,
-      theme: day.theme,
-      city: day.city,
-      heroImage: day.heroImage,
-      // Legacy alias kept while the pre-redesign components still read `image`.
-      image: day.heroImage,
-      color: day.color,
-      highlights: day.highlights,
-      note: day.note,
-      rainPlan: day.rainPlan,
-      foodAnchors: day.foodAnchorIds,
-      discovery: day.discovery,
-      blocks: (byDay.get(day.n) ?? [])
-        .sort((a, b) => a.order - b.order)
-        .map(toBlock),
-    }));
+    return days.map((day) => toDay(day, byDay.get(day.n) ?? []));
   },
 });
 
@@ -110,25 +124,7 @@ export const getDay = query({
       .withIndex("by_dayN_and_order", (q) => q.eq("dayN", args.n))
       .take(MAX_BLOCKS);
 
-    return {
-      day: day.n,
-      date: day.date,
-      dateHe: day.dateHe,
-      shortDate: day.shortDate,
-      title: day.title,
-      area: day.area,
-      theme: day.theme,
-      city: day.city,
-      heroImage: day.heroImage,
-      image: day.heroImage,
-      color: day.color,
-      highlights: day.highlights,
-      note: day.note,
-      rainPlan: day.rainPlan,
-      foodAnchors: day.foodAnchorIds,
-      discovery: day.discovery,
-      blocks: blocks.map(toBlock),
-    };
+    return toDay(day, blocks);
   },
 });
 

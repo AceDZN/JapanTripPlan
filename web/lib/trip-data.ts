@@ -44,6 +44,41 @@ const day = (
   return { day: n, heroImage: hero, image: hero, ...rest };
 };
 
+/**
+ * The four bases, written once.
+ *
+ * `stay` is repeated on every day (see `lib/types.ts`) so "where do I sleep
+ * tonight" never requires reasoning about date ranges — but the *content* is
+ * shared, so a corrected door code or address is a one-line change here rather
+ * than a hunt through seventeen day literals.
+ */
+const tabataStay: TripDay["stay"] = {
+  placeId: "tabata-base",
+  label: "הדירה בטבטה · Marble Tokyo Base Tabata",
+  url: "https://www.airbnb.com/rooms/1348289002107449827?adults=4&check_in=2026-10-02&check_out=2026-10-11",
+  note: "הכתובת המדויקת, קוד הלוקבוקס ומספר הקומה שמורים בכספת המשפחתית. בבניין אין מעלית.",
+};
+
+const fushimiStay: TripDay["stay"] = {
+  placeId: "fushimi-inari-apartment",
+  label: "הדירה בפושימי אינארי",
+  checkIn: "15:00",
+  checkOut: "11:00",
+  note: "כשלוש דקות הליכה מהמקדש. אין הבטחה להשארת מזוודות לפני 15:00 — לתכנן אחסון בתחנת קיוטו.",
+};
+
+const osakaStay: TripDay["stay"] = {
+  placeId: "namba-base",
+  label: "המלון בנמבה, אוסקה",
+  note: "טרם נסגר סופית. ברגע שנקבע — לעדכן כאן כתובת ביפנית, שעות צ׳ק־אין וקבלת משלוח מזוודות.",
+};
+
+const finalTokyoStay: TripDay["stay"] = {
+  placeId: "ueno-inaricho-base",
+  label: "הבסיס האחרון בטוקיו · אזור אואנו/אינאריצ׳ו",
+  note: "ליד בלבד, לא הזמנה סגורה. כל המסלולים של 15–17.10 מותנים בכך שהלינה הזו תיסגר.",
+};
+
 export const tripDays: TripDay[] = [
   day(1, {
     date: "2026-10-01",
@@ -58,30 +93,85 @@ export const tripDays: TripDay[] = [
     lng: 38.7993,
     highlights: ["ET419 ב־15:35", "קונקשן 2:45 באדיס", "ET672 בלילה לנריטה"],
     note: "בתיק היד: דרכונים, תרופות, מטענים, פאוור בנקים, בגד החלפה לכל אחד, כתובת הדירה בטבטה ביפנית והוראות הצ׳ק־אין המאוחר.",
+    stay: {
+      label: "לילה באוויר — ET672 בדרך לנריטה",
+      note: "אין לינה יבשתית הלילה. הכריות, מסכות השינה והתרופות צריכות להיות בתיק היד ולא במזוודה.",
+    },
     blocks: [
       {
-        time: "בוקר",
-        title: "מגיעים לנתב״ג",
+        time: "12:30",
+        title: "מגיעים לנתב״ג · טרמינל 3",
         placeIds: [],
-        detail: "לפי הנחיות הצ׳ק־אין הבינלאומי של Ethiopian Airlines.",
+        detail:
+          "Ethiopian Airlines עובדת מטרמינל 3. להגיע כשלוש שעות לפני ההמראה — עם ארבעה נוסעים ושמונה מזוודות רשומות התור לדלפק הוא החלק האיטי.",
+        needs: [
+          "ארבעה דרכונים בתוקף (לפחות חצי שנה מעבר לתאריך החזרה)",
+          "כרטיסי ה־e-ticket מודפסים או שמורים אופליין",
+          "אסמכתת חברת התעופה GHZBPP ואסמכתת איסתא 7MA3B6",
+          "פאוור בנקים בתיק היד בלבד — אסור במזוודה רשומה",
+        ],
+        warnings: [
+          "כל נוסע זכאי לשתי מזוודות רשומות בכל הקטעים — לוודא שקילה לפני היציאה מהבית.",
+        ],
+        links: [
+          {
+            label: "Ethiopian Airlines · צ׳ק־אין",
+            url: "https://www.ethiopianairlines.com/aa/book/check-in",
+            kind: "official",
+          },
+        ],
       },
       {
         time: "15:35",
         title: "ET419 · תל אביב ← אדיס אבבה",
         placeIds: [],
-        detail: "נחיתה באדיס אבבה ב־19:50.",
+        detail: "טיסה ישירה, 4 שעות ו־15 דקות. נחיתה באדיס אבבה ב־19:50 שעון מקומי.",
+        legs: [
+          {
+            mode: "plane",
+            from: { he: "נתב״ג · טרמינל 3", en: "Tel Aviv TLV T3" },
+            to: { he: "אדיס אבבה · טרמינל 2", en: "Addis Ababa ADD T2" },
+            line: { he: "ET419", en: "ET419" },
+            depart: "15:35",
+            arrive: "19:50",
+            durationMin: 255,
+            fareNote: "משולם — כלול בכרטיס",
+          },
+        ],
       },
       {
         time: "19:50",
-        title: "קונקשן של 2 שעות ו־45 דקות",
+        title: "קונקשן באדיס אבבה — 2 שעות ו־45 דקות",
         placeIds: [],
-        detail: "מנצלים את הזמן למעבר שער, ארוחה, שירותים ומתיחות. הקונקשן קצר מדי לתוכנית מלון עצירה.",
+        detail:
+          "מנצלים את הזמן למעבר שער, ארוחה, שירותים ומתיחות. הקונקשן קצר מדי לתוכנית מלון עצירה, וגם קצר מספיק כדי שלא כדאי להתפזר בטרמינל.",
+        warnings: [
+          "הקונקשן הוא בתוך טרמינל 2 באדיס. לאתר את שער ET672 על הצג מיד עם הנחיתה, לפני האוכל.",
+        ],
       },
       {
         time: "22:35",
         title: "ET672 · אדיס אבבה ← נריטה",
         placeIds: ["narita-airport"],
-        detail: "טיסת לילה ארוכה; נוחתים מחר ב־19:40.",
+        detail:
+          "הקטע הארוך: 15 שעות ו־5 דקות עם עצירת ביניים אחת. נוחתים מחר, יום ו׳, ב־19:40 שעון טוקיו — 6 שעות לפני שעון ישראל.",
+        legs: [
+          {
+            mode: "plane",
+            from: { he: "אדיס אבבה · טרמינל 2", en: "Addis Ababa ADD T2" },
+            to: { he: "נריטה · טרמינל 1", en: "Tokyo Narita NRT T1", ja: "成田空港 第1ターミナル" },
+            line: { he: "ET672", en: "ET672" },
+            depart: "22:35",
+            arrive: "19:40 (למחרת)",
+            durationMin: 905,
+            fareNote: "משולם — כלול בכרטיס",
+            gotcha:
+              "הטיסה נוחתת פעם אחת בדרך והנוסעים בדרך כלל נשארים במטוס. זו לא קפיצה אחת רצופה לטוקיו — להכין את הילדים מראש.",
+          },
+        ],
+        warnings: [
+          "עוד לא אושר באיזה שדה עוצרת ET672 והאם צריך לרדת מהמטוס. לבדוק בצ׳ק־אין המקוון.",
+        ],
       },
     ],
   }),
@@ -99,32 +189,165 @@ export const tripDays: TripDay[] = [
     lng: 139.7606,
     highlights: ["נחיתה ב־19:40", "TOURIST PASMO ו־Skyliner", "צ׳ק־אין עצמי מאוחר", "ארוחת קונביני"],
     note: "אין סיורים הערב. הדרכונים נשלחו למארח ב־1 באוגוסט; עדיין צריך אישור כתוב שהגעה ב־21:30–23:00 מותרת, פרטי לוקבוקס ואיש קשר לילי. שימו לב: בבניין בטבטה אין מעלית — כל המזוודות עולות במדרגות.",
+    stay: {
+      placeId: "tabata-base",
+      label: "הדירה בטבטה · Marble Tokyo Base Tabata",
+      checkIn: "22:00–23:00 (צ׳ק־אין עצמי)",
+      url: "https://www.airbnb.com/rooms/1348289002107449827?adults=4&check_in=2026-10-02&check_out=2026-10-11",
+      note: "הכתובת המדויקת, קוד הלוקבוקס ומספר הקומה שמורים בכספת המשפחתית באפליקציה — לפתוח אותם עוד לפני ההמראה ולשמור צילום מסך אופליין.",
+    },
     blocks: [
       {
         time: "19:40",
-        title: "נחיתה בנריטה",
+        title: "נחיתה בנריטה · טרמינל 1",
         placeIds: ["narita-airport"],
-        detail: "להקצות בערך 90 דקות להגירה, מזוודות ומכס.",
+        detail:
+          "להקצות בערך 90 דקות להגירה, מזוודות ומכס. אולם הנוסעים הנכנסים הוא בקומה 1 של טרמינל 1; תחנת הרכבת נמצאת קומה אחת מתחת.",
+        needs: [
+          "טופס ההגירה וההצהרה למכס — מומלץ למלא מראש ב־Visit Japan Web ולשמור את קודי ה־QR",
+          "כתובת הלינה בטבטה — נדרשת בטופס ההגירה",
+        ],
+        warnings: [
+          "בטרמינל 1 יש שני אולמות נכנסים (צפוני ודרומי). שניהם מובילים לאותה קומה 1 — לא להיבהל אם השילוט נראה שונה מהמצופה.",
+        ],
+        links: [
+          {
+            label: "Visit Japan Web",
+            url: "https://services.digital.go.jp/en/visit-japan-web/",
+            kind: "official",
+          },
+          {
+            label: "מפת טרמינל 1",
+            url: "https://www.narita-airport.jp/en/terminal1/",
+            kind: "map",
+          },
+        ],
       },
       {
         time: "~21:15",
-        title: "TOURIST PASMO ו־Skyliner לניפורי",
+        title: "TOURIST PASMO ו־Skyliner — בקומה B1",
         placeIds: [],
         detail:
-          "קונים ארבעה כרטיסי TOURIST PASMO (¥2,000 כל אחד, כל הסכום כערך צבור) במרכז המידע של Skyliner & Keisei, ואז את ה־Skyliner המעשי הבא לניפורי — ¥2,580 לאדם. לא מזמינים מראש רכבת שעיכוב בטיסה יכול לבטל.",
+          "מאולם הנכנסים בקומה 1 יורדים בדרגנוע או במעלית לקומה B1, שם נמצאת תחנת Narita Airport Terminal 1. דלפקי Skyliner נמצאים בצד שמאל (דלפקי Narita Express מימין). קודם קונים ארבעה כרטיסי TOURIST PASMO ואז את ה־Skyliner המעשי הבא — לא מזמינים מראש רכבת שעיכוב בטיסה יכול לבטל.",
+        legs: [
+          {
+            mode: "walk",
+            from: { he: "אולם נכנסים · קומה 1", en: "Arrivals Lobby 1F" },
+            to: {
+              he: "תחנת נריטה טרמינל 1 · קומה B1",
+              en: "Narita Airport Terminal 1 Station B1",
+              ja: "成田空港第1ターミナル駅",
+            },
+            durationMin: 5,
+            transferNote: "לעקוב אחרי שלט הרכבת מיד ביציאה מהמכס, ולרדת בדרגנוע קומה אחת.",
+          },
+        ],
+        needs: [
+          "כרטיס אשראי — מכונות ודלפקי Skyliner מקבלים את הכרטיסים הגדולים",
+          "מזומן ין לטעינת ה־PASMO בהמשך",
+        ],
+        costs: [
+          {
+            label: "TOURIST PASMO",
+            yen: 2000,
+            basis: "person",
+            note: "כל ה־¥2,000 הם ערך צבור — בלי דמי הנפקה ובלי פיקדון. תקף 28 יום.",
+          },
+          {
+            label: "Skyliner לניפורי",
+            yen: 2580,
+            basis: "person",
+            note: "מחיר משולב, כל המושבים שמורים",
+          },
+        ],
+        warnings: [
+          "היתרה שלא נוצלה ב־TOURIST PASMO אינה ניתנת להחזר — לטעון בסכומים קטנים.",
+          "לשמור את פתק ההפניה שמגיע עם כל כרטיס PASMO יחד עם הכרטיס עצמו.",
+        ],
+        links: [
+          {
+            label: "TOURIST PASMO · נקודות מכירה ותנאים",
+            url: "https://www.pasmo.co.jp/tourist-pasmo/",
+            kind: "official",
+          },
+          {
+            label: "Skyliner · איך קונים",
+            url: "https://new-www.keisei.co.jp/keisei/tetudou/skyliner/us/skyliner/purchase.php",
+            kind: "tickets",
+          },
+        ],
       },
       {
-        time: "~22:15",
-        title: "ניפורי ← טבטה ב־JR",
+        time: "~21:40",
+        title: "נריטה ← ניפורי ← טבטה",
         placeIds: [],
         detail:
-          "יוצאים משערי Keisei, עוקבים אחרי השילוט ל־JR ומעבירים PASMO לנסיעה של תחנה אחת — ¥155. סה״כ צפוי למשפחה: כ־¥10,940. אוטובוס או מונית רק אם המצב באמת מצדיק. בטבטה יוצאים דרך היציאה הצפונית שיש בה דרגנוע; ביציאה הדרומית יש כ־100 מדרגות ורמפה תלולה.",
+          "ה־Skyliner רץ ישירות לניפורי בכ־40 דקות. בניפורי עולים מהרציף קומה אחת למעלה, עוברים בשער B — שער המעבר בין Keisei ל־JR — ומשם רכבת אחת בלבד לטבטה.",
+        legs: [
+          {
+            mode: "train",
+            from: {
+              he: "נריטה טרמינל 1",
+              en: "Narita Airport Terminal 1",
+              ja: "成田空港第1ターミナル駅",
+            },
+            to: { he: "ניפורי", en: "Nippori", ja: "日暮里駅" },
+            line: { he: "קייסיי סקיילינר", en: "Keisei Skyliner", ja: "京成スカイライナー" },
+            durationMin: 40,
+            fareYen: 2580,
+            fareNote: "כרטיס משולב, מושב שמור",
+          },
+          {
+            mode: "walk",
+            from: { he: "רציף הסקיילינר", en: "Skyliner platform" },
+            to: { he: "שערי JR בניפורי", en: "JR gates, Nippori" },
+            durationMin: 5,
+            exit: { he: "שער B — שער המעבר", en: "Ticket Gate B (transfer gate)" },
+            transferNote:
+              "עולים מהרציף לקומה העליונה ועוברים בשער B עם ה־PASMO. המעבר כולו מקורה, עם דרגנועים ומעלית.",
+            gotcha:
+              "רק כרטיס Skyliner רגיל מאפשר מעבר בניפורי. מי שקונה בטעות ‏Skyliner & Tokyo Subway Ticket חייב להמשיך עד אואנו.",
+          },
+          {
+            mode: "train",
+            from: { he: "ניפורי", en: "Nippori", ja: "日暮里駅" },
+            to: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            line: {
+              he: "JR ימנוטה או קייהין־טוהוקו",
+              en: "JR Yamanote / Keihin-Tohoku",
+              ja: "JR山手線・京浜東北線",
+            },
+            direction: { he: "לכיוון איקבוקורו", en: "toward Ikebukuro" },
+            durationMin: 3,
+            fareYen: 155,
+            fareNote: "IC · תחנה אחת",
+            exit: { he: "היציאה הצפונית", en: "North Exit", ja: "北口" },
+            gotcha:
+              "לצאת דווקא ביציאה הצפונית — יש בה דרגנוע. ביציאה הדרומית יש כ־100 מדרגות ורמפה תלולה, עם המזוודות זה הבדל אמיתי.",
+          },
+        ],
+        costs: [
+          { label: "Skyliner נריטה ← ניפורי", yen: 2580, basis: "person" },
+          { label: "JR ניפורי ← טבטה", yen: 155, basis: "person" },
+        ],
+        warnings: [
+          "אוטובוס ישיר או מונית רק אם שחרור המזוודות התארך, הילדים גמורים או הצ׳ק־אין העצמי מסתבך — לא כברירת מחדל.",
+        ],
       },
       {
         time: "22:00–23:00",
         title: "צ׳ק־אין עצמי בדירה בטבטה",
         placeIds: ["tabata-base"],
-        detail: "מודיעים למארח מיד אחרי הנחיתה ופועלים לפי הוראות הלוקבוקס ששמרנו אופליין. בבניין אין מעלית — כל מזוודה עולה במדרגות בידיים, אחרי כ־22 שעות נסיעה. להחליט עוד בארץ אם שולחים את המזוודות הכבדות בשליחות או אורזים כך שכל אחד נושא את שלו.",
+        detail:
+          "מודיעים למארח מיד אחרי הנחיתה ופועלים לפי הוראות הלוקבוקס ששמרנו אופליין.",
+        needs: [
+          "קוד הלוקבוקס והוראות הכניסה — צילום מסך אופליין, לא קישור",
+          "מספר טלפון של איש קשר שעונה בלילה",
+        ],
+        warnings: [
+          "בבניין אין מעלית. כל מזוודה עולה במדרגות בידיים, אחרי כ־22 שעות נסיעה — להחליט עוד בארץ אם שולחים את הכבדות בשליחות או אורזים כך שכל אחד נושא את שלו.",
+          "עדיין חסר אישור כתוב מהמארח שהגעה ב־21:30–23:00 מותרת, וגם פרטי הלוקבוקס ומספר הקומה. הדרכונים נשלחו ב־1 באוגוסט.",
+        ],
         booking: {
           label: "לינה 2–11.10 · מוזמן",
           url: "https://www.airbnb.com/rooms/1348289002107449827?adults=4&check_in=2026-10-02&check_out=2026-10-11",
@@ -135,7 +358,17 @@ export const tripDays: TripDay[] = [
         time: "לילה",
         title: "קונביני לארוחת ערב ולארוחת בוקר",
         placeIds: [],
-        detail: "קונים ארוחה פשוטה וארוחת בוקר למחר. בלי אטרקציות.",
+        detail:
+          "קונים ארוחה פשוטה וארוחת בוקר למחר. בלי אטרקציות. סביב תחנת טבטה יש 7-Eleven, FamilyMart ו־Lawson שפתוחים 24 שעות.",
+        costs: [
+          {
+            label: "ארוחת ערב וארוחת בוקר בקונביני",
+            yen: 4000,
+            basis: "family",
+            note: "הערכה — כ־¥1,000 לאדם",
+          },
+        ],
+        needs: ["מזומן ין קטן — לא כל קופה קטנה מקבלת כרטיס זר"],
       },
     ],
   }),
@@ -166,12 +399,42 @@ export const tripDays: TripDay[] = [
       href: "https://www.instagram.com/tokyocity_fleamarket/",
     },
     foodAnchors: ["coco-ichibanya-akihabara"],
+    stay: tabataStay,
     blocks: [
       {
         time: "09:00",
         title: "יוצאים מטבטה",
         placeIds: ["tabata-base"],
-        detail: "JR ישיר לאקיהברה, ואז הכול ברגל. כ־¥398 לאדם / ¥1,592 למשפחה ליום כולו.",
+        detail: "JR ישיר לאקיהברה, ואז הכול ברגל.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            to: { he: "אקיהברה", en: "Akihabara", ja: "秋葉原駅" },
+            line: {
+              he: "JR ימנוטה או קייהין־טוהוקו",
+              en: "JR Yamanote / Keihin-Tohoku",
+              ja: "JR山手線・京浜東北線",
+            },
+            direction: { he: "לכיוון אואנו / טוקיו", en: "toward Ueno / Tokyo" },
+            durationMin: 12,
+            fareYen: 199,
+            fareNote: "IC · ישיר, בלי החלפות",
+            exit: { he: "יציאת אלקטריק טאון", en: "Electric Town Exit", ja: "電気街口" },
+          },
+        ],
+        costs: [
+          {
+            label: "נסיעות היום",
+            yen: 398,
+            basis: "person",
+            note: "הלוך וחזור לאקיהברה; כל השאר ברגל",
+          },
+        ],
+        needs: [
+          "מעטפת מזומן לגאצ׳פון ולארקייד — ¥1,500–2,000 לכל ילד",
+          "PASMO טעון · לטעון היום כ־¥5,000 לכרטיס",
+        ],
       },
       {
         time: "09:30",
@@ -240,13 +503,58 @@ export const tripDays: TripDay[] = [
     note: "היום היחיד שחורג מכלל שתי האטרקציות המתוזמנות — teamLab, Pixar ו־Joypolis יושבים על אותו קו Yurikamome רציף. שלושת העוגנים מוגנים.",
     rainPlan: "כמעט כל היום מקורה — היום הזה עובד גם בגשם.",
     foodAnchors: ["divercity-tokyo-plaza"],
+    stay: tabataStay,
     blocks: [
       {
         time: "08:15",
         title: "יוצאים מטבטה לכניסה המוזמנת ב־09:30",
         placeIds: ["tabata-base"],
         detail:
-          "לפני היציאה: פותחים את My Tickets וטוענים את ארבעת קודי ה־QR (הם מופיעים רק אחרי חצות של 4.10) ומצלמים מסך. JR ישיר לשימבאשי, ואז Yurikamome — להיות בשין־טויוסו בערך ב־09:15. לא באוטובוסים מתחנת טוקיו/גינזה/צוקיג׳י — יש שם עומס. לפני הנסיעה הראשונה קונים כרטיס יומי של Yurikamome ב־¥820 — זול יותר מארבע הנסיעות המתוכננות.",
+          "JR ישיר לשימבאשי, ואז Yurikamome — להיות בשין־טויוסו בערך ב־09:15. לא באוטובוסים מתחנת טוקיו/גינזה/צוקיג׳י, יש שם עומס כבד.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            to: { he: "שימבאשי", en: "Shimbashi", ja: "新橋駅" },
+            line: { he: "JR ימנוטה", en: "JR Yamanote", ja: "JR山手線" },
+            direction: { he: "לכיוון טוקיו / שינגאווה", en: "toward Tokyo / Shinagawa" },
+            durationMin: 25,
+            fareYen: 209,
+            fareNote: "IC",
+          },
+          {
+            mode: "monorail",
+            from: { he: "שימבאשי", en: "Shimbashi", ja: "新橋駅" },
+            to: { he: "שין־טויוסו", en: "Shin-Toyosu", ja: "新豊洲駅" },
+            line: { he: "יוריקאמומה", en: "Yurikamome", ja: "ゆりかもめ" },
+            durationMin: 22,
+            fareNote: "כלול בכרטיס היומי ¥820",
+            transferNote:
+              "יוצאים משערי JR ונכנסים לשערי Yurikamome — שני מפעילים נפרדים.",
+            gotcha:
+              "לא להעביר PASMO בשערי Yurikamome אחרי שקנינו כרטיס יומי — משתמשים רק בכרטיס היומי.",
+          },
+        ],
+        needs: [
+          "ארבעה קודי QR של teamLab — מופיעים ב־My Tickets רק אחרי חצות של 4.10. לפתוח, לטעון ולצלם מסך לפני היציאה מטבטה. המייל עצמו אינו מסמך כניסה.",
+          "בגדים שאפשר להפשיל מעל הברך — יש מים ורצפות מראה",
+        ],
+        costs: [
+          { label: "JR טבטה ← שימבאשי, הלוך וחזור", yen: 418, basis: "person" },
+          {
+            label: "כרטיס יומי Yurikamome",
+            yen: 820,
+            basis: "person",
+            note: "קונים בשימבאשי לפני הנסיעה הראשונה — זול מארבע הנסיעות המתוכננות",
+          },
+        ],
+        links: [
+          {
+            label: "Yurikamome · מחירים וכרטיס יומי",
+            url: "https://www.yurikamome.co.jp/en/ride-guidance/fare.html",
+            kind: "official",
+          },
+        ],
       },
       {
         time: "09:30–12:00",
@@ -254,6 +562,24 @@ export const tripDays: TripDay[] = [
         placeIds: ["teamlab-planets"],
         detail:
           "חלון כניסה 09:30–10:00 — נכנסים ב־09:30, לא בסוף החלון. שולם ¥16,800 לארבעה (2 מבוגרים ¥5,600 + 2 חטיבה/תיכון ¥2,800). ללבוש בגדים שאפשר להפשיל מעל הברך — יש מים ורצפות מראה. 2–2.5 שעות, לוקרים חינם. אפשר לשנות תאריך/שעה עד 3 פעמים, לא יאוחר משעתיים לפני הכניסה.",
+        costs: [
+          {
+            label: "teamLab Planets · שולם",
+            yen: 16800,
+            basis: "family",
+            note: "2 מבוגרים ¥5,600 + 2 חטיבה/תיכון ¥2,800",
+          },
+        ],
+        warnings: [
+          "אפשר לשנות תאריך ושעה עד שלוש פעמים, ולא יאוחר משעתיים לפני חלון הכניסה.",
+        ],
+        links: [
+          {
+            label: "teamLab Planets TOKYO",
+            url: "https://teamlabplanets.dmm.com/en",
+            kind: "official",
+          },
+        ],
         booking: {
           label: "כניסה 09:30–10:00 · מוזמן · ¥16,800",
           url: "https://teamlabplanets.dmm.com/en",
@@ -266,6 +592,45 @@ export const tripDays: TripDay[] = [
         placeIds: ["mundo-pixar"],
         detail:
           "תחנה אחת מ־teamLab ל־Shijō-mae. CREVIA BASE כשלוש דקות מהתחנה והחוויה 45–55 דקות. 4.10 הוא יום מחיר D: כ־¥20,100 למשפחה לפני עמלות. לקנות מול 12:30–13:00 — הכניסה המוזמנת ל־teamLab ב־09:30 מוציאה מהמשחק את החריץ הישן של 11:45/12:00.",
+        legs: [
+          {
+            mode: "monorail",
+            from: { he: "שין־טויוסו", en: "Shin-Toyosu", ja: "新豊洲駅" },
+            to: { he: "Shijō-mae", en: "Shijo-mae", ja: "市場前駅" },
+            line: { he: "יוריקאמומה", en: "Yurikamome", ja: "ゆりかもめ" },
+            durationMin: 2,
+            fareNote: "כלול בכרטיס היומי",
+          },
+          {
+            mode: "walk",
+            from: { he: "Shijō-mae", en: "Shijo-mae", ja: "市場前駅" },
+            to: { he: "CREVIA BASE Tokyo", en: "CREVIA BASE Tokyo" },
+            durationMin: 3,
+          },
+        ],
+        costs: [
+          {
+            label: "Mundo Pixar · יום מחיר D",
+            yen: 20100,
+            basis: "family",
+            note: "3 כרטיסי 16+ וכרטיס אחד 4–15, לפני עמלות",
+          },
+        ],
+        warnings: [
+          "אם החריץ המועדף נסגר — לבחור את הקרוב ביותר אחרי 12:15, כדי לשמור על הרצף teamLab ← פיקסאר ← אודאיבה.",
+        ],
+        links: [
+          {
+            label: "Mundo Pixar · התערוכה",
+            url: "https://mundopixar.com/en/cities/tokyo",
+            kind: "official",
+          },
+          {
+            label: "לוח מחירים וחריצים",
+            url: "https://t.pia.jp/en/pia/events/mundopixar",
+            kind: "tickets",
+          },
+        ],
         booking: {
           label: "חובה · לקנות כניסה מתוזמנת ל־12:30–13:00",
           url: "https://t.pia.jp/en/pia/events/mundopixar",
@@ -321,6 +686,7 @@ export const tripDays: TripDay[] = [
     lng: 139.5177,
     highlights: ["רכבל Sky Shuttle", "כניסה ב־11:00", "Pokémon Forest ראשון", "בקשות באפליקציה מ־10:45"],
     note: "הכרטיסים חייבים להיות מובטחים מראש — לא נוסעים בתקווה למכירה בשער. לא קונים דרך Fiverr, מתווך או ספסר: PokéPark עלול לבטל כרטיסים שנרכשו מסחרית ולסרב כניסה ללא פיצוי.",
+    stay: tabataStay,
     blocks: [
       {
         time: "לפני היציאה",
@@ -334,13 +700,98 @@ export const tripDays: TripDay[] = [
         title: "יוצאים לשינג׳וקו ולקו Keio",
         placeIds: ["tabata-base"],
         detail:
-          "JR ימנוטה לשינג׳וקו, יוצאים משערי JR ונכנסים ל־Keio: אקספרס לצ׳ופו ואז קו סאגמיהרה ל־Keio-yomiuri-land. ¥314 IC לכיוון; סה״כ כ־¥1,546 לאדם / ¥6,184 למשפחה.",
+          "שתי חברות רכבת נפרדות: יוצאים משערי JR בשינג׳וקו ונכנסים לשערי Keio. זו נקודת הבלבול היחידה של היום.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            to: { he: "שינג׳וקו", en: "Shinjuku", ja: "新宿駅" },
+            line: { he: "JR ימנוטה", en: "JR Yamanote", ja: "JR山手線" },
+            direction: { he: "לכיוון איקבוקורו", en: "toward Ikebukuro" },
+            durationMin: 24,
+            fareYen: 231,
+            fareNote: "IC",
+          },
+          {
+            mode: "train",
+            from: { he: "שינג׳וקו · קו Keio", en: "Shinjuku (Keio Line)", ja: "京王線新宿駅" },
+            to: { he: "צ׳ופו", en: "Chofu", ja: "調布駅" },
+            line: { he: "קו Keio · אקספרס", en: "Keio Line Express", ja: "京王線 急行" },
+            durationMin: 20,
+            fareYen: 314,
+            fareNote: "IC · עד Keio-yomiuri-land",
+            transferNote:
+              "לצאת משערי JR ולהיכנס לשערי Keio — מפעיל אחר, חיוב נפרד.",
+          },
+          {
+            mode: "train",
+            from: { he: "צ׳ופו", en: "Chofu", ja: "調布駅" },
+            to: {
+              he: "Keio-yomiuri-land",
+              en: "Keio-yomiuriland",
+              ja: "京王よみうりランド駅",
+            },
+            line: { he: "קו סאגמיהרה", en: "Keio Sagamihara Line", ja: "京王相模原線" },
+            durationMin: 10,
+            fareNote: "כלול בחיוב מ־שינג׳וקו",
+          },
+        ],
+        costs: [
+          {
+            label: "רכבות היום, הלוך וחזור",
+            yen: 1546,
+            basis: "person",
+            note: "JR + Keio + רכבל",
+          },
+        ],
+        needs: [
+          "אפליקציית PokéPark הרשמית מותקנת ומעודכנת",
+          "פאוור בנקים טעונים, מים, שכבת גשם ונעליים נוחות",
+        ],
+        links: [
+          {
+            label: "Keio · מחירים משינג׳וקו",
+            url: "https://www.keio.co.jp/global/routes/stations/shinjuku/",
+            kind: "official",
+          },
+          {
+            label: "PokéPark · הגעה ברכבת",
+            url: "https://www.pokepark-kanto.co.jp/ppark/access/train/index",
+            kind: "access",
+          },
+        ],
       },
       {
         time: "~10:20",
         title: "רכבל Sky Shuttle",
         placeIds: ["yomiuriland"],
-        detail: "כרטיס הלוך־חזור ¥500, נפרד מכרטיס הפארק. מגיעים לאזור לפני 10:30.",
+        detail: "מגיעים לאזור לפני 10:30, כדי להיות בשער בזמן הכרטיס.",
+        legs: [
+          {
+            mode: "cablecar",
+            from: {
+              he: "Keio-yomiuri-land",
+              en: "Keio-yomiuriland",
+              ja: "京王よみうりランド駅",
+            },
+            to: { he: "Yomiuriland", en: "Yomiuriland", ja: "よみうりランド" },
+            line: { he: "Sky Shuttle", en: "Sky Shuttle gondola", ja: "スカイシャトル" },
+            durationMin: 5,
+            fareYen: 500,
+            fareNote: "הלוך־חזור · נפרד לגמרי מכרטיס הפארק",
+          },
+        ],
+        costs: [{ label: "רכבל Sky Shuttle", yen: 500, basis: "person", note: "הלוך־חזור" }],
+        warnings: [
+          "הרכבל לא תמיד פועל. אם הוא מושבת יש אוטובוס מהתחנה — לבדוק באתר לפני היציאה.",
+        ],
+        links: [
+          {
+            label: "Yomiuriland · מחירי הרכבל",
+            url: "https://www.yomiuriland.com/en/charge/",
+            kind: "official",
+          },
+        ],
       },
       {
         time: "10:45",
@@ -401,12 +852,35 @@ export const tripDays: TripDay[] = [
     ],
     note: "היום מתקדם באופן טבעי: רגוע ← חמוד ← משחקים ← ניאון. בלי חזרות לאחור.",
     foodAnchors: ["ichiran-shibuya", "afuri-harajuku"],
+    stay: tabataStay,
     blocks: [
       {
         time: "08:00",
         title: "יוצאים מטבטה להרג׳וקו",
         placeIds: ["tabata-base"],
-        detail: "JR ימנוטה ישיר. כ־¥506 לאדם / ¥2,024 למשפחה ליום.",
+        detail:
+          "JR ימנוטה ישיר, בלי החלפות. את היום כולו הולכים דרומה מהרג׳וקו לשיבויה — לא חוזרים על העקבות.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            to: { he: "הרג׳וקו", en: "Harajuku", ja: "原宿駅" },
+            line: { he: "JR ימנוטה", en: "JR Yamanote", ja: "JR山手線" },
+            direction: { he: "לכיוון איקבוקורו / שינג׳וקו", en: "toward Ikebukuro / Shinjuku" },
+            durationMin: 30,
+            fareYen: 253,
+            fareNote: "IC",
+            exit: { he: "היציאה המערבית", en: "West Exit", ja: "西口" },
+          },
+        ],
+        costs: [
+          {
+            label: "נסיעות היום",
+            yen: 506,
+            basis: "person",
+            note: "טבטה ← הרג׳וקו וחזרה משיבויה",
+          },
+        ],
       },
       {
         time: "08:45",
@@ -489,13 +963,58 @@ export const tripDays: TripDay[] = [
     note: "מסלול חד־כיווני: חוזרים דרך פוג׳יסאווה במקום לחזור על כל קו האנודן.",
     rainPlan:
       "בגשם חזק — מזיזים את היום ומשתמשים בתוכנית המקורה של 8.10. בגשם קל אפשר להמשיך עם נעליים אטומות, אבל מוותרים על המערות ועל השקיעה בחוף אם זה לא בטוח.",
+    stay: tabataStay,
     blocks: [
       {
         time: "07:30",
         title: "יוצאים לקמקורה",
         placeIds: ["tabata-base"],
         detail:
-          "JR דרך טוקיו/שימבאשי לחיבור יוקוסוקה/טוקאידו, בלי לצאת משערי JR. כ־¥2,604 לאדם / ¥10,416 למשפחה ליום.",
+          "כל הנסיעה בתוך שערי JR — לא יוצאים ולא משלמים פעמיים. חוזרים דרך פוג׳יסאווה כדי לא לעשות את האנודן פעמיים.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            to: { he: "טוקיו", en: "Tokyo", ja: "東京駅" },
+            line: { he: "JR קייהין־טוהוקו", en: "JR Keihin-Tohoku", ja: "JR京浜東北線" },
+            direction: { he: "לכיוון טוקיו / יוקוהמה", en: "toward Tokyo / Yokohama" },
+            durationMin: 18,
+            fareNote: "כלול בחיוב הרציף עד קמקורה",
+          },
+          {
+            mode: "train",
+            from: { he: "טוקיו", en: "Tokyo", ja: "東京駅" },
+            to: { he: "קמקורה", en: "Kamakura", ja: "鎌倉駅" },
+            line: { he: "JR יוקוסוקה", en: "JR Yokosuka Line", ja: "JR横須賀線" },
+            direction: { he: "לכיוון זושי / קוריהאמה", en: "toward Zushi / Kurihama" },
+            durationMin: 57,
+            fareYen: 953,
+            fareNote: "IC · מטבטה, בלי לצאת משערים",
+            gotcha:
+              "לא לצאת משערי JR בטוקיו או בשימבאשי. יציאה באמצע מפצלת את החיוב ומייקרת את היום.",
+          },
+        ],
+        costs: [
+          {
+            label: "רכבות JR הלוך וחזור",
+            yen: 1804,
+            basis: "person",
+            note: "טבטה ← קמקורה, וחזרה מפוג׳יסאווה דרך טוקיו",
+          },
+          {
+            label: "Enoden Noriorikun · כרטיס יומי",
+            yen: 800,
+            basis: "person",
+            note: "קונים בקמקורה לפני הנסיעה הראשונה באנודן",
+          },
+        ],
+        links: [
+          {
+            label: "Enoden Noriorikun",
+            url: "https://www.enoden.co.jp/en/tourism/ticket/noriorikun/",
+            kind: "tickets",
+          },
+        ],
       },
       {
         time: "בוקר",
@@ -570,13 +1089,58 @@ export const tripDays: TripDay[] = [
     ],
     note: "Golden Gai ו־Omoide Yokocho הוסרו: הם מכוונים למבוגרים, צפופים ולא שווים את האנרגיה המשפחתית.",
     foodAnchors: ["kichijoji", "fuunji"],
+    stay: tabataStay,
     blocks: [
       {
         time: "08:35",
         title: "יוצאים לכניסה של 10:00",
         placeIds: ["tabata-base"],
         detail:
-          "JR ימנוטה לשינג׳וקו ואז Chuo Rapid למיטאקה, בלי לצאת משערי JR. אוטובוס המוזיאון ¥230 למבוגר או 15 דקות הליכה. כ־¥1,287 לאדם / ¥5,148 למשפחה.",
+          "שתי רכבות JR ברצף, בלי לצאת משערים. ממיטאקה אפשר אוטובוס ייעודי או 15 דקות הליכה.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            to: { he: "שינג׳וקו", en: "Shinjuku", ja: "新宿駅" },
+            line: { he: "JR ימנוטה", en: "JR Yamanote", ja: "JR山手線" },
+            direction: { he: "לכיוון איקבוקורו", en: "toward Ikebukuro" },
+            durationMin: 24,
+            fareNote: "כלול בחיוב הרציף עד מיטאקה",
+          },
+          {
+            mode: "train",
+            from: { he: "שינג׳וקו", en: "Shinjuku", ja: "新宿駅" },
+            to: { he: "מיטאקה", en: "Mitaka", ja: "三鷹駅" },
+            line: { he: "JR צ׳ואו · ראפיד", en: "JR Chuo Rapid", ja: "JR中央線快速" },
+            direction: { he: "לכיוון טאצ׳יקאווה", en: "toward Tachikawa" },
+            durationMin: 17,
+            fareYen: 396,
+            fareNote: "IC · מטבטה, בלי לצאת משערים",
+          },
+          {
+            mode: "bus",
+            from: { he: "מיטאקה · יציאה דרומית", en: "Mitaka South Exit", ja: "三鷹駅南口" },
+            to: { he: "מוזיאון ג׳יבלי", en: "Ghibli Museum", ja: "三鷹の森ジブリ美術館" },
+            line: { he: "אוטובוס הקהילה למוזיאון", en: "Museum community bus" },
+            durationMin: 6,
+            fareYen: 230,
+            fareNote: "למבוגר · או 15 דקות הליכה לאורך התעלה",
+          },
+        ],
+        costs: [
+          { label: "רכבות היום", yen: 1057, basis: "person", note: "כולל נקאנו ושינג׳וקו בהמשך" },
+          { label: "אוטובוס המוזיאון", yen: 230, basis: "person" },
+        ],
+        needs: [
+          "כרטיסי המוזיאון על שם הרוכש — ג׳יבלי בודקים תעודה מזהה בכניסה",
+        ],
+        links: [
+          {
+            label: "מוזיאון ג׳יבלי · הגעה ושעות",
+            url: "https://www.ghibli-museum.jp/en/hours-and-directions/",
+            kind: "access",
+          },
+        ],
       },
       {
         time: "10:00–12:30",
@@ -651,13 +1215,47 @@ export const tripDays: TripDay[] = [
     rainPlan:
       "בגשם כבד: מדלגים על טודורוקי ועל Hanegi, מתחילים באיסוף המוזמן ב־Shiro-Hige וממשיכים למסעדות המקורות של הפסטיבל, ל־Mikan, ל־Reload ולבתי קפה.",
     foodAnchors: ["setsugekka", "shiro-hige-cream-puff", "shimokitazawa-curry-festival"],
+    stay: tabataStay,
     blocks: [
       {
         time: "08:00",
         title: "יוצאים דרך אואימאצ׳י",
         placeIds: ["tabata-base"],
         detail:
-          "JR קייהין־טוהוקו ישיר לאואימאצ׳י ואז קו Tokyu Oimachi לטודורוקי. כ־¥1,404 לאדם / ¥5,616 למשפחה — כל מעבר בין מפעילים מחויב בנפרד.",
+          "היום הזה חוצה שלוש חברות רכבת — JR, Tokyu ו־Keio/Odakyu. כל מעבר בין מפעילים מחויב בנפרד, וזה מה שמייקר את היום.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            to: { he: "אואימאצ׳י", en: "Oimachi", ja: "大井町駅" },
+            line: { he: "JR קייהין־טוהוקו", en: "JR Keihin-Tohoku", ja: "JR京浜東北線" },
+            direction: { he: "לכיוון יוקוהמה", en: "toward Yokohama" },
+            durationMin: 32,
+            fareYen: 340,
+            fareNote: "IC",
+          },
+          {
+            mode: "train",
+            from: { he: "אואימאצ׳י", en: "Oimachi", ja: "大井町駅" },
+            to: { he: "טודורוקי", en: "Todoroki", ja: "等々力駅" },
+            line: { he: "Tokyu Oimachi", en: "Tokyu Oimachi Line", ja: "東急大井町線" },
+            durationMin: 22,
+            fareYen: 220,
+            fareNote: "IC · מפעיל נפרד",
+            transferNote: "יוצאים משערי JR ונכנסים לשערי Tokyu.",
+          },
+        ],
+        costs: [
+          {
+            label: "נסיעות היום",
+            yen: 1404,
+            basis: "person",
+            note: "JR + Tokyu + Keio/Odakyu, כולל החזרה משימוקיטזאווה",
+          },
+        ],
+        warnings: [
+          "שביל ערוץ טודורוקי צר, לא אחיד ולעיתים ללא מעקה — לא בגשם כבד ולא עד החושך.",
+        ],
       },
       {
         time: "08:45–10:45",
@@ -730,6 +1328,7 @@ export const tripDays: TripDay[] = [
     lng: 139.7519,
     highlights: ["בוקר איטי ומתנה", "Thunder Dolphin", "גלגל ענק עם קריוקי", "מזכרת אחת מ־JUMP SHOP"],
     note: "לא מוסיפים את התצוגה המקדימה של Tokyo Yosakoi. מחר מתחיל בהעברה מוקדמת לקיוטו ובשני אירועים בשעה קבועה — אף פעם לא בוחרים באפשרות של 21:00 ומעלה.",
+    stay: tabataStay,
     blocks: [
       {
         time: "בוקר",
@@ -742,6 +1341,36 @@ export const tripDays: TripDay[] = [
         title: "Tokyo Dome City Attractions",
         placeIds: ["tokyo-dome-city", "laqua"],
         detail: "קונים מתקנים בודדים או פספורט — רק אחרי בדיקת הפעלה חיה.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            to: { he: "אקיהברה", en: "Akihabara", ja: "秋葉原駅" },
+            line: { he: "JR ימנוטה", en: "JR Yamanote", ja: "JR山手線" },
+            direction: { he: "לכיוון אואנו", en: "toward Ueno" },
+            durationMin: 12,
+            fareNote: "כלול בחיוב הרציף עד סואידובאשי",
+          },
+          {
+            mode: "train",
+            from: { he: "אקיהברה", en: "Akihabara", ja: "秋葉原駅" },
+            to: { he: "סואידובאשי", en: "Suidobashi", ja: "水道橋駅" },
+            line: { he: "JR צ׳ואו־סובו · מקומית", en: "JR Chuo-Sobu Local", ja: "JR中央・総武線各駅停車" },
+            direction: { he: "לכיוון מיטאקה", en: "toward Mitaka" },
+            durationMin: 6,
+            fareYen: 209,
+            fareNote: "IC · מטבטה",
+            transferNote: "ההחלפה באקיהברה היא בתוך השערים — לא יוצאים.",
+          },
+        ],
+        costs: [
+          {
+            label: "נסיעות היום",
+            yen: 418,
+            basis: "person",
+            note: "בלי הקרנת Night & Light; איתה כ־¥596",
+          },
+        ],
         booking: {
           label: "בדיקת הפעלה ותחזוקה חיה",
           url: "https://www.at-raku.com/",
@@ -808,13 +1437,54 @@ export const tripDays: TripDay[] = [
     highlights: ["נוזומי מוקדם", "Mizuekai ב־13:00", "מנוחה וארוחה מאוחרת", "תהלוכת אוואטה מ־17:00"],
     note: "לא מוסיפים מקדש או קנייה — היום נשען על שני אירועים בשעה קבועה.",
     foodAnchors: ["gion"],
+    stay: fushimiStay,
     blocks: [
       {
         time: "מוקדם",
         title: "צ׳ק־אאוט ונוזומי שמור לקיוטו",
         placeIds: ["tabata-base", "tokyo-station"],
         detail:
-          "צ׳ק־אאוט עד 11:00 ו־JR ישיר מטבטה לתחנת טוקיו (¥209 לאדם). קונים אקיבן לפני העלייה לרכבת.",
+          "צ׳ק־אאוט עד 11:00, JR ישיר מטבטה לתחנת טוקיו, ואז שילוט שינקנסן — לא יוצאים מהתחנה. קונים אקיבן לפני העלייה לרכבת.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "טבטה", en: "Tabata", ja: "田端駅" },
+            to: { he: "תחנת טוקיו", en: "Tokyo Station", ja: "東京駅" },
+            line: { he: "JR קייהין־טוהוקו", en: "JR Keihin-Tohoku", ja: "JR京浜東北線" },
+            direction: { he: "לכיוון טוקיו / יוקוהמה", en: "toward Tokyo / Yokohama" },
+            durationMin: 18,
+            fareYen: 209,
+            fareNote: "IC · הקטע המקומי בלבד",
+          },
+          {
+            mode: "train",
+            from: { he: "תחנת טוקיו", en: "Tokyo Station", ja: "東京駅" },
+            to: { he: "תחנת קיוטו", en: "Kyoto Station", ja: "京都駅" },
+            line: { he: "שינקנסן נוזומי", en: "Nozomi Shinkansen", ja: "新幹線のぞみ" },
+            direction: { he: "לכיוון שין־אוסקה / הקאטה", en: "toward Shin-Osaka / Hakata" },
+            durationMin: 140,
+            fareYen: 14170,
+            fareNote: "מושב שמור · כרטיס נפרד, לא PASMO",
+            gotcha:
+              "מקום למזוודה גדולה מוזמן מראש ובחינם — בלי הזמנה זה קנס וטרטור. להזמין יחד עם המושבים.",
+          },
+        ],
+        costs: [
+          { label: "JR טבטה ← תחנת טוקיו", yen: 209, basis: "person" },
+          {
+            label: "נוזומי טוקיו ← קיוטו · מושב שמור",
+            yen: 14170,
+            basis: "person",
+            note: "הערכה — לאמת בהזמנה בפועל",
+          },
+        ],
+        needs: [
+          "הזמנת הנוזומי עם מספיק מרווח לפני מיזואקאי ב־13:00",
+          "מקום למזוודות גדולות מוזמן מראש, אם בכלל נוסעים איתן",
+        ],
+        warnings: [
+          "הדירה בפושימי לא נפתחת לפני 15:00 ואין הבטחה להנחת תיקים — לתכנן אחסון בתחנת קיוטו לפני שיוצאים לרסיטל.",
+        ],
       },
       {
         time: "בדרך",
@@ -903,6 +1573,7 @@ export const tripDays: TripDay[] = [
     lng: 135.7345,
     highlights: ["UZUMASA מ־10:00", "טקס תה ב־13:30", "פסטיבל היוקאי", "HIBIKI ב־19:00"],
     note: "12.10 הוא יום ספורט — חג רשמי, אז UZUMASA מפעיל תוכנית מלאה ויהיה עמוס; נכנסים עם הפתיחה. הכפר סגור ב־13.10, אז שום דבר מהיום הזה לא נדחה. מגינים על בלוק 10:00–15:45, על טקס התה ועל המנוחה לפני HIBIKI.",
+    stay: fushimiStay,
     blocks: [
       {
         time: "10:00–15:45",
@@ -910,6 +1581,45 @@ export const tripDays: TripDay[] = [
         placeIds: ["uzumasa-kyoto-village"],
         detail:
           "שולם ¥29,600: כניסה ×4 ב־¥3,800 (¥15,200) עם חוברת אירוע (יפנית ואנגלית) וגלויה אקראית מתוך שלושה עיצובים לכל אחד, טקס תה ×4 (¥10,800), Ninja Escape Room ×4 (¥2,400) ו־3D Maze the Ninja Fort ×2 (¥1,200). נכנסים עם הפתיחה ומתחילים ברחובות הסטים מעידן אדו. 10:30 Yokai ☆Dance Live (רק בחגים ובסופ״ש), ~11:00 חדר בריחה נינג׳ה — כל הארבעה מכוסים, ~11:45 מבוך תלת־ממד 3D Maze — רק שניים מכוסים, השניים האחרים משלימים ¥600 לאדם במקום. 12:15 ארוחת צהריים בתוך הפארק, מסיימים עד 13:15. 14:30 Yokai ☆Dance Live שני, 15:30 Kaikai Greeting, יוצאים ב־15:45. כל ארבעת הכרטיסים הונפקו כ״13 ומעלה״ — זה מעל תעריף הילד, אז השער מקבל אותם גם עבור בן ה־12. הכול תקף רק ב־12.10.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "JR אינארי", en: "JR Inari", ja: "JR稲荷駅" },
+            to: { he: "תחנת קיוטו", en: "Kyoto Station", ja: "京都駅" },
+            line: { he: "JR נארה", en: "JR Nara Line", ja: "JR奈良線" },
+            durationMin: 5,
+            fareYen: 150,
+            fareNote: "IC",
+          },
+          {
+            mode: "train",
+            from: { he: "תחנת קיוטו", en: "Kyoto Station", ja: "京都駅" },
+            to: { he: "Uzumasa-Koryuji", en: "Uzumasa-Koryuji", ja: "太秦広隆寺駅" },
+            line: { he: "JR סאגאנו ואז Randen", en: "JR Sagano Line then Randen", ja: "JR嵯峨野線・嵐電" },
+            direction: { he: "החלפה ב־Uzumasa", en: "change at Uzumasa" },
+            durationMin: 35,
+            fareYen: 460,
+            fareNote: "IC · לפחות החלפה אחת",
+            gotcha:
+              "יש שתי תחנות שונות עם השם Uzumasa — אחת של JR ואחת של Randen. לוודא באפליקציה לאיזו מהן המסלול מכוון.",
+          },
+        ],
+        costs: [
+          {
+            label: "UZUMASA Kyoto Village · שולם",
+            yen: 29600,
+            basis: "family",
+            note: "כניסה ×4, טקס תה ×4, חדר בריחה ×4, מבוך ×2",
+          },
+          { label: "נסיעות היום", yen: 1220, basis: "person", note: "כולל החזרה ו־Kyoto Avanti" },
+        ],
+        needs: [
+          "סמארטפון טעון עם חבילת גלישה פעילה — הכניסה לכפר היא דרך המסך בלבד, בלי הדפסה",
+        ],
+        warnings: [
+          "המבוך התלת־ממדי מכוסה לשניים בלבד. השניים האחרים משלימים ¥600 לאדם במקום.",
+          "כל ההזמנה תקפה רק ב־12.10 — אין העברה ליום אחר.",
+        ],
         booking: {
           label: "שולם — ¥29,600",
           url: "https://ticket.eigamura.com/ticket/purchased",
@@ -992,6 +1702,7 @@ export const tripDays: TripDay[] = [
       href: "https://transit.yahoo.co.jp/search/result?all=1&from=%E4%BA%AC%E9%83%BD&stype=&to=%E6%96%B0%E5%A4%A7%E9%98%AA",
     },
     foodAnchors: ["dotonbori"],
+    stay: osakaStay,
     blocks: [
       {
         time: "מוקדם",
@@ -1023,7 +1734,57 @@ export const tripDays: TripDay[] = [
         title: "פושימי אינארי ← נמבה ברכבת רגילה",
         placeIds: ["namba-base"],
         detail:
-          "ברירת המחדל היא JR/Metro או Keihan, לא שינקנסן. אם המסלול החי עובר בתחנת קיוטו: JR Inari ← Kyoto ← Special Rapid לאוסקה/Umeda ← Midosuji לנמבה. אם המלון הסופי הופך את Keihan מפושימי למהיר יותר — בוחרים בו. מורידים מזוודות לפני Den Den Town ואוספים את הגדולות אם שוגרו.",
+          "ברירת המחדל היא JR/Metro או Keihan, לא שינקנסן. אם המלון הסופי הופך את Keihan מפושימי למהיר יותר — בוחרים בו. מורידים מזוודות לפני Den Den Town ואוספים את הגדולות אם שוגרו.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "JR אינארי", en: "JR Inari", ja: "JR稲荷駅" },
+            to: { he: "תחנת קיוטו", en: "Kyoto Station", ja: "京都駅" },
+            line: { he: "JR נארה", en: "JR Nara Line", ja: "JR奈良線" },
+            direction: { he: "לכיוון קיוטו", en: "toward Kyoto" },
+            durationMin: 5,
+            fareYen: 150,
+            fareNote: "IC",
+          },
+          {
+            mode: "train",
+            from: { he: "תחנת קיוטו", en: "Kyoto Station", ja: "京都駅" },
+            to: { he: "אוסקה / אומדה", en: "Osaka / Umeda", ja: "大阪駅" },
+            line: { he: "JR קיוטו · Special Rapid", en: "JR Kyoto Line Special Rapid", ja: "JR京都線 新快速" },
+            direction: { he: "לכיוון אוסקה / הימג׳י", en: "toward Osaka / Himeji" },
+            durationMin: 29,
+            fareYen: 580,
+            fareNote: "IC · בלי תוספת אקספרס",
+            gotcha:
+              "לא לקנות שינקנסן מתוך הרגל. השינקנסן חוסך 14 דקות ועולה ¥870 יותר לאדם — ¥3,480 למשפחה — ומגיע לשין־אוסקה, שרחוקה יותר מנמבה.",
+          },
+          {
+            mode: "subway",
+            from: { he: "אומדה", en: "Umeda", ja: "梅田駅" },
+            to: { he: "נמבה", en: "Namba", ja: "難波駅" },
+            line: { he: "מידוסוג׳י", en: "Osaka Metro Midosuji Line", ja: "大阪メトロ御堂筋線" },
+            direction: { he: "לכיוון נקמוזו", en: "toward Nakamozu" },
+            durationMin: 9,
+            fareYen: 240,
+            fareNote: "IC · מפעיל נפרד",
+            transferNote: "יוצאים משערי JR באוסקה ונכנסים לשערי Osaka Metro באומדה.",
+          },
+        ],
+        costs: [
+          {
+            label: "פושימי ← נמבה ברכבת רגילה",
+            yen: 970,
+            basis: "person",
+            note: "JR + Osaka Metro. השינקנסן היה מוסיף ¥870 לאדם ללא רווח דלת־לדלת",
+          },
+        ],
+        links: [
+          {
+            label: "JR West · מסלולים ולוחות זמנים",
+            url: "https://www.westjr.co.jp/travel-information/en/plan-your-trip/routes-schedule/",
+            kind: "timetable",
+          },
+        ],
         booking: {
           label: "לינה 13–15.10 · עדיין לא הוזמן",
           url: "https://www.eslead-hotel.com/en/namba-east/",
@@ -1082,6 +1843,7 @@ export const tripDays: TripDay[] = [
     lng: 135.4323,
     highlights: ["כניסה מוקדמת לאזור נינטנדו", "Mario Kart", "Mine Cart Madness", "Frieren או One Piece"],
     note: "לא לוויתור: מוצר ה־Express חייב לציין במפורש את מתקני נינטנדו הרצויים ואת הכניסה לאזור — השמות מתחלפים.",
+    stay: osakaStay,
     blocks: [
       {
         time: "לפני השער",
@@ -1089,6 +1851,45 @@ export const tripDays: TripDay[] = [
         placeIds: [],
         detail:
           "Studio Pass ו־Express הם מוצרים נפרדים. לרשום את ה־Studio Pass באפליקציה הרשמית ולהגיע 60–90 דקות לפני הפתיחה המפורסמת — USJ עשוי להתחיל להכניס מוקדם יותר.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "נמבה", en: "Namba", ja: "難波駅" },
+            to: { he: "אוסקה / אומדה", en: "Osaka / Umeda", ja: "大阪駅" },
+            line: { he: "מידוסוג׳י", en: "Osaka Metro Midosuji Line", ja: "大阪メトロ御堂筋線" },
+            direction: { he: "לכיוון סנרי־צ׳ואו", en: "toward Senri-Chuo" },
+            durationMin: 9,
+            fareYen: 240,
+            fareNote: "IC",
+          },
+          {
+            mode: "train",
+            from: { he: "אוסקה", en: "Osaka", ja: "大阪駅" },
+            to: { he: "Universal City", en: "Universal City", ja: "ユニバーサルシティ駅" },
+            line: { he: "JR יומיגאוקה ואז Sakurajima", en: "JR Yumesaki (Sakurajima) Line", ja: "JRゆめ咲線" },
+            direction: { he: "החלפה בנישי־קוג׳ימה", en: "change at Nishikujo" },
+            durationMin: 17,
+            fareYen: 190,
+            fareNote: "IC",
+          },
+          {
+            mode: "walk",
+            from: { he: "Universal City", en: "Universal City", ja: "ユニバーサルシティ駅" },
+            to: { he: "שערי USJ", en: "USJ main gate" },
+            durationMin: 5,
+          },
+        ],
+        costs: [
+          { label: "נסיעות הלוך וחזור", yen: 860, basis: "person" },
+        ],
+        needs: [
+          "שני קודי QR נפרדים — Studio Pass ו־Express הם מוצרים שונים",
+          "האפליקציה הרשמית של USJ עם ה־Studio Pass רשום בתוכה",
+        ],
+        warnings: [
+          "להגיע 60–90 דקות לפני הפתיחה המפורסמת — USJ עשוי להתחיל להכניס מוקדם יותר.",
+          "ה־Express חייב לציין במפורש כניסה מתוזמנת ל־Super Nintendo World. בלי זה הוא לא מבטיח את האזור.",
+        ],
         booking: {
           label: "Studio Pass + Express שמציין את נינטנדו",
           url: "https://www.usj.co.jp/web/en/us/tickets",
@@ -1159,6 +1960,7 @@ export const tripDays: TripDay[] = [
     lng: 135.7842,
     highlights: ["זכינו — 14:30–15:00", "לשלם עד 7.8", "דרכונים בתיק", "נוזומי שמור לטוקיו"],
     note: "זכינו בהגרלה, אבל עוד לא שילמנו: יש זמן עד 7.8 בשעה 23:59 שעון יפן, אחרת הזכייה נמחקת. החריץ שהוקצה הוא 14:30–15:00 ואי אפשר לשנות אותו, ולכן היום בנוי מחדש — בוקר רגוע באוסקה, מוזיאון אחר הצהריים, והגעה לטוקיו סביב 20:00–20:30. לא לקבוע שום דבר לערב הזה.",
+    stay: finalTokyoStay,
     blocks: [
       {
         time: "עד 7.8",
@@ -1184,7 +1986,57 @@ export const tripDays: TripDay[] = [
         title: "יוצאים לאוג׳י",
         placeIds: ["namba-base"],
         detail:
-          "אוסקה ← אוג׳י כשעה. עדיף להקדים: חלון הכניסה הוא שלושים דקות בלבד והכרטיס לא תקף מחוצה לו. לוקחים את כל ארבעת הדרכונים — ייתכן אימות זהות למבקרים מחו״ל.",
+          "אוסקה ← אוג׳י כשעה. עדיף להקדים: חלון הכניסה הוא שלושים דקות בלבד והכרטיס לא תקף מחוצה לו.",
+        legs: [
+          {
+            mode: "subway",
+            from: { he: "נמבה", en: "Namba", ja: "難波駅" },
+            to: { he: "אומדה", en: "Umeda", ja: "梅田駅" },
+            line: { he: "מידוסוג׳י", en: "Osaka Metro Midosuji Line", ja: "大阪メトロ御堂筋線" },
+            direction: { he: "לכיוון סנרי־צ׳ואו", en: "toward Senri-Chuo" },
+            durationMin: 9,
+            fareYen: 240,
+            fareNote: "IC",
+          },
+          {
+            mode: "train",
+            from: { he: "אוסקה", en: "Osaka", ja: "大阪駅" },
+            to: { he: "תחנת קיוטו", en: "Kyoto Station", ja: "京都駅" },
+            line: { he: "JR קיוטו · Special Rapid", en: "JR Kyoto Line Special Rapid", ja: "JR京都線 新快速" },
+            direction: { he: "לכיוון קיוטו", en: "toward Kyoto" },
+            durationMin: 29,
+            fareYen: 580,
+            fareNote: "IC",
+          },
+          {
+            mode: "train",
+            from: { he: "תחנת קיוטו", en: "Kyoto Station", ja: "京都駅" },
+            to: { he: "JR אוגורה", en: "JR Ogura", ja: "JR小倉駅" },
+            line: { he: "JR נארה", en: "JR Nara Line", ja: "JR奈良線" },
+            direction: { he: "לכיוון נארה", en: "toward Nara" },
+            durationMin: 20,
+            fareYen: 240,
+            fareNote: "IC",
+            exit: { he: "היציאה הצפונית", en: "North Exit", ja: "北出口" },
+            gotcha:
+              "יורדים באוגורה, לא באוג׳י. המוזיאון יושב ב־Ogura-cho ותחנת אוג׳י רחוקה ממנו כשלושה ק״מ — זו טעות קלה לעשות כי העיר היא אוג׳י.",
+          },
+          {
+            mode: "walk",
+            from: { he: "JR אוגורה", en: "JR Ogura", ja: "JR小倉駅" },
+            to: { he: "Nintendo Museum", en: "Nintendo Museum", ja: "ニンテンドーミュージアム" },
+            durationMin: 8,
+          },
+        ],
+        costs: [{ label: "נמבה ← אוגורה", yen: 1060, basis: "person" }],
+        needs: [
+          "כל ארבעת הדרכונים — ייתכן אימות זהות למבקרים מחו״ל בכניסה למוזיאון",
+          "אישור התשלום של הכרטיסים, שמור אופליין",
+        ],
+        warnings: [
+          "המזוודות לא באות לאוג׳י. שילוח ימאטו לדירה בטוקיו או לוקרים בשין־אוסקה — מחליטים עד 13.10.",
+          "חלון הכניסה 14:30–15:00 אינו ניתן לשינוי. איחור = אין כניסה.",
+        ],
       },
       {
         time: "14:30–15:00",
@@ -1195,10 +2047,44 @@ export const tripDays: TripDay[] = [
       },
       {
         time: "17:30–18:00",
-        title: "אוג׳י ← קיוטו ← טוקיו בנוזומי שמור",
+        title: "אוגורה ← קיוטו ← טוקיו בנוזומי שמור",
         placeIds: ["kyoto-station"],
         detail:
           "מגיעים לטוקיו סביב 20:00–20:30. להזמין מקומות שמורים מראש — ארבעה מקומות לא שמורים בנוזומי של יום חמישי בערב עם מזוודות זה סוף רע ליום הזה.",
+        legs: [
+          {
+            mode: "train",
+            from: { he: "JR אוגורה", en: "JR Ogura", ja: "JR小倉駅" },
+            to: { he: "תחנת קיוטו", en: "Kyoto Station", ja: "京都駅" },
+            line: { he: "JR נארה", en: "JR Nara Line", ja: "JR奈良線" },
+            direction: { he: "לכיוון קיוטו", en: "toward Kyoto" },
+            durationMin: 20,
+            fareYen: 240,
+            fareNote: "IC",
+          },
+          {
+            mode: "train",
+            from: { he: "תחנת קיוטו", en: "Kyoto Station", ja: "京都駅" },
+            to: { he: "תחנת טוקיו", en: "Tokyo Station", ja: "東京駅" },
+            line: { he: "שינקנסן נוזומי", en: "Nozomi Shinkansen", ja: "新幹線のぞみ" },
+            direction: { he: "לכיוון טוקיו", en: "toward Tokyo" },
+            durationMin: 140,
+            fareYen: 14170,
+            fareNote: "מושב שמור · כרטיס נפרד",
+          },
+        ],
+        costs: [
+          { label: "אוג׳י ← קיוטו", yen: 240, basis: "person" },
+          {
+            label: "נוזומי קיוטו ← טוקיו · מושב שמור",
+            yen: 14170,
+            basis: "person",
+            note: "הערכה — לאמת בהזמנה בפועל",
+          },
+        ],
+        warnings: [
+          "להזמין מקום למזוודה גדולה יחד עם המושבים, אם המזוודות נוסעות איתנו ולא שוגרו.",
+        ],
       },
       {
         time: "ערב",
@@ -1243,6 +2129,7 @@ export const tripDays: TripDay[] = [
     ],
     note: "תלות בלינה: הדירה באואנו/אינאריצ׳ו היא עדיין ליד ולא הזמנה. אם היא נסגרת — שתי דקות לאינאריצ׳ו, קו גינזה ישיר לניהונבאשי בכ־10–12 דקות ויציאה B2. אם נבחרת לינה אחרת — שומרים על סדר היום ומחשבים מחדש רק את הרגליים הקצרות.",
     foodAnchors: ["pokemon-cafe", "tokyo-ramen-street"],
+    stay: finalTokyoStay,
     blocks: [
       {
         time: "10:30–11:00",
@@ -1250,6 +2137,44 @@ export const tripDays: TripDay[] = [
         placeIds: ["pokemon-cafe", "pokemon-center-tokyo-dx"],
         detail:
           "מגיעים 15 דקות מוקדם ומקצים 90 דקות. Pokémon Center Tokyo DX נמצא באותו בניין. אין עמלת הזמנה לגיטימית — אף פעם לא משלמים לספסר.",
+        legs: [
+          {
+            mode: "walk",
+            from: { he: "הבסיס באואנו/אינאריצ׳ו", en: "Ueno / Inaricho base" },
+            to: { he: "אינאריצ׳ו", en: "Inaricho", ja: "稲荷町駅" },
+            durationMin: 2,
+          },
+          {
+            mode: "subway",
+            from: { he: "אינאריצ׳ו", en: "Inaricho", ja: "稲荷町駅" },
+            to: { he: "ניהונבאשי", en: "Nihombashi", ja: "日本橋駅" },
+            line: { he: "טוקיו מטרו · גינזה", en: "Tokyo Metro Ginza Line", ja: "東京メトロ銀座線" },
+            direction: { he: "לכיוון שיבויה", en: "toward Shibuya" },
+            durationMin: 11,
+            fareYen: 178,
+            fareNote: "IC · ישיר, בלי החלפות",
+            exit: { he: "יציאה B2", en: "Exit B2" },
+          },
+        ],
+        costs: [
+          {
+            label: "נסיעות היום",
+            yen: 534,
+            basis: "person",
+            note: "שלוש נסיעות גינזה. כרטיס מטרו יומי ב־¥700 לא משתלם היום",
+          },
+        ],
+        needs: ["אישור ההזמנה של הקפה, אם היא נסגרה — עם השעה המדויקת"],
+        warnings: [
+          "אין עמלת הזמנה לגיטימית לקפה. לא משלמים לספסר בשום מצב.",
+        ],
+        links: [
+          {
+            label: "Tokyo Metro · מחירים",
+            url: "https://www.tokyometro.jp/lang_en/ticket/types/regular/index.html",
+            kind: "official",
+          },
+        ],
         booking: {
           label: "מועד ההזמנות לאוקטובר טרם הוכרז",
           url: "https://www.pokemon-cafe.jp/en/cafe/news/",
@@ -1275,7 +2200,42 @@ export const tripDays: TripDay[] = [
         title: "Taiko-kan בנישי־אסאקוסה",
         placeIds: ["taiko-kan"],
         detail:
-          "להגיע סביב 14:00 ולפני הכניסה האחרונה הרשמית ב־15:00. המוזיאון פתוח בשישי 11:00–16:00, ועל כלים מסומנים מותר לנגן. כלל תזמון: עם הזמנת קפה של 10:30–11:00 הסדר הוא קפה ← First Avenue ← Taiko-kan; עם הזמנה מאוחרת יותר מגיעים ל־Taiko-kan בפתיחה ב־11:00 וחוזרים לניהונבאשי/First Avenue אחר כך.",
+          "המוזיאון פתוח בשישי 11:00–16:00, ועל כלים מסומנים מותר לנגן. כלל תזמון: עם הזמנת קפה של 10:30–11:00 הסדר הוא קפה ← First Avenue ← Taiko-kan; עם הזמנה מאוחרת יותר מגיעים ל־Taiko-kan בפתיחה ב־11:00 וחוזרים לניהונבאשי/First Avenue אחר כך.",
+        legs: [
+          {
+            mode: "walk",
+            from: { he: "תחנת טוקיו · First Avenue", en: "Tokyo Station First Avenue" },
+            to: { he: "ניהונבאשי", en: "Nihombashi", ja: "日本橋駅" },
+            durationMin: 8,
+            transferNote: "חוזרים ברגל לניהונבאשי — זה המסלול הזול.",
+          },
+          {
+            mode: "subway",
+            from: { he: "ניהונבאשי", en: "Nihombashi", ja: "日本橋駅" },
+            to: { he: "טווארמאצ׳י", en: "Tawaramachi", ja: "田原町駅" },
+            line: { he: "טוקיו מטרו · גינזה", en: "Tokyo Metro Ginza Line", ja: "東京メトロ銀座線" },
+            direction: { he: "לכיוון אסאקוסה", en: "toward Asakusa" },
+            durationMin: 12,
+            fareYen: 178,
+            fareNote: "IC · ישיר",
+          },
+          {
+            mode: "walk",
+            from: { he: "טווארמאצ׳י", en: "Tawaramachi", ja: "田原町駅" },
+            to: { he: "Taiko-kan", en: "Taiko-kan", ja: "太鼓館" },
+            durationMin: 5,
+          },
+        ],
+        warnings: [
+          "כניסה אחרונה 15:00 — זו הדדליין הקשיחה של היום. אם נשארות פחות מ־45 דקות אחרי First Avenue, לוקחים מונית מדודה מתחנת טוקיו (כ־¥1,800–2,500) במקום את הגינזה.",
+        ],
+        links: [
+          {
+            label: "Tokyo Station First Avenue",
+            url: "https://www.tokyoeki-1bangai.co.jp/en/",
+            kind: "official",
+          },
+        ],
         booking: {
           label: "שעות המוזיאון הרשמיות",
           url: "https://www.miyamoto-unosuke.co.jp/pages/museum",
@@ -1371,7 +2331,37 @@ export const tripDays: TripDay[] = [
         title: "Skyliner מ־Keisei-Ueno",
         placeIds: ["keisei-ueno"],
         detail:
-          "להזמין כשהמכירה נפתחת חודש לפני, ואז לאמת את הלוח והטרמינל המדויקים. ¥2,580 לאדם / ¥10,320 למשפחה. אם המזוודות לא מתגלגלות בנוח — מונית קצרה, ואולי שתיים.",
+          "להזמין כשהמכירה נפתחת חודש לפני, ואז לאמת את הלוח והטרמינל המדויקים.",
+        legs: [
+          {
+            mode: "taxi",
+            from: { he: "הבסיס באואנו/אינאריצ׳ו", en: "Ueno / Inaricho base" },
+            to: { he: "קייסיי־אואנו", en: "Keisei-Ueno", ja: "京成上野駅" },
+            durationMin: 8,
+            fareNote: "מונית מדודה · או 15–20 דקות הליכה אם המזוודות מתגלגלות בנוח",
+            gotcha:
+              "מונית רגילה אחת לא בהכרח מכילה ארבעה אנשים וארבע מזוודות גדולות — לתכנן שתי מוניות או רכב גדול.",
+          },
+          {
+            mode: "train",
+            from: { he: "קייסיי־אואנו", en: "Keisei-Ueno", ja: "京成上野駅" },
+            to: {
+              he: "נריטה טרמינל 1",
+              en: "Narita Airport Terminal 1",
+              ja: "成田空港第1ターミナル駅",
+            },
+            line: { he: "קייסיי סקיילינר", en: "Keisei Skyliner", ja: "京成スカイライナー" },
+            depart: "15:45–16:00",
+            durationMin: 44,
+            fareYen: 2580,
+            fareNote: "מושב שמור · להזמין מראש",
+          },
+        ],
+        costs: [{ label: "Skyliner לנריטה", yen: 2580, basis: "person" }],
+        warnings: [
+          "הטיסה יוצאת מטרמינל 1. היעד הוא להיות בטרמינל סביב 16:45–17:15 לטיסה של 20:40.",
+          "לאמת את לוח הזמנים ואת הטרמינל ביום עצמו — לא להסתמך על התכנון מלפני חודש.",
+        ],
         booking: {
           label: "מכירה נפתחת חודש לפני הנסיעה",
           url: "https://new-www.keisei.co.jp/keisei/tetudou/skyliner/us/skyliner/purchase.php",

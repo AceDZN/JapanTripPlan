@@ -1,254 +1,254 @@
-# 03 — Transport for the Complete Route
+# 03 — תחבורה למסלול המלא
 
-**Family:** 4 adult rail fares. The son is 12 during the trip.
-**Principle:** use IC cards for city travel, reserved tickets for airport/intercity trains, and no nationwide JR Pass.
+**המשפחה:** 4 כרטיסי רכבת בתעריף מבוגר. הבן בן 12 בזמן הטיול.
+**העיקרון:** כרטיסי IC לנסיעות בעיר, כרטיסים שמורים לרכבות שדה תעופה ובין־עירוניות, ובלי JR Pass ארצי.
 
-## Before Buying Anything
+## לפני שקונים משהו
 
-Save the exact addresses and offline last-mile directions for:
+לשמור את הכתובות המדויקות ואת הוראות ה״קילומטר האחרון״ אופליין עבור:
 
-1. booked Tabata stay, Oct 2–11;
-2. booked Fushimi Inari stay, Oct 11–13;
-3. Osaka stay, Oct 13–15;
-4. Tokyo stay, Oct 15–17.
+1. הלינה המוזמנת בטבטה (田端), 2–11.10;
+2. הלינה המוזמנת בפושימי אינארי (伏見稲荷), 11–13.10;
+3. הלינה באוסקה, 13–15.10;
+4. הלינה בטוקיו, 15–17.10.
 
-The first Tokyo stay is confirmed in **Tabata**, not Ueno. Never reuse “walk back to Ueno” or Ueno-origin timing for Oct 2–11.
+הלינה הראשונה בטוקיו סגורה ב**טבטה**, לא באואנו. אף פעם לא להשתמש שוב ב״הליכה חזרה לאואנו״ או בתזמונים שמוצאם באואנו עבור 2–11.10.
 
-## Airport Transfers
+## מעברי שדה תעופה
 
-### Arrival — Oct 2
+### הגעה — 2.10
 
-Flight arrival is 19:40, so keep the route flexible:
+הנחיתה ב־19:40, ולכן שומרים על גמישות במסלול:
 
-- After immigration and bags, buy four adult **TOURIST PASMO** cards at the SKYLINER & KEISEI INFORMATION CENTER in the Terminal 1 or Terminal 2 station. Each costs JPY 2,000 with the full JPY 2,000 available as stored value, has no service charge/deposit and remains valid for 28 days. Keep each card’s reference paper with it. The unused balance is not refundable, so reload in small amounts. [Official TOURIST PASMO purchase points and terms](https://www.pasmo.co.jp/tourist-pasmo/)
-- Buy the next practical combined-fare **Skyliner** ticket to **Nippori** only after collecting the bags; do not reserve an arrival train that a flight delay could invalidate. All seats are reserved. The combined paper fare is JPY 2,580 per person and major credit cards are accepted at the Skyliner machine/counter. [Official purchase guide](https://new-www.keisei.co.jp/keisei/tetudou/skyliner/us/skyliner/purchase.php) · [official fare explanation](https://new-www.keisei.co.jp/keisei/tetudou/skyliner/us/faq/index.php)
-- At Nippori, leave the Keisei gates with the Skyliner ticket, follow signs to JR, then tap PASMO into the JR Yamanote/Keihin-Tohoku service for the one-stop ride to Tabata. The revised JR IC fare is JPY 155. Expected family rail cost: **JPY 10,940**.
-- Use a direct airport bus or taxi only when late baggage clearance, exhausted children or a difficult self-check-in make the extra cost worthwhile.
+- אחרי ההגירה והמזוודות, קונים ארבעה כרטיסי **TOURIST PASMO** למבוגר ב־SKYLINER & KEISEI INFORMATION CENTER שבתחנת טרמינל 1 או טרמינל 2. כל כרטיס עולה ¥2,000 והסכום כולו זמין כערך צבור, בלי דמי שירות ובלי פיקדון, ותקף 28 יום. לשמור את פתק ההפניה של כל כרטיס יחד איתו. היתרה שלא נוצלה אינה ניתנת להחזר, ולכן טוענים בסכומים קטנים. [נקודות מכירה ותנאים רשמיים של TOURIST PASMO](https://www.pasmo.co.jp/tourist-pasmo/)
+- קונים את הכרטיס המשולב ל־**Skyliner** אל **ניפורי** (日暮里) רק אחרי איסוף המזוודות; לא מזמינים מראש רכבת שעיכוב בטיסה יכול לבטל. כל המושבים שמורים. המחיר המשולב בנייר הוא ¥2,580 לאדם, וכרטיסי האשראי הגדולים מתקבלים במכונה ובדלפק. [מדריך רכישה רשמי](https://new-www.keisei.co.jp/keisei/tetudou/skyliner/us/skyliner/purchase.php) · [הסבר רשמי על התעריף](https://new-www.keisei.co.jp/keisei/tetudou/skyliner/us/faq/index.php)
+- בניפורי יוצאים משערי Keisei עם כרטיס ה־Skyliner, עוקבים אחרי השילוט ל־JR, ומעבירים PASMO בקו Yamanote/Keihin-Tohoku לנסיעה של תחנה אחת לטבטה. תעריף ה־IC המעודכן של JR הוא ¥155. עלות הרכבות הצפויה למשפחה: **¥10,940**.
+- אוטובוס ישיר או מונית רק כאשר שחרור מזוודות מתמשך, ילדים גמורים או צ׳ק־אין עצמי מסובך הופכים את התוספת למשתלמת.
 
-Do not pre-plan sightseeing. Send the host an arrival message after landing and follow the lockbox instructions saved in Airbnb.
+לא לתכנן סיורים. לשלוח למארח הודעת הגעה אחרי הנחיתה ולפעול לפי הוראות הלוקבוקס ששמורות ב־Airbnb.
 
-### Departure — Oct 17
+### יציאה — 17.10
 
-- Keep the day local.
-- Collect luggage by 15:15.
-- If the current Inaricho apartment lead is booked, take a short metered taxi to **Keisei-Ueno** if the luggage will not roll comfortably for 15–20 minutes. One ordinary taxi may not hold four people plus four large cases; use forwarded luggage, a larger vehicle or two taxis if needed. If a different final stay is chosen, recalculate this feeder leg before reserving the airport train.
-- Reserve a Skyliner around 15:45–16:00 when sales open one month before travel, then recheck the exact Oct 17 timetable and terminal. The combined fare is JPY 2,580 each / **JPY 10,320 for four**.
-- Target the correct Narita terminal by roughly 16:45–17:15 for the 20:40 flight.
+- לשמור על היום מקומי.
+- לאסוף את המזוודות עד 15:15.
+- אם הליד הנוכחי באינאריצ׳ו (稲荷町) ייסגר, לקחת מונית מדודה קצרה ל־**Keisei-Ueno** (京成上野) אם המזוודות לא מתגלגלות בנוחות ל־15–20 דקות הליכה. מונית רגילה אחת לא בהכרח מכילה ארבעה אנשים וארבע מזוודות גדולות; להשתמש בשילוח מזוודות, ברכב גדול יותר או בשתי מוניות לפי הצורך. אם נבחרת לינה סופית אחרת — לחשב מחדש את הקטע המזין הזה לפני שמזמינים את רכבת השדה.
+- להזמין Skyliner סביב 15:45–16:00 כשהמכירה נפתחת חודש לפני הנסיעה, ואז לבדוק שוב את הלוח המדויק ואת הטרמינל ל־17.10. התעריף המשולב הוא ¥2,580 לאדם / **¥10,320 לארבעה**.
+- להגיע לטרמינל הנכון בנריטה סביב 16:45–17:15 לטיסה של 20:40.
 
-Check terminal and train status on the day.
+לבדוק טרמינל וסטטוס רכבות ביום עצמו.
 
-## IC Cards
+## כרטיסי IC
 
-- Use **one physical TOURIST PASMO per traveler**. All four travelers pay adult rail fares; a card cannot be shared through a gate.
-- Use PASMO for ordinary JR, Tokyo Metro, Toei, Keio, Tokyu, Odakyu, Enoden, Yurikamome and local-bus rides. The same cards continue to work in Kyoto/Uji and Osaka.
-- Start with the included JPY 2,000. Add roughly JPY 5,000 per card on Oct 3, then reload JPY 1,000–2,000 at a time before Kamakura and Kansai. Physical IC-card reloads are most reliably done with cash at station machines or convenience-store counters.
-- Always tap **in and out**. When changing operators—JR to Keio at Shinjuku, JR to Yurikamome at Shimbashi, JR to Tokyu at Oimachi—exit one company’s gates and enter the next company’s gates.
-- Do not tap PASMO when using a separate paper/QR day pass. Use only the pass at that operator’s gates.
-- A bank card’s contactless transit feature is not the family default: coverage is still less universal than PASMO and does not remove the need for separate reserved/limited-express tickets.
-- Keep cash for IC reloads and small ticket machines. Pay Skyliner and Shinkansen reservations separately by credit card.
+- **TOURIST PASMO פיזי אחד לכל נוסע.** כל ארבעת הנוסעים משלמים תעריף מבוגר; אי אפשר לחלוק כרטיס דרך שער.
+- להשתמש ב־PASMO ל־JR רגיל, Tokyo Metro, Toei, Keio, Tokyu, Odakyu, Enoden, Yurikamome ואוטובוסים מקומיים. אותם כרטיסים ממשיכים לעבוד בקיוטו/אוג׳י ובאוסקה.
+- מתחילים עם ה־¥2,000 הכלולים. להוסיף כ־¥5,000 לכרטיס ב־3.10, ואז לטעון ¥1,000–2,000 בכל פעם לפני קמקורה ולפני קנסאי. טעינת כרטיס IC פיזי מתבצעת בצורה האמינה ביותר במזומן, במכונות בתחנה או בדלפקי קונביני.
+- תמיד להעביר **בכניסה וביציאה**. כשמחליפים מפעיל — JR ל־Keio בשינג׳וקו, JR ל־Yurikamome בשימבאשי, JR ל־Tokyu באואימאצ׳י — יוצאים משערי חברה אחת ונכנסים לשערי החברה הבאה.
+- לא להעביר PASMO כשמשתמשים בכרטיס יומי נפרד מנייר או QR. בשערי אותו מפעיל משתמשים רק בכרטיס היומי.
+- תשלום contactless בכרטיס בנק אינו ברירת המחדל המשפחתית: הכיסוי עדיין פחות אוניברסלי מ־PASMO, והוא לא מייתר כרטיסים שמורים או כרטיסי אקספרס נפרדים.
+- לשמור מזומן לטעינות IC ולמכונות כרטיסים קטנות. את ההזמנות של Skyliner ושל השינקנסן משלמים בנפרד בכרטיס אשראי.
 
-JR East changed its fare structure on **March 14, 2026**. The amounts below use the new fares, not older Tokyo guides. [Official JR East revision](https://www.jreast.co.jp/2026unchin-kaitei/) · [current fare bands](https://www.jreast.co.jp/2026unchin-kaitei/pamphlet/pageindices/index18.html)
+JR East שינתה את מבנה התעריפים ב־**14 במרץ 2026**. הסכומים כאן משתמשים בתעריפים החדשים, לא במדריכי טוקיו הישנים. [עדכון התעריפים הרשמי של JR East](https://www.jreast.co.jp/2026unchin-kaitei/) · [טבלאות התעריפים הנוכחיות](https://www.jreast.co.jp/2026unchin-kaitei/pamphlet/pageindices/index18.html)
 
-## Tokyo Base-to-Place Operating Sheet
+## גיליון תפעול: מהבסיס בטוקיו לכל מקום
 
-Times below are sensible **leave-the-apartment windows**, not train reservations. Check the live route after breakfast and add the private walk from the Airbnb to its station. Costs are current planning totals per adult and for the family of four; a different gate, an extra stop or exiting during a transfer can change a total slightly.
+השעות שלמטה הן **חלונות יציאה הגיוניים מהדירה**, לא הזמנות רכבת. לבדוק את המסלול החי אחרי ארוחת הבוקר ולהוסיף את ההליכה הפרטית מהדירה לתחנה שלה. העלויות הן סיכומי תכנון נוכחיים לכל מבוגר ולמשפחה של ארבעה; שער אחר, תחנה נוספת או יציאה באמצע החלפה יכולים לשנות סכום במעט.
 
-| Date | Leave base | Exact route structure | What to use / buy | Approx. fare |
+| תאריך | יציאה מהבסיס | מבנה המסלול המדויק | מה להשתמש / לקנות | תעריף משוער |
 |---|---:|---|---|---:|
-| **Oct 3 · Akihabara/Ochanomizu** | 09:00 | Tabata → direct JR Yamanote or Keihin-Tohoku toward Ueno/Tokyo → Akihabara. Walk to Ochanomizu; return by JR through Akihabara or walk back to Akihabara first. | PASMO only | **JPY 398 pp / 1,592 family** |
-| **Oct 4 · teamLab/Pixar/Odaiba** | **08:15 for the booked 09:30–10:00 teamLab entry** | Tabata → JR direct to Shimbashi → Yurikamome to Shin-Toyosu → Shijō-mae → Daiba/Odaiba → Shimbashi → JR to Tabata. Target Shin-Toyosu by about 09:15; do not use the congested public buses from Tokyo Station/Ginza/Tsukiji. | PASMO on JR. Before the first Yurikamome ride, buy its **JPY 820 one-day pass** at Shimbashi; it is cheaper than these four planned Yurikamome legs. [Official pass/fare](https://www.yurikamome.co.jp/en/ride-guidance/fare.html) | **JPY 1,238 pp / 4,952 family** |
-| **Oct 5 · PokéPark/Yomiuriland** | 08:45–09:00 | Tabata → JR Yamanote toward Ikebukuro/Shinjuku → Shinjuku. Exit JR; enter **Keio Line**, use an express to Chofu, then the Sagamihara Line to Keio-yomiuri-land → gondola to the park. Reverse at night. | PASMO for JR + Keio. Keio is JPY 314 IC each way. Buy the **JPY 500 round-trip Sky Shuttle** ticket separately; it is not included in the park pass. [Official Keio fare](https://www.keio.co.jp/global/routes/stations/shinjuku/) · [official gondola fare](https://www.yomiuriland.com/en/charge/) | **JPY 1,546 pp / 6,184 family** |
-| **Oct 6 · Harajuku/Shibuya** | 08:00 | Tabata → direct JR Yamanote toward Ikebukuro/Shinjuku → Harajuku. Walk the day south to Shibuya; return Shibuya → direct JR Yamanote through Shinjuku/Ikebukuro → Tabata. | PASMO only | **JPY 506 pp / 2,024 family** |
-| **Oct 7 · Kamakura/Enoshima** | 07:30 | Tabata → JR via Tokyo/Shimbashi → Yokosuka/Tokaido connection to Kamakura, staying inside JR gates. At Kamakura use Enoden: Hase → Kamakurakōkōmae → Enoshima → Fujisawa. Return Fujisawa → JR Tokaido to Tokyo → Yamanote/Keihin-Tohoku to Tabata. | PASMO for JR. Buy the **JPY 800 Enoden Noriorikun** at Kamakura before the first Enoden ride. [Official pass](https://www.enoden.co.jp/en/tourism/ticket/noriorikun/) | **about JPY 2,604 pp / 10,416 family** |
-| **Oct 8 · Ghibli/Nakano/Shinjuku** | 08:35 for 10:00 entry | Tabata → JR Yamanote to Shinjuku → JR Chuo Rapid to Mitaka, without leaving JR gates. Bus or 15-minute walk to Ghibli; walk through the park to Kichijoji → JR Chuo to Nakano → JR to Shinjuku → Yamanote to Tabata. | PASMO only. Museum bus is JPY 230 adult. [Official museum access](https://www.ghibli-museum.jp/en/hours-and-directions/) | **about JPY 1,287 pp / 5,148 family** |
-| **Oct 9 · Todoroki/Setagaya/Shimokitazawa** | 08:00 | Tabata → direct JR Keihin-Tohoku to Oimachi → Tokyu Oimachi Line to Todoroki → Tokyu to Jiyūgaoka and Shibuya → Keio Inokashira to Shimokitazawa. Walk to Shiro-Hige/Setagaya-Daita/Hanegi where energy permits. Return Shimokitazawa → Odakyu to Shinjuku → JR to Tabata. | PASMO throughout, but expect separate charges each time an operator’s gates are crossed. | **about JPY 1,404 pp / 5,616 family** |
-| **Oct 10 · Tokyo Dome City** | After brunch | Tabata → JR to Akihabara → cross-platform/within-gates transfer to westbound Chuo-Sobu Local → Suidobashi. Reverse to return. If the projection is confirmed, walk to Kasuga → Toei Oedo to Tochomae → walk to JR Shinjuku → Tabata. | PASMO only | **JPY 418 pp / 1,672 family** without projection; **about JPY 596 pp / 2,384 family** with it |
-| **Oct 11 · Tokyo Station** | Set by the reserved Nozomi | Tabata → direct JR to Tokyo Station. Follow Shinkansen signs without leaving the station unnecessarily. | JPY 209 on PASMO for the local leg; reserved Shinkansen ticket separately | **JPY 209 pp / 836 family**, before Shinkansen |
+| **3.10 · אקיהברה/אוצ׳נומיזו** | 09:00 | טבטה ← JR Yamanote או Keihin-Tohoku ישיר לכיוון אואנו/טוקיו ← אקיהברה (秋葉原). הליכה לאוצ׳נומיזו (御茶ノ水); חזרה ב־JR דרך אקיהברה או הליכה חזרה לאקיהברה קודם. | PASMO בלבד | **¥398 לאדם / ¥1,592 למשפחה** |
+| **4.10 · teamLab/Pixar/אודאיבה** | **08:15 לכניסה המוזמנת 09:30–10:00 ב־teamLab** | טבטה ← JR ישיר לשימבאשי (新橋) ← Yurikamome לשין־טויוסו (新豊洲) ← Shijō-mae (市場前) ← Daiba/אודאיבה ← שימבאשי ← JR לטבטה. להגיע לשין־טויוסו בערך ב־09:15; לא להשתמש באוטובוסים הצפופים מתחנת טוקיו/גינזה/צוקיג׳י. | PASMO ב־JR. לפני הנסיעה הראשונה ב־Yurikamome קונים בשימבאשי את **הכרטיס היומי ב־¥820**; זה זול מארבע הנסיעות המתוכננות. [תעריף/כרטיס רשמי](https://www.yurikamome.co.jp/en/ride-guidance/fare.html) | **¥1,238 לאדם / ¥4,952 למשפחה** |
+| **5.10 · PokéPark/Yomiuriland** | 08:45–09:00 | טבטה ← JR Yamanote לכיוון איקבוקורו/שינג׳וקו ← שינג׳וקו (新宿). לצאת משערי JR ולהיכנס ל**קו Keio**, אקספרס לצ׳ופו (調布) ואז קו Sagamihara ל־Keio-yomiuri-land (京王よみうりランド) ← רכבל לפארק. הפוך בלילה. | PASMO ל־JR ול־Keio. Keio עולה ¥314 IC לכיוון. את **הרכבל Sky Shuttle ב־¥500 הלוך־חזור** קונים בנפרד; הוא אינו כלול בכרטיס הפארק. [תעריף Keio רשמי](https://www.keio.co.jp/global/routes/stations/shinjuku/) · [תעריף הרכבל הרשמי](https://www.yomiuriland.com/en/charge/) | **¥1,546 לאדם / ¥6,184 למשפחה** |
+| **6.10 · הרג׳וקו/שיבויה** | 08:00 | טבטה ← JR Yamanote ישיר לכיוון איקבוקורו/שינג׳וקו ← הרג׳וקו (原宿). הולכים את היום דרומה עד שיבויה (渋谷); חוזרים שיבויה ← JR Yamanote ישיר דרך שינג׳וקו/איקבוקורו ← טבטה. | PASMO בלבד | **¥506 לאדם / ¥2,024 למשפחה** |
+| **7.10 · קמקורה/אנושימה** | 07:30 | טבטה ← JR דרך טוקיו/שימבאשי ← חיבור Yokosuka/Tokaido לקמקורה (鎌倉), בלי לצאת משערי JR. בקמקורה משתמשים ב־Enoden: האסה (長谷) ← Kamakurakōkōmae (鎌倉高校前) ← אנושימה (江ノ島) ← פוג׳יסאווה (藤沢). חזרה: פוג׳יסאווה ← JR Tokaido לטוקיו ← Yamanote/Keihin-Tohoku לטבטה. | PASMO ל־JR. לקנות את **Enoden Noriorikun ב־¥800** בקמקורה לפני הנסיעה הראשונה. [הכרטיס הרשמי](https://www.enoden.co.jp/en/tourism/ticket/noriorikun/) | **כ־¥2,604 לאדם / ¥10,416 למשפחה** |
+| **8.10 · ג׳יבלי/נקאנו/שינג׳וקו** | 08:35 לכניסה של 10:00 | טבטה ← JR Yamanote לשינג׳וקו ← JR Chuo Rapid למיטאקה (三鷹), בלי לצאת משערי JR. אוטובוס או 15 דקות הליכה לג׳יבלי; הליכה דרך הפארק לקיצ׳יג׳וג׳י (吉祥寺) ← JR Chuo לנקאנו (中野) ← JR לשינג׳וקו ← Yamanote לטבטה. | PASMO בלבד. אוטובוס המוזיאון ¥230 למבוגר. [הגעה רשמית למוזיאון](https://www.ghibli-museum.jp/en/hours-and-directions/) | **כ־¥1,287 לאדם / ¥5,148 למשפחה** |
+| **9.10 · טודורוקי/סטגאיה/שימוקיטזאווה** | 08:00 | טבטה ← JR Keihin-Tohoku ישיר לאואימאצ׳י (大井町) ← קו Tokyu Oimachi לטודורוקי (等々力) ← Tokyu לג׳יוגאוקה (自由が丘) ולשיבויה ← Keio Inokashira לשימוקיטזאווה (下北沢). הליכה ל־Shiro-Hige/סטגאיה־דאיטה/Hanegi כשהאנרגיה מרשה. חזרה: שימוקיטזאווה ← Odakyu לשינג׳וקו ← JR לטבטה. | PASMO לכל אורך הדרך, אבל לצפות לחיוב נפרד בכל פעם שחוצים שערים של מפעיל. | **כ־¥1,404 לאדם / ¥5,616 למשפחה** |
+| **10.10 · Tokyo Dome City** | אחרי הבראנץ׳ | טבטה ← JR לאקיהברה ← החלפה בתוך השערים לקו Chuo-Sobu המקומי מערבה ← סואידובאשי (水道橋). הפוך בחזרה. אם ההקרנה מאושרת, הליכה ל־Kasuga (春日) ← Toei Oedo ל־Tochomae (都庁前) ← הליכה ל־JR שינג׳וקו ← טבטה. | PASMO בלבד | **¥418 לאדם / ¥1,672 למשפחה** בלי ההקרנה; **כ־¥596 לאדם / ¥2,384 למשפחה** איתה |
+| **11.10 · תחנת טוקיו** | נקבע לפי הנוזומי השמור | טבטה ← JR ישיר לתחנת טוקיו (東京駅). לעקוב אחרי שילוט השינקנסן בלי לצאת מהתחנה שלא לצורך. | ¥209 ב־PASMO לקטע המקומי; כרטיס שינקנסן שמור בנפרד | **¥209 לאדם / ¥836 למשפחה**, לפני השינקנסן |
 
-### Planned final Ueno/Inaricho lead — Oct 15–17
+### הליד המתוכנן לאואנו/אינאריצ׳ו — 15–17.10
 
-The apartment described here is the current accommodation lead, **not a confirmed booking**. These routes become operational only if that stay is booked; otherwise preserve the same day structure and recalculate the short base-to-station legs.
+הדירה המתוארת כאן היא הליד הנוכחי ללינה, **לא הזמנה סגורה**. המסלולים האלה הופכים מבצעיים רק אם הלינה הזו תיסגר; אחרת שומרים על אותו מבנה יום ומחשבים מחדש את הקטעים הקצרים מהבסיס לתחנה.
 
-- **Oct 15 arrival if this lead is booked:** if the family has large luggage, a taxi from Tokyo Station to the apartment is the lowest-friction choice; expect roughly JPY 2,500–3,500 total depending on traffic and the exact address. If traveling light, use JR Tokyo → Ueno and walk about nine minutes, or Metro Marunouchi Tokyo → Ginza and change to the Ginza Line for Inaricho. SmartEX fares do not automatically include the same conventional-line benefits as every paper long-distance ticket, so follow the actual ticket’s gate instructions rather than assuming the Ueno leg is free.
-- **Oct 16 outbound:** walk about two minutes to Inaricho and take the **Ginza Line direct to Nihombashi**—roughly 10–12 minutes, JPY 178 IC each. Walk to Tokyo Station First Avenue on the Yaesu side.
-- **Oct 16 First Avenue → Taiko-kan:** the cheap route is to walk back to Nihombashi Station and take the Ginza Line direct to **Tawaramachi**, JPY 178 IC each, then walk about five minutes. If the café/Character Street timing leaves less than 45 minutes before Taiko-kan’s 15:00 last admission, take a metered taxi from Tokyo Station instead; allow roughly JPY 1,800–2,500 total depending on traffic.
-- **Oct 16 return:** Taiko-kan → Senso-ji is a straightforward walk. From Senso-ji, walk roughly 20–25 minutes to the Inaricho apartment, or return to Tawaramachi and pay JPY 178 each for the one-stop Ginza Line ride to Inaricho. The public-transport baseline is **JPY 356–534 per person / JPY 1,424–2,136 for four**. A JPY 700 Tokyo Metro 24-hour ticket does not pay off. [Official Metro fares](https://www.tokyometro.jp/lang_en/ticket/types/regular/index.html) · [official 24-hour ticket price](https://www.tokyometro.jp/en/ticket/1day/index.html)
-- **Oct 17 airport:** taxi or walk to Keisei-Ueno, then the reserved Skyliner described above.
+- **הגעה ב־15.10 אם הליד ייסגר:** אם למשפחה יש מזוודות גדולות, מונית מתחנת טוקיו לדירה היא הבחירה עם הכי פחות חיכוך; לצפות לכ־¥2,500–3,500 בסך הכול, תלוי בעומס ובכתובת המדויקת. אם נוסעים קל — JR טוקיו ← אואנו והליכה של כתשע דקות, או Metro Marunouchi מטוקיו לגינזה והחלפה לקו Ginza לאינאריצ׳ו. תעריפי SmartEX לא כוללים אוטומטית את אותן הטבות בקווים הרגילים כמו כל כרטיס נייר למרחקים ארוכים, ולכן פועלים לפי הוראות השער של הכרטיס בפועל ולא מניחים שהקטע לאואנו חינם.
+- **יציאה ב־16.10:** הליכה של כשתי דקות לאינאריצ׳ו ואז **קו Ginza ישיר לניהונבאשי** (日本橋) — כ־10–12 דקות, ¥178 IC לאדם. הליכה ל־Tokyo Station First Avenue בצד Yaesu.
+- **16.10 מ־First Avenue ל־Taiko-kan:** המסלול הזול הוא הליכה חזרה לתחנת ניהונבאשי וקו Ginza ישיר ל**טווארמאצ׳י** (田原町), ¥178 IC לאדם, ואז כחמש דקות הליכה. אם תזמון הקפה/Character Street משאיר פחות מ־45 דקות לפני הכניסה האחרונה ב־15:00 ל־Taiko-kan — לקחת מונית מדודה מתחנת טוקיו במקום; לצפות לכ־¥1,800–2,500 בסך הכול, תלוי בעומס.
+- **חזרה ב־16.10:** מ־Taiko-kan לסנסו־ג׳י (浅草寺) זו הליכה פשוטה. מסנסו־ג׳י — כ־20–25 דקות הליכה לדירה באינאריצ׳ו, או חזרה לטווארמאצ׳י ו־¥178 לאדם לנסיעה של תחנה אחת בקו Ginza. בסיס התחבורה הציבורית הוא **¥356–534 לאדם / ¥1,424–2,136 לארבעה**. כרטיס 24 שעות של Tokyo Metro ב־¥700 אינו משתלם. [תעריפי Metro רשמיים](https://www.tokyometro.jp/lang_en/ticket/types/regular/index.html) · [מחיר הכרטיס ל־24 שעות](https://www.tokyometro.jp/en/ticket/1day/index.html)
+- **17.10 לשדה:** מונית או הליכה ל־Keisei-Ueno, ואז ה־Skyliner שתואר למעלה.
 
-### Tokyo transport envelope
+### מעטפת התחבורה בטוקיו
 
-Using the baseline routes above, allow approximately **JPY 15,300–15,500 per person / JPY 61,200–62,000 for four** for both Skyliner trips, Tokyo city rides, Yurikamome, Yomiuriland gondola and the Kamakura/Enoden day. This excludes taxis, Shinkansen, Kyoto/Osaka local transport and attraction admission. The DisneySea fallback is cheaper to reach than PokéPark: allow roughly JPY 700 per person round trip from Tabata by JR, versus about JPY 1,546 for the PokéPark rail-and-gondola route.
+לפי מסלולי הבסיס שלמעלה, להקצות כ־**¥15,300–15,500 לאדם / ¥61,200–62,000 לארבעה** עבור שתי נסיעות ה־Skyliner, נסיעות העיר בטוקיו, ה־Yurikamome, הרכבל ב־Yomiuriland ויום קמקורה/אנודן. זה לא כולל מוניות, שינקנסן, תחבורה מקומית בקיוטו/אוסקה וכניסות לאטרקציות. גיבוי ה־DisneySea זול יותר להגעה מ־PokéPark: להקצות כ־¥700 לאדם הלוך־חזור מטבטה ב־JR, מול כ־¥1,546 למסלול הרכבת־ורכבל של PokéPark.
 
-## Route Sheet
+## גיליון מסלולים
 
-| Day | Main route |
+| יום | המסלול הראשי |
 |---|---|
-| Oct 3 | Base → Akihabara/Ochanomizu → base |
-| Oct 4 | Base → Toyosu/Shin-Toyosu → Shijō-mae/CREVIA BASE for Mundo Pixar → Yurikamome to Odaiba → base |
-| Oct 5 | Base → Shinjuku → Keio-Yomiuriland → gondola/bus → reverse |
-| Oct 6 | Base → Harajuku/Meiji-jingumae → walk toward Shibuya → base |
-| Oct 7 | Base → Kamakura → Hase → Kamakurakōkōmae → Enoshima → Fujisawa → base |
-| Oct 8 | Base → Mitaka/Kichijoji → Nakano → Shinjuku → base |
-| Oct 9 | Base → Oimachi → Todoroki → Jiyūgaoka/Shibuya → Shimokitazawa/Setagaya-Daita → Hanegi Park → Shimokitazawa → base |
-| Oct 10 | Base → Suidobashi/Tokyo Dome City → optional Kasuga–Tochomae projection → base |
-| Oct 11 | Tabata → Tokyo Station → Kyoto Station storage → Miyagawacho → Awata → Fushimi Inari apartment |
-| Oct 12 | Fushimi Inari base → UZUMASA → base/rest → Kyoto Avanti → base |
-| Oct 13 | Fushimi Inari base → shrine lower gates → Yūzen at 09:30 → base/checkout → Kyoto/Shin-Osaka → Namba → Dotonbori |
-| Oct 14 | Namba → Universal City → same Namba hotel |
-| Oct 15 | Namba → Uji → Kyoto → Tokyo if Nintendo Museum succeeds; otherwise Namba → Shin-Osaka → Tokyo |
-| Oct 16 | Planned Ueno/Inaricho base → Nihonbashi → Tokyo Station First Avenue → Taiko-kan/Nishi-Asakusa → Senso-ji → base |
-| Oct 17 | Local morning → Narita |
+| 3.10 | בסיס ← אקיהברה/אוצ׳נומיזו ← בסיס |
+| 4.10 | בסיס ← טויוסו/שין־טויוסו ← Shijō-mae/CREVIA BASE ל־Mundo Pixar ← Yurikamome לאודאיבה ← בסיס |
+| 5.10 | בסיס ← שינג׳וקו ← Keio-Yomiuriland ← רכבל/אוטובוס ← הפוך |
+| 6.10 | בסיס ← הרג׳וקו/Meiji-jingumae ← הליכה לכיוון שיבויה ← בסיס |
+| 7.10 | בסיס ← קמקורה ← האסה ← Kamakurakōkōmae ← אנושימה ← פוג׳יסאווה ← בסיס |
+| 8.10 | בסיס ← מיטאקה/קיצ׳יג׳וג׳י ← נקאנו ← שינג׳וקו ← בסיס |
+| 9.10 | בסיס ← אואימאצ׳י ← טודורוקי ← ג׳יוגאוקה/שיבויה ← שימוקיטזאווה/סטגאיה־דאיטה ← Hanegi Park ← שימוקיטזאווה ← בסיס |
+| 10.10 | בסיס ← סואידובאשי/Tokyo Dome City ← הקרנת Kasuga–Tochomae אופציונלית ← בסיס |
+| 11.10 | טבטה ← תחנת טוקיו ← אחסון בתחנת קיוטו ← מיאגאווה־צ׳ו ← אוואטה ← הדירה בפושימי אינארי |
+| 12.10 | בסיס פושימי ← UZUMASA ← בסיס/מנוחה ← Kyoto Avanti ← בסיס |
+| 13.10 | בסיס פושימי ← השערים התחתונים של המקדש ← Yūzen ב־09:30 ← בסיס/צ׳ק־אאוט ← קיוטו/שין־אוסקה ← נמבה ← דוטומבורי |
+| 14.10 | נמבה ← Universal City ← אותו מלון בנמבה |
+| 15.10 | נמבה ← אוג׳י ← קיוטו ← טוקיו אם Nintendo Museum מצליח; אחרת נמבה ← שין־אוסקה ← טוקיו |
+| 16.10 | הבסיס המתוכנן באואנו/אינאריצ׳ו ← ניהונבאשי ← Tokyo Station First Avenue ← Taiko-kan/נישי־אסאקוסה ← סנסו־ג׳י ← בסיס |
+| 17.10 | בוקר מקומי ← נריטה |
 
-## High-Friction Days
+## ימים עם חיכוך גבוה
 
 ### PokéPark
 
-- Leave the Tokyo base around 09:00.
-- Transfer at Shinjuku to the Keio route for Keio-Yomiuriland.
-- The Sky Shuttle gondola is part of the fun when operating.
-- Reach the area before 10:30 for 11:00 PokéPark hours and app requests from 10:45.
+- לצאת מהבסיס בטוקיו סביב 09:00.
+- להחליף בשינג׳וקו למסלול Keio אל Keio-Yomiuriland.
+- הרכבל Sky Shuttle הוא חלק מהכיף כשהוא פועל.
+- להגיע לאזור לפני 10:30 לקראת שעות PokéPark של 11:00 ובקשות באפליקציה מ־10:45.
 
-[Official train access](https://www.pokepark-kanto.co.jp/ppark/access/train/index)
+[הגעה רשמית ברכבת](https://www.pokepark-kanto.co.jp/ppark/access/train/index)
 
-### Kamakura / Enoshima
+### קמקורה / אנושימה
 
-Use a one-direction route and return through Fujisawa. This avoids repeating the entire coastal railway and makes the day feel like an adventure rather than a commute.
+להשתמש במסלול חד־כיווני ולחזור דרך פוג׳יסאווה. זה חוסך את החזרה על כל מסילת החוף והופך את היום להרפתקה במקום לנסיעת עבודה.
 
-### Ghibli → Nakano → Shinjuku
+### ג׳יבלי ← נקאנו ← שינג׳וקו
 
-- Museum access is by bus or walk from Mitaka.
-- After Kichijoji lunch, use JR Chuo to Nakano for a 60–90 minute collector stop.
-- Continue one stop cluster east to Shinjuku for the 3D cat, Godzilla photo and dinner.
-- namco TOKYO is the first transport-saving cut if the day runs late.
+- ההגעה למוזיאון היא באוטובוס או בהליכה ממיטאקה.
+- אחרי ארוחת הצהריים בקיצ׳יג׳וג׳י, JR Chuo לנקאנו לעצירת אספנים של 60–90 דקות.
+- ממשיכים מזרחה לאשכול אחד לשינג׳וקו לחתול התלת־ממדי, לתמונת גודזילה ולארוחת ערב.
+- namco TOKYO הוא הקיצוץ הראשון שחוסך תחבורה אם היום מתארך.
 
-### Mundo Pixar inside the waterfront route — Oct 4
+### Mundo Pixar בתוך מסלול המים — 4.10
 
-- CREVIA BASE Tokyo is by Shijō-mae, between teamLab’s Shin-Toyosu area and Odaiba on the Yurikamome.
-- Treat Pixar as a fixed stop: buy a timed entry around **12:30–13:00** — the booked teamLab admission is 09:30–10:00, so the family is not free before roughly 11:45–12:00 — allow about one hour and continue east; there is no reason to return to central Tokyo.
-- Protect teamLab, Pixar and a meaningful Joypolis block. Cut extended Gundam Base/mall browsing and the waterfront sunset first rather than allowing the three-anchor day to run late.
+- CREVIA BASE Tokyo נמצא ליד Shijō-mae, בין אזור שין־טויוסו של teamLab לבין אודאיבה על קו ה־Yurikamome.
+- להתייחס לפיקסאר כעצירה קבועה: לקנות כניסה מתוזמנת סביב **12:30–13:00** — הכניסה המוזמנת ל־teamLab היא 09:30–10:00, ולכן המשפחה לא פנויה לפני 11:45–12:00 בערך — להקצות כשעה ולהמשיך מזרחה; אין סיבה לחזור למרכז טוקיו.
+- להגן על teamLab, על פיקסאר ועל בלוק משמעותי ב־Joypolis. לקצץ שיטוט מורחב ב־Gundam Base/קניונים ואת השקיעה על המים לפני שנותנים ליום עם שלושה עוגנים להתארך.
 
-### Todoroki → Setagaya-Daita → Shimokitazawa — Oct 9
+### טודורוקי ← סטגאיה־דאיטה ← שימוקיטזאווה — 9.10
 
-- Reach Todoroki through Oimachi for the morning ravine walk.
-- After the ravine, use the live route back through Jiyūgaoka and Shibuya to Shimokitazawa; allow about 45 minutes including transfers and the walk to Shiro-Hige.
-- Shiro-Hige, Hanegi Park and central Shimokitazawa are close enough to connect on foot, but use a short taxi if the park construction or family energy makes the walk unpleasant.
-- Return from Shimokitazawa through Shinjuku; the whole day remains inside Tokyo.
+- מגיעים לטודורוקי דרך אואימאצ׳י להליכת הבוקר בערוץ.
+- אחרי הערוץ, משתמשים במסלול החי חזרה דרך ג׳יוגאוקה ושיבויה לשימוקיטזאווה; להקצות כ־45 דקות כולל החלפות וההליכה ל־Shiro-Hige.
+- Shiro-Hige, Hanegi Park ומרכז שימוקיטזאווה קרובים מספיק כדי לחבר אותם ברגל, אבל אפשר מונית קצרה אם שיפוצי הפארק או האנרגיה המשפחתית הופכים את ההליכה ללא נעימה.
+- חוזרים משימוקיטזאווה דרך שינג׳וקו; כל היום נשאר בתוך טוקיו.
 
-### Kyoto arrival + Awata — Oct 11
+### הגעה לקיוטו + אוואטה — 11.10
 
-- Reserve an early Tokyo → Kyoto Nozomi that leaves enough margin to store the two-night bags at Kyoto Station before the 13:00 Mizuekai.
-- The Fushimi apartment cannot be entered until 15:00 and no early bag drop is promised. Forward the main suitcases to Osaka if accepted there; otherwise use staffed storage or correctly sized lockers at Kyoto Station.
-- The recital and Awata area are east of Kyoto Station. After leaving the procession around 19:30, collect the bags and continue to Fushimi Inari for check-in.
-- Reach the Awata procession before its official 17:00 start and leave around 19:30.
-- Expect crowd controls and slower transit; save the apartment address and return route offline.
+- להזמין נוזומי מוקדם מטוקיו לקיוטו שמשאיר מספיק מרווח לאחסון תיקי שני הלילות בתחנת קיוטו לפני מיזואקאי ב־13:00.
+- אי אפשר להיכנס לדירה בפושימי לפני 15:00 ואין הבטחה להנחת תיקים מוקדמת. לשגר את המזוודות העיקריות לאוסקה אם מקבלים אותן שם; אחרת אחסון מאויש או לוקרים בגודל נכון בתחנת קיוטו.
+- הרסיטל ואזור אוואטה נמצאים ממזרח לתחנת קיוטו. אחרי שעוזבים את התהלוכה סביב 19:30, אוספים את התיקים וממשיכים לפושימי אינארי לצ׳ק־אין.
+- להגיע לתהלוכת אוואטה לפני ההתחלה הרשמית ב־17:00 ולעזוב סביב 19:30.
+- לצפות לבקרת קהל ולתחבורה איטית יותר; לשמור את כתובת הדירה ואת מסלול החזרה אופליין.
 
-### UZUMASA + Kyoto Avanti — Oct 12
+### UZUMASA + Kyoto Avanti — 12.10
 
-- Use the fastest live combination from Fushimi Inari to UZUMASA Kyoto Village; expect a cross-city journey with at least one transfer.
-- Leave UZUMASA by about 15:00–15:30 for a real apartment rest.
-- Kyoto Avanti is by Kyoto Station. Be at the theatre before doors at 18:15 for the 19:00 HIBIKI show.
-- The optional Mibu Kyogen route is a swap that requires leaving UZUMASA around 13:15; it is not an extra stop on the baseline.
+- להשתמש בשילוב המהיר ביותר בזמן אמת מפושימי אינארי ל־UZUMASA Kyoto Village; לצפות לנסיעה חוצת עיר עם החלפה אחת לפחות.
+- לעזוב את UZUMASA סביב 15:00–15:30 למנוחה אמיתית בדירה.
+- Kyoto Avanti נמצא ליד תחנת קיוטו. להיות בתיאטרון לפני פתיחת הדלתות ב־18:15 למופע HIBIKI של 19:00.
+- מסלול Mibu Kyogen האופציונלי הוא החלפה שדורשת עזיבה של UZUMASA סביב 13:15; זו לא עצירה נוספת על הבסיס.
 
-### Tokyo Dome → optional Pokémon projection — Oct 10
+### Tokyo Dome ← הקרנה אופציונלית — 10.10
 
-- Kasuga Station by Tokyo Dome City and Tochomae Station are on the Toei Oedo Line; this is the lowest-friction way to add Tokyo Night & Light.
-- Use the earliest practical Pokémon slot only if it appears in the official Oct 10 rotation, then eat in West Shinjuku.
-- Do not use Instagram’s 19:30/20:30/21:00 list as the October work order. The official site publishes multiple general screening slots, while individual works rotate.
-- Skip the projection if the listing changes, weather cancels the outdoor show or it would force a late night before the early Kyoto train.
+- תחנת Kasuga ליד Tokyo Dome City ותחנת Tochomae נמצאות שתיהן על קו Toei Oedo; זו הדרך עם הכי פחות חיכוך להוסיף את Tokyo Night & Light.
+- להשתמש בחריץ הפוקימון המעשי המוקדם ביותר רק אם הוא מופיע ברוטציה הרשמית של 10.10, ואז לאכול במערב שינג׳וקו.
+- לא להשתמש ברשימת 19:30/20:30/21:00 מאינסטגרם כסדר העבודה של אוקטובר. האתר הרשמי מפרסם כמה חריצי הקרנה כלליים, בעוד היצירות הבודדות מתחלפות בסבב.
+- לוותר על ההקרנה אם הרישום משתנה, מזג האוויר מבטל את המופע החיצוני, או שהיא תכפה לילה מאוחר לפני רכבת הבוקר המוקדמת לקיוטו.
 
-### Fushimi Inari departure morning — Oct 13
+### בוקר היציאה מפושימי אינארי — 13.10
 
-- The apartment is about three minutes from Fushimi Inari, so walk to the shrine rather than starting at Kyoto Station. [Official access guide](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
-- Leave the bags locked in the apartment and carry only daypacks.
-- Spend 60–90 minutes around the lower torii route and turn back before the mountain climb becomes the day’s headline.
-- Yūzen Fushimi is one minute from JR Inari and lists a 09:30 opening. Visit only after the early shrine loop; allow 20–30 minutes for choosing/engraving and confirm Tuesday hours in the final week.
-- Return for breakfast and bags, complete the host’s checkout steps by 11:00, then continue to Namba. Fushimi replaces the Manga Museum; it is not added before it.
-- Do not buy a Kyoto → Shin-Osaka Shinkansen ticket by reflex. The current comparison is about **14–15 minutes / JPY 1,450** by unreserved Shinkansen versus about **28–29 minutes / JPY 580** by JR Special Rapid to Osaka. Those are different arrival stations: Namba is farther from Shin-Osaka, and the Shinkansen also adds a ticket/gate transfer at Kyoto. The JPY 870 segment premium is **JPY 3,480 for this four-adult-fare family** for little or no useful door-to-door saving. [JR West route and timetable tools](https://www.westjr.co.jp/travel-information/en/plan-your-trip/routes-schedule/) · [live fare/time cross-check](https://transit.yahoo.co.jp/search/result?all=1&from=%E4%BA%AC%E9%83%BD&stype=&to=%E6%96%B0%E5%A4%A7%E9%98%AA)
-- Once the Osaka hotel is booked, compare two complete routes: **JR Inari → Kyoto → Special Rapid to Osaka/Umeda → Midosuji to Namba**, and a **Keihan Fushimi-inari → central Osaka** route. Use the winner for the actual hotel and luggage load; do not optimize only the Kyoto–Osaka headline time. [Keihan Fushimi-inari station](https://www.keihan.co.jp/traffic/station/151/info.html) · [Osaka Metro Namba](https://subway.osakametro.co.jp/en/station_guide/M/m20/index.php/map.php)
+- הדירה נמצאת כשלוש דקות מפושימי אינארי, ולכן הולכים למקדש במקום להתחיל מתחנת קיוטו. [מדריך הגעה רשמי](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
+- להשאיר את התיקים נעולים בדירה ולקחת רק תיקי יום.
+- להקדיש 60–90 דקות למסלול הטוריאי התחתון ולהסתובב חזרה לפני שהטיפוס להר הופך לכותרת של היום.
+- Yūzen Fushimi נמצא דקה מ־JR Inari (JR稲荷駅) ומפרסם פתיחה ב־09:30. לבקר רק אחרי לולאת המקדש המוקדמת; להקצות 20–30 דקות לבחירה ולחריטה ולאמת את שעות יום שלישי בשבוע האחרון.
+- לחזור לארוחת בוקר ולתיקים, להשלים את שלבי הצ׳ק־אאוט של המארח עד 11:00, ואז להמשיך לנמבה. פושימי מחליף את מוזיאון המנגה; הוא לא נוסף לפניו.
+- לא לקנות כרטיס שינקנסן מקיוטו לשין־אוסקה מתוך רפלקס. ההשוואה הנוכחית היא כ־**14–15 דקות / ¥1,450** בשינקנסן לא שמור מול כ־**28–29 דקות / ¥580** ב־JR Special Rapid לאוסקה. אלה תחנות הגעה שונות: נמבה רחוקה יותר משין־אוסקה, והשינקנסן גם מוסיף החלפת כרטיס ושער בקיוטו. פרמיית הקטע של ¥870 היא **¥3,480 למשפחה הזו עם ארבעה תעריפי מבוגר** תמורת חיסכון זעום או אפסי מדלת לדלת. [כלי מסלולים ולוחות זמנים של JR West](https://www.westjr.co.jp/travel-information/en/plan-your-trip/routes-schedule/) · [הצלבה חיה של תעריף/זמן](https://transit.yahoo.co.jp/search/result?all=1&from=%E4%BA%AC%E9%83%BD&stype=&to=%E6%96%B0%E5%A4%A7%E9%98%AA)
+- ברגע שהמלון באוסקה נסגר, להשוות שני מסלולים שלמים: **JR Inari ← קיוטו ← Special Rapid לאוסקה/אומדה ← Midosuji לנמבה**, ומסלול **Keihan Fushimi-inari ← מרכז אוסקה**. להשתמש במנצח לפי המלון בפועל ולפי עומס המזוודות; לא לייעל רק את זמן הכותרת בין קיוטו לאוסקה. [תחנת Keihan Fushimi-inari](https://www.keihan.co.jp/traffic/station/151/info.html) · [Osaka Metro Namba](https://subway.osakametro.co.jp/en/station_guide/M/m20/index.php/map.php)
 
-### Taiko-kan deadline — Oct 16
+### הדדליין של Taiko-kan — 16.10
 
-- If the current final-Tokyo lead is booked, Tokyo Station First Avenue is easy from the Ueno/Inaricho apartment. Walk about two minutes to Inaricho, take the Ginza Line directly to Nihombashi in roughly 10–12 minutes, and use exit B2 for the Pokémon Café building. First Avenue is a short onward walk at Tokyo Station’s Yaesu side and is outside the JR ticket gates. The JR alternative is a roughly nine-minute walk to Ueno Station followed by a direct train to Tokyo Station.
-- Protect 45–60 minutes for [First Avenue](https://www.tokyoeki-1bangai.co.jp/en/): Character Street first, then Okashi Land only if time remains. Tokyo Ramen Street remains the meal backup if the café fails.
-- Preferred order with a 10:30–11:00 café booking: Pokémon Café → First Avenue → Taiko-kan. With a later café booking, reverse the anchors: Taiko-kan at 11:00 → Pokémon Café → First Avenue → Senso-ji.
-- Reach Taiko-kan around 14:00 and no later than its official **15:00 last admission**.
-- The Nishi-Asakusa store is in the same building; choose the bachi after the museum.
-- Continue to Senso-ji toward dusk. Cut Skytree, extra Nakamise time and First Avenue browsing beyond one hour before dropping the First Avenue stop itself.
+- אם הליד הסופי בטוקיו ייסגר, Tokyo Station First Avenue נוח מהדירה באואנו/אינאריצ׳ו. הליכה של כשתי דקות לאינאריצ׳ו, קו Ginza ישיר לניהונבאשי בכ־10–12 דקות, ויציאה B2 לבניין של Pokémon Café. First Avenue הוא הליכה קצרה בהמשך בצד Yaesu של תחנת טוקיו, ומחוץ לשערי JR. החלופה ב־JR היא הליכה של כתשע דקות לתחנת אואנו ואז רכבת ישירה לתחנת טוקיו.
+- להגן על 45–60 דקות ב־[First Avenue](https://www.tokyoeki-1bangai.co.jp/en/): קודם Character Street, ואז Okashi Land רק אם נשאר זמן. Tokyo Ramen Street נשאר גיבוי הארוחה אם הקפה נופל.
+- סדר מועדף עם הזמנת קפה של 10:30–11:00: Pokémon Café ← First Avenue ← Taiko-kan. עם הזמנת קפה מאוחרת יותר, להפוך את העוגנים: Taiko-kan ב־11:00 ← Pokémon Café ← First Avenue ← סנסו־ג׳י.
+- להגיע ל־Taiko-kan סביב 14:00 ולא יאוחר מהכניסה האחרונה הרשמית ב־**15:00**.
+- חנות נישי־אסאקוסה נמצאת באותו בניין; בוחרים את מקלות התוף (bachi) אחרי המוזיאון.
+- ממשיכים לסנסו־ג׳י לקראת רדת החשכה. לקצץ את Skytree, זמן נוסף בנקמיסה ושיטוט ב־First Avenue מעבר לשעה — לפני שמוותרים על עצירת First Avenue עצמה.
 
-## Tokyo → Kyoto → Osaka / Uji
+## טוקיו ← קיוטו ← אוסקה / אוג׳י
 
-### Oct 11
+### 11.10
 
-- Reserve a Nozomi from Tokyo to Kyoto.
-- Book oversized-luggage space only if a bag exceeds the railway threshold.
-- Buy an ekiben before boarding.
-- Travel with two-night packs if the main bags have been forwarded directly to Osaka.
+- להזמין נוזומי מטוקיו לקיוטו.
+- להזמין מקום למזוודה גדולה רק אם תיק חורג מסף הרכבת.
+- לקנות אקיבן לפני העלייה.
+- לנסוע עם תיקי שני לילות אם המזוודות העיקריות שוגרו ישירות לאוסקה.
 
-### Oct 13
+### 13.10
 
-- Leave luggage in the apartment during the early Fushimi Inari visit, then return and check out by 11:00.
-- Use the quickest live route from the Fushimi Inari apartment to the final Osaka hotel. The baseline is ordinary JR/Metro or Keihan—not the Shinkansen—unless a live door-to-door comparison unusually proves otherwise.
-- Protect the short Fushimi visit. If the morning slips, shorten duplicate Den Den Town/Pokémon shopping after arrival in Osaka rather than moving Fushimi to another day.
+- להשאיר את המזוודות בדירה בזמן הביקור המוקדם בפושימי אינארי, ואז לחזור ולהתפנות עד 11:00.
+- להשתמש במסלול החי המהיר ביותר מהדירה בפושימי אינארי למלון הסופי באוסקה. הבסיס הוא JR/Metro רגיל או Keihan — לא שינקנסן — אלא אם השוואה חיה מדלת לדלת מוכיחה אחרת באופן חריג.
+- להגן על הביקור הקצר בפושימי. אם הבוקר מחליק, לקצר קניות כפולות ב־Den Den Town/פוקימון אחרי ההגעה לאוסקה במקום להזיז את פושימי ליום אחר.
 
-### Oct 15 if Nintendo Museum succeeds
+### 15.10 אם Nintendo Museum מצליח
 
-- Check out and move to Uji for the assigned entry slot.
-- Bring passports.
-- Use coin lockers or luggage forwarding/storage planned in advance; do not arrive at the museum assuming large bags are welcome.
-- Continue Uji → Kyoto, then reserved Nozomi to Tokyo.
+- להתפנות ולעבור לאוג׳י לחריץ הכניסה שהוקצה.
+- להביא דרכונים.
+- להשתמש בלוקרים או בשילוח/אחסון מזוודות שתוכנן מראש; לא להגיע למוזיאון בהנחה שתיקים גדולים יתקבלו בברכה.
+- להמשיך אוג׳י ← קיוטו, ואז נוזומי שמור לטוקיו.
 
-### Oct 15 if the lottery fails
+### 15.10 אם ההגרלה נכשלת
 
-Take the recovery morning and a direct reserved Shin-Osaka → Tokyo train after lunch.
+לוקחים את בוקר ההתאוששות ורכבת שמורה ישירה משין־אוסקה לטוקיו אחרי ארוחת הצהריים.
 
-## Luggage Plan
+## תוכנית המזוודות
 
-- Do not forward to an unstaffed apartment without written acceptance and delivery instructions.
-- Consider forwarding the main suitcases from Tokyo directly to the Osaka hotel at checkout on Oct 11; travel to Kyoto with two-night packs.
-- Confirm Osaka can receive the delivery before sending anything.
-- If forwarding is not possible, use luggage space on the Tokyo → Kyoto train and Kyoto Station storage until the 15:00 apartment check-in.
-- For Oct 15, forward large bags from Osaka to the final Tokyo stay only if both properties can receive/send them and delivery timing is confirmed.
-- Otherwise use station lockers/storage sized and located in advance.
-- Travel with medicines, passports, chargers and one overnight change in daypacks.
+- לא לשגר לדירה לא מאוישת בלי אישור בכתב והוראות מסירה.
+- לשקול לשגר את המזוודות העיקריות מטוקיו ישירות למלון באוסקה בצ׳ק־אאוט של 11.10; לנסוע לקיוטו עם תיקי שני לילות.
+- לאמת שאוסקה יכולה לקבל את המשלוח לפני ששולחים משהו.
+- אם שילוח לא אפשרי, להשתמש במקום המזוודות ברכבת טוקיו ← קיוטו ובאחסון בתחנת קיוטו עד הצ׳ק־אין ב־15:00.
+- עבור 15.10, לשגר תיקים גדולים מאוסקה ללינה הסופית בטוקיו רק אם שני הנכסים יכולים לקבל/לשלוח אותם ותזמון המסירה מאושר.
+- אחרת להשתמש בלוקרים/אחסון בתחנה שגודלם ומיקומם נקבעו מראש.
+- לנסוע עם תרופות, דרכונים, מטענים והחלפה אחת ללילה בתיקי היום.
 
-## Pass Decisions
+## החלטות על כרטיסים מרוכזים
 
-- **Nationwide JR Pass:** no; the route does not justify it. The official web price is currently JPY 50,000 per adult for seven days; overseas-agency purchase rises to JPY 53,000 from Oct 1, 2026. This family has four adult rail fares, so the pass alone is **JPY 200,000–212,000**.
-- The planned long-distance rail is essentially Tokyo → Kyoto and Kansai/Uji → Tokyo plus short local hops. The existing budget envelope for all reserved Shinkansen legs is only JPY 110,000–125,000 for the family. A JR Pass would therefore cost roughly **JPY 75,000–102,000 more**, before any JPY 4,960-per-person-per-ride Nozomi supplements.
-- The Instagram USD comparison is not a quote for this itinerary. Compare exact yen fares in the chosen official booking flow before purchase; do not buy a pass “for convenience” without doing the route math.
-- **Tokyo subway pass:** buy only if the actual next 24/48/72 hours are subway-heavy. Several key days use JR/private rail.
-- **Enoshima/Kamakura pass:** compare against the final starting station; convenience can matter more than a small saving.
-- **Joypolis/Tokyo Dome:** these are attraction passes, not transport; price them against the actual rides wanted.
+- **JR Pass ארצי:** לא; המסלול לא מצדיק אותו. המחיר הרשמי באתר הוא כרגע ¥50,000 למבוגר לשבעה ימים; רכישה דרך סוכנות מעבר לים עולה ל־¥53,000 מ־1 באוקטובר 2026. למשפחה הזו יש ארבעה תעריפי מבוגר, ולכן הפס לבדו הוא **¥200,000–212,000**.
+- הרכבות למרחקים ארוכים המתוכננות הן בעצם טוקיו ← קיוטו וקנסאי/אוג׳י ← טוקיו, ועוד קפיצות מקומיות קצרות. מעטפת התקציב הקיימת לכל קטעי השינקנסן השמורים היא רק ¥110,000–125,000 למשפחה. JR Pass היה עולה אפוא בערך **¥75,000–102,000 יותר**, לפני תוספות נוזומי של ¥4,960 לאדם לנסיעה.
+- ההשוואה בדולרים מאינסטגרם אינה הצעת מחיר למסלול הזה. להשוות תעריפי ין מדויקים בתהליך ההזמנה הרשמי שנבחר לפני רכישה; לא לקנות פס ״לנוחות״ בלי לעשות את חשבון המסלול.
+- **כרטיס מטרו לטוקיו:** לקנות רק אם 24/48/72 השעות הבאות באמת עמוסות במטרו. כמה מהימים המרכזיים משתמשים ב־JR או ברכבות פרטיות.
+- **כרטיס אנושימה/קמקורה:** להשוות מול תחנת המוצא הסופית; הנוחות יכולה להיות חשובה יותר מחיסכון קטן.
+- **Joypolis/Tokyo Dome:** אלה כרטיסי אטרקציה, לא תחבורה; לתמחר אותם מול המתקנים שבאמת רוצים.
 
-[Official JR Pass prices](https://japanrailpass.net/en/purchase/price/) · [official Nozomi supplement information](https://global.jr-central.co.jp/en/onlinebooking/contents/jrp_nozomi/index.html)
+[מחירי JR Pass רשמיים](https://japanrailpass.net/en/purchase/price/) · [מידע רשמי על תוספת נוזומי](https://global.jr-central.co.jp/en/onlinebooking/contents/jrp_nozomi/index.html)
 
-## Rush-Hour Strategy
+## אסטרטגיית שעות עומס
 
-The Instagram “golden hours” are useful as a rough Tokyo warning, not a universal Japan timetable.
+״שעות הזהב״ מאינסטגרם שימושיות כאזהרה גסה לטוקיו, לא כלוח זמנים אוניברסלי ליפן.
 
-- Tokyo’s approximate commuter peaks are **07:30–09:30** and **17:30–19:30**, with the morning usually tighter. Avoid moving luggage then when the itinerary allows. [Official Tokyo travel guide](https://www.gotokyo.org/en/plan/getting-around/subways/index.html)
-- Do not delay a timed attraction merely to obey a generic crowd chart. On early-entry days, travel earlier, use live congestion/route information and wait for the next train if a carriage is visibly packed.
-- Oct 11 and Oct 15 are reserved Shinkansen transfers, not ordinary commuter improvisation. Reserve family seats and required oversized-baggage space; station crowding matters more than a social-media color block.
-- The Oct 13 checkout transfer should begin after 10:30/11:00, naturally outside the morning peak. Keep luggage compact and avoid optional stops after checkout.
-- Evening city returns can overlap the second peak. Eat locally or wait over a snack instead of forcing four people with bags into the first arriving train.
+- שיאי היוממות המשוערים של טוקיו הם **07:30–09:30** ו־**17:30–19:30**, כשהבוקר בדרך כלל צפוף יותר. להימנע מהזזת מזוודות אז כשהמסלול מרשה. [מדריך תחבורה רשמי של טוקיו](https://www.gotokyo.org/en/plan/getting-around/subways/index.html)
+- לא לעכב אטרקציה מתוזמנת רק כדי לציית לטבלת עומס גנרית. בימים עם כניסה מוקדמת — לנסוע מוקדם יותר, להשתמש במידע חי על עומס ומסלולים, ולחכות לרכבת הבאה אם קרון נראה דחוס.
+- 11.10 ו־15.10 הם מעברי שינקנסן שמורים, לא אלתור יוממות רגיל. להזמין מקומות משפחתיים ומקום למזוודות חורגות לפי הצורך; העומס בתחנה חשוב יותר מריבוע צבע ברשת חברתית.
+- מעבר הצ׳ק־אאוט של 13.10 אמור להתחיל אחרי 10:30/11:00, באופן טבעי מחוץ לשיא הבוקר. לשמור על מזוודות קומפקטיות ולהימנע מעצירות אופציונליות אחרי הצ׳ק־אאוט.
+- חזרות ערב לעיר יכולות לחפוף לשיא השני. לאכול מקומית או להמתין מעל חטיף במקום לדחוף ארבעה אנשים עם תיקים לרכבת הראשונה שמגיעה.
 
-## Final-Week Checks
+## בדיקות בשבוע האחרון
 
-- [ ] Correct airport terminal.
-- [ ] Exact Tokyo property and last-mile route.
-- [ ] PokéPark access and gondola operation.
-- [ ] Kamakura weather.
-- [ ] Oct 11 Tokyo → Kyoto reservation with enough Mizuekai margin.
-- [ ] Awata crowd/transit notice and offline return route.
-- [ ] UZUMASA access and current show schedule.
-- [ ] HIBIKI theatre route and 18:15 doors.
-- [ ] Kyoto Station locker/storage fallback for Oct 11 and the apartment return route after Awata.
-- [ ] Taiko-kan arrival before 15:00 and same-building bachi stop.
-- [ ] Nozomi reservations and luggage requirements.
-- [ ] Nintendo Museum result and assigned time.
-- [ ] Tokyo/Kyoto/Osaka/Uji luggage solution.
-- [ ] Last train options saved offline.
-- [ ] Oct 10 Pokémon projection work order and weather status, if retained.
-- [ ] Oct 13 Yūzen 09:30 Tuesday opening and engraving timing.
+- [ ] הטרמינל הנכון בשדה.
+- [ ] הנכס המדויק בטוקיו ומסלול הקילומטר האחרון.
+- [ ] גישה ל־PokéPark והפעלת הרכבל.
+- [ ] מזג האוויר בקמקורה.
+- [ ] הזמנת טוקיו ← קיוטו ב־11.10 עם מספיק מרווח למיזואקאי.
+- [ ] הודעת קהל/תחבורה של אוואטה ומסלול חזרה אופליין.
+- [ ] הגעה ל־UZUMASA ולוח המופעים הנוכחי.
+- [ ] מסלול התיאטרון של HIBIKI ודלתות 18:15.
+- [ ] גיבוי לוקרים/אחסון בתחנת קיוטו ל־11.10 ומסלול החזרה לדירה אחרי אוואטה.
+- [ ] הגעה ל־Taiko-kan לפני 15:00 ועצירת ה־bachi באותו בניין.
+- [ ] הזמנות נוזומי ודרישות מזוודות.
+- [ ] תוצאת Nintendo Museum והשעה שהוקצתה.
+- [ ] פתרון מזוודות לטוקיו/קיוטו/אוסקה/אוג׳י.
+- [ ] אפשרויות הרכבת האחרונה שמורות אופליין.
+- [ ] סדר העבודה של הקרנת הפוקימון ב־10.10 וסטטוס מזג האוויר, אם היא נשמרת.
+- [ ] פתיחת Yūzen ב־09:30 ביום שלישי ותזמון החריטה ב־13.10.
 
-*Use live official route planners for exact departure times and fares; fixed minute-by-minute rail promises months ahead are less accurate than this route structure.*
+*להשתמש במתכנני מסלולים רשמיים וחיים לזמני יציאה ותעריפים מדויקים; הבטחות רכבת מדויקות לרמת הדקה חודשים מראש פחות מדויקות ממבנה המסלול הזה.*

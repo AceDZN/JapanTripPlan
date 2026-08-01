@@ -1,160 +1,160 @@
-# 10 — Working Budget for the Complete Plan
+# 10 — תקציב עבודה לתוכנית המלאה
 
-**Family:** 4 people: 2 adults, daughter (16), son (12)
-**Travel:** October 1–18, 2026
-**Japan:** 15 physical nights
-**Budget rule:** do not publish a false grand total while flights and the two remaining lodging totals are missing.
+**המשפחה:** 4 אנשים: 2 מבוגרים, בת (16), בן (12)
+**הנסיעה:** 1–18 באוקטובר 2026
+**ביפן:** 15 לילות פיזיים
+**כלל התקציב:** לא לפרסם סכום כולל כוזב כל עוד חסרים סכום הטיסות ושני סכומי הלינה הנותרים.
 
-## Current Truth
+## מה נכון כרגע
 
-| Category | Status | Working value |
+| קטגוריה | סטטוס | ערך עבודה |
 |---|---|---:|
-| Flights | Booked; receipt total missing from the documents | Add actual paid family total |
-| Tokyo Oct 2–11 | Booked Airbnb; reservation total | ILS 3,638.99 |
-| Kyoto Oct 11–13 | Booked Airbnb; amount paid | ILS 796.37 |
-| Osaka Oct 13–15 | ESLEAD HOTEL Namba East direct lead | JPY 35,184 |
-| Tokyo Oct 15–17 | Provisional Airbnb lead; checkout must be reconfirmed | ILS 1,380 |
-| **Booked lodging subtotal** | First 11 of 15 nights | **ILS 4,435.36** |
-| Remaining lodging | Osaka + final Tokyo / 4 nights | Not ready |
+| טיסות | מוזמנות; סכום הקבלה חסר במסמכים | להוסיף את הסכום המשפחתי ששולם בפועל |
+| טוקיו 2–11.10 | Airbnb מוזמן; סך ההזמנה | ₪3,638.99 |
+| קיוטו 11–13.10 | Airbnb מוזמן; הסכום ששולם | ₪796.37 |
+| אוסקה 13–15.10 | ליד ישיר ב־ESLEAD HOTEL Namba East | ¥35,184 |
+| טוקיו 15–17.10 | ליד Airbnb זמני; יש לאמת מחדש את מסך התשלום | ₪1,380 |
+| **סכום ביניים ללינה מוזמנת** | 11 הלילות הראשונים מתוך 15 | **₪4,435.36** |
+| לינה שנותרה | אוסקה + טוקיו הסופית / 4 לילות | לא מוכן |
 
-Keep the ILS and JPY values separate until bookings are held and the card exchange rate is known. See [02-ACCOMMODATION.md](./02-ACCOMMODATION.md).
+לשמור על הפרדה בין הערכים בשקלים לערכים בין כל עוד ההזמנות לא סגורות ושער ההמרה של הכרטיס לא ידוע. ראו [02-ACCOMMODATION.md](./02-ACCOMMODATION.md).
 
-## Planning Envelopes
+## מעטפות תכנון
 
-These are control ranges, not quotes:
+אלה טווחי שליטה, לא הצעות מחיר:
 
-| Envelope | Family range |
+| מעטפה | טווח למשפחה |
 |---|---:|
-| Local Tokyo/Kamakura transport + both Skyliner trips | JPY 65,000–75,000 |
-| Tokyo ↔ Osaka/Kyoto reserved Shinkansen | JPY 110,000–125,000 |
-| Food and non-ticketed snacks | JPY 190,000–260,000 |
-| Major attractions and workshops excluding USJ | JPY 150,000–260,000 |
-| USJ Studio Pass + current Nintendo-capable Express product | JPY 90,000–180,000 |
-| Arcades, gachapon and crane games | JPY 25,000–45,000 |
-| Anime/character shopping | Set a separate family cap |
-| eSIM, laundry, lockers, rain gear and pharmacy | JPY 20,000–35,000 |
-| Contingency | 10–15% of all variable categories |
+| תחבורה מקומית בטוקיו/קמקורה + שתי נסיעות ה־Skyliner | ¥65,000–75,000 |
+| שינקנסן שמור טוקיו ↔ אוסקה/קיוטו | ¥110,000–125,000 |
+| אוכל וחטיפים ללא כרטיס | ¥190,000–260,000 |
+| אטרקציות וסדנאות מרכזיות, ללא USJ | ¥150,000–260,000 |
+| USJ Studio Pass + מוצר Express עדכני שמכסה את נינטנדו | ¥90,000–180,000 |
+| ארקייד, גצ׳פון ומשחקי מנוף | ¥25,000–45,000 |
+| קניות אנימה/דמויות | להגדיר תקרה משפחתית נפרדת |
+| eSIM, כביסה, לוקרים, ציוד גשם ובית מרקחת | ¥20,000–35,000 |
+| רזרבה | 10–15% מכל הקטגוריות המשתנות |
 
-Why the attraction range is wide:
+למה טווח האטרקציות רחב:
 
-- PokéPark prices vary by date and pass class.
-- USJ Express inventory and products rotate.
-- Nintendo Museum is won and priced: JPY 11,000 for four, payable by Aug 7.
-- Joypolis, Tokyo Dome City and Odaiba can use either individual tickets or passports.
-- Mundo Pixar is now a must-do and adds about JPY 20,100 plus ticket fees. The attraction budget must include it; Oct 4 saves time by cutting lower-priority browsing rather than Pixar.
-- Shopping is deliberately excluded from “attractions” so it cannot hide inside the plan.
+- מחירי PokéPark משתנים לפי תאריך וסוג הכרטיס.
+- המלאי והמוצרים של USJ Express מתחלפים.
+- מוזיאון נינטנדו נסגר ומתומחר: ¥11,000 לארבעה, לתשלום עד 7 באוגוסט.
+- ב־Joypolis, ב־Tokyo Dome City ובאודאיבה אפשר לבחור בין כרטיסים בודדים לפספורטים.
+- Mundo Pixar הוא כעת חובה ומוסיף כ־¥20,100 בתוספת עמלות כרטוס. תקציב האטרקציות חייב לכלול אותו; ב־4.10 חוסכים זמן בקיצוץ סיבובים בעדיפות נמוכה, לא בקיצוץ פיקסאר.
+- קניות הוצאו מ״אטרקציות״ במכוון, כדי שלא יוכלו להתחבא בתוך התוכנית.
 
-### Kyoto traditional-experience subtotal
+### סכום ביניים לחוויות המסורתיות בקיוטו
 
-| Experience | Current family amount |
+| חוויה | הסכום המשפחתי הנוכחי |
 |---|---:|
-| Mizuekai · second-floor seats | JPY 32,000 |
-| Mizuekai · first-floor seats | JPY 40,000 |
-| UZUMASA · **BOOKED AND PAID** | JPY 29,600 |
-| DRUM TAO HIBIKI · **BOOKED AND PAID** | JPY 47,108 |
-| Fushimi Inari lower-gates visit | Free |
-| Awata Shrine procession | Free |
-| **Recommended Kyoto total** | **JPY 101,600–109,600** |
+| Mizuekai · מושבים בקומה השנייה | ¥32,000 |
+| Mizuekai · מושבים בקומה הראשונה | ¥40,000 |
+| UZUMASA · **מוזמן ומשולם** | ¥29,600 |
+| DRUM TAO HIBIKI · **מוזמן ומשולם** | ¥47,108 |
+| ביקור בשערים התחתונים בפושימי אינארי | חינם |
+| תהלוכת מקדש Awata | חינם |
+| **סך קיוטו המומלץ** | **¥101,600–109,600** |
 
-UZUMASA is a single paid credit-card order of **JPY 29,600**: admission JPY 15,200 (4 × JPY 3,800 yokai-festival 1-Day tickets with exclusive merchandise), the 13:30 tea ceremony JPY 10,800 (4 × JPY 2,700), Ninja Escape Room JPY 2,400 (4 × JPY 600) and 3D Maze the Ninja Fort JPY 1,200 (2 × JPY 600). The only open UZUMASA spend is lunch and an optional JPY 1,200 to put the other two through the 3D Maze. The subtotal still excludes food and transport. Mibu Kyogen is no longer a possible swap.
+UZUMASA הוא הזמנה אחת משולמת בכרטיס אשראי בסך **¥29,600**: כניסה ¥15,200 (4 × ¥3,800 כרטיסי 1-Day לפסטיבל היוקאי עם מרצ׳נדייז בלעדי), טקס תה ב־13:30 ב־¥10,800 (4 × ¥2,700), Ninja Escape Room ב־¥2,400 (4 × ¥600) ו־3D Maze the Ninja Fort ב־¥1,200 (2 × ¥600). ההוצאה הפתוחה היחידה ב־UZUMASA היא ארוחת צהריים ועוד ¥1,200 אופציונליים כדי להעביר גם את השניים האחרים ב־3D Maze. סכום הביניים עדיין לא כולל אוכל ותחבורה. Mibu Kyogen כבר אינו החלפה אפשרית.
 
-## Booking Ledger
+## פנקס ההזמנות
 
-Fill the actual charged amount immediately after every purchase.
+למלא את הסכום שחויב בפועל מיד אחרי כל רכישה.
 
-| Experience | Date | Booking state | Actual family charge |
+| חוויה | תאריך | מצב ההזמנה | החיוב המשפחתי בפועל |
 |---|---|---|---:|
-| Cat Cafe Temari no Oshiro (Kichijōji Petit Mura) | Oct 8 | Reserve · about JPY 5,300 for four at the weekday rate | — |
-| teamLab Planets | Oct 4 | **BOOKED** · Entrance Pass, admission 09:30–10:00 · 2 adults at JPY 5,600 + 2 junior-high/high-school at JPY 2,800 | **JPY 16,800 paid** |
-| Mundo Pixar | Oct 4 must-do | Buy timed **12:30–13:00** entry (the booked 09:30 teamLab slot rules out 11:45/12:00) | About JPY 20,100 + fees at current D pricing |
-| Joypolis | Oct 4 | Decide passport vs individual | — |
-| PokéPark KANTO / DisneySea fallback | Oct 5 | Monitor official PokéPark inventory; otherwise buy DisneySea officially | Record selected park total |
-| KAWAII MONSTER LAND | Oct 6 | Timed ticket | — |
-| Shiro-Hige Totoro cream-puff pickup | Oct 9 | Reserve closer to travel | Record actual order |
-| Tokyo Dome City | Oct 10 | Live ride choice | — |
-| Ghibli Museum | Oct 8 | Release Sept 10 | — |
-| Mizuekai · 13:00 | Oct 11 | Purchase method TBA | JPY 32,000–40,000 |
-| LOUTRE otter café (side quest) | Oct 11 | Optional walk-in; no reservation | — |
-| UZUMASA Kyoto Village | Oct 12 | **BOOKED AND PAID** — admission ×4, 13:30 tea ceremony ×4, Ninja Escape Room ×4, 3D Maze ×2; all dated Oct 12, and the date is changeable from the ticket page although the purchase cannot be cancelled | JPY 29,600 paid |
-| DRUM TAO HIBIKI · 19:00 | Oct 12 | **BOOKED AND PAID** — order 00003314, row G seats 12–15, Standard with snacks ×4 at JPY 11,000, plus JPY 2,800 service and JPY 308 ticketing | JPY 47,108 paid |
-| Fushimi Inari | Oct 13 | No ticket; lower-gates visit | Free |
-| Yūzen engraved chopsticks | Oct 13 | Walk-in after 09:30; reconfirm hours | Record actual product total; JPY 1,100 floor unverified |
-| Rock Star + America-mura snake café (side quests) | Oct 13 | Optional walk-ins; about JPY 1,100 + drink and JPY 2,000 per person | — |
-| USJ Studio Pass | Oct 14 | Buy | — |
-| USJ Express product | Oct 14 | Buy exact current product | — |
-| Nintendo Museum | Oct 15 | **WON — pay by Aug 7, 23:59 JST**; adult ×2 JPY 6,600 + youth ×2 JPY 4,400 | JPY 11,000 |
-| Pokémon Café | Oct 16 | Release not announced | Meal total, no reservation fee |
-| Taiko-kan + one bachi pair | Oct 16 | Museum walk-in; buy in shop | About JPY 3,150–3,750 |
-| Sumida Aquarium (optional finale) | Oct 16 | Decide on the day; buy at door or online | About JPY 8,800 for the family |
+| Cat Cafe Temari no Oshiro (Petit Mura, קיצ׳יג׳וג׳י) | 8.10 | להזמין · כ־¥5,300 לארבעה בתעריף יום חול | — |
+| teamLab Planets | 4.10 | **מוזמן** · Entrance Pass, כניסה 09:30–10:00 · 2 מבוגרים ב־¥5,600 + 2 תלמידי חטיבה/תיכון ב־¥2,800 | **¥16,800 שולמו** |
+| Mundo Pixar | 4.10, חובה | לקנות כניסה מתוזמנת ל־**12:30–13:00** (החלון המוזמן ב־teamLab ב־09:30 פוסל את 11:45/12:00) | כ־¥20,100 + עמלות בתמחור D הנוכחי |
+| Joypolis | 4.10 | להחליט בין פספורט לכרטיסים בודדים | — |
+| PokéPark KANTO / גיבוי DisneySea | 5.10 | לעקוב אחרי המלאי הרשמי של PokéPark; אחרת לקנות DisneySea רשמית | לתעד את סכום הפארק שנבחר |
+| KAWAII MONSTER LAND | 6.10 | כרטיס מתוזמן | — |
+| איסוף פחזניות טוטורו מ־Shiro-Hige | 9.10 | להזמין קרוב יותר לנסיעה | לתעד את ההזמנה בפועל |
+| Tokyo Dome City | 10.10 | בחירת מתקנים ביום עצמו | — |
+| מוזיאון ג׳יבלי | 8.10 | המכירה נפתחת ב־10 בספטמבר | — |
+| Mizuekai · 13:00 | 11.10 | דרך הרכישה טרם נקבעה | ¥32,000–40,000 |
+| בית קפה הלוטרות LOUTRE (סייד־קווסט) | 11.10 | כניסה ספונטנית אופציונלית; בלי הזמנה | — |
+| UZUMASA Kyoto Village | 12.10 | **מוזמן ומשולם** — כניסה ×4, טקס תה ב־13:30 ×4, Ninja Escape Room ×4, 3D Maze ×2; הכול מתוארך ל־12.10, והתאריך ניתן לשינוי מעמוד הכרטיסים אף שאי אפשר לבטל את הרכישה | ¥29,600 שולמו |
+| DRUM TAO HIBIKI · 19:00 | 12.10 | **מוזמן ומשולם** — הזמנה 00003314, שורה G מושבים 12–15, Standard עם חטיפים ×4 ב־¥11,000, ועוד ¥2,800 שירות ו־¥308 כרטוס | ¥47,108 שולמו |
+| פושימי אינארי | 13.10 | בלי כרטיס; ביקור בשערים התחתונים | חינם |
+| מקלות אכילה חרוטים ב־Yūzen | 13.10 | כניסה ספונטנית אחרי 09:30; לאמת שעות | לתעד את סכום המוצר בפועל; רצפת ¥1,100 לא מאומתת |
+| Rock Star + בית קפה הנחשים באמריקה־מורה (סייד־קווסטים) | 13.10 | כניסות ספונטניות אופציונליות; כ־¥1,100 + משקה וכ־¥2,000 לאדם | — |
+| USJ Studio Pass | 14.10 | לקנות | — |
+| מוצר USJ Express | 14.10 | לקנות בדיוק את המוצר העדכני | — |
+| מוזיאון נינטנדו | 15.10 | **זכייה — לשלם עד 7 באוגוסט, 23:59 שעון יפן**; מבוגר ×2 ¥6,600 + נוער ×2 ¥4,400 | ¥11,000 |
+| Pokémon Café | 16.10 | מועד המכירה לא הוכרז | סכום הארוחה, בלי דמי הזמנה |
+| Taiko-kan + זוג bachi אחד | 16.10 | כניסה ספונטנית למוזיאון; לקנות בחנות | כ־¥3,150–3,750 |
+| אקווריום סומידה (סיום אופציונלי) | 16.10 | להחליט ביום עצמו; לקנות בקופה או אונליין | כ־¥8,800 למשפחה |
 
-## Food Budget
+## תקציב האוכל
 
-The old JPY 10,000-per-day family figure is too low for this itinerary’s character meals, festival snacks and special dinner.
+הנתון הישן של ¥10,000 ליום למשפחה נמוך מדי עבור ארוחות הדמויות, חטיפי הפסטיבל וארוחת החגיגה שבמסלול הזה.
 
-Use:
+להשתמש ב:
 
-| Day type | Family food envelope |
+| סוג יום | מעטפת אוכל משפחתית |
 |---|---:|
-| Simple arrival/recovery | JPY 8,000–12,000 |
-| Normal city day | JPY 12,000–17,000 |
-| Festival/park/day-trip day | JPY 15,000–22,000 |
-| Celebration dinner day | JPY 25,000–45,000 including dinner |
+| הגעה/התאוששות פשוטה | ¥8,000–12,000 |
+| יום עיר רגיל | ¥12,000–17,000 |
+| יום פסטיבל/פארק/טיול יום | ¥15,000–22,000 |
+| יום ארוחת החגיגה | ¥25,000–45,000 כולל ארוחת הערב |
 
-A normal ramen meal for four is roughly JPY 4,000–6,500 before extras. Pokémon Café is a meal charge, not a paid reservation.
+ארוחת ראמן רגילה לארבעה היא כ־¥4,000–6,500 לפני תוספות. Pokémon Café הוא חיוב על ארוחה, לא הזמנה בתשלום.
 
-## Variable-Day Controls
+## בקרות לימים משתנים
 
-| Day | Main variable spend | Control rule |
+| תאריך | ההוצאה המשתנה העיקרית | כלל השליטה |
 |---|---|---|
-| Oct 3 | Anime shopping + arcades | One wish list and cash envelope per child |
-| Oct 4 | teamLab + Pixar + Joypolis | teamLab is paid at JPY 16,800; Pixar is funded and protected; price Joypolis against the rides the family will truly do and cut extended Gundam/mall time |
-| Oct 5 | PokéPark / DisneySea fallback | Buy through an official channel only; never budget a Fiverr/reseller premium |
-| Oct 6 | Kawaii/character goods | One cute purchase target each |
-| Oct 8 | Ghibli + Nakano | Protect Ghibli; compare before buying and stop Nakano after 60–90 minutes |
-| Oct 9 | Curry Festival + vintage | Ravine/parks are free; share mini curries and set one shopping target each |
-| Oct 10 | Celebration + optional free projection | Hold one inclusive day envelope excluding the gift; the projection is free, but moving dinner to West Shinjuku may change the reservation |
-| Oct 11 | Mizuekai/Awata | Choose one Mizuekai seat tier; do not add paid sightseeing |
-| Oct 12 | UZUMASA/HIBIKI | JPY 29,600 is already paid; the only open spend is lunch and an optional JPY 1,200 for the two uncovered 3D Maze places |
-| Oct 13 | Fushimi/Yūzen/Dotonbori | Fushimi is free and time-boxed; set a chopstick ceiling before choosing, then share Osaka portions |
-| Oct 14 | USJ | Buy exact Express value; do not assume a generic bundle |
-| Oct 15 | Nintendo Museum | JPY 11,000 — won, payable by Aug 7 |
-| Oct 16 | First Avenue + Taiko + final shopping | Protect the bachi budget; use a two-or-three-shop First Avenue target list and cap duplicate purchases |
+| 3.10 | קניות אנימה + ארקייד | רשימת משאלות אחת ומעטפת מזומן אחת לכל ילד |
+| 4.10 | teamLab + פיקסאר + Joypolis | teamLab שולם ב־¥16,800; פיקסאר ממומן ומוגן; לתמחר את Joypolis מול המתקנים שהמשפחה באמת תעשה, ולקצץ בזמן Gundam/קניון מורחב |
+| 5.10 | PokéPark / גיבוי DisneySea | לקנות בערוץ רשמי בלבד; אף פעם לא לתקצב פרמיה של Fiverr/מתווך |
+| 6.10 | מוצרי קוואי/דמויות | יעד רכישה חמודה אחד לכל אחד |
+| 8.10 | ג׳יבלי + נקאנו | להגן על ג׳יבלי; להשוות לפני קנייה ולעצור את נקאנו אחרי 60–90 דקות |
+| 9.10 | פסטיבל הקארי + וינטג׳ | הערוץ והפארקים חינם; לחלוק מנות קארי מיני ולהגדיר יעד קניות אחד לכל אחד |
+| 10.10 | חגיגה + הקרנה חינמית אופציונלית | להחזיק מעטפת יום אחת כוללת, ללא המתנה; ההקרנה חינם, אבל העברת ארוחת הערב למערב שינג׳וקו עשויה לשנות את ההזמנה |
+| 11.10 | Mizuekai/Awata | לבחור דרג מושבים אחד ב־Mizuekai; לא להוסיף סיורים בתשלום |
+| 12.10 | UZUMASA/HIBIKI | ¥29,600 כבר שולמו; ההוצאה הפתוחה היחידה היא ארוחת צהריים ועוד ¥1,200 אופציונליים לשני המקומות הלא מכוסים ב־3D Maze |
+| 13.10 | פושימי/Yūzen/דוטונבורי | פושימי חינם ותחום בזמן; להגדיר תקרה למקלות לפני שבוחרים, ואז לחלוק מנות באוסקה |
+| 14.10 | USJ | לקנות בדיוק את ערך ה־Express הנדרש; לא להניח חבילה גנרית |
+| 15.10 | מוזיאון נינטנדו | ¥11,000 — זכייה, לתשלום עד 7 באוגוסט |
+| 16.10 | First Avenue + תיפוף + קניות אחרונות | להגן על תקציב ה־bachi; להשתמש ברשימת יעדים של שתיים־שלוש חנויות ב־First Avenue ולהגביל קניות כפולות |
 
-## Celebration Envelope
+## מעטפת החגיגה
 
-| Item | Range |
+| פריט | טווח |
 |---|---:|
-| Tokyo Dome activities | JPY 10,000–20,000 |
-| Planned keepsake | JPY 3,000–8,000 |
-| Dinner | JPY 16,000–32,000 |
-| Karaoke/dessert extra | JPY 3,000–8,000 |
-| **Total excluding gift** | **JPY 32,000–68,000** |
+| פעילויות ב־Tokyo Dome | ¥10,000–20,000 |
+| מזכרת מתוכננת | ¥3,000–8,000 |
+| ארוחת ערב | ¥16,000–32,000 |
+| תוספת קריוקי/קינוח | ¥3,000–8,000 |
+| **סך הכול ללא המתנה** | **¥32,000–68,000** |
 
-## Transport Notes
+## הערות תחבורה
 
-- The 12-year-old uses adult rail fares during the trip.
-- The detailed July 25 route audit in [03-TRANSPORT.md](./03-TRANSPORT.md) produces a baseline of about JPY 61,200–62,000 for four, including both Skyliner trips, Yurikamome, the Yomiuriland gondola and Enoden. The JPY 65,000–75,000 envelope leaves room for the final-base taxi, one timing-saving taxi on Oct 16 and minor live-route changes.
-- Individual reserved Nozomi tickets remain more appropriate than a nationwide JR Pass for this route.
-- The Oct 15 return may start in Uji/Kyoto if Nintendo Museum succeeds; reserve the long-distance train only after the museum slot is known.
-- Do not budget a Hakone or Fuji day: neither is in the complete plan.
+- הילד בן ה־12 משלם תעריפי רכבת של מבוגר לאורך הטיול.
+- ביקורת המסלולים המפורטת מ־25 ביולי ב־[03-TRANSPORT.md](./03-TRANSPORT.md) מייצרת בסיס של כ־¥61,200–62,000 לארבעה, כולל שתי נסיעות ה־Skyliner, ה־Yurikamome, הרכבל ב־Yomiuriland וה־Enoden. מעטפת ה־¥65,000–75,000 משאירה מקום למונית לבסיס הסופי, למונית אחת חוסכת־זמן ב־16.10 ולשינויי מסלול קטנים בזמן אמת.
+- כרטיסי נוזומי שמורים בנפרד עדיין מתאימים למסלול הזה יותר מ־JR Pass ארצי.
+- החזרה של 15.10 מתחילה באוג׳י/קיוטו: חלון מוזיאון נינטנדו קבוע ב־14:30–15:00, ולכן אפשר להזמין את הרכבת הבין־עירונית מסביבו.
+- לא לתקצב יום האקונה או פוג׳י: אף אחד מהם אינו בתוכנית המלאה.
 
-## Cash and Cards
+## מזומן וכרטיסים
 
-- Keep one day’s cash plus a backup reserve; do not carry the full trip budget.
-- Use cash envelopes for arcades/gachapon.
-- Record every prepaid ticket in the ledger to avoid counting it again as daily cash.
-- Check actual card foreign-transaction fees and exchange rates before converting the full budget.
+- להחזיק מזומן ליום אחד ועוד רזרבה; לא לשאת את כל תקציב הטיול.
+- להשתמש במעטפות מזומן לארקייד/גצ׳פון.
+- לתעד כל כרטיס ששולם מראש בפנקס, כדי לא לספור אותו שוב כמזומן יומי.
+- לבדוק את עמלות המט״ח ואת שערי ההמרה בפועל של הכרטיס לפני שממירים את כל התקציב.
 
-## Before Calling the Budget “Final”
+## לפני שקוראים לתקציב ״סופי״
 
-- [ ] Insert the actual flight receipt total.
-- [x] Record Tokyo Oct 2–11 and Kyoto Oct 11–13 booking totals.
-- [ ] Confirm Osaka and final-Tokyo four-person checkout totals.
-- [ ] Record PokéPark pass class and charge.
-- [ ] Record the exact USJ Studio + Express product and charge.
-- [ ] Record Nintendo Museum result.
-- [ ] Set the family anime/character shopping cap.
-- [ ] Add 10–15% contingency.
-- [ ] Convert currencies once, using the actual payment/statement rate.
+- [ ] להזין את סכום קבלת הטיסות בפועל.
+- [x] לתעד את סכומי ההזמנה של טוקיו 2–11.10 ושל קיוטו 11–13.10.
+- [ ] לאמת סכומי תשלום סופיים לארבעה באוסקה ובטוקיו הסופית.
+- [ ] לתעד את סוג הכרטיס והחיוב ב־PokéPark.
+- [ ] לתעד את המוצר המדויק USJ Studio + Express ואת החיוב.
+- [ ] לתעד את החיוב בפועל של מוזיאון נינטנדו — הזכייה ידועה, התשלום עד 7 באוגוסט.
+- [ ] להגדיר את התקרה המשפחתית לקניות אנימה/דמויות.
+- [ ] להוסיף רזרבה של 10–15%.
+- [ ] להמיר מטבעות פעם אחת, לפי שער התשלום/הדוח בפועל.
 
-The honest current output is a controlled set of envelopes, not a grand total. Update this file after each booking rather than carrying old sample prices forward.
+הפלט הכן כרגע הוא מערכת מעטפות מבוקרת, לא סכום כולל. לעדכן את הקובץ הזה אחרי כל הזמנה, במקום לגרור קדימה מחירי דוגמה ישנים.

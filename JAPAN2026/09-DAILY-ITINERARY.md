@@ -1,620 +1,620 @@
-# 09 — Complete Daily Itinerary: Japan Family Trip 2026
+# 09 — המסלול היומי המלא: טיול משפחתי ליפן 2026
 
-**Travel:** October 1–18, 2026
-**Japan:** October 2–17, 2026 · 15 nights
-**Travelers:** 2 adults, daughter (16), son (12)
-**Fixed stays:** Tokyo Oct 2–11 · Kyoto Oct 11–13 · Osaka Oct 13–15 · Tokyo Oct 15–17
-**Trip promise:** anime, gaming, ramen, kawaii and hands-on fun — plus two Kyoto nights built around live traditional performance.
+**הנסיעה:** 1–18 באוקטובר 2026
+**ביפן:** 2–17 באוקטובר 2026 · 15 לילות
+**נוסעים:** 2 מבוגרים, בת (16), בן (12)
+**לינות קבועות:** טוקיו 2–11.10 · קיוטו 11–13.10 · אוסקה 13–15.10 · טוקיו 15–17.10
+**ההבטחה של הטיול:** אנימה, גיימינג, ראמן, קוואי וכיף מעשי — ועוד שני לילות בקיוטו שנבנו סביב הופעה מסורתית חיה.
 
-> **Canonical-plan rule:** this file is the source of truth for the daily route. If another guide conflicts with it, this file wins.
+> **כלל התוכנית הקנונית:** הקובץ הזה הוא מקור האמת למסלול היומי. אם מדריך אחר סותר אותו — הקובץ הזה מנצח.
 
-## The Family-Fit Filter
+## מסנן ההתאמה המשפחתית
 
-Every scheduled block must earn its place in at least one of these ways:
+כל בלוק בלוח הזמנים חייב להצדיק את מקומו לפחות באחת מהדרכים האלה:
 
-- **Play:** ride, game, workshop, arcade, karaoke or interactive art.
-- **Fandom:** Pokémon, Nintendo, anime, manga, Ghibli or character culture.
-- **Taste:** ramen, street food, themed food or a hands-on food experience.
-- **Wow:** a visually unforgettable place that works without a long history lesson.
-- **Cute:** kawaii design, character worlds or a welfare-conscious cat visit.
+- **משחק:** מתקן, משחק, סדנה, ארקייד, קריוקי או אמנות אינטראקטיבית.
+- **פאנדום:** פוקימון, נינטנדו, אנימה, מנגה, ג׳יבלי או תרבות דמויות.
+- **טעם:** ראמן, אוכל רחוב, אוכל מעוצב או חוויית אוכל מעשית.
+- **וואו:** מקום בלתי נשכח ויזואלית שעובד בלי שיעור היסטוריה ארוך.
+- **חמוד:** עיצוב קוואי, עולמות דמויות או ביקור חתולים מודע לרווחת בעלי חיים.
 
-The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and brief. Long museum visits, luxury-shopping walks, adult nightlife alleys and repetitive observation decks do not.
+הבודהה הגדול, מקדש מייג׳י וסנסו־ג׳י נשארים כי הם איקוניים וקצרים. ביקורי מוזיאון ארוכים, רחובות קניות יוקרה, סמטאות חיי לילה למבוגרים ותצפיות חוזרות — לא.
 
-## Booking Gates and Backups
+## שערי הזמנה וגיבויים
 
-| Experience | Current action | If unavailable |
+| חוויה | הפעולה הנוכחית | אם לא זמין |
 |---|---|---|
-| **Nintendo Museum · Oct 15** | **LOTTERY WON — payment outstanding.** The awarded window is **14:30–15:00** and cannot be moved. Buy the four tickets (2 adult + 2 youth, **JPY 11,000**) from the drawing page by **Aug 7 at 23:59 JST** or the win lapses. Card payments can be down for maintenance on the first Tuesday of the month. | Only if the payment deadline is missed: recovery morning in Osaka, then a direct return to Tokyo. |
-| **PokéPark KANTO · Oct 5** | The lottery is closed. As of Jul 24, the official overseas store has no Oct 5 purchase path. Monitor it for official inventory; the **Aug 1** system update is for admissions from Nov 1 and does not promise an October reopening. Use only the [official international store](https://ticket-en.pokepark-kanto.co.jp/) or a seller explicitly authorized by PokéPark; do not use Fiverr or an unofficial paid buyer. | **DisneySea** is the first fallback; Sanrio Puroland is secondary if the family prefers kawaii characters. |
-| **teamLab Planets · Oct 4** | **BOOKED.** Entrance Pass for four, admission **Sun Oct 4, 09:30–10:00 JST**, **JPY 16,800 paid**. QR codes appear on My Tickets only after 00:00 on Oct 4 — load all four before leaving Tabata. The admission date/time can still be changed up to three times, no later than two hours before the slot. | Not needed; the slot is held. |
-| **Mundo Pixar · must-do Oct 4** | Buy a timed entry from the [official event/ticket page](https://t.pia.jp/en/pia/events/mundopixar), now targeting **12:30–13:00** rather than 11:45/12:00 — the booked 09:30 teamLab entry plus 2–2.5 hours inside means the family is not out of teamLab before roughly 11:45–12:00. A daytime D-price slot costs about **JPY 20,100 for this family plus fees**. | If the preferred slot is gone, choose the nearest slot after 12:15 that preserves the teamLab → Pixar → Odaiba route. Cut extended Gundam Base/mall browsing and the waterfront sunset first. |
-| **KAWAII MONSTER LAND · Oct 6** | Buy a timed 60-minute entry from the [official attraction page](https://contents.gendagigo.jp/kawaii-monster-land/en). | Takeshita Street + purikura + Kiddy Land; no cross-city replacement. |
-| **Ghibli Museum · Oct 8** | October tickets release **Sept 10 at 10:00 JST** through the [official ticket page](https://www.ghibli-museum.jp/en/tickets/). Target 10:00. | Kichijoji + Inokashira Park, then the same compact Nakano/Shinjuku route. |
-| **Mizuekai · Oct 11** | Target the **13:00** performance; official sales method is still TBA. JPY 10,000 first floor / JPY 8,000 second floor, age 10+. | Skip the recital, keep a calm Kyoto arrival and meet the Awata procession at 17:00. |
-| **DRUM TAO HIBIKI · Oct 12** | **BOOKED AND PAID.** Order 00003314, four Standard-with-snacks seats in row G (12–15) for the **19:00** HIBIKI performance, **JPY 47,108 paid**. Doors 18:15; about 40 minutes; age 6+. Electronic lessQ tickets — a separate 2D code per seat, retrievable from the order link. | Not needed; the seats are held. |
-| **USJ + Nintendo · Oct 14** | Buy a Studio Pass **and** an Express Pass that explicitly includes Super Nintendo World timed entry from [USJ](https://www.usj.co.jp/web/en/us/tickets). | Studio Pass + immediate app entry request; if Express is gone, use single-rider selectively. |
-| **Pokémon Café · Oct 16** | Watch [Pokémon Café news](https://www.pokemon-cafe.jp/en/cafe/news/). As of July 23, October reservations are **not yet announced**. | Pokémon Center Tokyo DX + Tokyo Ramen Street. Do not pay a reseller. |
+| **מוזיאון נינטנדו · 15.10** | **זכינו בהגרלה — התשלום פתוח.** חלון הזכייה הוא **14:30–15:00** ואי אפשר להזיז אותו. לקנות את ארבעת הכרטיסים (2 מבוגרים + 2 נוער, **¥11,000**) מעמוד ההגרלה עד **7 באוגוסט בשעה 23:59 שעון יפן**, אחרת הזכייה פוקעת. ייתכן שתשלומי כרטיס מושבתים לתחזוקה ביום שלישי הראשון בחודש. | רק אם מועד התשלום יוחמץ: בוקר התאוששות באוסקה ואז חזרה ישירה לטוקיו. |
+| **PokéPark KANTO · 5.10** | ההגרלה נסגרה. נכון ל־1 באוגוסט, בחנות הבינלאומית הרשמית אין מסלול רכישה ל־5.10. עדכון המערכת מ־**1 באוגוסט** נוגע לכניסות מ־1 בנובמבר ואינו מבטיח פתיחה מחדש לאוקטובר. פנייה רשמית נשלחה ב־1 באוגוסט וחזרה ממנה רק תשובה אוטומטית. להשתמש רק ב[חנות הבינלאומית הרשמית](https://ticket-en.pokepark-kanto.co.jp/) או במוכר מורשה במפורש; לא להשתמש ב־Fiverr ולא בקונה בתשלום לא רשמי. | **DisneySea** הוא הגיבוי הראשון; Sanrio Puroland משני, אם המשפחה מעדיפה דמויות קוואי. |
+| **teamLab Planets · 4.10** | **מוזמן.** Entrance Pass לארבעה, כניסה **א׳ 4.10, 09:30–10:00 שעון יפן**, **¥16,800 שולמו**. קודי ה־QR מופיעים ב־My Tickets רק אחרי 00:00 ב־4.10 — לטעון את כל הארבעה לפני היציאה מטבטה. עדיין אפשר לשנות את התאריך/השעה עד שלוש פעמים, לא יאוחר משעתיים לפני החלון. | לא נדרש; החלון שמור. |
+| **Mundo Pixar · חובה 4.10** | לקנות כניסה מתוזמנת מ[עמוד האירוע/הכרטיסים הרשמי](https://t.pia.jp/en/pia/events/mundopixar), כעת ביעד **12:30–13:00** ולא 11:45/12:00 — הכניסה המוזמנת ל־teamLab ב־09:30 ועוד 2–2.5 שעות בפנים אומרות שהמשפחה לא תצא מ־teamLab לפני 11:45–12:00 בערך. חלון D-price ביום עולה כ־**¥20,100 למשפחה הזו, בתוספת עמלות**. | אם החלון המועדף נגמר — לבחור את החלון הקרוב ביותר אחרי 12:15 שמשמר את מסלול teamLab ← פיקסאר ← אודאיבה. לחתוך קודם את הסיבוב המורחב ב־Gundam Base/בקניון ואת השקיעה על קו המים. |
+| **KAWAII MONSTER LAND · 6.10** | לקנות כניסה מתוזמנת של 60 דקות מ[עמוד האטרקציה הרשמי](https://contents.gendagigo.jp/kawaii-monster-land/en). | רחוב Takeshita + פוריקורה + Kiddy Land; בלי תחליף שחוצה את העיר. |
+| **מוזיאון ג׳יבלי · 8.10** | כרטיסי אוקטובר משתחררים ב־**10 בספטמבר בשעה 10:00 שעון יפן** ב[עמוד הכרטיסים הרשמי](https://www.ghibli-museum.jp/en/tickets/). היעד הוא 10:00. | קיצ׳יג׳וג׳י + פארק אינוקשירה, ואז אותו מסלול קומפקטי של נקאנו/שינג׳וקו. |
+| **Mizuekai · 11.10** | היעד הוא ההופעה של **13:00**; דרך המכירה הרשמית טרם נקבעה. ¥10,000 בקומה הראשונה / ¥8,000 בקומה השנייה, מגיל 10 ומעלה. | לוותר על המופע, לשמור על הגעה רגועה לקיוטו ולפגוש את תהלוכת Awata ב־17:00. |
+| **DRUM TAO HIBIKI · 12.10** | **מוזמן ומשולם.** הזמנה 00003314, ארבעה מושבי Standard עם חטיפים בשורה G (12–15) להופעת HIBIKI של **19:00**, **¥47,108 שולמו**. הדלתות ב־18:15; כ־40 דקות; מגיל 6 ומעלה. כרטיסים אלקטרוניים lessQ — קוד דו־ממדי נפרד לכל מושב, שנשלף מקישור ההזמנה. | לא נדרש; המושבים שמורים. |
+| **USJ + נינטנדו · 14.10** | לקנות Studio Pass **וגם** Express Pass שכולל במפורש כניסה מתוזמנת ל־Super Nintendo World, מ־[USJ](https://www.usj.co.jp/web/en/us/tickets). | Studio Pass + בקשת כניסה מיידית באפליקציה; אם ה־Express נגמר — להשתמש ב־single rider באופן סלקטיבי. |
+| **Pokémon Café · 16.10** | לעקוב אחרי [חדשות Pokémon Café](https://www.pokemon-cafe.jp/en/cafe/news/). נכון ל־1 באוגוסט, ההזמנות לאוקטובר **טרם הוכרזו**. | Pokémon Center Tokyo DX + Tokyo Ramen Street. לא לשלם למתווך. |
 
-## Interest and Energy Rules
+## כללי עניין ואנרגיה
 
-- One headline experience per half-day; normally no more than two ticketed attractions in one day. Oct 4 is the deliberate exception because teamLab, Pixar and Joypolis sit on one continuous waterfront route, with lower-priority browsing removed.
-- Every shopping district gets a **wish list, time box and spending cap**.
-- For arcades and gachapon, load a fixed cash envelope before entering.
-- After three active days, the next day starts later or ends earlier.
-- “Cut first” means skip it without guilt when anyone is tired.
-- Rain planning: Day 7 needs its own wet-weather fallback once Ghibli is fixed on Oct 8; ticketed entries do not move casually.
-
----
-
-## Day 1 — Thu, Oct 1: Depart Tel Aviv
-
-**Theme:** travel only
-**Route:** TLV → Addis Ababa
-
-- Reach Ben Gurion according to Ethiopian Airlines’ international check-in guidance.
-- **ET419:** TLV 15:35 → ADD 19:50.
-- Use the 2h45 connection for the gate transfer, meal, bathrooms and stretching.
-- Board **ET672** at 22:35 for Narita.
-
-**Carry-on:** passports, medicines, chargers, power banks, one change of clothes each, the Tabata apartment address in Japanese and late-check-in instructions.
+- חוויית כותרת אחת לחצי יום; בדרך כלל לא יותר משתי אטרקציות עם כרטיס ביום אחד. 4.10 הוא היוצא מן הכלל המכוון, מפני ש־teamLab, פיקסאר ו־Joypolis יושבים על מסלול רציף אחד לאורך קו המים, אחרי שהוסרו ממנו סיבובים בעדיפות נמוכה.
+- כל אזור קניות מקבל **רשימת משאלות, תיחום זמן ותקרת הוצאה**.
+- לארקייד ולגצ׳פון — לטעון מעטפת מזומן קבועה לפני הכניסה.
+- אחרי שלושה ימים פעילים, היום הבא מתחיל מאוחר יותר או נגמר מוקדם יותר.
+- ״חותכים ראשון״ פירושו לוותר בלי אשמה כשמישהו עייף.
+- תכנון גשם: ליום 7 צריך גיבוי משלו לימים רטובים, מפני שג׳יבלי קבוע ב־8.10; כניסות עם כרטיס לא מוזזות סתם כך.
 
 ---
 
-## Day 2 — Fri, Oct 2: Narita Arrival
+## יום 1 — ה׳, 1.10: יציאה מתל אביב
 
-**Theme:** land, transfer, eat, sleep
-**Route:** NRT → Tabata base
+**הנושא:** נסיעה בלבד
+**המסלול:** TLV ← אדיס אבבה
 
-- **19:40:** ET672 arrives at Narita.
-- Allow roughly 90 minutes for immigration, bags and customs.
-- Buy the next practical Skyliner to Nippori after collecting bags, then connect by JR to Tabata; keep an airport-bus/taxi fallback.
-- **Leave Tabata Station by the north exit.** It has an escalator; the south exit is roughly 100 steps plus a steep ramp. This matters more than usual — see the next point.
-- **The apartment building has no lift.** Every suitcase goes up the stairs by hand, near midnight, after ~22 hours of travel. Send the heavy bags ahead or pack so each person can carry their own; decide this before departure, not on the pavement.
-- Message the accommodation after landing and follow the late self-check-in instructions saved offline.
-- Buy a simple konbini dinner and breakfast. No sightseeing.
+- להגיע לנתב״ג לפי הנחיות הצ׳ק־אין הבינלאומי של Ethiopian Airlines.
+- **ET419:** TLV 15:35 ← ADD 19:50.
+- לנצל את הקונקשן של 2 ש׳ 45 ד׳ למעבר לשער, לארוחה, לשירותים ולמתיחות.
+- לעלות ל־**ET672** ב־22:35 לנריטה.
 
-**Pre-trip gate — not an arrival-day task:** passport images for all four guests were sent in Airbnb chat on **Aug 1**, together with the 21:30–23:00 arrival window. Still outstanding: the host's written confirmation that the late arrival is permitted, the lockbox details, a contact who answers at night, and which floor the unit is on. Save the released instructions offline.
+**כבודת יד:** דרכונים, תרופות, מטענים, סוללות ניידות, החלפת בגדים אחת לכל אחד, כתובת הדירה בטבטה ביפנית והוראות הצ׳ק־אין המאוחר.
 
 ---
 
-## Day 3 — Sat, Oct 3: Akihabara Play + Collect
+## יום 2 — ו׳, 2.10: הגעה לנריטה
 
-**Theme:** anime, retro games, rhythm games and first-day treasure hunting
-**Route:** Tabata → Akihabara · direct JR, then compact on foot
+**הנושא:** לנחות, לנסוע, לאכול, לישון
+**המסלול:** NRT ← בסיס טבטה
 
-### Morning · 09:30–12:30
+- **19:40:** ET672 נוחתת בנריטה.
+- להקצות כ־90 דקות להגירה, למזוודות ולמכס.
+- לקנות את ה־Skyliner המעשי הבא לניפורי אחרי איסוף המזוודות, ואז להתחבר ב־JR לטבטה; לשמור גיבוי של אוטובוס שדה או מונית.
+- **לצאת מתחנת טבטה ביציאה הצפונית.** יש בה דרגנוע; ביציאה הדרומית יש כ־100 מדרגות ורמפה תלולה. זה חשוב מהרגיל — ראו את הסעיף הבא.
+- **אין מעלית בבניין הדירה.** כל מזוודה עולה במדרגות ביד, קרוב לחצות, אחרי כ־22 שעות נסיעה. לשלוח את התיקים הכבדים מראש או לארוז כך שכל אחד יישא את שלו; להחליט על זה לפני היציאה, לא על המדרכה.
+- לשלוח הודעה ללינה אחרי הנחיתה ולפעול לפי הוראות הצ׳ק־אין העצמי המאוחר ששמורות אופליין.
+- לקנות ארוחת ערב וארוחת בוקר פשוטות בקונביני. בלי סיורים.
 
-1. **Radio Kaikan**: each child chooses a hunt list—specific series, character and maximum price.
-2. **Animate Akihabara** for current series and character goods.
-3. **Mandarake Complex** after its noon opening for used figures and older Hunter × Hunter / Pokémon finds.
-
-**Optional flea-market swap:** the current 2026 calendar lists the **Oi Racecourse Tokyo City Flea Market** on Oct 3, marked with an asterisk, from 09:00–14:30 with free entry. If vintage bags, used character goods and bargain hunting excite the family more than a full Akihabara morning, replace—not add to—the morning block, leave the market by about 12:30/13:00 and run only a focused Akihabara list afterward. It is weather-sensitive, so check the organizer’s feed the night before and again that morning. [Organizer Instagram](https://www.instagram.com/tokyocity_fleamarket/) · [2026 date listing](https://odekakeoffice.jp/blog/2026/06/20/tokyo-city-flea-market/) · [independent venue guide](https://www.timeout.com/tokyo/shopping/oi-racecourse-flea-market)
-
-### Afternoon · 12:30–17:30
-
-- Lunch: **CoCo Ichibanya** or a nearby ramen shop. A maid café is optional only if both children actively want the performance.
-- Pick **one modern arcade** and **one serious game stop**:
-  - **GiGO** for crane/rhythm games.
-  - **HEY Taito** for playable arcade games.
-  - **Super Potato** for retro consoles and the small top-floor arcade.
-- Finish with a controlled gachapon session. With the cat café moved to Oct 8, the afternoon has extra slack — spend it on arcade play, not more shops.
-
-### Evening
-
-- Neon photos on Chuo-dori.
-- Dinner near Akihabara or back in Tabata; ramen is preferred over an adult-oriented alley.
-
-**Play budget:** JPY 1,500–2,000 per child.
-**Shopping rule:** photograph expensive items; do not buy the first version seen.
-**Cut first:** an extra shop. Protect the arcade play.
+**שער לפני הנסיעה — לא משימה של יום ההגעה:** תמונות הדרכון של כל ארבעת האורחים נשלחו בצ׳אט Airbnb ב־**1 באוגוסט**, יחד עם חלון ההגעה 21:30–23:00. עדיין פתוחים: אישור בכתב מהמארח שההגעה המאוחרת מותרת, פרטי הלוקבוקס, איש קשר שעונה בלילה, ובאיזו קומה נמצאת היחידה. לשמור אופליין את ההוראות ברגע שישוחררו.
 
 ---
 
-## Day 4 — Sun, Oct 4: teamLab Planets + Mundo Pixar + Odaiba
+## יום 3 — ש׳, 3.10: אקיהברה — לשחק ולאסוף
 
-**Theme:** immersive art, Pixar worlds and real play—not mall wandering
-**Route:** Toyosu → Shin-Toyosu → Shijō-mae → Odaiba on the Yurikamome
+**הנושא:** אנימה, משחקי רטרו, משחקי קצב וציד אוצרות ביום הראשון
+**המסלול:** טבטה ← אקיהברה · JR ישיר, ואז קומפקטי ברגל
 
-### Morning · 09:30–12:00
+### בוקר · 09:30–12:30
 
-- **teamLab Planets — booked.** Entrance Pass for four, admission window **09:30–10:00**, JPY 16,800 paid (2 adults at JPY 5,600, 2 junior-high/high-school at JPY 2,800). Enter at 09:30, not at the end of the window.
-- QR codes only become visible on My Tickets after **00:00 on Oct 4**. Open the link the night before, then load and screenshot all four QR codes before leaving Tabata. The e-mail itself is not an admission document.
-- Wear clothes that roll above the knee; the experience includes water and mirrored floors.
-- Allow 2–2.5 hours and use the free lockers.
-- Reach Shin-Toyosu on the **Yurikamome**, not by bus. teamLab warns of heavy congestion on the public buses from Tokyo Station, Ginza and Tsukiji toward Shin-Toyosu; the paid GINZA SIX shuttle is irrelevant to our Tabata → Shimbashi → Yurikamome route.
+1. **Radio Kaikan** (ラジオ会館): כל ילד בוחר רשימת ציד — סדרה, דמות ומחיר מקסימלי.
+2. **Animate אקיהברה** לסדרות עדכניות ולמוצרי דמויות.
+3. **Mandarake Complex** (まんだらけ) אחרי הפתיחה בצהריים, לפסלונים משומשים ולממצאי Hunter × Hunter / פוקימון ישנים יותר.
 
-### Afternoon · 12:00–17:30
+**החלפה אופציונלית ביריד:** לוח 2026 הנוכחי מציין את **Oi Racecourse Tokyo City Flea Market** ב־3.10, מסומן בכוכבית, 09:00–14:30 בכניסה חינם. אם תיקי וינטג׳, מוצרי דמויות משומשים וציד מציאות מלהיבים את המשפחה יותר מבוקר מלא באקיהברה — להחליף את בלוק הבוקר, לא להוסיף עליו, לעזוב את היריד סביב 12:30/13:00 ואז להריץ רק רשימה ממוקדת באקיהברה. היריד רגיש למזג אוויר, ולכן לבדוק את הפיד של המארגן בערב שלפני ושוב באותו בוקר. [אינסטגרם של המארגן](https://www.instagram.com/tokyocity_fleamarket/) · [רישום התאריכים ל־2026](https://odekakeoffice.jp/blog/2026/06/20/tokyo-city-flea-market/) · [מדריך עצמאי למקום](https://www.timeout.com/tokyo/shopping/oi-racecourse-flea-market)
 
-- **Must-do:** after teamLab, continue one stop to Shijō-mae for the timed **Mundo Pixar** entry, now targeting **12:30–13:00**. The booked 09:30 teamLab admission makes the old 11:45/12:00 slot unrealistic — buy the Pixar ticket against 12:30, not against the earlier plan. CREVIA BASE is about three minutes from the station, the experience takes about 45–55 minutes, and Oct 4 is currently a D-price day: three age-16+ tickets plus one age-4–15 ticket total about **JPY 20,100 before fees**. [Official exhibition](https://mundopixar.com/en/cities/tokyo) · [official calendar and prices](https://t.pia.jp/en/pia/events/mundopixar)
-- Treat teamLab, Pixar and a meaningful Joypolis block as the day’s three anchors. Pixar is not the cut: shorten Gundam Base/mall browsing and drop the waterfront sunset before reducing Joypolis.
-- Continue by Yurikamome to Odaiba; front or rear seats turn transport into an attraction.
-- Lunch at DiverCity.
-- **Unicorn Gundam statue** + **Gundam Base Tokyo**.
-- **Tokyo Joypolis** for indoor rides, Sonic-themed play and arcade experiences. Check ride restrictions; choose a passport only if the family will do enough rides.
+### אחר הצהריים · 12:30–17:30
 
-### Evening
+- צהריים: **CoCo Ichibanya** או מסעדת ראמן סמוכה. מייד קפה רק אם שני הילדים באמת רוצים את המופע.
+- לבחור **ארקייד מודרני אחד** ו**עצירת משחק רצינית אחת**:
+  - **GiGO** למשחקי מנוף/קצב.
+  - **HEY Taito** למשחקי ארקייד שאפשר לשחק בהם.
+  - **Super Potato** לקונסולות רטרו ולארקייד הקטן בקומה העליונה.
+- לסיים בסשן גצ׳פון מבוקר. אחרי שבית קפה החתולים עבר ל־8.10, יש באחר הצהריים אוויר נוסף — להוציא אותו על משחק בארקייד, לא על עוד חנויות.
 
-- Dinner near Joypolis or DiverCity, then the night Yurikamome back.
+### ערב
 
-**Cut first:** extra malls, Madame Tussauds, Fuji TV, extended Gundam Base browsing and the waterfront sunset. Protect teamLab, Pixar and the Joypolis play block.
-**Rain-proof:** almost the entire day is indoors.
+- תמונות ניאון ב־Chuo-dori (中央通り).
+- ארוחת ערב ליד אקיהברה או בחזרה בטבטה; ראמן עדיף על סמטה מוכוונת־מבוגרים.
 
----
-
-## Day 5 — Mon, Oct 5: PokéPark KANTO
-
-**Theme:** the son’s Pokémon dream day
-**Route:** Tabata → Shinjuku → Keio-Yomiuriland → gondola/bus
-
-### Before leaving
-
-- Tickets must already be secured; do not travel hoping for gate sales.
-- Download and update the official PokéPark app.
-- Pack charged power banks, water, rain layer and comfortable shoes.
-
-### Park strategy
-
-1. Arrive before the published Yomiuriland opening time.
-2. Use the scenic Sky Shuttle gondola if operating.
-3. Enter PokéPark at the exact ticket time; published October 2026 hours are **11:00–19:00**.
-4. From **10:45 in October**, use the app for limited-access requests for the Daisuki Shop, Playhouse and Sedge Gym show.
-5. Prioritize **Pokémon Forest** before anyone is tired; it includes steep terrain and a 110-step staircase.
-6. Add selected Yomiuriland rides only after the PokéPark priorities are complete.
-
-**Pass choice:** Trainer’s Pass is the default; Ace only if the included priority/re-entry perks justify the live price. Prices vary by date.
-**Ticket-sourcing rule:** do not buy through Fiverr, a broker or an unofficial reseller. PokéPark may invalidate tickets connected to commercial acquisition/resale/transfer and refuse entry without compensation. Monitor the official overseas store for Oct 5 inventory; the [Aug 1 update notice](https://www.pokepark-kanto.co.jp/ppark/announcement/47/detail/index) applies to admissions from Nov 1 and is not a promised reopening for October.
-**Backup:** DisneySea replaces this day if official PokéPark tickets cannot be secured. The official Oct 5 calendar currently shows 09:00–21:00 and Halloween, but Tower of Terror and Indiana Jones are scheduled closed. [Official calendar](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/)
+**תקציב משחק:** ¥1,500–2,000 לילד.
+**כלל קניות:** לצלם פריטים יקרים; לא לקנות את הגרסה הראשונה שרואים.
+**חותכים ראשון:** עוד חנות. להגן על המשחק בארקייד.
 
 ---
 
-## Day 6 — Tue, Oct 6: Harajuku Kawaii + Shibuya Gaming
+## יום 4 — א׳, 4.10: teamLab Planets + Mundo Pixar + אודאיבה
 
-**Theme:** the sister’s kawaii headline and a shared Nintendo/Pokémon finish
-**Route:** Meiji Jingu → Takeshita Street → Shibuya · no backtracking
+**הנושא:** אמנות עוטפת, עולמות פיקסאר ומשחק אמיתי — לא שיטוט בקניון
+**המסלול:** טויוסו ← שין־טויוסו ← Shijō-mae ← אודאיבה ב־Yurikamome
 
-### Morning · 08:45–12:30
+### בוקר · 09:30–12:00
 
-- **Meiji Jingu:** a 35–45 minute forest-and-torii reset, not a long shrine lesson.
-- Enter Takeshita Street before the midday crowd.
-- Harajuku crepe, purikura and a fast pass through **Kiddy Land**.
-- **KAWAII MONSTER LAND:** book a late-morning 60-minute show/game slot. It opened in February 2026 and is the trip’s strongest dedicated kawaii experience.
+- **teamLab Planets — מוזמן.** Entrance Pass לארבעה, חלון כניסה **09:30–10:00**, ¥16,800 שולמו (2 מבוגרים ב־¥5,600, 2 תלמידי חטיבה/תיכון ב־¥2,800). להיכנס ב־09:30, לא בסוף החלון.
+- קודי ה־QR נעשים גלויים ב־My Tickets רק אחרי **00:00 ב־4.10**. לפתוח את הקישור בערב שלפני, ואז לטעון ולצלם מסך של כל ארבעת הקודים לפני היציאה מטבטה. המייל עצמו אינו מסמך כניסה.
+- ללבוש בגדים שאפשר לגלול מעל הברך; החוויה כוללת מים ורצפות מראה.
+- להקצות 2–2.5 שעות ולהשתמש בלוקרים החינמיים.
+- להגיע לשין־טויוסו ב־**Yurikamome**, לא באוטובוס. teamLab מזהירים מעומס כבד באוטובוסים הציבוריים מתחנת טוקיו, מגינזה ומצוקיג׳י לכיוון שין־טויוסו; ההסעה בתשלום מ־GINZA SIX לא רלוונטית למסלול שלנו טבטה ← שימבאשי ← Yurikamome.
 
-### Afternoon · 13:00–17:30
+### אחר הצהריים · 12:00–17:30
 
-- Walk Cat Street toward Shibuya and eat lunch on the way.
-- Shibuya Crossing + Hachiko as quick photo stops.
-- **Shibuya PARCO 6F power block:**
+- **חובה:** אחרי teamLab להמשיך תחנה אחת ל־Shijō-mae לכניסה המתוזמנת ל־**Mundo Pixar**, כעת ביעד **12:30–13:00**. הכניסה המוזמנת ל־teamLab ב־09:30 הופכת את החלון הישן 11:45/12:00 ללא ריאלי — לקנות את כרטיס פיקסאר מול 12:30, לא מול התוכנית המוקדמת. CREVIA BASE נמצא כשלוש דקות מהתחנה, החוויה אורכת כ־45–55 דקות, ו־4.10 הוא כרגע יום D-price: שלושה כרטיסים מגיל 16 ומעלה ועוד כרטיס אחד לגילאי 4–15 מסתכמים בכ־**¥20,100 לפני עמלות**. [התערוכה הרשמית](https://mundopixar.com/en/cities/tokyo) · [לוח שנה ומחירים רשמיים](https://t.pia.jp/en/pia/events/mundopixar)
+- להתייחס ל־teamLab, לפיקסאר ולבלוק משמעותי ב־Joypolis כשלושת העוגנים של היום. פיקסאר אינו החיתוך: לקצר את הסיבוב ב־Gundam Base/בקניון ולוותר על השקיעה על קו המים לפני שמצמצמים את Joypolis.
+- להמשיך ב־Yurikamome לאודאיבה; מושבים בחזית או בירכתיים הופכים את הנסיעה לאטרקציה.
+- צהריים ב־DiverCity.
+- **פסל ה־Unicorn Gundam** + **Gundam Base Tokyo**.
+- **Tokyo Joypolis** למתקנים מקורים, למשחק בנושא סוניק ולחוויות ארקייד. לבדוק מגבלות מתקנים; לבחור פספורט רק אם המשפחה תעשה מספיק מתקנים.
+
+### ערב
+
+- ארוחת ערב ליד Joypolis או DiverCity, ואז Yurikamome לילי בחזרה.
+
+**חותכים ראשון:** קניונים נוספים, Madame Tussauds, Fuji TV, סיבוב מורחב ב־Gundam Base והשקיעה על קו המים. להגן על teamLab, על פיקסאר ועל בלוק המשחק ב־Joypolis.
+**חסין גשם:** כמעט כל היום מקורה.
+
+---
+
+## יום 5 — ב׳, 5.10: PokéPark KANTO
+
+**הנושא:** יום חלום הפוקימון של הבן
+**המסלול:** טבטה ← שינג׳וקו ← Keio-Yomiuriland ← רכבל/אוטובוס
+
+### לפני היציאה
+
+- הכרטיסים חייבים להיות מובטחים כבר; לא לנסוע בתקווה למכירה בשער.
+- להוריד ולעדכן את האפליקציה הרשמית של PokéPark.
+- לארוז סוללות ניידות טעונות, מים, שכבת גשם ונעליים נוחות.
+
+### אסטרטגיית הפארק
+
+1. להגיע לפני שעת הפתיחה המפורסמת של Yomiuriland.
+2. להשתמש ברכבל Sky Shuttle הנופי אם הוא פועל.
+3. להיכנס ל־PokéPark בדיוק בשעת הכרטיס; השעות שפורסמו לאוקטובר 2026 הן **11:00–19:00**.
+4. מ־**10:45 באוקטובר**, להשתמש באפליקציה לבקשות גישה מוגבלת ל־Daisuki Shop, ל־Playhouse ולמופע Sedge Gym.
+5. לתעדף את **Pokémon Forest** לפני שמישהו מתעייף; יש בו שטח תלול וגרם מדרגות של 110 מדרגות.
+6. להוסיף מתקנים נבחרים של Yomiuriland רק אחרי שעדיפויות ה־PokéPark הושלמו.
+
+**בחירת כרטיס:** Trainer's Pass הוא ברירת המחדל; Ace רק אם הטבות העדיפות/הכניסה החוזרת הכלולות מצדיקות את המחיר בפועל. המחירים משתנים לפי תאריך.
+**כלל מקור הכרטיס:** לא לקנות דרך Fiverr, ברוקר או מתווך לא רשמי. PokéPark רשאי לבטל כרטיסים שקשורים לרכישה/מכירה חוזרת/העברה מסחרית ולסרב כניסה בלי פיצוי. לעקוב אחרי החנות הבינלאומית הרשמית למלאי ל־5.10; [הודעת העדכון מ־1 באוגוסט](https://www.pokepark-kanto.co.jp/ppark/announcement/47/detail/index) חלה על כניסות מ־1 בנובמבר ואינה פתיחה מובטחת לאוקטובר.
+**גיבוי:** DisneySea מחליף את היום הזה אם אי אפשר להשיג כרטיסי PokéPark רשמיים. לוח השנה הרשמי ל־5.10 מציג כרגע 09:00–21:00 ותוכן ליל כל הקדושים, אבל Tower of Terror ו־Indiana Jones מתוכננים סגורים. [לוח השנה הרשמי](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/)
+
+---
+
+## יום 6 — ג׳, 6.10: קוואי בהרג׳וקו + גיימינג בשיבויה
+
+**הנושא:** כותרת הקוואי של האחות וסיום משותף של נינטנדו/פוקימון
+**המסלול:** מקדש מייג׳י ← רחוב Takeshita ← שיבויה · בלי לחזור אחורה
+
+### בוקר · 08:45–12:30
+
+- **מקדש מייג׳י** (明治神宮): איפוס של 35–45 דקות של יער ושערי טורי, לא שיעור מקדשים ארוך.
+- להיכנס לרחוב Takeshita (竹下通り) לפני הקהל של הצהריים.
+- קרפ בהרג׳וקו, פוריקורה ומעבר מהיר ב־**Kiddy Land**.
+- **KAWAII MONSTER LAND:** להזמין חלון מופע/משחק של 60 דקות בשעות הבוקר המאוחרות. הוא נפתח בפברואר 2026 והוא חוויית הקוואי הייעודית החזקה ביותר בטיול.
+
+### אחר הצהריים · 13:00–17:30
+
+- ללכת ברחוב Cat Street לכיוון שיבויה ולאכול צהריים בדרך.
+- מפגש Shibuya Crossing ופסל Hachiko כעצירות צילום מהירות.
+- **בלוק העוצמה בקומה 6 של Shibuya PARCO:**
   - Nintendo TOKYO
   - Pokémon Center Shibuya
   - CAPCOM STORE TOKYO
-  - JUMP SHOP for Hunter × Hunter and Demon Slayer goods
+  - JUMP SHOP למוצרי Hunter × Hunter ו־Demon Slayer
 
-### Evening
+### ערב
 
-- Choose **Shibuya Sky** only if a sunset slot was booked and the weather is clear.
-- Dinner: **AFURI** for lighter yuzu ramen or **Ichiran** for the booth experience. Note that Ichiran’s base bowl is no longer a sub-JPY 1,000 meal.
+- לבחור ב־**Shibuya Sky** רק אם הוזמן חלון שקיעה ומזג האוויר בהיר.
+- ארוחת ערב: **AFURI** לראמן יוזו קליל יותר, או **Ichiran** לחוויית התא. לשים לב שהקערה הבסיסית של Ichiran כבר אינה ארוחה מתחת ל־¥1,000.
 
-**Cut first:** Shibuya Sky. The fandom floor is the priority.
-**Why it works:** the day progresses naturally from calm → cute → games → neon.
-
----
-
-## Day 7 — Wed, Oct 7: Kamakura + Enoshima Adventure
-
-**Theme:** iconic Japan without temple fatigue, then coast, caves and snacks
-**Route:** Tabata → Kamakura → Hase → Enoshima → Fujisawa/Tokyo
-
-### Morning
-
-- Direct JR service to Kamakura where practical.
-- Go straight to **Hase**.
-- **Kotoku-in Great Buddha:** 30–40 minutes.
-- **Hasedera:** prioritize the cave, views and gardens; 60 minutes.
-
-### Afternoon
-
-- Ride the Enoden along the coast.
-- Pause briefly at **Kamakurakōkōmae** for the *Slam Dunk* crossing view; stay behind barriers, avoid blocking traffic and keep it to a quick photo stop.
-- Lunch around Hase/Enoshima; choose shirasu only if everyone wants it.
-- Cross to **Enoshima** for Nakamise snacks, escalator if needed, Sea Candle views and the Iwaya caves if weather/tide operations allow.
-
-### Evening
-
-- Sunset by the coast, then return via Fujisawa to avoid retracing the full Enoden route.
-
-**Cut first:** Tsurugaoka Hachimangu and the deepest Enoshima climb.
-**Bad-weather swap:** move this day and use Day 8’s indoor plan.
+**חותכים ראשון:** Shibuya Sky. קומת הפאנדום היא העדיפות.
+**למה זה עובד:** היום מתקדם באופן טבעי מרגוע ← חמוד ← משחקים ← ניאון.
 
 ---
 
-## Day 8 — Thu, Oct 8: Ghibli + Compact Nakano/Shinjuku
+## יום 7 — ד׳, 7.10: הרפתקת קמקורה + אנושימה
 
-**Theme:** animation magic, a focused collector hunt and one neon finale
-**Route:** Tabata → Mitaka/Kichijoji → Nakano → Shinjuku
+**הנושא:** יפן איקונית בלי עייפות מקדשים, ואז חוף, מערות וחטיפים
+**המסלול:** טבטה ← קמקורה ← האסה ← אנושימה ← פוג׳יסאווה/טוקיו
 
-### Morning · 10:00–12:30
+### בוקר
 
-- **Ghibli Museum** at 10:00 if secured; all entry is advance reservation.
-- Allow 2–2.5 hours for the exclusive short film, building, rooftop and shop.
-- Walk through Inokashira Park toward Kichijoji and eat an early, simple lunch.
+- שירות JR ישיר לקמקורה היכן שזה מעשי.
+- ללכת ישר ל־**האסה**.
+- **הבודהה הגדול ב־Kotoku-in** (高徳院): 30–40 דקות.
+- **Hasedera** (長谷寺): לתעדף את המערה, את התצפיות ואת הגנים; 60 דקות.
 
-### Afternoon · 13:00–16:30
+### אחר הצהריים
 
-- **Kichijōji Petit Mura · 13:00–14:00:** a fairy-tale micro-village five minutes north of Kichijoji Station. Visit **Cat Cafe Temari no Oshiro** — a two-story cat castle with about 20 cats and no time limit. Ages 10+, about JPY 1,200 + tax per person on Thursdays; reserve ahead. [Official site](https://temarinooshiro.com/)
-- Continue by JR Chuo to Nakano.
-- **Nakano Broadway scavenger hunt:** cap it at 60–90 minutes, because many stores duplicate Akihabara.
-- Each child gets three targets and a spending ceiling; compare Mandarake branches before purchasing.
+- לנסוע ב־Enoden לאורך החוף.
+- לעצור רגע ב־**Kamakurakōkōmae** בשביל נוף המפגש מ־*Slam Dunk*; להישאר מאחורי המחסומים, לא לחסום תנועה ולשמור על עצירת צילום קצרה.
+- צהריים סביב האסה/אנושימה; לבחור shirasu רק אם כולם רוצים.
+- לחצות ל־**אנושימה** לחטיפי Nakamise, לדרגנוע אם צריך, לנופי Sea Candle ולמערות Iwaya אם מזג האוויר והגאות מאפשרים.
 
-### Evening · 17:00–20:00
+### ערב
 
-- Continue five minutes by JR to Shinjuku.
-- Watch the free **Cross Shinjuku Vision 3D cat**, take the Godzilla Head photo and eat dinner.
-- **namco TOKYO** is optional only if everyone still has energy; it is no longer a protected long play block.
+- שקיעה על החוף, ואז חזרה דרך פוג׳יסאווה כדי לא לחזור על כל מסלול ה־Enoden אחורה.
 
-**Cut first:** namco TOKYO, then extra Nakano shops. Protect Ghibli, the Petit Mura cat visit and an unhurried lunch.
-**Ghibli backup:** Kichijoji + Inokashira Park, then the same compact Nakano/Shinjuku route.
-**Removed:** Golden Gai and Omoide Yokocho are adult-first, cramped and not worth using family energy.
+**חותכים ראשון:** Tsurugaoka Hachimangu והטיפוס העמוק ביותר באנושימה.
+**גיבוי למזג אוויר גרוע:** להשתמש בגיבוי מקורה נפרד בטוקיו. **לא** להחליף עם 8.10 — ג׳יבלי מוזמן שם ואינו זז.
 
 ---
 
-## Day 9 — Fri, Oct 9: Todoroki + Totoro + Curry Festival
+## יום 8 — ה׳, 8.10: ג׳יבלי + נקאנו/שינג׳וקו קומפקטיים
 
-**Theme:** two green resets, Ghibli-shaped sweets and a real neighborhood food festival
-**Route:** Tabata → Oimachi → Todoroki → Jiyūgaoka/Shibuya → Setagaya-Daita → Hanegi Park → Shimokitazawa → Tokyo
+**הנושא:** קסם אנימציה, ציד אספנים ממוקד וסיום ניאון אחד
+**המסלול:** טבטה ← מיטאקה/קיצ׳יג׳וג׳י ← נקאנו ← שינג׳וקו
 
-### Morning · 08:00–10:45
+### בוקר · 10:00–12:30
 
-- Leave around 08:00 and travel via Oimachi to Todoroki Station.
-- Enter beneath Golf Bridge, about three minutes from the station.
-- Walk the reopened riverside path toward **Todoroki Fudoson and the Japanese Garden**; allow 60–90 minutes.
-- The path is narrow, uneven and unfenced in places. Do not enter during or just after heavy rain, and leave well before dark.
-- If Setsugekka is open, share tea and kuzu-mochi rather than turning it into a full meal.
+- **מוזיאון ג׳יבלי** ב־10:00 אם הושג; כל הכניסות בהזמנה מראש.
+- להקצות 2–2.5 שעות לסרט הקצר הבלעדי, לבניין, לגג ולחנות.
+- ללכת דרך פארק אינוקשירה (井の頭公園) לכיוון קיצ׳יג׳וג׳י ולאכול צהריים מוקדמים ופשוטים.
 
-Setagaya reopened the full path on March 24, 2026. Recheck for temporary works one to two weeks before the visit. [Official status and safety notice](https://www.city.setagaya.lg.jp/02075/9082.html)
+### אחר הצהריים · 13:00–16:30
 
-### Midday · 10:45–13:30
+- **Petit Mura בקיצ׳יג׳וג׳י · 13:00–14:00:** כפר מיניאטורי מעולם האגדות, חמש דקות צפונית לתחנת קיצ׳יג׳וג׳י. לבקר ב־**Cat Cafe Temari no Oshiro** — טירת חתולים דו־קומתית עם כ־20 חתולים ובלי הגבלת זמן. מגיל 10 ומעלה, כ־¥1,200 + מס לאדם בימי חמישי; להזמין מראש. [האתר הרשמי](https://temarinooshiro.com/)
+- להמשיך ב־JR Chuo לנקאנו.
+- **ציד האספנים ב־Nakano Broadway:** להגביל ל־60–90 דקות, מפני שחנויות רבות משכפלות את אקיהברה.
+- כל ילד מקבל שלושה יעדים ותקרת הוצאה; להשוות בין סניפי Mandarake לפני קנייה.
 
-- Continue through Jiyūgaoka and Shibuya to Shimokitazawa/Setagaya-Daita; allow about 45 minutes including transfers and the walk.
-- Collect a reserved **Shiro-Hige Totoro cream-puff** box from the Daita shop after it opens at 10:30. [Official shop](https://shiro-hige.net/)
-- Walk to **Hanegi Park** for a short picnic and energy reset. Part of the park is scheduled for renovation during 2026, so use whatever lawn/rest area is open rather than chasing a specific facility. [Official park page](https://www.city.setagaya.lg.jp/02075/9123.html)
+### ערב · 17:00–20:00
 
-### Afternoon and evening · 13:30–19:00
+- להמשיך חמש דקות ב־JR לשינג׳וקו.
+- לראות את החתול התלת־ממדי החינמי ב־**Cross Shinjuku Vision**, לצלם את ראש הגודזילה ולאכול ארוחת ערב.
+- **namco TOKYO** אופציונלי רק אם לכולם עוד יש אנרגיה; הוא כבר לא בלוק משחק ארוך ומוגן.
 
-- Walk into Shimokitazawa after the neighborhood comes alive.
-- The **2026 Shimokitazawa Curry Festival** runs Oct 8–25, making Oct 9 its second day. Use mini portions at participating restaurants for a three-stop family curry scorecard. [Official festival](https://shimokitazawa-curryfes.com/)
-- Between bites, browse one vintage store, one music/book shop and Mikan or Reload; each child chooses one stop.
-- If everyone still wants ramen after the curry crawl, choose one family-friendly shop from the live map. Ramen is dinner, not another scheduled mission.
-- Return from Shimokitazawa through Shinjuku.
-
-**Cut first:** Hanegi Park, then vintage shopping. Protect the Curry Festival and, in dry weather, Todoroki Ravine.
-**Heavy-rain version:** skip Todoroki and Hanegi; start with the reserved Shiro-Hige pickup, then use the festival’s indoor restaurants, Mikan, Reload and cafés.
-**Animal-café decision:** the scheduled stop is the Oct 8 Petit Mura cat café. The Kyoto/Osaka exotic-animal side quests (LOUTRE otters Oct 11, Rock Star and the America-mura snake café Oct 13) are deliberate, eyes-open exceptions — the welfare research still flags such venues, so they stay optional walk-ins that are cut first.
+**חותכים ראשון:** namco TOKYO, ואז חנויות נוספות בנקאנו. להגן על ג׳יבלי, על ביקור החתולים ב־Petit Mura ועל צהריים לא לחוצים.
+**גיבוי לג׳יבלי:** קיצ׳יג׳וג׳י + פארק אינוקשירה, ואז אותו מסלול קומפקטי של נקאנו/שינג׳וקו.
+**הוסר:** Golden Gai ו־Omoide Yokocho — קודם כול למבוגרים, צפופים ולא שווים אנרגיה משפחתית.
 
 ---
 
-## Day 10 — Sat, Oct 10: Family Celebration at Tokyo Dome City
+## יום 9 — ו׳, 9.10: טודורוקי + טוטורו + פסטיבל הקארי
 
-**Theme:** one easy, celebratory playground with no cross-city checklist
-**Route:** Tabata → Suidobashi / Tokyo Dome City
+**הנושא:** שני איפוסים ירוקים, מתוקים בצורת ג׳יבלי ופסטיבל אוכל שכונתי אמיתי
+**המסלול:** טבטה ← אואימאצ׳י ← טודורוקי ← ג׳יוגאוקה/שיבויה ← סטגאיה־דאיטה ← פארק Hanegi ← שימוקיטזאווה ← טוקיו
 
-### Slow morning
+### בוקר · 08:00–10:45
 
-- Sleep in and have a proper brunch.
-- Give the bar mitzvah gift privately.
+- לצאת סביב 08:00 ולנסוע דרך אואימאצ׳י לתחנת טודורוקי.
+- להיכנס מתחת לגשר הגולף, כשלוש דקות מהתחנה.
+- ללכת בשביל הנחל שנפתח מחדש לכיוון **Todoroki Fudoson והגן היפני**; להקצות 60–90 דקות.
+- השביל צר, לא אחיד וללא מעקה בחלקים ממנו. לא להיכנס בזמן גשם חזק או מיד אחריו, ולצאת הרבה לפני רדת החשכה.
+- אם Setsugekka פתוח — לחלוק תה ו־kuzu-mochi במקום להפוך את זה לארוחה מלאה.
 
-### Headline afternoon
+סטגאיה פתחה מחדש את השביל המלא ב־24 במרץ 2026. לבדוק שוב עבודות זמניות שבוע-שבועיים לפני הביקור. [הסטטוס והודעת הבטיחות הרשמיים](https://www.city.setagaya.lg.jp/02075/9082.html)
 
-- **Tokyo Dome City Attractions:** buy rides individually or use a pass only after checking live operations.
-- Prioritize **Thunder Dolphin** for anyone who wants a major coaster and meets the rules.
-- Ride the **Big-O Ferris wheel**; choose a karaoke gondola if available.
-- Visit the large **JUMP SHOP** for one planned keepsake.
-- Optional family bowling/arcade only if the rides are weather-limited.
+### צהריים · 10:45–13:30
 
-### Evening
+- להמשיך דרך ג׳יוגאוקה ושיבויה לשימוקיטזאווה/סטגאיה־דאיטה; להקצות כ־45 דקות כולל החלפות והליכה.
+- לאסוף קופסת **פחזניות טוטורו של Shiro-Hige** שהוזמנה מראש, מהחנות בדאיטה, אחרי שהיא נפתחת ב־10:30. [החנות הרשמית](https://shiro-hige.net/)
+- ללכת ל**פארק Hanegi** לפיקניק קצר ולאיפוס אנרגיה. חלק מהפארק מתוכנן לשיפוץ במהלך 2026, ולכן להשתמש בכל מדשאה/אזור מנוחה שפתוח במקום לרדוף אחרי מתקן מסוים. [עמוד הפארק הרשמי](https://www.city.setagaya.lg.jp/02075/9123.html)
 
-- **Tentative free finale:** if the official Oct 10 program lists **Pokémon Card Game: TOKYO LUMINOUS NIGHT**, finish rides around 17:15 and take the Oedo Line from Kasuga to Tochomae. Choose the earliest practical Pokémon slot, arrive 15–20 minutes early at Citizens’ Plaza and reserve dinner in West Shinjuku afterward. The projection is outdoors and weather-dependent. [Official timetable](https://tokyoprojectionmappingproject.jp/en/) · [official current works](https://tokyoprojectionmappingproject.jp/en/contents/)
-- The Instagram times are not the October timetable. General October screenings begin at several half-hour slots from 18:00, while the Pokémon work rotates only in selected weekend/holiday positions; recheck the exact work order during the final week.
-- If Pokémon is not listed or the family wants a slower celebration, reserve a special dinner near Tokyo Dome, Kagurazaka or the Tokyo base and keep the original one-area evening.
-- Ask ahead for a dessert message.
-- Do not add the Tokyo Yosakoi preview. Tomorrow starts with an early Kyoto transfer and two fixed-time cultural events.
+### אחר הצהריים והערב · 13:30–19:00
 
-**Why this wins:** rides, Jump fandom and karaoke remain compact; the projection is a direct Kasuga → Tochomae add-on, not a cross-city zigzag.
-**Cut first:** bowling/arcade and extra shopping if the projection is confirmed. Never use the late 21:00-era option before the early Kyoto transfer.
+- להיכנס לשימוקיטזאווה אחרי שהשכונה מתעוררת.
+- **פסטיבל הקארי של שימוקיטזאווה 2026** רץ 8–25 באוקטובר, כך ש־9.10 הוא היום השני שלו. להשתמש במנות מיני במסעדות המשתתפות לכרטיס ניקוד משפחתי של שלוש עצירות. [הפסטיבל הרשמי](https://shimokitazawa-curryfes.com/)
+- בין הביסים, לעבור בחנות וינטג׳ אחת, בחנות מוזיקה/ספרים אחת וב־Mikan או Reload; כל ילד בוחר עצירה אחת.
+- אם אחרי סבב הקארי כולם עדיין רוצים ראמן — לבחור מסעדה משפחתית אחת מהמפה החיה. הראמן הוא ארוחת ערב, לא עוד משימה בלוח.
+- לחזור משימוקיטזאווה דרך שינג׳וקו.
 
----
-
-## Day 11 — Sun, Oct 11: Kyoto Arrival + Mizuekai + Awata Night Procession
-
-**Theme:** a geiko recital followed by lanterns, music and a living shrine tradition
-**Route:** Tokyo → Kyoto Station → Miyagawacho → Awata Shrine area
-
-### Early morning
-
-- Check out and take an early reserved Nozomi to Kyoto.
-- Forward the main suitcases to the Osaka hotel if both properties confirm delivery; carry two-night Kyoto packs.
-- The booked Fushimi apartment cannot be entered until 15:00 and no early bag drop is promised. Store the two-night bags at Kyoto Station; forward the main suitcases to Osaka if both properties approve the delivery.
-
-### Midday · 13:00
-
-- Attend **Mizuekai** at 13:00. Do not choose the 16:00 performance; it conflicts with Awata.
-- The official 2026 run is Oct 8–11. Tickets are JPY 10,000 first floor or JPY 8,000 second floor, and admission is age 10+.
-- Allow the performance to be the afternoon headline; no sightseeing checklist around it.
-
-### Reset · roughly 14:30–16:30
-
-- Have a late lunch, hydrate and sit down near the recital/Awata route. The apartment is not a practical rest stop before the procession.
-- Reach the Awata area before the procession rather than chasing its full route.
-
-**Side quest — only with real spare time:** the **LOUTRE otter café** on Teramachi (about 10 minutes' walk from the recital area) runs walk-in visits 13:00–19:00 with no advance booking. Added deliberately despite the exotic-café welfare research — treat it as a skip-first extra, and leave if the animals look stressed. [Official site](https://www.loutre-kyoto.com/)
-
-**Side quest — sukajan hunt, window 1 of 3:** the bar-mitzvah keepsake jacket. Two real options sit inside this afternoon's footprint. **tow** is the closest — 2F beside Shijo Ohashi, 300+ jackets, roughly five minutes from Miyagawacho — but it publishes no opening hours anywhere, so check [@tow_kyoto](https://www.instagram.com/tow_kyoto/) before climbing the stairs. **B.S.C Gallery** on the Teramachi arcade at the Rokkaku corner is the deep bench: Japan's largest sukajan dealer, 1,000+ jackets out of ~2,000 items, 11:00–21:00 with no closing days, tax-free with a passport, about ten minutes from the recital area and on the same street as the otter café. Target JPY 20,000–30,000, and fit an adult size on him in the shop before taking the next size up. Thirty to forty minutes fits the reset block; a longer browse does not. [B.S.C Gallery](https://r.goope.jp/bsckyoto/) · [tow](https://www.tow-kyoto.com/)
-
-### Evening · from 17:00
-
-- Watch **Awata Shrine’s night procession**, officially scheduled from 17:00.
-- Stay for the opening atmosphere and a manageable section of the procession, then leave around 19:30 before exhaustion and the deepest crowd.
-- Collect the stored bags at Kyoto Station and continue to the Fushimi Inari apartment for self check-in.
-
-**Cut first:** any added temple or shopping stop.
-**If Mizuekai fails:** keep the early Kyoto arrival, enjoy a longer lunch/rest and retain Awata as the day’s anchor.
+**חותכים ראשון:** פארק Hanegi, ואז קניות וינטג׳. להגן על פסטיבל הקארי, ובמזג אוויר יבש — על ערוץ טודורוקי.
+**גרסת גשם חזק:** לוותר על טודורוקי ועל Hanegi; להתחיל באיסוף השמור ב־Shiro-Hige, ואז להשתמש במסעדות המקורות של הפסטיבל, ב־Mikan, ב־Reload ובבתי הקפה.
+**החלטת בית קפה החיות:** העצירה המתוכננת היא בית קפה החתולים ב־Petit Mura ב־8.10. הסייד־קווסטים של חיות אקזוטיות בקיוטו/אוסקה (לוטרות LOUTRE ב־11.10, Rock Star ובית קפה הנחשים באמריקה־מורה ב־13.10) הם חריגים מכוונים ובעיניים פקוחות — מחקר הרווחה עדיין מסמן מקומות כאלה, ולכן הם נשארים כניסות ספונטניות אופציונליות שנחתכות ראשונות.
 
 ---
 
-## Day 12 — Mon, Oct 12: UZUMASA + DRUM TAO HIBIKI
+## יום 10 — ש׳, 10.10: חגיגה משפחתית ב־Tokyo Dome City
 
-**Theme:** samurai-film play by day and explosive taiko at night
-**Route:** Fushimi Inari base → UZUMASA Kyoto Village → apartment/rest → Kyoto Avanti
+**הנושא:** מגרש משחקים חגיגי אחד ונוח, בלי רשימת מטלות חוצת־עיר
+**המסלול:** טבטה ← סואידובאשי / Tokyo Dome City
 
-**Oct 12 is Sports Day, a public holiday.** UZUMASA runs its full holiday programme and will be busy, so enter at opening. The village is **closed on Oct 13**, so nothing here can slip to the next day.
+### בוקר איטי
 
-### Daytime · 10:00–15:45
+- לישון עד מאוחר ולאכול בראנץ׳ אמיתי.
+- לתת את מתנת הבר מצווה באופן פרטי.
 
-**BOOKED AND PAID — JPY 29,600 on one credit-card order.**
+### כותרת אחר הצהריים
 
-| Item | Unit | Qty | Paid |
+- **Tokyo Dome City Attractions:** לקנות מתקנים בנפרד או להשתמש בכרטיס משולב, רק אחרי בדיקת ההפעלה בפועל.
+- לתעדף את **Thunder Dolphin** לכל מי שרוצה רכבת הרים גדולה ועומד בכללים.
+- לעלות על **גלגל הענק Big-O**; לבחור תא קריוקי אם זמין.
+- לבקר ב־**JUMP SHOP** הגדול למזכרת מתוכננת אחת.
+- באולינג/ארקייד משפחתי אופציונלי, רק אם מזג האוויר מגביל את המתקנים.
+
+### ערב
+
+- **סיום חינמי מותנה:** אם התוכנית הרשמית ל־10.10 מציינת **Pokémon Card Game: TOKYO LUMINOUS NIGHT** — לסיים מתקנים סביב 17:15 ולנסוע בקו Oedo מ־Kasuga ל־Tochomae. לבחור את חלון הפוקימון המעשי המוקדם ביותר, להגיע 15–20 דקות מראש ל־Citizens' Plaza ולהזמין ארוחת ערב במערב שינג׳וקו אחר כך. ההקרנה בחוץ ותלויה במזג האוויר. [לוח הזמנים הרשמי](https://tokyoprojectionmappingproject.jp/en/) · [היצירות הנוכחיות הרשמיות](https://tokyoprojectionmappingproject.jp/en/contents/)
+- השעות באינסטגרם אינן לוח הזמנים של אוקטובר. ההקרנות הכלליות באוקטובר מתחילות בכמה חלונות של חצי שעה מ־18:00, ואילו יצירת הפוקימון מסתובבת רק בעמדות נבחרות של סופי שבוע וחגים; לבדוק שוב את סדר היצירות המדויק בשבוע האחרון.
+- אם פוקימון לא מופיע ברשימה או שהמשפחה רוצה חגיגה איטית יותר — להזמין ארוחת ערב מיוחדת ליד Tokyo Dome, ב־Kagurazaka (神楽坂) או ליד בסיס טוקיו, ולשמור על ערב באזור אחד.
+- לבקש מראש מסר על הקינוח.
+- לא להוסיף את התצוגה המקדימה של Tokyo Yosakoi. מחר מתחיל במעבר מוקדם לקיוטו ובשני אירועי תרבות בשעות קבועות.
+
+**למה זה מנצח:** המתקנים, פאנדום ה־JUMP והקריוקי נשארים קומפקטיים; ההקרנה היא תוספת ישירה של Kasuga ← Tochomae, לא זיגזג חוצה־עיר.
+**חותכים ראשון:** באולינג/ארקייד וקניות נוספות, אם ההקרנה מאושרת. אף פעם לא להשתמש באפשרות המאוחרת של 21:00 לפני המעבר המוקדם לקיוטו.
+
+---
+
+## יום 11 — א׳, 11.10: הגעה לקיוטו + Mizuekai + תהלוכת הלילה ב־Awata
+
+**הנושא:** מופע גיאיקו ואחריו פנסים, מוזיקה ומסורת מקדש חיה
+**המסלול:** טוקיו ← תחנת קיוטו ← Miyagawacho ← אזור מקדש Awata
+
+### בוקר מוקדם
+
+- לעשות צ׳ק־אאוט ולתפוס נוזומי שמור מוקדם לקיוטו.
+- לשלוח את המזוודות הראשיות למלון באוסקה אם שני הנכסים מאשרים מסירה; לשאת תיקי שני לילות.
+- אי אפשר להיכנס לדירה המוזמנת בפושימי לפני 15:00 ולא הובטחה הנחת מזוודות מוקדמת. לאחסן את תיקי שני הלילות בתחנת קיוטו; לשלוח את המזוודות הראשיות לאוסקה אם שני הנכסים מאשרים.
+
+### צהריים · 13:00
+
+- ללכת ל־**Mizuekai** ב־13:00. לא לבחור בהופעה של 16:00; היא מתנגשת עם Awata.
+- הריצה הרשמית ב־2026 היא 8–11 באוקטובר. הכרטיסים ¥10,000 בקומה הראשונה או ¥8,000 בקומה השנייה, והכניסה מגיל 10 ומעלה.
+- לתת להופעה להיות כותרת אחר הצהריים; בלי רשימת סיורים סביבה.
+
+### איפוס · בערך 14:30–16:30
+
+- לאכול צהריים מאוחרים, לשתות ולשבת ליד מסלול המופע/Awata. הדירה אינה תחנת מנוחה מעשית לפני התהלוכה.
+- להגיע לאזור Awata לפני התהלוכה, במקום לרדוף אחרי כל מסלולה.
+
+**סייד־קווסט — רק עם זמן פנוי אמיתי:** **בית קפה הלוטרות LOUTRE** ב־Teramachi (寺町), כעשר דקות הליכה מאזור המופע, מקבל כניסות ספונטניות 13:00–19:00 בלי הזמנה מראש. נוסף במכוון למרות מחקר הרווחה על בתי קפה אקזוטיים — להתייחס לזה כתוספת שנחתכת ראשונה, ולעזוב אם החיות נראות לחוצות. [האתר הרשמי](https://www.loutre-kyoto.com/)
+
+**סייד־קווסט — ציד הסוקאג׳אן, חלון 1 מתוך 3:** ז׳קט המזכרת לבר מצווה. שתי אפשרויות אמיתיות יושבות בתוך טווח ההליכה של אחר הצהריים הזה. **tow** הוא הקרוב ביותר — קומה 2 ליד Shijo Ohashi (四条大橋), 300+ ז׳קטים, כחמש דקות מ־Miyagawacho — אבל הוא לא מפרסם שעות פתיחה בשום מקום, ולכן לבדוק ב־[@tow_kyoto](https://www.instagram.com/tow_kyoto/) לפני שעולים במדרגות. **B.S.C Gallery** בקניון Teramachi בפינת Rokkaku הוא הספסל העמוק: סוחר הסוקאג׳אן הגדול ביפן, 1,000+ ז׳קטים מתוך כ־2,000 פריטים, 11:00–21:00 בלי ימי סגירה, פטור ממס עם דרכון, כעשר דקות מאזור המופע ובאותו רחוב כמו בית קפה הלוטרות. היעד ¥20,000–30,000, ולמדוד עליו מידת מבוגר בחנות לפני שלוקחים מידה אחת מעל. שלושים עד ארבעים דקות נכנסות בבלוק האיפוס; סיבוב ארוך יותר לא. [B.S.C Gallery](https://r.goope.jp/bsckyoto/) · [tow](https://www.tow-kyoto.com/)
+
+### ערב · מ־17:00
+
+- לצפות ב**תהלוכת הלילה של מקדש Awata** (粟田神社), שמתוכננת רשמית מ־17:00.
+- להישאר לאווירת הפתיחה ולקטע נסבל מהתהלוכה, ואז לעזוב סביב 19:30 לפני התשישות והצפיפות העמוקה ביותר.
+- לאסוף את התיקים המאוחסנים בתחנת קיוטו ולהמשיך לדירה בפושימי אינארי לצ׳ק־אין עצמי.
+
+**חותכים ראשון:** כל מקדש או עצירת קניות נוספים.
+**אם Mizuekai נופל:** לשמור על ההגעה המוקדמת לקיוטו, ליהנות מצהריים ומנוחה ארוכים יותר ולהשאיר את Awata כעוגן היום.
+
+---
+
+## יום 12 — ב׳, 12.10: UZUMASA + DRUM TAO HIBIKI
+
+**הנושא:** משחק בסרטי סמוראים ביום וטאיקו נפיץ בלילה
+**המסלול:** בסיס פושימי אינארי ← UZUMASA Kyoto Village ← דירה/מנוחה ← Kyoto Avanti
+
+**12.10 הוא יום הספורט, חג רשמי.** UZUMASA מריץ את תוכנית החג המלאה שלו ויהיה עמוס, ולכן נכנסים בפתיחה. הכפר **סגור ב־13.10**, ולכן שום דבר כאן לא יכול להידחות למחרת.
+
+### שעות היום · 10:00–15:45
+
+**מוזמן ומשולם — ¥29,600 בהזמנת כרטיס אשראי אחת.**
+
+| פריט | ליחידה | כמות | שולם |
 |---|---:|---:|---:|
-| 1-Day Admission with Kyoto Yokai Festival 2026 exclusive merchandise | JPY 3,800 | 4 | JPY 15,200 |
-| Cultural experience Sado (tea ceremony), 13:30 | JPY 2,700 | 4 | JPY 10,800 |
-| Ninja Escape Room | JPY 600 | 4 | JPY 2,400 |
-| 3D Maze the Ninja Fort | JPY 600 | 2 | JPY 1,200 |
-| **Total** | | | **JPY 29,600** |
+| כניסת 1-Day עם מרצ׳נדייז בלעדי של פסטיבל היוקאי קיוטו 2026 | ¥3,800 | 4 | ¥15,200 |
+| חוויית התרבות Sado (טקס תה), 13:30 | ¥2,700 | 4 | ¥10,800 |
+| Ninja Escape Room | ¥600 | 4 | ¥2,400 |
+| 3D Maze the Ninja Fort | ¥600 | 2 | ¥1,200 |
+| **סך הכול** | | | **¥29,600** |
 
-Each admission includes the event guidebook (B5 landscape, Japanese and English) and one random postcard from three designs.
+כל כניסה כוללת את חוברת המדריך של האירוע (B5 לרוחב, יפנית ואנגלית) וגלויה אקראית אחת מתוך שלושה עיצובים.
 
-| Time | Block |
+| שעה | בלוק |
 |---|---|
-| 10:00 | Enter at opening. Edo film-set streets first, while the park is still thin |
-| 10:30 | **Yokai ☆Dance Live!** — holiday-only performance |
-| ~11:00 | **Ninja Escape Room** — all four are covered |
-| ~11:45 | **3D Maze the Ninja Fort** — only two are covered; the other two pay **JPY 600 each on site** |
-| 12:15 | Lunch inside the park; finish by 13:15 |
-| **13:30** | **Cultural experience Sado (tea ceremony) × 4 — fixed timed slot** |
-| 14:30 | **Yokai ☆Dance Live!**, second show |
-| 15:30 | **Kaikai Greeting** — runs daily |
-| 15:45 | Leave for the apartment |
+| 10:00 | להיכנס בפתיחה. קודם רחובות אתרי הצילום מתקופת אדו, בזמן שהפארק עדיין דליל |
+| 10:30 | **Yokai ☆Dance Live!** — מופע לחגים בלבד |
+| ~11:00 | **Ninja Escape Room** — כל הארבעה מכוסים |
+| ~11:45 | **3D Maze the Ninja Fort** — רק שניים מכוסים; השניים האחרים משלמים **¥600 כל אחד במקום** |
+| 12:15 | צהריים בתוך הפארק; לסיים עד 13:15 |
+| **13:30** | **חוויית התרבות Sado (טקס תה) × 4 — חלון מתוזמן קבוע** |
+| 14:30 | **Yokai ☆Dance Live!**, מופע שני |
+| 15:30 | **ברכת Kaikai** — מתקיימת מדי יום |
+| 15:45 | לצאת לדירה |
 
-- The 13:30 tea ceremony is the day’s anchor and the single most expensive item in the order at JPY 2,700 a head. Be at the venue early; a missed slot is not refunded.
-- The 3D Maze gap is trivial money — JPY 1,200 buys the other two in at the door. Don’t plan around it.
-- Every option and coupon is dated **Oct 12**, so nothing is usable on another day as booked. The purchase confirmation is clear, though, that **the date can be changed** from the same ticket page the QR codes come from — it is only **cancellation** that is impossible once paid. So Oct 12 is the plan, not a trap: if the day has to move, move the booking rather than writing off JPY 29,600.
-- All four admissions were issued as “13 and over”. That is above the child rate, so the gate accepts it for the 12-year-old — no action needed.
-- **Tickets are smartphone-only.** Display them from the ticket page and show the screen at reception: [ticket.eigamura.com/ticket/purchased](https://ticket.eigamura.com/ticket/purchased). Printing is not required. Make sure the data plan is live before reaching the gate.
-- Record the admission, tea-ceremony and coupon IDs in the private ticket folder, not in this repo.
-- Non-refundable. Date changes go through the same ticket page, until the day before only.
+- טקס התה של 13:30 הוא עוגן היום והפריט היקר ביותר בהזמנה, ¥2,700 לראש. להיות במקום מוקדם; חלון שהוחמץ אינו מוחזר.
+- הפער ב־3D Maze הוא כסף זניח — ¥1,200 מכניסים את השניים האחרים בקופה. לא לתכנן סביב זה.
+- כל אופציה וקופון מתוארכים ל־**12.10**, ולכן שום דבר לא שמיש ביום אחר כפי שהוזמן. עם זאת, אישור הרכישה ברור: **את התאריך אפשר לשנות** מאותו עמוד כרטיסים שממנו מגיעים קודי ה־QR — רק **ביטול** בלתי אפשרי אחרי התשלום. כלומר 12.10 הוא התוכנית, לא מלכודת: אם היום חייב לזוז — להזיז את ההזמנה במקום למחוק ¥29,600.
+- כל ארבע הכניסות הונפקו כ״13 ומעלה״. זה מעל תעריף הילד, ולכן השער מקבל אותו לבן ה־12 — לא נדרשת פעולה.
+- **הכרטיסים בסמארטפון בלבד.** להציג אותם מעמוד הכרטיסים ולהראות את המסך בקבלה: [ticket.eigamura.com/ticket/purchased](https://ticket.eigamura.com/ticket/purchased). אין צורך בהדפסה. לוודא שחבילת הגלישה פעילה לפני שמגיעים לשער.
+- לתעד את מזהי הכניסה, טקס התה והקופונים בתיקיית הכרטיסים הפרטית, לא בריפו הזה.
+- לא ניתן להחזר. שינויי תאריך עוברים דרך אותו עמוד כרטיסים, עד יום לפני בלבד.
 
-**Yokai parades are given up on purpose.** The KAIKAI YOKAI Parade (17:30) and the Uzumasa Hyakki Yakō night procession (19:30) run on holidays but both collide with HIBIKI. Do not try to add one. Attractions close at 18:00 with last entry 17:30, which the daytime plan clears comfortably.
+**מוותרים על תהלוכות היוקאי במכוון.** תהלוכת KAIKAI YOKAI (17:30) ותהלוכת הלילה Uzumasa Hyakki Yakō (19:30) מתקיימות בחגים, אבל שתיהן מתנגשות עם HIBIKI. לא לנסות להוסיף אחת מהן. האטרקציות נסגרות ב־18:00 עם כניסה אחרונה ב־17:30, ותוכנית שעות היום מסיימת הרבה לפני כן.
 
-### Reset · roughly 16:15–18:00
+### איפוס · בערך 16:15–18:00
 
-- Return to the apartment, sit down and eat an early dinner near Kyoto Station.
-- Be at Kyoto Avanti before the **18:15 doors**.
+- לחזור לדירה, לשבת ולאכול ארוחת ערב מוקדמת ליד תחנת קיוטו.
+- להיות ב־Kyoto Avanti לפני **פתיחת הדלתות ב־18:15**.
 
-### Evening · 19:00
+### ערב · 19:00
 
-- See **DRUM TAO HIBIKI**, a roughly 40-minute show designed to work well even after a full daytime attraction.
-- **Booked and paid on Aug 1** (order 00003314): four Standard-with-snacks seats, **row G, seats 12–15**, at JPY 11,000 each. With the JPY 2,800 service charge and JPY 308 ticketing fee the total was **JPY 47,108** — the seat tier sold is dearer than the JPY 10,000 headline price the plan assumed.
-- Tickets are electronic (lessQ): a separate 2D code per seat, pulled from the order link in the family safe. One phone can show all four in sequence. Bring a passport — photo ID may be checked at entry.
-- No changes, cancellations or refunds after purchase. Standard-seat doors open 18:15; the ninth-floor lifts jam right before curtain, so arrive with slack.
+- לראות את **DRUM TAO HIBIKI**, מופע של כ־40 דקות שבנוי לעבוד היטב גם אחרי יום אטרקציות מלא.
+- **הוזמן ושולם ב־1 באוגוסט** (הזמנה 00003314): ארבעה מושבי Standard עם חטיפים, **שורה G, מושבים 12–15**, ב־¥11,000 כל אחד. עם דמי שירות של ¥2,800 ועמלת כרטוס של ¥308, הסכום היה **¥47,108** — דרג המושבים שנמכר יקר יותר ממחיר הכותרת ¥10,000 שהתוכנית הניחה.
+- הכרטיסים אלקטרוניים (lessQ): קוד דו־ממדי נפרד לכל מושב, שנשלף מקישור ההזמנה שבכספת המשפחתית. טלפון אחד יכול להציג את כל הארבעה ברצף. להביא דרכון — ייתכן שתיבדק תעודה מזהה עם תמונה בכניסה.
+- אין שינויים, ביטולים או החזרים אחרי הרכישה. הדלתות למושבי Standard נפתחות ב־18:15; המעליות לקומה התשיעית נתקעות ממש לפני ההרמה, ולכן להגיע עם מרווח.
 
-### Mibu Kyogen — no longer available
+### Mibu Kyogen — כבר לא זמין
 
-The old swap required leaving UZUMASA around 13:15, which now collides with the booked 13:30 tea ceremony. Mibu Kyogen is off the table for this trip.
+ההחלפה הישנה דרשה לצאת מ־UZUMASA סביב 13:15, וזה מתנגש כעת עם טקס התה המוזמן ב־13:30. Mibu Kyogen ירד מהפרק לטיול הזה.
 
-**Cut first:** any extra paid UZUMASA attraction beyond what is already bought. Protect the 13:30 tea ceremony, the rest block and HIBIKI.
-
----
-
-## Day 13 — Tue, Oct 13: Fushimi Inari + Osaka Neon
-
-**Theme:** one iconic Kyoto image, then a compact Osaka food-and-anime evening
-**Route:** Fushimi Inari apartment → shrine → apartment/checkout → live best rail route → Namba/Nipponbashi
-
-### Early morning
-
-- Leave the bags locked in the apartment and walk about three minutes to the shrine area. [Official access guide](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
-- Spend 60–90 minutes around the lower vermilion torii route.
-- Turn back before the full mountain climb. This is the trip’s one iconic classical-Kyoto sight, not a hiking day.
-- At **09:30**, stop at **Handmade Chopstick Workshop Yūzen Fushimi**, one minute from JR Inari. Eligible pairs can be engraved on the spot in roughly five minutes each; prepare the exact Roman-letter or katakana spelling before entering. The shop lists 09:30–17:30 with seasonal variation, so reconfirm Tuesday opening by phone during the final week. [Official shop account](https://page.line.me/xat.0000115429.mcu)
-- Do not promise the Instagram post’s JPY 1,100 starting price; no current official price list confirms it. Choose by actual product price and confirm whether each pair includes engraving.
-- Return for final packing, complete the host’s checkout steps by 11:00, then continue to Namba and retrieve the main suitcases if they were forwarded.
-- Do **not** default to the Shinkansen for this short transfer. Kyoto → Osaka by JR Special Rapid is currently about 28–29 minutes and JPY 580; Kyoto → Shin-Osaka by unreserved Shinkansen is about 14–15 minutes and JPY 1,450. The latter saves only about 13–15 train minutes, costs JPY 870 more per person (**JPY 3,480 for four**) and still leaves a longer Shin-Osaka → Namba subway ride. If the live route goes through Kyoto Station, use the Special Rapid to Osaka/Umeda and then the Midosuji Line; if the final hotel makes a Keihan route from Fushimi-inari toward central Osaka faster, take that instead. Re-run the exact apartment → hotel route after the Osaka booking is fixed. [JR West routes/timetables](https://www.westjr.co.jp/travel-information/en/plan-your-trip/routes-schedule/) · [current Kyoto–Shin-Osaka comparison](https://transit.yahoo.co.jp/search/result?all=1&from=%E4%BA%AC%E9%83%BD&stype=&to=%E6%96%B0%E5%A4%A7%E9%98%AA) · [official Keihan Fushimi-inari station](https://www.keihan.co.jp/traffic/station/151/info.html)
-
-### Afternoon
-
-- **Den Den Town / Ota Road:** use a shortened route and focus on stores not already exhausted in Tokyo.
-- Pick one Animate/Surugaya/Mandarake route and one arcade.
-- **Pokémon Center Osaka DX** only if the family still wants location-specific goods.
-
-### Evening
-
-- Dotonbori neon and Glico sign.
-- Street-food scorecard: takoyaki, okonomiyaki, kushikatsu and dessert; share portions.
-
-**Side quest — sukajan hunt, window 2 of 3:** America-mura is already on tonight's route for the snake café, and it is Osaka's sukajan district. **Rock Shop REGULUS** (12:00–20:00 daily, Nishi-Shinsaibashi 1-16-10) stocks hundreds of jackets including manga collaborations — CROWS×WORST, Karakuri Damashii, VANSON — alongside classic wagara. **American Long River 55** (11:00–20:00, Nishi-Shinsaibashi 2-10-13) is the second stop if the first misses; its published address dates from 2016, so confirm on the map that day. The area's vintage racks also start around JPY 10,000 for one-of-a-kind pieces. **Skip the whole window if Kyoto already delivered.** [REGULUS](https://regulus69.com/top/) · [American Long River 55](https://www.alr55.com/)
-
-**Side quests — only with real spare time:** two walk-in animal stops sit on this route, added deliberately despite the exotic-café welfare research; skip them without guilt. **Small Animal Cafe Rock Star** in Namba (hedgehogs, meerkats, chinchillas, sugar gliders and more; 11:00–22:00; about JPY 1,100 + a drink for up to two hours) and the **America-mura Snake Café** in Nishi-Shinsaibashi (12:00–21:00, closed Wednesdays — Oct 13 is a Tuesday; about JPY 2,000). [Rock Star](https://animalcafes.com/v/25554.html) · [Snake Café](https://americamura.snakecafe.xyz/)
-
-**Removed:** Osaka Castle on arrival day. It added cross-city travel and museum time before the trip’s best Osaka neighborhood.
-**Cut first:** another Pokémon Center, then duplicate Den Den Town browsing. Protect the short Fushimi visit and the nearby 09:30 souvenir stop; never risk the 11:00 checkout.
+**חותכים ראשון:** כל אטרקציה נוספת בתשלום ב־UZUMASA מעבר למה שכבר נקנה. להגן על טקס התה של 13:30, על בלוק המנוחה ועל HIBIKI.
 
 ---
 
-## Day 14 — Wed, Oct 14: Universal Studios Japan + Super Nintendo World
+## יום 13 — ג׳, 13.10: פושימי אינארי + ניאון באוסקה
 
-**Theme:** the biggest gaming day of the trip
-**Route:** Namba → Universal City → same Namba hotel
+**הנושא:** תמונת קיוטו איקונית אחת, ואז ערב אוכל־ואנימה קומפקטי באוסקה
+**המסלול:** דירת פושימי אינארי ← המקדש ← דירה/צ׳ק־אאוט ← מסלול הרכבת הטוב ביותר בזמן אמת ← נמבה/Nipponbashi
 
-### Before the gate
+### בוקר מוקדם
 
-- Studio Pass and Express Pass are separate products; bring both QR codes.
-- Register Studio Passes in the official app.
-- Arrive 60–90 minutes before the published opening; USJ may begin admission earlier than the posted time.
+- להשאיר את התיקים נעולים בדירה וללכת כשלוש דקות לאזור המקדש. [מדריך ההגעה הרשמי](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
+- להקדיש 60–90 דקות למסלול שערי הטורי האדומים התחתונים.
+- לחזור אחורה לפני טיפוס ההר המלא. זה מראה קיוטו הקלאסי האיקוני האחד של הטיול, לא יום הליכה בהרים.
+- ב־**09:30**, לעצור ב־**Handmade Chopstick Workshop Yūzen Fushimi**, דקה מ־JR Inari. זוגות מתאימים נחרטים במקום בכחמש דקות כל אחד; להכין את האיות המדויק באותיות לטיניות או בקטקאנה לפני הכניסה. החנות מציינת 09:30–17:30 עם שינויים עונתיים, ולכן לאמת טלפונית את הפתיחה ביום שלישי בשבוע האחרון. [חשבון החנות הרשמי](https://page.line.me/xat.0000115429.mcu)
+- לא להבטיח את מחיר הפתיחה ¥1,100 מהפוסט באינסטגרם; אין מחירון רשמי עדכני שמאשר אותו. לבחור לפי מחיר המוצר בפועל ולאמת אם כל זוג כולל חריטה.
+- לחזור לאריזה סופית, להשלים את שלבי הצ׳ק־אאוט של המארח עד 11:00, ואז להמשיך לנמבה ולאסוף את המזוודות הראשיות אם נשלחו.
+- **לא** להסתמך אוטומטית על השינקנסן למעבר הקצר הזה. קיוטו ← אוסקה ב־JR Special Rapid לוקח כרגע כ־28–29 דקות ועולה ¥580; קיוטו ← שין־אוסקה בשינקנסן ללא מקום שמור לוקח כ־14–15 דקות ועולה ¥1,450. השני חוסך רק כ־13–15 דקות רכבת, עולה ¥870 יותר לאדם (**¥3,480 לארבעה**) ועדיין משאיר נסיעת מטרו ארוכה יותר משין־אוסקה לנמבה. אם המסלול בזמן אמת עובר בתחנת קיוטו — להשתמש ב־Special Rapid לאוסקה/אומדה ואז בקו Midosuji; אם המלון הסופי הופך מסלול Keihan מפושימי־אינארי למרכז אוסקה למהיר יותר — לקחת אותו. להריץ מחדש את המסלול המדויק דירה ← מלון אחרי שההזמנה באוסקה נסגרת. [מסלולים ולוחות זמנים של JR West](https://www.westjr.co.jp/travel-information/en/plan-your-trip/routes-schedule/) · [השוואת קיוטו–שין־אוסקה נוכחית](https://transit.yahoo.co.jp/search/result?all=1&from=%E4%BA%AC%E9%83%BD&stype=&to=%E6%96%B0%E5%A4%A7%E9%98%AA) · [תחנת Keihan פושימי־אינארי הרשמית](https://www.keihan.co.jp/traffic/station/151/info.html)
 
-### Priority order
+### אחר הצהריים
 
-1. Follow the Express/timed-entry schedule for **Super Nintendo World**.
-2. **Mario Kart: Koopa’s Challenge**.
-3. **Mine Cart Madness** in Donkey Kong Country.
-4. Power-Up Band key challenges—buy two bands and share in teams rather than automatically buying four.
-5. Early or late lunch at Kinopio’s Café if the wait is reasonable.
-6. Choose one current anime/family bonus: the **Frieren Story Walk**, the separately ticketed **One Piece Premier Show** if Oct 14 is a performance date, or a non-Nintendo favorite such as Harry Potter, JAWS or Minions.
+- **Den Den Town / Ota Road:** להשתמש במסלול מקוצר ולהתמקד בחנויות שלא מוצו כבר בטוקיו.
+- לבחור מסלול אחד של Animate/Surugaya/Mandarake ועוד ארקייד אחד.
+- **Pokémon Center Osaka DX** רק אם המשפחה עדיין רוצה מוצרים ייחודיים למקום.
 
-Halloween Horror Nights and *Chainsaw Man: The Chaos 4-D* are optional only after the parents review the current warnings and the 12-year-old actively wants them. Do not add the attractions that exclude guests 14 and under.
+### ערב
 
-Stay through the evening if energy holds, then return to the same hotel. No Tokyo train tonight.
+- ניאון דוטונבורי ושלט Glico.
+- כרטיס ניקוד של אוכל רחוב: טאקויאקי, אוקונומיאקי, קושיקאצו וקינוח; לחלוק מנות.
 
-**Cut first:** repeat rides, shopping and any attraction with a wait that breaks the Express plan.
-**Non-negotiable:** the Express product must explicitly list the desired Nintendo rides and area entry; names change.
+**סייד־קווסט — ציד הסוקאג׳אן, חלון 2 מתוך 3:** אמריקה־מורה (アメリカ村) כבר נמצאת במסלול הערב בשביל בית קפה הנחשים, והיא רובע הסוקאג׳אן של אוסקה. **Rock Shop REGULUS** (12:00–20:00 מדי יום, Nishi-Shinsaibashi 1-16-10) מחזיק מאות ז׳קטים כולל שיתופי פעולה עם מנגה — CROWS×WORST, Karakuri Damashii, VANSON — לצד wagara קלאסי. **American Long River 55** (11:00–20:00, Nishi-Shinsaibashi 2-10-13) היא העצירה השנייה אם הראשונה מחטיאה; הכתובת שפורסמה שלה היא מ־2016, ולכן לאמת במפה באותו יום. גם מדפי הווינטג׳ באזור מתחילים סביב ¥10,000 לפריטים ייחודיים. **לוותר על כל החלון אם קיוטו כבר סיפקה.** [REGULUS](https://regulus69.com/top/) · [American Long River 55](https://www.alr55.com/)
 
----
+**סייד־קווסטים — רק עם זמן פנוי אמיתי:** שתי עצירות בעלי חיים ללא הזמנה יושבות על המסלול הזה, ונוספו במכוון למרות מחקר הרווחה על בתי קפה אקזוטיים; לוותר עליהן בלי אשמה. **Small Animal Cafe Rock Star** בנמבה (קיפודים, סוריקטות, צ׳ינצ׳ילות, סוכרוני דאון ועוד; 11:00–22:00; כ־¥1,100 + משקה לעד שעתיים) ו**בית קפה הנחשים באמריקה־מורה** ב־Nishi-Shinsaibashi (12:00–21:00, סגור בימי רביעי — 13.10 הוא יום שלישי; כ־¥2,000). [Rock Star](https://animalcafes.com/v/25554.html) · [בית קפה הנחשים](https://americamura.snakecafe.xyz/)
 
-## Day 15 — Thu, Oct 15: Nintendo Museum + Return to Tokyo
-
-**Theme:** a slow morning, one last major gaming experience, then a late travel evening
-**Route:** Namba → Uji → Kyoto → Tokyo
-
-**The lottery was won, and the slot is 14:30–15:00 — not the morning this day was originally built around.** The entry window cannot be moved, so the day is now back-loaded: a genuinely unhurried Osaka morning, the museum mid-afternoon, and a Tokyo arrival late in the evening. Plan the evening as travel, not as a night out.
-
-### Slow morning · Namba
-
-- No alarm. Breakfast in Namba and a relaxed checkout by **11:00**.
-- Forward or store the luggage — the bags must not come to Uji. Yamato forwarding to the Tokyo apartment, or coin lockers at Shin-Osaka, both work; decide by Oct 13 so the paperwork is done in advance.
-- Aim to leave Osaka around **12:15–12:45**. Osaka → Uji is roughly an hour, and being early in Uji is far better than being late: the entry window is thirty minutes wide and the ticket is void outside it.
-
-### Nintendo Museum · 14:30–15:00 entry
-
-- **Carry all four passports.** Foreign visitors may be asked to verify identity against the booking.
-- Explore the interactive exhibits. Budget about two hours, putting the exit near **16:30–17:00**.
-- Hanafuda Craft & Play only if a separate slot exists *and* it still clears a 17:00 departure. On this timing it will usually not.
-
-### Evening · the long way back
-
-- Uji → Kyoto, then a **reserved Nozomi** to Tokyo. Leaving Kyoto around 17:30–18:00 puts the family into Tokyo around **20:00–20:30**.
-- Reserve those seats in advance. Four unreserved seats on a Thursday evening Nozomi with luggage is a bad way to end this day.
-- Check in, eat something simple near the apartment, sleep. **Do not schedule anything else on this evening.**
-
-**Do not improvise Nintendo Museum:** entry is advance-lottery only, the awarded window cannot be changed, and there is no re-entry if the slot is missed.
+**הוסר:** טירת אוסקה ביום ההגעה. היא הוסיפה נסיעה חוצת־עיר וזמן מוזיאון לפני השכונה הטובה ביותר של אוסקה בטיול.
+**חותכים ראשון:** עוד Pokémon Center, ואז סיבוב כפול ב־Den Den Town. להגן על הביקור הקצר בפושימי ועל עצירת המזכרות הסמוכה ב־09:30; אף פעם לא לסכן את הצ׳ק־אאוט של 11:00.
 
 ---
 
-## Day 16 — Fri, Oct 16: Pokémon Café + First Avenue + Taiko + Asakusa Finale
+## יום 14 — ד׳, 14.10: Universal Studios Japan + Super Nintendo World
 
-**Theme:** final fandom meal, Tokyo Station’s character-and-food hub, a personal drumming stop and classic Tokyo at dusk
-**Route:** planned Ueno/Inaricho base → Nihonbashi → Tokyo Station First Avenue → Nishi-Asakusa → Senso-ji → base
+**הנושא:** יום הגיימינג הגדול ביותר בטיול
+**המסלול:** נמבה ← Universal City ← אותו מלון בנמבה
 
-### Morning and lunch
+### לפני השער
 
-- **Accommodation dependency:** the current Ueno/Inaricho apartment is still a lead, not a confirmed booking. If it is booked, walk about two minutes to Inaricho, ride the Ginza Line directly to Nihombashi in roughly 10–12 minutes and use exit B2 for the café building. If another final stay is chosen, preserve this day order and recalculate only the short feeder legs.
-- **Pokémon Café Tokyo** if secured; arrive 15 minutes early and allow 90 minutes.
-- Pokémon Center Tokyo DX is in the same building.
-- Protect **45–60 minutes at [Tokyo Station First Avenue](https://www.tokyoeki-1bangai.co.jp/en/)**, outside the JR gates on the Yaesu side. Start on B1 at **Tokyo Character Street** and choose two or three preselected shops; add Okashi Land only if time remains.
-- If the café is unavailable, eat at **Tokyo Ramen Street** inside First Avenue and still visit the Center.
+- Studio Pass ו־Express Pass הם מוצרים נפרדים; להביא את שני קודי ה־QR.
+- לרשום את ה־Studio Passes באפליקציה הרשמית.
+- להגיע 60–90 דקות לפני הפתיחה שפורסמה; ייתכן ש־USJ יתחיל להכניס לפני השעה הרשומה.
 
-### Afternoon
+### סדר העדיפויות
 
-- **Timing rule:** prefer a 10:30–11:00 café booking, then walk to First Avenue and continue to Taiko-kan. If the café booking is later, go to Taiko-kan at its 11:00 opening first, then return to Nihombashi/First Avenue before Senso-ji.
-- Reach **Taiko-kan** around 14:00 and before its official **15:00 last admission**. The museum is open 11:00–16:00 on Friday, and marked instruments may be played.
-- Visit **Miyamoto Unosuke Shoten** in the same building after the museum. Let the staff help choose one suitable in-stock bachi pair; name engraving takes about a week and is not a same-day option.
-- Continue to **Senso-ji** in late afternoon when day crowds begin to thin.
-- Quick Nakamise snack and Kaminarimon family photo.
-- **Optional goldfish finale — Sumida Aquarium:** inside Skytree Town, 15 minutes' walk from Senso-ji, with a large Edo-style goldfish gallery. Friday hours run to 20:00; from Feb 2026 tickets are JPY 2,700 adult / 2,000 high school / 1,400 elementary-junior high — about JPY 8,800 for the family. Only if packing and energy comfortably allow. [Official prices](https://www.sumida-aquarium.com/en/about/price/index.html)
+1. לפעול לפי לוח ה־Express/הכניסה המתוזמנת ל־**Super Nintendo World**.
+2. **Mario Kart: Koopa's Challenge**.
+3. **Mine Cart Madness** ב־Donkey Kong Country.
+4. אתגרי מפתח של Power-Up Band — לקנות שתי צמידים ולחלוק בקבוצות, במקום לקנות אוטומטית ארבע.
+5. צהריים מוקדמים או מאוחרים ב־Kinopio's Café אם ההמתנה סבירה.
+6. לבחור בונוס אנימה/משפחה עדכני אחד: **Frieren Story Walk**, מופע **One Piece Premier** בכרטוס נפרד אם 14.10 הוא תאריך הופעה, או מועדף שאינו נינטנדו כמו הארי פוטר, JAWS או מיניונים.
 
-### Evening
+Halloween Horror Nights ו־*Chainsaw Man: The Chaos 4-D* אופציונליים רק אחרי שההורים עוברים על האזהרות העדכניות ורק אם בן ה־12 באמת רוצה. לא להוסיף את האטרקציות שמדירות אורחים עד גיל 14.
 
-- Return early for packing and a favorite-neighborhood dinner. Solamachi is only a bonus if the museum, temple and packing are all comfortably complete.
-- Farewell dinner: Kura Sushi for the plate game, yakiniku for a splurge, or one final excellent ramen.
+להישאר לערב אם האנרגיה מחזיקה, ואז לחזור לאותו מלון. אין רכבת לטוקיו הלילה.
 
-**Cut first:** the optional Sumida Aquarium stop, then Solamachi browsing, extra Nakamise time and First Avenue browsing beyond one hour. Protect the focused First Avenue visit, Taiko-kan, the bachi and Senso-ji.
-**Pack tonight.**
+**חותכים ראשון:** מתקנים חוזרים, קניות וכל אטרקציה עם המתנה ששוברת את תוכנית ה־Express.
+**לא נתון למשא ומתן:** מוצר ה־Express חייב לפרט במפורש את מתקני נינטנדו הרצויים ואת הכניסה לאזור; השמות משתנים.
 
 ---
 
-## Day 17 — Sat, Oct 17: Local Goodbye + Narita
+## יום 15 — ה׳, 15.10: מוזיאון נינטנדו + חזרה לטוקיו
 
-**Theme:** relaxed farewell, no risky cross-city detour
-**Route:** planned Ueno/Inaricho area → NRT
+**הנושא:** בוקר איטי, חוויית גיימינג גדולה אחרונה, ואז ערב נסיעה מאוחר
+**המסלול:** נמבה ← אוג׳י ← קיוטו ← טוקיו
 
-- Check out and store bags only at a facility confirmed by the final property; make luggage storage a booking requirement if the current lead changes.
-- Keep 11:00–15:00 local: Ameyoko snacks, Ueno Park or any Asakusa piece missed yesterday.
-- **Sukajan hunt, last window — only if the jacket still has not been found.** **Okuma Shokai** trades inside Ameyoko at Ueno 4-8-1, has done since 1950, and offers the widest range on the list at JPY 4,500–75,000 with adult sizing all the way to 5L — so there is real room to size up for the years ahead. Open 11:00–19:00 and closed Mondays, so Saturday works. English support and card payment. Cap it at 30 minutes and never let it touch the 15:15 luggage pickup. [Official site](https://yokosuka-jumper.com/)
-- Collect luggage by 15:15.
-- Reserve a Skyliner around **15:45–16:00** when sales open, then recheck the exact timetable and terminal.
-- Target the correct Narita terminal by roughly **16:45–17:15** for the 20:40 flight.
-- **ET673:** NRT 20:40 → ADD 05:50 on Oct 18.
-- **ET418:** ADD 10:25 → TLV 14:35.
+**זכינו בהגרלה, והחלון הוא 14:30–15:00 — לא הבוקר שסביבו נבנה היום במקור.** אי אפשר להזיז את חלון הכניסה, ולכן היום כעת נוטה לאחור: בוקר אוסקאי באמת לא לחוץ, מוזיאון באמצע אחר הצהריים, והגעה לטוקיו בשעת ערב מאוחרת. לתכנן את הערב כנסיעה, לא כערב בחוץ.
 
-**Do not add:** Skytree tickets, a distant café or “one last” timed attraction.
+### בוקר איטי · נמבה
+
+- בלי שעון מעורר. ארוחת בוקר בנמבה וצ׳ק־אאוט רגוע עד **11:00**.
+- לשלוח או לאחסן את המזוודות — הן לא באות לאוג׳י. שילוח Yamato לדירה בטוקיו, או לוקרים בשין־אוסקה, שניהם עובדים; להחליט עד 13.10 כדי שהניירת תיסגר מראש.
+- לשאוף לצאת מאוסקה סביב **12:15–12:45**. אוסקה ← אוג׳י לוקח כשעה, ולהיות מוקדם באוג׳י עדיף בהרבה על לאחר: חלון הכניסה רחב שלושים דקות והכרטיס בטל מחוצה לו.
+
+### מוזיאון נינטנדו · כניסה 14:30–15:00
+
+- **לשאת את כל ארבעת הדרכונים.** מבקרים מחו״ל עשויים להתבקש לאמת זהות מול ההזמנה.
+- לחקור את המוצגים האינטראקטיביים. להקצות כשעתיים, כך שהיציאה סביב **16:30–17:00**.
+- Hanafuda Craft & Play רק אם קיים חלון נפרד *וגם* הוא עדיין מאפשר יציאה ב־17:00. בתזמון הזה בדרך כלל לא.
+
+### ערב · הדרך הארוכה חזרה
+
+- אוג׳י ← קיוטו, ואז **נוזומי שמור** לטוקיו. יציאה מקיוטו סביב 17:30–18:00 מכניסה את המשפחה לטוקיו סביב **20:00–20:30**.
+- להזמין את המושבים האלה מראש. ארבעה מקומות לא שמורים בנוזומי של ערב חמישי עם מזוודות זו דרך גרועה לסיים את היום הזה.
+- לעשות צ׳ק־אין, לאכול משהו פשוט ליד הדירה, לישון. **לא לתכנן שום דבר נוסף בערב הזה.**
+
+**לא לאלתר במוזיאון נינטנדו:** הכניסה בהגרלה מראש בלבד, אי אפשר לשנות את חלון הזכייה, ואין כניסה חוזרת אם החלון הוחמץ.
 
 ---
 
-## Final Experience Balance
+## יום 16 — ו׳, 16.10: Pokémon Café + First Avenue + תיפוף + סיום באסאקוסה
 
-| Category | Included highlights |
+**הנושא:** ארוחת הפאנדום האחרונה, מרכז הדמויות והאוכל של תחנת טוקיו, עצירת תיפוף אישית וטוקיו הקלאסית בשעת דמדומים
+**המסלול:** בסיס אואנו/אינאריצ׳ו המתוכנן ← ניהונבאשי ← Tokyo Station First Avenue ← מערב אסאקוסה ← סנסו־ג׳י ← בסיס
+
+### בוקר וצהריים
+
+- **תלות בלינה:** הדירה הנוכחית באואנו/אינאריצ׳ו היא עדיין ליד, לא הזמנה מאושרת. אם היא תוזמן — כשתי דקות הליכה לאינאריצ׳ו, קו Ginza ישיר לניהונבאשי בכ־10–12 דקות ויציאה B2 לבניין הקפה. אם תיבחר לינה סופית אחרת — לשמור על סדר היום הזה ולחשב מחדש רק את הקטעים המזינים הקצרים.
+- **Pokémon Café טוקיו** אם הושג; להגיע 15 דקות מראש ולהקצות 90 דקות.
+- Pokémon Center Tokyo DX נמצא באותו בניין.
+- להגן על **45–60 דקות ב־[Tokyo Station First Avenue](https://www.tokyoeki-1bangai.co.jp/en/)**, מחוץ לשערי JR בצד Yaesu. להתחיל ב־B1 ב־**Tokyo Character Street** ולבחור שתיים־שלוש חנויות שנבחרו מראש; להוסיף את Okashi Land רק אם נשאר זמן.
+- אם הקפה לא זמין — לאכול ב־**Tokyo Ramen Street** בתוך First Avenue ועדיין לבקר ב־Center.
+
+### אחר הצהריים
+
+- **כלל התזמון:** עדיף להזמין את הקפה ל־10:30–11:00, ואז ללכת ל־First Avenue ולהמשיך ל־Taiko-kan. אם הזמנת הקפה מאוחרת יותר — ללכת קודם ל־Taiko-kan בפתיחה שלו ב־11:00, ואז לחזור לניהונבאשי/First Avenue לפני סנסו־ג׳י.
+- להגיע ל־**Taiko-kan** סביב 14:00 ולפני הכניסה האחרונה הרשמית ב־**15:00**. המוזיאון פתוח בימי שישי 11:00–16:00, ובכלים המסומנים מותר לנגן.
+- לבקר ב־**Miyamoto Unosuke Shoten** באותו בניין אחרי המוזיאון. לתת לצוות לעזור לבחור זוג bachi מתאים מהמלאי; חריטת שם לוקחת כשבוע ואינה אפשרות לאותו יום.
+- להמשיך ל־**סנסו־ג׳י** בשעות אחר הצהריים המאוחרות, כשקהל היום מתחיל להידלל.
+- חטיף מהיר ב־Nakamise ותמונה משפחתית ב־Kaminarimon (雷門).
+- **סיום דגי זהב אופציונלי — אקווריום סומידה:** בתוך Skytree Town, 15 דקות הליכה מסנסו־ג׳י, עם גלריית דגי זהב גדולה בסגנון אדו. בימי שישי פתוח עד 20:00; מפברואר 2026 הכרטיסים ¥2,700 למבוגר / 2,000 לתיכון / 1,400 ליסודי־חטיבה — כ־¥8,800 למשפחה. רק אם האריזה והאנרגיה מאפשרים בנוחות. [מחירים רשמיים](https://www.sumida-aquarium.com/en/about/price/index.html)
+
+### ערב
+
+- לחזור מוקדם לאריזה ולארוחת ערב בשכונה האהובה. Solamachi הוא בונוס בלבד, אם המוזיאון, המקדש והאריזה כולם הושלמו בנוחות.
+- ארוחת הפרידה: Kura Sushi בשביל משחק הצלחות, יאקיניקו כפינוק, או ראמן מצוין אחרון.
+
+**חותכים ראשון:** עצירת אקווריום סומידה האופציונלית, ואז סיבוב ב־Solamachi, זמן נוסף ב־Nakamise וסיבוב ב־First Avenue מעבר לשעה. להגן על הביקור הממוקד ב־First Avenue, על Taiko-kan, על ה־bachi ועל סנסו־ג׳י.
+**לארוז הלילה.**
+
+---
+
+## יום 17 — ש׳, 17.10: פרידה מקומית + נריטה
+
+**הנושא:** פרידה רגועה, בלי עקיפה מסוכנת חוצת־עיר
+**המסלול:** אזור אואנו/אינאריצ׳ו המתוכנן ← NRT
+
+- לעשות צ׳ק־אאוט ולאחסן מזוודות רק במתקן שאושר בידי הנכס הסופי; אם הליד הנוכחי משתנה — להפוך אחסון מזוודות לדרישת הזמנה.
+- לשמור על 11:00–15:00 מקומיים: חטיפי Ameyoko (アメ横), פארק אואנו או כל קטע אסאקוסה שהוחמץ אתמול.
+- **ציד הסוקאג׳אן, חלון אחרון — רק אם הז׳קט עדיין לא נמצא.** **Okuma Shokai** פועלת בתוך Ameyoko ב־Ueno 4-8-1 מאז 1950, ומציעה את הטווח הרחב ביותר ברשימה: ¥4,500–75,000 עם מידות מבוגר עד 5L — כלומר יש מקום אמיתי לקחת מידה קדימה לשנים הבאות. פתוח 11:00–19:00 וסגור בימי שני, ולכן שבת עובדת. תמיכה באנגלית ותשלום בכרטיס. להגביל ל־30 דקות ואף פעם לא לתת לזה לגעת באיסוף המזוודות של 15:15. [האתר הרשמי](https://yokosuka-jumper.com/)
+- לאסוף מזוודות עד 15:15.
+- להזמין Skyliner סביב **15:45–16:00** כשהמכירה נפתחת, ואז לבדוק שוב את הלוח המדויק ואת הטרמינל.
+- להגיע לטרמינל הנכון בנריטה סביב **16:45–17:15** לטיסה של 20:40.
+- **ET673:** NRT 20:40 ← ADD 05:50 ב־18.10.
+- **ET418:** ADD 10:25 ← TLV 14:35.
+
+**לא להוסיף:** כרטיסי Skytree, בית קפה מרוחק או אטרקציה מתוזמנת ״אחרונה״.
+
+---
+
+## מאזן החוויות הסופי
+
+| קטגוריה | הדגשים הכלולים |
 |---|---|
-| **Anime / manga** | Akihabara, Shibuya PARCO, Nakano Broadway, Den Den Town, JUMP SHOP |
-| **Gaming** | GiGO/HEY, Nintendo TOKYO, Joypolis, Tokyo Dome City, UZUMASA, Super Nintendo World |
-| **Pokémon** | PokéPark KANTO, three deliberately different Pokémon Centers, Pokémon Café if secured, optional Oct 10 projection if officially scheduled |
-| **Cute** | KAWAII MONSTER LAND, Harajuku, Petit Mura cat castle, 3D Shinjuku cat, character stores, optional animal side quests (otters, small animals, snakes) and a goldfish-aquarium finale |
-| **Ramen / food play** | Ichiran/AFURI, tsukemen, Shimokitazawa Curry Festival, Totoro cream puffs and Dotonbori |
-| **Nintendo** | Nintendo TOKYO, Super Nintendo World and Nintendo Museum if the lottery succeeds |
-| **Ghibli** | Ghibli Museum with Kichijoji backup |
-| **Nature resets** | Meiji forest, Todoroki Ravine, Kamakura/Enoshima coast and Inokashira Park |
-| **Culture that earns its time** | Great Buddha/Hasedera cave, Mizuekai, Awata, UZUMASA, DRUM TAO, Fushimi Inari, Yūzen engraving and Taiko-kan |
-| **Screen worlds** | Mundo Pixar is a protected Oct 4 anchor between teamLab and Odaiba |
-| **Recovery** | light celebration structure, Kyoto reset blocks, optional Manga cut, slow return Day 15 |
+| **אנימה / מנגה** | אקיהברה, Shibuya PARCO, Nakano Broadway, Den Den Town, JUMP SHOP |
+| **גיימינג** | GiGO/HEY, Nintendo TOKYO, Joypolis, Tokyo Dome City, UZUMASA, Super Nintendo World |
+| **פוקימון** | PokéPark KANTO, שלושה Pokémon Centers שונים במכוון, Pokémon Café אם יושג, והקרנת 10.10 אופציונלית אם תתוזמן רשמית |
+| **חמוד** | KAWAII MONSTER LAND, הרג׳וקו, טירת החתולים Petit Mura, החתול התלת־ממדי בשינג׳וקו, חנויות דמויות, סייד־קווסטים אופציונליים של בעלי חיים (לוטרות, חיות קטנות, נחשים) וסיום באקווריום דגי זהב |
+| **ראמן / משחקי אוכל** | Ichiran/AFURI, צוקמן, פסטיבל הקארי של שימוקיטזאווה, פחזניות טוטורו ודוטונבורי |
+| **נינטנדו** | Nintendo TOKYO, Super Nintendo World ומוזיאון נינטנדו — הזכייה בידינו, חלון 14:30–15:00 ב־15.10 |
+| **ג׳יבלי** | מוזיאון ג׳יבלי עם גיבוי קיצ׳יג׳וג׳י |
+| **איפוסי טבע** | יער מייג׳י, ערוץ טודורוקי, חוף קמקורה/אנושימה ופארק אינוקשירה |
+| **תרבות שמצדיקה את הזמן** | הבודהה הגדול/מערת Hasedera, Mizuekai, Awata, UZUMASA, DRUM TAO, פושימי אינארי, חריטת Yūzen ו־Taiko-kan |
+| **עולמות מסך** | Mundo Pixar הוא עוגן מוגן ב־4.10, בין teamLab לאודאיבה |
+| **התאוששות** | מבנה חגיגה קליל, בלוקי איפוס בקיוטו, ויתור אופציונלי על המנגה, וחזרה איטית ביום 15 |
 
-## Official Verification Links
+## קישורי אימות רשמיים
 
-- [Nintendo Museum tickets](https://museum-tickets.nintendo.com/en/calendar?lang=en)
-- [PokéPark KANTO tickets and pass rules](https://www.pokepark-kanto.co.jp/ppark/ticketInfo/type/index?languageKind=en_US)
-- [PokéPark ticket-system update](https://www.pokepark-kanto.co.jp/ppark/announcement/47/detail/index)
-- [DisneySea Oct 5 calendar](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/)
-- [Pokémon Café news](https://www.pokemon-cafe.jp/en/cafe/news/)
-- [KAWAII MONSTER LAND official page](https://contents.gendagigo.jp/kawaii-monster-land/en)
-- [teamLab Planets official store](https://teamlabplanets.dmm.com/en)
-- [Mundo Pixar official exhibition](https://mundopixar.com/en/cities/tokyo)
-- [Mundo Pixar official calendar and prices](https://t.pia.jp/en/pia/events/mundopixar)
-- [Tokyo Night & Light official timetable](https://tokyoprojectionmappingproject.jp/en/)
-- [Tokyo Night & Light current works](https://tokyoprojectionmappingproject.jp/en/contents/)
+- [כרטיסי מוזיאון נינטנדו](https://museum-tickets.nintendo.com/en/calendar?lang=en)
+- [כרטיסי PokéPark KANTO וכללי הכרטיסים](https://www.pokepark-kanto.co.jp/ppark/ticketInfo/type/index?languageKind=en_US)
+- [עדכון מערכת הכרטיסים של PokéPark](https://www.pokepark-kanto.co.jp/ppark/announcement/47/detail/index)
+- [לוח השנה של DisneySea ל־5.10](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/)
+- [חדשות Pokémon Café](https://www.pokemon-cafe.jp/en/cafe/news/)
+- [העמוד הרשמי של KAWAII MONSTER LAND](https://contents.gendagigo.jp/kawaii-monster-land/en)
+- [החנות הרשמית של teamLab Planets](https://teamlabplanets.dmm.com/en)
+- [התערוכה הרשמית של Mundo Pixar](https://mundopixar.com/en/cities/tokyo)
+- [לוח שנה ומחירים רשמיים של Mundo Pixar](https://t.pia.jp/en/pia/events/mundopixar)
+- [לוח הזמנים הרשמי של Tokyo Night & Light](https://tokyoprojectionmappingproject.jp/en/)
+- [היצירות הנוכחיות של Tokyo Night & Light](https://tokyoprojectionmappingproject.jp/en/contents/)
 - [Tokyo Joypolis](https://tokyo-joypolis.com/language/english/)
-- [Ghibli Museum tickets](https://www.ghibli-museum.jp/en/tickets/)
-- [Mizuekai official page](https://www.miyagawacho.jp/mizuekai/)
-- [Awata Shrine annual events](https://awatajinja.jp/event/)
-- [UZUMASA Kyoto Village hours and tickets](https://en.eigamura.com/hours-tickets/)
-- [DRUM TAO Kyoto tickets](https://drum-tao-kyoto.com/en/ticket/)
-- [Fushimi Inari access](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
-- [Yūzen Fushimi official shop account](https://page.line.me/xat.0000115429.mcu)
+- [כרטיסי מוזיאון ג׳יבלי](https://www.ghibli-museum.jp/en/tickets/)
+- [העמוד הרשמי של Mizuekai](https://www.miyagawacho.jp/mizuekai/)
+- [אירועי השנה במקדש Awata](https://awatajinja.jp/event/)
+- [שעות וכרטיסים ב־UZUMASA Kyoto Village](https://en.eigamura.com/hours-tickets/)
+- [כרטיסי DRUM TAO קיוטו](https://drum-tao-kyoto.com/en/ticket/)
+- [הגעה לפושימי אינארי](https://kyoto.travel/en/getting-around/comfortable-access-to-fushimi-fushimi-inari-taisha-shrine/)
+- [חשבון החנות הרשמי של Yūzen Fushimi](https://page.line.me/xat.0000115429.mcu)
 - [Taiko-kan](https://www.miyamoto-unosuke.co.jp/pages/museum)
-- [Miyamoto Nishi-Asakusa store](https://www.miyamoto-unosuke.co.jp/pages/store)
-- [Mibu Kyogen event listing](https://www.kyoto-kankou.or.jp/event/1288)
-- [Todoroki Ravine Park reopening and safety notice](https://www.city.setagaya.lg.jp/02075/9082.html)
-- [Shimokitazawa Curry Festival 2026](https://shimokitazawa-curryfes.com/)
-- [Shiro-Hige’s Cream Puff Factory](https://shiro-hige.net/)
-- [Hanegi Park](https://www.city.setagaya.lg.jp/02075/9123.html)
-- [Cat Cafe Temari no Oshiro · Kichijōji Petit Mura](https://temarinooshiro.com/)
-- [LOUTRE otter café, Kyoto](https://www.loutre-kyoto.com/)
-- [Small Animal Cafe Rock Star, Namba](https://animalcafes.com/v/25554.html)
-- [America-mura Snake Café, Osaka](https://americamura.snakecafe.xyz/)
-- [Sumida Aquarium prices](https://www.sumida-aquarium.com/en/about/price/index.html)
-- [USJ tickets](https://www.usj.co.jp/web/en/us/tickets)
+- [חנות Miyamoto במערב אסאקוסה](https://www.miyamoto-unosuke.co.jp/pages/store)
+- [רישום האירוע Mibu Kyogen](https://www.kyoto-kankou.or.jp/event/1288)
+- [פתיחה מחדש והודעת בטיחות של פארק ערוץ טודורוקי](https://www.city.setagaya.lg.jp/02075/9082.html)
+- [פסטיבל הקארי של שימוקיטזאווה 2026](https://shimokitazawa-curryfes.com/)
+- [Shiro-Hige's Cream Puff Factory](https://shiro-hige.net/)
+- [פארק Hanegi](https://www.city.setagaya.lg.jp/02075/9123.html)
+- [Cat Cafe Temari no Oshiro · Petit Mura קיצ׳יג׳וג׳י](https://temarinooshiro.com/)
+- [בית קפה הלוטרות LOUTRE, קיוטו](https://www.loutre-kyoto.com/)
+- [Small Animal Cafe Rock Star, נמבה](https://animalcafes.com/v/25554.html)
+- [בית קפה הנחשים באמריקה־מורה, אוסקה](https://americamura.snakecafe.xyz/)
+- [מחירי אקווריום סומידה](https://www.sumida-aquarium.com/en/about/price/index.html)
+- [כרטיסי USJ](https://www.usj.co.jp/web/en/us/tickets)
 
-*Last research pass: July 25, 2026. Recheck live hours, prices, projection work order and maintenance closures during the final week before travel.*
+*מעבר המחקר האחרון: 25 ביולי 2026. לבדוק שוב שעות חיות, מחירים, סדר יצירות ההקרנה וסגירות תחזוקה בשבוע האחרון לפני הנסיעה.*

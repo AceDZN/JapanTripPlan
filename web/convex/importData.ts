@@ -1,6 +1,15 @@
 import { v } from "convex/values";
 import { internalMutation } from "./_generated/server";
-import { bookingStatus, city, placeCategory } from "./schema";
+import {
+  bookingStatus,
+  city,
+  costLine,
+  label,
+  placeCategory,
+  refLink,
+  stay,
+  transportLeg,
+} from "./schema";
 
 /**
  * One-time (but idempotent) import of the current hand-maintained data into
@@ -36,6 +45,7 @@ export const importDays = internalMutation({
         note: v.optional(v.string()),
         rainPlan: v.optional(v.string()),
         foodAnchorIds: v.array(v.string()),
+        stay: v.optional(stay),
         discovery: v.optional(
           v.object({
             label: v.string(),
@@ -88,6 +98,11 @@ export const importBlocksForDay = internalMutation({
             status: bookingStatus,
           }),
         ),
+        legs: v.optional(v.array(transportLeg)),
+        costs: v.optional(v.array(costLine)),
+        links: v.optional(v.array(refLink)),
+        needs: v.optional(v.array(v.string())),
+        warnings: v.optional(v.array(v.string())),
       }),
     ),
   },
@@ -118,6 +133,7 @@ export const importPlaces = internalMutation({
         slug: v.string(),
         nameHe: v.string(),
         nameEn: v.string(),
+        nameJa: v.optional(v.string()),
         category: placeCategory,
         area: v.string(),
         city,
@@ -132,6 +148,17 @@ export const importPlaces = internalMutation({
         mustDo: v.optional(v.boolean()),
         indoor: v.optional(v.boolean()),
         openingHours: v.optional(v.string()),
+        officialUrl: v.optional(v.string()),
+        priceLevel: v.optional(v.number()),
+        addressEn: v.optional(v.string()),
+        addressJa: v.optional(v.string()),
+        phone: v.optional(v.string()),
+        nearestStation: v.optional(label),
+        stationExit: v.optional(label),
+        walkMinutes: v.optional(v.number()),
+        closedDays: v.optional(v.string()),
+        lastEntry: v.optional(v.string()),
+        ticketNote: v.optional(v.string()),
       }),
     ),
   },

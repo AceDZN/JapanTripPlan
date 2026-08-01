@@ -1,85 +1,85 @@
-# 08 — Practical Family Playbook
+# 08 — ספר ההפעלה המשפחתי
 
-## October Conditions
+## תנאים באוקטובר
 
-Expect mild-to-warm days, cooler evenings and possible rain or typhoon disruption. Pack layers rather than one heavy coat.
+לצפות לימים נעימים עד חמימים, ערבים קרירים יותר, ואפשרות לגשם או לשיבוש טייפון. לארוז שכבות במקום מעיל כבד אחד.
 
-JMA October climate normals are about **22.0/14.8°C in Tokyo, 23.4/14.4°C in Kyoto and 23.7/16.0°C in Osaka** (typical daily high/low). Tokyo’s October monthly rainfall normal is 234.8 mm, Kyoto’s is 143.2 mm and Osaka’s is 136.0 mm, so a waterproof layer is essential even though many days may be comfortable. These are climate normals, not a trip forecast; use the actual JMA forecast during the final week. See the complete weather, wardrobe and timed preparation plan in [11-PRE-TRIP-CHECKLIST.md](./11-PRE-TRIP-CHECKLIST.md).
+הנורמלים האקלימיים של אוקטובר לפי JMA הם כ־**22.0/14.8°C בטוקיו, 23.4/14.4°C בקיוטו ו־23.7/16.0°C באוסקה** (מקסימום/מינימום יומי טיפוסי). המשקע החודשי הנורמלי באוקטובר הוא 234.8 מ״מ בטוקיו, 143.2 מ״מ בקיוטו ו־136.0 מ״מ באוסקה — כלומר שכבה אטומה למים היא הכרחית גם אם ימים רבים יהיו נוחים. אלה נורמלים אקלימיים, לא תחזית לטיול; להשתמש בתחזית ה־JMA בפועל בשבוע האחרון. תוכנית מזג האוויר, הביגוד וההכנות המתוזמנות במלואה נמצאת ב־[11-PRE-TRIP-CHECKLIST.md](./11-PRE-TRIP-CHECKLIST.md).
 
-- **buy walking shoes for all four travelers by July 31, then break them in on progressively longer walks;**
-- one light rain jacket and compact umbrella per person;
-- small daypacks;
-- refillable bottles;
-- power banks;
-- clean socks for the cat café;
-- medicines in carry-on with prescription copies;
-- one change of clothes in carry-on for the long flight.
+- **לקנות נעלי הליכה לכל ארבעת המטיילים עד 31 ביולי, ואז לרכך אותן בהליכות שהולכות ומתארכות;**
+- מעיל גשם קל ומטרייה קומפקטית לכל אחד;
+- תיקי יום קטנים;
+- בקבוקים למילוי חוזר;
+- פאוור בנקים;
+- גרביים נקיות לקפה החתולים;
+- תרופות בתיק היד עם העתקי מרשם;
+- החלפת בגדים אחת בתיק היד לטיסה הארוכה.
 
-Check the Japan Meteorological Agency forecast and any storm notices during the final week.
+לבדוק את תחזית ה־Japan Meteorological Agency ואת הודעות הסערה בשבוע האחרון.
 
-## Confirmed Event Structure
+## מבנה האירועים המאושר
 
-| Date | Event | Plan |
+| תאריך | אירוע | התוכנית |
 |---|---|---|
-| Oct 11 | Mizuekai | Target the 13:00 performance; the 16:00 show conflicts with Awata. Ticket method is still TBA. |
-| Oct 11 | Awata Shrine night procession | Official start is 17:00; watch a manageable section and leave around 19:30. |
-| Oct 12 | DRUM TAO HIBIKI | Doors 18:15, show 19:00, about 40 minutes; tickets open two months before. |
-| Oct 10–12 | Mibu Kyogen | Optional Oct 12 swap only, not part of the full UZUMASA + HIBIKI baseline. |
+| 11.10 | מיזואקאי | לכוון למופע של 13:00; המופע של 16:00 מתנגש עם אוואטה. שיטת הכרטוס עדיין לא פורסמה. |
+| 11.10 | תהלוכת הלילה במקדש אוואטה | ההתחלה הרשמית ב־17:00; לצפות בקטע שאפשר להתמודד איתו ולעזוב סביב 19:30. |
+| 12.10 | DRUM TAO HIBIKI | דלתות 18:15, מופע 19:00, כ־40 דקות; הכרטיסים נפתחים חודשיים לפני. |
+| 10–12.10 | Mibu Kyogen | החלפה אופציונלית ל־12.10 בלבד, לא חלק מהבסיס של UZUMASA + HIBIKI. |
 
-Tokyo Yosakoi and Ikegami Oeshiki have been removed from the route. Do not reinsert them from older drafts.
+Tokyo Yosakoi ו־Ikegami Oeshiki הוסרו מהמסלול. לא להחזיר אותם מטיוטות ישנות.
 
-## Phones and Apps
+## טלפונים ואפליקציות
 
-Install/update before travel:
+להתקין/לעדכן לפני הנסיעה:
 
-- Google Maps plus offline Tokyo/Kyoto/Osaka areas;
-- Google Translate with Japanese offline;
-- official PokéPark app;
-- official USJ app;
-- SmartEX or chosen Shinkansen booking method;
-- [Safety Tips](https://www.jnto.go.jp/safety-tips/eng/app.html) on both adults’ phones with alerts enabled;
-- airline app;
-- one shared family notes/list app.
+- Google Maps עם אזורי טוקיו/קיוטו/אוסקה שמורים אופליין;
+- Google Translate עם יפנית אופליין;
+- האפליקציה הרשמית של PokéPark;
+- האפליקציה הרשמית של USJ;
+- SmartEX או שיטת הזמנת השינקנסן שנבחרה;
+- [Safety Tips](https://www.jnto.go.jp/safety-tips/eng/app.html) בשני הטלפונים של המבוגרים, עם התראות פעילות;
+- אפליקציית חברת התעופה;
+- אפליקציית רשימות/פתקים משפחתית משותפת אחת.
 
-Keep screenshots/PDFs for every timed ticket. Each adult should have the full family set offline.
+לשמור צילומי מסך או PDF לכל כרטיס מתוזמן. לכל מבוגר צריכה להיות הערכה המשפחתית המלאה אופליין.
 
-### Three phrases worth memorizing
+### שלושה ביטויים ששווה לשנן
 
-| Japanese | Use |
+| יפנית | מתי משתמשים |
 |---|---|
-| **Sumimasen** (すみません) | Excuse me / sorry / politely get someone’s attention |
-| **Arigatō gozaimasu** (ありがとうございます) | Polite “thank you” |
-| **[item] onegaishimasu** ([item] お願いします) | “This/item, please” when ordering or making a simple request |
+| **Sumimasen** (すみません) | סליחה / מצטער / למשוך תשומת לב בנימוס |
+| **Arigatō gozaimasu** (ありがとうございます) | ״תודה״ מנומס |
+| **[פריט] onegaishimasu** ([פריט] お願いします) | ״את זה, בבקשה״ בהזמנה או בבקשה פשוטה |
 
-`Onegaishimasu` is not a magic ending for every sentence. Point to the item or show the translated sentence, say the phrase calmly, and thank the person afterward. Also save `wakarimasen` (“I don’t understand”), `… wa doko desu ka?` (“Where is …?”) and `ikura desu ka?` (“How much is it?”). [JNTO language guide](https://www.japan.travel/en/plan/japanese-language/)
+`Onegaishimasu` היא לא סיומת קסם לכל משפט. מצביעים על הפריט או מראים את המשפט המתורגם, אומרים את הביטוי ברוגע, ומודים אחר כך. כדאי לשמור גם את `wakarimasen` (״אני לא מבין״), `… wa doko desu ka?` (״איפה נמצא…?״) ו־`ikura desu ka?` (״כמה זה עולה?״). [מדריך השפה של JNTO](https://www.japan.travel/en/plan/japanese-language/)
 
-### Translation workflow
+### שגרת התרגום
 
-- Download Japanese inside Google Translate on every family phone and test it in airplane mode.
-- Use the camera for menus/signs, but confirm important allergy, medical, ticket and station information with a person; machine translation can miss context.
-- Save accommodation addresses, key dietary sentences and the four chopstick-name spellings as starred phrases.
-- For a longer exchange, use conversation mode and let the other person read the Japanese screen rather than repeatedly speaking louder.
+- להוריד יפנית בתוך Google Translate בכל טלפון במשפחה ולבדוק במצב טיסה.
+- להשתמש במצלמה לתפריטים ולשלטים, אבל לאמת מול אדם מידע חשוב על אלרגיות, רפואה, כרטיסים ותחנות; תרגום מכונה מפספס הקשר.
+- לשמור ככוכביות את כתובות הלינה, את משפטי התזונה המרכזיים ואת ארבעת האיותים של השמות למקלות האכילה.
+- לשיחה ארוכה יותר להשתמש במצב שיחה ולתת לאדם השני לקרוא את המסך ביפנית, במקום לדבר שוב ושוב חזק יותר.
 
-[Google Translate official feature guide](https://support.google.com/translate/answer/10421057)
+[מדריך התכונות הרשמי של Google Translate](https://support.google.com/translate/answer/10421057)
 
-### Connectivity without influencer risk
+### קישוריות בלי סיכוני משפיענים
 
-- Choose eSIM, physical SIM or roaming by coverage, data allowance, hotspot rules and total price—not an Instagram referral code.
-- Confirm each phone is carrier-unlocked and eSIM-compatible before paying.
-- Install on stable home Wi-Fi according to the provider’s activation policy; save QR/APN/setup instructions offline before departure.
-- Keep two independent adult phones. Ideally use different fallback paths so one activation or provider problem does not strand the family.
-- Disable data roaming on the home SIM; follow the travel eSIM provider’s exact roaming setting. Make one real test call/message and route search after landing.
-- The code `MATAN5087` from the post was not independently verified and is not part of this plan.
+- לבחור eSIM, SIM פיזי או נדידה לפי כיסוי, נפח גלישה, כללי hotspot ומחיר כולל — לא לפי קוד הפניה מאינסטגרם.
+- לאמת שכל טלפון פתוח לרשתות ותומך ב־eSIM לפני שמשלמים.
+- להתקין על Wi-Fi ביתי יציב לפי מדיניות ההפעלה של הספק; לשמור אופליין את הוראות ה־QR/APN/ההתקנה לפני היציאה.
+- לשמור שני טלפוני מבוגרים עצמאיים. עדיף עם מסלולי גיבוי שונים, כדי שתקלת הפעלה או תקלת ספק אחת לא תתקע את המשפחה.
+- לכבות נדידת נתונים ב־SIM הביתי; לפעול לפי הגדרת הנדידה המדויקת של ספק ה־eSIM לנסיעה. לבצע שיחה/הודעה אמיתית אחת וחיפוש מסלול אחד מיד אחרי הנחיתה.
+- הקוד `MATAN5087` מהפוסט לא אומת באופן עצמאי ואינו חלק מהתוכנית הזו.
 
-[JNTO connectivity guide](https://www.japan.travel/en/plan/wifi-and-connectivity/)
+[מדריך הקישוריות של JNTO](https://www.japan.travel/en/plan/wifi-and-connectivity/)
 
-### IC-card boundary
+### הגבול של כרטיס ה־IC
 
-Buy one physical **TOURIST PASMO** for each traveler after collecting bags at Narita, as detailed in the [transport guide](./03-TRANSPORT.md). Use it for ordinary urban rail, buses and many shops in Tokyo, Kamakura, Kyoto/Uji and Osaka; reload in small cash amounts because unused stored value is not refundable. It does **not** replace reserved Skyliner or Shinkansen tickets. If SmartEX is linked to an IC card, that card is only the gate token while the Shinkansen purchase remains separate. Do not assume IC cards cover every rural/highway service or cross all regional boundaries. [Official TOURIST PASMO terms](https://www.pasmo.co.jp/tourist-pasmo/) · [SmartEX IC boarding](https://smart-ex.jp/en/entraining/iccard/)
+לקנות **TOURIST PASMO** פיזי אחד לכל נוסע אחרי איסוף המזוודות בנריטה, כמפורט ב[מדריך התחבורה](./03-TRANSPORT.md). להשתמש בו לרכבת עירונית רגילה, לאוטובוסים ולחנויות רבות בטוקיו, בקמקורה, בקיוטו/אוג׳י ובאוסקה; לטעון בסכומי מזומן קטנים כי ערך צבור שלא נוצל אינו ניתן להחזר. הוא **אינו** מחליף כרטיסי Skyliner או שינקנסן שמורים. אם SmartEX מקושר לכרטיס IC, הכרטיס הזה הוא רק אסימון השער בעוד רכישת השינקנסן נשארת נפרדת. לא להניח שכרטיסי IC מכסים כל שירות כפרי או בין־עירוני, או חוצים כל גבול אזורי. [תנאי TOURIST PASMO רשמיים](https://www.pasmo.co.jp/tourist-pasmo/) · [עלייה עם IC ב־SmartEX](https://smart-ex.jp/en/entraining/iccard/)
 
-## Family Ticket Folder
+## תיקיית הכרטיסים המשפחתית
 
-Use one cloud folder plus offline copies:
+תיקיית ענן אחת ועותקים אופליין:
 
 ```
 Japan 2026/
@@ -100,181 +100,181 @@ Japan 2026/
   15 Taiko-kan
 ```
 
-File names should start with the date and include the lead guest name.
+שמות הקבצים צריכים להתחיל בתאריך ולכלול את שם האורח הראשי.
 
-### Booked-flight record
+### רשומת הטיסות המוזמנות
 
-The Ethiopian flights are purchased, but the itinerary screenshot did not show every operating detail. Copy the following from the full e-ticket into the private `01 Flights` folder:
+טיסות Ethiopian נרכשו, אבל צילום המסך של המסלול לא הראה כל פרט תפעולי. להעתיק את הבאים מה־e-ticket המלא לתיקייה הפרטית `01 Flights`:
 
-- booking reference / PNR and all four e-ticket numbers;
-- operating terminal for every airport;
-- checked- and cabin-baggage allowance for the purchased fare;
-- seat assignments and meal requests;
-- actual family total for the budget ledger;
-- airline contact and disruption-policy details.
+- אסמכתה / PNR וארבעת מספרי ה־e-ticket;
+- הטרמינל הפעיל בכל שדה תעופה;
+- קצובת כבודה רשומה וכבודת יד לכרטיס שנרכש;
+- הושבה ובקשות ארוחה;
+- הסכום המשפחתי בפועל לספר התקציב;
+- פרטי קשר של חברת התעופה ומדיניות שיבושים.
 
-Reconfirm the schedule 72 hours before both departures and save the final boarding documents offline on both adult phones.
+לאמת את הלוח 72 שעות לפני שתי ההמראות ולשמור את מסמכי העלייה הסופיים אופליין בשני טלפוני המבוגרים.
 
-### Booked teamLab Planets record
+### רשומת teamLab Planets המוזמנת
 
-teamLab Planets TOKYO is purchased: an Entrance Pass for four, admission **Sunday Oct 4, 09:30–10:00 JST**, **JPY 16,800** (2 adults at JPY 5,600, 2 junior-high/high-school at JPY 2,800). Handling rules:
+teamLab Planets TOKYO נרכש: Entrance Pass לארבעה, כניסה **יום א׳ 4.10, 09:30–10:00 שעון יפן**, **¥16,800** (2 מבוגרים ב־¥5,600, 2 חטיבה/תיכון ב־¥2,800). כללי טיפול:
 
-- The purchase e-mail is **not** an admission document. Entry is by QR code from the personal My Tickets page.
-- QR codes only render **after 00:00 on Oct 4**. Open My Tickets that morning, display all four and screenshot them before leaving Tabata.
-- The My Tickets link is a bearer link — anyone holding it can display the tickets. Keep it in the private `06 teamLab` folder and off any shared or web-synced document.
-- The admission date and time can be changed up to **three times**, no later than **two hours before** the slot, from the "Change admission date and time" button on My Tickets. This is the escape hatch if Oct 4 goes wrong; coupon-purchased tickets do not have it, ours were bought directly.
-- If a QR code will not scan on the day because of a cracked screen or similar, go to venue staff or the support desk rather than trying to re-buy.
+- מייל הרכישה **אינו** מסמך כניסה. הכניסה היא בקוד QR מדף My Tickets האישי.
+- קודי ה־QR נוצרים רק **אחרי חצות של 4.10**. לפתוח את My Tickets באותו בוקר, להציג את כל הארבעה ולצלם מסך לפני היציאה מטבטה.
+- הקישור ל־My Tickets הוא קישור נושא — כל מי שמחזיק בו יכול להציג את הכרטיסים. לשמור אותו בתיקייה הפרטית `06 teamLab` ולא במסמך משותף או מסונכרן לרשת.
+- אפשר לשנות את תאריך ושעת הכניסה עד **שלוש פעמים**, ולא יאוחר מ**שעתיים לפני** החריץ, מכפתור ״Change admission date and time״ ב־My Tickets. זו דלת המילוט אם 4.10 משתבש; לכרטיסים שנרכשו בקופון אין אותה, ושלנו נקנו ישירות.
+- אם קוד QR לא נסרק ביום עצמו בגלל מסך סדוק או תקלה דומה — לפנות לצוות המקום או לדלפק התמיכה במקום לנסות לקנות מחדש.
 
-## Confirmed Lodging Setup
+## מערך הלינה המאושר
 
-- **Tokyo / Oct 2–11:** send passport images for all four guests through Airbnb chat. The host will not release check-in details until this is complete. Send the approximate 22:00–23:00 arrival time and obtain written confirmation that late self-check-in is permitted.
-- **Kyoto / Oct 11–13:** complete the host-supplied registration form and confirm completion in Airbnb chat. Save the access guide on both adults’ phones.
-- Keep exact addresses, confirmation numbers, door codes and Wi-Fi passwords in the private lodging folder, not in the public/shared itinerary.
-- The Kyoto room door does not auto-lock. Lock it manually on entry and every departure.
-- On Kyoto checkout, bag rubbish inside the room, switch off lights/air-conditioning, lock the door and message the host.
+- **טוקיו / 2–11.10:** לשלוח תמונות דרכון של כל ארבעת האורחים ב־Airbnb chat. המארח לא ישחרר פרטי צ׳ק־אין עד שזה יושלם. לשלוח את שעת ההגעה המשוערת 22:00–23:00 ולקבל אישור בכתב שצ׳ק־אין עצמי מאוחר מותר.
+- **קיוטו / 11–13.10:** להשלים את טופס הרישום שהמארח סיפק ולאשר את ההשלמה ב־Airbnb chat. לשמור את מדריך הגישה בשני טלפוני המבוגרים.
+- לשמור כתובות מדויקות, מספרי אישור, קודי דלת וסיסמאות Wi-Fi בתיקיית הלינה הפרטית, לא במסלול הפומבי או המשותף.
+- דלת החדר בקיוטו אינה ננעלת אוטומטית. לנעול ידנית בכניסה ובכל יציאה.
+- בצ׳ק־אאוט מקיוטו: לארוז את האשפה בתוך החדר, לכבות אורות ומיזוג, לנעול את הדלת ולשלוח הודעה למארח.
 
-## Daily Rhythm
+## הקצב היומי
 
-- Review only the next day each evening.
-- Identify the headline, booking time and “cut first” item.
-- Give each child a fixed arcade/gachapon envelope.
-- Stop shopping when the wish-list target or time cap is reached.
-- After a festival or park block, protect the next rest window.
-- Carry a konbini snack so a hungry queue does not derail the whole day.
+- לעבור בכל ערב רק על היום הבא.
+- לזהות את הכותרת, את שעת ההזמנה ואת הפריט ״לוותר קודם״.
+- לתת לכל ילד מעטפה קבועה לארקייד/גאצ׳פון.
+- להפסיק לקנות כשהיעד ברשימת המשאלות או תקרת הזמן הושגו.
+- אחרי בלוק של פסטיבל או פארק, להגן על חלון המנוחה הבא.
+- לשאת חטיף מקונביני, כדי שתור עם ילד רעב לא יפיל את כל היום.
 
-## Train Crowd Reality
+## המציאות של עומס ברכבות
 
-The Instagram crowd chart is a useful warning, not a timetable guarantee.
+טבלת העומס מאינסטגרם היא אזהרה שימושית, לא הבטחת לוח זמנים.
 
-- Tokyo’s approximate commuter peaks are **07:30–09:30** and **17:30–19:30**; the weekday morning is usually the tighter squeeze. [Official Tokyo guide](https://www.gotokyo.org/en/plan/getting-around/subways/index.html)
-- “10:00–16:00 is empty” and “after 20:00 is always quiet” are false promises around attractions, events and nightlife areas.
-- Weekend/public-holiday crowd patterns differ from weekday commuting. Oct 10–12 can still be busy around attractions even without a normal office rush.
-- Keep timed entries and reserved Shinkansen seats. Travel earlier when practical, use live crowd/route information, and let one packed urban train leave rather than forcing four people into it.
-- The Oct 9 morning departure toward Todoroki crosses the weekday peak. Prefer about 07:00 or after 09:30; if the itinerary retains 08:00, treat a crowded ride as an intentional tradeoff.
+- שיאי היוממות המשוערים של טוקיו הם **07:30–09:30** ו־**17:30–19:30**; בוקר של יום חול הוא בדרך כלל הצפוף יותר. [מדריך טוקיו רשמי](https://www.gotokyo.org/en/plan/getting-around/subways/index.html)
+- ״10:00–16:00 ריק״ ו״אחרי 20:00 תמיד שקט״ הן הבטחות שווא סביב אטרקציות, אירועים ואזורי בילוי.
+- דפוסי עומס בסופ״ש ובחגים שונים מיוממות של יום חול. 10–12.10 יכולים להיות עמוסים סביב אטרקציות גם בלי ריצת משרדים רגילה.
+- לשמור על כניסות מתוזמנות ועל מושבי שינקנסן שמורים. לנסוע מוקדם יותר כשאפשר, להשתמש במידע חי על עומס ומסלולים, ולתת לרכבת עירונית דחוסה אחת לצאת במקום לדחוף אליה ארבעה אנשים.
+- יציאת הבוקר של 9.10 לכיוון טודורוקי חוצה את שיא יום החול. עדיף סביב 07:00 או אחרי 09:30; אם המסלול נשאר על 08:00 — להתייחס לנסיעה צפופה כפשרה מודעת.
 
-## Cat-Café Rules
+## כללי קפה החתולים
 
-The only scheduled live-animal café is **Cat Cafe Temari no Oshiro** inside **Kichijōji Petit Mura** (Oct 8) — a fairy-tale cat castle with about 20 cats and no time limit.
+קפה החיות החיות היחיד שמתוזמן הוא **Cat Cafe Temari no Oshiro** בתוך **Kichijōji Petit Mura** (8.10) — טירת חתולים מעולם האגדות עם כ־20 חתולים ובלי הגבלת זמן.
 
-- Reserve ahead; weekends sell out.
-- Children are admitted from age 10, so both kids qualify.
-- Wear clean socks.
-- Do not wake, hold or chase cats.
-- Leave if the room is too crowded or the cats show stress.
+- להזמין מראש; בסופי שבוע נגמרים המקומות.
+- ילדים מתקבלים מגיל 10, כך ששני הילדים עומדים בתנאי.
+- ללבוש גרביים נקיות.
+- לא להעיר, להחזיק או לרדוף אחרי חתולים.
+- לעזוב אם החדר צפוף מדי או שהחתולים מראים סימני מתח.
 
-Three exotic-animal **side quests** are deliberate, eyes-open exceptions to the original no-exotics rule: the LOUTRE otter café in Kyoto (Oct 11), and Small Animal Cafe Rock Star plus the America-mura snake café in Osaka (Oct 13). A peer-reviewed study of Japanese exotic-animal cafés found consistently low welfare, so these follow strict side-quest rules: walk-in only when there is genuine spare time; they are always the first thing cut; wash hands before and after; no flash photography; leave immediately if any animal looks stressed. No owl, capybara or micro-pig cafés were added. [Study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
+שלושה **סייד־קווסטים** של חיות אקזוטיות הם חריגים מודעים ובעיניים פקוחות מכלל ה״בלי אקזוטיות״ המקורי: קפה הלוטרות LOUTRE בקיוטו (11.10), Small Animal Cafe Rock Star וקפה הנחשים באמריקה־מורה באוסקה (13.10). מחקר שפוט־עמיתים על בתי קפה יפניים לחיות אקזוטיות מצא רווחה נמוכה באופן עקבי, ולכן אלה כפופים לכללי סייד־קווסט נוקשים: כניסה ללא הזמנה ורק כשיש זמן פנוי אמיתי; הם תמיד הדבר הראשון שמוותרים עליו; לשטוף ידיים לפני ואחרי; בלי צילום עם פלאש; לעזוב מיד אם חיה כלשהי נראית לחוצה. לא נוספו בתי קפה של ינשופים, קפיברות או חזירונים. [המחקר](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
 
-## Arcade and Shopping Rules
+## כללי ארקייד וקניות
 
-- Photograph expensive items and compare later districts.
-- Use cash envelopes for crane games and gachapon.
-- Decide in advance whether a crane prize is worth more than buying the item.
-- Keep receipts.
-- Carry fragile figures in hand luggage.
-- Do not schedule tax-free paperwork near a timed attraction.
-- **Tax-free timing is in our favour.** Japan replaces in-store tax-free with pay-then-refund-at-the-airport on **Nov 1, 2026** — two weeks after we fly home. For Oct 2–17 the old system still applies: the 10% comes off at the register on purchases over JPY 5,000, with a passport or the Visit Japan Web QR code.
+- לצלם פריטים יקרים ולהשוות ברבעים מאוחרים יותר.
+- להשתמש במעטפות מזומן למכונות צובט ולגאצ׳פון.
+- להחליט מראש אם פרס ממכונת צובט שווה יותר מלקנות את הפריט.
+- לשמור קבלות.
+- לשאת פיגורות שבירות בכבודת יד.
+- לא לתזמן ניירת פטור ממס סמוך לאטרקציה מתוזמנת.
+- **תזמון הפטור ממס לטובתנו.** יפן מחליפה את הפטור ממס בחנות בשיטת ״לשלם ולקבל החזר בשדה התעופה״ ב־**1 בנובמבר 2026** — שבועיים אחרי שנטוס הביתה. עבור 2–17.10 השיטה הישנה עדיין תקפה: 10% יורדים בקופה על רכישות מעל ¥5,000, מול דרכון או קוד ה־QR של Visit Japan Web.
 
-## The Sukajan Quest
+## מסע הסוקאג׳אן
 
-One keepsake souvenir jacket for the bar-mitzvah boy, with three chances at it and no obligation to take any of them. **The moment one is bought, every later window is cancelled.**
+ז׳קט מזכרת אחד לחתן הבר־מצווה, עם שלוש הזדמנויות ובלי חובה לנצל אף אחת מהן. **ברגע שקונים אחד, כל חלון מאוחר יותר מבוטל.**
 
-| Window | Day | Where |
+| חלון | יום | איפה |
 |---|---|---|
-| 1 | Oct 11, Kyoto | tow (beside Shijo Ohashi) and B.S.C Gallery (Teramachi × Rokkaku) |
-| 2 | Oct 13, Osaka | REGULUS and American Long River 55, both in America-mura |
-| 3 | Oct 17, Tokyo | Okuma Shokai, inside Ameyoko — the widest price range of the three |
+| 1 | 11.10, קיוטו | tow (לצד Shijo Ohashi) ו־B.S.C Gallery (Teramachi × Rokkaku) |
+| 2 | 13.10, אוסקה | REGULUS ו־American Long River 55, שניהם באמריקה־מורה |
+| 3 | 17.10, טוקיו | Okuma Shokai (大熊商会), בתוך אמייוקו — טווח המחירים הרחב מבין השלושה |
 
-Rules that apply in all three:
+כללים שחלים על כל השלושה:
 
-- **Price tiers.** Under JPY 10,000 is printed polyester with thin embroidery and lasts a season or two. **JPY 20,000–30,000 is the target** — rayon, real embroidery, quilted reversible back; HOUSTON sits at JPY 22,990–29,590 and is the reference point. JPY 35,000–50,000 buys the heavy wagara brands (Hanatabi Gakudan, Satori, Karakuri Damashii). Above that is Tailor Toyo collector territory and is not what a growing 12-year-old needs.
-- **Judge the embroidery, not the picture.** It is the one part that cannot be faked cheaply — dense, raised stitching that holds its shape versus flat, sparse fill.
-- **Adult sizes only, and size up.** He is already big enough that a kids 150/160 is off the table — it would be tight before the jacket is a year old. Japanese M runs about 54 cm chest width and 63 cm length, L about 57/65. Fit him in the shop, then take the next size up: sukajan is cut boxy by design, so a roomy M or L looks right immediately and is still his jacket at twenty. Japanese sizing runs small against European, so the label will read one step smaller than he is used to.
-- **Photograph and walk.** Same rule as everything else: no buying the first jacket seen, in the first shop, on the first day.
+- **מדרגות מחיר.** מתחת ל־¥10,000 זה פוליאסטר מודפס עם רקמה דקה שמחזיק עונה או שתיים. **¥20,000–30,000 הוא היעד** — ריון, רקמה אמיתית, גב מרופד דו־צדדי; HOUSTON יושב על ¥22,990–29,590 והוא נקודת הייחוס. ¥35,000–50,000 קונה את מותגי ה־wagara הכבדים (Hanatabi Gakudan, Satori, Karakuri Damashii). מעל זה זו טריטוריית אספנים של Tailor Toyo, ולא מה שילד בן 12 שעוד גדל צריך.
+- **לשפוט את הרקמה, לא את התמונה.** זה החלק היחיד שאי אפשר לזייף בזול — תפירה צפופה ומורמת ששומרת על צורתה, מול מילוי שטוח ודליל.
+- **מידות מבוגרים בלבד, ולעלות מידה.** הוא כבר גדול מספיק כדי שמידת ילדים 150/160 לא תבוא בחשבון — היא תהיה צמודה עוד לפני שלז׳קט תמלא שנה. M יפנית היא כ־54 ס״מ רוחב חזה ו־63 ס״מ אורך, L כ־57/65. למדוד עליו בחנות ואז לקחת מידה אחת מעל: סוקאג׳אן נגזר רחב בכוונה, אז M או L מרווחת נראית נכון מיד ותישאר הז׳קט שלו גם בגיל עשרים. המידות היפניות קטנות ביחס לאירופיות, ולכן התווית תראה מידה אחת מתחת למה שהוא רגיל אליו.
+- **לצלם וללכת.** אותו כלל כמו בכל השאר: לא קונים את הז׳קט הראשון שרואים, בחנות הראשונה, ביום הראשון.
 
-## Flea-Market Reality Check
+## בדיקת מציאות של שוקי פשפשים
 
-- **Useful trip match — Tokyo, Oct 3:** the 2026 listing includes the **Oi Racecourse Tokyo City Flea Market** on Oct 3, marked with an asterisk, from 09:00–14:30 with free entry. It can replace the first part of the Akihabara day if the family wants vintage/used treasure hunting more than a long anime-store morning. It is not an extra stop, and rain can cancel it. Check the [organizer’s Instagram](https://www.instagram.com/tokyocity_fleamarket/) the night before and morning of the event; the [dated listing](https://odekakeoffice.jp/blog/2026/06/20/tokyo-city-flea-market/) and [independent guide](https://www.timeout.com/tokyo/shopping/oi-racecourse-flea-market) support the time, venue and free entry.
-- **Real, but not on this trip — Kyoto:** To-ji’s large Kobo-ichi market is held on the **21st of each month**, while Kitano Tenmangu’s Tenjin market is on the **25th**. The family leaves Japan on Oct 17, so neither fits. [Official To-ji explanation](https://toji.or.jp/smp/mieku/) · [official Kitano Tenmangu calendar](https://kitanotenmangu.or.jp/event/)
-- **Not a standing market — Osaka:** Omatsuri Hiroba is an event space inside Expo ’70 Commemorative Park in Suita. It sometimes hosts flea markets and festivals, but there is no recurring market to assume; it is also outside the compact Namba/USJ route. Add it only if the [official venue](https://www.expo70-park.jp/facility/reserve/nature-09/) publishes a specific Oct 13–15 event worth replacing an existing anchor.
+- **התאמה שימושית לטיול — טוקיו, 3.10:** הרישום ל־2026 כולל את **Oi Racecourse Tokyo City Flea Market** ב־3.10, מסומן בכוכבית, 09:00–14:30 בכניסה חופשית. הוא יכול להחליף את החלק הראשון של יום אקיהברה אם המשפחה מעדיפה ציד וינטג׳/יד שנייה על פני בוקר ארוך בחנויות אנימה. הוא לא עצירה נוספת, וגשם יכול לבטל אותו. לבדוק את [האינסטגרם של המארגן](https://www.instagram.com/tokyocity_fleamarket/) בערב שלפני ובבוקר האירוע; [הרישום המתוארך](https://odekakeoffice.jp/blog/2026/06/20/tokyo-city-flea-market/) ו[המדריך העצמאי](https://www.timeout.com/tokyo/shopping/oi-racecourse-flea-market) תומכים בשעה, במקום ובכניסה החופשית.
+- **אמיתי, אבל לא בטיול הזה — קיוטו:** שוק Kobo-ichi הגדול של To-ji מתקיים ב־**21 בכל חודש**, ושוק Tenjin של Kitano Tenmangu ב־**25**. המשפחה עוזבת את יפן ב־17.10, ולכן אף אחד מהם לא מתאים. [הסבר רשמי של To-ji](https://toji.or.jp/smp/mieku/) · [לוח רשמי של Kitano Tenmangu](https://kitanotenmangu.or.jp/event/)
+- **לא שוק קבוע — אוסקה:** Omatsuri Hiroba הוא מרחב אירועים בתוך Expo ’70 Commemorative Park בסואיטה. לפעמים מתקיימים בו שוקי פשפשים ופסטיבלים, אבל אין שוק חוזר שאפשר להניח את קיומו; הוא גם מחוץ למסלול הקומפקטי של נמבה/USJ. להוסיף אותו רק אם [אתר המקום הרשמי](https://www.expo70-park.jp/facility/reserve/nature-09/) מפרסם אירוע ספציפי ב־13–15.10 ששווה להחליף בו עוגן קיים.
 
-## PokéPark Ticket-Sourcing Rule
+## כלל רכישת הכרטיסים ל־PokéPark
 
-- As of Jul 24, the overseas store shows maintenance/changeover information and no Oct 5 purchase path. Monitor it for official inventory re-release.
-- The announced **Aug 1** update applies to admissions from Nov 1; it is not a promised reopening for October.
-- Use only the official international store or a seller PokéPark explicitly identifies as authorized.
-- Do not pay a Fiverr buyer, broker or unofficial reseller to purchase or transfer tickets. Commercial acquisition/resale/transfer can lead to invalidation, and entry may be refused without compensation.
-- DisneySea is the Oct 5 fallback if official PokéPark tickets cannot be secured; it is not an additional park day.
+- נכון ל־24 ביולי, החנות מעבר לים מציגה מידע על תחזוקה/מעבר ואין דרך רכישה ל־5.10. לעקוב אחריה לשחרור מלאי רשמי מחדש.
+- עדכון ה־**1 באוגוסט** שהוכרז חל על כניסות מ־1 בנובמבר; הוא אינו הבטחה לפתיחה מחדש לאוקטובר.
+- להשתמש רק בחנות הבינלאומית הרשמית או במוכר ש־PokéPark מזהה במפורש כמורשה.
+- לא לשלם לקונה ב־Fiverr, למתווך או למשווק לא רשמי כדי לרכוש או להעביר כרטיסים. רכישה/מכירה/העברה מסחרית עלולות להוביל לביטול, והכניסה עלולה להיאסר בלי פיצוי.
+- DisneySea הוא הגיבוי ל־5.10 אם לא ניתן להשיג כרטיסי PokéPark רשמיים; הוא אינו יום פארק נוסף.
 
-## Food and Allergy Notes
+## הערות אוכל ואלרגיות
 
-- Carry a Japanese allergy card for each relevant allergy.
-- Independent ramen counters may seat the family separately and may require a bowl per diner.
-- Slurping is accepted, never required.
-- Share street-food portions.
-- Never rely on a hardcoded queue estimate.
-- Pokémon Café has no legitimate reservation fee; do not buy reseller access.
+- לשאת כרטיס אלרגיה ביפנית לכל אלרגיה רלוונטית.
+- דלפקי ראמן עצמאיים עלולים להושיב את המשפחה בנפרד, ועשויים לדרוש קערה לכל סועד.
+- שאיבה רועשת מקובלת, אף פעם לא חובה.
+- לחלוק מנות של אוכל רחוב.
+- אף פעם לא להסתמך על הערכת תור קבועה מראש.
+- ל־Pokémon Café אין דמי הזמנה לגיטימיים; לא לקנות גישה ממשווק.
 
-## Festival Safety
+## בטיחות בפסטיבלים
 
-- Photograph the meeting point before entering a crowd.
-- Put the accommodation name/phone number in both children’s phones.
-- Choose a fixed regrouping point if separated.
-- Keep valuables zipped and phones tethered/secure.
-- Stand outside the densest procession flow.
-- Leave early enough that tired children are not navigating the final crowd surge.
+- לצלם את נקודת המפגש לפני שנכנסים לקהל.
+- להכניס את שם הלינה ומספר הטלפון שלה לשני הטלפונים של הילדים.
+- לקבוע נקודת התכנסות מחדש קבועה למקרה של היפרדות.
+- לשמור חפצי ערך ברוכסן וטלפונים מקושרים או מאובטחים.
+- לעמוד מחוץ לזרם התהלוכה הצפוף ביותר.
+- לעזוב מוקדם מספיק כדי שילדים עייפים לא ינווטו בגל הקהל האחרון.
 
-## Luggage
+## מזוודות
 
-- Confirm that apartments can receive deliveries before using takkyubin.
-- Do not send bags to an unstaffed property based on assumption.
-- Keep passports, medicines, chargers and one overnight change with the family.
-- Preferred plan: forward main suitcases from the first Tokyo stay directly to Osaka and use two-night packs in Kyoto.
-- The Fushimi Inari apartment has not promised luggage storage. Use Kyoto Station storage before the 15:00 check-in on Oct 11; leave bags in the room during the early shrine visit and return before the 11:00 checkout on Oct 13.
-- The Oct 15 Nintendo Museum plan needs a specific luggage solution before travel.
+- לאמת שהדירות יכולות לקבל משלוחים לפני שמשתמשים ב־takkyubin.
+- לא לשלוח תיקים לנכס לא מאויש על בסיס הנחה.
+- לשמור דרכונים, תרופות, מטענים והחלפה אחת ללילה אצל המשפחה.
+- התוכנית המועדפת: לשגר את המזוודות העיקריות מהלינה הראשונה בטוקיו ישירות לאוסקה ולהשתמש בתיקי שני לילות בקיוטו.
+- הדירה בפושימי אינארי לא הבטיחה אחסון מזוודות. להשתמש באחסון בתחנת קיוטו לפני הצ׳ק־אין ב־15:00 ב־11.10; להשאיר תיקים בחדר בזמן ביקור המקדש המוקדם ולחזור לפני הצ׳ק־אאוט ב־11:00 ב־13.10.
+- תוכנית Nintendo Museum ב־15.10 צריכה פתרון מזוודות ספציפי עוד לפני הנסיעה.
 
-## Basic Etiquette
+## נימוסים בסיסיים
 
-- Keep voices low on trains.
-- Queue in the marked lines.
-- Do not eat while moving through crowded streets unless the area clearly supports it.
-- Carry rubbish until a bin appears.
-- Remove shoes when indicated.
-- Ask before photographing people or small shops.
-- At Kamakurakōkōmae, stay out of the road and respect residents.
+- לשמור על קול נמוך ברכבות.
+- לעמוד בתורים המסומנים.
+- לא לאכול תוך כדי הליכה ברחובות צפופים, אלא אם האזור ברור שתומך בזה.
+- לשאת אשפה עד שמופיע פח.
+- לחלוץ נעליים כשמסומן.
+- לשאול לפני שמצלמים אנשים או חנויות קטנות.
+- ב־Kamakurakōkōmae — להישאר מחוץ לכביש ולכבד את התושבים.
 
-## Health and Emergency
+## בריאות וחירום
 
-- Travel insurance details should be saved offline.
-- Japan emergency numbers: police **110**, ambulance/fire **119**.
-- Keep passport copies separate from originals.
-- Know the nearest late-opening pharmacy and hospital to each stay.
-- Schedule water and seated breaks before anyone feels unwell.
+- פרטי ביטוח הנסיעות צריכים להישמר אופליין.
+- מספרי חירום ביפן: משטרה **110**, אמבולנס/כיבוי אש **119**.
+- לשמור העתקי דרכון בנפרד מהמקור.
+- להכיר את בית המרקחת הפתוח עד מאוחר ואת בית החולים הקרובים לכל לינה.
+- לתזמן מים והפסקות בישיבה לפני שמישהו מרגיש לא טוב.
 
-## Final-Week Checklist
+## צ׳קליסט לשבוע האחרון
 
-The canonical family-wide action tracker is [11-PRE-TRIP-CHECKLIST.md](./11-PRE-TRIP-CHECKLIST.md). This short list is the final verification pass.
+עוקב המשימות הקנוני לכל המשפחה הוא [11-PRE-TRIP-CHECKLIST.md](./11-PRE-TRIP-CHECKLIST.md). הרשימה הקצרה הזו היא מעבר האימות הסופי.
 
-- [ ] Weather and storm forecast.
-- [ ] Tokyo passport submission accepted; late arrival and lockbox instructions confirmed.
-- [ ] Kyoto registration form accepted; access guide and credentials saved offline.
-- [ ] All timed tickets downloaded.
-- [ ] Attraction maintenance/closure notices.
-- [ ] Oct 10 Tokyo Night & Light work order and weather status if the Pokémon projection remains in the plan.
-- [ ] PokePark and USJ apps logged in.
-- [ ] Ghibli/USJ/PokéPark entry names match passports where required.
-- [ ] PokéPark purchased only through an official/explicitly authorized channel; DisneySea fallback decision recorded.
-- [ ] Restaurant dietary requests reconfirmed.
-- [ ] Festival schedules and transit controls checked.
-- [ ] If using the Oct 3 Oi flea-market swap, organizer confirms it is running and weather is suitable.
-- [ ] Mizuekai 13:00 ticket method and seat level.
-- [ ] UZUMASA October show schedule and HIBIKI tickets/QR codes.
-- [ ] Fushimi Inari lower-gates plan and apartment return before 11:00 checkout.
-- [ ] Yūzen Fushimi Tuesday 09:30 opening, four exact spellings and current prices.
-- [ ] Taiko-kan arrival before 15:00 and bachi purchase plan.
-- [ ] Kyoto Station locker/storage fallback and Tokyo-to-Osaka forwarding confirmations.
-- [ ] Cat-café reservation and socks.
-- [ ] Shiro-Hige Oct 9 pickup reservation and final Curry Festival map.
-- [ ] Nintendo Museum result, passports and luggage plan.
-- [ ] Narita terminal and departure train.
+- [ ] תחזית מזג אוויר וסערות.
+- [ ] הגשת הדרכונים לטוקיו התקבלה; הגעה מאוחרת והוראות לוקבוקס אושרו.
+- [ ] טופס הרישום לקיוטו התקבל; מדריך הגישה והאישורים שמורים אופליין.
+- [ ] כל הכרטיסים המתוזמנים הורדו.
+- [ ] הודעות תחזוקה/סגירה של אטרקציות.
+- [ ] סדר העבודה של Tokyo Night & Light ב־10.10 וסטטוס מזג האוויר, אם הקרנת הפוקימון נשארת בתוכנית.
+- [ ] אפליקציות PokePark ו־USJ מחוברות.
+- [ ] שמות הכניסה ל־ג׳יבלי/USJ/PokéPark תואמים לדרכונים היכן שנדרש.
+- [ ] PokéPark נרכש רק דרך ערוץ רשמי או מורשה במפורש; החלטת הגיבוי ל־DisneySea תועדה.
+- [ ] בקשות תזונה במסעדות אושרו מחדש.
+- [ ] לוחות הפסטיבלים ובקרות התחבורה נבדקו.
+- [ ] אם משתמשים בהחלפה לשוק Oi ב־3.10 — המארגן מאשר שהוא מתקיים ושמזג האוויר מתאים.
+- [ ] שיטת הכרטוס למיזואקאי ב־13:00 ורמת המושב.
+- [ ] לוח המופעים של UZUMASA באוקטובר וכרטיסי/קודי ה־QR של HIBIKI.
+- [ ] תוכנית השערים התחתונים בפושימי אינארי וחזרה לדירה לפני הצ׳ק־אאוט ב־11:00.
+- [ ] פתיחת Yūzen Fushimi ב־09:30 ביום שלישי, ארבעת האיותים המדויקים והמחירים הנוכחיים.
+- [ ] הגעה ל־Taiko-kan לפני 15:00 ותוכנית רכישת ה־bachi.
+- [ ] גיבוי לוקרים/אחסון בתחנת קיוטו ואישורי שילוח מטוקיו לאוסקה.
+- [ ] הזמנת קפה החתולים וגרביים.
+- [ ] הזמנת האיסוף ב־Shiro-Hige ל־9.10 ומפת פסטיבל הקארי הסופית.
+- [ ] תוצאת Nintendo Museum, דרכונים ותוכנית מזוודות.
+- [ ] הטרמינל בנריטה ורכבת היציאה.
 
-The best practical rule for this trip: protect the headline experience and delete the filler before the family becomes tired.
+הכלל המעשי הטוב ביותר לטיול הזה: להגן על חוויית הכותרת ולמחוק את המילוי לפני שהמשפחה מתעייפת.

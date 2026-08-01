@@ -8,6 +8,7 @@ import {
   CalendarDays,
   ClipboardCheck,
   Compass,
+  Heart,
   House,
   MapPinned,
   MessageCircle,
@@ -26,6 +27,7 @@ const primaryNav = [
 const moreNav = [
   { href: "/chat", label: "צ׳אט", icon: MessageCircle, hint: "לשאול הכול על הטיול" },
   { href: "/prepare", label: "הכנות", icon: ClipboardCheck, hint: "רשימת המשימות לפני הטיסה" },
+  { href: "/wishes", label: "רשימות", icon: Heart, hint: "מה כל אחד רוצה — משותף ופרטי" },
   { href: "/guides", label: "מדריכים", icon: BookOpenText, hint: "כל מסמכי התכנון" },
   { href: "/private", label: "כספת", icon: ShieldCheck, hint: "כרטיסים, אישורים וקודים — רק למשפחה" },
 ];

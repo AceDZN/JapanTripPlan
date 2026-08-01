@@ -50,7 +50,7 @@ async function startNext(env = {}, { nodeOptions } = {}) {
   const port = await freePort();
   const child = spawn(
     process.execPath,
-    [nextBin, "start", "--hostname", "127.0.0.1", "--port", String(port)],
+    [nextBin, "start", "--hostname", "localhost", "--port", String(port)],
     {
       cwd: root,
       stdio: ["ignore", "pipe", "pipe"],
@@ -76,7 +76,7 @@ async function startNext(env = {}, { nodeOptions } = {}) {
   child.stdout.on("data", (chunk) => (log += chunk));
   child.stderr.on("data", (chunk) => (log += chunk));
 
-  const origin = `http://127.0.0.1:${port}`;
+  const origin = `http://localhost:${port}`;
   const deadline = Date.now() + 90_000;
 
   for (;;) {
@@ -119,11 +119,11 @@ async function startStubEve() {
   });
 
   const port = await freePort();
-  await new Promise((resolve) => server.listen(port, "127.0.0.1", resolve));
+  await new Promise((resolve) => server.listen(port, "localhost", resolve));
   stubs.push(server);
 
   // Trailing slash on purpose: the relay must normalize it away.
-  return { calls, url: `http://127.0.0.1:${port}/` };
+  return { calls, url: `http://localhost:${port}/` };
 }
 
 /** The three server configurations plus the mid-trip clock. */
@@ -315,18 +315,45 @@ test("guides index and a rendered guide keep the canonical documents readable", 
   assert.match(index, /href="\/guide\/daily-itinerary"/);
   assert.match(index, /href="\/guide\/pre-trip-checklist"/);
 
+  // The flights guide is translated, so it renders RTL — and the flight
+  // numbers, airport codes and terminals stay in Latin on purpose: those are
+  // what is printed on the boarding pass and on the airport signage.
   const guide = await html("/guide/flights");
-  assert.match(guide, /class="guide-content"/);
-  assert.match(guide, /BOOKED: Tel Aviv \(TLV\) to Tokyo Narita \(NRT\)/);
+  assert.match(guide, /class="guide-content" dir="rtl"/);
+  assert.match(guide, /מוזמן: תל אביב \(TLV\) לטוקיו נריטה \(NRT\)/);
   assert.match(guide, /ET419/);
   assert.match(guide, /ET672/);
   assert.match(guide, /ET673/);
   assert.match(guide, /ET418/);
-  assert.match(guide, /Tabata/);
+  assert.match(guide, /TLV T3/);
+  assert.match(guide, /NRT T1/);
+  assert.match(guide, /טבטה/);
   assert.doesNotMatch(guide, /travel to Ueno/);
   assert.doesNotMatch(guide, /Pre-booking Research Archive/);
   assert.doesNotMatch(guide, /Best Value: Etihad Airways/);
   assert.doesNotMatch(guide, /TARGET BOOKING WINDOW/);
+});
+
+test("the wish list shows a signed-out visitor nothing but the sign-in prompt", async () => {
+  // The whole feature rests on one rule: shared wishes go to the family, and a
+  // private wish goes only to its owner. A signed-out request is the strongest
+  // version of "not the owner", so it is the one worth pinning in CI — if
+  // convex/wishes.ts ever stops filtering, this is what catches it.
+  const page = await html("/wishes");
+
+  assert.match(page, /מה אנחנו רוצים/);
+  assert.match(page, /רק למשפחה/);
+  // Server-side, Convex auth is still resolving, so the board renders its
+  // loading state and the sign-in card appears once Clerk answers on the
+  // client. What matters here is that the server ships no wish data either way.
+  assert.match(page, /בודק כניסה/);
+
+  // Nothing anybody has actually wished for may appear before sign-in — not
+  // the seeded shared wishes, and certainly not a private one.
+  assert.doesNotMatch(page, /פיקאצ׳ו/);
+  assert.doesNotMatch(page, /PDRN/);
+  assert.doesNotMatch(page, /ownerEmail/);
+  assert.doesNotMatch(page, /acedzn\.com/);
 });
 
 test("map, around and chat render their full experiences", async () => {
@@ -541,11 +568,11 @@ test("the relay streams NDJSON as it arrives instead of buffering the response",
     setTimeout(() => response.end('{"type":"turn.completed"}\n'), 2000);
   });
   const port = await freePort();
-  await new Promise((resolve) => server.listen(port, "127.0.0.1", resolve));
+  await new Promise((resolve) => server.listen(port, "localhost", resolve));
   stubs.push(server);
 
   const slow = await startNext({
-    EVE_URL: `http://127.0.0.1:${port}`,
+    EVE_URL: `http://localhost:${port}`,
     EVE_SHARED_SECRET: "s3cret",
   });
 
@@ -622,21 +649,24 @@ test("keeps all generated guides synchronized with the canonical Markdown", asyn
     assert.equal(published, source, `${file} must be synchronized`);
   }
 
-  const generated = await readFile(
-    new URL("../app/generated/trip-content.ts", import.meta.url),
-    "utf8",
-  );
+  // Asserted against the Markdown itself rather than against a generated
+  // TypeScript copy of it. The guide pages now read Convex directly, so
+  // `app/generated/trip-content.ts` no longer exists — and a third copy of the
+  // trip is exactly what this migration set out to remove.
+  const generated = (
+    await Promise.all(files.map((file) => readFile(new URL(file, sourceRoot), "utf8")))
+  ).join("\n");
   assert.match(generated, /Nintendo Museum/);
   assert.match(generated, /KAWAII MONSTER LAND/);
-  assert.match(generated, /Todoroki Ravine/);
-  assert.match(generated, /Shimokitazawa Curry Festival/);
+  assert.match(generated, /ערוץ טודורוקי/);
+  assert.match(generated, /פסטיבל הקארי של שימוקיטזאווה/);
   assert.match(generated, /Shiro-Hige/);
   assert.match(generated, /Mizuekai/);
   assert.match(generated, /DRUM TAO HIBIKI/);
   assert.match(generated, /UZUMASA Kyoto Village/);
   assert.match(generated, /Fushimi Inari/);
   assert.match(generated, /Taiko-kan/);
-  assert.match(generated, /Buy new walking shoes for everyone/);
+  assert.match(generated, /לקנות נעלי הליכה חדשות לכולם/);
   assert.doesNotMatch(generated, /Light Manga-morning snack/);
   assert.doesNotMatch(generated, /CHECK IF STILL OPEN/);
   assert.doesNotMatch(generated, /Tokyo Oct 2–13 · Osaka Oct 13–15/);

@@ -16,6 +16,8 @@
  */
 
 import { eveSecret, eveUrl, jsonResponse } from "@/lib/server-env";
+import { familySession } from "@/lib/family-session";
+import { withVerifiedSpeaker } from "@/lib/agent-context";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -71,6 +73,10 @@ async function relay(request: Request): Promise<Response> {
     headers.set("content-type", "application/json");
     body = await request.text();
     if (!body) body = "{}";
+    // Stamp the VERIFIED speaker onto the turn. Done here, server-side, on the
+    // way past — a client-supplied name would be worthless, and this is what
+    // lets the agent attribute a wish to the person who asked for it.
+    body = withVerifiedSpeaker(body, await familySession());
   }
 
   let upstream: Response;

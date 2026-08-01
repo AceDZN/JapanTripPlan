@@ -59,6 +59,80 @@ export const booking = v.object({
 });
 
 /**
+ * Operational vocabulary — see `web/lib/types.ts` for why each of these exists.
+ *
+ * The rule these encode: anything we have to *act on* in Japan is stored as
+ * structured fields, never as a sentence. A fare inside prose cannot be summed,
+ * a station name inside prose cannot carry its Japanese, and a last-admission
+ * time inside prose cannot warn anyone.
+ */
+export const label = v.object({
+  he: v.string(),
+  en: v.optional(v.string()),
+  ja: v.optional(v.string()),
+});
+
+export const transportMode = v.union(
+  v.literal("train"),
+  v.literal("subway"),
+  v.literal("walk"),
+  v.literal("bus"),
+  v.literal("taxi"),
+  v.literal("plane"),
+  v.literal("ferry"),
+  v.literal("cablecar"),
+  v.literal("monorail"),
+);
+
+export const transportLeg = v.object({
+  mode: transportMode,
+  from: label,
+  to: label,
+  line: v.optional(label),
+  direction: v.optional(label),
+  platform: v.optional(v.string()),
+  depart: v.optional(v.string()),
+  arrive: v.optional(v.string()),
+  durationMin: v.optional(v.number()),
+  fareYen: v.optional(v.number()),
+  fareNote: v.optional(v.string()),
+  exit: v.optional(label),
+  transferNote: v.optional(v.string()),
+  gotcha: v.optional(v.string()),
+});
+
+export const costLine = v.object({
+  label: v.string(),
+  yen: v.number(),
+  basis: v.union(v.literal("person"), v.literal("family"), v.literal("total")),
+  note: v.optional(v.string()),
+});
+
+export const refLink = v.object({
+  label: v.string(),
+  url: v.string(),
+  kind: v.union(
+    v.literal("official"),
+    v.literal("tickets"),
+    v.literal("timetable"),
+    v.literal("map"),
+    v.literal("hours"),
+    v.literal("menu"),
+    v.literal("access"),
+  ),
+});
+
+export const stay = v.object({
+  placeId: v.optional(v.string()),
+  label: v.string(),
+  addressJa: v.optional(v.string()),
+  checkIn: v.optional(v.string()),
+  checkOut: v.optional(v.string()),
+  url: v.optional(v.string()),
+  note: v.optional(v.string()),
+});
+
+/**
  * No users/sessions tables: Clerk owns identity. A request's identity arrives
  * as a verified JWT and is matched against the allowlist in `lib/family.ts`,
  * so there is no account state for this app to store or keep in sync.
@@ -80,6 +154,8 @@ export default defineSchema({
     note: v.optional(v.string()),
     rainPlan: v.optional(v.string()),
     foodAnchorIds: v.array(v.string()), // place slugs
+    /** Where we sleep tonight — repeated per day on purpose, see lib/types.ts. */
+    stay: v.optional(stay),
     discovery: v.optional(
       v.object({
         label: v.string(),
@@ -110,6 +186,12 @@ export default defineSchema({
     placeIds: v.array(v.string()), // place slugs
     cutFirst: v.optional(v.boolean()),
     booking: v.optional(booking),
+    /** The operational half: how it is done, what it costs, what breaks it. */
+    legs: v.optional(v.array(transportLeg)),
+    costs: v.optional(v.array(costLine)),
+    links: v.optional(v.array(refLink)),
+    needs: v.optional(v.array(v.string())),
+    warnings: v.optional(v.array(v.string())),
     updatedAt: v.number(),
     updatedBy: v.optional(v.string()),
   })
@@ -121,6 +203,7 @@ export default defineSchema({
     slug: v.string(), // stable kebab-case English key; exposed to the app as `id`
     nameHe: v.string(),
     nameEn: v.string(),
+    nameJa: v.optional(v.string()), // as it appears on signage / in Google Maps JP
     category: placeCategory,
     area: v.string(),
     city,
@@ -135,6 +218,23 @@ export default defineSchema({
     mustDo: v.optional(v.boolean()),
     indoor: v.optional(v.boolean()), // rain-friendly
     openingHours: v.optional(v.string()),
+    /**
+     * Present in `places.json` and `lib/types.ts` since before the migration,
+     * but omitted here — so the import silently dropped `officialUrl` for 41
+     * places and `priceLevel` for 148. Restored; the app reads them again.
+     */
+    officialUrl: v.optional(v.string()),
+    priceLevel: v.optional(v.number()), // 0..3
+    /** Getting-there and being-there facts — see lib/types.ts. */
+    addressEn: v.optional(v.string()),
+    addressJa: v.optional(v.string()),
+    phone: v.optional(v.string()),
+    nearestStation: v.optional(label),
+    stationExit: v.optional(label),
+    walkMinutes: v.optional(v.number()),
+    closedDays: v.optional(v.string()),
+    lastEntry: v.optional(v.string()),
+    ticketNote: v.optional(v.string()),
     updatedAt: v.number(),
     updatedBy: v.optional(v.string()),
   })
@@ -294,6 +394,110 @@ export default defineSchema({
     createdAt: v.number(),
     updatedAt: v.number(),
   }).index("by_ownerId_and_updatedAt", ["ownerId", "updatedAt"]),
+
+  /**
+   * FAMILY-ONLY. What each of us actually wants out of this trip.
+   *
+   * Two things the itinerary alone cannot hold: the kids' own ideas, and the
+   * specific object someone is hoping to come home with. A wish is either
+   * `shared` (the whole family sees it and it feeds planning) or `private`
+   * (only its owner ever sees it) — which is what makes it safe to note a
+   * surprise gift for someone who also uses this app.
+   *
+   * `ownerEmail` rather than `identity.tokenIdentifier`, deliberately, and
+   * unlike `chatThreads`: e-mail is already THE family key in `lib/family.ts`
+   * and in `requireFamily()`, so using it here means a wish can be seeded or
+   * reassigned from a script without first impersonating someone to learn
+   * their token. Always stored lowercased, always taken from the verified JWT
+   * claim, never from the client.
+   */
+  wishes: defineTable({
+    kind: v.union(
+      v.literal("attraction"),
+      v.literal("place"),
+      v.literal("product"),
+      v.literal("food"),
+      v.literal("experience"),
+      v.literal("other"),
+    ),
+    title: v.string(),
+    /**
+     * The same trilingual rule as the itinerary: you cannot ask a shop
+     * assistant in Tokyo for a "פיקאצ׳ו" figurine, and a cosmetics counter
+     * needs the product name exactly as printed.
+     */
+    titleEn: v.optional(v.string()),
+    titleJa: v.optional(v.string()),
+    note: v.optional(v.string()),
+    url: v.optional(v.string()),
+    /** Where it could plausibly be found. */
+    placeId: v.optional(v.string()), // place slug
+    area: v.optional(v.string()),
+    dayN: v.optional(v.number()), // pinned to a day, so it surfaces there
+    priceYen: v.optional(v.number()),
+    priority: v.union(v.literal("must"), v.literal("want"), v.literal("maybe")),
+    visibility: v.union(v.literal("shared"), v.literal("private")),
+    ownerEmail: v.string(),
+    ownerName: v.string(), // display name, for "who asked for this"
+    status: v.union(
+      v.literal("idea"),
+      /** eve has been asked to research it but has not answered yet. */
+      v.literal("researching"),
+      v.literal("approved"),
+      v.literal("done"),
+      v.literal("dropped"),
+    ),
+
+    /**
+     * The half eve fills in.
+     *
+     * A wish starts as whatever someone typed — "פיגורת פיקאצ׳ו", maybe with a
+     * screenshot. The agent researches it and writes back here: what it costs,
+     * which shops on OUR route stock it, pictures, and the sources it used.
+     * Everything is optional because a hand-typed wish is still a valid wish;
+     * these fields simply stay empty until the research lands.
+     */
+    images: v.optional(
+      v.array(
+        v.object({
+          storageId: v.id("_storage"),
+          alt: v.optional(v.string()),
+          /** Where the picture came from, so a rights question has an answer. */
+          sourceUrl: v.optional(v.string()),
+        }),
+      ),
+    ),
+    /** Shops that actually stock it, ranked by how well they fit the route. */
+    whereToBuy: v.optional(
+      v.array(
+        v.object({
+          shop: v.string(),
+          shopJa: v.optional(v.string()),
+          area: v.optional(v.string()),
+          /** Ties the wish to a stop we are already making. */
+          placeId: v.optional(v.string()),
+          dayN: v.optional(v.number()),
+          priceYen: v.optional(v.number()),
+          url: v.optional(v.string()),
+          note: v.optional(v.string()),
+        }),
+      ),
+    ),
+    /** Citations. A researched price with no source is a rumour. */
+    sources: v.optional(
+      v.array(v.object({ label: v.string(), url: v.string() })),
+    ),
+    researchedAt: v.optional(v.number()),
+    researchedBy: v.optional(v.string()), // "eve", or a person who did it by hand
+    /** The original prompt — the text and/or screenshot the wish grew from. */
+    promptText: v.optional(v.string()),
+
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_visibility", ["visibility"])
+    .index("by_ownerEmail", ["ownerEmail"])
+    .index("by_dayN", ["dayN"]),
 
   /** FAMILY-ONLY. `ownerId` is `identity.tokenIdentifier`, as above. */
   chatMessages: defineTable({

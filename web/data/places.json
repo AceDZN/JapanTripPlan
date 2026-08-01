@@ -270,7 +270,18 @@
     "mapsQuery": "teamLab Planets TOKYO, Toyosu",
     "priceLevel": 3,
     "mustDo": true,
-    "indoor": true
+    "indoor": true,
+    "nameJa": "チームラボプラネッツ TOKYO DMM",
+    "addressEn": "6-1-16 Toyosu, Koto-ku, Tokyo",
+    "addressJa": "〒135-0061 東京都江東区豊洲6-1-16",
+    "phone": "+81-3-6387-9306",
+    "nearestStation": {
+      "he": "שין־טויוסו",
+      "en": "Shin-Toyosu",
+      "ja": "新豊洲駅"
+    },
+    "walkMinutes": 1,
+    "ticketNote": "שולם ¥16,800 לארבעה. חלון כניסה 09:30–10:00 ב־4.10."
   },
   {
     "id": "mundo-pixar",
@@ -431,7 +442,15 @@
     "image": "/images/places/yomiuriland.jpg",
     "officialUrl": "https://www.yomiuriland.com/en/charge/",
     "mapsQuery": "Yomiuriland, Inagi, Tokyo",
-    "priceLevel": 2
+    "priceLevel": 2,
+    "nameJa": "よみうりランド",
+    "nearestStation": {
+      "he": "Keio-yomiuri-land",
+      "en": "Keio-yomiuriland",
+      "ja": "京王よみうりランド駅"
+    },
+    "walkMinutes": 2,
+    "ticketNote": "רכבל Sky Shuttle ¥500 הלוך־חזור, נפרד מכרטיס הפארק. אין לוח זמנים — הרכבל פועל ברצף מלפני הפתיחה ועד אחרי הסגירה, המתנה רגילה כ־5 דקות ובעומס עד 15."
   },
   {
     "id": "tokyo-disneysea",
@@ -917,7 +936,25 @@
     "mapsQuery": "Ghibli Museum Mitaka",
     "priceLevel": 2,
     "mustDo": true,
-    "indoor": true
+    "indoor": true,
+    "nameJa": "三鷹の森ジブリ美術館",
+    "addressEn": "1-1-83 Shimorenjaku, Mitaka, Tokyo 181-0013",
+    "addressJa": "〒181-0013 東京都三鷹市下連雀1-1-83",
+    "phone": "+81-570-055-777",
+    "nearestStation": {
+      "he": "מיטאקה",
+      "en": "Mitaka",
+      "ja": "三鷹駅"
+    },
+    "stationExit": {
+      "he": "היציאה הדרומית",
+      "en": "South Exit",
+      "ja": "南口"
+    },
+    "walkMinutes": 15,
+    "openingHours": "10:00–18:00 · כניסה בחריצים קבועים: 10:00, 12:00, 14:00, 16:00",
+    "closedDays": "סגור בימי שלישי",
+    "ticketNote": "כניסה בהזמנה מראש בלבד, על שם הרוכש. מכירת אוקטובר ב־10.9 בשעה 10:00 שעון יפן."
   },
   {
     "id": "inokashira-park",
@@ -1470,7 +1507,19 @@
     "officialUrl": "https://en.eigamura.com/hours-tickets/",
     "mapsQuery": "Toei Kyoto Studio Park Uzumasa",
     "priceLevel": 2,
-    "mustDo": true
+    "mustDo": true,
+    "nameJa": "東映太秦映画村（UZUMASA Kyoto Village）",
+    "addressEn": "10 Uzumasa Higashihachiokacho, Ukyo-ku, Kyoto",
+    "addressJa": "〒616-8586 京都市右京区太秦東蜂岡町10",
+    "phone": "+81-570-064-349",
+    "nearestStation": {
+      "he": "Uzumasa-Koryuji",
+      "en": "Uzumasa-Koryuji",
+      "ja": "太秦広隆寺駅"
+    },
+    "walkMinutes": 5,
+    "openingHours": "10:00–17:00 · משתנה לפי עונה",
+    "ticketNote": "שולם ¥29,600 לכל החבילה. הכניסה דרך המסך בסמארטפון בלבד — בלי הדפסה."
   },
   {
     "id": "kyoto-avanti",
@@ -1733,7 +1782,25 @@
     "mapsQuery": "Nintendo Museum, Ogura, Uji, Kyoto",
     "priceLevel": 2,
     "indoor": true,
-    "mustDo": true
+    "mustDo": true,
+    "nameJa": "ニンテンドーミュージアム",
+    "addressEn": "56 Kagurada, Ogura-cho, Uji, Kyoto 611-0042",
+    "addressJa": "〒611-0042 京都府宇治市小倉町神楽田56",
+    "phone": "+81-570-011-120",
+    "nearestStation": {
+      "he": "JR אוגורה",
+      "en": "JR Ogura",
+      "ja": "JR小倉駅"
+    },
+    "stationExit": {
+      "he": "היציאה הצפונית",
+      "en": "North Exit",
+      "ja": "北出口"
+    },
+    "walkMinutes": 8,
+    "openingHours": "10:00–19:00",
+    "closedDays": "סגור בימי שלישי (ואם שלישי הוא חג — סגור ברביעי שאחריו)",
+    "ticketNote": "מבוגר ¥3,300 · חטיבה ותיכון ¥2,200. כניסה בחריץ שהוקצה בהגרלה בלבד."
   },
   {
     "id": "ueno-inaricho-base",
@@ -1880,7 +1947,20 @@
     "priceLevel": 1,
     "indoor": true,
     "mustDo": true,
-    "openingHours": "שישי 11:00–16:00, כניסה אחרונה 15:00"
+    "openingHours": "שישי 11:00–16:00, כניסה אחרונה 15:00",
+    "nameJa": "太鼓館（宮本卯之助商店 西浅草店）",
+    "addressEn": "2-1-1 Nishi-Asakusa, Taito-ku, Tokyo 111-0035",
+    "addressJa": "〒111-0035 東京都台東区西浅草2-1-1",
+    "phone": "+81-3-3844-2141",
+    "nearestStation": {
+      "he": "טווארמאצ׳י",
+      "en": "Tawaramachi",
+      "ja": "田原町駅"
+    },
+    "walkMinutes": 5,
+    "lastEntry": "15:00",
+    "closedDays": "סגור בשני ובשלישי (אם שני הוא חג — פתוח). 16.10 הוא שישי, פתוח.",
+    "ticketNote": "החנות עצמה פתוחה 10:00–18:00; המוזיאון בקומה שמעליה 11:00–16:00."
   },
   {
     "id": "miyamoto-unosuke-store",

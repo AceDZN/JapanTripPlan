@@ -16,9 +16,10 @@
     "prebuild": "npm run sync:content",
     "build": "next build",
     "start": "next start",
-    "test": "npm run build && node --test tests/*.test.mjs",
+    "test": "npm run build && npm run export:md -- --check && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern .next",
-    "seed:private": "tsx --env-file=.env.local scripts/seed-private-slots.ts"
+    "seed:private": "tsx --env-file=.env.local scripts/seed-private-slots.ts",
+    "seed:wishes": "tsx --env-file=.env.local scripts/seed-wishes.ts"
   },
   "dependencies": {
     "@ai-sdk/gateway": "^4.0.28",

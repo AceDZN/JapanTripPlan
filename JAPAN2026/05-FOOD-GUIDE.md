@@ -1,111 +1,111 @@
-# 05 — Ramen and Family Food Guide
+# 05 — ראמן ואוכל משפחתי
 
-**Cities:** Tokyo + Kyoto + Osaka
-**Family priority:** ramen should be a memory, not just repeated bowls between shops.
+**ערים:** טוקיו + קיוטו + אוסקה
+**העדיפות המשפחתית:** הראמן צריך להיות זיכרון, לא עוד קערה חוזרת בין חנות לחנות.
 
-## The Food Strategy
+## אסטרטגיית האוכל
 
-- One planned food experience per day is enough.
-- Share street-food portions so everyone can try more without wasting meals.
-- Keep a konbini breakfast fallback for ticketed early starts.
-- Counter restaurants may split the family; ask before queuing if sitting together matters.
-- A realistic ramen meal for four is roughly **JPY 4,000–6,500 before extras**.
-- Slurping is common and accepted, never required.
+- חוויית אוכל מתוכננת אחת ליום זה מספיק.
+- לחלוק מנות של אוכל רחוב כדי שכולם יטעמו יותר בלי לבזבז ארוחות.
+- לשמור ארוחת בוקר מקונביני כגיבוי לימים עם כניסה מוקדמת מוזמנת.
+- מסעדות דלפק עלולות לפצל את המשפחה; אם חשוב לשבת יחד — לשאול לפני שנעמדים בתור.
+- ארוחת ראמן ריאלית לארבעה היא בערך **¥4,000–6,500 לפני תוספות**.
+- שאיבת האטריות בקול נפוצה ומקובלת, אבל אף פעם לא חובה.
 
-## The Three Ramen Meals Worth Protecting
+## שלוש ארוחות הראמן ששווה להגן עליהן
 
-### 1. Ichiran or AFURI — Oct 6
+### 1. Ichiran או AFURI — 6.10
 
-**Ichiran Shibuya** is worth doing once for the private booth and customization ritual. The base ramen is JPY 1,180 before extras, seating is counter-only and the family may not sit together. Go off-peak.
+**Ichiran שיבויה** (一蘭 · 渋谷) שווה פעם אחת בשביל התא הפרטי וטקס ההתאמה האישית. הראמן הבסיסי עולה ¥1,180 לפני תוספות, הישיבה היא בדלפק בלבד וייתכן שהמשפחה לא תשב יחד. ללכת מחוץ לשעות השיא.
 
-**AFURI** is the better backup for a lighter yuzu-shio bowl and a more flexible end to the day.
+**AFURI** (阿夫利) הוא הגיבוי הטוב יותר לקערת yuzu-shio קלילה יותר ולסיום יום גמיש יותר.
 
-### 2. Shinjuku dinner after Ghibli — Oct 8
+### 2. ארוחת ערב בשינג׳וקו אחרי ג׳יבלי — 8.10
 
-Fuunji is famous for tsukemen but has only a small counter and no reservation. Treat it as optional after Ghibli, Nakano and the Shinjuku photo stops; never build the evening around an invented queue estimate.
+Fuunji (風雲児) מפורסם בצוקמן (つけ麺) אבל יש בו דלפק קטן בלבד ואי אפשר להזמין מקום. להתייחס אליו כאופציונלי אחרי ג׳יבלי, נקאנו ועצירות הצילום בשינג׳וקו; לא לבנות את הערב סביב הערכת תור מומצאת.
 
-If four nearby seats matter more, choose a larger family-friendly ramen shop on the live map.
+אם ארבעה מקומות צמודים חשובים יותר — לבחור מסעדת ראמן גדולה ומשפחתית מהמפה החיה.
 
-### 3. Tokyo Ramen Street — Oct 16 backup
+### 3. Tokyo Ramen Street — גיבוי ל־16.10
 
-Use Tokyo Ramen Street **only if Pokémon Café fails**. Do not schedule both as full meals.
+להשתמש ב־Tokyo Ramen Street **רק אם Pokémon Café נופל**. לא לתכנן את שניהם כארוחות מלאות.
 
-The lineup and prices change, so choose on the day from the official directory rather than hardcoding one shop months ahead. [Official directory](https://www.tokyoeki-1bangai.co.jp/street/ramen/en/)
+הרכב המסעדות והמחירים משתנים, ולכן בוחרים ביום עצמו מהמדריך הרשמי במקום לקבע חנות אחת חודשים מראש. [המדריך הרשמי](https://www.tokyoeki-1bangai.co.jp/street/ramen/en/)
 
 ## Pokémon Café
 
-- Reservation required.
-- Seating period: 90 minutes.
-- Every guest age six or older must order at least one item.
-- There is no official reservation fee.
-- October 2026 release timing has not been announced; monitor [official news](https://www.pokemon-cafe.jp/en/cafe/news/) and book immediately when published.
-- If Tokyo inventory fails, check the Osaka café only if its date fits the fixed Osaka route.
+- חובה הזמנת מקום.
+- משך הישיבה: 90 דקות.
+- כל אורח מגיל שש ומעלה חייב להזמין לפחות פריט אחד.
+- אין דמי הזמנה רשמיים.
+- מועד פתיחת המכירה לאוקטובר 2026 טרם הוכרז; לעקוב אחרי [החדשות הרשמיות](https://www.pokemon-cafe.jp/en/cafe/news/) ולהזמין מיד עם הפרסום.
+- אם המלאי בטוקיו נכשל, לבדוק את הסניף באוסקה רק אם התאריך שלו מתאים למסלול האוסקאי הקבוע.
 
-Never buy a reservation from a reseller.
+אף פעם לא לקנות הזמנה ממתווך.
 
-## Daily Food Map
+## מפת האוכל היומית
 
-| Day | Area | Food anchor | Flexible backup |
+| תאריך | אזור | עוגן האוכל | גיבוי גמיש |
 |---|---|---|---|
-| Oct 2 | Arrival | Konbini dinner | Airport meal |
-| Oct 3 | Akihabara | Ramen or CoCo Ichibanya | Family restaurant |
-| Oct 4 | Toyosu/Odaiba | DiverCity/Joypolis-area lunch | Odaiba food court |
-| Oct 5 | PokéPark / DisneySea fallback | Eat inside the selected park at an off-peak time | Simple dinner near the return route |
-| Oct 6 | Harajuku/Shibuya | Crepe + Ichiran or AFURI | PARCO restaurant floor |
-| Oct 7 | Kamakura/Enoshima | Coastal lunch + island snacks | Hase café |
-| Oct 8 | Kichijoji/Nakano/Shinjuku | Early Kichijoji lunch + easy Shinjuku dinner | Larger ramen shop |
-| Oct 9 | Todoroki → Setagaya-Daita → Shimokitazawa | Kuzu-mochi + Totoro cream puffs + Curry Festival mini-dish crawl | Skip the parks and use Shiro-Hige + indoor festival shops |
-| Oct 10 | Tokyo Dome | Celebration dinner with dessert message | Hotel-neighborhood favorite |
-| Oct 11 | Kyoto east side | Train breakfast + late lunch between Mizuekai and Awata | Kyoto Station meal after the procession |
-| Oct 12 | UZUMASA/Kyoto Station | Park lunch + early dinner before HIBIKI | Kyoto Avanti/Station quick meal |
-| Oct 13 | Fushimi Inari → Osaka | Konbini/train breakfast + Dotonbori scorecard | Earlier Namba restaurant |
-| Oct 14 | USJ | Early/late Kinopio meal if practical | Mobile-order/quick service |
-| Oct 15 | Uji transfer | Train-friendly meal/ekiben | Kyoto Station meal |
-| Oct 16 | Nihonbashi → Tokyo Station First Avenue → Nishi-Asakusa | Pokémon Café + light Asakusa snack | Tokyo Ramen Street if the café fails |
-| Oct 17 | Ueno | Favorite repeat or simple lunch | Station meal before Narita |
+| 2.10 | הגעה | ארוחת ערב מקונביני | ארוחה בשדה התעופה |
+| 3.10 | אקיהברה | ראמן או CoCo Ichibanya | מסעדה משפחתית |
+| 4.10 | טויוסו/אודאיבה | צהריים באזור DiverCity/Joypolis | בית קפה־מזון באודאיבה |
+| 5.10 | PokéPark / גיבוי DisneySea | לאכול בתוך הפארק שנבחר, מחוץ לשעות השיא | ארוחת ערב פשוטה ליד מסלול החזרה |
+| 6.10 | הרג׳וקו/שיבויה | קרפ + Ichiran או AFURI | קומת המסעדות ב־PARCO |
+| 7.10 | קמקורה/אנושימה | צהריים על החוף + חטיפי האי | בית קפה בהאסה |
+| 8.10 | קיצ׳יג׳וג׳י/נקאנו/שינג׳וקו | צהריים מוקדמים בקיצ׳יג׳וג׳י + ערב קליל בשינג׳וקו | מסעדת ראמן גדולה יותר |
+| 9.10 | טודורוקי ← סטגאיה־דאיטה ← שימוקיטזאווה | kuzu-mochi + פחזניות טוטורו + סבב מנות מיני בפסטיבל הקארי | לוותר על הפארקים ולהסתפק ב־Shiro-Hige ובחנויות הפסטיבל שבפנים |
+| 10.10 | Tokyo Dome | ארוחת חגיגה עם מסר על הקינוח | המסעדה האהובה בשכונת הלינה |
+| 11.10 | מזרח קיוטו | ארוחת בוקר ברכבת + צהריים מאוחרים בין Mizuekai ל־Awata | ארוחה בתחנת קיוטו אחרי התהלוכה |
+| 12.10 | UZUMASA/תחנת קיוטו | צהריים בפארק + ארוחת ערב מוקדמת לפני HIBIKI | ארוחה מהירה ב־Kyoto Avanti או בתחנה |
+| 13.10 | פושימי אינארי ← אוסקה | בוקר מקונביני/ברכבת + כרטיס הניקוד של דוטונבורי | מסעדה מוקדמת יותר בנמבה |
+| 14.10 | USJ | ארוחה ב־Kinopio מוקדם או מאוחר אם זה מעשי | הזמנה מהנייד / שירות מהיר |
+| 15.10 | מעבר דרך אוג׳י | ארוחה נוחה לרכבת / אקיבן (駅弁) | ארוחה בתחנת קיוטו |
+| 16.10 | ניהונבאשי ← Tokyo Station First Avenue ← מערב אסאקוסה | Pokémon Café + חטיף קליל באסאקוסה | Tokyo Ramen Street אם הקפה נופל |
+| 17.10 | אואנו | חזרה על מנה אהובה או צהריים פשוטים | ארוחה בתחנה לפני נריטה |
 
-## Oct 9 Street-Food Game
+## משחק אוכל הרחוב של 9.10
 
-The complete food route is:
+מסלול האוכל המלא:
 
-1. share tea and kuzu-mochi at Setsugekka in Todoroki Ravine if it is open;
-2. collect a reserved box of Totoro cream puffs from Shiro-Hige’s Daita shop;
-3. use Hanegi Park as a short picnic/reset, not another sightseeing checklist;
-4. at the **Shimokitazawa Curry Festival**, choose three mini portions: one mild/familiar, one adventurous and one child-selected wildcard;
-5. add ramen at dinner only if everyone is genuinely hungry after the curry crawl.
+1. לחלוק תה ו־kuzu-mochi (葛餅) ב־Setsugekka בערוץ טודורוקי, אם פתוח;
+2. לאסוף קופסה שמורה מראש של פחזניות טוטורו מחנות Shiro-Hige בדאיטה;
+3. להשתמש בפארק Hanegi כפיקניק קצר ואיפוס, לא כעוד תחנת סיור ברשימה;
+4. ב**פסטיבל הקארי של שימוקיטזאווה** — לבחור שלוש מנות מיני: אחת עדינה ומוכרת, אחת הרפתקנית ואחת ג׳וקר שהילדים בוחרים;
+5. להוסיף ראמן לארוחת ערב רק אם כולם באמת רעבים אחרי סבב הקארי.
 
-The 2026 festival runs Oct 8–25 around participating Shimokitazawa restaurants. Exact menus and opening hours are still shop-specific, so download the final official map close to travel. [Official Curry Festival](https://shimokitazawa-curryfes.com/)
+פסטיבל 2026 מתקיים בין 8 ל־25 באוקטובר במסעדות המשתתפות בשימוקיטזאווה. התפריטים ושעות הפתיחה המדויקים עדיין נקבעים לכל חנות בנפרד, ולכן מורידים את המפה הרשמית הסופית סמוך לנסיעה. [פסטיבל הקארי הרשמי](https://shimokitazawa-curryfes.com/)
 
-Shiro-Hige’s Daita shop is open 10:30–18:00 and accepts pickup reservations. [Official shop and reservations](https://shiro-hige.net/)
+חנות Shiro-Hige בדאיטה פתוחה 10:30–18:00 ומקבלת הזמנות לאיסוף. [החנות וההזמנות הרשמיות](https://shiro-hige.net/)
 
-## Osaka Food Scorecard
+## כרטיס הניקוד של אוסקה
 
-On Oct 13 share, do not order four of everything:
+ב־13.10 חולקים, לא מזמינים ארבע מנות מכל דבר:
 
-- takoyaki;
-- okonomiyaki;
-- kushikatsu;
-- one dessert;
-- one wildcard chosen by each child.
+- טאקויאקי (たこ焼き);
+- אוקונומיאקי (お好み焼き);
+- קושיקאצו (串カツ);
+- קינוח אחד;
+- ג׳וקר אחד לכל ילד.
 
-Kinryu’s dragon is a fun Dotonbori photo marker, not one of the trip’s serious ramen priorities.
+הדרקון של Kinryu (金龍) הוא סמן צילום כיפי בדוטונבורי, לא אחת מעדיפויות הראמן הרציניות של הטיול.
 
-## Cute Food Without Overbooking
+## מתוק וחמוד בלי להעמיס הזמנות
 
-- Harajuku crepe on Oct 6.
-- One character snack inside KAWAII MONSTER LAND.
-- Reserve Totoro cream puffs for the Oct 9 Setagaya picnic.
-- Sanrio or Mofusand only if it fits naturally; do not add another cross-city reservation.
-- During the protected 45–60-minute [Tokyo Station First Avenue](https://www.tokyoeki-1bangai.co.jp/en/) stop on Oct 16, choose at most one quick take-away target such as Kirby Café Petit or Mofusand. Character Street comes first; Okashi Land is a bonus, and Tokyo Ramen Street remains the meal backup if the Pokémon Café fails.
-- The scheduled live-animal experience is the Oct 8 cat café — Temari no Oshiro at Kichijōji Petit Mura. The Kyoto/Osaka animal side quests (otters, small animals, snakes) are optional cut-first walk-ins listed in the daily itinerary, added knowing the welfare tradeoffs. We considered a capybara café and skipped it: no current Tokyo operator had independent welfare verification strong enough to outweigh the systemic concerns around keeping a social, semi-aquatic wild species in a touch-and-feed café. [Peer-reviewed welfare study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
+- קרפ בהרג׳וקו ב־6.10.
+- חטיף דמות אחד בתוך KAWAII MONSTER LAND.
+- להזמין מראש פחזניות טוטורו לפיקניק בסטגאיה ב־9.10.
+- Sanrio או Mofusand רק אם זה מסתדר באופן טבעי; לא להוסיף עוד הזמנה שחוצה את העיר.
+- בעצירה המוגנת של 45–60 דקות ב־[Tokyo Station First Avenue](https://www.tokyoeki-1bangai.co.jp/en/) ב־16.10 — לבחור לכל היותר יעד טייק־אווי מהיר אחד, כמו Kirby Café Petit או Mofusand. Character Street קודם; Okashi Land הוא בונוס, ו־Tokyo Ramen Street נשאר גיבוי הארוחה אם Pokémon Café נופל.
+- חוויית בעלי החיים המתוכננת היא בית קפה החתולים ב־8.10 — Temari no Oshiro במתחם Petit Mura בקיצ׳יג׳וג׳י. הסייד־קווסטים של בעלי חיים בקיוטו ובאוסקה (לוטרות, חיות קטנות, נחשים) הם כניסות ספונטניות אופציונליות שמופיעות במסלול היומי ונחתכות ראשונות — הם נוספו מתוך ידיעה מלאה של הפשרה ברווחת בעלי החיים. שקלנו בית קפה קפיברות וּויתרנו: לאף מפעיל בטוקיו לא היה אימות רווחה עצמאי חזק מספיק כדי לגבור על החששות המערכתיים שבהחזקת מין בר חברותי וחצי־מימי בבית קפה של נגיעה והאכלה. [מחקר רווחה שעבר שיפוט עמיתים](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
 
-## Family Ordering Notes
+## הערות הזמנה למשפחה
 
-- Independent ramen counters may expect each seated diner to order a bowl.
-- Children’s portions are not universal.
-- Ask about spice and pork stock before ordering when relevant.
-- Carry a translation card for allergies; do not rely on staff guessing.
-- Keep cash for ticket-machine restaurants.
-- Avoid promising exact wait times—queues change by weather, events and social-media popularity.
+- דלפקי ראמן עצמאיים עשויים לצפות שכל סועד יושב יזמין קערה.
+- מנות ילדים אינן דבר מובן מאליו.
+- לשאול על חריפות ועל ציר חזיר לפני ההזמנה כשזה רלוונטי.
+- לשאת כרטיסייה מתורגמת לאלרגיות; לא להסתמך על ניחוש של הצוות.
+- לשמור מזומן למסעדות עם מכונת כרטיסים.
+- לא להבטיח זמני המתנה מדויקים — התורים משתנים לפי מזג האוויר, אירועים ופופולריות ברשתות.
 
-*Plan consistency audited July 25, 2026. Recheck menus, prices and opening hours during the final week.*
+*עקביות התוכנית נבדקה ב־25 ביולי 2026. לבדוק שוב תפריטים, מחירים ושעות פתיחה בשבוע האחרון לפני הנסיעה.*

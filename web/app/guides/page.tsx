@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, FileText } from "lucide-react";
-import { tripGuides } from "@/app/generated/trip-content";
+import { getGuides } from "@/lib/trip-source";
 import { guideImage } from "@/components/guide-images";
 
 export const metadata: Metadata = {
@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   description: "כל מסמכי התכנון של יפן 2026 במקום אחד: טיסות, לינה, תחבורה, אנימה, אוכל, תקציב וטיפים.",
 };
 
-export default function GuidesPage() {
+export default async function GuidesPage() {
+  const tripGuides = await getGuides();
+
   return (
     <div className="container section">
       <header className="section-head">

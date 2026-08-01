@@ -14,6 +14,7 @@ import type * as lib_family from "../lib/family.js";
 import type * as lib_guards from "../lib/guards.js";
 import type * as private_ from "../private.js";
 import type * as trip from "../trip.js";
+import type * as wishes from "../wishes.js";
 
 import type {
   ApiFromModules,
@@ -28,6 +29,7 @@ declare const fullApi: ApiFromModules<{
   "lib/guards": typeof lib_guards;
   private: typeof private_;
   trip: typeof trip;
+  wishes: typeof wishes;
 }>;
 
 /**

@@ -1,114 +1,114 @@
-# 00 — Japan 2026: Complete Family Plan
+# 00 — יפן 2026: התוכנית המשפחתית המלאה
 
-**Travel:** October 1–18, 2026
-**Japan:** October 2–17 · 15 nights
-**Family:** 2 adults, daughter (16), son (12)
-**Stays:** Tokyo Oct 2–11 · Kyoto Oct 11–13 · Osaka Oct 13–15 · Tokyo Oct 15–17
-**Canonical daily route:** [09-DAILY-ITINERARY.md](./09-DAILY-ITINERARY.md)
+**הנסיעה:** 1–18 באוקטובר 2026
+**ביפן:** 2–17 באוקטובר · 15 לילות
+**המשפחה:** 2 מבוגרים, בת (16), בן (12)
+**לינות:** טוקיו 2–11.10 · קיוטו 11–13.10 · אוסקה 13–15.10 · טוקיו 15–17.10
+**המסלול היומי הקנוני:** [09-DAILY-ITINERARY.md](./09-DAILY-ITINERARY.md)
 
-## What This Trip Is
+## מה הטיול הזה
 
-This is a family trip built around **anime, gaming, Pokémon, Nintendo, ramen and kawaii experiences**. It is not a checklist of famous adult sights.
+זה טיול משפחתי שנבנה סביב **אנימה, גיימינג, פוקימון, נינטנדו, ראמן וחוויות קוואי**. הוא אינו רשימת אתרים מפורסמים למבוגרים.
 
-Every scheduled block must deliver at least one of:
+כל בלוק בלוח הזמנים חייב לספק לפחות אחד מאלה:
 
-- active play or a hands-on workshop;
-- anime, manga, gaming or character fandom;
-- ramen, street food or a memorable themed meal;
-- a short visual “wow” moment;
-- cute character culture or one welfare-conscious cat-café visit.
+- משחק פעיל או סדנה מעשית;
+- אנימה, מנגה, גיימינג או פאנדום דמויות;
+- ראמן, אוכל רחוב או ארוחה מעוצבת בלתי נשכחת;
+- רגע ״וואו״ ויזואלי קצר;
+- תרבות דמויות חמודה או ביקור אחד בבית קפה חתולים מודע לרווחת בעלי חיים.
 
-Long museums, luxury-shopping streets, smoky nightlife alleys, repetitive viewpoints and temple marathons have been removed. Meiji Jingu, the Great Buddha and Senso-ji remain because each is iconic, visual and easy to keep short.
+מוזיאונים ארוכים, רחובות קניות יוקרה, סמטאות חיי לילה מעושנות, תצפיות חוזרות ומרתוני מקדשים — הוסרו. מקדש מייג׳י, הבודהה הגדול וסנסו־ג׳י נשארים כי כל אחד מהם איקוני, ויזואלי וקל לשמור עליו קצר.
 
-## The 17-Day Shape
+## המבנה של 17 הימים
 
-| Date | Headline |
+| תאריך | הכותרת |
 |---|---|
-| Oct 1–2 | Flights, arrival and sleep |
-| Oct 3 | Akihabara gaming challenge |
-| Oct 4 | teamLab Planets + Mundo Pixar + Odaiba/Joypolis |
-| Oct 5 | PokéPark KANTO; DisneySea if official PokéPark tickets fail |
-| Oct 6 | KAWAII MONSTER LAND + Shibuya Nintendo/Pokémon |
-| Oct 7 | Great Buddha + *Slam Dunk* coast + Enoshima |
-| Oct 8 | Ghibli Museum + Kichijōji Petit Mura cat castle + compact Nakano/Shinjuku |
-| Oct 9 | Todoroki Ravine + Totoro cream puffs + Shimokitazawa Curry Festival |
-| Oct 10 | Tokyo Dome City family celebration |
-| Oct 11 | Early Kyoto transfer + Mizuekai + Awata Shrine night procession |
-| Oct 12 | UZUMASA Kyoto Village + DRUM TAO HIBIKI |
-| Oct 13 | Early Fushimi Inari + Kyoto-to-Osaka + shortened Den Den Town/Dotonbori |
-| Oct 14 | USJ / Super Nintendo World |
-| Oct 15 | Nintendo Museum lottery plan + return to Tokyo |
-| Oct 16 | Pokémon Café + Tokyo Station First Avenue + Taiko-kan/bachi + Senso-ji finale |
-| Oct 17 | Local goodbye + Narita |
+| 1–2.10 | טיסות, הגעה ושינה |
+| 3.10 | אתגר הגיימינג באקיהברה |
+| 4.10 | teamLab Planets + Mundo Pixar + אודאיבה/Joypolis |
+| 5.10 | PokéPark KANTO; DisneySea אם כרטיסי PokéPark הרשמיים לא יושגו |
+| 6.10 | KAWAII MONSTER LAND + נינטנדו/פוקימון בשיבויה |
+| 7.10 | הבודהה הגדול + חוף *Slam Dunk* + אנושימה |
+| 8.10 | מוזיאון ג׳יבלי + טירת החתולים Petit Mura בקיצ׳יג׳וג׳י + נקאנו/שינג׳וקו קומפקטיים |
+| 9.10 | ערוץ טודורוקי + פחזניות טוטורו + פסטיבל הקארי בשימוקיטזאווה |
+| 10.10 | חגיגה משפחתית ב־Tokyo Dome City |
+| 11.10 | מעבר מוקדם לקיוטו + Mizuekai + תהלוכת הלילה ב־Awata |
+| 12.10 | UZUMASA Kyoto Village + DRUM TAO HIBIKI |
+| 13.10 | פושימי אינארי מוקדם + קיוטו לאוסקה + Den Den Town/דוטונבורי מקוצרים |
+| 14.10 | USJ / Super Nintendo World |
+| 15.10 | מוזיאון נינטנדו ב־14:30 + חזרה לטוקיו |
+| 16.10 | Pokémon Café + Tokyo Station First Avenue + Taiko-kan/bachi + סיום בסנסו־ג׳י |
+| 17.10 | פרידה מקומית + נריטה |
 
-## Booking Control Center
+## מרכז הבקרה של ההזמנות
 
-The family-wide operational list—including **new walking shoes for all four travelers**, apps, documents, tickets, weather checks and what to wear—is in the [Pre-Trip Action Checklist](./11-PRE-TRIP-CHECKLIST.md).
+הרשימה התפעולית המשפחתית המלאה — כולל **נעלי הליכה חדשות לכל ארבעת הנוסעים**, אפליקציות, מסמכים, כרטיסים, בדיקות מזג אוויר ומה ללבוש — נמצאת ב־[רשימת הפעולות לפני הטיול](./11-PRE-TRIP-CHECKLIST.md).
 
-### Act now
+### לפעול עכשיו
 
-- **Nintendo Museum:** lottery **won**. Awarded window is **Oct 15, 14:30–15:00 JST** and cannot be changed. Tickets (JPY 11,000 for four) must be bought by **Aug 7 at 23:59 JST**. Day 15 is rebuilt around the afternoon slot: slow Osaka morning, museum mid-afternoon, Tokyo around 20:00–20:30.
-- **USJ:** buy the Studio Pass, then a current Express Pass that explicitly includes the desired Nintendo rides and guaranteed area entry. Product names rotate. [Official tickets](https://www.usj.co.jp/web/en/us/tickets)
-- **teamLab Planets:** **BOOKED** — Oct 4, admission 09:30–10:00, JPY 16,800 for four. Nothing left to buy; just load the QR codes on the morning itself.
-- **UZUMASA Kyoto Village:** **BOOKED AND PAID** — Oct 12, **JPY 29,600**: four yokai-festival 1-Day tickets with exclusive merchandise (JPY 15,200), the 13:30 tea ceremony for four (JPY 10,800), Ninja Escape Room for four (JPY 2,400) and 3D Maze the Ninja Fort for two (JPY 1,200). Everything is **valid only on Oct 12**, and entry is smartphone-only from [the ticket page](https://ticket.eigamura.com/ticket/purchased).
-- **Mundo Pixar:** buy the Oct 4 timed entry for **12:30–13:00**, not 11:45/12:00 — the booked teamLab slot moved the day.
-- **KAWAII MONSTER LAND:** reserve the timed entry before preferred slots disappear.
-- **Accommodation:** Tokyo Oct 2–11 and Fushimi Inari Oct 11–13 are booked. Complete both host-registration steps, then book Osaka Oct 13–15 and final Tokyo Oct 15–17.
+- **מוזיאון נינטנדו:** **זכינו** בהגרלה. חלון הזכייה הוא **15.10, 14:30–15:00 שעון יפן** ואי אפשר לשנות אותו. את הכרטיסים (¥11,000 לארבעה) חייבים לקנות עד **7 באוגוסט בשעה 23:59 שעון יפן**. יום 15 נבנה מחדש סביב החלון של אחר הצהריים: בוקר איטי באוסקה, מוזיאון באמצע אחר הצהריים, טוקיו סביב 20:00–20:30.
+- **USJ:** לקנות Studio Pass, ואז מוצר Express עדכני שכולל במפורש את מתקני נינטנדו הרצויים ואת הכניסה המובטחת לאזור. שמות המוצרים מתחלפים. [כרטיסים רשמיים](https://www.usj.co.jp/web/en/us/tickets)
+- **teamLab Planets:** **מוזמן** — 4.10, כניסה 09:30–10:00, ¥16,800 לארבעה. לא נשאר מה לקנות; רק לטעון את קודי ה־QR בבוקר עצמו.
+- **UZUMASA Kyoto Village:** **מוזמן ומשולם** — 12.10, **¥29,600**: ארבעה כרטיסי 1-Day לפסטיבל היוקאי עם מרצ׳נדייז בלעדי (¥15,200), טקס תה ב־13:30 לארבעה (¥10,800), Ninja Escape Room לארבעה (¥2,400) ו־3D Maze the Ninja Fort לשניים (¥1,200). הכול **תקף רק ב־12.10**, והכניסה מהסמארטפון בלבד, מ[עמוד הכרטיסים](https://ticket.eigamura.com/ticket/purchased).
+- **Mundo Pixar:** לקנות את הכניסה המתוזמנת ל־4.10 בשעה **12:30–13:00**, לא 11:45/12:00 — החלון המוזמן ב־teamLab הזיז את היום.
+- **KAWAII MONSTER LAND:** להזמין את הכניסה המתוזמנת לפני שהחלונות המועדפים ייעלמו.
+- **לינה:** טוקיו 2–11.10 ופושימי אינארי 11–13.10 מוזמנים. להשלים את שני שלבי הרישום מול המארחים, ואז להזמין את אוסקה 13–15.10 ואת טוקיו הסופית 15–17.10.
 
-### Fixed future gates
+### שערים עתידיים קבועים
 
-- **PokéPark KANTO:** as of Jul 24, the official overseas store shows maintenance/changeover information and no Oct 5 purchase path. Monitor it for an official inventory re-release; the announced Aug 1 system change is for admissions from Nov 1, not a promised reopening for October. Use only the [official overseas store](https://ticket-en.pokepark-kanto.co.jp/) or a seller explicitly authorized by PokéPark. Do not pay a Fiverr buyer or unofficial reseller; keep [DisneySea](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/) as the Oct 5 fallback.
-- **Ghibli Museum:** buy for **Oct 8** when October tickets release **Sept 10 at 10:00 JST**. [Official tickets](https://www.ghibli-museum.jp/en/tickets/)
-- **Mizuekai:** target the **13:00 Oct 11** recital; the 16:00 performance conflicts with Awata. Official 2026 prices are JPY 10,000 on the first floor and JPY 8,000 on the second, age 10+. [Official page](https://www.miyagawacho.jp/mizuekai/)
-- **DRUM TAO HIBIKI:** target **19:00 on Oct 12**; doors open 18:15 and the show runs about 40 minutes. Ticket sales open two months before the performance. [Official tickets](https://drum-tao-kyoto.com/en/ticket/)
-- **Pokémon Café:** the previous “Sept 15” instruction is invalid. October’s release has not been announced; watch [official news](https://www.pokemon-cafe.jp/en/cafe/news/) and reserve immediately when published.
+- **PokéPark KANTO:** נכון ל־1 באוגוסט, בחנות הבינלאומית הרשמית אין מסלול רכישה ל־5.10. לעקוב אחרי שחרור מלאי רשמי; שינוי המערכת שהוכרז ל־1 באוגוסט נוגע לכניסות מ־1 בנובמבר ואינו פתיחה מובטחת לאוקטובר. פנייה רשמית נשלחה ב־1 באוגוסט וחזרה ממנה רק תשובה אוטומטית. להשתמש רק ב[חנות הבינלאומית הרשמית](https://ticket-en.pokepark-kanto.co.jp/) או במוכר שהוסמך במפורש על ידי PokéPark. לא לשלם לקונה ב־Fiverr או למתווך לא רשמי; לשמור את [DisneySea](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20261005/) כגיבוי ל־5.10.
+- **מוזיאון ג׳יבלי:** לקנות ל־**8.10** כשכרטיסי אוקטובר משתחררים ב־**10 בספטמבר בשעה 10:00 שעון יפן**. [כרטיסים רשמיים](https://www.ghibli-museum.jp/en/tickets/)
+- **Mizuekai:** היעד הוא המופע של **13:00 ב־11.10**; ההופעה של 16:00 מתנגשת עם Awata. המחירים הרשמיים ל־2026 הם ¥10,000 בקומה הראשונה ו־¥8,000 בשנייה, מגיל 10 ומעלה. [העמוד הרשמי](https://www.miyagawacho.jp/mizuekai/)
+- **DRUM TAO HIBIKI:** **מוזמן ומשולם** — 12.10 בשעה 19:00, שורה G מושבים 12–15, ¥47,108. הדלתות ב־18:15 והמופע כ־40 דקות.
+- **Pokémon Café:** ההוראה הישנה על ״15 בספטמבר״ אינה תקפה. המכירה לאוקטובר טרם הוכרזה; לעקוב אחרי [החדשות הרשמיות](https://www.pokemon-cafe.jp/en/cafe/news/) ולהזמין מיד עם הפרסום.
 
-## The Major Wins
+## הניצחונות הגדולים
 
-- **Best for the son:** PokéPark, Joypolis, Tokyo Dome rides, Super Nintendo World, Nintendo Museum.
-- **Best for the sister:** KAWAII MONSTER LAND, Harajuku, Shibuya PARCO, Ghibli, character shopping.
-- **Best shared fandom:** Akihabara, Nakano, UZUMASA, Den Den Town and Pokémon Centers.
-- **Best food memories:** Shimokitazawa Curry Festival, Totoro cream puffs, Ichiran/AFURI, tsukemen and Dotonbori.
-- **Best nature resets:** Meiji forest, Todoroki Ravine, the Kamakura/Enoshima coast and Inokashira Park.
-- **Best “cute” mix:** the Petit Mura fairy-tale cat castle, Harajuku kawaii, the Shinjuku 3D cat, Kirby/Mofusand/Sanrio character stops.
-- **Best traditional moments:** Mizuekai, Awata Shrine’s night procession, UZUMASA, DRUM TAO, Fushimi Inari and the hands-on Taiko-kan finale.
+- **הכי טוב לבן:** PokéPark, Joypolis, המתקנים ב־Tokyo Dome, Super Nintendo World, מוזיאון נינטנדו.
+- **הכי טוב לאחות:** KAWAII MONSTER LAND, הרג׳וקו, Shibuya PARCO, ג׳יבלי, קניות דמויות.
+- **הפאנדום המשותף הכי טוב:** אקיהברה, נקאנו, UZUMASA, Den Den Town ו־Pokémon Centers.
+- **זיכרונות האוכל הכי טובים:** פסטיבל הקארי בשימוקיטזאווה, פחזניות טוטורו, Ichiran/AFURI, צוקמן ודוטונבורי.
+- **איפוסי הטבע הכי טובים:** יער מייג׳י, ערוץ טודורוקי, חוף קמקורה/אנושימה ופארק אינוקשירה.
+- **תערובת ה״חמוד״ הכי טובה:** טירת החתולים האגדתית Petit Mura, קוואי בהרג׳וקו, החתול התלת־ממדי בשינג׳וקו, ועצירות Kirby/Mofusand/Sanrio.
+- **הרגעים המסורתיים הכי טובים:** Mizuekai, תהלוכת הלילה במקדש Awata, UZUMASA, DRUM TAO, פושימי אינארי והסיום המעשי ב־Taiko-kan.
 
-## Pacing Rules
+## כללי הקצב
 
-1. One headline per half-day; maximum two timed attractions in one day.
-2. Shopping areas get a wish list, a time box and a cash cap.
-3. Protect the slow start on Oct 10, the rest block between UZUMASA and HIBIKI on Oct 12, and the fallback recovery version of Oct 15.
-4. “Cut first” notes in the daily itinerary are real instructions, not suggestions to squeeze everything in.
-5. Day 7 cannot casually swap with Oct 8 after Ghibli is booked; use rain gear or a separate indoor backup instead.
+1. כותרת אחת לחצי יום; לכל היותר שתי אטרקציות מתוזמנות ביום אחד.
+2. אזורי קניות מקבלים רשימת משאלות, תיחום זמן ותקרת מזומן.
+3. להגן על ההתחלה האיטית ב־10.10, על בלוק המנוחה בין UZUMASA ל־HIBIKI ב־12.10, ועל הבוקר הרגוע של 15.10 לפני חלון המוזיאון.
+4. הערות ״חותכים ראשון״ במסלול היומי הן הוראות אמיתיות, לא הצעות לדחוס הכול.
+5. יום 7 אינו יכול להתחלף סתם כך עם 8.10 אחרי שג׳יבלי הוזמן; להשתמש בציוד גשם או בגיבוי מקורה נפרד.
 
-## Important Accuracy Corrections
+## תיקוני דיוק חשובים
 
-- Todoroki Ravine’s full riverside path reopened on March 24, 2026. It has narrow, uneven and sometimes unfenced sections; skip it during or just after heavy rain. [Official Setagaya update](https://www.city.setagaya.lg.jp/02075/9082.html)
-- Recheck that official Todoroki page one to two weeks before Oct 9 for any temporary maintenance or construction restrictions.
-- The 2026 Shimokitazawa Curry Festival is confirmed for Oct 8–25, so Oct 9 lands on day two. Use mini portions for a family tasting game. [Official festival](https://shimokitazawa-curryfes.com/)
-- The scheduled animal stop is a conventional cat café — **Cat Cafe Temari no Oshiro** inside the fairy-tale **Kichijōji Petit Mura** complex on Oct 8. Three exotic-animal **side quests** (LOUTRE otters in Kyoto Oct 11; Rock Star small animals and the America-mura snake café in Osaka Oct 13) were added deliberately as optional walk-ins, knowing a peer-reviewed assessment found consistently low welfare across Japanese exotic-animal cafés — they are eyes-open, cut-first extras. [Study](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
-- Akihabara’s pedestrian zone is Sunday-only in October, so it is not promised on Saturday Oct 3.
-- PokéPark October hours are 11:00–19:00 and limited-access app requests begin from 10:45.
-- Tokyo Yosakoi and Ikegami Oeshiki are no longer in the route; Kyoto’s fixed-date Mizuekai and Awata events replace them.
-- Pokémon Café release rules changed; no October date should be hardcoded until the official announcement.
-- Kyoto is now a two-night stay, not a day trip. Uji still appears on Oct 15 for Nintendo Museum only if the lottery succeeds.
-- Fushimi Inari replaces the optional Kyoto Manga Museum on Oct 13; keep the visit to the lower gates so Osaka still gets a relaxed arrival.
-- Tokyo Station First Avenue is a protected 45–60-minute Oct 16 stop, including a focused pass through Character Street. If the Pokémon Café slot is later than 11:00, visit Taiko-kan at opening and move the café/First Avenue block afterward; cut Skytree and extra shopping first.
-- PokéPark’s Aug 1 update applies to admissions from Nov 1 and is not an October sales date. Monitor only the official overseas store for Oct 5 inventory; unofficial paid ticket acquisition is not an approved fallback.
-- Mibu Kyogen is off the table: the booked 13:30 UZUMASA tea ceremony rules out the early departure the swap required.
+- שביל הנחל המלא בערוץ טודורוקי נפתח מחדש ב־24 במרץ 2026. יש בו קטעים צרים, לא אחידים ולעיתים ללא מעקה; לוותר עליו בזמן גשם חזק או מיד אחריו. [עדכון רשמי של סטגאיה](https://www.city.setagaya.lg.jp/02075/9082.html)
+- לבדוק שוב את העמוד הרשמי של טודורוקי שבוע-שבועיים לפני 9.10, לאיתור הגבלות תחזוקה או עבודות זמניות.
+- פסטיבל הקארי של שימוקיטזאווה 2026 מאושר ל־8–25 באוקטובר, כך ש־9.10 נופל ביום השני. להשתמש במנות מיני למשחק טעימות משפחתי. [הפסטיבל הרשמי](https://shimokitazawa-curryfes.com/)
+- עצירת בעלי החיים המתוכננת היא בית קפה חתולים רגיל — **Cat Cafe Temari no Oshiro** בתוך מתחם האגדות **Petit Mura** בקיצ׳יג׳וג׳י, ב־8.10. שלושה **סייד־קווסטים** של חיות אקזוטיות (לוטרות LOUTRE בקיוטו ב־11.10; Rock Star ובית קפה הנחשים באמריקה־מורה באוסקה ב־13.10) נוספו במכוון ככניסות ספונטניות אופציונליות, מתוך ידיעה שמחקר שעבר שיפוט עמיתים מצא רווחה נמוכה באופן עקבי בבתי קפה של חיות אקזוטיות ביפן — הם תוספות בעיניים פקוחות שנחתכות ראשונות. [המחקר](https://www.jstage.jst.go.jp/article/jvms/advpub/0/advpub_24-0257/_article/-char/en)
+- מדרחוב אקיהברה פעיל באוקטובר בימי ראשון בלבד, ולכן הוא אינו מובטח בשבת 3.10.
+- שעות PokéPark באוקטובר הן 11:00–19:00, ובקשות הגישה המוגבלת באפליקציה מתחילות מ־10:45.
+- Tokyo Yosakoi ו־Ikegami Oeshiki כבר אינם במסלול; אירועי Mizuekai ו־Awata בקיוטו, בתאריכים קבועים, מחליפים אותם.
+- כללי המכירה של Pokémon Café השתנו; אין לקבע תאריך באוקטובר לפני ההכרזה הרשמית.
+- קיוטו היא כעת לינה של שני לילות, לא טיול יום. אוג׳י מופיע ב־15.10 בדרך למוזיאון נינטנדו.
+- פושימי אינארי מחליף את מוזיאון המנגה האופציונלי בקיוטו ב־13.10; לשמור על ביקור בשערים התחתונים בלבד, כדי שאוסקה עדיין תקבל הגעה רגועה.
+- Tokyo Station First Avenue היא עצירה מוגנת של 45–60 דקות ב־16.10, כולל מעבר ממוקד ב־Character Street. אם חלון Pokémon Café מאוחר מ־11:00 — לבקר ב־Taiko-kan בפתיחה ולהזיז את בלוק הקפה/First Avenue אחר כך; לחתוך קודם את Skytree ואת הקניות הנוספות.
+- העדכון של PokéPark מ־1 באוגוסט חל על כניסות מ־1 בנובמבר ואינו תאריך מכירה לאוקטובר. לעקוב רק אחרי החנות הבינלאומית הרשמית למלאי ל־5.10; רכישת כרטיסים בתשלום בערוץ לא רשמי אינה גיבוי מאושר.
+- Mibu Kyogen ירד מהפרק: טקס התה המוזמן ב־13:30 ב־UZUMASA שולל את היציאה המוקדמת שההחלפה דרשה.
 
-## Guide Map
+## מפת המדריכים
 
-- [Flights](./01-FLIGHTS.md)
-- [Accommodation](./02-ACCOMMODATION.md)
-- [Transport](./03-TRANSPORT.md)
-- [Anime, Pokémon, Gaming and Cute](./04-ANIME-POKEMON-GHIBLI.md)
-- [Ramen and Food](./05-FOOD-GUIDE.md)
-- [Kamakura and the Todoroki/Setagaya Green Day](./06-DAY-TRIPS.md)
-- [Family Celebration](./07-BAR-MITZVAH.md)
-- [Practical Tips](./08-PRACTICAL-TIPS.md)
-- [Complete Daily Itinerary](./09-DAILY-ITINERARY.md)
-- [Budget](./10-BUDGET.md)
-- [Pre-Trip Action Checklist](./11-PRE-TRIP-CHECKLIST.md)
+- [טיסות](./01-FLIGHTS.md)
+- [לינה](./02-ACCOMMODATION.md)
+- [תחבורה](./03-TRANSPORT.md)
+- [אנימה, פוקימון, גיימינג וקוואי](./04-ANIME-POKEMON-GHIBLI.md)
+- [ראמן ואוכל](./05-FOOD-GUIDE.md)
+- [קמקורה ויום טודורוקי/סטגאיה הירוק](./06-DAY-TRIPS.md)
+- [החגיגה המשפחתית](./07-BAR-MITZVAH.md)
+- [טיפים שימושיים](./08-PRACTICAL-TIPS.md)
+- [המסלול היומי המלא](./09-DAILY-ITINERARY.md)
+- [תקציב](./10-BUDGET.md)
+- [רשימת הפעולות לפני הטיול](./11-PRE-TRIP-CHECKLIST.md)
 
-*Plan consistency audited July 25, 2026. Recheck live opening hours, attraction maintenance, age/height limits and ticket inventory during the final week before travel.*
+*עקביות התוכנית נבדקה ב־25 ביולי 2026. לבדוק שוב שעות פתיחה חיות, תחזוקת אטרקציות, מגבלות גיל/גובה ומלאי כרטיסים בשבוע האחרון לפני הנסיעה.*

@@ -13,11 +13,22 @@ import {
   Scissors,
   Sparkles,
   UtensilsCrossed,
+  Wallet,
 } from "lucide-react";
 import { PlaceCard } from "@/components/cards";
 import { StatusChip } from "@/components/visuals";
 import { TripMap, type MapPoint } from "@/components/TripMap";
+import { DayWishes } from "@/components/DayWishes";
+import {
+  CostList,
+  LinkRow,
+  NeedsList,
+  RouteStrip,
+  StayPanel,
+  WarningList,
+} from "@/components/day-ops";
 import { cityLabels, mapsSearchUrl } from "@/lib/trip-data";
+import { familyTotal, yen } from "@/lib/ops";
 import { getPlaceIndex, getTripDay, getTripDays } from "@/lib/trip-source";
 import type { Place } from "@/lib/types";
 
@@ -96,6 +107,11 @@ export default async function DayPage({
   const foodAnchors = placeIndex.get(day.foodAnchors ?? []);
   const dayPlaces = placeIndex.forDay(day.day);
   const style = { "--day-color": day.color } as CSSProperties;
+
+  // What the whole day costs, summed from the blocks rather than maintained as
+  // a second number that can disagree with them.
+  const dayCosts = day.blocks.flatMap((block) => block.costs ?? []);
+  const dayTotal = familyTotal(dayCosts);
 
   return (
     <article style={style}>
@@ -176,6 +192,14 @@ export default async function DayPage({
                       ) : null}
                     </div>
                   ) : null}
+
+                  {block.warnings?.length ? (
+                    <WarningList warnings={block.warnings} />
+                  ) : null}
+                  {block.legs?.length ? <RouteStrip legs={block.legs} /> : null}
+                  {block.needs?.length ? <NeedsList needs={block.needs} /> : null}
+                  {block.costs?.length ? <CostList costs={block.costs} /> : null}
+                  {block.links?.length ? <LinkRow links={block.links} /> : null}
                 </section>
               ))}
             </div>
@@ -188,6 +212,26 @@ export default async function DayPage({
               route
               ariaLabel={`מפת יום ${day.day}`}
             />
+
+            <DayWishes dayN={day.day} />
+
+            {day.stay ? <StayPanel stay={day.stay} /> : null}
+
+            {dayTotal > 0 ? (
+              <section className="panel day-total-panel">
+                <h2>
+                  <Wallet size={16} />
+                  עלות היום
+                </h2>
+                <p className="day-total" dir="ltr">
+                  {yen(dayTotal)}
+                </p>
+                <small>
+                  סיכום כל שורות העלות של היום, למשפחה של ארבעה. לא כולל קניות,
+                  גאצ׳פון וכיבודים.
+                </small>
+              </section>
+            ) : null}
 
             {day.discovery ? (
               <section className="panel discovery-panel" data-reveal>

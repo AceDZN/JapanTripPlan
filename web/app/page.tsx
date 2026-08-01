@@ -13,10 +13,9 @@ import { Countdown } from "@/components/Countdown";
 import { DayCard } from "@/components/cards";
 import { Photo, StatusChip } from "@/components/visuals";
 import { bookingGates, dueTone, formatDueHe } from "@/components/booking-gates";
-import { getChecklist, getTripDays } from "@/lib/trip-source";
+import { getChecklist, getGuides, getTripDays } from "@/lib/trip-source";
 import { dateKey, daysUntilTrip, todayTripDay } from "@/lib/trip-time";
 import { routeChapters } from "@/lib/trip-data";
-import { tripGuides } from "@/app/generated/trip-content";
 
 const cityImages: Record<string, string> = {
   tokyo: "/images/cities/tokyo.jpg",
@@ -26,7 +25,11 @@ const cityImages: Record<string, string> = {
 };
 
 export default async function Home() {
-  const [tripDays, checklist] = await Promise.all([getTripDays(), getChecklist()]);
+  const [tripDays, checklist, tripGuides] = await Promise.all([
+    getTripDays(),
+    getChecklist(),
+    getGuides(),
+  ]);
 
   const now = new Date();
   const today = todayTripDay(tripDays, now);
