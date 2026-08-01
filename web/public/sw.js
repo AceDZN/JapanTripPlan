@@ -14,7 +14,7 @@
  * Bump VERSION whenever the precache list or a caching rule changes.
  */
 
-const VERSION = "japan2026-v1";
+const VERSION = "japan2026-v2";
 const SHELL_CACHE = `${VERSION}-shell`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 const IMAGE_CACHE = `${VERSION}-images`;
@@ -47,6 +47,10 @@ const PRECACHE_URLS = [
   "/map",
   "/around",
   "/chat",
+  // The vault matters most exactly when there is no signal — standing at a
+  // lockbox needing a door code. The page shell is public; the records behind
+  // it still require a family session.
+  "/private",
   ...DAY_ROUTES,
   ...MARKDOWN_FILES,
   "/manifest.webmanifest",
@@ -120,6 +124,51 @@ async function navigationHandler(request) {
 
 /* ---------------------------------------------------------------- events */
 
+/**
+ * Precache the build's stylesheets.
+ *
+ * The precached documents reference hashed CSS under /_next/static/, whose
+ * filenames change every build. Without this, an offline cold open served
+ * correct HTML with a stylesheet that was not in any cache — the page came up
+ * fully readable and completely unstyled. That is exactly what a family member
+ * would get on a train with no signal.
+ *
+ * The URLs are discovered from the shell documents rather than hard-coded,
+ * because the hashes are unknowable until build time.
+ *
+ * JS chunks are deliberately left to the runtime stale-while-revalidate cache:
+ * pages are server-rendered so they read fine without hydration, and
+ * precaching every chunk would bloat the install.
+ */
+async function precacheBuildStyles(shellCache, documents) {
+  const hrefs = new Set();
+
+  for (const url of documents) {
+    const cached = await shellCache.match(url);
+    if (!cached) continue;
+    const html = await cached.clone().text();
+    // The trailing query matters: on Vercel every asset URL carries a
+    // ?dpl=<deployment> suffix, so a pattern anchored on `.css"` matches
+    // nothing in production while working perfectly against a local build.
+    for (const match of html.matchAll(/href="(\/_next\/static\/[^"]+?\.css(?:\?[^"]*)?)"/g)) {
+      hrefs.add(match[1]);
+    }
+  }
+
+  // Into the RUNTIME cache, not the shell cache: build assets are served by
+  // the stale-while-revalidate branch of the fetch handler, which only ever
+  // looks in RUNTIME_CACHE. Caching them anywhere else is invisible to it.
+  const runtime = await caches.open(RUNTIME_CACHE);
+  await Promise.allSettled(
+    [...hrefs].map(async (href) => {
+      const response = await fetch(href, { cache: "reload" });
+      if (isCacheable(response)) await runtime.put(href, response);
+    }),
+  );
+
+  return hrefs.size;
+}
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
@@ -131,6 +180,13 @@ self.addEventListener("install", (event) => {
           if (isCacheable(response)) await cache.put(url, response);
         }),
       );
+      // Never let a missing stylesheet fail the install — an unstyled app
+      // still beats no app.
+      try {
+        await precacheBuildStyles(cache, ["/", ...DAY_ROUTES]);
+      } catch {
+        /* ignore */
+      }
       await self.skipWaiting();
     })(),
   );
