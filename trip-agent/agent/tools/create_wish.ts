@@ -81,9 +81,47 @@ export default defineTool({
         // second copy was made.
         created: body.created,
         note: body.created ? undefined : "כבר היה ברשימה — לא נוצר כפול.",
+        /**
+         * Said here, at the moment it matters, because saying it in the
+         * instructions was not enough.
+         *
+         * Observed for real: the model created the wish, ran `search_places`
+         * and `web_search`, reported everything it found in the chat — and
+         * never called `research_wish`. The answer read perfectly and the wish
+         * card stayed empty: "עוד לא נחקר — אין מחיר, חנות או תמונה". Reporting
+         * in chat feels like finishing, so the step that actually lands the
+         * value gets skipped. A tool result is the one place the reminder
+         * arrives while the turn is still running.
+         */
+        nextStep:
+          "המשאלה נוצרה אבל היא ריקה. עכשיו תחקור, ואז **חובה** לקרוא ל-research_wish עם " +
+          `id: "${body.id}" ו-finish: true. לספר להם בצ'אט מה מצאת זה לא תחליף — מה שלא ` +
+          "נכתב עם research_wish לא מופיע בכרטיס ולא בעמוד היום, כלומר מבחינתם לא חקרת. " +
+          "**וקריאה כמעט ריקה גרועה כמעט כמו לא לקרוא בכלל.** הרף: `note` בעברית שמסביר מה " +
+          "זה ואיך מבדילים בין הדגמים; `titleEn` ו-`titleJa`; `priceYen`; **`whereToBuy` עם " +
+          "כל חנות רלוונטית** — לכל אחת `shopJa`, `area`, `priceYen`, ו-`dayN` כשהיא יושבת " +
+          "על יום מהמסלול; ו-`sources` לכל מחיר. חנות אחת בלי יום ובלי הסבר זה לא מחקר. " +
+          "אם `search_places` לא מכיר את החנות — עדיין תרשום אותה עם האזור, ותגיד בפירוש " +
+          "שהיא לא על המסלול המתוכנן.",
       };
     } catch (error) {
-      return { ok: false as const, error: String(error) };
+      return {
+        ok: false as const,
+        error: String(error),
+        /**
+         * Spelled out because the model did the opposite.
+         *
+         * Observed: the create failed with "… is not on the family list", and
+         * the reply opened "רשמתי שאתה רוצה לקנות …" — a flat claim that the
+         * wish had been saved. A failure the family is told is a success is
+         * worse than the failure: they stop watching for it, and the wish is
+         * simply gone.
+         */
+        whatToSay:
+          "המשאלה **לא** נשמרה. אל תגיד 'רשמתי', 'הוספתי' או 'שמרתי' — זה פשוט לא נכון. " +
+          "תגיד להם בפשטות שלא הצלחת להוסיף אותה ומה הסיבה. אם הסיבה היא שהמשתמש לא מזוהה, " +
+          "תבקש שיתחברו. מה שמצאת במחקר עדיין שווה לספר — רק אל תתלה אותו על משאלה שלא קיימת.",
+      };
     }
   },
 });

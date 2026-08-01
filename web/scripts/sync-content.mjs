@@ -24,43 +24,73 @@
  * was, briefly, and it broke the Vercel deploy.
  */
 
+import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../convex/_generated/api.js";
 
 const generatedDir = path.resolve(process.cwd(), "app", "generated");
+const outFile = path.join(generatedDir, "ai-context.ts");
+
+/**
+ * Refreshing the chat's context must never take down a deploy.
+ *
+ * `ai-context.ts` is committed, so a build that cannot reach Convex can still
+ * ship with the last known-good guides. Exiting non-zero here has broken a
+ * Vercel deploy twice now — once on a missing `.env.local`, once on a wrong
+ * Convex host — and "the chat's context is a commit behind" beats "the site is
+ * not deployed" every time.
+ *
+ * The one case that still fails hard is having no committed file to fall back
+ * to, because then the alternative is shipping an assistant that confidently
+ * answers from nothing.
+ */
+function keepCommittedContext(reason) {
+  if (existsSync(outFile)) {
+    console.log(`sync:content: ${reason} — keeping the committed ai-context.ts`);
+    process.exit(0);
+  }
+  console.error(`sync:content: ${reason}, and no committed ai-context.ts to fall back to.`);
+  process.exit(1);
+}
 
 const CONVEX_URL = process.env.NEXT_PUBLIC_CONVEX_URL;
 if (!CONVEX_URL) {
-  throw new Error(
-    "NEXT_PUBLIC_CONVEX_URL is not set — the guides live in Convex now, so this " +
-      "script cannot run without it. Locally it comes from web/.env.local; on " +
-      "Vercel it is a project environment variable.",
-  );
+  keepCommittedContext("NEXT_PUBLIC_CONVEX_URL is not set");
 }
 
 const convex = new ConvexHttpClient(CONVEX_URL);
 
-const index = await convex.query(api.trip.listGuides, {});
+let index;
+try {
+  index = await convex.query(api.trip.listGuides, {});
+} catch (error) {
+  keepCommittedContext(`could not reach Convex at ${CONVEX_URL} (${error})`);
+}
 
 /*
  * One request per guide rather than one for everything: `listGuides` is
  * metadata-only by design (see convex/trip.ts) so the listing stays small, and
  * `getGuide` is the only thing that returns a body.
  */
-const guides = await Promise.all(
-  index.map(async ({ slug }) => {
-    const guide = await convex.query(api.trip.getGuide, { slug });
-    if (!guide) throw new Error(`Guide "${slug}" vanished between listing and fetch.`);
-    return { file: guide.file, title: guide.title, markdown: guide.body };
-  }),
-);
+let guides;
+try {
+  guides = await Promise.all(
+    index.map(async ({ slug }) => {
+      const guide = await convex.query(api.trip.getGuide, { slug });
+      if (!guide) throw new Error(`guide "${slug}" vanished between listing and fetch`);
+      return { file: guide.file, title: guide.title, markdown: guide.body };
+    }),
+  );
+} catch (error) {
+  keepCommittedContext(`could not read guide bodies (${error})`);
+}
 
-// A build that silently shipped an empty system prompt would leave the chat
-// confidently answering from nothing at all, which is worse than not building.
+// An empty context would leave the chat confidently answering from nothing,
+// which is worse than keeping yesterday's copy.
 if (guides.length === 0) {
-  throw new Error("Convex returned no guides — refusing to write an empty AI context.");
+  keepCommittedContext("Convex returned no guides");
 }
 
 const aiContextText = guides

@@ -67,28 +67,65 @@ function titleOf(markdown, file) {
   return file.replace(/\.md$/, "");
 }
 
-const response = await fetch(`${CONVEX_SITE_URL}/agent/export`, {
-  headers: { Authorization: `Bearer ${AGENT_SERVICE_KEY}` },
-  cache: "no-store",
-});
-const exported = await response.json().catch(() => null);
-if (!response.ok || !exported?.ok || !Array.isArray(exported.guides)) {
-  console.error(
-    `sync-data: Convex /agent/export failed (${response.status}): ` +
-      `${JSON.stringify(exported)?.slice(0, 300)}`,
-  );
-  process.exit(1);
+/**
+ * Refresh the guides from Convex — but never fail the build over it.
+ *
+ * This is a CONTENT REFRESH, not a correctness requirement: `content.ts` is
+ * committed, so a build that cannot reach Convex can still ship a working agent
+ * with the last known-good guides. Exiting non-zero here took down a Vercel
+ * deploy once already, and "the assistant's guides are a commit behind" is a far
+ * better outcome than "the assistant is not deployed".
+ *
+ * The most common cause of a 404 here, worth stating because it costs an hour
+ * to spot: Convex serves HTTP actions from `<deployment>.convex.SITE`, while
+ * `<deployment>.convex.CLOUD` is the client/query endpoint. Pointing
+ * `CONVEX_SITE_URL` at the `.cloud` host returns exactly a 404 with an empty
+ * body, which looks like a missing route rather than a wrong host.
+ */
+async function fetchGuidesFromConvex() {
+  let response;
+  try {
+    response = await fetch(`${CONVEX_SITE_URL}/agent/export`, {
+      headers: { Authorization: `Bearer ${AGENT_SERVICE_KEY}` },
+      cache: "no-store",
+    });
+  } catch (error) {
+    return { error: `network error reaching ${CONVEX_SITE_URL} (${error})` };
+  }
+
+  const body = await response.json().catch(() => null);
+
+  if (response.status === 404) {
+    return {
+      error:
+        `/agent/export returned 404 at ${CONVEX_SITE_URL}. ` +
+        `HTTP routes live on the \`.convex.site\` host — check CONVEX_SITE_URL is not the \`.convex.cloud\` URL, ` +
+        `and that this deployment has the functions deployed.`,
+    };
+  }
+  if (response.status === 401) {
+    return { error: `/agent/export returned 401 — AGENT_SERVICE_KEY does not match this deployment.` };
+  }
+  if (!response.ok || !body?.ok || !Array.isArray(body.guides)) {
+    return {
+      error: `/agent/export failed (${response.status}): ${JSON.stringify(body)?.slice(0, 200)}`,
+    };
+  }
+  if (body.guides.length === 0) {
+    return { error: "Convex returned no guides — refusing to bake an empty bundle." };
+  }
+
+  return {
+    guides: body.guides
+      .slice()
+      .sort((a, b) => a.order - b.order)
+      .map(({ file, markdown }) => ({ file, title: titleOf(markdown, file), markdown })),
+  };
 }
 
-const guides = exported.guides
-  .slice()
-  .sort((a, b) => a.order - b.order)
-  .map(({ file, markdown }) => ({ file, title: titleOf(markdown, file), markdown }));
-
-if (guides.length === 0) {
-  console.error("sync-data: Convex returned no guides — refusing to bake an empty bundle.");
-  process.exit(1);
-}
+const fetched = await fetchGuidesFromConvex();
+if (fetched.error) keepCommittedBundle(`could not refresh guides — ${fetched.error}`);
+const guides = fetched.guides;
 
 const places = JSON.parse(readFileSync(placesFile, "utf8"));
 if (!Array.isArray(places) || places.length === 0) {
