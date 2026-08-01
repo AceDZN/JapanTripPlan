@@ -17,18 +17,13 @@ import {
 import { PlaceCard } from "@/components/cards";
 import { StatusChip } from "@/components/visuals";
 import { TripMap, type MapPoint } from "@/components/TripMap";
-import {
-  cityLabels,
-  getDay,
-  getPlaces,
-  getPlacesForDay,
-  mapsSearchUrl,
-  tripDays,
-} from "@/lib/trip-data";
+import { cityLabels, mapsSearchUrl } from "@/lib/trip-data";
+import { getPlaceIndex, getTripDay, getTripDays } from "@/lib/trip-source";
 import type { Place } from "@/lib/types";
 
-export function generateStaticParams() {
-  return tripDays.map((day) => ({ n: String(day.day) }));
+export async function generateStaticParams() {
+  const days = await getTripDays();
+  return days.map((day) => ({ n: String(day.day) }));
 }
 
 export async function generateMetadata({
@@ -37,7 +32,7 @@ export async function generateMetadata({
   params: Promise<{ n: string }>;
 }): Promise<Metadata> {
   const { n } = await params;
-  const day = getDay(Number(n));
+  const day = await getTripDay(Number(n));
   if (!day) return { title: "יום לא נמצא" };
   return {
     title: `יום ${day.day} · ${day.title}`,
@@ -45,8 +40,8 @@ export async function generateMetadata({
   };
 }
 
-/** Ordered, de-duplicated places for the day's map + place grid. */
-function routePlaces(placeIdsInOrder: string[]): Place[] {
+/** Ordered, de-duplicated ids for the day's map + place grid. */
+function orderedPlaceIds(placeIdsInOrder: string[]): string[] {
   const seen = new Set<string>();
   const ordered: string[] = [];
   placeIdsInOrder.forEach((id) => {
@@ -54,7 +49,7 @@ function routePlaces(placeIdsInOrder: string[]): Place[] {
     seen.add(id);
     ordered.push(id);
   });
-  return getPlaces(ordered);
+  return ordered;
 }
 
 export default async function DayPage({
@@ -63,13 +58,20 @@ export default async function DayPage({
   params: Promise<{ n: string }>;
 }) {
   const { n } = await params;
-  const day = getDay(Number(n));
+
+  // One round trip for the whole page: the day list covers this day plus its
+  // neighbours for the prev/next links.
+  const [days, placeIndex] = await Promise.all([getTripDays(), getPlaceIndex()]);
+
+  const day = days.find((entry) => entry.day === Number(n));
   if (!day) notFound();
 
-  const previous = getDay(day.day - 1);
-  const next = getDay(day.day + 1);
+  const previous = days.find((entry) => entry.day === day.day - 1) ?? null;
+  const next = days.find((entry) => entry.day === day.day + 1) ?? null;
 
-  const ordered = routePlaces(day.blocks.flatMap((block) => block.placeIds));
+  const ordered: Place[] = placeIndex.get(
+    orderedPlaceIds(day.blocks.flatMap((block) => block.placeIds)),
+  );
   const mapPoints: MapPoint[] = ordered
     .filter((place) => place.lat && place.lng)
     .map((place, index) => ({
@@ -83,8 +85,8 @@ export default async function DayPage({
       mapsUrl: mapsSearchUrl(place),
     }));
 
-  const foodAnchors = getPlaces(day.foodAnchors ?? []);
-  const dayPlaces = getPlacesForDay(day.day);
+  const foodAnchors = placeIndex.get(day.foodAnchors ?? []);
+  const dayPlaces = placeIndex.forDay(day.day);
   const style = { "--day-color": day.color } as CSSProperties;
 
   return (
@@ -134,7 +136,7 @@ export default async function DayPage({
                   {block.detail ? <p className="block-detail">{block.detail}</p> : null}
                   {block.placeIds.length > 0 ? (
                     <div className="block-places">
-                      {getPlaces(block.placeIds).map((place) => (
+                      {placeIndex.get(block.placeIds).map((place) => (
                         <a
                           className="place-pill"
                           href={mapsSearchUrl(place)}

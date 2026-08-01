@@ -45,6 +45,45 @@ export async function getPlaces(): Promise<Place[]> {
   return (await fetchQuery(api.trip.listPlaces, {})) as unknown as Place[];
 }
 
+/**
+ * Places plus the lookups pages need.
+ *
+ * `trip-data.ts` exposed `placesById` / `getPlaces` / `getPlacesForDay` as
+ * module-scope constants over a static array. Those become one fetch plus
+ * local indexing, so a page pays for the places once per render instead of
+ * per lookup.
+ */
+export async function getPlaceIndex() {
+  const places = await getPlaces();
+  const byId = new Map(places.map((place) => [place.id, place]));
+
+  return {
+    places,
+    byId,
+    /** Resolve ids in order, dropping any that no longer exist. */
+    get: (ids: string[]): Place[] =>
+      ids.map((id) => byId.get(id)).filter((place): place is Place => Boolean(place)),
+    forDay: (n: number): Place[] => places.filter((place) => place.days.includes(n)),
+  };
+}
+
+export type GuideSummary = {
+  slug: string;
+  file: string;
+  title: string;
+  description: string;
+  category: string;
+  generated: boolean;
+};
+
+export async function getGuides(): Promise<GuideSummary[]> {
+  return await fetchQuery(api.trip.listGuides, {});
+}
+
+export async function getGuide(slug: string) {
+  return await fetchQuery(api.trip.getGuide, { slug });
+}
+
 export type ChecklistPayload = {
   groups: string[];
   items: ChecklistItem[];

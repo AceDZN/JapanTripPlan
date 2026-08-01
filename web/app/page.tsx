@@ -13,13 +13,9 @@ import { Countdown } from "@/components/Countdown";
 import { DayCard } from "@/components/cards";
 import { Photo, StatusChip } from "@/components/visuals";
 import { bookingGates, dueTone, formatDueHe } from "@/components/booking-gates";
-import { nextDeadline } from "@/lib/checklist-data";
-import {
-  daysUntilTrip,
-  getTodayTripDay,
-  routeChapters,
-  tripDays,
-} from "@/lib/trip-data";
+import { getChecklist, getTripDays } from "@/lib/trip-source";
+import { dateKey, daysUntilTrip, todayTripDay } from "@/lib/trip-time";
+import { routeChapters } from "@/lib/trip-data";
 import { tripGuides } from "@/app/generated/trip-content";
 
 const cityImages: Record<string, string> = {
@@ -29,11 +25,23 @@ const cityImages: Record<string, string> = {
   kamakura: "/images/cities/kamakura.jpg",
 };
 
-export default function Home() {
+export default async function Home() {
+  const [tripDays, checklist] = await Promise.all([getTripDays(), getChecklist()]);
+
   const now = new Date();
-  const today = getTodayTripDay(now);
+  const today = todayTripDay(tripDays, now);
   const until = daysUntilTrip(now);
-  const deadline = nextDeadline(now);
+
+  // The nearest checklist deadline still ahead of us. Computed here rather than
+  // in a Convex query, because a query is not re-run just because the clock
+  // moves and would happily serve yesterday's answer forever.
+  const todayKey = dateKey(now);
+  const deadline =
+    checklist.items
+      .filter((item) => item.due)
+      .sort((a, b) => a.due!.localeCompare(b.due!))
+      .find((item) => item.due! >= todayKey) ?? null;
+
   const gates = bookingGates()
     .filter((gate) => gate.status !== "booked")
     .slice(0, 6);
