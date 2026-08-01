@@ -13,7 +13,7 @@
     "sync:to-prod": "node scripts/sync-deployment.mjs to-prod",
     "predev": "npm run sync:content",
     "dev": "next dev",
-    "prebuild": "npm run sync:content",
+    "prebuild": "npm run export:md && npm run sync:content",
     "build": "next build",
     "start": "next start",
     "test": "npm run build && npm run export:md -- --check && node --test tests/*.test.mjs",
