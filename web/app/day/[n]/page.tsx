@@ -19,6 +19,7 @@ import { PlaceCard } from "@/components/cards";
 import { StatusChip } from "@/components/visuals";
 import { TripMap, type MapPoint } from "@/components/TripMap";
 import { DayWishes } from "@/components/DayWishes";
+import { DaySpend } from "@/components/DaySpend";
 import {
   CostList,
   LinkRow,
@@ -221,7 +222,7 @@ export default async function DayPage({
               <section className="panel day-total-panel">
                 <h2>
                   <Wallet size={16} />
-                  עלות היום
+                  עלות היום בתוכנית
                 </h2>
                 <p className="day-total" dir="ltr">
                   {yen(dayTotal)}
@@ -232,6 +233,9 @@ export default async function DayPage({
                 </small>
               </section>
             ) : null}
+
+            {/* What the plan predicted is above; what the receipts say is here. */}
+            <DaySpend dayN={day.day} date={day.date} plannedYen={dayTotal} />
 
             {day.discovery ? (
               <section className="panel discovery-panel" data-reveal>

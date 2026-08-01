@@ -5,6 +5,7 @@ import { ArrowRight, FileText } from "lucide-react";
 import { getGuide, getGuides } from "@/lib/trip-source";
 import { isRtl, renderGuideHtml } from "@/lib/markdown";
 import { guideImage } from "@/components/guide-images";
+import { BudgetLive } from "@/components/BudgetLive";
 
 export async function generateStaticParams() {
   const guides = await getGuides();
@@ -73,6 +74,13 @@ export default async function GuidePage({
       )}
 
       <div className="container">
+        {/*
+          The budget guide is the one document whose subject has live numbers.
+          The panel reports the position; the prose below still argues the
+          policy, which is the half a ledger cannot hold.
+        */}
+        {guide.category === "budget" ? <BudgetLive /> : null}
+
         <div
           className="guide-content"
           dir={rtl ? "rtl" : "ltr"}

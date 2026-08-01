@@ -378,6 +378,51 @@ test("the wish list shows a signed-out visitor nothing but the sign-in prompt", 
   assert.doesNotMatch(page, /acedzn\.com/);
 });
 
+test("the money page shows a signed-out visitor no amounts at all", async () => {
+  // The ledger carries booking references, card amounts and — for a private
+  // row — the fact that somebody is buying somebody else a present. A
+  // signed-out request is the strongest version of "not the family", so it is
+  // the one pinned in CI: if convex/money.ts ever stops gating, this catches it.
+  const page = await html("/money");
+
+  assert.match(page, /כספים/);
+  assert.match(page, /רק למשפחה/);
+  // Convex auth is still resolving server-side, so the board ships its loading
+  // state and the sign-in card appears once Clerk answers on the client.
+  assert.match(page, /בודקים מי מחובר/);
+
+  // None of the seeded ledger may appear before sign-in.
+  assert.doesNotMatch(page, /DRUM TAO/);
+  assert.doesNotMatch(page, /Marble Tokyo Base/);
+  assert.doesNotMatch(page, /00003314/, "no booking reference");
+  assert.doesNotMatch(page, /¥\d/, "no amount, of any size");
+  assert.doesNotMatch(page, /acedzn\.com/);
+});
+
+test("the budget guide and the notebook stay public and stay silent about spend", async () => {
+  // Both pages carry a family-only panel. The guide's own prose is public and
+  // must keep rendering exactly as before; the live numbers must not.
+  const guide = await html("/guide/budget");
+  assert.match(guide, /תקציב/);
+  assert.match(guide, /מעטפות תכנון/, "the guide's own prose still renders");
+  assert.doesNotMatch(guide, /המצב בפועל/, "but the live panel needs a signed-in family member");
+
+  const index = await html("/guides");
+  assert.match(index, /מחברת המסע/);
+  assert.doesNotMatch(index, /המצב בפועל/);
+});
+
+test("a day page keeps its planned cost public and its receipts private", async () => {
+  const page = await html("/day/4");
+
+  // The planned figure comes from the block cost lines and has always been
+  // public — it is what the plan says the day costs.
+  assert.match(page, /עלות היום בתוכנית/);
+  // What was actually paid is not.
+  assert.doesNotMatch(page, /מה הוצאנו היום/);
+  assert.doesNotMatch(page, /teamLab Planets — Entrance Pass/);
+});
+
 test("map, around and chat render their full experiences", async () => {
   const map = await html("/map");
   assert.match(map, /מפת הטיול/);

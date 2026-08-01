@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, FileText } from "lucide-react";
 import { getGuides } from "@/lib/trip-source";
 import { guideImage } from "@/components/guide-images";
+import { BudgetLive } from "@/components/BudgetLive";
 
 export const metadata: Metadata = {
   title: "מדריכי הטיול",
@@ -22,6 +23,12 @@ export default async function GuidesPage() {
           את התוכן פעמיים.
         </p>
       </header>
+
+      {/*
+        The one number the notebook cannot render from its own markdown. Signed
+        out it renders nothing, so the index looks exactly as it always has.
+      */}
+      <BudgetLive compact />
 
       <div className="guides-grid">
         {tripGuides.map((guide, index) => (

@@ -17,7 +17,8 @@
     "test": "npm run build && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern .next",
     "seed:private": "tsx --env-file-if-exists=.env.local scripts/seed-private-slots.ts",
-    "seed:wishes": "tsx --env-file-if-exists=.env.local scripts/seed-wishes.ts"
+    "seed:wishes": "tsx --env-file-if-exists=.env.local scripts/seed-wishes.ts",
+    "seed:money": "tsx --env-file-if-exists=.env.local scripts/seed-money.ts"
   },
   "dependencies": {
     "@ai-sdk/gateway": "^4.0.28",

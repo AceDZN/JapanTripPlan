@@ -13,6 +13,7 @@ import { Countdown } from "@/components/Countdown";
 import { DayCard } from "@/components/cards";
 import { Photo, StatusChip } from "@/components/visuals";
 import { bookingGates, dueTone, formatDueHe } from "@/components/booking-gates";
+import { BudgetLive } from "@/components/BudgetLive";
 import { getChecklist, getGuides, getTripDays } from "@/lib/trip-source";
 import { dateKey, daysUntilTrip, todayTripDay } from "@/lib/trip-time";
 import { routeChapters } from "@/lib/trip-data";
@@ -269,6 +270,13 @@ export default async function Home() {
               </article>
             ))}
           </div>
+
+          {/*
+            Right under the gates on purpose: "these tickets are about to
+            disappear" and "this is what the trip has cost so far" are the same
+            decision. Family-only, so a signed-out home page is unchanged.
+          */}
+          <BudgetLive compact />
         </div>
       </section>
 

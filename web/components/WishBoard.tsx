@@ -13,6 +13,7 @@ import {
   Lock,
   MapPin,
   Plus,
+  Receipt,
   Search,
   ShoppingBag,
   Sparkles,
@@ -21,6 +22,7 @@ import {
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 import { yen } from "@/lib/ops";
+import type { Expense } from "@/lib/money";
 
 /**
  * What each of us wants out of this trip.
@@ -311,7 +313,126 @@ type Wish = {
   researchedBy?: string;
 };
 
-function WishCard({ wish }: { wish: Wish }) {
+/**
+ * "We bought it" — the moment a wish stops being a wish.
+ *
+ * Recording the purchase here rather than on /money is the whole point: the
+ * price, the day and the person are all already on this card, so the honest
+ * version of "mark it done" costs one number instead of a whole form. The
+ * expense carries `wishId`, and `convex/money.ts` does the two things that
+ * follow from it — closes the wish, and forces the expense private when the
+ * wish is, so buying somebody's surprise present does not announce itself in
+ * the family total.
+ */
+function BoughtIt({ wish, spent }: { wish: Wish; spent: Expense[] }) {
+  const add = useMutation(api.money.addExpense);
+  const [open, setOpen] = useState(false);
+  const [amount, setAmount] = useState("");
+  const [dayN, setDayN] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  if (spent.length > 0) {
+    const paid = spent.reduce(
+      (sum, expense) => (expense.status === "refunded" ? sum : sum + expense.amountYen),
+      0,
+    );
+    return (
+      <p className="wish-bought">
+        <Receipt size={12} />
+        נקנה — <span dir="ltr">{yen(paid)}</span>
+        {spent[0].dayN ? <Link href={`/day/${spent[0].dayN}`}> · יום {spent[0].dayN}</Link> : null}
+      </p>
+    );
+  }
+
+  // Somebody else's wish is somebody else's to close. Anyone may pay for it,
+  // but a shared wish already has a status dropdown for that conversation.
+  if (!wish.mine) return null;
+
+  // Whatever research already found is the best first guess at what it cost.
+  const suggested =
+    wish.priceYen ?? wish.whereToBuy?.find((shop) => shop.priceYen)?.priceYen ?? undefined;
+
+  async function submit(event: React.FormEvent) {
+    event.preventDefault();
+    const value = Number(amount);
+    if (!(value > 0)) return;
+
+    setSaving(true);
+    setError(null);
+    try {
+      await add({
+        title: wish.title,
+        titleEn: wish.titleEn,
+        // A wish is a thing somebody wanted to come home with, so `shopping` is
+        // right far more often than not; it is editable on /money afterwards.
+        category: wish.kind === "food" ? "food" : "shopping",
+        amount: value,
+        currency: "JPY",
+        spentOn: new Date().toISOString().slice(0, 10),
+        dayN: dayN ? Number(dayN) : undefined,
+        wishId: wish.id,
+      });
+      setOpen(false);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "לא הצלחנו לשמור");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  if (!open) {
+    return (
+      <button
+        type="button"
+        className="btn btn-ghost btn-sm wish-buy"
+        onClick={() => {
+          setAmount(suggested ? String(suggested) : "");
+          setOpen(true);
+        }}
+      >
+        <Receipt size={14} />
+        קניתי
+      </button>
+    );
+  }
+
+  return (
+    <form className="wish-buy-form" onSubmit={submit}>
+      <input
+        aria-label="כמה שילמנו, בין"
+        dir="ltr"
+        inputMode="numeric"
+        value={amount}
+        onChange={(event) => setAmount(event.target.value.replace(/[^\d]/g, ""))}
+        placeholder={suggested ? String(suggested) : "3800"}
+        required
+      />
+      <select
+        aria-label="יום בטיול"
+        value={dayN}
+        onChange={(event) => setDayN(event.target.value)}
+      >
+        <option value="">בלי יום</option>
+        {Array.from({ length: 17 }, (_, index) => index + 1).map((value) => (
+          <option key={value} value={value}>
+            יום {value}
+          </option>
+        ))}
+      </select>
+      <button className="btn btn-sm" type="submit" disabled={saving}>
+        {saving ? "שומר…" : "רישום"}
+      </button>
+      <button className="btn btn-sm btn-ghost" type="button" onClick={() => setOpen(false)}>
+        ביטול
+      </button>
+      {error ? <p className="wish-error">{error}</p> : null}
+    </form>
+  );
+}
+
+function WishCard({ wish, spent }: { wish: Wish; spent: Expense[] }) {
   const update = useMutation(api.wishes.update);
   const remove = useMutation(api.wishes.remove);
   const [busy, setBusy] = useState(false);
@@ -439,6 +560,8 @@ function WishCard({ wish }: { wish: Wish }) {
         </a>
       ) : null}
 
+      <BoughtIt wish={wish} spent={spent} />
+
       <div className="wish-actions">
         <select
           value={wish.status}
@@ -492,6 +615,14 @@ function WishCard({ wish }: { wish: Wish }) {
 
 function Board() {
   const wishes = useQuery(api.wishes.list) as Wish[] | undefined;
+  /**
+   * Every expense the caller may see, fetched once for the whole board.
+   *
+   * A per-card `listForWish` would open one subscription per wish for a lookup
+   * that is a Map. The ledger is small and already family-gated, and this is
+   * the same rows /money renders.
+   */
+  const expenses = useQuery(api.money.listExpenses, {}) as Expense[] | undefined;
   const [adding, setAdding] = useState(false);
   const [asking, setAsking] = useState(false);
   const [person, setPerson] = useState<string>("all");
@@ -509,6 +640,17 @@ function Board() {
         .filter((w) => showDropped || w.status !== "dropped"),
     [wishes, person, showDropped],
   );
+
+  const spentByWish = useMemo(() => {
+    const map = new Map<string, Expense[]>();
+    for (const expense of expenses ?? []) {
+      if (!expense.wishId) continue;
+      const list = map.get(expense.wishId);
+      if (list) list.push(expense);
+      else map.set(expense.wishId, [expense]);
+    }
+    return map;
+  }, [expenses]);
 
   if (wishes === undefined) return <p className="lede">טוען…</p>;
 
@@ -566,7 +708,7 @@ function Board() {
       ) : (
         <div className="wish-grid">
           {visible.map((wish) => (
-            <WishCard wish={wish} key={wish.id} />
+            <WishCard wish={wish} spent={spentByWish.get(wish.id) ?? []} key={wish.id} />
           ))}
         </div>
       )}

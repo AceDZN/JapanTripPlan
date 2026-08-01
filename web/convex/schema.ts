@@ -122,6 +122,80 @@ export const refLink = v.object({
   ),
 });
 
+/**
+ * Money vocabulary.
+ *
+ * Two different things get called "cost" in this trip and they must never be
+ * summed together by accident:
+ *
+ *   PLANNED  — `costLine` above, and the `budgets` envelopes below. What we
+ *              expect a thing to cost. Lives on the plan.
+ *   ACTUAL   — the `expenses` table. What actually left an account, with a
+ *              receipt behind it. Lives on the record of what happened.
+ *
+ * The categories are the join between them: an envelope and an expense both
+ * carry one, which is what makes "we budgeted ¥190k–260k for food and have
+ * spent ¥84k" a question the database can answer rather than a spreadsheet.
+ * They are deliberately the envelopes 10-BUDGET.md already argues for — arcade
+ * and gachapon are their own line precisely because the guide refuses to let
+ * them hide inside "attractions".
+ */
+export const expenseCategory = v.union(
+  v.literal("flights"),
+  v.literal("stay"),
+  v.literal("transport"),
+  v.literal("food"),
+  v.literal("attractions"),
+  v.literal("shopping"),
+  v.literal("arcade"),
+  v.literal("gifts"),
+  v.literal("essentials"),
+  v.literal("other"),
+);
+
+/**
+ * The four currencies this trip is actually paid in.
+ *
+ * Flights and both booked Airbnbs were charged in shekels; everything from
+ * 2 October onwards is yen. A single total is only honest if every row carries
+ * the rate it was converted at, which is why `jpyPerUnit` is stored per expense
+ * rather than looked up at read time — a total that silently moves because the
+ * yen moved is not a record of what we spent.
+ */
+export const currencyCode = v.union(
+  v.literal("JPY"),
+  v.literal("ILS"),
+  v.literal("USD"),
+  v.literal("EUR"),
+);
+
+export const expenseStatus = v.union(
+  /** Money has left an account. */
+  v.literal("paid"),
+  /** Committed — booked, lottery won, ticket held — but not yet charged. */
+  v.literal("pending"),
+  /** Charged and given back. Kept, with the sign intact, so the trail survives. */
+  v.literal("refunded"),
+);
+
+export const paymentMethod = v.union(
+  v.literal("card"),
+  v.literal("cash"),
+  v.literal("ic"),
+  v.literal("transfer"),
+  v.literal("points"),
+  v.literal("other"),
+);
+
+/** Receipts and confirmations, in Convex file storage. Same shape as the vault. */
+export const attachedFile = v.object({
+  storageId: v.id("_storage"),
+  name: v.string(),
+  size: v.number(),
+  type: v.string(),
+  uploadedAt: v.number(),
+});
+
 export const stay = v.object({
   placeId: v.optional(v.string()),
   label: v.string(),
@@ -365,17 +439,7 @@ export default defineSchema({
      *
      * Optional so every existing row stays valid without a migration.
      */
-    files: v.optional(
-      v.array(
-        v.object({
-          storageId: v.id("_storage"),
-          name: v.string(),
-          size: v.number(),
-          type: v.string(),
-          uploadedAt: v.number(),
-        }),
-      ),
-    ),
+    files: v.optional(v.array(attachedFile)),
     updatedAt: v.number(),
     updatedBy: v.optional(v.string()),
   })
@@ -574,4 +638,132 @@ export default defineSchema({
     .index("by_status_and_createdAt", ["status", "createdAt"])
     .index("by_proposedByEmail", ["proposedByEmail"])
     .index("by_guideSlug", ["guideSlug"]),
+
+  /**
+   * FAMILY-ONLY. What we actually spent.
+   *
+   * 10-BUDGET.md has kept a "פנקס ההזמנות" — a markdown table with a column
+   * headed "החיוב המשפחתי בפועל" that a person is supposed to fill in after
+   * every purchase. It mostly reads "—", because a table in a document cannot
+   * be written from a shop in Osaka, cannot be summed, and cannot tell the day
+   * page that today has cost ¥14,200 so far. This table is that ledger, made
+   * writable from the app and from eve.
+   *
+   * ONE ROW = ONE CHARGE. Not one plan, not one intention: `blocks.costs` and
+   * `budgets` already hold what we expect to pay. Mixing the two is how a trip
+   * ends up double-counting a ticket it bought once.
+   *
+   * PRIVACY, and it matters here as much as it does on `wishes`: buying the
+   * surprise present is exactly the purchase that must not appear in a family
+   * total everyone can see. A `private` expense is visible only to the person
+   * who paid, which means totals are per-caller — Alex's own view includes his
+   * private spend, nobody else's does. The alternative (a shared total that
+   * mysteriously does not add up) leaks the surprise just as effectively.
+   */
+  expenses: defineTable({
+    title: v.string(), // Hebrew, as a person would name the purchase
+    titleEn: v.optional(v.string()),
+    category: expenseCategory,
+
+    /** What was charged, in the currency it was charged in. */
+    amount: v.number(),
+    currency: currencyCode,
+    /**
+     * The same money in yen, frozen at record time.
+     *
+     * Denormalised on purpose: it is what every total sums, and recomputing it
+     * from a live rate would make last month's spend change overnight.
+     */
+    amountYen: v.number(),
+    /** Yen per one unit of `currency` when this was recorded. Exactly 1 for JPY. */
+    jpyPerUnit: v.number(),
+    rateSource: v.optional(v.string()),
+
+    /** ISO "2026-10-05" — when the money moved, not when somebody typed it in. */
+    spentOn: v.string(),
+    /** Trip day, when there is one. Pre-trip bookings have none. */
+    dayN: v.optional(v.number()),
+    placeId: v.optional(v.string()), // place slug
+    guideSlug: v.optional(v.string()), // which guide argues for this cost
+    /** Set when this purchase IS somebody's wish — see `markWishDone` in money.ts. */
+    wishId: v.optional(v.id("wishes")),
+    checklistItemSlug: v.optional(v.string()),
+    /** The block on the day page this belongs to, matched by title. */
+    blockTitle: v.optional(v.string()),
+
+    status: expenseStatus,
+    method: v.optional(paymentMethod),
+    /** Booking reference / order number, so a receipt can be found again. */
+    reference: v.optional(v.string()),
+    url: v.optional(v.string()),
+    note: v.optional(v.string()),
+
+    /** Who paid. `ownerEmail` for a private row — the only person who sees it. */
+    paidByEmail: v.string(),
+    paidByName: v.string(),
+    visibility: v.union(v.literal("shared"), v.literal("private")),
+
+    /** Receipts, e-tickets, confirmation PDFs. */
+    files: v.optional(v.array(attachedFile)),
+    /** Where the row came from, so a bad import can be found and undone. */
+    source: v.union(
+      v.literal("app"),
+      v.literal("agent"),
+      v.literal("receipt"),
+      v.literal("import"),
+    ),
+
+    createdAt: v.number(),
+    updatedAt: v.number(),
+    updatedBy: v.optional(v.string()),
+  })
+    .index("by_spentOn", ["spentOn"])
+    .index("by_dayN", ["dayN"])
+    .index("by_category", ["category"])
+    .index("by_paidByEmail", ["paidByEmail"])
+    .index("by_wishId", ["wishId"]),
+
+  /**
+   * FAMILY-ONLY. The planning envelopes from 10-BUDGET.md, as data.
+   *
+   * The guide is emphatic that these are ranges of control, not quotes — so
+   * `minYen`/`maxYen` rather than a single number, and both optional, because
+   * "קניות אנימה/דמויות: להגדיר תקרה משפחתית נפרדת" is a real envelope with a
+   * real name and no figure yet. Storing that as a row with empty bounds keeps
+   * the open question visible; leaving it out would quietly close it.
+   *
+   * Several envelopes may share a `category` (the guide splits local transport
+   * from the Shinkansen); the spend side aggregates by category, and the UI
+   * shows the envelopes that make it up.
+   */
+  budgets: defineTable({
+    slug: v.string(), // stable kebab key, e.g. "local-transport"
+    category: expenseCategory,
+    label: v.string(), // Hebrew
+    minYen: v.optional(v.number()),
+    maxYen: v.optional(v.number()),
+    note: v.optional(v.string()),
+    order: v.number(),
+    updatedAt: v.number(),
+    updatedBy: v.optional(v.string()),
+  })
+    .index("by_slug", ["slug"])
+    .index("by_order", ["order"]),
+
+  /**
+   * FAMILY-ONLY. The conversion rate to use for the NEXT expense entered in a
+   * foreign currency.
+   *
+   * Not a rate history and not a market feed: each expense keeps the rate it was
+   * recorded at, so this table only answers "what should we convert at right
+   * now". eve refreshes it from a source it can cite; a stale `updatedAt` is
+   * shown next to any converted total rather than hidden.
+   */
+  fxRates: defineTable({
+    currency: currencyCode,
+    jpyPerUnit: v.number(),
+    source: v.optional(v.string()),
+    updatedAt: v.number(),
+    updatedBy: v.optional(v.string()),
+  }).index("by_currency", ["currency"]),
 });

@@ -3222,3 +3222,614 @@ a.status-chip:hover {
   font-weight: 700;
   text-decoration: underline;
 }
+
+/* =========================================================================
+   Money — planning envelopes vs. what actually left the card.
+   The visual rule mirrors the data rule: planned and actual never share a
+   number, and "מוזמן וטרם חויב" is always called out separately from "שולם".
+   ========================================================================= */
+
+.money-loading,
+.money-empty {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 14px;
+  gap: 8px;
+  padding: 18px 0;
+}
+
+.money-signin {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  padding: 24px;
+}
+
+.money-stats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-bottom: 14px;
+}
+
+.money-stat {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+}
+
+.money-stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.4vw, 30px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.money-stat small {
+  color: var(--text-faint);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.money-stat.is-ok .money-stat-value {
+  color: var(--ops-ok-ink);
+}
+
+.money-stat.is-over .money-stat-value {
+  color: var(--ops-warn-ink);
+}
+
+/* A bar that can exceed 100% has to say so, not silently cap. */
+.money-bar {
+  background: var(--surface-3);
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.money-bar-fill {
+  background: linear-gradient(90deg, var(--matcha), var(--gold));
+  display: block;
+  height: 100%;
+}
+
+.money-bar-fill.is-over {
+  background: linear-gradient(90deg, var(--gold), var(--vermillion));
+}
+
+.money-bar-over {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--vermillion) 0 4px,
+    transparent 4px 8px
+  );
+  inset: 0;
+  position: absolute;
+}
+
+.money-currencies {
+  align-items: baseline;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.money-currencies span {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.money-currencies small {
+  color: var(--text-faint);
+  font-size: 11.5px;
+}
+
+.money-section {
+  margin-top: 40px;
+}
+
+.money-list-head {
+  align-items: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: space-between;
+}
+
+.money-categories {
+  display: grid;
+  gap: 16px;
+}
+
+.money-categories > li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  display: grid;
+  gap: 7px;
+  padding: 14px 16px;
+}
+
+.money-cat-head {
+  align-items: baseline;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.money-cat-head span {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+
+.money-cat-meta {
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  gap: 12px;
+}
+
+.money-cat-note {
+  border-inline-start: 3px solid var(--line);
+  color: var(--text-faint);
+  font-size: 12px;
+  line-height: 1.6;
+  padding-inline-start: 9px;
+}
+
+.money-payers {
+  margin-top: 28px;
+}
+
+.money-payers ul {
+  display: grid;
+  font-size: 13.5px;
+  gap: 6px;
+}
+
+.money-payers li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.money-payers li span:last-child {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.money-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 16px 0;
+}
+
+.money-rows {
+  display: grid;
+  gap: 10px;
+}
+
+.money-row {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  padding: 13px 16px;
+}
+
+/* A refund stays in the list so the trail survives — greyed, never deleted. */
+.money-row.is-refunded {
+  opacity: 0.55;
+}
+
+.money-row.is-refunded .money-row-amount strong {
+  text-decoration: line-through;
+}
+
+.money-row-main {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.money-row-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.money-row-meta {
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 10px;
+}
+
+.money-row-meta a {
+  color: var(--vermillion-deep);
+  font-weight: 700;
+}
+
+.money-row-note {
+  color: var(--text-faint);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.money-row-files {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 10px;
+}
+
+.money-row-files a {
+  align-items: center;
+  color: var(--vermillion-deep);
+  display: inline-flex;
+  gap: 4px;
+}
+
+.money-row-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.money-row-danger {
+  color: var(--ops-warn-ink);
+}
+
+.money-row-error {
+  color: var(--ops-warn-ink);
+  font-size: 11.5px;
+}
+
+.money-row-amount {
+  display: grid;
+  gap: 2px;
+  justify-items: end;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.money-row-amount strong {
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.money-row-amount small {
+  color: var(--text-faint);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.money-chip-private,
+.money-chip-pending,
+.money-chip-refunded {
+  align-items: center;
+  display: inline-flex;
+  font-size: 11px;
+  gap: 4px;
+}
+
+.money-chip-pending {
+  background: color-mix(in srgb, var(--st-lottery) 16%, transparent);
+  color: #8a5a05;
+}
+
+.money-chip-refunded {
+  background: var(--surface-3);
+  color: var(--text-muted);
+}
+
+.money-chip-private {
+  background: var(--ink);
+  color: var(--on-dark);
+}
+
+.money-form-warn {
+  align-items: flex-start;
+  background: color-mix(in srgb, var(--vermillion) 10%, transparent);
+  border-radius: var(--r-sm);
+  color: var(--ops-warn-ink);
+  display: flex;
+  font-size: 12.5px;
+  gap: 6px;
+  line-height: 1.55;
+  padding: 8px 10px;
+}
+
+.money-form-warn svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.money-form-hint {
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.money-rates {
+  margin-top: 40px;
+}
+
+.money-rate-list {
+  display: grid;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.money-rate-list li {
+  display: grid;
+  gap: 1px;
+}
+
+.money-rate-list small {
+  color: var(--text-faint);
+  font-size: 11.5px;
+}
+
+.money-rate-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.money-rate-form input,
+.money-rate-form select {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-size: 13px;
+  min-width: 0;
+  padding: 7px 10px;
+}
+
+.money-rate-form input {
+  flex: 1 1 110px;
+}
+
+/* --- the day page's spend panel */
+
+.day-spend-total {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.day-spend-compare {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  gap: 10px;
+}
+
+.day-spend-over,
+.day-spend-under {
+  align-items: center;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 4px;
+}
+
+.day-spend-over {
+  color: var(--ops-warn-ink);
+}
+
+.day-spend-under {
+  color: var(--ops-ok-ink);
+}
+
+.day-spend-pending {
+  align-items: center;
+  color: #8a5a05;
+  display: flex;
+  font-size: 12px;
+  gap: 5px;
+}
+
+.day-spend-list {
+  display: grid;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.day-spend-list li {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.day-spend-list li.is-refunded {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+.day-spend-what {
+  display: grid;
+  min-width: 0;
+}
+
+.day-spend-what small {
+  align-items: center;
+  color: var(--text-faint);
+  display: flex;
+  font-size: 11px;
+  gap: 3px;
+}
+
+.day-spend-amount {
+  display: grid;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  justify-items: end;
+  white-space: nowrap;
+}
+
+.day-spend-amount small {
+  color: var(--text-faint);
+  font-size: 10.5px;
+  font-weight: 500;
+}
+
+.day-spend-empty {
+  color: var(--text-faint);
+  font-size: 12.5px;
+}
+
+.day-spend-add {
+  display: grid;
+  gap: 7px;
+  grid-template-columns: 1fr 84px;
+}
+
+.day-spend-add input,
+.day-spend-add select {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-size: 13px;
+  min-width: 0;
+  padding: 7px 9px;
+}
+
+.day-spend-add select,
+.day-spend-add button {
+  grid-column: span 1;
+}
+
+.day-spend-error {
+  color: var(--ops-warn-ink);
+  font-size: 12px;
+  grid-column: 1 / -1;
+}
+
+/* --- live numbers on the budget guide */
+
+.budget-live {
+  margin: 0 0 28px;
+}
+
+.budget-live-total {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4vw, 34px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.budget-live-sub {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.budget-live-list {
+  display: grid;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.budget-live-list li {
+  align-items: baseline;
+  border-bottom: 1px dashed var(--line);
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.budget-live-list li span:last-child {
+  display: grid;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  justify-items: end;
+}
+
+.budget-live-list small {
+  color: var(--text-faint);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* --- "we bought it", on a wish card */
+
+.wish-bought {
+  align-items: center;
+  background: color-mix(in srgb, var(--matcha) 12%, transparent);
+  border-radius: var(--r-sm);
+  color: var(--ops-ok-ink);
+  display: flex;
+  font-size: 12.5px;
+  font-weight: 700;
+  gap: 5px;
+  padding: 6px 9px;
+}
+
+.wish-bought a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.wish-buy {
+  justify-self: start;
+}
+
+.wish-buy-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wish-buy-form input,
+.wish-buy-form select {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  flex: 1 1 90px;
+  font: inherit;
+  font-size: 13px;
+  min-width: 0;
+  padding: 7px 9px;
+}
+
+@media (max-width: 640px) {
+  .money-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .money-row-amount {
+    justify-items: start;
+    text-align: start;
+  }
+
+  .day-spend-add {
+    grid-template-columns: 1fr;
+  }
+}

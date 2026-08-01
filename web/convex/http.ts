@@ -456,6 +456,241 @@ http.route({
   }),
 });
 
+/* -------------------------------------------------------------------- money */
+
+/**
+ * The ledger, private rows included, plus the envelopes and the stored rates.
+ *
+ * One route rather than three: every honest answer about money needs all of
+ * them together — spend alone cannot say "over budget", and an envelope alone
+ * cannot say "we have ¥40,000 left".
+ */
+http.route({
+  path: "/agent/money/state",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+    const state = await ctx.runQuery(internal.money.internalListAll, {});
+    return json({ ok: true, ...state });
+  }),
+});
+
+/**
+ * Record a charge on behalf of a family member.
+ *
+ * Open to the service key on the same grounds as `/agent/checklist/done`:
+ * "we paid ¥16,800 for teamLab" reports a fact about the world, it does not
+ * change what the family plans to do. Changing the PLAN still goes through
+ * `/agent/suggestions/propose`.
+ */
+http.route({
+  path: "/agent/money/expense",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+    if (
+      typeof row.paidByEmail !== "string" ||
+      typeof row.title !== "string" ||
+      typeof row.amount !== "number" ||
+      typeof row.spentOn !== "string"
+    ) {
+      return json(
+        {
+          ok: false,
+          error:
+            "expected { paidByEmail, title, amount, currency, category, spentOn } " +
+            "with amount as a number and spentOn as an ISO date",
+        },
+        400,
+      );
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.money.internalRecordExpense, row as never);
+      return json({ ok: true, ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/** Correct a recorded charge. Cannot change who paid or who can see it. */
+http.route({
+  path: "/agent/money/expense/update",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    if (typeof (body as Record<string, unknown>).id !== "string") {
+      return json({ ok: false, error: "expected { id, ...fields }" }, 400);
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.money.internalUpdateExpense, body as never);
+      return json({ ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/**
+ * Delete a charge that should never have been recorded.
+ *
+ * Present because the agent WILL occasionally record the same receipt twice
+ * under two different titles, and leaving the family to hunt a phantom ¥54,000
+ * through the app is worse than letting it clean up after itself.
+ */
+http.route({
+  path: "/agent/money/expense/remove",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    if (typeof (body as Record<string, unknown>).id !== "string") {
+      return json({ ok: false, error: "expected { id }" }, 400);
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.money.internalRemoveExpense, body as never);
+      return json({ ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/** Create or adjust a planning envelope. */
+http.route({
+  path: "/agent/money/budget",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+    if (
+      typeof row.slug !== "string" ||
+      typeof row.category !== "string" ||
+      typeof row.label !== "string"
+    ) {
+      return json({ ok: false, error: "expected { slug, category, label, minYen?, maxYen? }" }, 400);
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.money.internalSetBudget, row as never);
+      return json({ ok: true, ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/** Drop an envelope created by mistake. */
+http.route({
+  path: "/agent/money/budget/remove",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    if (typeof (body as Record<string, unknown>).slug !== "string") {
+      return json({ ok: false, error: "expected { slug }" }, 400);
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.money.internalRemoveBudget, body as never);
+      return json({ ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/** Refresh the rate the NEXT foreign-currency expense converts at. */
+http.route({
+  path: "/agent/money/rate",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+    if (typeof row.currency !== "string" || typeof row.jpyPerUnit !== "number") {
+      return json({ ok: false, error: "expected { currency, jpyPerUnit, source? }" }, 400);
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.money.internalSetRate, row as never);
+      return json({ ok: true, ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/**
+ * Correct a PLANNED cost line on a day's block.
+ *
+ * Note what this is not: a route to rewrite the day. It sets one labelled
+ * amount inside one named block that must already exist, which is the whole
+ * "the ticket is ¥3,800 not ¥3,500" case. Anything structural — moving a
+ * block, adding a stop — is still a suggestion for the owner to approve.
+ */
+http.route({
+  path: "/agent/money/block-cost",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+    if (
+      typeof row.dayN !== "number" ||
+      typeof row.blockTitle !== "string" ||
+      typeof row.label !== "string"
+    ) {
+      return json(
+        { ok: false, error: "expected { dayN, blockTitle, label, yen, basis } " },
+        400,
+      );
+    }
+
+    try {
+      const result = await ctx.runMutation(internal.money.internalSetBlockCost, row as never);
+      return json({ ...result, ok: result.ok });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
 /** One guide with its full body — kept separate so /agent/snapshot stays small. */
 http.route({
   path: "/agent/guide",
