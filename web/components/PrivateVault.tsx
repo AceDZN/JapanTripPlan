@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Authenticated, AuthLoading, Unauthenticated, useMutation, useQuery } from "convex/react";
 import { UserButton } from "@clerk/nextjs";
-import { KeyRound, Lock, Pencil, Plus, Trash2, ExternalLink } from "lucide-react";
+import { KeyRound, Lock, Paperclip, Pencil, Plus, Trash2, ExternalLink } from "lucide-react";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 
@@ -151,6 +151,26 @@ function AddRecordForm({ onDone }: { onDone: () => void }) {
   );
 }
 
+/** Convex file storage's own per-file ceiling is far higher; this is ours. */
+const MAX_FILE_MB = 20;
+const MAX_FILE_BYTES = MAX_FILE_MB * 1024 * 1024;
+
+function formatBytes(bytes: number) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+}
+
+type VaultFile = {
+  storageId: string;
+  name: string;
+  size: number;
+  type: string;
+  uploadedAt: number;
+  /** Signed download URL, minted per query. Null if the blob has gone. */
+  url: string | null;
+};
+
 type Record_ = {
   id: string;
   subject: string;
@@ -158,6 +178,7 @@ type Record_ = {
   kind: string;
   label: string;
   value: string;
+  files?: VaultFile[];
   url?: string;
   hint?: string;
   updatedBy?: string;
@@ -178,12 +199,55 @@ function RecordCard({
   onRemove: (args: { id: Id<"privateRecords"> }) => Promise<null>;
 }) {
   const upsert = useMutation(api.private.upsert);
+  const generateUploadUrl = useMutation(api.private.generateUploadUrl);
+  const attachFile = useMutation(api.private.attachFile);
+  const removeFile = useMutation(api.private.removeFile);
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState(record.value);
   const [url, setUrl] = useState(record.url ?? "");
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
-  const empty = record.value.trim().length === 0;
+  const files = record.files ?? [];
+  // A slot with a document in it is not "empty", even with no typed value.
+  const empty = record.value.trim().length === 0 && files.length === 0;
+
+  /**
+   * Convex uploads are two-step: POST the bytes to a one-shot URL, then record
+   * the returned storage id against this vault record.
+   */
+  async function upload(picked: FileList | null) {
+    if (!picked || picked.length === 0) return;
+    setUploading(true);
+    setUploadError(null);
+    try {
+      for (const file of Array.from(picked)) {
+        if (file.size > MAX_FILE_BYTES) {
+          throw new Error(`"${file.name}" גדול מ־${MAX_FILE_MB}MB.`);
+        }
+        const postUrl = await generateUploadUrl({});
+        const response = await fetch(postUrl, {
+          method: "POST",
+          headers: { "Content-Type": file.type || "application/octet-stream" },
+          body: file,
+        });
+        if (!response.ok) throw new Error(`ההעלאה של "${file.name}" נכשלה.`);
+        const { storageId } = (await response.json()) as { storageId: string };
+        await attachFile({
+          id: record.id as Id<"privateRecords">,
+          storageId: storageId as Id<"_storage">,
+          name: file.name,
+          size: file.size,
+          type: file.type || "application/octet-stream",
+        });
+      }
+    } catch (caught) {
+      setUploadError(caught instanceof Error ? caught.message : "ההעלאה נכשלה.");
+    } finally {
+      setUploading(false);
+    }
+  }
 
   async function save() {
     setSaving(true);
@@ -294,6 +358,60 @@ function RecordCard({
           ) : null}
         </>
       )}
+
+      <div style={{ marginTop: 12, display: "grid", gap: 6 }}>
+        {files.map((file) => (
+          <div
+            key={file.storageId}
+            style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13 }}
+          >
+            <Paperclip size={14} style={{ flexShrink: 0, opacity: 0.7 }} />
+            {file.url ? (
+              <a className="text-link" href={file.url} target="_blank" rel="noreferrer">
+                {file.name}
+              </a>
+            ) : (
+              <span style={{ opacity: 0.6 }}>{file.name} (הקובץ חסר)</span>
+            )}
+            <span style={{ opacity: 0.55 }}>{formatBytes(file.size)}</span>
+            <button
+              className="text-link"
+              type="button"
+              aria-label={`מחיקת הקובץ ${file.name}`}
+              style={{ marginInlineStart: "auto" }}
+              onClick={() => {
+                if (confirm(`למחוק את "${file.name}"?`)) {
+                  void removeFile({
+                    id: record.id as Id<"privateRecords">,
+                    storageId: file.storageId as Id<"_storage">,
+                  });
+                }
+              }}
+            >
+              <Trash2 size={13} />
+            </button>
+          </div>
+        ))}
+
+        <label className="text-link" style={{ fontSize: 13, cursor: "pointer", width: "fit-content" }}>
+          <Paperclip size={14} />
+          {uploading ? " מעלה…" : " צירוף קובץ"}
+          <input
+            type="file"
+            multiple
+            hidden
+            disabled={uploading}
+            onChange={(e) => {
+              void upload(e.target.files);
+              e.target.value = "";
+            }}
+          />
+        </label>
+
+        {uploadError ? (
+          <p style={{ color: "var(--danger, #c0392b)", margin: 0, fontSize: 13 }}>{uploadError}</p>
+        ) : null}
+      </div>
     </article>
   );
 }

@@ -256,6 +256,26 @@ export default defineSchema({
      * notes so whoever fills a slot knows where to look.
      */
     hint: v.optional(v.string()),
+    /**
+     * Attached documents — e-tickets, booking confirmations, insurance PDFs.
+     *
+     * Stored in Convex file storage; only the handle lives here. Reads go
+     * through `ctx.storage.getUrl()` inside a `requireFamily()`-guarded query,
+     * so the signed URL is only ever minted for a signed-in family member.
+     *
+     * Optional so every existing row stays valid without a migration.
+     */
+    files: v.optional(
+      v.array(
+        v.object({
+          storageId: v.id("_storage"),
+          name: v.string(),
+          size: v.number(),
+          type: v.string(),
+          uploadedAt: v.number(),
+        }),
+      ),
+    ),
     updatedAt: v.number(),
     updatedBy: v.optional(v.string()),
   })

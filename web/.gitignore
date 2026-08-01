@@ -41,3 +41,6 @@ next-env.d.ts
 # scratch
 /outputs/
 /work/
+
+# Convex deployment snapshots (contain real private records)
+.convex-snapshots/
