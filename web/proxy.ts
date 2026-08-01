@@ -3,6 +3,10 @@ import { clerkMiddleware } from "@clerk/nextjs/server";
 /**
  * Server-side Clerk, so `/api/agent/*` can ask WHO is calling.
  *
+ * Named `proxy.ts` because Next 16 renamed the `middleware` file convention;
+ * the behaviour is unchanged. `clerkMiddleware()` keeps its own name — that is
+ * Clerk's export, not the file convention.
+ *
  * SCOPED TO API ROUTES ON PURPOSE — and narrowly at that. A broad matcher over
  * the whole site made every page 500 in a production build ("Failed to proxy
  * http://localhost:PORT/ — Parse Error: Expected HTTP/"), with Next 16.2.6
