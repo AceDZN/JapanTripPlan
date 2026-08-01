@@ -343,18 +343,53 @@ test("the chat ships a mic button and a read-aloud toggle", async () => {
   // so the contract is asserted on the component source.
   const view = await readFile(new URL("../components/chat/ChatView.tsx", import.meta.url), "utf8");
 
-  assert.match(view, /aria-label=\{recorder\.recording \? "סיום הקלטה ושליחה" : "הקלטת הודעה קולית"\}/);
+  assert.match(view, /aria-label=\{voice\.recording \? "סיום הקלטה ושליחה" : "הקלטת הודעה קולית"\}/);
   assert.match(view, /className=\{`chat-mic/);
   assert.match(view, /"כיבוי הקראה אוטומטית"/);
   assert.match(view, /"הקראה אוטומטית של התשובות"/);
   assert.match(view, /aria-pressed=\{autoSpeak\}/);
-  // The mic only exists on the durable transport: /api/chat cannot take audio.
-  assert.match(view, /voiceEnabled=\{false\}/);
+  // The mic now rides on both transports: the recording is turned into words by
+  // /api/transcribe before either of them sees it.
+  assert.equal(/voiceEnabled/.test(view), false);
 
   const styles = await readFile(new URL("../app/chat/chat.css", import.meta.url), "utf8");
   assert.match(styles, /\.chat-mic\b/);
   assert.match(styles, /\.chat-recording\b/);
   assert.match(styles, /\.chat-speak\b/);
+  assert.match(styles, /\.chat-voice-player\b/);
+});
+
+test("the composer can attach files, and bubbles can draw them", async () => {
+  const view = await readFile(new URL("../components/chat/ChatView.tsx", import.meta.url), "utf8");
+
+  assert.match(view, /aria-label="צירוף תמונה, מסמך או קובץ"/);
+  assert.match(view, /accept=\{ACCEPT_ATTR\}/);
+  // A pasted screenshot is the fastest way to ask "what does this say?".
+  assert.match(view, /onPaste=/);
+  assert.match(view, /<AttachmentTray/);
+  assert.match(view, /<BubbleAttachments/);
+  assert.match(view, /<VoicePlayback/);
+
+  const styles = await readFile(new URL("../app/chat/chat.css", import.meta.url), "utf8");
+  assert.match(styles, /\.chat-attach\b/);
+  assert.match(styles, /\.chat-tray\b/);
+  assert.match(styles, /\.chat-bubble-files\b/);
+});
+
+test("a recording is listened to before it reaches either transport", async () => {
+  // The reason this endpoint exists at all: eve stages attachments into the
+  // agent sandbox and only re-inlines images and PDFs into the model call, so
+  // raw audio arrives as a filename the model cannot open.
+  const route = await readFile(new URL("../app/api/transcribe/route.ts", import.meta.url), "utf8");
+
+  assert.match(route, /attachment-staging/, "the constraint is documented where it is worked around");
+  assert.match(route, /google\/gemini/, "the primary listener is audio-native");
+  assert.match(route, /whisper/, "with a speech-to-text fallback");
+
+  const turn = await readFile(new URL("../components/chat/useVoiceTurn.ts", import.meta.url), "utf8");
+  // A failed listen must not cost the family the recording.
+  assert.match(turn, /heldRef/);
+  assert.match(turn, /saveVoiceNote/);
 });
 
 test("the composer carries a location toggle wired to both transports", async () => {
@@ -368,7 +403,7 @@ test("the composer carries a location toggle wired to both transports", async ()
   // The durable path awaits a fix; the fallback peeks at the cache so it never
   // gains a GPS wait, and strips the line back out before drawing the bubble.
   assert.match(view, /useEveChat\(\{ resolveContext: geo\.resolveContextLine \}\)/);
-  assert.match(view, /geo\.peekContextLine\(\)/);
+  assert.match(view, /geo\.peekContextLine\(\{ voice: input\.spoken \}\)/);
   assert.match(view, /stripContextLines\(raw\)/);
 
   const geo = await readFile(new URL("../components/chat/useGeoContext.ts", import.meta.url), "utf8");

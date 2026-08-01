@@ -8,10 +8,12 @@ import {
   dropSupersededUser,
   reduceEve,
   visibleMessages,
+  type BubbleAttachment,
   type EveBubble,
   type EveEvent,
   type EveState,
 } from "./eve-protocol";
+import { textAttachmentPart, type Attachment } from "./attachments";
 import {
   EveTransportError,
   NETWORK_FAILURE,
@@ -41,9 +43,19 @@ import { toolStatusLabel } from "./tool-labels";
 const SESSION_KEY = "japan2026.eve.session.v1";
 const MAX_RECONNECTS = 5;
 
-export type VoiceAttachment = { dataUrl: string; mediaType: string };
-
-export type SendInput = { text?: string; audio?: VoiceAttachment };
+/**
+ * One turn's payload.
+ *
+ * `spoken` marks a turn whose `text` came from an audio-native model listening
+ * to a recording rather than from the keyboard — see app/api/transcribe. It
+ * changes two things: the agent is told the wording is heard (so a mangled place
+ * name is forgiven), and the bubble offers the recording for playback.
+ */
+export type SendInput = {
+  text?: string;
+  spoken?: boolean;
+  attachments?: readonly Attachment[];
+};
 
 /** How the visible error card should read and which icon it gets. */
 export type ChatErrorKind = "offline" | "agent";
@@ -164,45 +176,57 @@ function writeStoredSession(sessionId: string | null): void {
   }
 }
 
-/** Extension for the recorded blob, so the attachment has a sane filename. */
-function audioFilename(mediaType: string): string {
-  if (mediaType.includes("mp4") || mediaType.includes("aac")) return "voice.m4a";
-  if (mediaType.includes("ogg")) return "voice.ogg";
-  if (mediaType.includes("mpeg")) return "voice.mp3";
-  if (mediaType.includes("wav")) return "voice.wav";
-  return "voice.webm";
-}
-
 /**
  * Builds the message body. Attachments follow the documented eve contract
  * (eve/docs/guides/client/messages.mdx — "Send attachments"): the message is an
  * AI SDK `UserContent` array whose file part carries a base64 `data:` URL,
  * `mediaType` and `filename`.
  *
- * Part order is fixed: context metadata, then the user's words, then audio.
+ * Part order is fixed: context metadata, then the user's words, then files.
+ * Text attachments are inlined as words rather than sent as file parts — eve
+ * would stage them into the sandbox, and this agent has no filesystem tools to
+ * open them again.
  */
 function buildMessage(input: SendInput, contextLine: string | null): EveMessage {
   const typed = input.text?.trim() ?? "";
-  const body = typed || (input.audio ? VOICE_TEXT_PART : "");
-  if (!body) return "";
+  const attachments = input.attachments ?? [];
+  const body = typed || (input.spoken ? VOICE_TEXT_PART : "");
+  if (!body && attachments.length === 0) return "";
 
   // A plain typed turn with no context stays a plain string, as before.
-  if (!contextLine && !input.audio) return body;
+  if (!contextLine && attachments.length === 0) return body;
 
   const parts: EveMessagePart[] = [];
   if (contextLine) parts.push({ type: "text", text: contextLine });
-  parts.push({ type: "text", text: body });
+  if (body) parts.push({ type: "text", text: body });
 
-  if (input.audio) {
-    parts.push({
-      type: "file",
-      data: input.audio.dataUrl,
-      mediaType: input.audio.mediaType,
-      filename: audioFilename(input.audio.mediaType),
-    });
+  for (const attachment of attachments) {
+    if (attachment.kind === "text") {
+      parts.push({ type: "text", text: textAttachmentPart(attachment) });
+    } else if (attachment.dataUrl) {
+      parts.push({
+        type: "file",
+        data: attachment.dataUrl,
+        mediaType: attachment.mediaType,
+        filename: attachment.name,
+      });
+    }
   }
 
   return parts;
+}
+
+/** Projects picked files onto the bubble shape, for the optimistic render. */
+export function toBubbleAttachments(
+  attachments: readonly Attachment[] = [],
+): BubbleAttachment[] {
+  return attachments.map((attachment) => ({
+    id: attachment.id,
+    kind: attachment.kind,
+    name: attachment.name,
+    mediaType: attachment.mediaType,
+    url: attachment.previewUrl,
+  }));
 }
 
 function sleep(ms: number, signal: AbortSignal): Promise<void> {
@@ -223,9 +247,9 @@ export type UseEveChatOptions = {
   /**
    * Resolves the `[הקשר: …]` metadata part for the next turn. Awaited after the
    * optimistic bubble is already on screen, so a slow GPS never delays what the
-   * user sees.
+   * user sees. `voice` adds the clause telling the agent the words were heard.
    */
-  resolveContext?: () => Promise<string>;
+  resolveContext?: (options: { voice: boolean }) => Promise<string>;
 };
 
 export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
@@ -331,7 +355,8 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   const deliver = useCallback(
     async (input: SendInput) => {
       // Re-resolved per attempt, so a retry carries the current time and place.
-      const contextLine = (await contextRef.current?.()) ?? null;
+      const contextLine =
+        (await contextRef.current?.({ voice: Boolean(input.spoken) })) ?? null;
       const message = buildMessage(input, contextLine);
       if (message.length === 0) return;
 
@@ -374,7 +399,8 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   const send = useCallback(
     async (input: SendInput) => {
       const typed = input.text?.trim() ?? "";
-      if (!typed && !input.audio) return;
+      const attachments = input.attachments ?? [];
+      if (!typed && attachments.length === 0) return;
 
       lastInputRef.current = input;
       setHasLastInput(true);
@@ -385,8 +411,9 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
         bubble: {
           id: `pending:${Date.now()}`,
           role: "user",
-          text: input.audio ? VOICE_BUBBLE_LABEL : typed,
-          audio: Boolean(input.audio),
+          text: typed || (input.spoken ? VOICE_BUBBLE_LABEL : ""),
+          audio: Boolean(input.spoken),
+          attachments: toBubbleAttachments(attachments),
           activity: [],
           streaming: false,
           final: true,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import type {
   LayerGroup,
   Map as LeafletMap,
@@ -39,6 +39,8 @@ type Props = {
   focus?: FocusCommand | null;
   fit?: FitCommand | null;
   userPoint?: { lat: number; lng: number; accuracy?: number } | null;
+  /** Controls floated over the map (locate button, badges) — outside Leaflet's DOM. */
+  overlay?: ReactNode;
   onBounds?: (bounds: MapBounds) => void;
   onMarkerClick?: (id: string) => void;
   onNavigate?: (href: string) => void;
@@ -76,6 +78,7 @@ export function MapCanvas({
   focus = null,
   fit = null,
   userPoint = null,
+  overlay = null,
   onBounds,
   onMarkerClick,
   onNavigate,
@@ -325,6 +328,7 @@ export function MapCanvas({
       style={{ "--jm-ctl-bottom": `${controlBottom}px` } as CSSProperties}
     >
       <div ref={hostRef} className="jm-canvas-host" role="application" aria-label={ariaLabel} />
+      {overlay ? <div className="jm-canvas-overlay">{overlay}</div> : null}
       {ready ? null : (
         <div className="jm-canvas-skel" aria-hidden>
           <span />

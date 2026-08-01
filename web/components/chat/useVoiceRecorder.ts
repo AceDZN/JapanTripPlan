@@ -1,15 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { VoiceAttachment } from "./useEveChat";
 
 /**
- * Records a short voice note with MediaRecorder and hands back a base64
- * `data:` URL, which is exactly what an eve file part wants.
+ * Records a short voice note with MediaRecorder and hands back the raw blob.
  *
- * Opus-in-WebM is preferred (small, and understood natively by Gemini on the
- * agent side); Safari only offers MP4/AAC, so the list degrades to whatever the
- * browser will actually record.
+ * The blob goes two places: to `/api/transcribe`, which turns it into the words
+ * the agent actually receives, and to IndexedDB, so the family can play their
+ * own question back (see voice-store.ts). Neither wants a base64 `data:` URL,
+ * so none is built.
+ *
+ * Opus-in-WebM is preferred (small, and transcribes well); Safari only offers
+ * MP4/AAC, so the list degrades to whatever the browser will actually record.
  */
 
 const MIME_CANDIDATES = [
@@ -25,6 +27,14 @@ export const MAX_RECORDING_SECONDS = 60;
 
 export type RecorderStatus = "idle" | "requesting" | "recording";
 
+/** What one finished recording hands back. */
+export type VoiceRecording = {
+  blob: Blob;
+  /** Container/codec family, without codec parameters. */
+  mediaType: string;
+  durationMs: number;
+};
+
 function pickMimeType(): string | undefined {
   if (typeof MediaRecorder === "undefined") return undefined;
   return MIME_CANDIDATES.find((type) => {
@@ -33,15 +43,6 @@ function pickMimeType(): string | undefined {
     } catch {
       return false;
     }
-  });
-}
-
-function blobToDataUrl(blob: Blob): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onerror = () => reject(new Error("read failed"));
-    reader.onload = () => resolve(String(reader.result));
-    reader.readAsDataURL(blob);
   });
 }
 
@@ -55,7 +56,7 @@ function detectSupport(): boolean {
   );
 }
 
-export function useVoiceRecorder(onComplete: (attachment: VoiceAttachment) => void) {
+export function useVoiceRecorder(onComplete: (recording: VoiceRecording) => void) {
   const [supported] = useState<boolean>(detectSupport);
   const [status, setStatus] = useState<RecorderStatus>("idle");
   const [elapsed, setElapsed] = useState(0);
@@ -65,6 +66,7 @@ export function useVoiceRecorder(onComplete: (attachment: VoiceAttachment) => vo
   const chunksRef = useRef<Blob[]>([]);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const stopTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const startedAtRef = useRef(0);
   const keepRef = useRef(true);
   const onCompleteRef = useRef(onComplete);
 
@@ -138,16 +140,17 @@ export function useVoiceRecorder(onComplete: (attachment: VoiceAttachment) => vo
         return;
       }
 
-      void blobToDataUrl(blob)
-        .then((dataUrl) => {
-          // The media type is sent without codec parameters — the agent side
-          // only needs the container/codec family.
-          onCompleteRef.current({ dataUrl, mediaType: mimeType.split(";")[0] });
-        })
-        .catch(() => setError("לא הצלחנו לקרוא את ההקלטה. נסו שוב."));
+      // The media type is reported without codec parameters — the transcription
+      // endpoint only needs the container family.
+      onCompleteRef.current({
+        blob,
+        mediaType: mimeType.split(";")[0],
+        durationMs: Date.now() - startedAtRef.current,
+      });
     };
 
     recorder.start();
+    startedAtRef.current = Date.now();
     setStatus("recording");
     setElapsed(0);
 

@@ -79,6 +79,29 @@ const CSS = `
   100% { box-shadow: 0 0 0 0 rgba(47, 111, 208, 0); }
 }
 
+/* ------------------------------------------------------------ overlay controls */
+/* Above Leaflet's own controls (z-index 1000) so the locate button is never
+   buried under a popup or the zoom cluster. */
+.jm-canvas-overlay {
+  inset: 0; pointer-events: none; position: absolute; z-index: 1200;
+}
+.jm-canvas-overlay > * { pointer-events: auto; }
+.jm-locate {
+  align-items: center; background: var(--surface); border: 1px solid var(--line-strong);
+  border-radius: 12px; box-shadow: var(--shadow-sm); color: var(--text); cursor: pointer;
+  display: inline-flex; height: 40px; inset-block-start: 10px; inset-inline-end: 10px;
+  justify-content: center; position: absolute; width: 40px;
+}
+.jm-locate:hover { background: var(--surface-2); }
+.jm-locate[data-active] { border-color: #2f6fd0; color: #2f6fd0; }
+.jm-locate[data-error] { border-color: var(--st-lottery); color: var(--st-lottery); }
+/* On /map the top strip belongs to the search bar and the bottom-start corner to
+   Leaflet's zoom pair (2 x 36px + its own 10px margin), so the button stacks
+   directly above them rather than on top of the zoom-out control. */
+.jm-locate-bottom {
+  inset-block-start: auto; inset-block-end: calc(var(--jm-ctl-bottom, 0px) + 94px);
+}
+
 /* ------------------------------------------------------------ popups */
 .jm-canvas .leaflet-popup-content-wrapper {
   background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); color: var(--text);
@@ -298,6 +321,11 @@ const CSS = `
 .jm-origin-copy strong { font-size: 15px; }
 .jm-origin-copy small { color: var(--text-muted); font-size: 12px; }
 .jm-origin-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+.jm-live {
+  align-items: center; color: #2f6fd0 !important; display: inline-flex; font-weight: 700; gap: 4px;
+}
+.jm-live svg { animation: jm-blink 2s ease-in-out infinite; }
+@keyframes jm-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
 .jm-state {
   background: linear-gradient(150deg, color-mix(in srgb, var(--vermillion) 8%, var(--surface)), var(--surface));
@@ -360,7 +388,7 @@ const CSS = `
 
 @media (prefers-reduced-motion: reduce) {
   .jm-panel { transition: none; }
-  .jm-user, .jm-skel-row, .jm-canvas-skel span { animation: none; }
+  .jm-user, .jm-skel-row, .jm-canvas-skel span, .jm-live svg { animation: none; }
 }
 `;
 

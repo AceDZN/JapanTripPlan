@@ -8,6 +8,7 @@ import {
   ExternalLink,
   Layers,
   ListFilter,
+  LocateFixed,
   Route,
   Search,
   Sparkles,
@@ -37,7 +38,8 @@ import {
   type ViewCommand,
 } from "@/components/map/MapCanvas";
 import { buildPlacePopup, markerHtml, markerSizeFor } from "@/components/map/markers";
-import { CITY_JUMPS, JAPAN_VIEW } from "@/components/map/geo";
+import { CITY_JUMPS, JAPAN_VIEW, distanceMeters, formatDistance } from "@/components/map/geo";
+import { geoErrorCopy, useGeoLocation } from "@/components/map/useGeoLocation";
 
 const MAPPABLE = allPlaces.filter(
   (place) => Number.isFinite(place.lat) && Number.isFinite(place.lng),
@@ -183,8 +185,36 @@ export function MapExplorer() {
     });
   }, [visiblePlaces, bounds]);
 
+  /**
+   * The map is the screen the family will actually hold on a Tokyo pavement, so
+   * it tracks them live. The dot is the only stateful bit — the view only moves
+   * when they ask it to, because a map that keeps recentring is unusable while
+   * you are trying to look at the next street over.
+   */
+  const geo = useGeoLocation({ watch: true });
+
   const handleBounds = useCallback((value: MapBounds) => setBounds(value), []);
   const handleNavigate = useCallback((href: string) => router.push(href), [router]);
+
+  const locateMe = useCallback(() => {
+    if (!geo.fix) {
+      geo.request();
+      return;
+    }
+    setView({ center: [geo.fix.lat, geo.fix.lng], zoom: 16, nonce: (nonce.current += 1) });
+  }, [geo]);
+
+  /** Distance to whatever is nearest, shown once we are close enough to walk. */
+  const nearestLabel = useMemo(() => {
+    if (!geo.fix) return null;
+    let best: { place: Place; meters: number } | null = null;
+    for (const place of MAPPABLE) {
+      const meters = distanceMeters(geo.fix, place);
+      if (!best || meters < best.meters) best = { place, meters };
+    }
+    if (!best || best.meters > 50_000) return null;
+    return `${best.place.nameHe} · ${formatDistance(best.meters)}`;
+  }, [geo.fix]);
 
   const flyTo = (place: Place) => {
     setFocus({ id: place.id, nonce: next() });
@@ -214,6 +244,30 @@ export function MapExplorer() {
         view={view}
         focus={focus}
         fit={fit}
+        userPoint={
+          geo.fix ? { lat: geo.fix.lat, lng: geo.fix.lng, accuracy: geo.fix.accuracy } : null
+        }
+        overlay={
+          <button
+            type="button"
+            className="jm-locate jm-locate-bottom"
+            onClick={locateMe}
+            aria-label={geo.fix ? "מרכוז המפה על המיקום שלי" : "איתור המיקום שלי"}
+            title={
+              geo.error
+                ? geoErrorCopy(geo.error).title
+                : geo.fix
+                  ? nearestLabel
+                    ? `הכי קרוב אליכם: ${nearestLabel}`
+                    : "המיקום שלי"
+                  : "איתור המיקום שלי"
+            }
+            data-active={geo.watching ? "" : undefined}
+            data-error={geo.error ? "" : undefined}
+          >
+            <LocateFixed size={17} />
+          </button>
+        }
         onBounds={handleBounds}
         onMarkerClick={() => setPanelOpen(false)}
         onNavigate={handleNavigate}

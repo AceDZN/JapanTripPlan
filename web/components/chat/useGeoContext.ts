@@ -39,9 +39,9 @@ export type GeoContext = {
   attached: boolean;
   toggle: () => void;
   /** Awaits a fix when needed. Used by the durable eve send path. */
-  resolveContextLine: () => Promise<string>;
+  resolveContextLine: (options?: { voice?: boolean }) => Promise<string>;
   /** Never waits: uses a cached fix and warms one up for the next turn. */
-  peekContextLine: () => string;
+  peekContextLine: (options?: { voice?: boolean }) => string;
 };
 
 function readEnabled(): boolean {
@@ -150,23 +150,29 @@ export function useGeoContext(): GeoContext {
     return fix ?? cached ?? null;
   }, [supported]);
 
-  const resolveContextLine = useCallback(async (): Promise<string> => {
-    const location = await acquire();
-    setAttached(Boolean(location));
-    return buildContextLine({ now: new Date(), location });
-  }, [acquire]);
+  const resolveContextLine = useCallback(
+    async ({ voice = false } = {}): Promise<string> => {
+      const location = await acquire();
+      setAttached(Boolean(location));
+      return buildContextLine({ now: new Date(), location, voice });
+    },
+    [acquire],
+  );
 
-  const peekContextLine = useCallback((): string => {
-    const cached = enabledRef.current ? fixRef.current : null;
-    const location = isFreshFix(cached) ? cached : null;
-    setAttached(Boolean(location));
+  const peekContextLine = useCallback(
+    ({ voice = false } = {}): string => {
+      const cached = enabledRef.current ? fixRef.current : null;
+      const location = isFreshFix(cached) ? cached : null;
+      setAttached(Boolean(location));
 
-    // Warm the cache so the next turn carries coordinates, without making this
-    // one wait for the GPS.
-    if (!location && enabledRef.current && supported) void acquire();
+      // Warm the cache so the next turn carries coordinates, without making this
+      // one wait for the GPS.
+      if (!location && enabledRef.current && supported) void acquire();
 
-    return buildContextLine({ now: new Date(), location });
-  }, [acquire, supported]);
+      return buildContextLine({ now: new Date(), location, voice });
+    },
+    [acquire, supported],
+  );
 
   const toggle = useCallback(() => {
     setEnabled((current) => {

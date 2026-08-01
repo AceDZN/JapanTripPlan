@@ -376,6 +376,24 @@
   margin-top: 2px;
 }
 
+/* Only local problems (a recording, a file) are dismissable — a transport
+   failure clears itself when the next turn succeeds. */
+.chat-error-dismiss {
+  align-items: center;
+  background: none;
+  border: 0;
+  color: var(--text-faint);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  padding: 2px;
+}
+
+.chat-error-dismiss:hover {
+  color: var(--vermillion);
+}
+
 .chat-error-setup .chat-error-icon {
   color: color-mix(in srgb, var(--gold) 65%, var(--text));
 }
@@ -517,10 +535,150 @@
   color: var(--vermillion);
 }
 
-/* Voice note bubble — the transcript lives on the agent side, not here. */
+/* Spoken turn: the bubble shows what the listening model heard, with the
+   recording underneath so it can be checked against the words. */
 .chat-bubble-user.is-voice p {
   font-variant-emoji: text;
   letter-spacing: 0.01em;
+}
+
+.chat-voice-player {
+  block-size: 34px;
+  display: block;
+  inline-size: min(260px, 100%);
+  margin-top: 9px;
+}
+
+/* ------------------------------------------------------------ attachments */
+
+.chat-file-input {
+  block-size: 0;
+  inline-size: 0;
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.chat-attach {
+  align-items: center;
+  background: none;
+  border: 0;
+  color: var(--text-faint);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  padding: 8px;
+  transition: color 160ms ease;
+}
+
+.chat-attach:hover:not(:disabled) {
+  color: var(--vermillion);
+}
+
+.chat-attach:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* Staging tray, above the composer. */
+.chat-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin-top: 8px;
+}
+
+.chat-tray-item {
+  align-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  display: flex;
+  gap: 8px;
+  max-inline-size: 220px;
+  padding: 6px 8px 6px 6px;
+}
+
+.chat-tray-item.is-busy {
+  color: var(--text-faint);
+  font-size: 12.5px;
+  padding-inline: 10px;
+}
+
+.chat-tray-thumb {
+  block-size: 30px;
+  border-radius: 6px;
+  flex: 0 0 auto;
+  inline-size: 30px;
+  object-fit: cover;
+}
+
+.chat-tray-icon {
+  align-items: center;
+  background: var(--surface);
+  color: var(--text-muted);
+  display: flex;
+  justify-content: center;
+}
+
+.chat-tray-name {
+  direction: ltr;
+  font-size: 12.5px;
+  overflow: hidden;
+  text-align: start;
+  text-overflow: ellipsis;
+  unicode-bidi: plaintext;
+  white-space: nowrap;
+}
+
+.chat-tray-remove {
+  align-items: center;
+  background: none;
+  border: 0;
+  color: var(--text-faint);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 2px;
+}
+
+.chat-tray-remove:hover {
+  color: var(--vermillion);
+}
+
+/* Sent alongside a message. */
+.chat-bubble-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  margin-bottom: 8px;
+}
+
+.chat-bubble-file {
+  align-items: center;
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  border-radius: var(--r-sm);
+  display: flex;
+  font-size: 12.5px;
+  gap: 6px;
+  padding: 5px 9px;
+}
+
+.chat-bubble-file.is-image {
+  background: none;
+  padding: 0;
+}
+
+.chat-bubble-file.is-image img {
+  block-size: auto;
+  border-radius: var(--r-sm);
+  display: block;
+  max-block-size: 200px;
+  max-inline-size: 220px;
+  object-fit: cover;
 }
 
 /* --------------------------------------------------------- mic + recording */
@@ -573,6 +731,11 @@
   gap: 9px;
   margin-top: 6px;
   padding: 9px 13px;
+}
+
+.chat-recording.is-listening {
+  background: var(--surface-2);
+  border-color: var(--line);
 }
 
 .chat-recording-dot {

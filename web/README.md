@@ -35,11 +35,31 @@ which copies `../JAPAN2026/*.md` into `public/markdown/` and regenerates
 | --- | --- |
 | `POST /api/chat` | Stateless concierge agent (AI SDK `ToolLoopAgent`) streamed as UI messages |
 | `POST /api/tts` | Reads an answer aloud (`generateSpeech`, `openai/tts-1`) |
+| `POST /api/transcribe` | Listens to a recorded voice note and returns the words |
 | `GET /api/agent/enabled` | Whether the durable eve transport is configured |
 | `GET`/`POST` `/api/agent/*` | Credentialed NDJSON relay to the deployed eve trip agent |
 
 The eve relay is the only holder of `EVE_URL` / `EVE_SHARED_SECRET`; the browser
 only ever learns a boolean from `/api/agent/enabled`.
+
+### Why `/api/transcribe` exists
+
+eve stages every attachment into the agent sandbox and only re-inlines the bytes
+for `image/*` (≤3 MiB) and `application/pdf` (≤20 MiB) on the way into the model
+call — see `shouldInlineSandboxRefAsBytes` in
+`eve/dist/src/harness/attachment-staging.js`, unchanged as of 0.29.4. An
+`audio/*` part reaches the model as the line `Attached file
+/workspace/attachments/…/voice.webm (audio/webm)`, so the agent answers "I can't
+listen to it" no matter how audio-capable the model is. The staging call is
+unconditional, there is no config flag, and every eve agent has exactly one
+sandbox.
+
+So the app listens first: an audio-native model (Gemini, with the trip's proper
+nouns as a vocabulary hint) turns the recording into words, and the turn is sent
+marked `קלט: הודעה קולית מתומללת` in the context part so the agent knows the
+wording was *heard*, not typed. The recording stays on the device in IndexedDB
+and is re-attached to its bubble by transcript, so it still plays back after a
+reload. Images and PDFs need none of this — they reach the model as bytes.
 
 ## Environment
 

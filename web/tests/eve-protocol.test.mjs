@@ -16,9 +16,12 @@ import {
   AGENT_FAILURE_MESSAGE,
   CONTEXT_PREFIX,
   EVE_INITIAL_STATE,
+  FILE_TEXT_CLOSE,
+  FILE_TEXT_OPEN,
   dropSupersededUser,
   GEO_FRESH_MS,
   VOICE_BUBBLE_LABEL,
+  VOICE_CONTEXT_CLAUSE,
   VOICE_TEXT_PART,
   buildContextLine,
   contextTimeZone,
@@ -209,7 +212,9 @@ test("cursor counts every consumed event, which is the reconnect startIndex", ()
   assert.equal(visibleMessages(resumed.messages).length, 3);
 });
 
-test("renders an audio attachment as a voice bubble", () => {
+// Sessions recorded before the listening step still hold raw audio parts, and
+// replaying one must still read as a voice turn.
+test("legacy: renders a raw audio attachment as a voice bubble", () => {
   const state = play([
     { type: "turn.started", data: { turnId: "turn_v" } },
     {
@@ -392,7 +397,7 @@ test("never renders the context part in a replayed user bubble", () => {
   assert.equal(bubble.text.includes("35.65858"), false, "coordinates never reach the UI");
 });
 
-test("a voice turn keeps its 🎤 bubble even with a context part attached", () => {
+test("legacy: a raw audio turn keeps its 🎤 bubble even with a context part attached", () => {
   const line = buildContextLine({ now: DURING_TRIP, location: TOKYO_FIX });
 
   const { text, audio } = readUserMessage({
@@ -406,6 +411,101 @@ test("a voice turn keeps its 🎤 bubble even with a context part attached", () 
 
   assert.equal(audio, true);
   assert.equal(text, VOICE_BUBBLE_LABEL);
+});
+
+/* ------------------------------------------------- spoken turns + files */
+
+// eve cannot pass audio to the model (its attachment staging only re-inlines
+// images and PDFs), so a voice note is listened to before the turn is sent and
+// the *transcript* travels as the message. The context part is what tells both
+// the agent and the UI that those words were heard rather than typed.
+test("a spoken turn is marked by the context clause and shows the transcript", () => {
+  const line = buildContextLine({ now: DURING_TRIP, location: TOKYO_FIX, voice: true });
+  assert.ok(line.includes(VOICE_CONTEXT_CLAUSE), "the clause rides inside the context part");
+
+  const { text, audio, attachments } = readUserMessage({
+    message: `${line} מה התוכנית למחר בקיוטו?`,
+    parts: [
+      { type: "text", text: line },
+      { type: "text", text: "מה התוכנית למחר בקיוטו?" },
+    ],
+  });
+
+  assert.equal(audio, true, "the bubble offers playback");
+  assert.equal(text, "מה התוכנית למחר בקיוטו?", "the transcript is the bubble, not a 🎤 label");
+  assert.equal(text.includes("קלט"), false, "the marker itself never reaches the UI");
+  assert.deepEqual(attachments, []);
+});
+
+test("a typed turn carries no spoken marker", () => {
+  const line = buildContextLine({ now: DURING_TRIP });
+  assert.equal(line.includes(VOICE_CONTEXT_CLAUSE), false);
+
+  const { audio } = readUserMessage({
+    parts: [
+      { type: "text", text: line },
+      { type: "text", text: "מה התוכנית למחר?" },
+    ],
+  });
+  assert.equal(audio, false);
+});
+
+test("the spoken marker survives the flattened summary", () => {
+  const line = buildContextLine({ now: DURING_TRIP, voice: true });
+  const { text, audio } = readUserMessage({ message: `${line}\nאיפה אוכלים כאן?` });
+
+  assert.equal(audio, true);
+  assert.equal(text, "איפה אוכלים כאן?");
+});
+
+test("image and pdf parts become bubble attachments with a renderable source", () => {
+  const { text, attachments } = readUserMessage({
+    parts: [
+      { type: "text", text: "מה כתוב בתפריט?" },
+      {
+        type: "file",
+        mediaType: "image/jpeg",
+        filename: "menu.jpg",
+        url: "data:image/jpeg;base64,AAAA",
+      },
+      { type: "file", mediaType: "application/pdf", filename: "ticket.pdf" },
+    ],
+  });
+
+  assert.equal(text, "מה כתוב בתפריט?");
+  assert.equal(attachments.length, 2);
+  assert.equal(attachments[0].kind, "image");
+  assert.equal(attachments[0].name, "menu.jpg");
+  assert.equal(attachments[0].url, "data:image/jpeg;base64,AAAA");
+  assert.equal(attachments[1].kind, "pdf");
+  assert.equal(attachments[1].url, undefined);
+});
+
+// A text file has no file part on either transport — no model reads a `.csv`
+// upload — so its contents are inlined as words and lifted back out here.
+test("an inlined text file is lifted out of the bubble into a chip", () => {
+  const body = [
+    "מה זה אומר?",
+    `${FILE_TEXT_OPEN} "booking.txt" ---`,
+    "Reservation 8891 — Osaka, Oct 13",
+    FILE_TEXT_CLOSE,
+  ].join("\n");
+
+  const { text, attachments } = readUserMessage({ parts: [{ type: "text", text: body }] });
+
+  assert.equal(text, "מה זה אומר?", "the file body never lands in the bubble");
+  assert.equal(attachments.length, 1);
+  assert.equal(attachments[0].kind, "text");
+  assert.equal(attachments[0].name, "booking.txt");
+});
+
+test("a message that is only an attachment keeps an empty body", () => {
+  const { text, attachments } = readUserMessage({
+    parts: [{ type: "file", mediaType: "image/jpeg", filename: "sign.jpg", url: "data:," }],
+  });
+
+  assert.equal(text, "");
+  assert.equal(attachments.length, 1);
 });
 
 test("hides the context part when only the flattened summary survived", () => {

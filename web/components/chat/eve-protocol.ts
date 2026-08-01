@@ -26,13 +26,28 @@ export type EveActivity = {
   done: boolean;
 };
 
+/** A file the family attached, as the bubble needs to draw it. */
+export type BubbleAttachment = {
+  id: string;
+  kind: "image" | "pdf" | "text";
+  name: string;
+  mediaType: string;
+  /** Renderable source for an image thumbnail, when the stream carried one. */
+  url?: string;
+};
+
 /** One rendered bubble. Shared shape with the AI SDK fallback transport. */
 export type EveBubble = {
   id: string;
   role: "user" | "assistant";
   text: string;
-  /** The user bubble carried a voice note (audio file part). */
+  /**
+   * The turn was spoken rather than typed. `text` is what the listening model
+   * heard, and the recording itself is played back from the device — see
+   * voice-store.ts.
+   */
   audio: boolean;
+  attachments: BubbleAttachment[];
   activity: EveActivity[];
   streaming: boolean;
   /** Assistant text reached its terminal `message.completed` (safe to speak). */
@@ -60,7 +75,7 @@ export type EveState = {
 
 export type LabelFn = (toolName: string, input: Record<string, unknown> | undefined) => string;
 
-/** Rendered in place of the transcript for a voice message. */
+/** Fallback bubble text when a voice turn produced no words at all. */
 export const VOICE_BUBBLE_LABEL = "🎤 הודעה קולית";
 
 /* -------------------------------------------------- outbound context part */
@@ -77,6 +92,18 @@ export const VOICE_BUBBLE_LABEL = "🎤 הודעה קולית";
  * bubbles and `message.received` replay.
  */
 export const CONTEXT_PREFIX = "[הקשר:";
+
+/**
+ * Clause added to the context part when the turn was spoken.
+ *
+ * A voice note cannot reach the model as audio on this transport (eve's
+ * attachment staging only re-inlines images and PDFs), so an audio-native model
+ * listens first and its words are what the agent receives. This marker is how
+ * the agent is told those words were *heard*, not typed — so it can forgive a
+ * mangled place name instead of taking the transcript literally. The chat never
+ * renders the context part, so the family never sees it.
+ */
+export const VOICE_CONTEXT_CLAUSE = "קלט: הודעה קולית מתומללת";
 
 /** During the trip the family reads clocks in Japan, not at home. */
 const TRIP_TIME_ZONE = "Asia/Tokyo";
@@ -160,7 +187,9 @@ export function isFreshFix(fix: GeoFix | null | undefined, now = Date.now()): bo
  * Builds the context part. The time clause is always present; the location
  * clause is omitted whenever sharing is off, denied, or unavailable.
  */
-export function buildContextLine(input: { now?: Date; location?: GeoFix | null } = {}): string {
+export function buildContextLine(
+  input: { now?: Date; location?: GeoFix | null; voice?: boolean } = {},
+): string {
   const now = input.now ?? new Date();
   const stamp = isoWithOffset(now, contextTimeZone(now));
   const fix = input.location;
@@ -168,8 +197,9 @@ export function buildContextLine(input: { now?: Date; location?: GeoFix | null }
   const where = fix
     ? `; מיקום: ${fix.lat.toFixed(5)},${fix.lng.toFixed(5)} דיוק ${Math.round(fix.accuracy)}מ׳`
     : "";
+  const spoken = input.voice ? `; ${VOICE_CONTEXT_CLAUSE}` : "";
 
-  return `${CONTEXT_PREFIX} ${stamp}${where}]`;
+  return `${CONTEXT_PREFIX} ${stamp}${where}${spoken}]`;
 }
 
 /** True when a text part is client-injected metadata rather than user words. */
@@ -196,9 +226,22 @@ export function stripContextLines(text: string): string {
     .trim();
 }
 
-/** Text part that rides along with an audio attachment, so the flattened
- *  `message.received.data.message` is never empty. */
+/** Text part that rides along when a voice note produced no words at all. */
 export const VOICE_TEXT_PART = "(הודעה קולית)";
+
+/**
+ * How an attached text file reaches the model.
+ *
+ * Nothing on either transport reads a `.txt`/`.csv`/`.json` attachment — eve
+ * turns it into a sandbox path the concierge has no tools to open — so the
+ * contents are inlined as words instead, inside this fence. The chat lifts the
+ * fence back out into a file chip rather than dumping the file into the bubble.
+ */
+export const FILE_TEXT_OPEN = "--- תוכן הקובץ המצורף";
+export const FILE_TEXT_CLOSE = "--- סוף הקובץ ---";
+
+/** Matches one inlined text attachment, capturing its filename. */
+const FILE_TEXT_BLOCK = /--- תוכן הקובץ המצורף "([^"]*)" ---\n[\s\S]*?\n--- סוף הקובץ ---/g;
 
 export const EVE_INITIAL_STATE: EveState = {
   messages: [],
@@ -246,6 +289,7 @@ function withAssistant(
       role: "assistant",
       text: "",
       audio: false,
+      attachments: [],
       activity: [],
       streaming: true,
       final: false,
@@ -293,12 +337,51 @@ function actionLabel(action: Record<string, unknown>, label: LabelFn | undefined
   return toolName || "עובד על זה";
 }
 
+/** Classifies a file part by media type, or `null` when it is not renderable. */
+function attachmentKind(mediaType: string): BubbleAttachment["kind"] | null {
+  if (mediaType.startsWith("image/")) return "image";
+  if (mediaType === "application/pdf") return "pdf";
+  return null;
+}
+
+/**
+ * Lifts inlined text attachments out of the message body.
+ *
+ * The whole file was sent as words, which is right for the model and very wrong
+ * for a chat bubble — so the fence is replaced by a chip and the body keeps only
+ * what the family actually wrote.
+ */
+export function extractTextAttachments(text: string): {
+  text: string;
+  attachments: BubbleAttachment[];
+} {
+  if (!text.includes(FILE_TEXT_OPEN)) return { text, attachments: [] };
+
+  const attachments: BubbleAttachment[] = [];
+  let index = 0;
+
+  const stripped = text.replace(FILE_TEXT_BLOCK, (_match, name: string) => {
+    index += 1;
+    attachments.push({
+      id: `text:${index}:${name}`,
+      kind: "text",
+      name: name || "קובץ טקסט",
+      mediaType: "text/plain",
+    });
+    return "";
+  });
+
+  return { text: stripped.replace(/\n{3,}/g, "\n\n").trim(), attachments };
+}
+
 /** Reads the structured user message, preferring `parts` over the flat summary. */
 export function readUserMessage(data: Record<string, unknown> | undefined): {
   text: string;
   audio: boolean;
+  attachments: BubbleAttachment[];
 } {
   const parts = Array.isArray(data?.parts) ? (data.parts as unknown[]) : [];
+  const attachments: BubbleAttachment[] = [];
   let text = "";
   let audio = false;
 
@@ -308,24 +391,49 @@ export function readUserMessage(data: Record<string, unknown> | undefined): {
 
     if (part.type === "text") {
       const value = str(part.text) ?? "";
-      // The leading context part is ours, not the user's — never rendered.
-      if (isContextPart(value)) continue;
+      // The leading context part is ours, not the user's — never rendered, but
+      // it is where "this turn was spoken" is recorded.
+      if (isContextPart(value)) {
+        if (value.includes(VOICE_CONTEXT_CLAUSE)) audio = true;
+        continue;
+      }
       text += value;
     } else if (part.type === "file") {
       const mediaType = str(part.mediaType) ?? "";
-      if (mediaType.startsWith("audio/")) audio = true;
+      // Sessions recorded before the listening step still carry raw audio parts.
+      if (mediaType.startsWith("audio/")) {
+        audio = true;
+        continue;
+      }
+
+      const kind = attachmentKind(mediaType);
+      if (!kind) continue;
+
+      const name = str(part.filename) ?? (kind === "pdf" ? "מסמך.pdf" : "תמונה");
+      attachments.push({
+        id: `file:${attachments.length}:${name}`,
+        kind,
+        name,
+        mediaType,
+        // eve echoes the data URL back on the stream, so a rebuilt transcript
+        // can still draw the thumbnail.
+        url: str(part.url) ?? str(part.data),
+      });
     }
   }
 
   if (parts.length === 0) text = str(data?.message) ?? "";
-  // Also covers the flattened summary, where the context rides inline.
-  text = stripContextLines(text);
+  // The flattened summary carries the context inline, marker included, so the
+  // spoken flag is read before the context is stripped back out.
+  if (text.includes(VOICE_CONTEXT_CLAUSE)) audio = true;
 
-  if (audio) {
-    text = text && text !== VOICE_TEXT_PART ? `${VOICE_BUBBLE_LABEL} — ${text}` : VOICE_BUBBLE_LABEL;
-  }
+  const lifted = extractTextAttachments(stripContextLines(text));
+  attachments.push(...lifted.attachments);
+  text = lifted.text;
 
-  return { text, audio };
+  if (audio && (!text || text === VOICE_TEXT_PART)) text = VOICE_BUBBLE_LABEL;
+
+  return { text, audio, attachments };
 }
 
 /** What a transient upstream/model failure reads like. Paired with a retry button. */
@@ -378,7 +486,7 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
       return { ...base, status: "streaming", error: null, retryable: false };
 
     case "message.received": {
-      const { text, audio } = readUserMessage(data);
+      const { text, audio, attachments } = readUserMessage(data);
       const id = `user:${turnId ?? "turn"}:${String(data?.sequence ?? state.received)}`;
       if (state.messages.some((message) => message.id === id)) return base;
 
@@ -387,7 +495,16 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
         received: state.received + 1,
         messages: [
           ...state.messages,
-          { id, role: "user", text, audio, activity: [], streaming: false, final: true },
+          {
+            id,
+            role: "user",
+            text,
+            audio,
+            attachments,
+            activity: [],
+            streaming: false,
+            final: true,
+          },
         ],
       };
     }

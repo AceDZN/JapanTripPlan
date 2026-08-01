@@ -8,25 +8,38 @@ import {
   AlertTriangle,
   ArrowUp,
   Check,
+  FileText,
   MapPin,
   MapPinOff,
   MessageCirclePlus,
   Mic,
+  Paperclip,
   RotateCw,
   Sparkles,
   Square,
   Volume2,
   VolumeX,
   WifiOff,
+  X,
 } from "lucide-react";
 import { Markdown } from "./Markdown";
 import { messageText, toolActivity } from "./tool-labels";
 import type { TripUIMessage } from "./agent";
-import { stripContextLines, type EveBubble } from "./eve-protocol";
+import {
+  VOICE_CONTEXT_CLAUSE,
+  extractTextAttachments,
+  stripContextLines,
+  type BubbleAttachment,
+  type EveBubble,
+} from "./eve-protocol";
 import { fetchAgentEnabled } from "./eve-client";
 import { useGeoContext, type GeoContext } from "./useGeoContext";
-import { useEveChat, type SendInput, type VoiceAttachment } from "./useEveChat";
-import { MAX_RECORDING_SECONDS, useVoiceRecorder } from "./useVoiceRecorder";
+import { useEveChat, type SendInput } from "./useEveChat";
+import { ACCEPT_ATTR, textAttachmentPart } from "./attachments";
+import { useComposerAttachments } from "./useComposerAttachments";
+import { MAX_RECORDING_SECONDS } from "./useVoiceRecorder";
+import { useVoiceTurn } from "./useVoiceTurn";
+import { voiceKey, voiceNoteUrl } from "./voice-store";
 import { useSpeech } from "./speech";
 
 /**
@@ -34,9 +47,14 @@ import { useSpeech } from "./speech";
  *
  * - **eve mode** (when `/api/agent/enabled` says yes): durable server-side
  *   sessions proxied by the Worker. History is rebuilt from the session stream,
- *   so it survives a reload on the same device, and voice notes are supported.
+ *   so it survives a reload on the same device, and the agent can edit the trip
+ *   documents.
  * - **fallback mode**: the original `useChat` → `POST /api/chat` AI SDK agent,
- *   unchanged, with the transcript in sessionStorage.
+ *   with the transcript in sessionStorage.
+ *
+ * Both carry voice and file attachments: a recording is listened to by
+ * `/api/transcribe` before either transport sees it, and images/PDFs are read
+ * natively by the model on both sides.
  *
  * Everything below `ChatSurface` is shared between them.
  */
@@ -164,15 +182,8 @@ function EveConversation() {
   // Every turn leads with a `[הקשר: …]` part, so the agent knows when and where
   // the family is without them having to say so.
   const chat = useEveChat({ resolveContext: geo.resolveContextLine });
-  const [voiceError, setVoiceError] = useState<string | null>(null);
 
-  const submit = useCallback(
-    (input: SendInput) => {
-      setVoiceError(null);
-      void chat.send(input);
-    },
-    [chat],
-  );
+  const submit = useCallback((input: SendInput) => void chat.send(input), [chat]);
 
   const error: TransportError | null = chat.error
     ? { message: chat.error, kind: chat.errorKind ?? "agent" }
@@ -183,15 +194,13 @@ function EveConversation() {
       messages={chat.messages}
       busy={chat.busy}
       hydrating={chat.hydrating}
-      error={voiceError ? { message: voiceError } : error}
+      error={error}
       onSubmit={submit}
       onStop={chat.cancel}
       onReset={chat.messages.length > 0 || chat.hasSession ? chat.newChat : undefined}
-      onVoiceError={setVoiceError}
       // A failed turn parks the session; the same question goes back on it.
-      onRetry={chat.canRetry && !voiceError ? () => void chat.retry() : undefined}
+      onRetry={chat.canRetry ? () => void chat.retry() : undefined}
       geo={geo}
-      voiceEnabled
     />
   );
 }
@@ -222,14 +231,22 @@ function SdkConversation() {
         const raw = messageText(message);
         // The context line rides inside the user's text here, so it has to be
         // peeled off again before the bubble is drawn.
-        const text = message.role === "user" ? stripContextLines(raw) : raw;
+        const user = message.role === "user";
+        // Inlined text files are lifted back out into chips, exactly as the
+        // durable transport does when it replays them.
+        const lifted = user
+          ? extractTextAttachments(stripContextLines(raw))
+          : { text: raw, attachments: [] };
+        const text = lifted.text;
         const last = index === messages.length - 1;
+
         return {
           id: message.id,
-          role: message.role === "user" ? "user" : "assistant",
+          role: user ? "user" : "assistant",
           text,
-          audio: false,
-          activity: message.role === "user" ? [] : toolActivity(message),
+          audio: user && raw.includes(VOICE_CONTEXT_CLAUSE),
+          attachments: user ? [...sdkAttachments(message), ...lifted.attachments] : [],
+          activity: user ? [] : toolActivity(message),
           streaming: message.role === "assistant" && last && busy,
           final: message.role === "assistant" && !(last && busy) && text.trim().length > 0,
         };
@@ -239,13 +256,33 @@ function SdkConversation() {
 
   const submit = useCallback(
     (input: SendInput) => {
-      const question = input.text?.trim();
-      if (!question) return;
+      const question = input.text?.trim() ?? "";
+      const attachments = input.attachments ?? [];
+      if (!question && attachments.length === 0) return;
       clearError();
+
+      // A text attachment has no file part here either: no model reads a `.csv`
+      // upload, so its contents ride in the prompt as words.
+      const inlined = attachments
+        .filter((attachment) => attachment.kind === "text")
+        .map(textAttachmentPart);
+
       // `/api/chat` takes a plain UIMessage, so the same bracketed metadata
       // rides as the first line of the text instead of as its own part. It is
       // read with `peek`, never awaited: the fallback must not gain a GPS wait.
-      void sendMessage({ text: `${geo.peekContextLine()}\n${question}` });
+      void sendMessage({
+        text: [geo.peekContextLine({ voice: input.spoken }), question, ...inlined]
+          .filter(Boolean)
+          .join("\n"),
+        files: attachments
+          .filter((attachment) => attachment.kind !== "text" && attachment.dataUrl)
+          .map((attachment) => ({
+            type: "file" as const,
+            mediaType: attachment.mediaType,
+            filename: attachment.name,
+            url: attachment.dataUrl as string,
+          })),
+      });
     },
     [clearError, geo, sendMessage],
   );
@@ -280,11 +317,34 @@ function SdkConversation() {
           : undefined
       }
       geo={geo}
-      // No mic here: /api/chat runs Claude through the Gateway, which does not
-      // take audio input. Voice questions need eve mode.
-      voiceEnabled={false}
     />
   );
+}
+
+/** File parts the AI SDK kept on a user message, as bubble attachments. */
+function sdkAttachments(message: TripUIMessage): BubbleAttachment[] {
+  const files: BubbleAttachment[] = [];
+
+  message.parts.forEach((part, index) => {
+    if (part.type !== "file") return;
+    const mediaType = part.mediaType ?? "";
+    const kind = mediaType.startsWith("image/")
+      ? "image"
+      : mediaType === "application/pdf"
+        ? "pdf"
+        : null;
+    if (!kind) return;
+
+    files.push({
+      id: `${message.id}:file:${index}`,
+      kind,
+      name: part.filename ?? (kind === "pdf" ? "מסמך.pdf" : "תמונה"),
+      mediaType,
+      url: part.url,
+    });
+  });
+
+  return files;
 }
 
 /* ============================================================ shared shell */
@@ -368,10 +428,8 @@ function ChatSurface({
   onSubmit,
   onStop,
   onReset,
-  onVoiceError,
   onRetry,
   geo,
-  voiceEnabled,
 }: {
   messages: EveBubble[];
   busy: boolean;
@@ -380,19 +438,19 @@ function ChatSurface({
   onSubmit: (input: SendInput) => void;
   onStop: () => void;
   onReset?: () => void;
-  onVoiceError?: (message: string) => void;
   onRetry?: () => void;
   geo?: GeoContext;
-  voiceEnabled: boolean;
 }) {
   const [input, setInput] = useState("");
   const [offline, setOffline] = useState(false);
 
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const stickToBottom = useRef(true);
 
   const speech = useSpeech();
+  const attachments = useComposerAttachments();
 
   /* ------------------------------------------------------------- send path */
 
@@ -415,26 +473,31 @@ function ChatSurface({
     [busy, onSubmit],
   );
 
-  const submitText = useCallback(
-    (text: string) => {
+  /** Whatever is staged right now: typed words plus the attachment tray. */
+  const submitComposer = useCallback(
+    (text: string, spoken = false) => {
       const question = text.trim();
-      if (!question) return;
+      const files = attachments.items;
+      if (!question && files.length === 0) return;
+
       setInput("");
-      guardedSubmit({ text: question });
+      attachments.clear();
+      attachments.clearError();
+      guardedSubmit({ text: question, spoken, attachments: files });
     },
-    [guardedSubmit],
+    [attachments, guardedSubmit],
   );
 
-  const onRecorded = useCallback(
-    (audio: VoiceAttachment) => guardedSubmit({ audio }),
-    [guardedSubmit],
+  // A voice turn carries the tray with it, so a photo and a spoken question
+  // about that photo arrive together.
+  const onTranscribed = useCallback(
+    ({ text }: { text: string }) => submitComposer(text, true),
+    [submitComposer],
   );
 
-  const recorder = useVoiceRecorder(onRecorded);
+  const voice = useVoiceTurn(onTranscribed);
 
-  useEffect(() => {
-    if (recorder.error) onVoiceError?.(recorder.error);
-  }, [recorder.error, onVoiceError]);
+  const pickFiles = useCallback(() => fileInputRef.current?.click(), []);
 
   /* ------------------------------------------------------------ autoscroll */
 
@@ -480,9 +543,17 @@ function ChatSurface({
   }, [input, autosize]);
 
   const isEmpty = messages.length === 0 && !hydrating;
+
+  // One error card, fed by four sources. Local problems (a recording that could
+  // not be heard, a file that could not be attached) win over a transport error
+  // because they are the thing the family just did.
   const transportError: TransportError | null = offline
     ? { message: OFFLINE_MESSAGE, kind: "offline" }
-    : error;
+    : voice.error
+      ? { message: voice.error }
+      : attachments.error
+        ? { message: attachments.error }
+        : error;
 
   const errorKind = transportError?.hint
     ? "setup"
@@ -497,13 +568,25 @@ function ChatSurface({
       guardedSubmit(blocked);
       return;
     }
+    if (voice.canRetry) {
+      // Re-listens to the recording that is still held, rather than asking the
+      // family to say the whole thing again.
+      voice.retry();
+      return;
+    }
     setOffline(false);
     onRetry?.();
-  }, [guardedSubmit, onRetry]);
+  }, [guardedSubmit, onRetry, voice]);
 
-  const showRetry = Boolean(transportError) && (offline || Boolean(onRetry));
+  const showRetry =
+    Boolean(transportError) && (offline || voice.canRetry || (!voice.error && Boolean(onRetry)));
 
-  const showMic = voiceEnabled && recorder.supported;
+  const dismissError = useCallback(() => {
+    voice.clearError();
+    attachments.clearError();
+  }, [attachments, voice]);
+
+  const canSend = Boolean(input.trim()) || attachments.items.length > 0;
 
   return (
     <ChatShell
@@ -518,41 +601,85 @@ function ChatSurface({
       onScroll={handleScroll}
       composer={
         <>
-          {recorder.recording ? (
+          {voice.recording ? (
             <div className="chat-recording" role="status">
               <span className="chat-recording-dot" aria-hidden="true" />
-              <span>מקליט… {formatElapsed(recorder.elapsed)}</span>
-              <span className="chat-recording-max">
-                עד {MAX_RECORDING_SECONDS} שניות
-              </span>
-              <button type="button" className="chat-recording-cancel" onClick={recorder.cancel}>
+              <span>מקליט… {formatElapsed(voice.elapsed)}</span>
+              <span className="chat-recording-max">עד {MAX_RECORDING_SECONDS} שניות</span>
+              <button type="button" className="chat-recording-cancel" onClick={voice.cancel}>
                 ביטול
               </button>
             </div>
           ) : null}
 
+          {voice.listening ? (
+            <div className="chat-recording is-listening" role="status">
+              <span className="chat-tool-spinner" aria-hidden="true" />
+              <span>מקשיב להקלטה…</span>
+              <button type="button" className="chat-recording-cancel" onClick={voice.cancel}>
+                ביטול
+              </button>
+            </div>
+          ) : null}
+
+          <AttachmentTray items={attachments.items} busy={attachments.busy} onRemove={attachments.remove} />
+
           <form
             className="chat-composer"
             onSubmit={(event) => {
               event.preventDefault();
-              submitText(input);
+              submitComposer(input);
             }}
           >
+            <input
+              ref={fileInputRef}
+              type="file"
+              className="chat-file-input"
+              accept={ACCEPT_ATTR}
+              multiple
+              tabIndex={-1}
+              aria-hidden="true"
+              onChange={(event) => {
+                void attachments.add(event.target.files);
+                // Lets the same file be picked twice in a row.
+                event.target.value = "";
+              }}
+            />
+
             <textarea
               ref={textareaRef}
               className="chat-input"
               value={input}
               rows={1}
-              placeholder={recorder.recording ? "מקליט הודעה קולית…" : "שאלו כל דבר על הטיול…"}
-              disabled={recorder.recording}
+              placeholder={voice.recording ? "מקליט הודעה קולית…" : "שאלו כל דבר על הטיול…"}
+              disabled={voice.recording}
               onChange={(event) => setInput(event.target.value)}
+              // A screenshot pasted straight from the clipboard is the fastest
+              // way to ask "what does this say?" while standing in a station.
+              onPaste={(event) => {
+                const files = Array.from(event.clipboardData.files);
+                if (files.length === 0) return;
+                event.preventDefault();
+                void attachments.add(files);
+              }}
               onKeyDown={(event) => {
                 if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
                   event.preventDefault();
-                  submitText(input);
+                  submitComposer(input);
                 }
               }}
             />
+
+            <button
+              type="button"
+              className="chat-attach"
+              onClick={pickFiles}
+              disabled={voice.recording || attachments.busy}
+              aria-label="צירוף תמונה, מסמך או קובץ"
+              title="תמונה, צילום מסך, PDF או קובץ טקסט"
+            >
+              <Paperclip size={17} />
+            </button>
 
             {geo?.supported ? (
               <button
@@ -569,16 +696,16 @@ function ChatSurface({
               </button>
             ) : null}
 
-            {showMic && !busy ? (
+            {voice.supported && !busy ? (
               <button
                 type="button"
-                className={`chat-mic${recorder.recording ? " is-recording" : ""}`}
-                onClick={() => (recorder.recording ? recorder.stop() : void recorder.start())}
-                aria-label={recorder.recording ? "סיום הקלטה ושליחה" : "הקלטת הודעה קולית"}
-                aria-pressed={recorder.recording}
-                disabled={recorder.status === "requesting"}
+                className={`chat-mic${voice.recording ? " is-recording" : ""}`}
+                onClick={() => (voice.recording ? voice.stop() : voice.start())}
+                aria-label={voice.recording ? "סיום הקלטה ושליחה" : "הקלטת הודעה קולית"}
+                aria-pressed={voice.recording}
+                disabled={voice.listening}
               >
-                {recorder.recording ? <Square size={15} fill="currentColor" /> : <Mic size={18} />}
+                {voice.recording ? <Square size={15} fill="currentColor" /> : <Mic size={18} />}
               </button>
             ) : null}
 
@@ -595,7 +722,7 @@ function ChatSurface({
               <button
                 type="submit"
                 className="chat-send"
-                disabled={!input.trim() || recorder.recording}
+                disabled={!canSend || voice.recording || voice.listening}
                 aria-label="שליחה"
               >
                 <ArrowUp size={19} />
@@ -621,7 +748,7 @@ function ChatSurface({
                 <button
                   type="button"
                   className="chip chat-suggestion"
-                  onClick={() => submitText(suggestion)}
+                  onClick={() => submitComposer(suggestion)}
                 >
                   {suggestion}
                 </button>
@@ -678,10 +805,20 @@ function ChatSurface({
             {showRetry ? (
               <button type="button" className="chat-retry" onClick={retry} disabled={busy}>
                 <RotateCw size={14} />
-                נסה שוב
+                {voice.canRetry ? "להאזין שוב" : "נסה שוב"}
               </button>
             ) : null}
           </div>
+          {voice.error || attachments.error ? (
+            <button
+              type="button"
+              className="chat-error-dismiss"
+              onClick={dismissError}
+              aria-label="סגירת ההודעה"
+            >
+              <X size={15} />
+            </button>
+          ) : null}
         </div>
       ) : null}
     </ChatShell>
@@ -691,6 +828,106 @@ function ChatSurface({
 function formatElapsed(seconds: number): string {
   const minutes = Math.floor(seconds / 60);
   return `${minutes}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+/* --------------------------------------------------------- attachments UI */
+
+/** Files staged in the composer, with a thumbnail for anything that has one. */
+function AttachmentTray({
+  items,
+  busy,
+  onRemove,
+}: {
+  items: readonly { id: string; kind: string; name: string; previewUrl?: string }[];
+  busy: boolean;
+  onRemove: (id: string) => void;
+}) {
+  if (items.length === 0 && !busy) return null;
+
+  return (
+    <ul className="chat-tray">
+      {items.map((item) => (
+        <li key={item.id} className="chat-tray-item">
+          {item.previewUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element -- a blob: URL, not an optimisable asset
+            <img src={item.previewUrl} alt="" className="chat-tray-thumb" />
+          ) : (
+            <span className="chat-tray-thumb chat-tray-icon" aria-hidden="true">
+              <FileText size={18} />
+            </span>
+          )}
+          <span className="chat-tray-name" title={item.name}>
+            {item.name}
+          </span>
+          <button
+            type="button"
+            className="chat-tray-remove"
+            onClick={() => onRemove(item.id)}
+            aria-label={`הסרת ${item.name}`}
+          >
+            <X size={13} />
+          </button>
+        </li>
+      ))}
+      {busy ? (
+        <li className="chat-tray-item is-busy">
+          <span className="chat-tool-spinner" aria-hidden="true" />
+          <span className="chat-tray-name">מכין את הקובץ…</span>
+        </li>
+      ) : null}
+    </ul>
+  );
+}
+
+/** Files that rode along with a sent message. */
+function BubbleAttachments({ items }: { items: readonly BubbleAttachment[] }) {
+  if (items.length === 0) return null;
+
+  return (
+    <ul className="chat-bubble-files">
+      {items.map((item) =>
+        item.kind === "image" && item.url ? (
+          <li key={item.id} className="chat-bubble-file is-image">
+            <a href={item.url} target="_blank" rel="noreferrer">
+              {/* eslint-disable-next-line @next/next/no-img-element -- data:/blob: URL */}
+              <img src={item.url} alt={item.name} />
+            </a>
+          </li>
+        ) : (
+          <li key={item.id} className="chat-bubble-file">
+            <FileText size={15} />
+            <span>{item.name}</span>
+          </li>
+        ),
+      )}
+    </ul>
+  );
+}
+
+/**
+ * Plays back the recording behind a spoken turn.
+ *
+ * The agent received the transcript, not the audio — eve cannot pass audio to
+ * the model — so this is the only place the actual recording still exists. It is
+ * looked up by transcript in the device's own store, which means it survives a
+ * reload but not a different phone; nothing is rendered when it is missing.
+ */
+function VoicePlayback({ transcript }: { transcript: string }) {
+  const [url, setUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    let live = true;
+    void voiceNoteUrl(voiceKey(transcript)).then((found) => {
+      if (live) setUrl(found);
+    });
+    return () => {
+      live = false;
+    };
+  }, [transcript]);
+
+  if (!url) return null;
+
+  return <audio className="chat-voice-player" controls preload="metadata" src={url} />;
 }
 
 /** One bubble: user text, or assistant tool activity + markdown answer. */
@@ -706,7 +943,9 @@ function ChatMessage({
   if (message.role === "user") {
     return (
       <article className={`chat-bubble chat-bubble-user${message.audio ? " is-voice" : ""}`}>
-        <p>{message.text}</p>
+        <BubbleAttachments items={message.attachments} />
+        {message.text ? <p>{message.text}</p> : null}
+        {message.audio ? <VoicePlayback transcript={message.text} /> : null}
       </article>
     );
   }

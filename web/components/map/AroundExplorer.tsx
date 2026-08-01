@@ -15,8 +15,10 @@ import {
   Compass,
   Crosshair,
   Footprints,
+  LocateFixed,
   MapPin,
   Navigation,
+  Radio,
   RefreshCw,
   Sparkles,
 } from "lucide-react";
@@ -39,6 +41,7 @@ import {
   type FitCommand,
   type FocusCommand,
   type MapMarkerSpec,
+  type ViewCommand,
 } from "@/components/map/MapCanvas";
 import {
   buildPlacePopup,
@@ -61,6 +64,11 @@ import {
   fetchDiscoveries,
   type Discovery,
 } from "@/components/map/overpass";
+import {
+  formatFixAge,
+  geoErrorCopy,
+  useGeoLocation,
+} from "@/components/map/useGeoLocation";
 
 const MAPPABLE = allPlaces.filter(
   (place) => Number.isFinite(place.lat) && Number.isFinite(place.lng),
@@ -79,8 +87,12 @@ type Origin = {
   accuracy?: number;
 };
 
-type GeoState = "locating" | "ready" | "denied" | "unsupported";
 type Segment = "all" | "planned" | "extra" | "discovery";
+
+/** Beyond this from the nearest place we are planning from home, not walking. */
+const FAR_FROM_TRIP_M = 50_000;
+/** How far the origin must move before the map re-frames itself. */
+const REFIT_THRESHOLD_M = 400;
 
 type Ranked = { place: Place; meters: number };
 
@@ -108,8 +120,7 @@ export function AroundExplorer() {
   const nonce = useRef(0);
   const next = () => (nonce.current += 1);
 
-  const [geoState, setGeoState] = useState<GeoState>("locating");
-  const [origin, setOrigin] = useState<Origin | null>(null);
+  const [manual, setManual] = useState<Origin | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [segment, setSegment] = useState<Segment>("all");
   const [limit, setLimit] = useState(PAGE_SIZE);
@@ -117,6 +128,8 @@ export function AroundExplorer() {
   const [today, setToday] = useState<TripDay | null>(null);
   const [duringTrip, setDuringTrip] = useState(false);
   const [focus, setFocus] = useState<FocusCommand | null>(null);
+  const [view, setView] = useState<ViewCommand | null>(null);
+  const [fit, setFit] = useState<FitCommand | null>(null);
 
   /* --------------------------------------------------------- today mode */
   // Read the clock only after paint, so the server and client markup match and
@@ -131,48 +144,54 @@ export function AroundExplorer() {
   }, []);
 
   /* --------------------------------------------------------- geolocation */
-  const requestLocation = useCallback(() => {
-    if (typeof navigator === "undefined" || !navigator.geolocation) {
-      setGeoState("unsupported");
-      setPickerOpen(true);
-      return;
-    }
-    setGeoState("locating");
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setOrigin({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-          accuracy: position.coords.accuracy,
-          label: "המיקום הנוכחי שלך",
-          kind: "gps",
-        });
-        setGeoState("ready");
-        setPickerOpen(false);
-        setLimit(PAGE_SIZE);
-      },
-      (error) => {
-        setGeoState(error.code === error.PERMISSION_DENIED ? "denied" : "unsupported");
-        setPickerOpen(true);
-      },
-      { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 },
-    );
-  }, []);
+  // Live by default: the list is a walking-distance list, so it has to follow
+  // the family down the street rather than freeze on the fix they arrived with.
+  const geo = useGeoLocation({ watch: true });
 
-  useEffect(() => {
-    const timer = window.setTimeout(requestLocation, 0);
-    return () => window.clearTimeout(timer);
-  }, [requestLocation]);
+  /**
+   * A hand-picked neighbourhood always wins over the GPS — that is the whole
+   * point of picking one — until it is explicitly dropped.
+   */
+  const origin = useMemo<Origin | null>(() => {
+    if (manual) return manual;
+    if (!geo.fix) return null;
+    return {
+      lat: geo.fix.lat,
+      lng: geo.fix.lng,
+      accuracy: geo.fix.accuracy,
+      label: "המיקום הנוכחי שלך",
+      kind: "gps",
+    };
+  }, [manual, geo.fix]);
 
   const pickArea = (area: AreaOption) => {
-    setOrigin({ lat: area.lat, lng: area.lng, label: area.label, kind: "manual" });
-    setGeoState("ready");
+    setManual({ lat: area.lat, lng: area.lng, label: area.label, kind: "manual" });
     setPickerOpen(false);
     setLimit(PAGE_SIZE);
   };
 
+  const useMyLocation = useCallback(() => {
+    setManual(null);
+    setPickerOpen(false);
+    setLimit(PAGE_SIZE);
+    geo.request();
+  }, [geo]);
+
+  /** Puts the blue dot back on screen, whatever the map is currently framing. */
+  const centreOnMe = useCallback(() => {
+    if (!geo.fix) {
+      geo.request();
+      return;
+    }
+    setView({ center: [geo.fix.lat, geo.fix.lng], zoom: 16, nonce: next() });
+  }, [geo]);
+
   /* --------------------------------------------------------- discovery */
-  const originKey = origin ? `${origin.lat.toFixed(4)},${origin.lng.toFixed(4)}` : null;
+  // Quantised to a ~110 m grid on purpose: with a live watch running, keying on
+  // the raw fix would fire a fresh Overpass round trip every few metres of GPS
+  // jitter. This matches the cache cell in overpass.ts, so walking a block is
+  // one request and standing still is none.
+  const originKey = origin ? `${origin.lat.toFixed(3)},${origin.lng.toFixed(3)}` : null;
 
   useEffect(() => {
     if (!origin || !originKey) return;
@@ -216,7 +235,7 @@ export function AroundExplorer() {
   }, [ranked, segment]);
 
   /** True when we are not in Japan yet — planning from home rather than on the street. */
-  const farFromTrip = ranked.length > 0 && ranked[0].meters > 50000;
+  const farFromTrip = ranked.length > 0 && ranked[0].meters > FAR_FROM_TRIP_M;
 
   const rankedDiscoveries = useMemo(() => {
     if (!origin) return [];
@@ -285,25 +304,44 @@ export function AroundExplorer() {
       : [...placeMarkers, ...discoveryMarkers];
   }, [filtered, rankedDiscoveries, segment]);
 
-  // Derived, not stateful: a fresh object here is exactly the signal MapCanvas
-  // needs to refit, and it changes only when the origin (or ranking) changes.
-  const fit = useMemo<FitCommand | null>(() => {
-    if (!origin || ranked.length === 0) return null;
+  // Stateful and throttled, because the watch is live: re-framing on every GPS
+  // tick would yank the map out from under anyone trying to pan it. We re-fit
+  // when the origin *source* changes or when it has genuinely moved a block.
+  const lastFitRef = useRef<{ kind: string; lat: number; lng: number } | null>(null);
+
+  useEffect(() => {
+    if (!origin || ranked.length === 0) return;
+
+    const kind = origin.kind === "manual" ? `manual:${origin.label}` : "gps";
+    const previous = lastFitRef.current;
+    const moved = previous
+      ? distanceMeters(previous, origin) > REFIT_THRESHOLD_M
+      : true;
+    if (previous && previous.kind === kind && !moved) return;
+
+    lastFitRef.current = { kind, lat: origin.lat, lng: origin.lng };
+
     const nearby = ranked
       .slice(0, 8)
       .map((entry) => [entry.place.lat, entry.place.lng] as [number, number]);
-    // Before the trip the user is nowhere near Japan; framing both would show
-    // half the planet, so we frame the places only.
+    // Before the trip the family is nowhere near Japan; framing both would show
+    // half the planet, so we frame the places only and offer "מרכז עליי" for
+    // anyone who wants to see where they actually are.
     const points: [number, number][] = farFromTrip
       ? nearby
       : [[origin.lat, origin.lng], ...nearby];
-    return { points, nonce: 0 };
+
+    setFit({ points, nonce: next() });
   }, [origin, ranked, farFromTrip]);
 
   const handleNavigate = useCallback((href: string) => router.push(href), [router]);
 
   const pageItems = filtered.slice(0, limit);
-  const showList = geoState === "ready" && origin !== null;
+  const showList = origin !== null;
+
+  /** The permission sheet has not been answered yet — so we ask, with a button. */
+  const askForPermission = geo.needsPermission && geo.status !== "locating" && !geo.error;
+  const nearestMeters = ranked.length > 0 ? ranked[0].meters : null;
 
   return (
     <div className="container jm-around">
@@ -316,8 +354,8 @@ export function AroundExplorer() {
         </span>
         <h1>מה יש עכשיו סביבכם</h1>
         <p className="lede">
-          כל 150 המקומות של המסע ממוינים לפי מרחק הליכה, ועוד גילויים חיים מהמפה הפתוחה
-          ברדיוס {DISCOVERY_RADIUS_M} מטר.
+          כל {MAPPABLE.length} המקומות של המסע ממוינים לפי מרחק הליכה, ועוד גילויים חיים
+          מהמפה הפתוחה ברדיוס {DISCOVERY_RADIUS_M} מטר.
         </p>
       </header>
 
@@ -328,26 +366,55 @@ export function AroundExplorer() {
               ? origin.kind === "gps"
                 ? "המיקום הנוכחי שלך"
                 : `אזור נבחר · ${origin.label}`
-              : geoState === "locating"
+              : geo.status === "locating"
                 ? "מאתרים אתכם…"
-                : "אין מיקום"}
+                : "אין מיקום עדיין"}
           </strong>
           <small>
             {origin
               ? origin.kind === "gps"
-                ? `דיוק כ־${Math.round(origin.accuracy ?? 0)} מ׳ · ${MAPPABLE.length} מקומות במאגר`
+                ? `דיוק כ־${Math.round(origin.accuracy ?? 0)} מ׳ · ${
+                    geo.fix ? formatFixAge(geo.fix.at) : "עכשיו"
+                  } · ${MAPPABLE.length} מקומות במאגר`
                 : `מרכז השכונה · ${MAPPABLE.length} מקומות במאגר`
-              : "אפשר לאשר מיקום או לבחור אזור ידנית"}
+              : `${MAPPABLE.length} מקומות במאגר · אפשר לאשר מיקום או לבחור אזור ידנית`}
           </small>
-          {farFromTrip ? (
-            <small>עדיין רחוקים מיפן — אפשר לבחור שכונה כדי לראות מה יהיה סביבכם שם.</small>
+          {origin?.kind === "gps" && geo.watching ? (
+            <small className="jm-live">
+              <Radio size={11} />
+              עוקב אחריכם בזמן אמת
+            </small>
+          ) : null}
+          {farFromTrip && nearestMeters !== null ? (
+            <small>
+              אתם {formatDistance(nearestMeters)} מהמקום הקרוב ביותר במסלול — עדיין לא ביפן.
+              המפה ממוקדת ביפן; ״מרכז עליי״ יראה איפה אתם עכשיו.
+            </small>
           ) : null}
         </span>
         <span className="jm-origin-actions">
-          <button type="button" className="btn btn-ghost btn-sm" onClick={requestLocation}>
-            <RefreshCw size={15} />
-            רענון מיקום
-          </button>
+          {manual ? (
+            <button type="button" className="btn btn-ghost btn-sm" onClick={useMyLocation}>
+              <LocateFixed size={15} />
+              חזרה למיקום שלי
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-ghost btn-sm"
+              onClick={geo.request}
+              disabled={geo.status === "locating"}
+            >
+              <RefreshCw size={15} />
+              {geo.status === "locating" ? "מאתרים…" : "רענון מיקום"}
+            </button>
+          )}
+          {geo.fix ? (
+            <button type="button" className="btn btn-ghost btn-sm" onClick={centreOnMe}>
+              <Crosshair size={15} />
+              מרכז עליי
+            </button>
+          ) : null}
           <button
             type="button"
             className="btn btn-ghost btn-sm"
@@ -360,20 +427,46 @@ export function AroundExplorer() {
         </span>
       </div>
 
-      {geoState === "denied" || geoState === "unsupported" ? (
+      {askForPermission ? (
         <div className="jm-state">
-          <h2>
-            {geoState === "denied" ? "הגישה למיקום נחסמה" : "אי אפשר לאתר מיקום כרגע"}
-          </h2>
+          <h2>מרשים לנו לדעת איפה אתם?</h2>
           <p>
-            {geoState === "denied"
-              ? "אפשר לאשר מיקום בהגדרות האתר בדפדפן ואז ללחוץ על רענון מיקום — או פשוט לבחור למטה את השכונה שאתם נמצאים בה. הרשימה עובדת מצוין גם בלי GPS."
-              : "הדפדפן לא סיפק מיקום (למשל בגלישה ללא HTTPS או במצב חיסכון). בוחרים את השכונה ידנית וממשיכים."}
+            הרשימה כאן מסודרת לפי מרחק הליכה, אז היא צריכה מיקום. הדפדפן ישאל אתכם פעם
+            אחת — המיקום נשאר על המכשיר ומשמש רק למיון המקומות ולנקודה הכחולה על המפה.
           </p>
+          <span className="jm-origin-actions">
+            <button type="button" className="btn btn-primary btn-sm" onClick={geo.request}>
+              <LocateFixed size={15} />
+              אפשרו מיקום
+            </button>
+            <button
+              type="button"
+              className="btn btn-ghost btn-sm"
+              onClick={() => setPickerOpen(true)}
+            >
+              <MapPin size={15} />
+              במקום זה, אבחר שכונה
+            </button>
+          </span>
         </div>
       ) : null}
 
-      {pickerOpen || (!origin && geoState !== "locating") ? (
+      {geo.error && !manual ? (
+        <div className="jm-state">
+          <h2>{geoErrorCopy(geo.error).title}</h2>
+          <p>{geoErrorCopy(geo.error).body}</p>
+          {geo.error !== "unsupported" && geo.error !== "insecure" ? (
+            <span className="jm-origin-actions">
+              <button type="button" className="btn btn-ghost btn-sm" onClick={geo.request}>
+                <RefreshCw size={15} />
+                נסו שוב
+              </button>
+            </span>
+          ) : null}
+        </div>
+      ) : null}
+
+      {pickerOpen || (!origin && !askForPermission && geo.status !== "locating") ? (
         <div className="jm-state jm-picker">
           <h2>אני ליד…</h2>
           {PICKER_CITIES.map((city) => {
@@ -401,13 +494,26 @@ export function AroundExplorer() {
             markers={markers}
             initialView={JAPAN_VIEW}
             fit={fit}
+            view={view}
             focus={focus}
+            // Always the real GPS dot, never the hand-picked neighbourhood — a
+            // fake "you are here" on the other side of the world is worse than
+            // none. The chosen area shows up as the map framing instead.
             userPoint={
-              origin && origin.kind === "gps"
-                ? { lat: origin.lat, lng: origin.lng, accuracy: origin.accuracy }
-                : origin
-                  ? { lat: origin.lat, lng: origin.lng }
-                  : null
+              geo.fix
+                ? { lat: geo.fix.lat, lng: geo.fix.lng, accuracy: geo.fix.accuracy }
+                : null
+            }
+            overlay={
+              <button
+                type="button"
+                className="jm-locate"
+                onClick={centreOnMe}
+                aria-label={geo.fix ? "מרכוז המפה על המיקום שלי" : "איתור המיקום שלי"}
+                data-active={geo.watching ? "" : undefined}
+              >
+                <LocateFixed size={17} />
+              </button>
             }
             onNavigate={handleNavigate}
             ariaLabel="מפת המקומות הקרובים אליי"
