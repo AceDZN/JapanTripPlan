@@ -172,6 +172,24 @@ Three exotic-animal **side quests** are deliberate, eyes-open exceptions to the 
 - Keep receipts.
 - Carry fragile figures in hand luggage.
 - Do not schedule tax-free paperwork near a timed attraction.
+- **Tax-free timing is in our favour.** Japan replaces in-store tax-free with pay-then-refund-at-the-airport on **Nov 1, 2026** — two weeks after we fly home. For Oct 2–17 the old system still applies: the 10% comes off at the register on purchases over JPY 5,000, with a passport or the Visit Japan Web QR code.
+
+## The Sukajan Quest
+
+One keepsake souvenir jacket for the bar-mitzvah boy, with three chances at it and no obligation to take any of them. **The moment one is bought, every later window is cancelled.**
+
+| Window | Day | Where |
+|---|---|---|
+| 1 | Oct 11, Kyoto | tow (beside Shijo Ohashi) and B.S.C Gallery (Teramachi × Rokkaku) |
+| 2 | Oct 13, Osaka | REGULUS and American Long River 55, both in America-mura |
+| 3 | Oct 17, Tokyo | Okuma Shokai, inside Ameyoko — the widest price range of the three |
+
+Rules that apply in all three:
+
+- **Price tiers.** Under JPY 10,000 is printed polyester with thin embroidery and lasts a season or two. **JPY 20,000–30,000 is the target** — rayon, real embroidery, quilted reversible back; HOUSTON sits at JPY 22,990–29,590 and is the reference point. JPY 35,000–50,000 buys the heavy wagara brands (Hanatabi Gakudan, Satori, Karakuri Damashii). Above that is Tailor Toyo collector territory and is not what a growing 12-year-old needs.
+- **Judge the embroidery, not the picture.** It is the one part that cannot be faked cheaply — dense, raised stitching that holds its shape versus flat, sparse fill.
+- **Adult sizes only, and size up.** He is already big enough that a kids 150/160 is off the table — it would be tight before the jacket is a year old. Japanese M runs about 54 cm chest width and 63 cm length, L about 57/65. Fit him in the shop, then take the next size up: sukajan is cut boxy by design, so a roomy M or L looks right immediately and is still his jacket at twenty. Japanese sizing runs small against European, so the label will read one step smaller than he is used to.
+- **Photograph and walk.** Same rule as everything else: no buying the first jacket seen, in the first shop, on the first day.
 
 ## Flea-Market Reality Check
 

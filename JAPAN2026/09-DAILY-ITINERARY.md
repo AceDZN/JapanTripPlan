@@ -345,6 +345,8 @@ Setagaya reopened the full path on March 24, 2026. Recheck for temporary works o
 
 **Side quest — only with real spare time:** the **LOUTRE otter café** on Teramachi (about 10 minutes' walk from the recital area) runs walk-in visits 13:00–19:00 with no advance booking. Added deliberately despite the exotic-café welfare research — treat it as a skip-first extra, and leave if the animals look stressed. [Official site](https://www.loutre-kyoto.com/)
 
+**Side quest — sukajan hunt, window 1 of 3:** the bar-mitzvah keepsake jacket. Two real options sit inside this afternoon's footprint. **tow** is the closest — 2F beside Shijo Ohashi, 300+ jackets, roughly five minutes from Miyagawacho — but it publishes no opening hours anywhere, so check [@tow_kyoto](https://www.instagram.com/tow_kyoto/) before climbing the stairs. **B.S.C Gallery** on the Teramachi arcade at the Rokkaku corner is the deep bench: Japan's largest sukajan dealer, 1,000+ jackets out of ~2,000 items, 11:00–21:00 with no closing days, tax-free with a passport, about ten minutes from the recital area and on the same street as the otter café. Target JPY 20,000–30,000, and fit an adult size on him in the shop before taking the next size up. Thirty to forty minutes fits the reset block; a longer browse does not. [B.S.C Gallery](https://r.goope.jp/bsckyoto/) · [tow](https://www.tow-kyoto.com/)
+
 ### Evening · from 17:00
 
 - Watch **Awata Shrine’s night procession**, officially scheduled from 17:00.
@@ -444,6 +446,8 @@ The old swap required leaving UZUMASA around 13:15, which now collides with the 
 
 - Dotonbori neon and Glico sign.
 - Street-food scorecard: takoyaki, okonomiyaki, kushikatsu and dessert; share portions.
+
+**Side quest — sukajan hunt, window 2 of 3:** America-mura is already on tonight's route for the snake café, and it is Osaka's sukajan district. **Rock Shop REGULUS** (12:00–20:00 daily, Nishi-Shinsaibashi 1-16-10) stocks hundreds of jackets including manga collaborations — CROWS×WORST, Karakuri Damashii, VANSON — alongside classic wagara. **American Long River 55** (11:00–20:00, Nishi-Shinsaibashi 2-10-13) is the second stop if the first misses; its published address dates from 2016, so confirm on the map that day. The area's vintage racks also start around JPY 10,000 for one-of-a-kind pieces. **Skip the whole window if Kyoto already delivered.** [REGULUS](https://regulus69.com/top/) · [American Long River 55](https://www.alr55.com/)
 
 **Side quests — only with real spare time:** two walk-in animal stops sit on this route, added deliberately despite the exotic-café welfare research; skip them without guilt. **Small Animal Cafe Rock Star** in Namba (hedgehogs, meerkats, chinchillas, sugar gliders and more; 11:00–22:00; about JPY 1,100 + a drink for up to two hours) and the **America-mura Snake Café** in Nishi-Shinsaibashi (12:00–21:00, closed Wednesdays — Oct 13 is a Tuesday; about JPY 2,000). [Rock Star](https://animalcafes.com/v/25554.html) · [Snake Café](https://americamura.snakecafe.xyz/)
 
@@ -549,6 +553,7 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 
 - Check out and store bags only at a facility confirmed by the final property; make luggage storage a booking requirement if the current lead changes.
 - Keep 11:00–15:00 local: Ameyoko snacks, Ueno Park or any Asakusa piece missed yesterday.
+- **Sukajan hunt, last window — only if the jacket still has not been found.** **Okuma Shokai** trades inside Ameyoko at Ueno 4-8-1, has done since 1950, and offers the widest range on the list at JPY 4,500–75,000 with adult sizing all the way to 5L — so there is real room to size up for the years ahead. Open 11:00–19:00 and closed Mondays, so Saturday works. English support and card payment. Cap it at 30 minutes and never let it touch the 15:15 luggage pickup. [Official site](https://yokosuka-jumper.com/)
 - Collect luggage by 15:15.
 - Reserve a Skyliner around **15:45–16:00** when sales open, then recheck the exact timetable and terminal.
 - Target the correct Narita terminal by roughly **16:45–17:15** for the 20:40 flight.
