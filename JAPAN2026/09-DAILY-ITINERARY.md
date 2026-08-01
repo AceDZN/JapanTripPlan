@@ -24,14 +24,14 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 
 | Experience | Current action | If unavailable |
 |---|---|---|
-| **Nintendo Museum · Oct 15** | Enter the October lottery by **July 31 at 23:59 JST** on the [official ticket calendar](https://museum-tickets.nintendo.com/en/calendar?lang=en). Choose a morning or early-afternoon slot. | Recovery morning in Osaka, then a direct return to Tokyo. |
+| **Nintendo Museum · Oct 15** | **LOTTERY WON — payment outstanding.** The awarded window is **14:30–15:00** and cannot be moved. Buy the four tickets (2 adult + 2 youth, **JPY 11,000**) from the drawing page by **Aug 7 at 23:59 JST** or the win lapses. Card payments can be down for maintenance on the first Tuesday of the month. | Only if the payment deadline is missed: recovery morning in Osaka, then a direct return to Tokyo. |
 | **PokéPark KANTO · Oct 5** | The lottery is closed. As of Jul 24, the official overseas store has no Oct 5 purchase path. Monitor it for official inventory; the **Aug 1** system update is for admissions from Nov 1 and does not promise an October reopening. Use only the [official international store](https://ticket-en.pokepark-kanto.co.jp/) or a seller explicitly authorized by PokéPark; do not use Fiverr or an unofficial paid buyer. | **DisneySea** is the first fallback; Sanrio Puroland is secondary if the family prefers kawaii characters. |
 | **teamLab Planets · Oct 4** | **BOOKED.** Entrance Pass for four, admission **Sun Oct 4, 09:30–10:00 JST**, **JPY 16,800 paid**. QR codes appear on My Tickets only after 00:00 on Oct 4 — load all four before leaving Tabata. The admission date/time can still be changed up to three times, no later than two hours before the slot. | Not needed; the slot is held. |
 | **Mundo Pixar · must-do Oct 4** | Buy a timed entry from the [official event/ticket page](https://t.pia.jp/en/pia/events/mundopixar), now targeting **12:30–13:00** rather than 11:45/12:00 — the booked 09:30 teamLab entry plus 2–2.5 hours inside means the family is not out of teamLab before roughly 11:45–12:00. A daytime D-price slot costs about **JPY 20,100 for this family plus fees**. | If the preferred slot is gone, choose the nearest slot after 12:15 that preserves the teamLab → Pixar → Odaiba route. Cut extended Gundam Base/mall browsing and the waterfront sunset first. |
 | **KAWAII MONSTER LAND · Oct 6** | Buy a timed 60-minute entry from the [official attraction page](https://contents.gendagigo.jp/kawaii-monster-land/en). | Takeshita Street + purikura + Kiddy Land; no cross-city replacement. |
 | **Ghibli Museum · Oct 8** | October tickets release **Sept 10 at 10:00 JST** through the [official ticket page](https://www.ghibli-museum.jp/en/tickets/). Target 10:00. | Kichijoji + Inokashira Park, then the same compact Nakano/Shinjuku route. |
 | **Mizuekai · Oct 11** | Target the **13:00** performance; official sales method is still TBA. JPY 10,000 first floor / JPY 8,000 second floor, age 10+. | Skip the recital, keep a calm Kyoto arrival and meet the Awata procession at 17:00. |
-| **DRUM TAO HIBIKI · Oct 12** | Buy the **19:00** show when its two-month sales window opens. Doors 18:15; about 40 minutes; JPY 10,000 each, age 6+. | Keep UZUMASA as the day’s headline and enjoy an early Kyoto dinner. |
+| **DRUM TAO HIBIKI · Oct 12** | **BOOKED AND PAID.** Order 00003314, four Standard-with-snacks seats in row G (12–15) for the **19:00** HIBIKI performance, **JPY 47,108 paid**. Doors 18:15; about 40 minutes; age 6+. Electronic lessQ tickets — a separate 2D code per seat, retrievable from the order link. | Not needed; the seats are held. |
 | **USJ + Nintendo · Oct 14** | Buy a Studio Pass **and** an Express Pass that explicitly includes Super Nintendo World timed entry from [USJ](https://www.usj.co.jp/web/en/us/tickets). | Studio Pass + immediate app entry request; if Express is gone, use single-rider selectively. |
 | **Pokémon Café · Oct 16** | Watch [Pokémon Café news](https://www.pokemon-cafe.jp/en/cafe/news/). As of July 23, October reservations are **not yet announced**. | Pokémon Center Tokyo DX + Tokyo Ramen Street. Do not pay a reseller. |
 
@@ -391,7 +391,7 @@ Each admission includes the event guidebook (B5 landscape, Japanese and English)
 
 - The 13:30 tea ceremony is the day’s anchor and the single most expensive item in the order at JPY 2,700 a head. Be at the venue early; a missed slot is not refunded.
 - The 3D Maze gap is trivial money — JPY 1,200 buys the other two in at the door. Don’t plan around it.
-- Every option and coupon is marked **“valid only on the day”**, so none of it survives a date change in usable form. Treat Oct 12 as fixed.
+- Every option and coupon is dated **Oct 12**, so nothing is usable on another day as booked. The purchase confirmation is clear, though, that **the date can be changed** from the same ticket page the QR codes come from — it is only **cancellation** that is impossible once paid. So Oct 12 is the plan, not a trap: if the day has to move, move the booking rather than writing off JPY 29,600.
 - All four admissions were issued as “13 and over”. That is above the child rate, so the gate accepts it for the 12-year-old — no action needed.
 - **Tickets are smartphone-only.** Display them from the ticket page and show the screen at reception: [ticket.eigamura.com/ticket/purchased](https://ticket.eigamura.com/ticket/purchased). Printing is not required. Make sure the data plan is live before reaching the gate.
 - Record the admission, tea-ceremony and coupon IDs in the private ticket folder, not in this repo.
@@ -407,7 +407,9 @@ Each admission includes the event guidebook (B5 landscape, Japanese and English)
 ### Evening · 19:00
 
 - See **DRUM TAO HIBIKI**, a roughly 40-minute show designed to work well even after a full daytime attraction.
-- Current official price is JPY 10,000 per person: **JPY 40,000 for the family**. The show admits ages 6+ and tickets open two months before the performance.
+- **Booked and paid on Aug 1** (order 00003314): four Standard-with-snacks seats, **row G, seats 12–15**, at JPY 11,000 each. With the JPY 2,800 service charge and JPY 308 ticketing fee the total was **JPY 47,108** — the seat tier sold is dearer than the JPY 10,000 headline price the plan assumed.
+- Tickets are electronic (lessQ): a separate 2D code per seat, pulled from the order link in the family safe. One phone can show all four in sequence. Bring a passport — photo ID may be checked at entry.
+- No changes, cancellations or refunds after purchase. Standard-seat doors open 18:15; the ninth-floor lifts jam right before curtain, so arrive with slack.
 
 ### Mibu Kyogen — no longer available
 
@@ -481,16 +483,30 @@ Stay through the evening if energy holds, then return to the same hotel. No Toky
 
 ## Day 15 — Thu, Oct 15: Nintendo Museum + Return to Tokyo
 
-**Theme:** one last major gaming experience, then travel comfortably
+**Theme:** a slow morning, one last major gaming experience, then a late travel evening
 **Route:** Namba → Uji → Kyoto → Tokyo
 
-- Enter the **Nintendo Museum October lottery by July 31 at 23:59 JST** and select Oct 15 morning/early-afternoon slots.
-- Check out, forward or store luggage appropriately, and travel to Uji with passports; foreign visitors may need passport verification.
-- Explore the interactive Nintendo exhibits. Add Hanafuda Craft & Play only if a separate slot is available and the train schedule still works.
-- Continue from Kyoto on a reserved Nozomi to Tokyo, check in, eat simply and sleep.
+**The lottery was won, and the slot is 14:30–15:00 — not the morning this day was originally built around.** The entry window cannot be moved, so the day is now back-loaded: a genuinely unhurried Osaka morning, the museum mid-afternoon, and a Tokyo arrival late in the evening. Plan the evening as travel, not as a night out.
 
-**If the lottery fails:** revert immediately to the recovery version—sleep later, brunch in Namba and take a reserved train to Tokyo after lunch.
-**Do not improvise Nintendo Museum:** entry is advance-lottery/reservation only.
+### Slow morning · Namba
+
+- No alarm. Breakfast in Namba and a relaxed checkout by **11:00**.
+- Forward or store the luggage — the bags must not come to Uji. Yamato forwarding to the Tokyo apartment, or coin lockers at Shin-Osaka, both work; decide by Oct 13 so the paperwork is done in advance.
+- Aim to leave Osaka around **12:15–12:45**. Osaka → Uji is roughly an hour, and being early in Uji is far better than being late: the entry window is thirty minutes wide and the ticket is void outside it.
+
+### Nintendo Museum · 14:30–15:00 entry
+
+- **Carry all four passports.** Foreign visitors may be asked to verify identity against the booking.
+- Explore the interactive exhibits. Budget about two hours, putting the exit near **16:30–17:00**.
+- Hanafuda Craft & Play only if a separate slot exists *and* it still clears a 17:00 departure. On this timing it will usually not.
+
+### Evening · the long way back
+
+- Uji → Kyoto, then a **reserved Nozomi** to Tokyo. Leaving Kyoto around 17:30–18:00 puts the family into Tokyo around **20:00–20:30**.
+- Reserve those seats in advance. Four unreserved seats on a Thursday evening Nozomi with luggage is a bad way to end this day.
+- Check in, eat something simple near the apartment, sleep. **Do not schedule anything else on this evening.**
+
+**Do not improvise Nintendo Museum:** entry is advance-lottery only, the awarded window cannot be changed, and there is no re-entry if the slot is missed.
 
 ---
 

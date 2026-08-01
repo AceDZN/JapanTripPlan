@@ -41,7 +41,7 @@
 
 | Experience | Correct action |
 |---|---|
-| Nintendo Museum | Apply for Oct 15 by **July 31 at 23:59 JST**. Foreign visitors should bring passports. [Official site](https://museum.nintendo.com/en/index.html) |
+| Nintendo Museum | **Won the lottery for Oct 15, 14:30–15:00** — pay by **Aug 7, 23:59 JST** (JPY 11,000 for four). Bring all four passports; identity may be checked. [Official site](https://museum.nintendo.com/en/index.html) |
 | PokéPark KANTO | Lottery closed. As of Jul 24, the official overseas store has no Oct 5 purchase path. Monitor it for official inventory; the **Aug 1** system update concerns admissions from Nov 1 and is not a promised October reopening. Use only the [official international store](https://ticket-en.pokepark-kanto.co.jp/) or an explicitly authorized seller. Do not use Fiverr or an unofficial paid buyer. |
 | Ghibli Museum | Buy Oct 8 tickets **Sept 10 at 10:00 JST**. Advance reservation only. [Official tickets](https://www.ghibli-museum.jp/en/tickets/) |
 | UZUMASA Kyoto Village | **BOOKED AND PAID for Oct 12 — JPY 29,600.** Four yokai-festival 1-Day tickets with exclusive merchandise (JPY 15,200), 13:30 tea ceremony ×4 (JPY 10,800), Ninja Escape Room ×4 (JPY 2,400), 3D Maze the Ninja Fort ×2 (JPY 1,200). All valid only on Oct 12; smartphone-only entry from [the ticket page](https://ticket.eigamura.com/ticket/purchased). |

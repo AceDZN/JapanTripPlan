@@ -12,7 +12,8 @@
 |---|---|---|---|---|
 | [ ] | **Buy new walking shoes for everyone** | **By July 31** | Local running/outdoor shop; fit late in the day with the socks each person will use in Japan | All 4 |
 | [ ] | Start breaking in the new shoes | From the first week after purchase | Three short walks, then one 8–10 km family test; exchange immediately if there are hot spots | All 4 |
-| [ ] | Enter Nintendo Museum lottery for Oct 15 | **By July 31, 23:59 JST** | [Official Nintendo Museum ticket calendar](https://museum-tickets.nintendo.com/en/calendar?lang=en) | Adult lead |
+| ✅ | Enter Nintendo Museum lottery for Oct 15 | Done — entry drawn Aug 1 | Awarded window **Oct 15, 14:30–15:00 JST**, not changeable | Adult lead |
+| [ ] | **Pay for the Nintendo Museum tickets** | **By Aug 7, 23:59 JST — the win lapses otherwise** | Drawing page link in the family safe. 2 adult + 2 youth, JPY 11,000. Card payments may be down for maintenance on the first Tuesday of the month, so avoid leaving it to Aug 4 | Adult lead |
 | [ ] | Complete Tokyo guest passport submission and confirm late self-check-in | Now | Airbnb chat only; obtain written acceptance and save it in the private lodging folder | Adult lead |
 | [ ] | Complete Kyoto guest registration and save access guide | Now | Host form + Airbnb chat; keep door code out of the public itinerary | Adult lead |
 | [ ] | Book Osaka Oct 13–15 and final Tokyo Oct 15–17 | Now | Chosen booking platform; refundable option preferred until the route is fully locked | Adults |

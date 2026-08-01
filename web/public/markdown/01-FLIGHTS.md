@@ -7,18 +7,24 @@
 - **Route:** Ben Gurion Airport (TLV) → Addis Ababa (ADD) → Tokyo Narita (NRT), round trip
 - **Time-zone difference during this trip:** Tokyo is 6 hours ahead of Tel Aviv
 
-> **Source of truth:** the purchased-ticket itinerary screenshot supplied on July 23, 2026. It confirms the flight numbers and local times below. The fare, baggage allowance, booking reference, operating terminals and ticket conditions were not visible and must be copied from the full e-ticket.
+> **Source of truth:** the full ISSTA e-ticket issued February 9, 2026, read from the confirmation e-mail. It supersedes the July 23 screenshot, which had the Addis arrival on the return leg an hour early and therefore overstated that connection.
+
+**Booking references:** airline (Ethiopian) **GHZBPP** · agency (ISSTA Yashir Online) **7MA3B6**. The four e-ticket numbers, agency contact and full leg detail live in the family safe, not here.
 
 ## Confirmed Itinerary
 
-| Leg | Date | Flight | Route | Depart | Arrive | Connection |
-|---|---|---|---|---:|---:|---:|
-| Outbound 1 | Thu, Oct 1 | **ET419** | TLV → ADD | 15:35 | 19:50 | **2h 45m** in ADD |
-| Outbound 2 | Thu–Fri, Oct 1–2 | **ET672** | ADD → NRT | 22:35 | 19:40 (+1 day) | — |
-| Return 1 | Sat–Sun, Oct 17–18 | **ET673** | NRT → ADD | 20:40 | 05:50 (+1 day) | **4h 35m** in ADD |
-| Return 2 | Sun, Oct 18 | **ET418** | ADD → TLV | 10:25 | 14:35 | — |
+| Leg | Date | Flight | Route | Depart | Arrive | Stops | Connection |
+|---|---|---|---|---:|---:|---|---:|
+| Outbound 1 | Thu, Oct 1 | **ET419** | TLV T3 → ADD | 15:35 | 19:50 | Non-stop, 4h 15m | **2h 45m** in ADD |
+| Outbound 2 | Thu–Fri, Oct 1–2 | **ET672** | ADD T2 → NRT T1 | 22:35 | 19:40 (+1 day) | **1 stop**, 15h 05m | — |
+| Return 1 | Sat–Sun, Oct 17–18 | **ET673** | NRT T1 → ADD T2 | 20:40 | 06:55 (+1 day) | **1 stop**, 16h 15m | **3h 30m** in ADD |
+| Return 2 | Sun, Oct 18 | **ET418** | ADD → TLV T3 | 10:25 | 14:35 | Non-stop, 4h 10m | — |
 
 All times are local. Approximate total scheduled journey time is **22h 05m outbound** and **23h 55m return**.
+
+**Both long legs make an intermediate stop.** ET672 and ET673 are not single hops to and from Tokyo — each touches down once en route, and passengers normally stay on board. Brief the children on this before departure: the long leg is two flights' worth of sitting with a landing in the middle, not one uninterrupted stretch. Confirm the stop airport and whether disembarking is required at online check-in.
+
+**Fare basis:** Economy M outbound, Economy V on the return. Baggage is **2 pieces per passenger on every leg**, all four travellers. All four legs are Confirmed.
 
 ## Planning Consequences
 
@@ -31,12 +37,14 @@ All times are local. Approximate total scheduled journey time is **22h 05m outbo
 
 ## Still to Confirm From the Full E-ticket
 
-- [ ] Booking reference / PNR and all four e-ticket numbers saved offline
-- [ ] Operating terminals at TLV, ADD and NRT
-- [ ] Checked- and cabin-baggage allowance for the purchased fare
+- [x] Booking reference / PNR and all four e-ticket numbers saved offline — in the family safe
+- [x] Operating terminals at TLV, ADD and NRT — TLV 3, ADD 2, NRT 1
+- [x] Checked-baggage allowance for the purchased fare — 2 pieces per passenger, every leg
+- [ ] Cabin-baggage allowance for the purchased fare
 - [ ] Seat assignments and meal requests
 - [ ] Actual family ticket total added to [10-BUDGET.md](./10-BUDGET.md)
 - [ ] Ethiopian Airlines contact details and disruption policy saved
+- [ ] Which airport ET672/ET673 stop at, and whether passengers must disembark
 - [ ] Schedule reconfirmed 72 hours before each departure
 
 > The pre-booking airline comparison has been removed from this active guide because the flights are purchased. Historical alternatives remain available in Git history if they are ever needed.

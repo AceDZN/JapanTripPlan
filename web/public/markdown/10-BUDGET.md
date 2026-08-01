@@ -39,7 +39,7 @@ Why the attraction range is wide:
 
 - PokéPark prices vary by date and pass class.
 - USJ Express inventory and products rotate.
-- Nintendo Museum is lottery-dependent.
+- Nintendo Museum is won and priced: JPY 11,000 for four, payable by Aug 7.
 - Joypolis, Tokyo Dome City and Odaiba can use either individual tickets or passports.
 - Mundo Pixar is now a must-do and adds about JPY 20,100 plus ticket fees. The attraction budget must include it; Oct 4 saves time by cutting lower-priority browsing rather than Pixar.
 - Shopping is deliberately excluded from “attractions” so it cannot hide inside the plan.
@@ -51,7 +51,7 @@ Why the attraction range is wide:
 | Mizuekai · second-floor seats | JPY 32,000 |
 | Mizuekai · first-floor seats | JPY 40,000 |
 | UZUMASA · **BOOKED AND PAID** | JPY 29,600 |
-| DRUM TAO HIBIKI | JPY 40,000 |
+| DRUM TAO HIBIKI · **BOOKED AND PAID** | JPY 47,108 |
 | Fushimi Inari lower-gates visit | Free |
 | Awata Shrine procession | Free |
 | **Recommended Kyoto total** | **JPY 101,600–109,600** |
@@ -75,14 +75,14 @@ Fill the actual charged amount immediately after every purchase.
 | Ghibli Museum | Oct 8 | Release Sept 10 | — |
 | Mizuekai · 13:00 | Oct 11 | Purchase method TBA | JPY 32,000–40,000 |
 | LOUTRE otter café (side quest) | Oct 11 | Optional walk-in; no reservation | — |
-| UZUMASA Kyoto Village | Oct 12 | **BOOKED AND PAID** — admission ×4, 13:30 tea ceremony ×4, Ninja Escape Room ×4, 3D Maze ×2; all valid only on Oct 12 | JPY 29,600 paid |
-| DRUM TAO HIBIKI · 19:00 | Oct 12 | Buy when two-month window opens | JPY 40,000 |
+| UZUMASA Kyoto Village | Oct 12 | **BOOKED AND PAID** — admission ×4, 13:30 tea ceremony ×4, Ninja Escape Room ×4, 3D Maze ×2; all dated Oct 12, and the date is changeable from the ticket page although the purchase cannot be cancelled | JPY 29,600 paid |
+| DRUM TAO HIBIKI · 19:00 | Oct 12 | **BOOKED AND PAID** — order 00003314, row G seats 12–15, Standard with snacks ×4 at JPY 11,000, plus JPY 2,800 service and JPY 308 ticketing | JPY 47,108 paid |
 | Fushimi Inari | Oct 13 | No ticket; lower-gates visit | Free |
 | Yūzen engraved chopsticks | Oct 13 | Walk-in after 09:30; reconfirm hours | Record actual product total; JPY 1,100 floor unverified |
 | Rock Star + America-mura snake café (side quests) | Oct 13 | Optional walk-ins; about JPY 1,100 + drink and JPY 2,000 per person | — |
 | USJ Studio Pass | Oct 14 | Buy | — |
 | USJ Express product | Oct 14 | Buy exact current product | — |
-| Nintendo Museum | Oct 15 | Lottery by July 31 | — |
+| Nintendo Museum | Oct 15 | **WON — pay by Aug 7, 23:59 JST**; adult ×2 JPY 6,600 + youth ×2 JPY 4,400 | JPY 11,000 |
 | Pokémon Café | Oct 16 | Release not announced | Meal total, no reservation fee |
 | Taiko-kan + one bachi pair | Oct 16 | Museum walk-in; buy in shop | About JPY 3,150–3,750 |
 | Sumida Aquarium (optional finale) | Oct 16 | Decide on the day; buy at door or online | About JPY 8,800 for the family |
@@ -117,7 +117,7 @@ A normal ramen meal for four is roughly JPY 4,000–6,500 before extras. Pokémo
 | Oct 12 | UZUMASA/HIBIKI | JPY 29,600 is already paid; the only open spend is lunch and an optional JPY 1,200 for the two uncovered 3D Maze places |
 | Oct 13 | Fushimi/Yūzen/Dotonbori | Fushimi is free and time-boxed; set a chopstick ceiling before choosing, then share Osaka portions |
 | Oct 14 | USJ | Buy exact Express value; do not assume a generic bundle |
-| Oct 15 | Nintendo Museum | Budget only after lottery success |
+| Oct 15 | Nintendo Museum | JPY 11,000 — won, payable by Aug 7 |
 | Oct 16 | First Avenue + Taiko + final shopping | Protect the bachi budget; use a two-or-three-shop First Avenue target list and cap duplicate purchases |
 
 ## Celebration Envelope

@@ -47,7 +47,7 @@ The family-wide operational list—including **new walking shoes for all four tr
 
 ### Act now
 
-- **Nintendo Museum:** enter the October lottery by **July 31 at 23:59 JST**. Choose Oct 15 morning/early-afternoon. [Official lottery calendar](https://museum-tickets.nintendo.com/en/calendar?lang=en)
+- **Nintendo Museum:** lottery **won**. Awarded window is **Oct 15, 14:30–15:00 JST** and cannot be changed. Tickets (JPY 11,000 for four) must be bought by **Aug 7 at 23:59 JST**. Day 15 is rebuilt around the afternoon slot: slow Osaka morning, museum mid-afternoon, Tokyo around 20:00–20:30.
 - **USJ:** buy the Studio Pass, then a current Express Pass that explicitly includes the desired Nintendo rides and guaranteed area entry. Product names rotate. [Official tickets](https://www.usj.co.jp/web/en/us/tickets)
 - **teamLab Planets:** **BOOKED** — Oct 4, admission 09:30–10:00, JPY 16,800 for four. Nothing left to buy; just load the QR codes on the morning itself.
 - **UZUMASA Kyoto Village:** **BOOKED AND PAID** — Oct 12, **JPY 29,600**: four yokai-festival 1-Day tickets with exclusive merchandise (JPY 15,200), the 13:30 tea ceremony for four (JPY 10,800), Ninja Escape Room for four (JPY 2,400) and 3D Maze the Ninja Fort for two (JPY 1,200). Everything is **valid only on Oct 12**, and entry is smartphone-only from [the ticket page](https://ticket.eigamura.com/ticket/purchased).
