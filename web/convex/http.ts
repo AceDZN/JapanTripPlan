@@ -113,6 +113,19 @@ http.route({
 });
 
 /**
+ * Read every private record. Used to copy the vault between deployments.
+ */
+http.route({
+  path: "/agent/private/list",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+    const records = await ctx.runQuery(internal.private.internalListAll, {});
+    return json({ ok: true, records });
+  }),
+});
+
+/**
  * Create or update one private record.
  *
  * Used by the seeder to lay out an empty slot for every private item the

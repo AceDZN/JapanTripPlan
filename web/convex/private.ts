@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { internalMutation, mutation, query } from "./_generated/server";
+import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import { requireFamily } from "./lib/guards";
 
 const subjectValidator = v.union(
@@ -197,6 +197,30 @@ export const internalUpsert = internalMutation({
       updatedAt: Date.now(),
       updatedBy: updatedBy ?? "seed",
     });
+  },
+});
+
+/**
+ * Read side of the machine API, for copying the vault between deployments.
+ *
+ * Internal, like `internalUpsert`: it skips requireFamily() because the only
+ * caller is the Bearer-authenticated `/agent/private/list` route. It must
+ * never be public — it returns every private value in the trip.
+ */
+export const internalListAll = internalQuery({
+  args: {},
+  handler: async (ctx) => {
+    const rows = await ctx.db.query("privateRecords").take(MAX_PRIVATE);
+    return rows.map((row) => ({
+      subject: row.subject,
+      subjectId: row.subjectId,
+      kind: row.kind,
+      label: row.label,
+      value: row.value,
+      url: row.url,
+      hint: row.hint,
+      updatedBy: row.updatedBy,
+    }));
   },
 });
 
