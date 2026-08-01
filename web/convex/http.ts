@@ -401,6 +401,39 @@ http.route({
 });
 
 /**
+ * Park a wish as `researching` because a background run has just taken it on.
+ *
+ * Service-key only. Reports `ok: false` with a reason rather than throwing when
+ * the wish is gone or already past the idea stage — the caller queues research
+ * either way, and a failed spinner is not worth failing the queue over.
+ */
+http.route({
+  path: "/agent/wishes/mark-researching",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    if (typeof (body as Record<string, unknown>).id !== "string") {
+      return json({ ok: false, error: "expected { id }" }, 400);
+    }
+
+    try {
+      const result = await ctx.runMutation(
+        internal.wishes.internalMarkResearching,
+        body as never,
+      );
+      return json(result);
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/**
  * Store an image eve found, and return its storage id.
  *
  * The agent sends the bytes; Convex owns the file. Passing a remote URL

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // Bundles the canonical trip content into agent/data/content.ts as plain TS
 // literals, so the agent never depends on the filesystem at runtime (Vercel
-// functions do not ship ../JAPAN2026 or ../web/data).
+// functions do not ship ../web/data).
 //
 // Sources:
-//   ../JAPAN2026/*.md        (canonical guides; *ARCHIVE* files are skipped)
+//   Convex /agent/export     (canonical guides — the trip lives there)
 //   ../web/data/places.json  (map/place database shared with the webapp)
 //
 // Run: npm run sync-data   (also wired as predev / prebuild)
@@ -12,7 +12,6 @@
 import {
   existsSync,
   mkdirSync,
-  readdirSync,
   readFileSync,
   writeFileSync,
 } from "node:fs";
@@ -22,28 +21,44 @@ import { fileURLToPath } from "node:url";
 const here = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(here, "..");
 const repoRoot = resolve(appRoot, "..");
-const guidesDir = join(repoRoot, "JAPAN2026");
 const placesFile = join(repoRoot, "web", "data", "places.json");
 const outFile = join(appRoot, "agent", "data", "content.ts");
 
-// A Vercel deployment uploads only trip-agent/, so ../JAPAN2026 and
-// ../web/data are absent at build time. agent/data/content.ts is committed, so
-// the correct behaviour there is to keep the checked-in bundle and move on —
-// but only if that bundle actually exists.
-if (!existsSync(guidesDir) || !existsSync(placesFile)) {
+/*
+ * GUIDES COME FROM CONVEX NOW.
+ *
+ * They used to be read from ../JAPAN2026/*.md. Those files are gone — the trip
+ * lives in Convex and the guides are edited there, so a copy on disk was a
+ * second source that could disagree with the first.
+ *
+ * Places are still a repo file (web/data/places.json); only the guides moved.
+ */
+const CONVEX_SITE_URL = process.env.CONVEX_SITE_URL;
+const AGENT_SERVICE_KEY = process.env.AGENT_SERVICE_KEY;
+
+/**
+ * Fall back to the committed bundle rather than failing the build.
+ *
+ * A Vercel deployment uploads only trip-agent/, so ../web/data is absent, and
+ * the Convex credentials may not be present in every build environment.
+ * `agent/data/content.ts` is committed precisely so those builds can proceed —
+ * but only if the bundle actually exists to fall back to.
+ */
+function keepCommittedBundle(reason) {
   if (existsSync(outFile)) {
-    console.log(
-      "sync-data: repo sources not present (deployment build?) — keeping the committed agent/data/content.ts",
-    );
+    console.log(`sync-data: ${reason} — keeping the committed agent/data/content.ts`);
     process.exit(0);
   }
-  console.error(
-    `sync-data: missing sources (${guidesDir}, ${placesFile}) and no committed ${outFile} to fall back to.`,
-  );
+  console.error(`sync-data: ${reason}, and no committed ${outFile} to fall back to.`);
   process.exit(1);
 }
 
-/** First `# heading` in the file, falling back to a readable filename. */
+if (!existsSync(placesFile)) keepCommittedBundle("places source not present (deployment build?)");
+if (!CONVEX_SITE_URL || !AGENT_SERVICE_KEY) {
+  keepCommittedBundle("CONVEX_SITE_URL / AGENT_SERVICE_KEY not set");
+}
+
+/** First `# heading` in the body, falling back to a readable filename. */
 function titleOf(markdown, file) {
   for (const line of markdown.split("\n")) {
     const match = /^#\s+(.+?)\s*$/.exec(line);
@@ -52,15 +67,28 @@ function titleOf(markdown, file) {
   return file.replace(/\.md$/, "");
 }
 
-const guideFiles = readdirSync(guidesDir)
-  .filter((f) => f.endsWith(".md"))
-  .filter((f) => !/ARCHIVE/i.test(f))
-  .sort();
-
-const guides = guideFiles.map((file) => {
-  const markdown = readFileSync(join(guidesDir, file), "utf8");
-  return { file, title: titleOf(markdown, file), markdown };
+const response = await fetch(`${CONVEX_SITE_URL}/agent/export`, {
+  headers: { Authorization: `Bearer ${AGENT_SERVICE_KEY}` },
+  cache: "no-store",
 });
+const exported = await response.json().catch(() => null);
+if (!response.ok || !exported?.ok || !Array.isArray(exported.guides)) {
+  console.error(
+    `sync-data: Convex /agent/export failed (${response.status}): ` +
+      `${JSON.stringify(exported)?.slice(0, 300)}`,
+  );
+  process.exit(1);
+}
+
+const guides = exported.guides
+  .slice()
+  .sort((a, b) => a.order - b.order)
+  .map(({ file, markdown }) => ({ file, title: titleOf(markdown, file), markdown }));
+
+if (guides.length === 0) {
+  console.error("sync-data: Convex returned no guides — refusing to bake an empty bundle.");
+  process.exit(1);
+}
 
 const places = JSON.parse(readFileSync(placesFile, "utf8"));
 if (!Array.isArray(places) || places.length === 0) {
@@ -68,13 +96,13 @@ if (!Array.isArray(places) || places.length === 0) {
 }
 
 const header = `// generated — run npm run sync-data
-// Source of truth: JAPAN2026/*.md and web/data/places.json in the repo root.
+// Source of truth: Convex (guides) and web/data/places.json (places).
 // Do not edit by hand; edits are overwritten on the next sync.
 `;
 
 const types = `
 export type Guide = {
-  /** File name inside JAPAN2026/, e.g. "09-DAILY-ITINERARY.md". */
+  /** Stable guide file name, e.g. "09-DAILY-ITINERARY.md". */
   file: string;
   /** First markdown H1 of the guide. */
   title: string;

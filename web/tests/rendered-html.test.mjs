@@ -654,35 +654,20 @@ test("serves the PWA manifest and service worker from the app origin", async () 
   assert.match(await worker.text(), /caches/);
 });
 
-// Post-cutover, `JAPAN2026/*.md` is no longer the truth — Convex is, and those
-// files are the git-tracked export of it (`npm run export:md`). So this test is
-// now the SECOND link in the chain rather than the first: `npm test` runs
-// `export:md --check` beforehand to assert Convex→files, and this asserts
-// files→`public/markdown`. Together they still pin "what the site serves is what
-// the trip says", which is what the assertions below are really guarding.
-test("keeps public/markdown in step with the exported guide files", async () => {
-  const sourceRoot = new URL("../../JAPAN2026/", import.meta.url);
-  const publicRoot = new URL("../public/markdown/", import.meta.url);
-  const files = (await readdir(sourceRoot))
-    .filter((file) => /^\d{2}-.*\.md$/.test(file) && !file.includes("ARCHIVE"))
-    .sort();
+// There is no Markdown on disk any more. Convex holds the guides, and the only
+// derived copy left is `app/generated/ai-context.ts`, which `sync:content`
+// regenerates from Convex on every build and which the chat uses as its system
+// prompt. So that file IS the thing worth guarding: if a guide loses a landmark
+// the family is relying on, the assistant is the first place it goes missing.
+test("the generated AI context still carries the trip's landmarks", async () => {
+  const { aiContext, aiContextText } = await import("../app/generated/ai-context.ts");
 
-  assert.equal(files.length, 12);
+  assert.equal(aiContext.length, 12);
+  // A plausible-but-empty context would pass every `match` below by accident.
+  assert.ok(aiContextText.length > 100_000, "AI context is suspiciously small");
 
-  for (const file of files) {
-    const [source, published] = await Promise.all([
-      readFile(new URL(file, sourceRoot), "utf8"),
-      readFile(new URL(file, publicRoot), "utf8"),
-    ]);
-    assert.equal(published, source, `${file} must be synchronized`);
-  }
-
-  // Asserted against the Markdown itself rather than against a generated
-  // TypeScript copy of it. The guide pages now read Convex directly, so
-  // `app/generated/trip-content.ts` no longer exists — and a third copy of the
-  // trip is exactly what this migration set out to remove.
   const generated = (
-    await Promise.all(files.map((file) => readFile(new URL(file, sourceRoot), "utf8")))
+    aiContext.map((entry) => entry.markdown)
   ).join("\n");
   assert.match(generated, /Nintendo Museum/);
   assert.match(generated, /KAWAII MONSTER LAND/);

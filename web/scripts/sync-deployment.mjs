@@ -117,7 +117,7 @@ console.log(
     "",
     direction === "from-prod"
       ? "   Reminder: dev now holds the family's real private records. Same care as prod."
-      : "   Reminder: run `npm run export:md -- --check` to confirm the guides still round-trip.",
+      : "   Reminder: run `npm run sync:content` so the chat's baked context matches the guides you just pushed.",
     "",
   ].join("\n"),
 );

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Download, FileText } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
 import { getGuide, getGuides } from "@/lib/trip-source";
 import { isRtl, renderGuideHtml } from "@/lib/markdown";
 import { guideImage } from "@/components/guide-images";
@@ -62,10 +62,6 @@ export default async function GuidePage({
           </span>
           <h1>{guide.title}</h1>
           <p>{guide.description}</p>
-          <a className="btn btn-glass btn-sm" href={`/markdown/${guide.file}`} download>
-            <Download size={16} />
-            הורדת קובץ המקור
-          </a>
         </div>
       </header>
 

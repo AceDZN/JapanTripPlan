@@ -105,6 +105,28 @@ export const CONTEXT_PREFIX = "[הקשר:";
  */
 export const VOICE_CONTEXT_CLAUSE = "קלט: הודעה קולית מתומללת";
 
+/**
+ * Marker opening a background run's report back into the originating session.
+ *
+ * Deferred research (`queue_background_research`) finishes long after the turn
+ * that asked for it, and the only way eve can push into a parked session is a
+ * follow-up on its continuation token — which lands as a **user-role** message.
+ * So the transcript contains a message the family never typed, addressed to the
+ * agent rather than to them.
+ *
+ * It is machine-to-machine payload, so the bubble is suppressed entirely rather
+ * than stripped down to a blank one: `visibleMessages` keeps every user bubble
+ * unconditionally, and an empty one would render as a mystery gap right where
+ * the answer is supposed to appear. The agent's reply to it renders normally —
+ * that reply is the whole point.
+ */
+export const BACKGROUND_UPDATE_PREFIX = "[עדכון-רקע]";
+
+/** True for a background run's report — never shown, never treated as a send. */
+export function isBackgroundUpdate(text: string): boolean {
+  return text.trimStart().startsWith(BACKGROUND_UPDATE_PREFIX);
+}
+
 /** During the trip the family reads clocks in Japan, not at home. */
 const TRIP_TIME_ZONE = "Asia/Tokyo";
 /** Mirrors lib/trip-data.ts, extended to the Oct 18 flight home. */
@@ -487,6 +509,11 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
 
     case "message.received": {
       const { text, audio, attachments } = readUserMessage(data);
+      // A background run reporting in is not a family message: no bubble, and
+      // `received` stays put so it cannot be mistaken for confirmation of an
+      // optimistic send that happens to be in flight.
+      if (isBackgroundUpdate(text)) return base;
+
       const id = `user:${turnId ?? "turn"}:${String(data?.sequence ?? state.received)}`;
       if (state.messages.some((message) => message.id === id)) return base;
 

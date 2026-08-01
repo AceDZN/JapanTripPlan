@@ -1,4 +1,4 @@
-// Generated from ../JAPAN2026/*.md — do not edit by hand.
+// Generated from Convex (`trip.listGuides` + `trip.getGuide`) — do not edit by hand.
 export type AiContextFile = {
   file: string;
   title: string;

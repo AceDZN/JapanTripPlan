@@ -14,6 +14,7 @@ import test from "node:test";
 
 import {
   AGENT_FAILURE_MESSAGE,
+  BACKGROUND_UPDATE_PREFIX,
   CONTEXT_PREFIX,
   EVE_INITIAL_STATE,
   FILE_TEXT_CLOSE,
@@ -182,6 +183,99 @@ test("correlates incrementally streamed calls by call id instead of duplicating"
   assert.equal(activity.length, 2);
   assert.equal(activity[0].label, "מחפש ״ראמן״", "a later call refines its own label");
   assert.equal(activity[1].label, "קורא את מדריך");
+});
+
+// The agent does not only answer. Background research finishes on its own and
+// arrives as a whole turn with no `message.received` in front of it, on a
+// session that was sitting idle. That has to read as a new bubble, not as an
+// edit of the last answer and not as something the family said.
+test("an agent-initiated turn renders as its own assistant bubble", () => {
+  const answered = play(FIRST_TURN);
+  const before = visibleMessages(answered.messages).length;
+
+  const unsolicited = play(
+    [
+      { type: "turn.started", data: { sequence: 30, turnId: "turn_bg" } },
+      {
+        type: "actions.requested",
+        data: {
+          actions: [{ callId: "bg1", kind: "tool-call", toolName: "search_places", input: { query: "פיקאצ׳ו" } }],
+          turnId: "turn_bg",
+        },
+      },
+      { type: "action.result", data: { result: { callId: "bg1" }, turnId: "turn_bg" } },
+      {
+        type: "message.appended",
+        data: { messageDelta: "מצאתי", messageSoFar: "מצאתי", sequence: 32, stepIndex: 1, turnId: "turn_bg" },
+      },
+      {
+        type: "message.completed",
+        data: { message: "מצאתי בובה בפוקימון סנטר שיבויה", finishReason: "stop", sequence: 33, stepIndex: 1, turnId: "turn_bg" },
+      },
+      { type: "turn.completed", data: { sequence: 34, turnId: "turn_bg" } },
+      { type: "session.waiting", data: { continuationToken: "eve:token-bg", wait: "next-user-message" } },
+    ],
+    answered,
+  );
+
+  const rendered = visibleMessages(unsolicited.messages);
+  assert.equal(rendered.length, before + 1, "the push is added, not merged into the previous answer");
+
+  const pushed = rendered.at(-1);
+  assert.equal(pushed.role, "assistant", "an unprompted turn must not be attributed to the family");
+  assert.equal(pushed.text, "מצאתי בובה בפוקימון סנטר שיבויה");
+  assert.equal(pushed.final, true, "so it can be read aloud like any other answer");
+  assert.equal(pushed.streaming, false);
+  assert.equal(unsolicited.continuationToken, "eve:token-bg", "the composer is usable again afterwards");
+});
+
+// The only way eve can wake a parked session is a follow-up on its continuation
+// token, which lands as a *user* message. So a background run reporting in puts
+// words in the family's mouth: a bubble they never typed, addressed to the agent
+// rather than to them. It has to vanish, and its answer has to stay.
+test("a background run's report never renders as a family message", () => {
+  const answered = play(FIRST_TURN);
+  const before = visibleMessages(answered.messages).length;
+
+  const pushed = play(
+    [
+      { type: "turn.started", data: { sequence: 40, turnId: "turn_bg2" } },
+      {
+        type: "message.received",
+        data: {
+          message: `${BACKGROUND_UPDATE_PREFIX} מחקר הסתיים: בובת פיקאצ׳ו ¥2,400, פוקימון סנטר שיבויה, יום 6`,
+          sequence: 40,
+          turnId: "turn_bg2",
+        },
+      },
+      {
+        type: "message.completed",
+        data: {
+          message: "מצאתי! בובת פיקאצ׳ו עולה בערך 2,400 ין",
+          finishReason: "stop",
+          sequence: 41,
+          stepIndex: 0,
+          turnId: "turn_bg2",
+        },
+      },
+      { type: "turn.completed", data: { sequence: 42, turnId: "turn_bg2" } },
+    ],
+    answered,
+  );
+
+  const rendered = visibleMessages(pushed.messages);
+  assert.equal(rendered.length, before + 1, "only the agent's answer is added");
+  assert.equal(
+    rendered.some((message) => message.text.includes(BACKGROUND_UPDATE_PREFIX)),
+    false,
+    "the machine payload must never reach the screen",
+  );
+  assert.equal(rendered.at(-1).role, "assistant");
+  assert.equal(rendered.at(-1).text, "מצאתי! בובת פיקאצ׳ו עולה בערך 2,400 ין");
+
+  // `received` gates the optimistic-bubble drop in useEveChat, so a background
+  // report must not look like confirmation of a send still in flight.
+  assert.equal(pushed.received, answered.received, "a background report is not a family send");
 });
 
 test("captures the continuation token from session.waiting", () => {

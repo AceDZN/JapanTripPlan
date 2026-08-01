@@ -1,4 +1,4 @@
-// The agent is read-only over the plan. Plan edits happen in the repo via the JAPAN2026 docs, not from a chat turn.
+// The agent is read-only over files. Plan edits go through edit_plan_doc, which proposes a change in Convex.
 import { disableTool } from "eve/tools";
 
 export default disableTool();

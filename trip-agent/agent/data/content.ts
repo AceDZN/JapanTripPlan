@@ -1,9 +1,9 @@
 // generated — run npm run sync-data
-// Source of truth: JAPAN2026/*.md and web/data/places.json in the repo root.
+// Source of truth: Convex (guides) and web/data/places.json (places).
 // Do not edit by hand; edits are overwritten on the next sync.
 
 export type Guide = {
-  /** File name inside JAPAN2026/, e.g. "09-DAILY-ITINERARY.md". */
+  /** Stable guide file name, e.g. "09-DAILY-ITINERARY.md". */
   file: string;
   /** First markdown H1 of the guide. */
   title: string;

@@ -310,8 +310,20 @@ export const internalCreateFor = internalMutation({
     priceYen: v.optional(v.number()),
     priority: priorityValidator,
     visibility: visibilityValidator,
+    /**
+     * Only ever `"researching"`, and only when the agent has already handed the
+     * wish to a background run in the same breath as creating it.
+     *
+     * Without this the wish lands as `"idea"` and two things break: the board
+     * shows no in-progress state for a wish the family was just told is being
+     * researched, and the sweep in `trip-agent/agent/schedules/wish-research.ts`
+     * cannot retry it if that run dies — the sweep only picks up `"researching"`.
+     * `internalApplyResearch` is what moves it back out.
+     */
+    researching: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
+    const { researching, ...fields } = args;
     const ownerEmail = args.ownerEmail.trim().toLowerCase();
     const member = FAMILY[ownerEmail];
     if (!member) throw new Error(`${ownerEmail} is not on the family list.`);
@@ -325,11 +337,11 @@ export const internalCreateFor = internalMutation({
 
     const now = Date.now();
     const id = await ctx.db.insert("wishes", {
-      ...args,
+      ...fields,
       title: args.title.trim(),
       ownerEmail,
       ownerName: member.name,
-      status: "idea",
+      status: researching ? "researching" : "idea",
       createdAt: now,
       updatedAt: now,
     });
@@ -383,6 +395,36 @@ export const internalApplyResearch = internalMutation({
 
     await ctx.db.patch("wishes", id, patch);
     return { id, ok: true };
+  },
+});
+
+/**
+ * Park an existing wish as `researching`. Service-key only, via
+ * `/agent/wishes/mark-researching`.
+ *
+ * Called when the chat agent hands a wish to a background run. It is the same
+ * state the "ask eve to research it" button sets, reached from the other side,
+ * and it buys two things: the board shows the wish in flight instead of looking
+ * untouched, and the sweep in `trip-agent/agent/schedules/wish-research.ts` can
+ * pick the wish back up if that run dies — the sweep only sees `"researching"`.
+ *
+ * Deliberately one-way. `internalApplyResearch` is the only way back out, so a
+ * wish the family has already decided on cannot be dragged backwards into a
+ * spinner by a stray background run.
+ */
+export const internalMarkResearching = internalMutation({
+  args: { id: v.id("wishes") },
+  handler: async (ctx, args) => {
+    const wish = await ctx.db.get("wishes", args.id);
+    if (!wish) return { ok: false as const, reason: "not-found" as const };
+    if (wish.status !== "idea") {
+      return { ok: false as const, reason: "not-idea" as const };
+    }
+    await ctx.db.patch("wishes", args.id, {
+      status: "researching",
+      updatedAt: Date.now(),
+    });
+    return { ok: true as const };
   },
 });
 

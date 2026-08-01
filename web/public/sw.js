@@ -4,7 +4,7 @@
  * Dependency-free. Three caches, all namespaced by VERSION so a bump wipes
  * everything stale on activate:
  *
- *   shell    precached app-shell documents + /markdown/*.md + manifest/icons
+ *   shell    precached app-shell documents + manifest/icons
  *   runtime  stale-while-revalidate for pages and build assets
  *   images   cache-first for photos, populated lazily as they are visited
  *
@@ -14,7 +14,7 @@
  * Bump VERSION whenever the precache list or a caching rule changes.
  */
 
-const VERSION = "japan2026-v3";
+const VERSION = "japan2026-v4";
 const SHELL_CACHE = `${VERSION}-shell`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 const IMAGE_CACHE = `${VERSION}-images`;
@@ -24,20 +24,6 @@ const OFFLINE_FALLBACK = "/";
 
 const DAY_ROUTES = Array.from({ length: 17 }, (_, i) => `/day/${i + 1}`);
 
-const MARKDOWN_FILES = [
-  "00-OVERVIEW",
-  "01-FLIGHTS",
-  "02-ACCOMMODATION",
-  "03-TRANSPORT",
-  "04-ANIME-POKEMON-GHIBLI",
-  "05-FOOD-GUIDE",
-  "06-DAY-TRIPS",
-  "07-BAR-MITZVAH",
-  "08-PRACTICAL-TIPS",
-  "09-DAILY-ITINERARY",
-  "10-BUDGET",
-  "11-PRE-TRIP-CHECKLIST",
-].map((name) => `/markdown/${name}.md`);
 
 const PRECACHE_URLS = [
   "/",
@@ -52,7 +38,6 @@ const PRECACHE_URLS = [
   // it still require a family session.
   "/private",
   ...DAY_ROUTES,
-  ...MARKDOWN_FILES,
   "/manifest.webmanifest",
   "/favicon.svg",
   "/icons/icon-192.png",
@@ -250,11 +235,6 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Trip documents: instant from cache, refreshed in the background.
-  if (url.pathname.startsWith("/markdown/")) {
-    event.respondWith(staleWhileRevalidate(SHELL_CACHE, request).catch(() => Response.error()));
-    return;
-  }
 
   // Page navigations: network-first with an offline fallback.
   if (request.mode === "navigate") {
