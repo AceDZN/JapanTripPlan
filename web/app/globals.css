@@ -1938,6 +1938,19 @@ a.status-chip:hover {
   color: var(--text-muted);
 }
 
+/**
+ * "Critical" is not "overdue". The critical chip used to borrow `.due-past`,
+ * which painted every must-do item in the overdue red and left the two items
+ * that had genuinely slipped indistinguishable from the twelve that had not.
+ * Outlined amber reads as "this one cannot be skipped" without competing with
+ * a real missed deadline.
+ */
+.due-critical {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  color: color-mix(in srgb, var(--gold) 62%, var(--text));
+}
+
 .pinned {
   background: linear-gradient(140deg, color-mix(in srgb, var(--vermillion) 9%, var(--surface)), var(--surface));
   border: 1px solid color-mix(in srgb, var(--vermillion) 26%, transparent);

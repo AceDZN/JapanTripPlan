@@ -284,7 +284,7 @@ export function ChecklistBoard() {
                     <div className="prep-tags">
                       <DueBadge item={item} today={today} />
                       {item.critical ? (
-                        <span className="due due-past">
+                        <span className="due due-critical">
                           <Flame size={12} />
                           קריטי
                         </span>

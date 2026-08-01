@@ -17,7 +17,10 @@ export const checklistItems: ChecklistItem[] = [
     group: "כרטיסים ואטרקציות",
     title: "הגרלת Nintendo Museum ל־15.10 — זכינו",
     detail: "הוגש בזמן וזכינו: הודעה ב־1.8. החריץ שהוקצה הוא 15.10 בשעה 14:30–15:00, ואי אפשר לשנות תאריך או שעה. יום 15 נבנה מחדש סביב החריץ הזה.",
-    due: "2026-07-31",
+    // No `due`: the 31 July entry deadline was met. Leaving it here painted a
+    // red "עבר התאריך" on a task that succeeded — the markdown row already
+    // reads ✅ / "Done — entry drawn Aug 1". The live deadline that matters now
+    // is the payment one, which is its own item below.
     url: "https://museum-tickets.nintendo.com/en/calendar?lang=en",
   },
   {
