@@ -507,4 +507,71 @@ export default defineSchema({
     content: v.string(),
     createdAt: v.number(),
   }).index("by_threadId_and_createdAt", ["threadId", "createdAt"]),
+
+  /**
+   * Proposed changes to the SHARED plan, awaiting the owner's decision.
+   *
+   * Scope is deliberately narrow: the trip documents (`guides`) and the daily
+   * route (`days`/`blocks`). Wishes are NOT routed through here — a family
+   * member manages their own wishes directly, shared or private, and needing
+   * Alex to rubber-stamp "I'd like to see this shop" would be friction with no
+   * payoff. This table is for the grand changes: rewriting a guide, moving a
+   * day around.
+   *
+   * The lifecycle is the same shape `wishes` already uses, minus the research
+   * states: pending -> approved | rejected | withdrawn.
+   *
+   * A guide suggestion carries a mechanical edit (`oldString`/`newString`, an
+   * exact substring replacement) so approving it can apply the change inside
+   * the same transaction. A day suggestion cannot — days are structured rows,
+   * not markdown — so it records intent and `appliedAt` stays null until the
+   * structured edit is actually made. `needsManualApply` says which is which
+   * rather than leaving the caller to infer it.
+   */
+  suggestions: defineTable({
+    targetKind: v.union(v.literal("guide"), v.literal("day")),
+    /** Set when targetKind === "guide". Matches `guides.slug`. */
+    guideSlug: v.optional(v.string()),
+    /** Set when targetKind === "day". Matches `days.n`. */
+    dayN: v.optional(v.number()),
+
+    /** One line, for the list and for the agent to read aloud. */
+    title: v.string(),
+    /** The case being made. Optional — some changes are self-evident. */
+    rationale: v.optional(v.string()),
+
+    /**
+     * Exact substring replacement against `guides.bodyHe`. `oldString` must
+     * occur EXACTLY once at apply time, which is checked on approval rather
+     * than on proposal: the document may have moved on in between.
+     */
+    oldString: v.optional(v.string()),
+    newString: v.optional(v.string()),
+
+    status: v.union(
+      v.literal("pending"),
+      v.literal("approved"),
+      v.literal("rejected"),
+      v.literal("withdrawn"),
+    ),
+    /** True when approval could not itself perform the edit (day targets). */
+    needsManualApply: v.boolean(),
+
+    proposedByEmail: v.string(),
+    proposedByName: v.string(),
+
+    decidedByEmail: v.optional(v.string()),
+    decidedByName: v.optional(v.string()),
+    decidedAt: v.optional(v.number()),
+    /** The owner's word on why — shown back to whoever proposed it. */
+    decisionNote: v.optional(v.string()),
+
+    /** When the change actually landed in the data. */
+    appliedAt: v.optional(v.number()),
+
+    createdAt: v.number(),
+  })
+    .index("by_status_and_createdAt", ["status", "createdAt"])
+    .index("by_proposedByEmail", ["proposedByEmail"])
+    .index("by_guideSlug", ["guideSlug"]),
 });

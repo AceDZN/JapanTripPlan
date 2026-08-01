@@ -2170,18 +2170,45 @@ a.status-chip:hover {
   color: var(--vermillion);
 }
 
-.guide-content table {
-  border-collapse: collapse;
-  display: block;
+/*
+ * The scroller lives on the wrapper (added by `wrapTables` in lib/markdown.ts),
+ * not on the table. That split is the whole point: the wrapper stays inside the
+ * column and clips, while the table is free to be as wide as its content needs.
+ * Putting both jobs on the table makes the PAGE scroll sideways instead.
+ *
+ * `tabindex="0"` on the wrapper comes from the renderer so the table is
+ * keyboard-scrollable; the focus ring is toned down since it is a scroll
+ * region rather than a control.
+ */
+.guide-content .table-scroll {
   max-width: 100%;
   overflow-x: auto;
   overscroll-behavior-x: contain;
+}
+
+.guide-content .table-scroll:focus-visible {
+  outline: 2px solid var(--line);
+  outline-offset: 2px;
+}
+
+.guide-content table {
+  border-collapse: collapse;
+  /* Size to content, then let the wrapper scroll. */
+  width: max-content;
+  max-width: none;
 }
 
 .guide-content th,
 .guide-content td {
   border: 1px solid var(--line);
   min-width: 130px;
+  /*
+   * The cap that stops a route description becoming one enormous line. Columns
+   * of short values (flight numbers, times, fares) stay narrow because the
+   * table sizes to content; only prose columns reach this and then wrap
+   * normally, which is what keeps rows a readable height.
+   */
+  max-width: 44ch;
   padding: 9px 12px;
   text-align: start;
   vertical-align: top;
@@ -3161,4 +3188,34 @@ a.status-chip:hover {
 .wish-vis {
   justify-content: center;
   min-width: 132px;
+}
+
+/**
+ * A wish nobody has researched yet.
+ *
+ * Deliberately visible rather than an empty card: "just a title" is what the
+ * family could already write themselves, so the card should name the gap and
+ * point at the way to close it.
+ */
+.wish-unresearched {
+  align-items: flex-start;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  color: var(--text-muted);
+  display: flex;
+  font-size: 12.5px;
+  gap: 6px;
+  line-height: 1.55;
+  padding: 7px 9px;
+}
+
+.wish-unresearched svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.wish-unresearched a {
+  color: var(--vermillion-deep);
+  font-weight: 700;
+  text-decoration: underline;
 }

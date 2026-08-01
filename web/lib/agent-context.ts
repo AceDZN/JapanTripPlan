@@ -20,6 +20,26 @@
  */
 const SPEAKER_CLAUSE = "משתמש";
 
+/**
+ * The clause carrying what the speaker is ALLOWED to do.
+ *
+ * Split from the speaker clause on purpose: the agent needs "who" for
+ * attribution (whose wish is this) and "what rank" for authority (may this
+ * person approve a change to the plan), and they are answered by different
+ * questions. Keeping them separate means a prompt that reads one does not
+ * accidentally depend on the format of the other.
+ *
+ * Values are the English `FamilyRole` literals — `owner`, `adult`, `kid` — and
+ * deliberately NOT translated. The agent matches on them, and a role that
+ * changes spelling between the allowlist and the prompt is a bug waiting to
+ * happen.
+ *
+ * Critically, this is stripped from client input for the same reason the
+ * speaker clause is: a browser that could write `תפקיד: owner` into its own
+ * turn would hand itself approval rights.
+ */
+const ROLE_CLAUSE = "תפקיד";
+
 /** `[` … `]` of the leading context part, if the client sent one. */
 const CONTEXT_LINE = /^(\s*\[הקשר:)([^\]]*)(\])/;
 
@@ -34,7 +54,7 @@ const CONTEXT_LINE = /^(\s*\[הקשר:)([^\]]*)(\])/;
  */
 export function withVerifiedSpeaker(
   raw: string,
-  member: { name: string; email: string } | null,
+  member: { name: string; email: string; role?: string } | null,
 ): string {
   let payload: unknown;
   try {
@@ -51,9 +71,20 @@ export function withVerifiedSpeaker(
     const inner = (match ? match[2] : "")
       .split(";")
       .map((clause) => clause.trim())
-      .filter((clause) => clause.length > 0 && !clause.startsWith(`${SPEAKER_CLAUSE}:`));
+      .filter(
+        (clause) =>
+          clause.length > 0 &&
+          !clause.startsWith(`${SPEAKER_CLAUSE}:`) &&
+          !clause.startsWith(`${ROLE_CLAUSE}:`),
+      );
 
-    if (member) inner.push(`${SPEAKER_CLAUSE}: ${member.name} <${member.email}>`);
+    if (member) {
+      inner.push(`${SPEAKER_CLAUSE}: ${member.name} <${member.email}>`);
+      // Only ever from the server-resolved allowlist entry. A member without a
+      // role is not given one by default — silence is safer than guessing, and
+      // the agent treats a missing role as "cannot approve".
+      if (member.role) inner.push(`${ROLE_CLAUSE}: ${member.role}`);
+    }
 
     if (!match) {
       // Nothing to rewrite; only add a line when we actually know who this is.
@@ -80,10 +111,10 @@ export function withVerifiedSpeaker(
     );
     if (first) first.text = stamp(first.text);
     else if (member) {
-      message.unshift({
-        type: "text",
-        text: `[הקשר: ${SPEAKER_CLAUSE}: ${member.name} <${member.email}>]`,
-      });
+      // No text part to rewrite (an image-only turn, say). `stamp("")` builds
+      // the same clause list the text path would, so the role travels here too
+      // rather than this branch quietly dropping it.
+      message.unshift({ type: "text", text: stamp("").trim() });
     }
     return JSON.stringify(payload);
   }

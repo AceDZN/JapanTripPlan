@@ -270,6 +270,67 @@ http.route({
   }),
 });
 
+/* -------------------------------------------------------------- suggestions */
+
+/**
+ * Propose a change to a guide or a day, on behalf of a named family member.
+ *
+ * Note what is NOT here: there is no `/agent/suggestions/approve`, and adding
+ * one would defeat the point of the table. Approval requires proof that the
+ * owner personally said yes, and AGENT_SERVICE_KEY is not that proof — every
+ * agent process holds it. `convex/suggestions.ts:approve` refuses a service
+ * actor outright, so even if a route were added it would only ever 500.
+ *
+ * The owner approves from the app, or from a chat turn carrying their own
+ * Clerk identity. Everything reachable with the service key stops at "pending".
+ */
+http.route({
+  path: "/agent/suggestions/propose",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+    if (typeof row.proposedByEmail !== "string" || typeof row.title !== "string") {
+      return json(
+        {
+          ok: false,
+          error: "expected { proposedByEmail, targetKind, title, guideSlug?|dayN?, oldString?, newString? }",
+        },
+        400,
+      );
+    }
+    if (row.targetKind !== "guide" && row.targetKind !== "day") {
+      return json({ ok: false, error: "targetKind must be \"guide\" or \"day\"" }, 400);
+    }
+
+    try {
+      const result = await ctx.runMutation(
+        internal.suggestions.internalProposeFor,
+        row as never,
+      );
+      return json({ ...result, ok: true });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/** What is waiting on the owner, so the agent can read the queue back in chat. */
+http.route({
+  path: "/agent/suggestions/pending",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+    const suggestions = await ctx.runQuery(internal.suggestions.internalListPending, {});
+    return json({ ok: true, suggestions });
+  }),
+});
+
 /** Write research back onto a wish. Cannot change ownership or visibility. */
 http.route({
   path: "/agent/wishes/research",

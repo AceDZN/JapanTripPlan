@@ -13,6 +13,7 @@ import {
   Lock,
   MapPin,
   Plus,
+  Search,
   ShoppingBag,
   Sparkles,
   Trash2,
@@ -317,6 +318,21 @@ function WishCard({ wish }: { wish: Wish }) {
 
   const foreign = [wish.titleEn, wish.titleJa].filter(Boolean).join(" · ");
 
+  /**
+   * A wish nobody has researched yet.
+   *
+   * Worth saying out loud rather than rendering a card that is just a title
+   * and looks broken. The whole promise of handing a wish to eve is the price,
+   * the shop and the day — so when those are missing the card should say so
+   * and offer the way to get them, not quietly show nothing.
+   */
+  const needsResearch =
+    wish.status !== "researching" &&
+    !wish.note &&
+    !wish.priceYen &&
+    !(wish.whereToBuy?.length ?? 0) &&
+    !wish.images?.some((image) => image.url);
+
   return (
     <article className="card wish-card" data-status={wish.status}>
       <div className="wish-card-head">
@@ -351,6 +367,16 @@ function WishCard({ wish }: { wish: Wish }) {
       ) : null}
 
       {wish.note ? <p className="wish-note">{wish.note}</p> : null}
+
+      {needsResearch ? (
+        <p className="wish-unresearched">
+          <Search size={13} />
+          <span>
+            עוד לא נחקר — אין מחיר, חנות או תמונה.{" "}
+            <Link href="/chat">בקשו מ־eve לבדוק</Link>
+          </span>
+        </p>
+      ) : null}
 
       {wish.images?.some((img) => img.url) ? (
         <div className="wish-images">
@@ -417,6 +443,13 @@ function WishCard({ wish }: { wish: Wish }) {
         <select
           value={wish.status}
           disabled={busy || (!wish.mine && wish.visibility === "private")}
+          /**
+           * A wheel over a focused native select cycles its value. On a page
+           * you scroll through, that silently rewrites shared family data —
+           * it is how this very wish got marked "ירד" and disappeared from
+           * everyone's list. Blurring on wheel makes the scroll a scroll.
+           */
+          onWheel={(e) => e.currentTarget.blur()}
           onChange={async (e) => {
             setBusy(true);
             try {

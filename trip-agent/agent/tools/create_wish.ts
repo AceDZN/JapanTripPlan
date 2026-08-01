@@ -17,7 +17,9 @@ import { CONVEX_UNCONFIGURED, convexConfigured, convexPost } from "../lib/convex
 export default defineTool({
   description: [
     "Add a wish to the family list on behalf of the person in this conversation.",
-    "Use it when someone says they want something — a product, a place, a food, an experience.",
+    "THIS is the tool for 'תוסיף/י לרשימה', 'אני רוצה', 'תמצא/י לי', 'we want', 'add to my list' —",
+    "anything somebody wants to get, eat, see or do. Never record such a request with edit_plan_doc:",
+    "a wish written into a guide never reaches the family's wish pages or their day pages.",
     "You MUST pass their e-mail from the `משתמש:` clause of the context line; never guess it,",
     "and never use somebody else's. If there is no such clause you do not know who is asking:",
     "do not call this tool, tell them to sign in instead.",

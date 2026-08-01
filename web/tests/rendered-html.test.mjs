@@ -632,7 +632,13 @@ test("serves the PWA manifest and service worker from the app origin", async () 
   assert.match(await worker.text(), /caches/);
 });
 
-test("keeps all generated guides synchronized with the canonical Markdown", async () => {
+// Post-cutover, `JAPAN2026/*.md` is no longer the truth — Convex is, and those
+// files are the git-tracked export of it (`npm run export:md`). So this test is
+// now the SECOND link in the chain rather than the first: `npm test` runs
+// `export:md --check` beforehand to assert Convex→files, and this asserts
+// files→`public/markdown`. Together they still pin "what the site serves is what
+// the trip says", which is what the assertions below are really guarding.
+test("keeps public/markdown in step with the exported guide files", async () => {
   const sourceRoot = new URL("../../JAPAN2026/", import.meta.url);
   const publicRoot = new URL("../public/markdown/", import.meta.url);
   const files = (await readdir(sourceRoot))

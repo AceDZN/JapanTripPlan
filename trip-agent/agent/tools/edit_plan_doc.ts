@@ -33,6 +33,11 @@ const catalog = guides.map((g) => `- ${g.file}: ${g.title}`).join("\n");
 export default defineTool({
   description: [
     "Edit one of the canonical Japan 2026 trip documents and commit the change to the repo.",
+    "",
+    "NOT for wish lists. If somebody says they WANT something — a product, a place, a food, an",
+    "experience — that is a wish and belongs in `create_wish`, never in a document. Writing a wish",
+    "into a guide puts it somewhere the family's wish pages cannot see, and it is the wrong answer",
+    "even though it looks like 'adding it to the plan'.",
     "This is how the plan actually changes: the documents are the single source of truth, and the",
     "trip website and this agent both rebuild from them automatically after the commit.",
     "",
