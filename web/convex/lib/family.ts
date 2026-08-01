@@ -1,11 +1,16 @@
 /**
- * Who counts as family.
+ * Who counts as family. This list IS the access control for the trip.
  *
- * Sign-in is Google one-tap — no passwords, no keys to type, and everyone is
- * already signed into Google on their phone. This allowlist is what turns
- * "anyone with a Google account" into "the four of us": an address that is not
- * on this list cannot sign in at all, so the trip can be read by anyone with
- * the URL but changed only by us.
+ * Sign-in is Clerk e-mail + password. We deliberately do NOT use Clerk's
+ * Allowlist feature (it is a paid plan, and for four people it would buy us
+ * nothing): authorization is enforced here, on the server, on every call.
+ *
+ * What that means in practice — if a stranger somehow creates an account on
+ * our Clerk instance, they get a valid session and precisely nothing with it.
+ * They see the same public itinerary anyone with the URL can see, and every
+ * write and every private record is refused, because `requireFamily()` looks
+ * up their address here and does not find it. The gate is in version control
+ * rather than in a dashboard setting, which is where we want it.
  *
  * `name` is what shows up as "who closed this" on a ticked checklist item, so
  * keep it short and human.
