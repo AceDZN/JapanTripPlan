@@ -28,7 +28,7 @@ export type FamilyMember = {
 
 export const FAMILY: Record<string, FamilyMember> = {
   "alex@acedzn.com": { name: "Alex", role: "owner" },
-  "yonitiny@gmail.com": { name: "Yoni", role: "adult" },
+  "yonitiny@gmail.com": { name: "Yonit", role: "adult" },
   "maya.s@acedzn.com": { name: "Maya", role: "kid" },
   "tommy@acedzn.com": { name: "Tommy", role: "kid" },
 };
