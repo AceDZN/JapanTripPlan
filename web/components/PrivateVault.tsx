@@ -288,7 +288,9 @@ function RecordCard({
             </a>
           ) : null}
           {!empty && record.updatedBy ? (
-            <p className="eyebrow" style={{ marginTop: 8 }}>עודכן על ידי {record.updatedBy}</p>
+            <p style={{ marginTop: 8, fontSize: 12, opacity: 0.6 }}>
+              עודכן על ידי {record.updatedBy}
+            </p>
           ) : null}
         </>
       )}
