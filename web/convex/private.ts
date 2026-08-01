@@ -1,6 +1,24 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { internalMutation, mutation, query } from "./_generated/server";
 import { requireFamily } from "./lib/guards";
+
+const subjectValidator = v.union(
+  v.literal("place"),
+  v.literal("day"),
+  v.literal("booking"),
+  v.literal("guide"),
+  v.literal("checklistItem"),
+  v.literal("trip"),
+);
+
+const kindValidator = v.union(
+  v.literal("ticket"),
+  v.literal("confirmation"),
+  v.literal("address"),
+  v.literal("doorCode"),
+  v.literal("passport"),
+  v.literal("note"),
+);
 
 /**
  * Family-only data: ticket links, booking confirmations, Airbnb addresses,
@@ -54,6 +72,7 @@ export const listForSubject = query({
       label: row.label,
       value: row.value,
       url: row.url,
+      hint: row.hint,
       updatedAt: row.updatedAt,
       updatedBy: row.updatedBy,
     }));
@@ -73,6 +92,7 @@ export const listAll = query({
       label: row.label,
       value: row.value,
       url: row.url,
+      hint: row.hint,
       updatedAt: row.updatedAt,
       updatedBy: row.updatedBy,
     }));
@@ -101,6 +121,7 @@ export const upsert = mutation({
     label: v.string(),
     value: v.string(),
     url: v.optional(v.string()),
+    hint: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const actor = await requireFamily(ctx);
@@ -120,6 +141,62 @@ export const upsert = mutation({
       return match._id;
     }
     return await ctx.db.insert("privateRecords", doc);
+  },
+});
+
+/**
+ * Seeding path for the machine API.
+ *
+ * Internal on purpose: it skips `requireFamily()` because the only caller is
+ * the Bearer-authenticated `/agent/private/upsert` route, which has already
+ * proven it holds AGENT_SERVICE_KEY. It must never be exposed publicly.
+ *
+ * Used by `scripts/seed-private-slots.ts` to create the empty slots for every
+ * private item the guides reference — values stay blank; only the family fills
+ * those in.
+ */
+export const internalUpsert = internalMutation({
+  args: {
+    subject: subjectValidator,
+    subjectId: v.string(),
+    kind: kindValidator,
+    label: v.string(),
+    value: v.string(),
+    url: v.optional(v.string()),
+    hint: v.optional(v.string()),
+    updatedBy: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const { updatedBy, ...fields } = args;
+
+    const existing = await ctx.db
+      .query("privateRecords")
+      .withIndex("by_subject_and_subjectId", (q) =>
+        q.eq("subject", args.subject).eq("subjectId", args.subjectId),
+      )
+      .take(MAX_PRIVATE);
+
+    const match = existing.find((row) => row.kind === args.kind && row.label === args.label);
+
+    // Never clobber a filled-in value with a blank seed: re-running the seeder
+    // must be safe once the family has started entering real data.
+    if (match) {
+      if (match.value.trim().length > 0 && fields.value.trim().length === 0) {
+        return match._id;
+      }
+      await ctx.db.patch("privateRecords", match._id, {
+        ...fields,
+        updatedAt: Date.now(),
+        updatedBy: updatedBy ?? "seed",
+      });
+      return match._id;
+    }
+
+    return await ctx.db.insert("privateRecords", {
+      ...fields,
+      updatedAt: Date.now(),
+      updatedBy: updatedBy ?? "seed",
+    });
   },
 });
 

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Authenticated, AuthLoading, Unauthenticated, useMutation, useQuery } from "convex/react";
 import { UserButton } from "@clerk/nextjs";
-import { KeyRound, Lock, Plus, Trash2, ExternalLink } from "lucide-react";
+import { KeyRound, Lock, Pencil, Plus, Trash2, ExternalLink } from "lucide-react";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 
@@ -151,8 +151,155 @@ function AddRecordForm({ onDone }: { onDone: () => void }) {
   );
 }
 
+type Record_ = {
+  id: string;
+  subject: string;
+  subjectId: string;
+  kind: string;
+  label: string;
+  value: string;
+  url?: string;
+  hint?: string;
+  updatedBy?: string;
+};
+
+/**
+ * One record, which may be an empty slot waiting to be filled.
+ *
+ * Most rows start blank: the seeder lays out a slot for every private item the
+ * guides reference, but never invents a value. An empty slot shows where the
+ * real value lives today so whoever fills it knows where to look.
+ */
+function RecordCard({
+  record,
+  onRemove,
+}: {
+  record: Record_;
+  onRemove: (args: { id: Id<"privateRecords"> }) => Promise<null>;
+}) {
+  const upsert = useMutation(api.private.upsert);
+  const [editing, setEditing] = useState(false);
+  const [value, setValue] = useState(record.value);
+  const [url, setUrl] = useState(record.url ?? "");
+  const [saving, setSaving] = useState(false);
+
+  const empty = record.value.trim().length === 0;
+
+  async function save() {
+    setSaving(true);
+    try {
+      await upsert({
+        subject: record.subject as never,
+        subjectId: record.subjectId,
+        kind: record.kind as never,
+        label: record.label,
+        value: value.trim(),
+        url: url.trim() || undefined,
+        hint: record.hint,
+      });
+      setEditing(false);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <article className="card" style={{ padding: 16, opacity: empty && !editing ? 0.72 : 1 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+        <span className="chip">{kindLabel(record.kind)}</span>
+        <strong style={{ flex: 1 }}>{record.label}</strong>
+        {empty && !editing ? <span className="chip">ריק</span> : null}
+        <button
+          className="text-link"
+          type="button"
+          aria-label={`עריכת ${record.label}`}
+          onClick={() => setEditing((v) => !v)}
+        >
+          <Pencil size={15} />
+        </button>
+        <button
+          className="text-link"
+          type="button"
+          aria-label={`מחיקת ${record.label}`}
+          onClick={() => {
+            if (confirm(`למחוק את "${record.label}"?`)) {
+              void onRemove({ id: record.id as Id<"privateRecords"> });
+            }
+          }}
+        >
+          <Trash2 size={15} />
+        </button>
+      </div>
+
+      {editing ? (
+        <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
+          <textarea
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            rows={3}
+            autoFocus
+            placeholder="להדביק כאן את הערך האמיתי…"
+          />
+          <input
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="קישור (לא חובה)"
+            dir="ltr"
+          />
+          <div style={{ display: "flex", gap: 8 }}>
+            <button className="btn btn-primary btn-sm" type="button" onClick={save} disabled={saving}>
+              {saving ? "שומר…" : "שמירה"}
+            </button>
+            <button
+              className="btn btn-glass btn-sm"
+              type="button"
+              onClick={() => {
+                setValue(record.value);
+                setUrl(record.url ?? "");
+                setEditing(false);
+              }}
+            >
+              ביטול
+            </button>
+          </div>
+        </div>
+      ) : (
+        <>
+          {empty ? (
+            record.hint ? (
+              <p
+                style={{
+                  margin: "10px 0 0",
+                  fontSize: 13,
+                  lineHeight: 1.65,
+                  opacity: 0.72,
+                }}
+              >
+                <span style={{ fontWeight: 600 }}>איפה זה נמצא עכשיו:</span> {record.hint}
+              </p>
+            ) : null
+          ) : (
+            <p style={{ whiteSpace: "pre-wrap", margin: "8px 0 0" }}>{record.value}</p>
+          )}
+          {record.url ? (
+            <a className="text-link" href={record.url} target="_blank" rel="noreferrer" dir="ltr">
+              {record.url}
+              <ExternalLink size={13} />
+            </a>
+          ) : null}
+          {!empty && record.updatedBy ? (
+            <p className="eyebrow" style={{ marginTop: 8 }}>עודכן על ידי {record.updatedBy}</p>
+          ) : null}
+        </>
+      )}
+    </article>
+  );
+}
+
 function VaultList() {
   const records = useQuery(api.private.listAll);
+  // Public query — used only to turn place slugs into readable Hebrew names.
+  const places = useQuery(api.trip.listPlaces);
   const remove = useMutation(api.private.remove);
   const [adding, setAdding] = useState(false);
 
@@ -166,6 +313,12 @@ function VaultList() {
     return [...map.entries()].sort(([a], [b]) => a.localeCompare(b));
   }, [records]);
 
+  const placeName = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const place of places ?? []) map.set(place.id, place.nameHe);
+    return map;
+  }, [places]);
+
   if (records === undefined) {
     return <p className="lede">טוען…</p>;
   }
@@ -176,7 +329,7 @@ function VaultList() {
         <p className="lede" style={{ margin: 0 }}>
           {records.length === 0
             ? "הכספת ריקה. אפשר להתחיל מאישור ההזמנה של teamLab או מקוד הכניסה לדירה בטבטה."
-            : `${records.length} פריטים שמורים, גלויים רק למשפחה.`}
+            : `${records.length} פריטים, מתוכם ${records.filter((r) => !r.value.trim()).length} עוד מחכים למילוי. גלוי רק למשפחה.`}
         </p>
         <button className="btn btn-glass" type="button" onClick={() => setAdding((v) => !v)}>
           <Plus size={16} />
@@ -190,42 +343,14 @@ function VaultList() {
         <section key={key}>
           <div className="section-head" style={{ marginBottom: 10 }}>
             <p className="eyebrow">
-              {subjectLabel(items[0].subject)}
-              {items[0].subject !== "trip" ? ` · ${items[0].subjectId}` : ""}
+              {items[0].subject === "trip"
+                ? subjectLabel(items[0].subject)
+                : placeName.get(items[0].subjectId) ?? items[0].subjectId}
             </p>
           </div>
           <div style={{ display: "grid", gap: 12 }}>
             {items.map((record) => (
-              <article className="card" key={record.id} style={{ padding: 16 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                  <span className="chip">{kindLabel(record.kind)}</span>
-                  <strong style={{ flex: 1 }}>{record.label}</strong>
-                  <button
-                    className="text-link"
-                    type="button"
-                    aria-label={`מחיקת ${record.label}`}
-                    onClick={() => {
-                      if (confirm(`למחוק את "${record.label}"?`)) {
-                        void remove({ id: record.id as Id<"privateRecords"> });
-                      }
-                    }}
-                  >
-                    <Trash2 size={15} />
-                  </button>
-                </div>
-                <p style={{ whiteSpace: "pre-wrap", margin: "8px 0 0" }}>{record.value}</p>
-                {record.url ? (
-                  <a className="text-link" href={record.url} target="_blank" rel="noreferrer" dir="ltr">
-                    {record.url}
-                    <ExternalLink size={13} />
-                  </a>
-                ) : null}
-                {record.updatedBy ? (
-                  <p className="eyebrow" style={{ marginTop: 8 }}>
-                    עודכן על ידי {record.updatedBy}
-                  </p>
-                ) : null}
-              </article>
+              <RecordCard key={record.id} record={record} onRemove={remove} />
             ))}
           </div>
         </section>

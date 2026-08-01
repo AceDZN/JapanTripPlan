@@ -113,6 +113,58 @@ http.route({
 });
 
 /**
+ * Create or update one private record.
+ *
+ * Used by the seeder to lay out an empty slot for every private item the
+ * guides reference ("save it in the private lodging folder", "keep the door
+ * code out of the public itinerary"), and available to eve later. A blank
+ * value never overwrites a filled-in one.
+ */
+http.route({
+  path: "/agent/private/upsert",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    const actor = serviceActorFromRequest(request);
+    if (!actor) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const { subject, subjectId, kind, label, value, url, hint, updatedBy } = body as Record<string, unknown>;
+
+    if (
+      typeof subject !== "string" ||
+      typeof subjectId !== "string" ||
+      typeof kind !== "string" ||
+      typeof label !== "string" ||
+      typeof value !== "string"
+    ) {
+      return json(
+        { ok: false, error: "expected { subject, subjectId, kind, label, value } as strings" },
+        400,
+      );
+    }
+
+    try {
+      const id = await ctx.runMutation(internal.private.internalUpsert, {
+        subject: subject as never,
+        subjectId,
+        kind: kind as never,
+        label,
+        value,
+        url: typeof url === "string" && url.length > 0 ? url : undefined,
+        hint: typeof hint === "string" && hint.length > 0 ? hint : undefined,
+        updatedBy: typeof updatedBy === "string" ? updatedBy : undefined,
+      });
+      return json({ ok: true, id });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/**
  * Every guide with its body, for regenerating `JAPAN2026/*.md`.
  *
  * The counterpart to /agent/import: because this exists, the trip can always

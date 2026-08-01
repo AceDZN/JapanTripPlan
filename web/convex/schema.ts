@@ -247,8 +247,15 @@ export default defineSchema({
       v.literal("note"),
     ),
     label: v.string(),
+    /** Blank means "slot exists, nobody has filled it in yet". */
     value: v.string(),
     url: v.optional(v.string()),
+    /**
+     * Where the real value lives today (an inbox, a Drive folder, the Airbnb
+     * chat). Seeded from the guides' own "keep it in the private folder"
+     * notes so whoever fills a slot knows where to look.
+     */
+    hint: v.optional(v.string()),
     updatedAt: v.number(),
     updatedBy: v.optional(v.string()),
   })
