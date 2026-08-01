@@ -35,7 +35,15 @@ The split stay is now selected. Keeping a Tokyo apartment from **Oct 2-17** whil
 | Access | Self-check-in with lockbox |
 | Host | Voyan Hotels |
 
-The reservation screen describes the selected product as a renovated multi-room apartment near Tabata Station for up to 11 guests. Save the exact bed, floor and bathroom layout from the house manual before travel so there is no arrival-night ambiguity.
+The reservation screen describes the selected product as a renovated multi-room apartment near Tabata Station for up to 11 guests. The reservation panel names the unit as the 3-room / 11-guest apartment: **3 bedrooms, 4 beds, 1 bath**, with kitchen, washer, dryer, Wi-Fi and air conditioning. Save the exact bed, floor and bathroom layout from the house manual before travel so there is no arrival-night ambiguity.
+
+#### Building access — the arrival-night constraint
+
+**There is no lift.** The listing states it twice: "No elevator in the building" and "The building only has stairs, no elevator." Combined with a 22:00–23:00 arrival and four large suitcases, this is the biggest single friction on Day 1.
+
+- The floor the unit sits on is **not published**. The other units in the building are numbered 301, which suggests a third floor. Confirm with the host before travel.
+- At Tabata Station use the **north exit**, which has an escalator. A reviewer reports the south exit has roughly **100 steps** plus a steep ramp — avoid it with suitcases.
+- Plan the arrival on the assumption that every bag is carried up by hand, late at night, by two adults and two tired children.
 
 #### Host requirements and operating rules
 
@@ -151,7 +159,9 @@ MIMARU Ueno East has a full kitchen but **coin laundry, not an in-room washer/dr
 
 #### Before arrival
 
-- Complete the host-supplied guest-registration Google Form before check-in, then tell the host in Airbnb chat that it is complete.
+- Complete the host-supplied guest-registration Google Form before check-in, then tell the host in Airbnb chat that it is complete. **Submitted Aug 1, 2026** with all four guests and passport images.
+- The host's chat message links the form's `/edit` URL rather than the guest response URL. Use the `/viewform` version. Flag the mistake to the host: an editable link can expose other guests' submitted passport scans.
+- The entry code has already been changed once by the host (Jul 24 → Thursday before Aug 1). **Re-verify the code in the Airbnb thread within 48 hours of arrival** rather than trusting the earliest message.
 - Open the form only from the original Airbnb host message. Do not copy the form, confirmation number, exact address or access credentials into this web-synced guide.
 - Read the host’s access guide and save it offline.
 - The host has **not** offered pre-check-in or post-checkout luggage storage. Forward the main suitcases to Osaka if accepted there, and keep the two-night bags in Kyoto Station lockers/storage until check-in.

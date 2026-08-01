@@ -14,11 +14,11 @@
 | [ ] | Start breaking in the new shoes | From the first week after purchase | Three short walks, then one 8–10 km family test; exchange immediately if there are hot spots | All 4 |
 | ✅ | Enter Nintendo Museum lottery for Oct 15 | Done — entry drawn Aug 1 | Awarded window **Oct 15, 14:30–15:00 JST**, not changeable | Adult lead |
 | [ ] | **Pay for the Nintendo Museum tickets** | **By Aug 7, 23:59 JST — the win lapses otherwise** | Drawing page link in the family safe. 2 adult + 2 youth, JPY 11,000. Card payments may be down for maintenance on the first Tuesday of the month, so avoid leaving it to Aug 4 | Adult lead |
-| [ ] | Complete Tokyo guest passport submission and confirm late self-check-in | Now | Airbnb chat only; obtain written acceptance and save it in the private lodging folder | Adult lead |
-| [ ] | Complete Kyoto guest registration and save access guide | Now | Host form + Airbnb chat; keep door code out of the public itinerary | Adult lead |
+| [ ] | Confirm Tokyo late self-check-in in writing | Now — awaiting host reply | Passports for all four **sent Aug 1** in the Airbnb chat, with the 21:30–23:00 arrival window, the no-lift/floor question and the bed-and-bathroom questions. Still need the host's written acceptance plus lockbox details and a night contact; save both in the private lodging folder | Adult lead |
+| [ ] | Tell the Kyoto host the registration is done | Now | Google Form **submitted Aug 1** with all four passports. Drafted Airbnb reply still to send; it also asks what Room D shares with Rooms A–C, and asks the host to re-confirm the entry code. Keep the door code out of the public itinerary | Adult lead |
 | [ ] | Book Osaka Oct 13–15 and final Tokyo Oct 15–17 | Now | Chosen booking platform; refundable option preferred until the route is fully locked | Adults |
 | [ ] | Buy/confirm family travel insurance | Now | Insurer site; include medical care, disruption and booked-ticket cancellation where available | Adults |
-| [ ] | Check all four passports and names | Now | At home against airline and booking records; record expiry dates privately | Adults |
+| [ ] | Check all four passports and names | Now | Passport side verified Aug 1: all four data pages agree with their MRZ lines, surname is **SINDALOVSKY** on all four, and the earliest expiry (Maya, Tommy) is Jul 3, 2027 — clear of the Oct 18 return. Still to do: match these spellings against the ISSTA e-ticket and every named ticket | Adults |
 | [ ] | Complete the Ethiopian e-ticket record | Now | Save PNR/e-ticket numbers, terminals, purchased baggage, seats/meals, paid total and disruption contacts in the private flight folder | Adults |
 
 ## Bookings and Tickets

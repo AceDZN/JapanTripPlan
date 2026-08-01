@@ -68,10 +68,12 @@ The Great Buddha, Meiji Shrine and Senso-ji stay because they are iconic and bri
 - **19:40:** ET672 arrives at Narita.
 - Allow roughly 90 minutes for immigration, bags and customs.
 - Buy the next practical Skyliner to Nippori after collecting bags, then connect by JR to Tabata; keep an airport-bus/taxi fallback.
+- **Leave Tabata Station by the north exit.** It has an escalator; the south exit is roughly 100 steps plus a steep ramp. This matters more than usual — see the next point.
+- **The apartment building has no lift.** Every suitcase goes up the stairs by hand, near midnight, after ~22 hours of travel. Send the heavy bags ahead or pack so each person can carry their own; decide this before departure, not on the pavement.
 - Message the accommodation after landing and follow the late self-check-in instructions saved offline.
 - Buy a simple konbini dinner and breakfast. No sightseeing.
 
-**Pre-trip gate — not an arrival-day task:** before departure, send passport images for all four guests in Airbnb chat, obtain written confirmation that arrival around 22:00–23:00 is permitted and save the released instructions offline.
+**Pre-trip gate — not an arrival-day task:** passport images for all four guests were sent in Airbnb chat on **Aug 1**, together with the 21:30–23:00 arrival window. Still outstanding: the host's written confirmation that the late arrival is permitted, the lockbox details, a contact who answers at night, and which floor the unit is on. Save the released instructions offline.
 
 ---
 

@@ -21,9 +21,17 @@ import { cityLabels, mapsSearchUrl } from "@/lib/trip-data";
 import { getPlaceIndex, getTripDay, getTripDays } from "@/lib/trip-source";
 import type { Place } from "@/lib/types";
 
-export async function generateStaticParams() {
-  const days = await getTripDays();
-  return days.map((day) => ({ n: String(day.day) }));
+/**
+ * The trip is 17 days. That is a fixed fact, not data.
+ *
+ * This used to fetch the day list from Convex, which made every build depend
+ * on the database being both reachable and already populated — so a fresh
+ * deployment could never be built against, and a Convex blip would fail the
+ * build rather than one request. The route list is now static; the pages
+ * themselves still render from Convex.
+ */
+export function generateStaticParams() {
+  return Array.from({ length: 17 }, (_, i) => ({ n: String(i + 1) }));
 }
 
 export async function generateMetadata({
