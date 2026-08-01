@@ -7,19 +7,19 @@
   },
   "scripts": {
     "sync:content": "node scripts/sync-content.mjs",
-    "import:convex": "tsx --env-file=.env.local scripts/import-to-convex.ts",
-    "export:md": "tsx --env-file=.env.local scripts/export-md.ts",
+    "import:convex": "tsx --env-file-if-exists=.env.local scripts/import-to-convex.ts",
+    "export:md": "tsx --env-file-if-exists=.env.local scripts/export-md.ts",
     "sync:from-prod": "node scripts/sync-deployment.mjs from-prod",
     "sync:to-prod": "node scripts/sync-deployment.mjs to-prod",
     "predev": "npm run sync:content",
     "dev": "next dev",
-    "prebuild": "npm run export:md && npm run sync:content",
+    "prebuild": "npm run sync:content",
     "build": "next build",
     "start": "next start",
     "test": "npm run build && npm run export:md -- --check && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern .next",
-    "seed:private": "tsx --env-file=.env.local scripts/seed-private-slots.ts",
-    "seed:wishes": "tsx --env-file=.env.local scripts/seed-wishes.ts"
+    "seed:private": "tsx --env-file-if-exists=.env.local scripts/seed-private-slots.ts",
+    "seed:wishes": "tsx --env-file-if-exists=.env.local scripts/seed-wishes.ts"
   },
   "dependencies": {
     "@ai-sdk/gateway": "^4.0.28",
