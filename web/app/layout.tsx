@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Heebo, Noto_Serif_Hebrew } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { heIL } from "@clerk/localizations";
 import { AppShell } from "@/components/AppShell";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import { ServiceWorkerRegistrar } from "@/components/chat/ServiceWorkerRegistrar";
@@ -76,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider localization={heIL} afterSignOutUrl="/">
       <ConvexClientProvider>
         <html lang="he" dir="rtl">
           <body className={`${heebo.variable} ${notoSerif.variable}`}>

@@ -12,6 +12,7 @@ import {
   MapPinned,
   MessageCircle,
   Plane,
+  ShieldCheck,
   Sparkles,
 } from "lucide-react";
 
@@ -26,6 +27,7 @@ const moreNav = [
   { href: "/chat", label: "צ׳אט", icon: MessageCircle, hint: "לשאול הכול על הטיול" },
   { href: "/prepare", label: "הכנות", icon: ClipboardCheck, hint: "רשימת המשימות לפני הטיסה" },
   { href: "/guides", label: "מדריכים", icon: BookOpenText, hint: "כל מסמכי התכנון" },
+  { href: "/private", label: "כספת", icon: ShieldCheck, hint: "כרטיסים, אישורים וקודים — רק למשפחה" },
 ];
 
 const desktopNav = [...primaryNav, ...moreNav];

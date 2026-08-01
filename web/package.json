@@ -20,6 +20,7 @@
   "dependencies": {
     "@ai-sdk/gateway": "^4.0.28",
     "@ai-sdk/react": "^4.0.40",
+    "@clerk/localizations": "^4.13.10",
     "@clerk/nextjs": "^7.6.4",
     "ai": "^7.0.37",
     "convex": "^1.43.0",
