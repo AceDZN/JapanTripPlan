@@ -14,16 +14,15 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
+import { usePreloadedQuery, type Preloaded } from "convex/react";
+import type { api } from "@/convex/_generated/api";
 import type { Place, PlaceCategory } from "@/lib/types";
+// Labels and URL builders only — the places and days come from Convex below.
 import {
   cityLabels,
-  getDay,
-  getPlacesForDay,
   mapsSearchUrl,
   placeCategoryLabels,
-  places as allPlaces,
-  placesById,
-  tripDays,
+  type TripDay,
 } from "@/lib/trip-data";
 import { CategoryIcon, categoryTone } from "@/components/visuals";
 import { MapStyles } from "@/components/map/map-style";
@@ -41,19 +40,33 @@ import { buildPlacePopup, markerHtml, markerSizeFor } from "@/components/map/mar
 import { CITY_JUMPS, JAPAN_VIEW, distanceMeters, formatDistance } from "@/components/map/geo";
 import { geoErrorCopy, useGeoLocation } from "@/components/map/useGeoLocation";
 
-const MAPPABLE = allPlaces.filter(
-  (place) => Number.isFinite(place.lat) && Number.isFinite(place.lng),
-);
-
-const CATEGORIES: PlaceCategory[] = (
-  ["attraction", "gaming", "food", "kawaii", "shopping", "culture", "nature", "viewpoint", "event", "transport", "stay"] as PlaceCategory[]
-).filter((category) => MAPPABLE.some((place) => place.category === category));
+const CATEGORY_ORDER: PlaceCategory[] = [
+  "attraction",
+  "gaming",
+  "food",
+  "kawaii",
+  "shopping",
+  "culture",
+  "nature",
+  "viewpoint",
+  "event",
+  "transport",
+  "stay",
+];
 
 const LIST_LIMIT = 120;
 
-/** Points of a day, in the order the itinerary blocks visit them. */
-function dayRoutePoints(dayNumber: number): [number, number][] {
-  const day = getDay(dayNumber);
+/**
+ * Points of a day, in the order the itinerary blocks visit them.
+ *
+ * Takes its data as arguments rather than closing over module state — the days
+ * and places are query results now, not a static import.
+ */
+function dayRoutePoints(
+  day: TripDay | null,
+  byId: Map<string, Place>,
+  mappable: Place[],
+): [number, number][] {
   if (!day) return [];
   const seen = new Set<string>();
   const points: [number, number][] = [];
@@ -62,15 +75,15 @@ function dayRoutePoints(dayNumber: number): [number, number][] {
     for (const id of block.placeIds) {
       if (seen.has(id)) continue;
       seen.add(id);
-      const place = placesById[id];
+      const place = byId.get(id);
       if (!place || !Number.isFinite(place.lat)) continue;
       points.push([place.lat, place.lng]);
     }
   }
 
   if (points.length >= 2) return points;
-  return getPlacesForDay(dayNumber)
-    .filter((place) => Number.isFinite(place.lat))
+  return mappable
+    .filter((place) => place.days.includes(day.day))
     .map((place) => [place.lat, place.lng] as [number, number]);
 }
 
@@ -83,10 +96,42 @@ function inBounds(place: Place, bounds: MapBounds): boolean {
   );
 }
 
-export function MapExplorer() {
+type Props = {
+  preloadedPlaces: Preloaded<typeof api.trip.listPlaces>;
+  preloadedDays: Preloaded<typeof api.trip.listDays>;
+};
+
+export function MapExplorer({ preloadedPlaces, preloadedDays }: Props) {
   const router = useRouter();
   const nonce = useRef(0);
   const next = () => (nonce.current += 1);
+
+  /* ------------------------------------------------------------- data */
+  // Server-rendered from the preloaded snapshot, then a live subscription.
+  const places = usePreloadedQuery(preloadedPlaces) as unknown as Place[];
+  const tripDays = usePreloadedQuery(preloadedDays) as unknown as TripDay[];
+
+  const mappable = useMemo(
+    () => places.filter((place) => Number.isFinite(place.lat) && Number.isFinite(place.lng)),
+    [places],
+  );
+  const placesById = useMemo(
+    () => new Map(mappable.map((place) => [place.id, place])),
+    [mappable],
+  );
+  const daysByNumber = useMemo(
+    () => new Map(tripDays.map((day) => [day.day, day])),
+    [tripDays],
+  );
+  const getDay = useCallback(
+    (n: number): TripDay | null => daysByNumber.get(n) ?? null,
+    [daysByNumber],
+  );
+  /** Only the categories the current data actually contains. */
+  const categories = useMemo(
+    () => CATEGORY_ORDER.filter((category) => mappable.some((p) => p.category === category)),
+    [mappable],
+  );
 
   const [query, setQuery] = useState("");
   const [activeCategories, setActiveCategories] = useState<PlaceCategory[]>([]);
@@ -114,7 +159,7 @@ export function MapExplorer() {
 
   const visiblePlaces = useMemo(() => {
     const term = query.trim().toLowerCase();
-    return MAPPABLE.filter((place) => {
+    return mappable.filter((place) => {
       if (!place.planned && !showExtras) return false;
       if (activeCategories.length && !activeCategories.includes(place.category)) return false;
       if (activeDays.length && !place.days.some((day) => activeDays.includes(day))) return false;
@@ -124,7 +169,7 @@ export function MapExplorer() {
       }
       return true;
     });
-  }, [query, activeCategories, activeDays, showExtras]);
+  }, [mappable, query, activeCategories, activeDays, showExtras]);
 
   const markers = useMemo<MapMarkerSpec[]>(
     () =>
@@ -156,7 +201,7 @@ export function MapExplorer() {
             }),
         };
       }),
-    [visiblePlaces],
+    [visiblePlaces, getDay],
   );
 
   const routes = useMemo<RouteSpec[]>(() => {
@@ -165,12 +210,12 @@ export function MapExplorer() {
     return targets
       .map((dayNumber) => {
         const day = getDay(dayNumber);
-        const points = dayRoutePoints(dayNumber);
+        const points = dayRoutePoints(day, placesById, mappable);
         if (!day || points.length < 2) return null;
         return { id: `route-${dayNumber}`, color: day.color, points } satisfies RouteSpec;
       })
       .filter((route): route is RouteSpec => route !== null);
-  }, [showRoutes, activeDays]);
+  }, [showRoutes, activeDays, tripDays, getDay, placesById, mappable]);
 
   const listed = useMemo(() => {
     const source = bounds
@@ -208,13 +253,13 @@ export function MapExplorer() {
   const nearestLabel = useMemo(() => {
     if (!geo.fix) return null;
     let best: { place: Place; meters: number } | null = null;
-    for (const place of MAPPABLE) {
+    for (const place of mappable) {
       const meters = distanceMeters(geo.fix, place);
       if (!best || meters < best.meters) best = { place, meters };
     }
     if (!best || best.meters > 50_000) return null;
     return `${best.place.nameHe} · ${formatDistance(best.meters)}`;
-  }, [geo.fix]);
+  }, [geo.fix, mappable]);
 
   const flyTo = (place: Place) => {
     setFocus({ id: place.id, nonce: next() });
@@ -230,7 +275,7 @@ export function MapExplorer() {
     setQuery("");
     setShowExtras(false);
     setShowRoutes(false);
-    setFit({ points: MAPPABLE.filter((p) => p.planned).map((p) => [p.lat, p.lng]), nonce: next() });
+    setFit({ points: mappable.filter((p) => p.planned).map((p) => [p.lat, p.lng]), nonce: next() });
   };
 
   return (
@@ -336,7 +381,7 @@ export function MapExplorer() {
               ) : null}
             </div>
             <div className="jm-scroller">
-              {CATEGORIES.map((category) => {
+              {categories.map((category) => {
                 const on = activeCategories.includes(category);
                 return (
                   <button
