@@ -115,6 +115,13 @@ const SETTLES = new Set([
   "session.completed",
   "turn.failed",
   "turn.cancelled",
+  // Not the end of a turn, but the end of *our* wait: the run is parked on a
+  // human answer (an `ask_question`, or an approval gate on `edit_plan_doc` /
+  // `mark_done`) and nothing moves until one is typed. No `session.waiting`
+  // ever follows, so without this the composer stayed locked behind a spinner
+  // for as long as the stream survived — the agent asking a question and
+  // simultaneously taking away the means to answer it.
+  "input.requested",
 ]);
 
 function reducer(state: ChatState, action: Action): ChatState {
@@ -178,23 +185,51 @@ function reducer(state: ChatState, action: Action): ChatState {
   }
 }
 
-function readStoredSession(): string | null {
+type StoredSession = { sessionId: string; continuationToken: string | null };
+
+function readStoredSession(): StoredSession | null {
   if (typeof window === "undefined") return null;
   try {
     const raw = window.localStorage.getItem(SESSION_KEY);
     if (!raw) return null;
-    const parsed: unknown = JSON.parse(raw);
-    const id = (parsed as { sessionId?: unknown }).sessionId;
-    return typeof id === "string" && id.length > 0 ? id : null;
+    const parsed = JSON.parse(raw) as { sessionId?: unknown; continuationToken?: unknown };
+    const id = parsed.sessionId;
+    if (typeof id !== "string" || id.length === 0) return null;
+    const token = parsed.continuationToken;
+    return { sessionId: id, continuationToken: typeof token === "string" && token ? token : null };
   } catch {
     return null;
   }
 }
 
-function writeStoredSession(sessionId: string | null): void {
+/**
+ * Persists the resume handle — id *and* token.
+ *
+ * The token used to be re-derived on resume from the replayed `session.waiting`,
+ * which is fine right up until the session is parked somewhere else. A run
+ * halted on an approval gate never emits `session.waiting`, so after a reload
+ * there was no token to be found: `fetchContinuationToken` reads the stream tail,
+ * finds `input.requested`, and that event carries none. The next send then died
+ * on "השיחה עוד נטענת מהסוכן" with nothing the family could do about it.
+ *
+ * Storing it is safe because the eve channel mints `eve:<uuid>` once at session
+ * creation and its continue route reuses whatever the client sends — the token is
+ * stable for the life of the session, not rotated per turn. Verified against the
+ * live agent: the token returned by `POST /eve/v1/session` is byte-identical to
+ * the one in that session's `session.waiting`.
+ */
+function writeStoredSession(sessionId: string | null, continuationToken?: string | null): void {
   try {
-    if (sessionId) window.localStorage.setItem(SESSION_KEY, JSON.stringify({ sessionId }));
-    else window.localStorage.removeItem(SESSION_KEY);
+    if (!sessionId) {
+      window.localStorage.removeItem(SESSION_KEY);
+      return;
+    }
+    // An omitted token keeps whatever is already stored; an explicit null clears it.
+    const token =
+      continuationToken === undefined
+        ? (readStoredSession()?.continuationToken ?? null)
+        : continuationToken;
+    window.localStorage.setItem(SESSION_KEY, JSON.stringify({ sessionId, continuationToken: token }));
   } catch {
     // Private mode: the chat still works, it just will not resume after reload.
   }
@@ -280,7 +315,8 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   const [state, dispatch] = useReducer(reducer, INITIAL);
   // Read once, lazily: this hook runs client-side only, behind the chat's
   // client-only gate, so there is no SSR markup to mismatch.
-  const [resumable] = useState<string | null>(readStoredSession);
+  const [stored] = useState<StoredSession | null>(readStoredSession);
+  const resumable = stored?.sessionId ?? null;
   const [sessionId, setSessionId] = useState<string | null>(resumable);
   const [hydrating, setHydrating] = useState<boolean>(Boolean(resumable));
   /** Mirrors `hydrating` for the silence timer, which outlives its closure. */
@@ -290,7 +326,10 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   }, [hydrating]);
 
   const sessionRef = useRef<string | null>(resumable);
-  const tokenRef = useRef<string | null>(null);
+  // Seeded from storage so a session parked on an approval — which never emits
+  // the `session.waiting` this used to be derived from — is still answerable
+  // after a reload.
+  const tokenRef = useRef<string | null>(stored?.continuationToken ?? null);
   const cursorRef = useRef(0);
   const streamRef = useRef<AbortController | null>(null);
   /** Pending dead-session timer, cleared by the first event of an attach. */
@@ -301,8 +340,12 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   /** Render-safe mirror of `lastInputRef` — refs must not be read during render. */
   const [hasLastInput, setHasLastInput] = useState(false);
 
+  // A replayed `session.waiting` refreshes the handle; a session parked
+  // elsewhere keeps the one from storage rather than being reset to null.
   useEffect(() => {
+    if (!state.eve.continuationToken) return;
     tokenRef.current = state.eve.continuationToken;
+    if (sessionRef.current) writeStoredSession(sessionRef.current, state.eve.continuationToken);
   }, [state.eve.continuationToken]);
 
   useEffect(() => {
@@ -485,7 +528,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
           const handles = await createSession(message);
           sessionRef.current = handles.sessionId;
           tokenRef.current = handles.continuationToken;
-          writeStoredSession(handles.sessionId);
+          writeStoredSession(handles.sessionId, handles.continuationToken);
           setSessionId(handles.sessionId);
           startStream(handles.sessionId, 0);
           return;

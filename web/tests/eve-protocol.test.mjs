@@ -229,6 +229,28 @@ test("an agent-initiated turn renders as its own assistant bubble", () => {
   assert.equal(unsolicited.continuationToken, "eve:token-bg", "the composer is usable again afterwards");
 });
 
+// An approval gate (`edit_plan_doc`, `mark_done`) parks the run on a human and
+// emits `input.requested` — and no `session.waiting` ever follows, because the
+// turn has not ended. Leaving the status on "streaming" is what made the chat
+// spin forever: the agent asked a question and disabled the box to answer in.
+test("an approval prompt unlocks the composer instead of spinning forever", () => {
+  const parked = play([
+    ...FIRST_TURN.slice(0, 4),
+    {
+      type: "input.requested",
+      data: {
+        requests: [{ prompt: "לסמן בצ׳קליסט שקניתם כרטיסים ל-teamLab?", requestId: "req_1" }],
+        turnId: "turn_1",
+      },
+    },
+  ]);
+
+  assert.notEqual(parked.status, "streaming", "a run parked on a human is not streaming");
+  const last = visibleMessages(parked.messages).at(-1);
+  assert.equal(last.role, "assistant");
+  assert.match(last.text, /teamLab/, "the question itself has to be readable");
+});
+
 // The only way eve can wake a parked session is a follow-up on its continuation
 // token, which lands as a *user* message. So a background run reporting in puts
 // words in the family's mouth: a bubble they never typed, addressed to the agent

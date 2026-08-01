@@ -615,14 +615,22 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
     case "input.requested": {
       // Rendered as ordinary assistant text: a plain follow-up message answers
       // an `ask_question` or an approval, so the composer stays sufficient.
+      //
+      // Sufficient only if it is actually usable, though. The run is parked on
+      // a human, and no `session.waiting` follows — that event marks the end of
+      // a *turn*, and this turn has not ended. Leaving `status: "streaming"`
+      // here is what turned an approval prompt into a chat that spins until the
+      // stream dies: the agent asked a question and then disabled the only
+      // control that could answer it.
       const requests = Array.isArray(data?.requests) ? (data.requests as unknown[]) : [];
       const prompts = requests
         .map((raw) => str(record(raw)?.prompt))
         .filter((prompt): prompt is string => Boolean(prompt));
-      if (prompts.length === 0) return base;
+      if (prompts.length === 0) return { ...base, status: "idle" };
 
       return {
         ...base,
+        status: "idle",
         messages: withAssistant(base, turnId, (bubble) => {
           bubble.text = [bubble.text, ...prompts].filter(Boolean).join("\n\n");
           bubble.final = true;
