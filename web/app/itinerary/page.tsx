@@ -3,8 +3,9 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { ArrowLeft, CalendarDays, Plane } from "lucide-react";
 import { Photo } from "@/components/visuals";
-import { getDay, routeChapters, tripDays } from "@/lib/trip-data";
+import { routeChapters } from "@/lib/trip-data";
 import type { TripDay } from "@/lib/trip-data";
+import { getTripDays } from "@/lib/trip-source";
 
 export const metadata: Metadata = {
   title: "המסלול היומי",
@@ -48,7 +49,9 @@ function DayRow({ day }: { day: TripDay }) {
   );
 }
 
-export default function ItineraryPage() {
+export default async function ItineraryPage() {
+  const tripDays = await getTripDays();
+  const byDay = new Map(tripDays.map((day) => [day.day, day]));
   const prologue = tripDays.filter((day) => day.day === 1);
 
   return (
@@ -102,7 +105,7 @@ export default function ItineraryPage() {
           </div>
           <div className="timeline">
             {chapter.days
-              .map((n) => getDay(n))
+              .map((n) => byDay.get(n))
               .filter((day): day is TripDay => Boolean(day))
               .map((day) => (
                 <DayRow day={day} key={day.day} />

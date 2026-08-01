@@ -47,7 +47,12 @@ export type TripDay = {
   city: City;
   heroImage: string;        // "/images/days/day-03.jpg"
   color: string;            // hex, per-day identity color
-  lat: number; lng: number; // day centroid
+  /**
+   * Day centroid. Optional and effectively unused — the only consumer was
+   * `mapPlaces` in trip-data.ts, which nothing imports. Not carried into
+   * Convex; every map view derives its centre from the day's places instead.
+   */
+  lat?: number; lng?: number;
   blocks: DayBlock[];
   highlights: string[];     // 3–5 short Hebrew bullets
   note?: string;
