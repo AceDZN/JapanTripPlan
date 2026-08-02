@@ -178,6 +178,22 @@
   color: var(--matcha);
 }
 
+/* the folded head of a long run of steps */
+.chat-tools-live li.chat-tools-earlier {
+  color: var(--text-faint);
+}
+
+/* how many calls one status line stands for */
+.chat-tool-count {
+  background: color-mix(in srgb, currentColor 11%, transparent);
+  border-radius: 999px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  opacity: 0.85;
+  padding: 2px 5px;
+}
+
 .chat-tool-spinner {
   animation: chat-spin 700ms linear infinite;
   border: 2px solid color-mix(in srgb, var(--vermillion) 30%, transparent);
@@ -227,6 +243,12 @@
   gap: 3px;
   margin-top: 6px;
   padding-inline-start: 10px;
+}
+
+.chat-tools-done li {
+  align-items: center;
+  display: flex;
+  gap: 6px;
 }
 
 /* ----------------------------------------------------- markdown-lite body */

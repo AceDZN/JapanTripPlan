@@ -26,6 +26,7 @@ import {
   VOICE_TEXT_PART,
   buildContextLine,
   contextTimeZone,
+  groupActivity,
   isContextPart,
   isFreshFix,
   isoWithOffset,
@@ -818,4 +819,54 @@ test("a terminal session.failed is retryable too", () => {
   assert.equal(state.status, "failed");
   assert.equal(state.retryable, true);
   assert.equal(state.messages.every((message) => !message.streaming), true);
+});
+
+/* ------------------------------------------------------- activity grouping */
+
+/** Shorthand for one status line: `label` repeated `count` times, all settled. */
+function run(label, count, done = true) {
+  return Array.from({ length: count }, (_, index) => ({
+    id: `${label}:${index}`,
+    label,
+    done,
+  }));
+}
+
+test("a repeated status line folds into one row with a count", () => {
+  const groups = groupActivity(run("מחפש ברשת", 9));
+
+  assert.equal(groups.length, 1);
+  assert.equal(groups[0].count, 9);
+  assert.equal(groups[0].label, "מחפש ברשת");
+  assert.equal(groups[0].id, "מחפש ברשת:0", "the row keeps the first call's id while it grows");
+});
+
+test("a row is only done once every call behind it has returned", () => {
+  const [first, ...rest] = run("מחפש ברשת", 3);
+  const groups = groupActivity([{ ...first, done: false }, ...rest]);
+
+  assert.equal(groups.length, 1);
+  assert.equal(groups[0].done, false);
+});
+
+test("the same line after a different one is a second attempt, not the same run", () => {
+  const groups = groupActivity([
+    ...run("מחפש ברשת", 2),
+    ...run("קורא את מדריך האוכל", 1),
+    ...run("מחפש ברשת", 3),
+  ]);
+
+  assert.deepEqual(
+    groups.map((group) => [group.label, group.count]),
+    [
+      ["מחפש ברשת", 2],
+      ["קורא את מדריך האוכל", 1],
+      ["מחפש ברשת", 3],
+    ],
+  );
+});
+
+test("distinct lines are never merged, and an empty turn groups to nothing", () => {
+  assert.deepEqual(groupActivity([]), []);
+  assert.equal(groupActivity([...run("א", 1), ...run("ב", 1)]).length, 2);
 });

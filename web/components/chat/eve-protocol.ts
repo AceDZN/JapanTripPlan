@@ -716,6 +716,51 @@ export function dropSupersededUser(messages: EveBubble[]): EveBubble[] {
   return messages;
 }
 
+/* ------------------------------------------------------- activity grouping */
+
+/** Runs of the same status line, folded into one row with a count. */
+export type ActivityGroup = {
+  /** The first member's call id — stable while the run grows. */
+  id: string;
+  label: string;
+  /** How many calls this row stands for. */
+  count: number;
+  /** Every call in the run has returned. */
+  done: boolean;
+};
+
+/**
+ * How many status rows the live list shows before the older ones fold away.
+ *
+ * A deep research turn can fire a dozen calls; without a ceiling the bubble
+ * grows past the screen and pushes the answer out of view while it streams.
+ */
+export const ACTIVITY_LIVE_ROWS = 3;
+
+/**
+ * Folds *adjacent* calls sharing a label into one row.
+ *
+ * Adjacent only, deliberately: "מחפש ברשת" three times in a row is one thing
+ * happening three times and reads as `×3`, but the same line reappearing after
+ * the agent went off to read a guide is a second, separate attempt, and
+ * collapsing the two would hide that the agent looped back.
+ */
+export function groupActivity(activity: EveActivity[]): ActivityGroup[] {
+  const groups: ActivityGroup[] = [];
+
+  for (const item of activity) {
+    const last = groups[groups.length - 1];
+    if (last && last.label === item.label) {
+      last.count += 1;
+      last.done = last.done && item.done;
+      continue;
+    }
+    groups.push({ id: item.id, label: item.label, count: 1, done: item.done });
+  }
+
+  return groups;
+}
+
 /** Drops turn placeholders that never produced text or a status line. */
 export function visibleMessages(messages: EveBubble[]): EveBubble[] {
   return messages.filter(

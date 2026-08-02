@@ -26,8 +26,10 @@ import { Markdown } from "./Markdown";
 import { messageText, toolActivity } from "./tool-labels";
 import type { TripUIMessage } from "./agent";
 import {
+  ACTIVITY_LIVE_ROWS,
   VOICE_CONTEXT_CLAUSE,
   extractTextAttachments,
+  groupActivity,
   stripContextLines,
   type BubbleAttachment,
   type EveBubble,
@@ -930,6 +932,18 @@ function VoicePlayback({ transcript }: { transcript: string }) {
   return <audio className="chat-voice-player" controls preload="metadata" src={url} />;
 }
 
+/** `×3` next to a status line that stands for more than one call. */
+function ActivityCount({ count }: { count: number }) {
+  if (count < 2) return null;
+  // `dir` is forced: inside the RTL bubble the bidi algorithm would otherwise
+  // flip this to `3×`.
+  return (
+    <span className="chat-tool-count" dir="ltr">
+      ×{count}
+    </span>
+  );
+}
+
 /** One bubble: user text, or assistant tool activity + markdown answer. */
 function ChatMessage({
   message,
@@ -953,29 +967,47 @@ function ChatMessage({
   const activity = message.activity;
   const answered = message.text.trim().length > 0;
 
+  // Repeats of one line fold into a count, so a fifteen-call research turn
+  // reads as a handful of steps instead of a wall of identical rows.
+  const groups = groupActivity(activity);
+  // While the agent is still working, only the tail is on screen: the newest
+  // row is what it is doing *now*, and that is the row worth reading.
+  const hiddenRows = Math.max(0, groups.length - ACTIVITY_LIVE_ROWS);
+  const liveRows = hiddenRows > 0 ? groups.slice(hiddenRows) : groups;
+
   return (
     <article className="chat-bubble chat-bubble-assistant" aria-live="polite">
-      {activity.length > 0 ? (
+      {groups.length > 0 ? (
         answered ? (
-          // Collapses into a source count once the answer starts streaming.
+          // Collapses into a step count once the answer starts streaming.
           <details className="chat-tools chat-tools-done">
             <summary>
               <Check size={13} />
-              {activity.length === 1 ? "מקור אחד" : `${activity.length} מקורות`}
+              {groups.length === 1 ? "צעד אחד" : `${groups.length} צעדים`}
             </summary>
             <ul>
-              {activity.map((item) => (
-                <li key={item.id}>{item.label}</li>
+              {groups.map((group) => (
+                <li key={group.id}>
+                  {group.label}
+                  <ActivityCount count={group.count} />
+                </li>
               ))}
             </ul>
           </details>
         ) : (
           <ul className="chat-tools chat-tools-live">
-            {activity.map((item) => (
-              <li key={item.id} className={item.done ? "is-done" : undefined}>
-                {item.done ? <Check size={13} /> : <span className="chat-tool-spinner" />}
-                {item.label}
-                {item.done ? null : "…"}
+            {hiddenRows > 0 ? (
+              <li className="is-done chat-tools-earlier">
+                <Check size={13} />
+                {hiddenRows === 1 ? "צעד קודם" : `${hiddenRows} צעדים קודמים`}
+              </li>
+            ) : null}
+            {liveRows.map((group) => (
+              <li key={group.id} className={group.done ? "is-done" : undefined}>
+                {group.done ? <Check size={13} /> : <span className="chat-tool-spinner" />}
+                {group.label}
+                <ActivityCount count={group.count} />
+                {group.done ? null : "…"}
               </li>
             ))}
           </ul>
