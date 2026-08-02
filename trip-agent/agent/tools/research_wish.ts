@@ -98,14 +98,32 @@ export default defineTool({
     }
 
     try {
-      await convexPost("/agent/wishes/research", {
+      const body = (await convexPost("/agent/wishes/research", {
         ...research,
         ...(images.length > 0 ? { images } : {}),
-      });
+      })) as { revivedFromDropped?: boolean; status?: string };
+
       return {
         ok: true as const,
         id: research.id,
         imagesStored: images.length,
+        status: body.status,
+        /**
+         * The wish was `dropped` and finishing the research brought it back.
+         *
+         * Worth saying out loud: the board hides dropped wishes, so before this
+         * existed a perfectly good research result landed on a card nobody
+         * could see, and the family reasonably concluded nothing had happened.
+         */
+        revivedFromDropped: Boolean(body.revivedFromDropped),
+        ...(body.revivedFromDropped
+          ? {
+              whatToSay:
+                "המשאלה הייתה מסומנת 'ירדה' ולכן לא הופיעה בעמוד. היא חזרה עכשיו למצב " +
+                "'רעיון' וגם המחקר נכתב עליה — תגיד להם את שני הדברים, כי הם יראו אותה " +
+                "מופיעה מחדש.",
+            }
+          : {}),
         ...(imageProblems.length > 0 ? { imageProblems } : {}),
       };
     } catch (error) {

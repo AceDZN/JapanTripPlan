@@ -73,14 +73,31 @@ export default defineTool({
       const body = (await convexPost("/agent/wishes/create", wish)) as {
         id: string;
         created: boolean;
+        revived?: boolean;
+        status?: string;
       };
       return {
         ok: true as const,
         id: body.id,
-        // Idempotent on (owner, title): say so plainly rather than claiming a
-        // second copy was made.
+        // Idempotent on (owner, title-or-titleEn): say so plainly rather than
+        // claiming a second copy was made.
         created: body.created,
-        note: body.created ? undefined : "כבר היה ברשימה — לא נוצר כפול.",
+        /**
+         * True when this call brought a `dropped` wish back onto the board.
+         *
+         * Reported separately because the three outcomes need three different
+         * sentences, and conflating them produced a real failure: a dropped
+         * Game Boy wish was "re-added", the call found the existing row, and
+         * the reply said it was back on the list while the board — which hides
+         * dropped wishes — still showed nothing.
+         */
+        revived: Boolean(body.revived),
+        status: body.status,
+        note: body.created
+          ? undefined
+          : body.revived
+            ? "כבר היה ברשימה במצב 'ירד' — הוחזר עכשיו למצב 'רעיון' ושוב מופיע בעמוד."
+            : "כבר היה ברשימה ופעיל — לא נוצר כפול ולא השתנה כלום.",
         /**
          * Said here, at the moment it matters, because saying it in the
          * instructions was not enough.

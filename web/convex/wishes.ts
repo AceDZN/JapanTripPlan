@@ -290,8 +290,17 @@ export const remove = mutation({
  * it at creation is the person's stated intent, flipping it afterwards would
  * be the agent overriding them.
  *
- * Idempotent on (ownerEmail, title), so a retried tool call converges instead
- * of duplicating, and never overwrites an edit somebody has since made.
+ * Idempotent on (ownerEmail, title-or-titleEn), so a retried tool call converges
+ * instead of duplicating, and never overwrites an edit somebody has since made.
+ * Matching `titleEn` too is what stops "Game Boy (קונסולת רטרו)" and
+ * "גיימבוי (Game Boy)" — same `titleEn`, same object, two rows — from both
+ * existing, which is exactly what happened before this was added.
+ *
+ * A `dropped` wish that somebody asks for AGAIN is REVIVED rather than left
+ * alone. That is the bug this comment exists for: eve would report "החזרתי את
+ * הגיימבוי לרשימה", the call would find the dropped row, return it untouched,
+ * and the family would look at a wish page that still did not show it. Asking
+ * for a thing is the clearest possible statement that it is no longer dropped.
  */
 export const internalCreateFor = internalMutation({
   args: {
@@ -332,8 +341,55 @@ export const internalCreateFor = internalMutation({
       .query("wishes")
       .withIndex("by_ownerEmail", (q) => q.eq("ownerEmail", ownerEmail))
       .take(MAX_WISHES);
-    const match = existing.find((wish) => wish.title === args.title.trim());
-    if (match) return { id: match._id, created: false };
+
+    const key = (value: string | undefined) => value?.trim().toLowerCase() ?? "";
+    const title = key(args.title);
+    const titleEn = key(args.titleEn);
+
+    /**
+     * Identity is the title, and only the title.
+     *
+     * Matching on `titleEn` as well was tried and reverted: these English names
+     * are routinely categories rather than products — the real one in this trip
+     * is "Game Boy / Game Boy Color / Game Boy Advance" — so it silently merged
+     * two wishes that were not the same thing. Losing somebody's wish is far
+     * worse than carrying a near-duplicate, and a merge cannot be undone from
+     * the app.
+     *
+     * Among rows with the same title, the one that already carries research
+     * wins, so a revive never lands on the empty twin of a card holding a price
+     * and seven shops.
+     */
+    const researched = (wish: Doc<"wishes">) =>
+      wish.researchedAt !== undefined || (wish.whereToBuy ?? []).length > 0;
+    const sameTitle = existing.filter((wish) => key(wish.title) === title);
+    const match = sameTitle.find(researched) ?? sameTitle[0];
+
+    /**
+     * Rows that look like the same object without being an exact match.
+     *
+     * Reported, never merged. It gives the agent what it needs to say "you
+     * already have something almost identical — shall I use that one?" instead
+     * of either duplicating in silence or destroying intent in silence.
+     */
+    const similar = existing
+      .filter(
+        (wish) =>
+          wish._id !== match?._id &&
+          titleEn.length > 0 &&
+          key(wish.titleEn) === titleEn,
+      )
+      .map((wish) => ({ id: wish._id, title: wish.title, status: wish.status }));
+
+    if (match) {
+      if (match.status !== "dropped") {
+        return { id: match._id, created: false, revived: false, status: match.status, similar };
+      }
+      // Someone is asking for it again. Back to the board, and say so — the
+      // caller must be able to tell the family it reappeared.
+      await ctx.db.patch("wishes", match._id, { status: "idea", updatedAt: Date.now() });
+      return { id: match._id, created: false, revived: true, status: "idea" as const, similar };
+    }
 
     const now = Date.now();
     const id = await ctx.db.insert("wishes", {
@@ -345,7 +401,13 @@ export const internalCreateFor = internalMutation({
       createdAt: now,
       updatedAt: now,
     });
-    return { id, created: true };
+    return {
+      id,
+      created: true,
+      revived: false,
+      status: researching ? "researching" : "idea",
+      similar,
+    };
   },
 });
 
@@ -374,8 +436,8 @@ export const internalApplyResearch = internalMutation({
     whereToBuy: v.optional(whereToBuyValidator),
     sources: v.optional(sourcesValidator),
     images: v.optional(imagesValidator),
-    /** Only ever "idea" (research done) — never approved/done/dropped, which
-     *  are family decisions, and never "researching" backwards. */
+    /** Only ever "idea" (research done) — never approved/done, which are
+     *  family decisions, and never "researching" backwards. */
     finish: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
@@ -389,12 +451,23 @@ export const internalApplyResearch = internalMutation({
       researchedBy: "eve",
       updatedAt: Date.now(),
     };
-    // Only lift it out of "researching"; never override a decision the family
-    // has already made about this wish.
-    if (finish && wish.status === "researching") patch.status = "idea";
+
+    // Lift it out of "researching" — and out of "dropped" too.
+    //
+    // "dropped" used to be untouchable here on the grounds that it is a family
+    // decision. In practice that produced the worst outcome available: eve
+    // researched a dropped wish properly (a price, seven shops, four sources),
+    // wrote all of it, reported it in chat — and the card stayed hidden behind
+    // the board's dropped filter, so the family saw nothing and concluded the
+    // agent was lying. Nobody researches a wish nobody asked about; the request
+    // that triggered this IS the newer decision.
+    const revivedFromDropped = Boolean(finish) && wish.status === "dropped";
+    if (finish && (wish.status === "researching" || wish.status === "dropped")) {
+      patch.status = "idea";
+    }
 
     await ctx.db.patch("wishes", id, patch);
-    return { id, ok: true };
+    return { id, ok: true, revivedFromDropped, status: patch.status ?? wish.status };
   },
 });
 

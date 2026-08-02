@@ -633,13 +633,25 @@ function Board() {
     [wishes],
   );
 
-  const visible = useMemo(
-    () =>
-      (wishes ?? [])
-        .filter((w) => person === "all" || w.ownerName === person)
-        .filter((w) => showDropped || w.status !== "dropped"),
-    [wishes, person, showDropped],
+  const inScope = useMemo(
+    () => (wishes ?? []).filter((w) => person === "all" || w.ownerName === person),
+    [wishes, person],
   );
+
+  const visible = useMemo(
+    () => inScope.filter((w) => showDropped || w.status !== "dropped"),
+    [inScope, showDropped],
+  );
+
+  /**
+   * How many wishes the filter is currently swallowing.
+   *
+   * The toggle used to say only "להציג ירדו", so a board showing three cards
+   * gave no sign that two more existed. That is how a researched wish sat here
+   * fully filled in — price, seven shops, four sources — while the family read
+   * the page as proof that nothing had been saved.
+   */
+  const hiddenCount = inScope.length - visible.length;
 
   const spentByWish = useMemo(() => {
     const map = new Map<string, Expense[]>();
@@ -699,12 +711,20 @@ function Board() {
           onClick={() => setShowDropped((v) => !v)}
         >
           {showDropped ? <EyeOff size={12} /> : <Eye size={12} />}
-          {showDropped ? "להסתיר ירדו" : "להציג ירדו"}
+          {showDropped
+            ? "להסתיר ירדו"
+            : hiddenCount > 0
+              ? `להציג ${hiddenCount} שירדו`
+              : "להציג ירדו"}
         </button>
       </div>
 
       {visible.length === 0 ? (
-        <p className="lede">אין עדיין כלום. מי שרוצה משהו — שיוסיף.</p>
+        <p className="lede">
+          {hiddenCount > 0
+            ? `אין כאן כלום פעיל, אבל ${hiddenCount} משאלות מסומנות כ״ירדו״ ומוסתרות.`
+            : "אין עדיין כלום. מי שרוצה משהו — שיוסיף."}
+        </p>
       ) : (
         <div className="wish-grid">
           {visible.map((wish) => (
