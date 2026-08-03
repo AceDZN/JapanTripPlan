@@ -6,7 +6,7 @@ import { distanceMeters, type LatLng } from "@/components/map/geo";
  *
  * Etiquette: one request per rounded location cell, a hard client timeout, a
  * 24h localStorage cache and no polling whatsoever. Any failure is swallowed —
- * the curated list from places.json is the product, this is a bonus layer.
+ * the curated place list is the product, this is a bonus layer.
  */
 
 export type Discovery = {

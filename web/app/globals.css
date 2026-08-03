@@ -68,36 +68,38 @@
   --font-jp: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
+/* Dark palette. Keyed off the attribute rather than a media query: the theme
+   boot script (lib/theme.ts) resolves the OS preference before first paint and
+   stamps data-theme, so this one block covers both "follow the system" and an
+   explicit choice from the header toggle. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
 
-    --bg: #0f1120;
-    --bg-tint: #14172a;
-    --surface: #191d33;
-    --surface-2: #20253f;
-    --surface-3: #2a3052;
-    --text: #f3f1ec;
-    --text-muted: #a8adc9;
-    --text-faint: #838aab;
-    --line: rgba(255, 255, 255, 0.12);
-    --line-strong: rgba(255, 255, 255, 0.24);
-    --vermillion: #ff5c4a;
-    --vermillion-deep: #e34234;
-    /* Lifted well above the brand colours: both sit on tinted dark surfaces,
-       where #e34234 and the light-mode matcha both fall under 4.5:1. */
-    --ops-warn-ink: #ff9182;
-    --ops-ok-ink: #57d6ab;
-    --st-buy-now: #ff5c4a;
-    --st-booked: #3bbd93;
-    --st-lottery: #efb547;
-    --st-monitor: #efb547;
-    --st-on-sale-soon: #6fa4f5;
-    --st-fallback: #8b90ab;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-    --shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
-    --shadow-lg: 0 26px 64px rgba(0, 0, 0, 0.55);
-  }
+  --bg: #0f1120;
+  --bg-tint: #14172a;
+  --surface: #191d33;
+  --surface-2: #20253f;
+  --surface-3: #2a3052;
+  --text: #f3f1ec;
+  --text-muted: #a8adc9;
+  --text-faint: #838aab;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.24);
+  --vermillion: #ff5c4a;
+  --vermillion-deep: #e34234;
+  /* Lifted well above the brand colours: both sit on tinted dark surfaces,
+     where #e34234 and the light-mode matcha both fall under 4.5:1. */
+  --ops-warn-ink: #ff9182;
+  --ops-ok-ink: #57d6ab;
+  --st-buy-now: #ff5c4a;
+  --st-booked: #3bbd93;
+  --st-lottery: #efb547;
+  --st-monitor: #efb547;
+  --st-on-sale-soon: #6fa4f5;
+  --st-fallback: #8b90ab;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
+  --shadow-lg: 0 26px 64px rgba(0, 0, 0, 0.55);
 }
 
 * {
@@ -354,10 +356,8 @@ main {
   color: #fff;
 }
 
-@media (prefers-color-scheme: dark) {
-  .nav-desktop a.active {
-    background: var(--vermillion);
-  }
+:root[data-theme="dark"] .nav-desktop a.active {
+  background: var(--vermillion);
 }
 
 .flight-chip {
@@ -381,11 +381,42 @@ main {
   padding: 3px 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .flight-chip strong {
-    background: var(--surface-3);
-  }
+:root[data-theme="dark"] .flight-chip strong {
+  background: var(--surface-3);
 }
+
+/* ------------------------------------------------- header actions + theme */
+
+.header-actions {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+}
+
+.theme-toggle {
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 36px;
+  justify-content: center;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  width: 36px;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-2);
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+
+/* Which of the three icons is visible is decided by `themeBootStyle` in
+   lib/theme.ts, inlined into the document head — see the note there. Deliberately
+   not repeated here: two copies of that rule would be a silent drift hazard. */
 
 @media (max-width: 1000px) {
   :root {
@@ -1958,6 +1989,43 @@ a.status-chip:hover {
   background: transparent;
   border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
   color: color-mix(in srgb, var(--gold) 62%, var(--text));
+}
+
+/** Attribution on a ticked item — quiet, because it is provenance, not status. */
+.due-done {
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding-inline: 0;
+}
+
+/**
+ * The one line that says the list is shared. It sits under the progress bar
+ * rather than in the page header because that is where somebody is standing
+ * when they are about to tick something and wondering who else will see it.
+ */
+.prep-shared {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 13px;
+  gap: 7px;
+  margin: 12px 2px 0;
+}
+
+.prep-check:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .pinned {
@@ -3571,6 +3639,29 @@ a.status-chip:hover {
   margin-top: 40px;
 }
 
+.money-rates-head {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.money-rates-head h2 {
+  margin: 0;
+}
+
+.money-rate-stale {
+  color: var(--warn, #b4541a);
+}
+
+.money-rate-manual > summary {
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: 12.5px;
+  margin-bottom: 8px;
+  width: fit-content;
+}
+
 .money-rate-list {
   display: grid;
   font-size: 13px;
@@ -3578,8 +3669,10 @@ a.status-chip:hover {
 }
 
 .money-rate-list li {
-  display: grid;
-  gap: 1px;
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
 }
 
 .money-rate-list small {
@@ -3832,4 +3925,43 @@ a.status-chip:hover {
   .day-spend-add {
     grid-template-columns: 1fr;
   }
+}
+
+/* ------------------------------------------------------- place gallery */
+
+/*
+ * The extra angles under a place, as a swipeable row. Scroll-snap so a thumb
+ * flick lands on a picture rather than between two, and `scrollbar-width: none`
+ * because on a phone the strip is obviously scrollable and on a desktop a
+ * scrollbar under three photos is noise.
+ */
+.place-gallery {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 2px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.place-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.place-gallery-shot {
+  background: var(--surface-2);
+  border-radius: 10px;
+  flex: 0 0 auto;
+  height: 92px;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: start;
+  width: 132px;
+}
+
+.place-gallery-shot img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }

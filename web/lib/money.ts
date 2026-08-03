@@ -90,8 +90,27 @@ export type FxRate = {
   currency: Currency;
   jpyPerUnit: number;
   source?: string;
+  /** When the provider quoted it. Absent on a hand-typed rate. */
+  asOf?: number;
+  /** When we wrote the row. */
   updatedAt: number;
 };
+
+/**
+ * The one date worth showing for a rate: what it is a rate *for*.
+ *
+ * `updatedAt` alone reads as fresher than the number is (a refresh that only
+ * re-confirms Friday's quote still bumps it), and showing both dates next to
+ * each other just makes the reader do the subtraction.
+ */
+export function rateAsOf(rate: FxRate): number {
+  return rate.asOf ?? rate.updatedAt;
+}
+
+/** Days old, for the "this rate is from last week" warning. */
+export function rateAgeDays(rate: FxRate, now: number = Date.now()): number {
+  return Math.max(0, Math.floor((now - rateAsOf(rate)) / 86_400_000));
+}
 
 /* ------------------------------------------------------------------ labels */
 
@@ -194,7 +213,7 @@ export function counts(expense: Expense): boolean {
 export type Totals = {
   /** Money that has actually left an account. */
   paidYen: number;
-  /** Booked or won but not yet charged — the Nintendo Museum until 7 August. */
+  /** Booked or won but not yet charged. */
   pendingYen: number;
   /** What the trip is on the hook for: paid + pending. */
   committedYen: number;

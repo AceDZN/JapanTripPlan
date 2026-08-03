@@ -18,12 +18,8 @@ import { usePreloadedQuery, type Preloaded } from "convex/react";
 import type { api } from "@/convex/_generated/api";
 import type { Place, PlaceCategory } from "@/lib/types";
 // Labels and URL builders only — the places and days come from Convex below.
-import {
-  cityLabels,
-  mapsSearchUrl,
-  placeCategoryLabels,
-  type TripDay,
-} from "@/lib/trip-data";
+import { cityLabels, mapsSearchUrl, placeCategoryLabels } from "@/lib/labels";
+import type { TripDay } from "@/lib/types";
 import { CategoryIcon, categoryTone } from "@/components/visuals";
 import { MapStyles } from "@/components/map/map-style";
 import { Thumb } from "@/components/map/Thumb";

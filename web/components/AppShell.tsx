@@ -17,6 +17,7 @@ import {
   Sparkles,
   Wallet,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const primaryNav = [
   { href: "/", label: "בית", icon: House },
@@ -128,10 +129,13 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
 
-        <div className="flight-chip">
-          <Plane size={14} />
-          <span>TLV → NRT</span>
-          <strong>1.10</strong>
+        <div className="header-actions">
+          <ThemeToggle />
+          <div className="flight-chip">
+            <Plane size={14} />
+            <span>TLV → NRT</span>
+            <strong>1.10</strong>
+          </div>
         </div>
       </header>
 

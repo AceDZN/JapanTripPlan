@@ -1,4 +1,4 @@
-import type { MutationCtx, QueryCtx } from "../_generated/server";
+import type { Auth } from "convex/server";
 import { familyMemberFor, type FamilyMember } from "./family";
 
 /**
@@ -30,8 +30,11 @@ export type Actor = {
  * may hold an account; this decides who may change the trip. Defence in depth,
  * and it keeps the rule visible in the codebase rather than only in a
  * dashboard setting.
+ *
+ * Takes `{ auth }` rather than a QueryCtx/MutationCtx so an action can gate on
+ * it too — the identity check reads nothing from the database.
  */
-export async function requireFamily(ctx: QueryCtx | MutationCtx): Promise<Actor> {
+export async function requireFamily(ctx: { auth: Auth }): Promise<Actor> {
   const identity = await ctx.auth.getUserIdentity();
   if (!identity) {
     throw new Error(

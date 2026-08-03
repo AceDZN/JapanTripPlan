@@ -30,6 +30,7 @@ import {
   isContextPart,
   isFreshFix,
   isoWithOffset,
+  markPromptAnswered,
   parseNdjson,
   readUserMessage,
   reduceEve,
@@ -381,6 +382,141 @@ test("surfaces turn and session failures in Hebrew", () => {
 
   assert.equal(failed.status, "failed");
   assert.match(failed.error, /יותר מדי בקשות/);
+});
+
+/*
+ * A tool approval is NOT a question, and the difference is the whole bug it
+ * used to cause. eve emits it as `display: "confirmation"`, `allowFreeform:
+ * false`, options `approve`/`deny`, and a prompt reading `Approve tool call:
+ * edit_plan_doc`. Rendering that as text and pointing the family at the
+ * composer left the run parked forever: unmatched free text does not deny an
+ * approval, eve just holds it. So the request has to survive as structure.
+ */
+const APPROVAL_REQUEST = {
+  requestId: "appr_1",
+  prompt: "Approve tool call: edit_plan_doc",
+  display: "confirmation",
+  allowFreeform: false,
+  options: [
+    { id: "approve", label: "Yes" },
+    { id: "deny", label: "No" },
+  ],
+  action: {
+    kind: "tool-call",
+    callId: "call_edit_1",
+    toolName: "edit_plan_doc",
+    input: { file: "11-PRE-TRIP-CHECKLIST.md", summary: "להוסיף מתאמי תקע" },
+  },
+};
+
+test("an approval survives as a structured prompt, not as English boilerplate", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    { type: "input.requested", data: { requests: [APPROVAL_REQUEST], turnId: "t" } },
+  ]);
+
+  const bubble = parked.messages.at(-1);
+  assert.equal(bubble.prompts.length, 1, "the request has to be answerable, so it has to be kept");
+
+  const prompt = bubble.prompts[0];
+  assert.equal(prompt.requestId, "appr_1", "the answer is keyed by this and nothing else");
+  assert.equal(prompt.display, "confirmation");
+  assert.equal(prompt.allowFreeform, false);
+  assert.deepEqual(
+    prompt.options.map((option) => option.id),
+    ["approve", "deny"],
+  );
+  assert.equal(prompt.callId, "call_edit_1", "so the result event can retire the card");
+  assert.equal(prompt.toolName, "edit_plan_doc");
+  assert.equal(prompt.toolInput.summary, "להוסיף מתאמי תקע", "the card says what is being approved");
+  assert.equal(prompt.answered, false);
+
+  assert.doesNotMatch(
+    bubble.text,
+    /Approve tool call/,
+    "eve's English boilerplate names a function, not an act — the card writes its own Hebrew",
+  );
+  assert.notEqual(parked.status, "streaming", "a run parked on a human is not streaming");
+});
+
+test("a question and an approval in one pause are told apart", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    {
+      type: "input.requested",
+      data: {
+        requests: [
+          APPROVAL_REQUEST,
+          { requestId: "q_1", prompt: "לאיזה יום להוסיף את זה?", display: "text" },
+        ],
+        turnId: "t",
+      },
+    },
+  ]);
+
+  const bubble = parked.messages.at(-1);
+  assert.equal(bubble.prompts.length, 2);
+  assert.match(bubble.text, /לאיזה יום/, "a question can be replied to, so it stays readable text");
+  assert.doesNotMatch(bubble.text, /Approve tool call/);
+});
+
+test("the gated call's result retires its approval card", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    { type: "input.requested", data: { requests: [APPROVAL_REQUEST], turnId: "t" } },
+  ]);
+
+  const resumed = play(
+    [
+      {
+        type: "action.result",
+        data: { result: { callId: "call_edit_1", kind: "tool-result" }, turnId: "t" },
+      },
+    ],
+    parked,
+  );
+
+  assert.equal(
+    resumed.messages.at(-1).prompts[0].answered,
+    true,
+    "answered elsewhere is still answered — the buttons must not stay live",
+  );
+});
+
+test("a cancelled turn cannot leave a live approval behind", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    { type: "input.requested", data: { requests: [APPROVAL_REQUEST], turnId: "t" } },
+  ]);
+
+  const cancelled = play([{ type: "turn.cancelled", data: { turnId: "t" } }], parked);
+  assert.equal(
+    cancelled.messages.at(-1).prompts[0].answered,
+    true,
+    "the turn is over; a button that answers nothing is worse than no button",
+  );
+});
+
+test("marking one prompt answered leaves the others alone", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    {
+      type: "input.requested",
+      data: {
+        requests: [
+          APPROVAL_REQUEST,
+          { ...APPROVAL_REQUEST, requestId: "appr_2", action: { ...APPROVAL_REQUEST.action, callId: "call_edit_2" } },
+        ],
+        turnId: "t",
+      },
+    },
+  ]);
+
+  const after = markPromptAnswered(parked.messages, { requestId: "appr_1" });
+  assert.deepEqual(
+    after.at(-1).prompts.map((prompt) => prompt.answered),
+    [true, false],
+  );
 });
 
 test("shows an input request as answerable assistant text", () => {

@@ -18,6 +18,20 @@ export type Label = {
   ja?: string;
 };
 
+/**
+ * A picture kept in Convex storage.
+ *
+ * `url` is cached rather than minted per read — Convex file URLs are bearer
+ * URLs that stay valid until the file is deleted. See `storedImage` in
+ * `convex/schema.ts` for the full argument.
+ */
+export type StoredImage = {
+  storageId: string;
+  url: string;
+  /** Hebrew: what is visible in the picture. */
+  alt?: string;
+};
+
 export type Place = {
   id: string;               // kebab-case English slug, stable
   nameHe: string;
@@ -32,7 +46,11 @@ export type Place = {
   planned: boolean;         // true = in our itinerary; false = nearby-extra recommendation
   descriptionHe: string;    // 1–2 sentences, family-fit angle
   tips?: string;            // Hebrew: booking/cut-first/timing notes
-  image?: string;           // "/images/places/<id>.jpg" if exists
+  /** The hero's URL — kept as a plain string so every existing <Photo> works. */
+  image?: string;
+  hero?: StoredImage;
+  /** Extra angles. 3–5 on an attraction reads like a Google result. */
+  gallery?: StoredImage[];
   officialUrl?: string;
   mapsQuery?: string;       // string for Google Maps search deep-link (name + area, English)
   priceLevel?: 0 | 1 | 2 | 3;
@@ -106,9 +124,18 @@ export type LinkKind =
 export type RefLink = { label: string; url: string; kind: LinkKind };
 
 export type DayBlock = {
+  /**
+   * Convex document id, and the block's public key.
+   *
+   * Blocks have no natural stable identifier (two blocks on one day can share
+   * a time and a title), so `convex/content.ts` addresses them by this. Only
+   * optional because the legacy hand-written days predate it — anything read
+   * from Convex always has it.
+   */
+  id?: string;
   time?: string;            // "10:00" or "בוקר"/"צהריים"/"ערב"
   title: string;            // Hebrew
-  placeIds: string[];       // refs into places.json (may be empty)
+  placeIds: string[];       // place ids (may be empty)
   detail?: string;          // Hebrew
   cutFirst?: boolean;       // explicit "cut first" instruction from the docs
   booking?: { label: string; url: string; status: BookingStatus };
@@ -133,13 +160,25 @@ export type TripDay = {
   heroImage: string;        // "/images/days/day-03.jpg"
   color: string;            // hex, per-day identity color
   /**
-   * Day centroid. Optional and effectively unused — the only consumer was
-   * `mapPlaces` in trip-data.ts, which nothing imports. Not carried into
-   * Convex; every map view derives its centre from the day's places instead.
+   * Day centroid. Optional and unused — its only consumer was `mapPlaces` in
+   * the deleted `trip-data.ts`. Not carried into Convex; every map view derives
+   * its centre from the day's places instead.
    */
   lat?: number; lng?: number;
   blocks: DayBlock[];
   highlights: string[];     // 3–5 short Hebrew bullets
+
+  /**
+   * The day's "while you're here" panel — one nearby thing worth a detour.
+   * Lived on a `TripDay` superset in `trip-data.ts` until that module was
+   * deleted; it has always been in the Convex schema.
+   */
+  discovery?: {
+    label: string;
+    title: string;
+    detail: string;
+    href: string;
+  };
   note?: string;
   rainPlan?: string;
   foodAnchors?: string[];   // placeIds
@@ -169,6 +208,7 @@ export type ChecklistItem = {
   title: string;            // Hebrew
   detail?: string;
   due?: string;             // ISO date if there's a real deadline
+  doFrom?: string;          // ISO date — earliest it can be done; with `due`, a window
   url?: string;
   critical?: boolean;
 };

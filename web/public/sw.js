@@ -8,13 +8,15 @@
  *   runtime  stale-while-revalidate for pages and build assets
  *   images   cache-first for photos, populated lazily as they are visited
  *
- * Deliberately NOT precached: /images/** (~18MB). Images are cached the first
+ * Deliberately NOT precached: photos. They live in Convex storage and are
+ * served through `/_next/image`, so they are same-origin here but still tens of
+ * MB in total. They are cached the first
  * time they are actually shown, so an install stays small and fast.
  *
  * Bump VERSION whenever the precache list or a caching rule changes.
  */
 
-const VERSION = "japan2026-v4";
+const VERSION = "japan2026-v5";
 const SHELL_CACHE = `${VERSION}-shell`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 const IMAGE_CACHE = `${VERSION}-images`;
@@ -230,7 +232,11 @@ self.addEventListener("fetch", (event) => {
   if (request.headers.get("RSC") === "1" || url.searchParams.has("_rsc")) return;
 
   // Photos: cache-first, populated as the user browses.
-  if (url.pathname.startsWith("/images/") || url.pathname === "/_vinext/image") {
+  // `/_next/image` is the optimiser. Pictures live in Convex storage now, but
+  // the browser still requests them SAME-ORIGIN through it — which is the only
+  // reason they are cacheable here at all, and so the only reason the app still
+  // shows photographs on a Tokyo platform with no signal.
+  if (url.pathname === "/_next/image") {
     event.respondWith(cacheFirst(IMAGE_CACHE, request).catch(() => Response.error()));
     return;
   }

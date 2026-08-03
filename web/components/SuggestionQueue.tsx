@@ -22,6 +22,97 @@ import { Check, Clock, X } from "lucide-react";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 
+/** What a structured suggestion is pointing at, in Hebrew. */
+const CONTENT_TARGETS: Record<string, string> = {
+  places: "מקום",
+  days: "יום",
+  blocks: "בלוק",
+  checklistItems: "משימה",
+};
+
+/**
+ * The target line for one suggestion.
+ *
+ * A `content` row has no `guideSlug` and no `dayN` — it names a table and a
+ * key — so the original two-branch expression rendered "יום undefined" for it.
+ */
+function targetLabel(s: {
+  targetKind: string;
+  guideSlug?: string;
+  dayN?: number;
+  content?: { table: string; op: string; key?: string };
+}): string {
+  if (s.targetKind === "guide") return s.guideSlug ?? "מדריך";
+  if (s.targetKind === "day") return `יום ${s.dayN}`;
+  if (!s.content) return "שינוי בתוכנית";
+
+  const what = CONTENT_TARGETS[s.content.table] ?? s.content.table;
+  const verb = s.content.op === "create" ? "הוספה" : s.content.op === "delete" ? "הסרה" : "עדכון";
+  return s.content.key ? `${verb} · ${what} ${s.content.key}` : `${verb} · ${what}`;
+}
+
+/**
+ * Field-by-field view of a structured change.
+ *
+ * Same reason the guide diff exists below: without it the owner is approving a
+ * one-line description of a change rather than the change. `fieldsJson` is
+ * whatever was stored — it is rendered, never trusted, and a payload that will
+ * not parse is said so rather than shown as an empty table.
+ */
+function ContentDiff({
+  content,
+}: {
+  content: { table: string; op: string; key?: string; fieldsJson: string; unset?: string[] };
+}) {
+  let fields: Record<string, unknown> | null = null;
+  try {
+    const parsed: unknown = JSON.parse(content.fieldsJson);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      fields = parsed as Record<string, unknown>;
+    }
+  } catch {
+    fields = null;
+  }
+
+  const rows = Object.entries(fields ?? {});
+  const cleared = content.unset ?? [];
+
+  if (rows.length === 0 && cleared.length === 0) {
+    return (
+      <p className="muted">
+        {fields === null
+          ? "לא הצלחתי לקרוא את פרטי השינוי הזה — עדיף לדחות ולבקש שוב."
+          : content.op === "delete"
+            ? "הפריט יימחק כולו."
+            : "אין שדות בשינוי הזה."}
+      </p>
+    );
+  }
+
+  return (
+    <div className="table-scroll">
+      <table>
+        <tbody>
+          {rows.map(([name, value]) => (
+            <tr key={name}>
+              <th>{name}</th>
+              <td>{typeof value === "string" ? value : JSON.stringify(value)}</td>
+            </tr>
+          ))}
+          {cleared.map((name) => (
+            <tr key={`unset-${name}`}>
+              <th>{name}</th>
+              <td>
+                <del>יימחק</del>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function Pending() {
   const viewer = useQuery(api.suggestions.viewer);
   const pending = useQuery(api.suggestions.listPending);
@@ -76,7 +167,7 @@ function Pending() {
           <header className="card-head">
             <span className="eyebrow">
               <Clock size={13} />
-              {s.targetKind === "guide" ? s.guideSlug : `יום ${s.dayN}`}
+              {targetLabel(s)}
             </span>
             <h3>{s.title}</h3>
             <p className="muted">הציע/ה: {s.proposedByName}</p>
@@ -86,6 +177,8 @@ function Pending() {
 
           {/* The actual diff. Without it the owner is approving a description
               of a change rather than the change, which is not a real review. */}
+          {s.targetKind === "content" && s.content ? <ContentDiff content={s.content} /> : null}
+
           {s.oldString !== undefined ? (
             <div className="table-scroll">
               <table>

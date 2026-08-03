@@ -32,9 +32,17 @@ import { v } from "convex/values";
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
 import type { Doc } from "./_generated/dataModel";
+import { internal } from "./_generated/api";
 import { requireFamily } from "./lib/guards";
 import { FAMILY } from "./lib/family";
+import { PATCH_ARG } from "./content";
 
+/**
+ * What `propose` accepts. Note `content` is NOT here: a structured content
+ * suggestion is only ever created by `convex/content.ts`, which decides — from
+ * the patch itself — that the change needs asking for. Letting a caller file
+ * one directly would let it choose its own payload without that check.
+ */
 const targetKindValidator = v.union(v.literal("guide"), v.literal("day"));
 
 const statusValidator = v.union(
@@ -124,6 +132,49 @@ async function applyGuideEdit(
     updatedAt: Date.now(),
     updatedBy: actorName,
   });
+}
+
+/**
+ * Apply an approved STRUCTURED edit — a place, a day, a block, a checklist item.
+ *
+ * The counterpart to `applyGuideEdit` above, and deliberately unlike it: there
+ * is no text to match, so nothing here can fail because the wording moved on.
+ * What it can fail on is the payload no longer being valid — a place deleted
+ * since the suggestion was filed, a field removed from the schema — and it
+ * should. `internal.content.internalApplyContent` is a real function boundary,
+ * so `fieldsJson` is re-checked against the same validators the direct edit
+ * path uses before a single byte is written.
+ *
+ * The nested call is NOT wrapped in a try: if it throws, the whole approval
+ * rolls back and the suggestion stays pending, which is the only honest
+ * outcome. See the `approve` comment.
+ */
+async function applyContentSuggestion(
+  ctx: MutationCtx,
+  content: NonNullable<Doc<"suggestions">["content"]>,
+  ownerName: string,
+) {
+  let fields: unknown;
+  try {
+    fields = JSON.parse(content.fieldsJson);
+  } catch {
+    throw new Error(
+      "This suggestion's stored change could not be read back. " +
+        "Reject it and ask for it again — nothing has been altered.",
+    );
+  }
+  if (typeof fields !== "object" || fields === null || Array.isArray(fields)) {
+    throw new Error("This suggestion's stored change is not a set of fields.");
+  }
+
+  await ctx.runMutation(internal.content.internalApplyContent, {
+    table: content.table,
+    op: content.op,
+    key: content.key ?? "",
+    [PATCH_ARG[content.table]]: fields,
+    unset: content.unset,
+    actorName: ownerName,
+  } as never);
 }
 
 /**
@@ -286,6 +337,9 @@ export const approve = mutation({
         suggestion.newString,
         owner.name,
       );
+      appliedAt = Date.now();
+    } else if (suggestion.targetKind === "content" && suggestion.content) {
+      await applyContentSuggestion(ctx, suggestion.content, owner.name);
       appliedAt = Date.now();
     }
 
@@ -478,5 +532,90 @@ export const viewer = query({
       role: actor.role ?? null,
       isOwner: actor.kind === "family" && actor.role === "owner",
     };
+  },
+});
+
+/**
+ * Delete a suggestion row outright.
+ *
+ * MAINTENANCE ONLY, and specifically for rows created while TESTING the
+ * suggestion flow — `internalMutation` with no HTTP route, so it needs the
+ * deploy key and is unreachable from eve.
+ *
+ * This is NOT `reject`. Rejecting is a decision: it records who said no, when,
+ * and why, and the proposer can go and read it. This erases the row and leaves
+ * nothing behind, which is right for a row that was never a real proposal and
+ * wrong for one that was. Never point it at a family member's suggestion —
+ * silently deleting somebody's request is worse than turning it down.
+ */
+export const internalDiscard = internalMutation({
+  args: { id: v.id("suggestions") },
+  handler: async (ctx, args) => {
+    const row = await ctx.db.get("suggestions", args.id);
+    if (!row) return { deleted: false as const };
+    if (row.status !== "pending") {
+      throw new Error(
+        `That suggestion is ${row.status} — it is part of the decision history. ` +
+          "Discard is only for rows that were never a real proposal.",
+      );
+    }
+    await ctx.db.delete("suggestions", args.id);
+    return { deleted: true as const, title: row.title };
+  },
+});
+
+/**
+ * Create or replace a guide outright.
+ *
+ * MAINTENANCE ONLY — deliberately `internalMutation` with no HTTP route, so it
+ * is reachable from `npx convex run` (which needs the deploy key) and from
+ * nothing else. It exists because content sometimes has to get INTO Convex
+ * without a Markdown file to import from: seeding a fresh deployment, or
+ * bringing in a document that predates the cutover.
+ *
+ * It is NOT the agent's editing path and must not become one. eve edits the
+ * plan through `propose` above, which lands as a pending suggestion for the
+ * owner. A tool that could overwrite a whole guide body in one call would walk
+ * straight around that gate.
+ */
+export const internalUpsertGuide = internalMutation({
+  args: {
+    slug: v.string(),
+    file: v.string(),
+    order: v.number(),
+    titleHe: v.string(),
+    descriptionHe: v.string(),
+    category: v.string(),
+    bodyHe: v.string(),
+    generated: v.optional(v.boolean()),
+    archived: v.optional(v.boolean()),
+    updatedBy: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db
+      .query("guides")
+      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
+      .unique();
+
+    const doc = {
+      slug: args.slug,
+      file: args.file,
+      order: args.order,
+      titleHe: args.titleHe,
+      descriptionHe: args.descriptionHe,
+      category: args.category,
+      bodyHe: args.bodyHe,
+      generated: args.generated ?? false,
+      archived: args.archived,
+      updatedAt: Date.now(),
+      updatedBy: args.updatedBy ?? "maintenance",
+    };
+
+    if (existing) {
+      await ctx.db.replace("guides", existing._id, doc);
+      return { slug: args.slug, created: false, chars: args.bodyHe.length };
+    }
+    const id = await ctx.db.insert("guides", doc);
+    return { id, slug: args.slug, created: true, chars: args.bodyHe.length };
   },
 });

@@ -36,6 +36,39 @@ export type BubbleAttachment = {
   url?: string;
 };
 
+/**
+ * A pending human-in-the-loop request — the run is parked until it is answered.
+ *
+ * Two things produce one (eve/docs/tools/human-in-the-loop.md): a tool gated on
+ * `approval`, and the model calling `ask_question`. They differ in a way that
+ * decides the whole UI:
+ *
+ *   * a question is `display: "text"` or `"select"` with `allowFreeform`, so
+ *     typing an answer resolves it — the composer is enough;
+ *   * an approval is `display: "confirmation"` with `allowFreeform: false` and
+ *     the fixed options `approve` / `deny`. Free text does NOT resolve it. eve
+ *     holds the text and keeps the approval pending, so a family member typing
+ *     "כן" is answering into a void.
+ *
+ * That second case is why this type exists: an approval has to be rendered as
+ * buttons and answered with `inputResponses`, not as a sentence to reply to.
+ */
+export type EvePrompt = {
+  requestId: string;
+  /** eve's own wording — English boilerplate for approvals, Hebrew for questions. */
+  prompt: string;
+  display: "confirmation" | "select" | "text";
+  options: { id: string; label: string }[];
+  allowFreeform: boolean;
+  /** The gated call, so an approval card can say what it is approving. */
+  toolName?: string;
+  toolInput?: Record<string, unknown>;
+  /** Call id of that action; its `action.result` is what retires the card. */
+  callId?: string;
+  /** Set the moment the family answers, so the buttons cannot fire twice. */
+  answered: boolean;
+};
+
 /** One rendered bubble. Shared shape with the AI SDK fallback transport. */
 export type EveBubble = {
   id: string;
@@ -49,6 +82,8 @@ export type EveBubble = {
   audio: boolean;
   attachments: BubbleAttachment[];
   activity: EveActivity[];
+  /** Human answers this bubble is parked on. Empty for every settled bubble. */
+  prompts: EvePrompt[];
   streaming: boolean;
   /** Assistant text reached its terminal `message.completed` (safe to speak). */
   final: boolean;
@@ -313,21 +348,42 @@ function withAssistant(
       audio: false,
       attachments: [],
       activity: [],
+      prompts: [],
       streaming: true,
       final: false,
     });
     index = messages.length - 1;
   }
 
-  const next: EveBubble = { ...messages[index], activity: messages[index].activity.slice() };
+  const next: EveBubble = {
+    ...messages[index],
+    activity: messages[index].activity.slice(),
+    prompts: messages[index].prompts.slice(),
+  };
   mutate(next);
   messages[index] = next;
   return messages;
 }
 
-/** Marks every bubble settled — used at turn and session boundaries. */
+/**
+ * Marks every bubble settled — used at turn and session boundaries.
+ *
+ * Pending prompts go inert too: the turn cannot both have ended and still be
+ * parked waiting for a person, so a live approval card surviving a
+ * `turn.cancelled` would be a button that answers nothing.
+ */
 function settle(messages: EveBubble[]): EveBubble[] {
-  return messages.map((message) => (message.streaming ? { ...message, streaming: false } : message));
+  return messages.map((message) => {
+    const stale = message.prompts.some((prompt) => !prompt.answered);
+    if (!message.streaming && !stale) return message;
+    return {
+      ...message,
+      streaming: false,
+      prompts: stale
+        ? message.prompts.map((prompt) => ({ ...prompt, answered: true }))
+        : message.prompts,
+    };
+  });
 }
 
 function markDone(messages: EveBubble[], callId: string | undefined): EveBubble[] {
@@ -340,6 +396,70 @@ function markDone(messages: EveBubble[], callId: string | undefined): EveBubble[
     const activity = message.activity.slice();
     activity[at] = { ...activity[at], done: true };
     return { ...message, activity };
+  });
+}
+
+/**
+ * Reads one `input.requested` entry into the shape the bubble renders.
+ *
+ * Field names follow eve's own extractor (`harness/input-extraction`): the
+ * request carries `requestId`, `prompt`, `display`, `options`, `allowFreeform`
+ * and an `action` describing the call that is waiting — `{ kind: "tool-call",
+ * callId, toolName, input }`. That action is the only place the *content* of a
+ * pending approval exists, which is why it is kept rather than just the prompt.
+ */
+function readInputRequest(raw: unknown): EvePrompt | null {
+  const request = record(raw);
+  const requestId = request ? str(request.requestId) : undefined;
+  if (!request || !requestId) return null;
+
+  const action = record(request.action);
+  const display = str(request.display);
+  const options = (Array.isArray(request.options) ? request.options : [])
+    .map((item) => {
+      const option = record(item);
+      const id = option ? str(option.id) : undefined;
+      return id ? { id, label: str(option?.label) ?? id } : null;
+    })
+    .filter((option): option is { id: string; label: string } => option !== null);
+
+  return {
+    requestId,
+    prompt: str(request.prompt) ?? "",
+    display: display === "confirmation" || display === "select" ? display : "text",
+    options,
+    allowFreeform: request.allowFreeform !== false,
+    toolName: action ? str(action.toolName) : undefined,
+    toolInput: action ? record(action.input) : undefined,
+    callId: action ? str(action.callId) : undefined,
+    answered: false,
+  };
+}
+
+/**
+ * Retires a prompt once its answer is on the wire (or once eve reports the
+ * gated call finished, which is the same thing arriving from the other side).
+ * The card stays on screen but goes inert, so the transcript still shows what
+ * was asked and that it was dealt with.
+ */
+export function markPromptAnswered(
+  messages: EveBubble[],
+  match: { requestId?: string; callId?: string },
+): EveBubble[] {
+  if (!match.requestId && !match.callId) return messages;
+
+  return messages.map((message) => {
+    const at = message.prompts.findIndex(
+      (prompt) =>
+        !prompt.answered &&
+        ((match.requestId !== undefined && prompt.requestId === match.requestId) ||
+          (match.callId !== undefined && prompt.callId === match.callId)),
+    );
+    if (at === -1) return message;
+
+    const prompts = message.prompts.slice();
+    prompts[at] = { ...prompts[at], answered: true };
+    return { ...message, prompts };
   });
 }
 
@@ -529,6 +649,7 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
             audio,
             attachments,
             activity: [],
+            prompts: [],
             streaming: false,
             final: true,
           },
@@ -557,8 +678,15 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
       return { ...base, messages, status: "streaming" };
     }
 
-    case "action.result":
-      return { ...base, messages: markDone(base.messages, str(record(data?.result)?.callId)) };
+    case "action.result": {
+      // A result for a gated call means its approval was resolved — here, or in
+      // another tab, or by the run being cancelled. Either way the card is spent.
+      const callId = str(record(data?.result)?.callId);
+      return {
+        ...base,
+        messages: markPromptAnswered(markDone(base.messages, callId), { callId }),
+      };
+    }
 
     case "subagent.called":
       return {
@@ -613,26 +741,37 @@ export function reduceEve(state: EveState, event: EveEvent, label?: LabelFn): Ev
     }
 
     case "input.requested": {
-      // Rendered as ordinary assistant text: a plain follow-up message answers
-      // an `ask_question` or an approval, so the composer stays sufficient.
+      // The run is parked on a human, and no `session.waiting` follows — that
+      // event marks the end of a *turn*, and this turn has not ended. So the
+      // status goes idle here, or the chat spins until the stream dies with the
+      // agent having asked a question and disabled the means to answer it.
       //
-      // Sufficient only if it is actually usable, though. The run is parked on
-      // a human, and no `session.waiting` follows — that event marks the end of
-      // a *turn*, and this turn has not ended. Leaving `status: "streaming"`
-      // here is what turned an approval prompt into a chat that spins until the
-      // stream dies: the agent asked a question and then disabled the only
-      // control that could answer it.
+      // What each request becomes depends on whether words can answer it. A
+      // question can be replied to, so its prompt is appended as assistant text
+      // and the composer does the rest. An approval cannot: `allowFreeform` is
+      // false, so it is kept as a structured prompt for the bubble to render as
+      // buttons, and its English boilerplate ("Approve tool call: edit_plan_doc")
+      // is deliberately NOT shown — the card writes its own Hebrew from the tool
+      // call the request carries.
       const requests = Array.isArray(data?.requests) ? (data.requests as unknown[]) : [];
-      const prompts = requests
-        .map((raw) => str(record(raw)?.prompt))
-        .filter((prompt): prompt is string => Boolean(prompt));
-      if (prompts.length === 0) return { ...base, status: "idle" };
+      const parsed = requests
+        .map(readInputRequest)
+        .filter((prompt): prompt is EvePrompt => prompt !== null);
+      if (parsed.length === 0) return { ...base, status: "idle" };
+
+      const spoken = parsed
+        .filter((prompt) => prompt.display !== "confirmation")
+        .map((prompt) => prompt.prompt);
 
       return {
         ...base,
         status: "idle",
         messages: withAssistant(base, turnId, (bubble) => {
-          bubble.text = [bubble.text, ...prompts].filter(Boolean).join("\n\n");
+          bubble.text = [bubble.text, ...spoken].filter(Boolean).join("\n\n");
+          for (const prompt of parsed) {
+            if (bubble.prompts.some((item) => item.requestId === prompt.requestId)) continue;
+            bubble.prompts.push(prompt);
+          }
           bubble.final = true;
           bubble.streaming = false;
         }),

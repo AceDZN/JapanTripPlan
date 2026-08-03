@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, FileText } from "lucide-react";
 import { getGuides } from "@/lib/trip-source";
@@ -33,7 +34,13 @@ export default async function GuidesPage() {
       <div className="guides-grid">
         {tripGuides.map((guide, index) => (
           <Link className="guide-card" href={`/guide/${guide.slug}`} key={guide.slug} data-reveal>
-            <img src={guideImage(guide.category)} alt="" loading="lazy" />
+            <Image
+              src={guide.hero?.url ?? guideImage(guide.category)}
+              alt=""
+              fill
+              sizes="(max-width: 640px) 100vw, 380px"
+              loading="lazy"
+            />
             <span className="guide-card-num">{String(index + 1).padStart(2, "0")}</span>
             <span className="guide-card-body">
               <span className="file">

@@ -187,6 +187,27 @@ export const paymentMethod = v.union(
   v.literal("other"),
 );
 
+/**
+ * A picture, wherever one is attached.
+ *
+ * `url` is cached at store time rather than minted per read. Convex file URLs
+ * are bearer URLs that do not expire — they stay valid until the file itself is
+ * deleted — so caching one is safe, and it turns rendering 154 place thumbnails
+ * from 154 `ctx.storage.getUrl()` calls into zero. If a file IS deleted the URL
+ * 404s, which `Photo`/`Thumb` already degrade to the category gradient.
+ *
+ * Everything ELSE about the file — where it came from, who took it, licence,
+ * dimensions, sha256 — lives once on `imageAssets`, keyed by the same
+ * storageId. Only `alt` is repeated here, because alt text is a property of the
+ * PLACE the picture is used, not of the picture.
+ */
+export const storedImage = v.object({
+  storageId: v.id("_storage"),
+  url: v.string(),
+  /** Hebrew, for screen readers and for the gradient fallback's label. */
+  alt: v.optional(v.string()),
+});
+
 /** Receipts and confirmations, in Convex file storage. Same shape as the vault. */
 export const attachedFile = v.object({
   storageId: v.id("_storage"),
@@ -195,6 +216,24 @@ export const attachedFile = v.object({
   type: v.string(),
   uploadedAt: v.number(),
 });
+
+/**
+ * The four tables a structured content edit can target, and what it can do to
+ * one. Defined here rather than in `lib/contentPolicy.ts` because the
+ * `suggestions` table below needs them and that module imports from this one.
+ */
+export const contentTableName = v.union(
+  v.literal("places"),
+  v.literal("days"),
+  v.literal("blocks"),
+  v.literal("checklistItems"),
+);
+
+export const contentOpName = v.union(
+  v.literal("create"),
+  v.literal("patch"),
+  v.literal("delete"),
+);
 
 export const stay = v.object({
   placeId: v.optional(v.string()),
@@ -223,7 +262,8 @@ export default defineSchema({
     theme: v.string(),
     city,
     color: v.string(), // hex, per-day identity colour
-    heroImage: v.string(), // "/images/days/day-03.jpg"
+    hero: v.optional(storedImage),
+    gallery: v.optional(v.array(storedImage)),
     highlights: v.array(v.string()),
     note: v.optional(v.string()),
     rainPlan: v.optional(v.string()),
@@ -246,10 +286,11 @@ export default defineSchema({
    * Day blocks, as their own table rather than an array on `days`.
    *
    * This is the point of the whole migration: moving or reordering one block
-   * is a single atomic mutation, which is exactly the edit that silently
-   * desyncs the site today (eve rewrites the markdown, `trip-data.ts` does not
-   * follow). `order` is a sparse integer so a block can be inserted between
-   * two others without rewriting its siblings.
+   * is a single atomic mutation, which is exactly the edit that used to
+   * silently desync the site — eve rewrote the markdown and `trip-data.ts` did
+   * not follow. `convex/content.ts` performs that mutation now. `order` is a
+   * sparse integer so a block can be inserted between two others without
+   * rewriting its siblings.
    */
   blocks: defineTable({
     dayN: v.number(),
@@ -266,6 +307,8 @@ export default defineSchema({
     links: v.optional(v.array(refLink)),
     needs: v.optional(v.array(v.string())),
     warnings: v.optional(v.array(v.string())),
+    /** What this actually looks like — the ramen counter, the ticket machine. */
+    gallery: v.optional(v.array(storedImage)),
     updatedAt: v.number(),
     updatedBy: v.optional(v.string()),
   })
@@ -287,15 +330,25 @@ export default defineSchema({
     planned: v.boolean(),
     descriptionHe: v.string(),
     tips: v.optional(v.string()),
-    image: v.optional(v.string()),
+    /**
+     * The place's photo. Those 120MB of unoptimised originals are gone; pictures
+     * live in Convex storage now, so a place's photo is data the agents can
+     * improve rather than a file only a commit can change.
+     */
+    hero: v.optional(storedImage),
+    /**
+     * Extra angles — the point of a gallery is an attraction you can size up
+     * the way you would from a Google result, so 3–5 is the useful number.
+     */
+    gallery: v.optional(v.array(storedImage)),
     mapsQuery: v.optional(v.string()),
     mustDo: v.optional(v.boolean()),
     indoor: v.optional(v.boolean()), // rain-friendly
     openingHours: v.optional(v.string()),
     /**
-     * Present in `places.json` and `lib/types.ts` since before the migration,
-     * but omitted here — so the import silently dropped `officialUrl` for 41
-     * places and `priceLevel` for 148. Restored; the app reads them again.
+     * Present in the pre-migration `places.json` and in `lib/types.ts`, but
+     * omitted here at first — so the import silently dropped `officialUrl` for
+     * 41 places and `priceLevel` for 148. Restored; the app reads them again.
      */
     officialUrl: v.optional(v.string()),
     priceLevel: v.optional(v.number()), // 0..3
@@ -319,9 +372,10 @@ export default defineSchema({
   /**
    * Checklist section headings.
    *
-   * Today this is a hand-written tuple in `checklist-data.ts:3` that must match
-   * every item's `group` string exactly or items silently vanish from the UI.
-   * Making it a table with an explicit order removes that footgun.
+   * This was a hand-written tuple in `checklist-data.ts` that had to match
+   * every item's `group` string exactly or items silently vanished from the UI.
+   * A table with an explicit order removes that footgun — and `content.ts`
+   * refuses to create an item in a group that is not here.
    */
   checklistGroups: defineTable({
     title: v.string(), // Hebrew group title, e.g. "כרטיסים ואטרקציות"
@@ -331,9 +385,10 @@ export default defineSchema({
   /**
    * 59 checklist items.
    *
-   * `slug` MUST stay byte-identical to the ids in today's `checklist-data.ts`:
-   * it is the localStorage key (`japan2026.checklist.v1`), so renaming one
-   * loses that tick for every family member who already has it saved.
+   * `slug` MUST stay byte-identical to the ids the pre-migration
+   * `checklist-data.ts` used: it is the retired localStorage key
+   * (`japan2026.checklist.v1`), so renaming one loses that tick for any family
+   * member whose browser still holds an unmerged local copy.
    */
   checklistItems: defineTable({
     slug: v.string(), // exposed to the app as `id`
@@ -342,8 +397,28 @@ export default defineSchema({
     title: v.string(),
     detail: v.optional(v.string()),
     due: v.optional(v.string()), // ISO date, only when there is a real deadline
+    /**
+     * The earliest date this can actually be done, when that is later than
+     * "now" and earlier than `due`.
+     *
+     * Together with `due` this is a WINDOW, and the window is what puts a task
+     * on a day page: any trip day whose date falls in `[doFrom ?? due, due]`
+     * shows it. Collecting the Mundo Pixar tickets is the case that motivated
+     * it — impossible before landing on 2 Oct, useless after the 15:00 entry on
+     * the 4th, and much better done on the 2nd than in the rush of the 4th. One
+     * `due` alone could say "the 3rd" but could not say "from the 2nd is fine",
+     * so the task would appear on exactly one day and the early-start advice
+     * would live only in prose nobody reads at the right moment.
+     *
+     * Omitted for the ordinary case: a task with only a `due` shows on the one
+     * day that matches it, and a task whose window is entirely before the trip
+     * (most of the checklist) shows on no day page at all.
+     */
+    doFrom: v.optional(v.string()), // ISO date
     url: v.optional(v.string()),
     critical: v.optional(v.boolean()),
+    /** A picture of the thing you are looking for — the machine, the counter. */
+    hero: v.optional(storedImage),
     updatedAt: v.number(),
     updatedBy: v.optional(v.string()),
   })
@@ -356,6 +431,56 @@ export default defineSchema({
    * This is what lets the family see each other's ticks and lets eve read
    * progress, neither of which is possible today.
    */
+  /**
+   * One row per stored picture — where it came from and what it is.
+   *
+   * The entity rows (`places.hero`, `days.gallery`, …) carry only the
+   * storageId, the cached URL and a per-use `alt`. Everything intrinsic to the
+   * FILE lives here, once, and that buys three things:
+   *
+   *   DEDUP — the same photo attached to a place and to the block that visits
+   *   it is one file, not two. Matched on `sourceUrl` before downloading (free)
+   *   and on `sha256` after (catches the same image served from two URLs).
+   *
+   *   SAFE DELETION — Convex has no foreign keys, so nothing otherwise stops a
+   *   file being deleted while three rows still point at it. `refs` is the
+   *   count, maintained by `convex/images.ts`, and a file is only really
+   *   deleted when it reaches zero.
+   *
+   *   PROVENANCE — `sourceUrl`, `credit` and `license` are what make a picture
+   *   re-findable and re-checkable a year later. This is a private family app
+   *   so attribution is not a legal necessity, but "where did this come from"
+   *   is a question that gets asked and it costs nothing to be able to answer.
+   */
+  imageAssets: defineTable({
+    storageId: v.id("_storage"),
+    /** Cached bearer URL — see the `storedImage` comment for why this is safe. */
+    url: v.string(),
+    /** Content hash from the `_storage` system table, for cross-URL dedup. */
+    sha256: v.string(),
+    contentType: v.string(),
+    size: v.number(),
+    width: v.optional(v.number()),
+    height: v.optional(v.number()),
+
+    /** Where the bytes came from. Absent for a hand-uploaded file. */
+    sourceUrl: v.optional(v.string()),
+    /** "Wikimedia Commons", or the host we pulled it from. */
+    sourceName: v.optional(v.string()),
+    /** Photographer or uploader, when the source told us. */
+    credit: v.optional(v.string()),
+    /** e.g. "CC BY-SA 3.0". Absent when the source does not state one. */
+    license: v.optional(v.string()),
+
+    /** How many entity rows point at this file. Zero means it can go. */
+    refs: v.number(),
+    addedAt: v.number(),
+    addedBy: v.optional(v.string()),
+  })
+    .index("by_storageId", ["storageId"])
+    .index("by_sha256", ["sha256"])
+    .index("by_sourceUrl", ["sourceUrl"]),
+
   checklistState: defineTable({
     itemSlug: v.string(),
     done: v.boolean(),
@@ -379,11 +504,28 @@ export default defineSchema({
     order: v.number(),
     titleHe: v.string(),
     descriptionHe: v.string(),
-    category: v.string(), // drives components/guide-images.ts
+    category: v.string(),
+    /**
+     * Cover photo. Guides used to borrow a day or place photo by category
+     * (`components/guide-images.ts`), so twelve documents shared five pictures
+     * and none of them was chosen for the document it fronted.
+     */
+    hero: v.optional(storedImage),
     /** Canonical Hebrew markdown. Empty for generated guides (09, 11). */
     bodyHe: v.string(),
     /** true => body is rendered from structured tables, not from bodyHe. */
     generated: v.boolean(),
+    /**
+     * Superseded research, kept for the record but out of the way.
+     *
+     * An archived guide is still readable at its own URL — the live guides link
+     * to it — but it is excluded from the guide index, from the chat's baked
+     * context and from the agent's editable-file list. Without this flag the
+     * February accommodation research would show up as a 13th guide the family
+     * is meant to plan from, which is the opposite of what it is: its own first
+     * line says not to book from it.
+     */
+    archived: v.optional(v.boolean()),
     preamble: v.optional(v.string()),
     postamble: v.optional(v.string()),
     updatedAt: v.number(),
@@ -593,11 +735,40 @@ export default defineSchema({
    * rather than leaving the caller to infer it.
    */
   suggestions: defineTable({
-    targetKind: v.union(v.literal("guide"), v.literal("day")),
+    targetKind: v.union(v.literal("guide"), v.literal("day"), v.literal("content")),
     /** Set when targetKind === "guide". Matches `guides.slug`. */
     guideSlug: v.optional(v.string()),
     /** Set when targetKind === "day". Matches `days.n`. */
     dayN: v.optional(v.number()),
+
+    /**
+     * Set when targetKind === "content": a structured edit to `places`,
+     * `days`, `blocks` or `checklistItems`, waiting for the owner.
+     *
+     * This is the half of the plan that is NOT prose. A guide suggestion is a
+     * substring replacement against markdown; this one is "set day 12's stay
+     * to X" or "move this block to day 13" — an operation the app can apply
+     * exactly, with no text matching involved.
+     *
+     * `fieldsJson` rather than a typed object: the four tables have four
+     * different patch shapes, and a `v.any()` here would be a hole straight
+     * through the validators in `lib/contentPolicy.ts`. Stored as an inert
+     * string and re-validated against the real patch validator at approval
+     * time — see `applyContentEdit` in `convex/content.ts`. A suggestion that
+     * has gone stale or malformed therefore fails loudly on approve rather
+     * than writing something nobody checked.
+     */
+    content: v.optional(
+      v.object({
+        table: contentTableName,
+        op: contentOpName,
+        /** places/checklistItems: slug. days: the day number. blocks: _id. */
+        key: v.optional(v.string()),
+        fieldsJson: v.string(),
+        /** Field names to clear on apply — see `classifyNames` in contentPolicy. */
+        unset: v.optional(v.array(v.string())),
+      }),
+    ),
 
     /** One line, for the list and for the agent to read aloud. */
     title: v.string(),
@@ -756,13 +927,21 @@ export default defineSchema({
    *
    * Not a rate history and not a market feed: each expense keeps the rate it was
    * recorded at, so this table only answers "what should we convert at right
-   * now". eve refreshes it from a source it can cite; a stale `updatedAt` is
-   * shown next to any converted total rather than hidden.
+   * now". A daily cron refreshes it from a source it can cite; a stale row is
+   * flagged in the UI rather than hidden.
+   *
+   * `asOf` is when the PROVIDER quoted the rate; `updatedAt` is when we wrote
+   * the row. They are usually a few hours apart and identical in meaning to the
+   * reader, so the UI shows only `asOf ?? updatedAt` — but when a refresh fails
+   * for two days and then succeeds, the gap is exactly what tells you the rate
+   * you are converting at is Monday's, not today's. A hand-typed rate has no
+   * `asOf`: it is worth precisely what the person typing it knew.
    */
   fxRates: defineTable({
     currency: currencyCode,
     jpyPerUnit: v.number(),
     source: v.optional(v.string()),
+    asOf: v.optional(v.number()),
     updatedAt: v.number(),
     updatedBy: v.optional(v.string()),
   }).index("by_currency", ["currency"]),

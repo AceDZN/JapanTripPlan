@@ -3,35 +3,34 @@
 // literals, so the agent never depends on the filesystem at runtime (Vercel
 // functions do not ship ../web/data).
 //
-// Sources:
-//   Convex /agent/export     (canonical guides — the trip lives there)
-//   ../web/data/places.json  (map/place database shared with the webapp)
+// Sources — both Convex, which is the only place the trip lives:
+//   /agent/export          canonical guides
+//   /agent/content/places  the place database
 //
 // Run: npm run sync-data   (also wired as predev / prebuild)
 
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  writeFileSync,
-} from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(here, "..");
-const repoRoot = resolve(appRoot, "..");
-const placesFile = join(repoRoot, "web", "data", "places.json");
 const outFile = join(appRoot, "agent", "data", "content.ts");
 
 /*
- * GUIDES COME FROM CONVEX NOW.
+ * EVERYTHING COMES FROM CONVEX NOW.
  *
- * They used to be read from ../JAPAN2026/*.md. Those files are gone — the trip
- * lives in Convex and the guides are edited there, so a copy on disk was a
- * second source that could disagree with the first.
+ * Guides used to be read from ../JAPAN2026/*.md and places from
+ * ../web/data/places.json. Both are gone. The trip lives in Convex, and a copy
+ * on disk was a second source that could — and did — disagree with the first:
+ * the webapp read places from Convex while this agent read them from the JSON,
+ * so a place corrected in the app stayed wrong in every answer eve gave.
  *
- * Places are still a repo file (web/data/places.json); only the guides moved.
+ * What this bundle still is: an OFFLINE FALLBACK, not a rival source. The tools
+ * read Convex live on every call (`agent/lib/content.ts`) and drop back to what
+ * is baked here only when Convex cannot be reached. So the worst case is an
+ * answer from the last deploy rather than no answer at all — and there is no
+ * longer any path where a stale copy wins over a live one.
  */
 const CONVEX_SITE_URL = process.env.CONVEX_SITE_URL;
 const AGENT_SERVICE_KEY = process.env.AGENT_SERVICE_KEY;
@@ -53,7 +52,6 @@ function keepCommittedBundle(reason) {
   process.exit(1);
 }
 
-if (!existsSync(placesFile)) keepCommittedBundle("places source not present (deployment build?)");
 if (!CONVEX_SITE_URL || !AGENT_SERVICE_KEY) {
   keepCommittedBundle("CONVEX_SITE_URL / AGENT_SERVICE_KEY not set");
 }
@@ -123,17 +121,41 @@ async function fetchGuidesFromConvex() {
   };
 }
 
+/** The place database, from the same deployment the guides came from. */
+async function fetchPlacesFromConvex() {
+  let response;
+  try {
+    response = await fetch(`${CONVEX_SITE_URL}/agent/content/places`, {
+      headers: { Authorization: `Bearer ${AGENT_SERVICE_KEY}` },
+      cache: "no-store",
+    });
+  } catch (error) {
+    return { error: `network error reaching ${CONVEX_SITE_URL} (${error})` };
+  }
+
+  const body = await response.json().catch(() => null);
+  if (!response.ok || !body?.ok || !Array.isArray(body.places)) {
+    return {
+      error: `/agent/content/places failed (${response.status}): ${JSON.stringify(body)?.slice(0, 200)}`,
+    };
+  }
+  if (body.places.length === 0) {
+    return { error: "Convex returned no places — refusing to bake an empty bundle." };
+  }
+  return { places: body.places };
+}
+
 const fetched = await fetchGuidesFromConvex();
 if (fetched.error) keepCommittedBundle(`could not refresh guides — ${fetched.error}`);
 const guides = fetched.guides;
 
-const places = JSON.parse(readFileSync(placesFile, "utf8"));
-if (!Array.isArray(places) || places.length === 0) {
-  throw new Error(`No places found in ${placesFile}`);
-}
+const fetchedPlaces = await fetchPlacesFromConvex();
+if (fetchedPlaces.error) keepCommittedBundle(`could not refresh places — ${fetchedPlaces.error}`);
+const places = fetchedPlaces.places;
 
 const header = `// generated — run npm run sync-data
-// Source of truth: Convex (guides) and web/data/places.json (places).
+// Source of truth: Convex. This file is an OFFLINE FALLBACK for the live reads
+// in agent/lib/content.ts, not a source in its own right.
 // Do not edit by hand; edits are overwritten on the next sync.
 `;
 
@@ -161,6 +183,13 @@ export type PlaceCategory =
   | "transport"
   | "event";
 
+/** A stored picture: Convex storage id plus its cached, non-expiring URL. */
+export type StoredImage = {
+  storageId: string;
+  url: string;
+  alt?: string;
+};
+
 export type Place = {
   id: string;
   nameHe: string;
@@ -176,7 +205,10 @@ export type Place = {
   planned: boolean;
   descriptionHe: string;
   tips?: string;
+  /** The hero's URL, for code that just wants somewhere to point an <img>. */
   image?: string;
+  hero?: StoredImage;
+  gallery?: StoredImage[];
   officialUrl?: string;
   mapsQuery?: string;
   priceLevel?: number;

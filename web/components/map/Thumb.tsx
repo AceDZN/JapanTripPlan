@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, type CSSProperties } from "react";
 import type { Place } from "@/lib/types";
 import { CategoryIcon, categoryTone } from "@/components/visuals";
@@ -27,12 +28,17 @@ export function Thumb({ place, className = "" }: { place: Place; className?: str
 
   return (
     <div className={classes} style={style}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      {/*
+        Small and always in a list, so a narrow `sizes` matters more here than
+        anywhere: without it every marker thumbnail would ask the optimiser for
+        a full-width variant.
+      */}
+      <Image
         src={place.image}
         alt=""
+        fill
+        sizes="(max-width: 640px) 33vw, 160px"
         loading="lazy"
-        decoding="async"
         onError={() => setFailed(true)}
       />
     </div>

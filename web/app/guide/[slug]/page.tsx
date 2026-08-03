@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, FileText } from "lucide-react";
@@ -43,13 +44,7 @@ export default async function GuidePage({
     <article>
       <header className="guide-doc-hero">
         <div className="hero-media">
-          <img
-            src={guideImage(guide.category)}
-            alt=""
-            fetchPriority="high"
-            width={1600}
-            height={900}
-          />
+          <Image src={guide.hero?.url ?? guideImage(guide.category)} alt="" fill sizes="100vw" priority />
         </div>
         <div className="hero-wash" />
         <div className="container guide-doc-body">

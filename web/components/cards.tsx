@@ -14,10 +14,11 @@ import {
   TrainFront,
 } from "lucide-react";
 import type { Place } from "@/lib/types";
-import type { TripDay } from "@/lib/trip-data";
-import { mapsDirectionsUrl, mapsSearchUrl, placeCategoryLabels } from "@/lib/trip-data";
+import type { TripDay } from "@/lib/types";
+import { mapsDirectionsUrl, mapsSearchUrl, placeCategoryLabels } from "@/lib/labels";
 import { labelForeign } from "@/lib/ops";
 import { CategoryIcon, Photo, categoryTone } from "@/components/visuals";
+import { PlaceGallery } from "@/components/PlaceGallery";
 import { CopyButton } from "@/components/CopyButton";
 
 export function DayCard({ day, reveal = true }: { day: TripDay; reveal?: boolean }) {
@@ -70,6 +71,13 @@ export function PlaceCard({ place }: { place: Place }) {
           {place.nameJa ? <span lang="ja"> · {place.nameJa}</span> : null}
         </span>
         <p>{place.descriptionHe}</p>
+
+        <PlaceGallery
+          hero={place.hero}
+          gallery={place.gallery}
+          name={place.nameHe}
+          tone={categoryTone[place.category]}
+        />
 
         <PlaceFacts place={place} />
 

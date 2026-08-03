@@ -13,8 +13,10 @@ import {
 
 /**
  * One-time (but idempotent) import of the current hand-maintained data into
- * Convex: `web/lib/trip-data.ts`, `web/data/places.json`,
- * `web/lib/checklist-data.ts` and the prose of `JAPAN2026/*.md`.
+ * Convex: the former `web/lib/trip-data.ts`, `web/data/places.json`,
+ * `web/lib/checklist-data.ts` and the prose of `JAPAN2026/*.md`. Those source
+ * files no longer exist; this stays as the bulk-load path for seeding a fresh
+ * deployment. Ordinary edits go through `convex/content.ts`.
  *
  * Every mutation here upserts on the natural key, so `npm run import:convex`
  * can be re-run safely while we iterate — it converges rather than duplicating.

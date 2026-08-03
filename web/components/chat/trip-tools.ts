@@ -1,36 +1,59 @@
 import { tool } from "ai";
 import { z } from "zod";
 import { aiContext } from "@/app/generated/ai-context";
-import { bookingStatusLabels, places, placesById, tripDays } from "@/lib/trip-data";
-import { checklistItems, checklistGroups } from "@/lib/checklist-data";
+import { bookingStatusLabels } from "@/lib/labels";
+import { routeChapters } from "@/lib/route-chapters";
 import { bookingGates } from "@/components/booking-gates";
-import type { Place } from "@/lib/types";
+import type { ChecklistItem, Place, TripDay } from "@/lib/types";
 
-/* ========================================================================== */
-/* Always-in-context digest                                                    */
-/* ========================================================================== */
+/**
+ * Tools for the FALLBACK chat — the in-app AI SDK agent that answers when the
+ * eve agent is switched off (`/api/agent/enabled`).
+ *
+ * Everything here is built PER REQUEST from Convex, via `createTripTools`.
+ * It used to close over `trip-data.ts` / `checklist-data.ts` at module scope,
+ * which meant this assistant answered from a snapshot of the itinerary frozen
+ * at build time: a block moved in Convex an hour ago was still described the
+ * old way, confidently, with no way for anyone to tell.
+ *
+ * The cost of building the closures per request is a few hundred microseconds
+ * against a request that is about to spend seconds in a model. The cost of the
+ * old arrangement was the assistant being quietly wrong.
+ */
 
-const STAY_BASES = [
-  "2–11 באוקטובר · טוקיו (בסיס אחד)",
-  "11–13 באוקטובר · קיוטו",
-  "13–15 באוקטובר · אוסקה",
-  "15–17 באוקטובר · טוקיו (סיבוב שני)",
-];
+export type TripSnapshot = {
+  days: TripDay[];
+  places: Place[];
+  checklist: {
+    groups: string[];
+    items: ChecklistItem[];
+    /** Shared family progress, keyed by item id. */
+    state: Record<string, { done: boolean; doneAt?: number; doneBy?: string }>;
+  };
+};
 
 /**
  * A ~20 line summary injected into the system prompt so trivial questions
  * ("כמה ימים בקיוטו?", "מה יש ביום 9?") are answered without a tool round-trip.
  * Anything beyond the headline requires a tool call.
+ *
+ * The lodging bases used to be four hand-typed Hebrew lines here — a fifth
+ * copy of the route, after `trip-data.ts`, the itinerary page and the guides.
+ * They are derived from the days' `stay` now, so a base that moves moves here.
  */
-export const TRIP_DIGEST = [
-  "לוח 17 הימים (יום · תאריך · אזור · כותרת):",
-  ...tripDays.map(
-    (day) => `${day.day} · ${day.shortDate} · ${day.area} · ${day.title}`,
-  ),
-  "",
-  "בסיסי לינה:",
-  ...STAY_BASES.map((line) => `- ${line}`),
-].join("\n");
+export function tripDigest(days: TripDay[]): string {
+  return [
+    "לוח 17 הימים (יום · תאריך · אזור · כותרת):",
+    ...[...days]
+      .sort((a, b) => a.day - b.day)
+      .map((day) => `${day.day} · ${day.shortDate} · ${day.area} · ${day.title}`),
+    "",
+    "בסיסי לינה:",
+    ...routeChapters(days).map(
+      (chapter) => `- ${chapter.dates} · ${chapter.label}`,
+    ),
+  ].join("\n");
+}
 
 /* ========================================================================== */
 /* Tools                                                                       */
@@ -38,7 +61,7 @@ export const TRIP_DIGEST = [
 
 const GUIDE_FILES = aiContext.map((entry) => entry.file);
 
-export const readGuide = tool({
+const readGuide = tool({
   description: [
     "Read one full planning guide (markdown). These documents are the source of truth for the trip.",
     "Use it whenever the answer needs detail the digest does not contain — prices, transport passes, booking rules, food picks, packing.",
@@ -57,14 +80,16 @@ export const readGuide = tool({
   },
 });
 
-export const getDay = tool({
+function makeGetDay({ days, places }: TripSnapshot) {
+  const placesById = new Map(places.map((place) => [place.id, place]));
+  return tool({
   description:
     "Get the full structured plan for one trip day (1–17): date, area, theme, time blocks with details, booking links and statuses, the note, the rain plan and highlights. Use for any question about a specific day or date between Oct 1 and Oct 18 2026.",
   inputSchema: z.object({
     day: z.number().int().min(1).max(17).describe("Trip day number, 1 = Oct 1 2026"),
   }),
   execute: async ({ day }) => {
-    const found = tripDays.find((entry) => entry.day === day);
+    const found = days.find((entry) => entry.day === day);
     if (!found) return { error: `No such day: ${day}. Valid days are 1–17.` };
 
     return {
@@ -84,8 +109,8 @@ export const getDay = tool({
         detail: block.detail,
         cutFirst: block.cutFirst,
         places: block.placeIds
-          .map((id) => placesById[id])
-          .filter(Boolean)
+          .map((id) => placesById.get(id))
+          .filter((place): place is Place => Boolean(place))
           .map((place) => ({ id: place.id, name: place.nameHe, area: place.area })),
         booking: block.booking
           ? {
@@ -98,7 +123,8 @@ export const getDay = tool({
       })),
     };
   },
-});
+  });
+}
 
 const MAX_PLACE_RESULTS = 15;
 
@@ -121,7 +147,8 @@ function summarisePlace(place: Place) {
   };
 }
 
-export const searchPlaces = tool({
+function makeSearchPlaces({ places }: TripSnapshot) {
+  return tool({
   description: [
     "Search the trip's place database (150 entries): planned stops plus curated nearby extras.",
     "Filter by free-text query (matches Hebrew/English name, description and area), category, city, or trip day.",
@@ -175,13 +202,16 @@ export const searchPlaces = tool({
       results: matches.slice(0, MAX_PLACE_RESULTS).map(summarisePlace),
     };
   },
-});
+  });
+}
 
-export const getChecklist = tool({
+function makeGetChecklist({ checklist }: TripSnapshot) {
+  const { groups: checklistGroups, items: checklistItems } = checklist;
+  // `checklist` itself stays in scope for the shared done-state lookup below.
+  return tool({
   description: [
-    "Get pre-trip checklist items with their groups, deadlines, links and critical flags.",
-    "IMPORTANT: completion state is stored only in the family's browser (localStorage) and is NOT visible to you.",
-    "Never claim an item is done or not done — describe what is on the list and when it is due, and tell the family to check the הכנות page for their own ticks.",
+    "Get pre-trip checklist items with their groups, deadlines, links, critical flags and whether they are DONE.",
+    "Completion is shared across the whole family and is included here as `done` (with `doneBy` when known), so you may state plainly what is and is not finished.",
     `Groups: ${checklistGroups.join(" · ")}.`,
   ].join(" "),
   inputSchema: z.object({
@@ -198,7 +228,6 @@ export const getChecklist = tool({
     });
 
     return {
-      note: "Completion state lives in the user's localStorage and is unknown server-side.",
       total: matches.length,
       groups: checklistGroups,
       items: matches.slice(0, 40).map((item) => ({
@@ -209,12 +238,16 @@ export const getChecklist = tool({
         due: item.due,
         url: item.url,
         critical: item.critical,
+        done: checklist.state[item.id]?.done ?? false,
+        doneBy: checklist.state[item.id]?.doneBy,
       })),
     };
   },
-});
+  });
+}
 
-export const getBookingGates = tool({
+function makeGetBookingGates({ days, checklist }: TripSnapshot) {
+  return tool({
   description:
     "List every booking gate for the trip — the things that must be reserved, entered in a lottery, or bought on a specific on-sale date — with status, deadline, day and booking URL. Use for 'what still needs booking', 'what are we at risk of missing', 'when do tickets open'.",
   inputSchema: z.object({
@@ -224,7 +257,9 @@ export const getBookingGates = tool({
       .describe("true = exclude gates already marked booked"),
   }),
   execute: async ({ openOnly }) => {
-    const gates = bookingGates().filter((gate) => !openOnly || gate.status !== "booked");
+    const gates = bookingGates(days, checklist.items).filter(
+      (gate) => !openOnly || gate.status !== "booked",
+    );
     return {
       total: gates.length,
       gates: gates.map((gate) => ({
@@ -239,7 +274,8 @@ export const getBookingGates = tool({
       })),
     };
   },
-});
+  });
+}
 
 /** Haversine distance in metres. Inlined so the tool stays worker-safe. */
 function distanceMeters(aLat: number, aLng: number, bLat: number, bLng: number): number {
@@ -254,7 +290,8 @@ function distanceMeters(aLat: number, aLng: number, bLat: number, bLng: number):
   return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
 }
 
-export const nearbyPlaces = tool({
+function makeNearbyPlaces({ places }: TripSnapshot) {
+  return tool({
   description:
     "Rank trip places by real distance from a latitude/longitude, with walking-time estimates (80 m/min). Use when the family says where they are, or asks what is near a place you already looked up with searchPlaces.",
   inputSchema: z.object({
@@ -282,13 +319,17 @@ export const nearbyPlaces = tool({
       })),
     };
   },
-});
+  });
+}
 
-export const tripTools = {
-  readGuide,
-  getDay,
-  searchPlaces,
-  getChecklist,
-  getBookingGates,
-  nearbyPlaces,
-};
+/** Bind every tool to one request's snapshot of the trip. */
+export function createTripTools(trip: TripSnapshot) {
+  return {
+    readGuide,
+    getDay: makeGetDay(trip),
+    searchPlaces: makeSearchPlaces(trip),
+    getChecklist: makeGetChecklist(trip),
+    getBookingGates: makeGetBookingGates(trip),
+    nearbyPlaces: makeNearbyPlaces(trip),
+  };
+}

@@ -6,6 +6,7 @@ import { heIL } from "@clerk/localizations";
 import { AppShell } from "@/components/AppShell";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import { ServiceWorkerRegistrar } from "@/components/chat/ServiceWorkerRegistrar";
+import { themeBootScript, themeBootStyle } from "@/lib/theme";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
 
@@ -25,11 +26,12 @@ const notoSerif = Noto_Serif_Hebrew({
   display: "swap",
 });
 
+/**
+ * No `themeColor` here on purpose: a manual light/dark choice has to win over
+ * the OS setting, and media-scoped <meta> tags can't express that. The theme
+ * boot script appends the single correct theme-color tag instead.
+ */
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf7f2" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f1120" },
-  ],
   colorScheme: "light dark",
 };
 
@@ -79,7 +81,14 @@ export default function RootLayout({
   return (
     <ClerkProvider localization={heIL} afterSignOutUrl="/">
       <ConvexClientProvider>
-        <html lang="he" dir="rtl">
+        {/* suppressHydrationWarning: the boot script below stamps data-theme
+            on <html> before React hydrates, so the served markup and the live
+            DOM differ by design. */}
+        <html lang="he" dir="rtl" suppressHydrationWarning>
+          <head>
+            <style dangerouslySetInnerHTML={{ __html: themeBootStyle }} />
+            <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+          </head>
           <body className={`${heebo.variable} ${notoSerif.variable}`}>
             <AppShell>{children}</AppShell>
             <ServiceWorkerRegistrar />

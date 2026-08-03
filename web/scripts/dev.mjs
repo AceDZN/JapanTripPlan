@@ -123,7 +123,10 @@ process.stdout.write("\x1b[36m[dev]\x1b[0m bundling agent data…\n");
 await run("npm", ["run", "sync-data"], AGENT_DIR);
 
 process.stdout.write(`\x1b[36m[dev]\x1b[0m starting eve agent on :${AGENT_PORT}…\n`);
-start("[agent]", "npx", ["eve", "dev"], AGENT_DIR, "35");
+// PORT is passed explicitly: `eve dev` falls back to $PORT before its own 2000
+// default, so an ambient PORT (a launcher, a shell export) would otherwise send
+// the agent to the web app's port and hang the wait below.
+start("[agent]", "npx", ["eve", "dev"], AGENT_DIR, "35", { PORT: String(AGENT_PORT) });
 
 try {
   await waitForPort(AGENT_PORT, AGENT_READY_TIMEOUT_MS);

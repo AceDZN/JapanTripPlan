@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   AlarmClock,
@@ -16,14 +17,7 @@ import { bookingGates, dueTone, formatDueHe } from "@/components/booking-gates";
 import { BudgetLive } from "@/components/BudgetLive";
 import { getChecklist, getGuides, getTripDays } from "@/lib/trip-source";
 import { dateKey, daysUntilTrip, todayTripDay } from "@/lib/trip-time";
-import { routeChapters } from "@/lib/trip-data";
-
-const cityImages: Record<string, string> = {
-  tokyo: "/images/cities/tokyo.jpg",
-  kyoto: "/images/cities/kyoto.jpg",
-  osaka: "/images/cities/osaka.jpg",
-  kamakura: "/images/cities/kamakura.jpg",
-};
+import { routeChapters } from "@/lib/route-chapters";
 
 export default async function Home() {
   const [tripDays, checklist, tripGuides] = await Promise.all([
@@ -46,21 +40,27 @@ export default async function Home() {
       .sort((a, b) => a.due!.localeCompare(b.due!))
       .find((item) => item.due! >= todayKey) ?? null;
 
-  const gates = bookingGates()
+  // Day 2 is the first day in Japan; day 1 is spent entirely in the air.
+  const arrivalImage =
+    tripDays.find((day) => day.day === 2)?.heroImage ?? tripDays[0]?.heroImage ?? "";
+
+  const gates = bookingGates(tripDays, checklist.items)
     .filter((gate) => gate.status !== "booked")
     .slice(0, 6);
+  const chapters = routeChapters(tripDays);
   const previewDays = tripDays.filter((day) => day.day >= 3).slice(0, 8);
 
   return (
     <>
       <section className="hero">
         <div className="hero-media">
-          <img
-            src="/images/cities/tokyo.jpg"
-            alt="קו הרקיע של טוקיו"
-            fetchPriority="high"
-            width={1600}
-            height={900}
+          {/* The first day on the ground, rather than a stock skyline. */}
+          <Image
+            src={arrivalImage}
+            alt="יפן 2026"
+            fill
+            sizes="100vw"
+            priority
           />
         </div>
         <div className="hero-wash" />
@@ -207,18 +207,22 @@ export default async function Home() {
           </Link>
         </div>
         <div className="route-strip">
-          {routeChapters.map((chapter, index) => (
+          {chapters.map((chapter, index) => (
             <Link
               className="route-card"
               href={`/day/${chapter.days[0]}`}
               key={`${chapter.city}-${chapter.dates}`}
               data-reveal
             >
-              <img
-                src={cityImages[chapter.city] ?? cityImages.tokyo}
-                alt={chapter.label}
-                loading="lazy"
-              />
+              {chapter.image ? (
+                <Image
+                  src={chapter.image}
+                  alt={chapter.label}
+                  fill
+                  sizes="(max-width: 640px) 80vw, 320px"
+                  loading="lazy"
+                />
+              ) : null}
               <span className="route-card-body">
                 <span>פרק {index + 1}</span>
                 <strong>{chapter.label}</strong>

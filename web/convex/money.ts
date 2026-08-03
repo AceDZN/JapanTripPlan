@@ -33,6 +33,9 @@ const MAX_BUDGETS = 200;
 const MAX_RATES = 20;
 const MAX_FILES_PER_EXPENSE = 6;
 
+/** A fetched rate this far from the stored one is a bad feed, not a market move. */
+const MAX_RATE_DRIFT = 0.25;
+
 const visibilityValidator = v.union(v.literal("shared"), v.literal("private"));
 
 const sourceValidator = v.union(
@@ -132,6 +135,16 @@ function toEnvelope(doc: Doc<"budgets">) {
   return { id: _id, ...rest };
 }
 
+function toRate(doc: Doc<"fxRates">) {
+  return {
+    currency: doc.currency,
+    jpyPerUnit: doc.jpyPerUnit,
+    source: doc.source,
+    asOf: doc.asOf,
+    updatedAt: doc.updatedAt,
+  };
+}
+
 /* ------------------------------------------------------------------- reads */
 
 /** Every expense this caller may see. Sorting belongs to `lib/money.ts`. */
@@ -175,12 +188,7 @@ export const listRates = query({
   handler: async (ctx) => {
     await caller(ctx);
     const rows = await ctx.db.query("fxRates").take(MAX_RATES);
-    return rows.map((row) => ({
-      currency: row.currency,
-      jpyPerUnit: row.jpyPerUnit,
-      source: row.source,
-      updatedAt: row.updatedAt,
-    }));
+    return rows.map(toRate);
   },
 });
 
@@ -207,12 +215,7 @@ export const board = query({
         expenseDocs.filter(visibleTo(email)).map((doc) => toExpense(ctx, doc, email)),
       ),
       envelopes: budgetDocs.map(toEnvelope),
-      rates: rateDocs.map((row) => ({
-        currency: row.currency,
-        jpyPerUnit: row.jpyPerUnit,
-        source: row.source,
-        updatedAt: row.updatedAt,
-      })),
+      rates: rateDocs.map(toRate),
       me: email,
     };
   },
@@ -603,10 +606,17 @@ async function upsertBudget(
 
 async function upsertRate(
   ctx: MutationCtx,
-  args: { currency: Doc<"fxRates">["currency"]; jpyPerUnit: number; source?: string },
+  args: {
+    currency: Doc<"fxRates">["currency"];
+    jpyPerUnit: number;
+    source?: string;
+    asOf?: number;
+  },
   actorName: string,
 ) {
-  if (!(args.jpyPerUnit > 0)) throw new Error("jpyPerUnit must be a positive number.");
+  if (!Number.isFinite(args.jpyPerUnit) || !(args.jpyPerUnit > 0)) {
+    throw new Error("jpyPerUnit must be a positive number.");
+  }
   if (args.currency === "JPY" && args.jpyPerUnit !== 1) {
     throw new Error("The yen rate is 1 by definition.");
   }
@@ -620,6 +630,7 @@ async function upsertRate(
     currency: args.currency,
     jpyPerUnit: args.jpyPerUnit,
     source: args.source,
+    asOf: args.asOf,
     updatedAt: Date.now(),
     updatedBy: actorName,
   };
@@ -848,12 +859,7 @@ export const internalListAll = internalQuery({
         source: row.source,
       })),
       envelopes: budgets.map(toEnvelope),
-      rates: rates.map((row) => ({
-        currency: row.currency,
-        jpyPerUnit: row.jpyPerUnit,
-        source: row.source,
-        updatedAt: row.updatedAt,
-      })),
+      rates: rates.map(toRate),
     };
   },
 });
@@ -900,11 +906,69 @@ export const internalSetRate = internalMutation({
     currency: currencyCode,
     jpyPerUnit: v.number(),
     source: v.optional(v.string()),
+    asOf: v.optional(v.number()),
     updatedBy: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const { updatedBy, ...fields } = args;
     return await upsertRate(ctx, fields, updatedBy ?? "eve");
+  },
+});
+
+/**
+ * Write a batch of rates fetched from a price feed. Called by `fx.refresh`.
+ *
+ * The drift guard is the point of having a separate entry rather than looping
+ * `internalSetRate`: a feed that answers 5.18 instead of 51.8 — a decimal slip,
+ * a base-currency mix-up, a placeholder — would silently rescale every foreign
+ * charge entered afterwards by a factor of ten, and nobody re-reads a rate they
+ * did not type. A day's real FX move is under 2%; anything past 25% is the feed
+ * being wrong, so we keep yesterday's rate and say why. `force` exists for the
+ * genuine outlier (a devaluation, a first fetch after a long gap) and is only
+ * ever set by a human asking for it.
+ */
+export const applyFetchedRates = internalMutation({
+  args: {
+    source: v.string(),
+    asOf: v.number(),
+    force: v.optional(v.boolean()),
+    rows: v.array(v.object({ currency: currencyCode, jpyPerUnit: v.number() })),
+  },
+  handler: async (ctx, args) => {
+    const written: string[] = [];
+    const rejected: { currency: string; reason: string }[] = [];
+
+    for (const row of args.rows) {
+      if (!Number.isFinite(row.jpyPerUnit) || !(row.jpyPerUnit > 0)) {
+        rejected.push({ currency: row.currency, reason: `not a rate: ${row.jpyPerUnit}` });
+        continue;
+      }
+
+      const existing = await ctx.db
+        .query("fxRates")
+        .withIndex("by_currency", (q) => q.eq("currency", row.currency))
+        .unique();
+
+      if (existing && !args.force) {
+        const drift = Math.abs(row.jpyPerUnit - existing.jpyPerUnit) / existing.jpyPerUnit;
+        if (drift > MAX_RATE_DRIFT) {
+          rejected.push({
+            currency: row.currency,
+            reason: `${(drift * 100).toFixed(0)}% from the stored ${existing.jpyPerUnit.toFixed(3)} — kept the old rate`,
+          });
+          continue;
+        }
+      }
+
+      await upsertRate(
+        ctx,
+        { currency: row.currency, jpyPerUnit: row.jpyPerUnit, source: args.source, asOf: args.asOf },
+        args.source,
+      );
+      written.push(row.currency);
+    }
+
+    return { written, rejected };
   },
 });
 

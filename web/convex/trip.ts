@@ -10,9 +10,9 @@ import type { Doc } from "./_generated/dataModel";
  * offline use in Japan. Anything family-only lives in `privateRecords` /
  * `chatMessages` and is served from `convex/private.ts` behind requireFamily().
  *
- * These return the exact shapes `web/lib/types.ts` already describes, so the
- * eleven modules importing `@/lib/trip-data` keep working with no changes:
- * `slug` is mapped back to `id`, and blocks are nested into their day.
+ * These return the exact shapes `web/lib/types.ts` describes: `slug` is mapped
+ * back to `id`, and blocks are nested into their day. Writes live next door in
+ * `convex/content.ts`.
  *
  * NOTE: no function here reads the wall clock. "Which day is today" is a
  * function of the request, not of the data — queries are not re-run just
@@ -29,18 +29,39 @@ const MAX_PLACES = 1000;
 const MAX_CHECKLIST = 500;
 const MAX_GUIDES = 50;
 
+/**
+ * Places, with pictures resolved to plain URLs.
+ *
+ * `image` stays a URL string so every component that already renders one keeps
+ * working; it is now the stored file's URL rather than a path into a `public/`
+ * folder that no longer exists. `hero`/`gallery` carry the full objects for the
+ * newer UI (alt text, the attraction carousel).
+ *
+ */
 function toPlace(doc: Doc<"places">) {
-  const { slug, _id, _creationTime, updatedAt, updatedBy, ...rest } = doc;
-  return { id: slug, ...rest };
+  const { slug, _id, _creationTime, updatedAt, updatedBy, hero, gallery, ...rest } = doc;
+  return {
+    id: slug,
+    ...rest,
+    image: hero?.url,
+    hero,
+    gallery: gallery ?? [],
+  };
 }
 
 function toBlock(doc: Doc<"blocks">) {
   return {
+    // A block has no natural stable key — two blocks on one day can share a
+    // time and a title — so the document id IS its public key. Everything that
+    // edits a block (`convex/content.ts`, the agent's `edit_content` tool)
+    // addresses it by this, which is why it has to be on the read path too.
+    id: doc._id,
     time: doc.time,
     title: doc.title,
     placeIds: doc.placeIds,
     detail: doc.detail,
     cutFirst: doc.cutFirst,
+    gallery: doc.gallery ?? [],
     booking: doc.booking,
     legs: doc.legs,
     costs: doc.costs,
@@ -66,9 +87,11 @@ function toDay(doc: Doc<"days">, blocks: Doc<"blocks">[]) {
     area: doc.area,
     theme: doc.theme,
     city: doc.city,
-    heroImage: doc.heroImage,
-    // Legacy alias kept while the pre-redesign components still read `image`.
-    image: doc.heroImage,
+    // Same contract as `toPlace.image`: a URL string the existing components
+    // can render, sourced from Convex storage rather than from `public/`.
+    heroImage: doc.hero?.url ?? "",
+    hero: doc.hero,
+    gallery: doc.gallery ?? [],
     color: doc.color,
     highlights: doc.highlights,
     note: doc.note,
@@ -87,8 +110,10 @@ function toChecklistItem(doc: Doc<"checklistItems">) {
     title: doc.title,
     detail: doc.detail,
     due: doc.due,
+    doFrom: doc.doFrom,
     url: doc.url,
     critical: doc.critical,
+    hero: doc.hero,
   };
 }
 
@@ -180,14 +205,19 @@ export const listGuides = query({
       .query("guides")
       .withIndex("by_order")
       .take(MAX_GUIDES);
-    return guides.map((g) => ({
-      slug: g.slug,
-      file: g.file,
-      title: g.titleHe,
-      description: g.descriptionHe,
-      category: g.category,
-      generated: g.generated,
-    }));
+    // Archived research stays readable at its own URL but never appears in the
+    // index — see the `archived` comment in schema.ts.
+    return guides
+      .filter((g) => !g.archived)
+      .map((g) => ({
+        slug: g.slug,
+        file: g.file,
+        title: g.titleHe,
+        description: g.descriptionHe,
+        category: g.category,
+        generated: g.generated,
+        hero: g.hero,
+      }));
   },
 });
 
@@ -210,15 +240,19 @@ export const exportGuides = query({
       .query("guides")
       .withIndex("by_order")
       .take(MAX_GUIDES);
-    return guides.map((g) => ({
-      file: g.file,
-      slug: g.slug,
-      order: g.order,
-      generated: g.generated,
-      markdown: g.bodyHe,
-      preamble: g.preamble,
-      postamble: g.postamble,
-    }));
+    // Archived research is excluded here too, so it stays out of the chat's
+    // baked context and out of the agent's editable-file list.
+    return guides
+      .filter((g) => !g.archived)
+      .map((g) => ({
+        file: g.file,
+        slug: g.slug,
+        order: g.order,
+        generated: g.generated,
+        markdown: g.bodyHe,
+        preamble: g.preamble,
+        postamble: g.postamble,
+      }));
   },
 });
 
@@ -236,6 +270,7 @@ export const getGuide = query({
       title: guide.titleHe,
       description: guide.descriptionHe,
       category: guide.category,
+      hero: guide.hero,
       body: guide.bodyHe,
       generated: guide.generated,
       preamble: guide.preamble,

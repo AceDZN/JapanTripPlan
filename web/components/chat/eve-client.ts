@@ -24,6 +24,15 @@ export type EveMessagePart =
 
 export type EveMessage = string | EveMessagePart[];
 
+/** One answer to a pending `input.requested` entry, keyed by its `requestId`. */
+export type EveInputResponse = {
+  requestId: string;
+  /** `approve` / `deny` for a tool approval; an option id for a question. */
+  optionId?: string;
+  /** Free text, for a question that allows it. */
+  text?: string;
+};
+
 export type EveSessionHandles = {
   sessionId: string;
   continuationToken: string | null;
@@ -120,6 +129,43 @@ export async function sendFollowUp(
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ continuationToken, message }),
+    signal,
+  });
+
+  if (!response.ok) throw await failure(response);
+
+  try {
+    const body = (await response.json()) as { continuationToken?: string };
+    return body.continuationToken ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Answers a pending human-in-the-loop request on a parked session.
+ *
+ * Structurally, keyed by `requestId` — not as text. The text fallback eve
+ * offers ("a follow-up whose text matches an option ID or label resolves
+ * automatically") cannot work on this transport for two independent reasons:
+ * the relay stamps a `[הקשר: …]` speaker clause onto the front of every
+ * outgoing message, so the body never equals `approve`; and a tool approval is
+ * `allowFreeform: false`, which means unmatched text is held rather than
+ * treated as a denial and the run stays parked. This route is the only one that
+ * actually resolves an approval. See eve/docs/tools/human-in-the-loop.md.
+ *
+ * The body carries no `message`, so `withVerifiedSpeaker` leaves it untouched.
+ */
+export async function sendInputResponses(
+  sessionId: string,
+  continuationToken: string,
+  inputResponses: readonly EveInputResponse[],
+  signal?: AbortSignal,
+): Promise<string | null> {
+  const response = await request(`${BASE}/session/${encodeURIComponent(sessionId)}`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ continuationToken, inputResponses }),
     signal,
   });
 

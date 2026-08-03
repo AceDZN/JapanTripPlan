@@ -6,6 +6,7 @@ import {
   VOICE_BUBBLE_LABEL,
   VOICE_TEXT_PART,
   dropSupersededUser,
+  markPromptAnswered,
   reduceEve,
   visibleMessages,
   type BubbleAttachment,
@@ -21,7 +22,9 @@ import {
   createSession,
   fetchContinuationToken,
   sendFollowUp,
+  sendInputResponses,
   streamSession,
+  type EveInputResponse,
   type EveMessage,
   type EveMessagePart,
 } from "./eve-client";
@@ -95,6 +98,7 @@ type ChatState = {
 type Action =
   | { kind: "event"; event: EveEvent }
   | { kind: "optimistic"; bubble: EveBubble }
+  | { kind: "answered"; requestId: string }
   | { kind: "retrying" }
   | { kind: "error"; message: string; errorKind: ChatErrorKind }
   | { kind: "clearError" }
@@ -153,6 +157,20 @@ function reducer(state: ChatState, action: Action): ChatState {
         retrying: false,
         localError: null,
         localErrorKind: null,
+      };
+    case "answered":
+      // The card goes inert on click rather than on the round trip: the answer
+      // resumes a run that can then think for a while, and two taps on "אישור"
+      // would file the suggestion twice.
+      return {
+        ...state,
+        sending: true,
+        localError: null,
+        localErrorKind: null,
+        eve: {
+          ...state.eve,
+          messages: markPromptAnswered(state.eve.messages, { requestId: action.requestId }),
+        },
       };
     case "retrying":
       // The failed bubble stays on screen; no optimistic copy is added.
@@ -578,6 +596,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
           audio: Boolean(input.spoken),
           attachments: toBubbleAttachments(attachments),
           activity: [],
+          prompts: [],
           streaming: false,
           final: true,
         },
@@ -605,6 +624,51 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
     dispatch({ kind: "retrying" });
     await deliver(last);
   }, [deliver, reconnect]);
+
+  /**
+   * Answers a pending approval or question and lets the parked run continue.
+   *
+   * Deliberately not routed through `deliver`: this is not a turn. It carries no
+   * message, adds no user bubble, and must not become `lastInput` — a retry
+   * after this should re-send the family's actual question, not re-approve
+   * something they already approved.
+   */
+  const respond = useCallback(
+    async (requestId: string, optionId: string) => {
+      const id = sessionRef.current;
+      if (!id) return;
+
+      dispatch({ kind: "answered", requestId });
+
+      try {
+        let token = tokenRef.current;
+        if (!token) token = await fetchContinuationToken(id);
+        if (!token) {
+          throw new EveTransportError("השיחה עוד נטענת מהסוכן. נסו שוב בעוד רגע.", 409);
+        }
+
+        const responses: EveInputResponse[] = [{ requestId, optionId }];
+        const rotated = await sendInputResponses(id, token, responses);
+        if (rotated) tokenRef.current = rotated;
+
+        // The stream this session was parked on has usually been torn down by
+        // now — a parked run sends nothing, and both the relay's fetch and any
+        // proxy in front of it time an idle body out (seen locally as
+        // UND_ERR_BODY_TIMEOUT after ~40s). Re-attaching from the cursor is
+        // cheap and idempotent, and without it the resumed run streams into a
+        // connection nobody is holding.
+        reconnect();
+      } catch (error) {
+        const failed = error instanceof EveTransportError ? error : null;
+        dispatch({
+          kind: "error",
+          message: failed?.message || "לא הצלחנו לשלוח את התשובה לסוכן. נסו שוב בעוד רגע.",
+          errorKind: failed?.status === NETWORK_FAILURE ? "offline" : "agent",
+        });
+      }
+    },
+    [reconnect],
+  );
 
   const cancel = useCallback(() => {
     if (sessionRef.current) void cancelTurn(sessionRef.current);
@@ -653,6 +717,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
       (hasLastInput || Boolean(sessionId)),
     hasSession: Boolean(sessionId),
     send,
+    respond,
     retry,
     cancel,
     newChat,

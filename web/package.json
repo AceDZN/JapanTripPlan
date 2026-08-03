@@ -7,6 +7,7 @@
   },
   "scripts": {
     "sync:content": "node --env-file-if-exists=.env.local scripts/sync-content.mjs",
+    "content": "node --env-file-if-exists=.env.local scripts/content.mjs",
     "sync:from-prod": "node scripts/sync-deployment.mjs from-prod",
     "sync:to-prod": "node scripts/sync-deployment.mjs to-prod",
     "predev": "npm run sync:content",

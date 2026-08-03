@@ -9,8 +9,13 @@
  */
 
 import type * as checklist from "../checklist.js";
+import type * as content from "../content.js";
+import type * as crons from "../crons.js";
+import type * as fx from "../fx.js";
 import type * as http from "../http.js";
+import type * as images from "../images.js";
 import type * as importData from "../importData.js";
+import type * as lib_contentPolicy from "../lib/contentPolicy.js";
 import type * as lib_family from "../lib/family.js";
 import type * as lib_guards from "../lib/guards.js";
 import type * as money from "../money.js";
@@ -27,8 +32,13 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   checklist: typeof checklist;
+  content: typeof content;
+  crons: typeof crons;
+  fx: typeof fx;
   http: typeof http;
+  images: typeof images;
   importData: typeof importData;
+  "lib/contentPolicy": typeof lib_contentPolicy;
   "lib/family": typeof lib_family;
   "lib/guards": typeof lib_guards;
   money: typeof money;

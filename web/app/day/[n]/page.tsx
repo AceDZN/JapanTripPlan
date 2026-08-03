@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
@@ -28,7 +29,7 @@ import {
   StayPanel,
   WarningList,
 } from "@/components/day-ops";
-import { cityLabels, mapsSearchUrl } from "@/lib/trip-data";
+import { cityLabels, mapsSearchUrl } from "@/lib/labels";
 import { familyTotal, yen } from "@/lib/ops";
 import { getPlaceIndex, getTripDay, getTripDays } from "@/lib/trip-source";
 import type { Place } from "@/lib/types";
@@ -118,13 +119,7 @@ export default async function DayPage({
     <article style={style}>
       <header className="day-hero">
         <div className="hero-media">
-          <img
-            src={day.heroImage}
-            alt={day.title}
-            fetchPriority="high"
-            width={1600}
-            height={900}
-          />
+          <Image src={day.heroImage} alt={day.title} fill sizes="100vw" priority />
         </div>
         <div className="day-hero-wash" />
         <div className="container day-hero-body">

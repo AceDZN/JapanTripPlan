@@ -1,6 +1,6 @@
 import type { Place, PlaceCategory } from "@/lib/types";
 import { categoryTone } from "@/components/visuals";
-import { placeCategoryLabels } from "@/lib/trip-data";
+import { placeCategoryLabels } from "@/lib/labels";
 
 /**
  * Pure inline-SVG glyphs (24×24, stroked) so markers never hit the network and

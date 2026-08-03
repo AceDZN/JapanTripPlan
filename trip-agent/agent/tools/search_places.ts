@@ -1,6 +1,7 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { matchesQuery, places, toCompact, TRIP_DAYS } from "../lib/trip";
+import { matchesQuery, toCompact, TRIP_DAYS } from "../lib/trip";
+import { getPlaces } from "../lib/content";
 
 const MAX_RESULTS = 15;
 
@@ -45,7 +46,9 @@ export default defineTool({
       .optional()
       .describe("true = only places already in the itinerary; false = only nearby extras."),
   }),
-  execute({ query, category, city, day, plannedOnly }) {
+  async execute({ query, category, city, day, plannedOnly }) {
+    const { places, stale } = await getPlaces();
+
     const matches = places.filter((place) => {
       if (query && !matchesQuery(place, query)) return false;
       if (category && place.category !== category) return false;
@@ -67,6 +70,11 @@ export default defineTool({
       total: matches.length,
       returned: Math.min(matches.length, MAX_RESULTS),
       truncated: matches.length > MAX_RESULTS,
+      // Only present when Convex was unreachable and this came from the baked
+      // bundle. Say so rather than asserting details that may have moved.
+      ...(stale
+        ? { stale: true, staleNote: "לא הצלחתי להתחבר לנתונים החיים — זה מהעותק השמור, ייתכן שהשתנה." }
+        : {}),
       results: ranked.slice(0, MAX_RESULTS).map(toCompact),
     };
   },

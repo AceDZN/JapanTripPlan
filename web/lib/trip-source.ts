@@ -1,47 +1,33 @@
 import { fetchQuery, preloadQuery } from "convex/nextjs";
 import { api } from "@/convex/_generated/api";
-import type { TripDay } from "@/lib/trip-data";
-import type { ChecklistItem, Place } from "@/lib/types";
-
-// Legacy sources — the hand-maintained files this migration replaces. They
-// stay wired up behind the flag below so a bad deploy is one env var away from
-// being undone, and they are deleted only once everything is proven green.
-import { tripDays as legacyDays } from "@/lib/trip-data";
-import { places as legacyPlaces } from "@/lib/trip-data";
-import { checklistGroups as legacyGroups, checklistItems as legacyItems } from "@/lib/checklist-data";
+import type { ChecklistItem, Place, TripDay } from "@/lib/types";
 
 /**
- * Server-side read layer: where does the trip come from?
+ * Server-side read layer: the trip comes from Convex, and only from Convex.
  *
- * `TRIP_SOURCE=generated` falls back to the pre-migration hand-maintained
- * modules. Anything else (including unset) reads Convex, which is the real
- * source of truth.
- *
- * This exists so Phase 3 is reversible. Once the site has run on Convex
- * through a full test pass, the legacy branch and its imports go away.
+ * There used to be a `TRIP_SOURCE=generated` escape hatch here that read the
+ * hand-maintained `trip-data.ts` / `places.json` / `checklist-data.ts` instead.
+ * It is gone, along with those files. Keeping it meant keeping a second full
+ * copy of the itinerary in the repo that no longer agreed with the first — the
+ * home page's booking gates were still being computed from it — and a rollback
+ * switch that silently serves stale data is worse than no rollback switch. The
+ * real safety net is `convex/trip.ts:exportGuides` plus the `JAPAN2026/*.md`
+ * export: the trip can always be rendered back out to git-tracked files.
  *
  * Server-only by construction: `fetchQuery`/`preloadQuery` come from
  * `convex/nextjs`. Client components receive data as props or via
  * `usePreloadedQuery`, never by importing this module.
  */
-const useConvex = process.env.TRIP_SOURCE !== "generated";
-
-export function tripSource(): "convex" | "generated" {
-  return useConvex ? "convex" : "generated";
-}
 
 export async function getTripDays(): Promise<TripDay[]> {
-  if (!useConvex) return legacyDays;
   return (await fetchQuery(api.trip.listDays, {})) as unknown as TripDay[];
 }
 
 export async function getTripDay(n: number): Promise<TripDay | null> {
-  if (!useConvex) return legacyDays.find((day) => day.day === n) ?? null;
   return (await fetchQuery(api.trip.getDay, { n })) as unknown as TripDay | null;
 }
 
 export async function getPlaces(): Promise<Place[]> {
-  if (!useConvex) return legacyPlaces;
   return (await fetchQuery(api.trip.listPlaces, {})) as unknown as Place[];
 }
 
@@ -74,6 +60,8 @@ export type GuideSummary = {
   description: string;
   category: string;
   generated: boolean;
+  /** Cover photo, once one is attached; the category fallback covers the rest. */
+  hero?: { storageId: string; url: string; alt?: string };
 };
 
 export async function getGuides(): Promise<GuideSummary[]> {
@@ -87,14 +75,11 @@ export async function getGuide(slug: string) {
 export type ChecklistPayload = {
   groups: string[];
   items: ChecklistItem[];
-  /** Shared, family-wide progress. Empty until Phase 4 starts writing it. */
+  /** Shared, family-wide progress — replaces the per-device localStorage map. */
   state: Record<string, { done: boolean; doneAt?: number; doneBy?: string }>;
 };
 
 export async function getChecklist(): Promise<ChecklistPayload> {
-  if (!useConvex) {
-    return { groups: [...legacyGroups], items: legacyItems, state: {} };
-  }
   return (await fetchQuery(api.trip.listChecklist, {})) as unknown as ChecklistPayload;
 }
 

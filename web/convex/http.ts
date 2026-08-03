@@ -88,12 +88,12 @@ http.route({
 });
 
 /**
- * Full read-back for the parity gate.
+ * Full read-back: days, places, checklist and the guide index in one request.
  *
- * The migration's safety net: the import script fetches this and deep-compares
- * it against the current `trip-data.ts` / `places.json` / `checklist-data.ts`
- * so we can prove Convex holds exactly what the live app holds before anything
- * switches over.
+ * Written for the migration's parity gate, which deep-compared it against the
+ * hand-maintained files before the cutover. Those files are gone, and this is
+ * now simply the cheapest way for a script to get the whole trip at once.
+ * Per-kind reads live at /agent/content/*.
  */
 http.route({
   path: "/agent/snapshot",
@@ -688,6 +688,286 @@ http.route({
     } catch (error) {
       return json({ ok: false, error: String(error) }, 500);
     }
+  }),
+});
+
+/**
+ * Structured content edit, on behalf of a named family member.
+ *
+ * Body: { byEmail, table, op, key, fields, unset?, rationale? }
+ *   table  places | days | blocks | checklistItems
+ *   op     patch | create | delete
+ *   key    place/checklist slug, day number, or block id ("" when creating a block)
+ *   fields the patch, in the shape `web/convex/lib/contentPolicy.ts` validates
+ *   unset  field names to clear, for a fact that stopped being true
+ *
+ * The reply says what happened to each field — `applied` went in, `pending`
+ * went to Alex's queue with `suggestionId`. The caller does NOT choose which:
+ * `convex/content.ts` decides from the patch, and this path is pinned to the
+ * FACT tier however senior the claimed e-mail is. See that file's header.
+ */
+http.route({
+  path: "/agent/content/edit",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+
+    const TABLES = ["places", "days", "blocks", "checklistItems"] as const;
+    const OPS = ["patch", "create", "delete"] as const;
+    type Table = (typeof TABLES)[number];
+
+    if (typeof row.byEmail !== "string") {
+      return json({ ok: false, error: "expected { byEmail, table, op, key, fields }" }, 400);
+    }
+    if (!TABLES.includes(row.table as Table)) {
+      return json({ ok: false, error: `table must be one of ${TABLES.join(", ")}` }, 400);
+    }
+    if (!OPS.includes(row.op as (typeof OPS)[number])) {
+      return json({ ok: false, error: `op must be one of ${OPS.join(", ")}` }, 400);
+    }
+    if (typeof row.key !== "string") {
+      return json({ ok: false, error: "key must be a string (\"\" when creating a block)" }, 400);
+    }
+
+    const fields = row.fields ?? {};
+    if (typeof fields !== "object" || fields === null || Array.isArray(fields)) {
+      return json({ ok: false, error: "fields must be an object" }, 400);
+    }
+
+    const unset = row.unset ?? [];
+    if (!Array.isArray(unset) || unset.some((name) => typeof name !== "string")) {
+      return json({ ok: false, error: "unset must be an array of field names" }, 400);
+    }
+
+    // One optional patch argument per table rather than a single `any`, so the
+    // body is checked by the same validator the app's own mutations use.
+    const slot = {
+      places: "place",
+      days: "day",
+      blocks: "block",
+      checklistItems: "checklistItem",
+    }[row.table as Table];
+
+    try {
+      const result = await ctx.runMutation(internal.content.internalEditFor, {
+        byEmail: row.byEmail,
+        table: row.table,
+        op: row.op,
+        key: row.key,
+        rationale: typeof row.rationale === "string" ? row.rationale : undefined,
+        unset: unset.length > 0 ? unset : undefined,
+        [slot]: fields,
+      } as never);
+      return json({ ...result, ok: true });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/**
+ * One day, structured — blocks with their ids, and the places pinned to it.
+ *
+ * The agent used to answer "what do we do on day 5" from a Markdown section
+ * baked in at build time. This is the live version, and it is the only way to
+ * learn a block's id, which is what `edit_content` needs to change one.
+ */
+http.route({
+  path: "/agent/content/day",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const n = Number(new URL(request.url).searchParams.get("n"));
+    if (!Number.isInteger(n)) return json({ ok: false, error: "missing ?n" }, 400);
+
+    const day = await ctx.runQuery(api.trip.getDay, { n });
+    if (!day) return json({ ok: false, error: `no day ${n}` }, 404);
+
+    const places = (await ctx.runQuery(api.trip.listPlaces, {})) as { days: number[] }[];
+    return json({
+      ok: true,
+      day,
+      places: places.filter((place) => place.days.includes(n)),
+    });
+  }),
+});
+
+/**
+ * Every place, live.
+ *
+ * Replaces `web/data/places.json`, which the agent's build used to bake in —
+ * a copy of the trip that could disagree with Convex and did.
+ */
+http.route({
+  path: "/agent/content/places",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+    const places = await ctx.runQuery(api.trip.listPlaces, {});
+    return json({ ok: true, places });
+  }),
+});
+
+/* -------------------------------------------------------------------------- */
+/* Pictures                                                                    */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Find candidate pictures for something. Returns URLs; stores nothing.
+ *
+ * Body: { query, pageUrl?, limit? }
+ *
+ * `pageUrl` is the place's own site, and it is worth passing whenever there is
+ * one — for a shop or a restaurant its `og:image` beats anything an image
+ * search will surface.
+ */
+http.route({
+  path: "/agent/images/search",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+    if (typeof row.query !== "string" || row.query.trim().length === 0) {
+      return json({ ok: false, error: "expected { query }" }, 400);
+    }
+
+    try {
+      const result = await ctx.runAction(internal.images.internalSearch, {
+        query: row.query,
+        pageUrl: typeof row.pageUrl === "string" ? row.pageUrl : undefined,
+        limit: typeof row.limit === "number" ? row.limit : undefined,
+      });
+      return json({ ok: true, ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/**
+ * Put a picture on a place / day / block / checklist item.
+ *
+ * Body: { table, key, slot, url | storageId, alt?, byEmail?, credit?, license?,
+ *         sourceName?, pageUrl?, maxGallery? }
+ *
+ * `byEmail` present => acting for that family member, FACT tier (which is what
+ * images are, so it applies). Absent => the caller is a terminal holding the
+ * service key and gets the full tier. Same rule as /agent/content/edit.
+ */
+http.route({
+  path: "/agent/images/attach",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const body: unknown = await request.json();
+    if (typeof body !== "object" || body === null) {
+      return json({ ok: false, error: "body must be an object" }, 400);
+    }
+    const row = body as Record<string, unknown>;
+
+    const TABLES = ["places", "days", "blocks", "checklistItems"];
+    if (!TABLES.includes(row.table as string)) {
+      return json({ ok: false, error: `table must be one of ${TABLES.join(", ")}` }, 400);
+    }
+    if (typeof row.key !== "string" || row.key.length === 0) {
+      return json({ ok: false, error: "key is required" }, 400);
+    }
+    if (row.slot !== "hero" && row.slot !== "gallery") {
+      return json({ ok: false, error: 'slot must be "hero" or "gallery"' }, 400);
+    }
+    if (typeof row.url !== "string" && typeof row.storageId !== "string") {
+      return json({ ok: false, error: "give either url or storageId" }, 400);
+    }
+
+    try {
+      const result = await ctx.runAction(internal.images.attach, row as never);
+      return json({ ok: true, ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/**
+ * Upload raw image bytes and register them.
+ *
+ * Used by `npm run images:migrate` to lift the old `public/images/` files into
+ * storage; the agents use /agent/images/attach instead, which fetches by URL.
+ * Query string carries the metadata, because the body is the picture.
+ */
+http.route({
+  path: "/agent/images/upload",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+
+    const type = request.headers.get("content-type") ?? "";
+    if (!type.startsWith("image/")) {
+      return json({ ok: false, error: `body must be an image, got "${type}"` }, 400);
+    }
+
+    const params = new URL(request.url).searchParams;
+    const storageId = await ctx.storage.store(await request.blob());
+
+    try {
+      const asset = await ctx.runMutation(internal.images.internalRegisterAsset, {
+        storageId,
+        sourceUrl: params.get("sourceUrl") ?? undefined,
+        sourceName: params.get("sourceName") ?? undefined,
+        credit: params.get("credit") ?? undefined,
+        license: params.get("license") ?? undefined,
+        width: params.has("width") ? Number(params.get("width")) : undefined,
+        height: params.has("height") ? Number(params.get("height")) : undefined,
+        addedBy: params.get("addedBy") ?? undefined,
+      });
+      return json({ ok: true, ...asset });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/** Set a guide's cover photo. Guides sit outside the content-edit tables. */
+http.route({
+  path: "/agent/images/guide-hero",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+    const body = (await request.json()) as Record<string, unknown>;
+    if (typeof body.slug !== "string" || typeof body.storageId !== "string") {
+      return json({ ok: false, error: "expected { slug, storageId, alt? }" }, 400);
+    }
+    try {
+      const result = await ctx.runMutation(internal.images.internalSetGuideHero, body as never);
+      return json({ ok: true, ...result });
+    } catch (error) {
+      return json({ ok: false, error: String(error) }, 500);
+    }
+  }),
+});
+
+/** What is stored, and what nothing points at. `?apply=1` deletes the orphans. */
+http.route({
+  path: "/agent/images/sweep",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    if (!serviceActorFromRequest(request)) return UNAUTHORIZED();
+    const apply = new URL(request.url).searchParams.get("apply") === "1";
+    const result = await ctx.runMutation(internal.images.sweep, { apply });
+    return json({ ok: true, ...result });
   }),
 });
 

@@ -179,7 +179,15 @@ test("home page renders the hero, the next gate to close and the trip previews",
 
   assert.match(page, /המסע המשפחתי/);
   assert.match(page, /אנימה, גיימינג, פוקימון, נינטנדו, ראמן וקוואי/);
-  assert.match(page, /\/images\/cities\/tokyo\.jpg/);
+  // The hero is a real trip photo out of Convex storage, served through the
+  // Next.js optimiser. Both halves matter: `/_next/image` is what makes it
+  // same-origin (so the service worker can cache it for offline Japan) and
+  // resized (so a phone pulls ~30 kB, not the 800 kB source), and the
+  // `convex.cloud/api/storage` source is what proves no picture is a file in
+  // `public/` any more.
+  assert.match(page, /\/_next\/image\?url=/);
+  assert.match(page, /convex\.cloud%2Fapi%2Fstorage/);
+  assert.doesNotMatch(page, /\/images\/cities\//, "city photos were replaced by day heroes");
 
   // before the trip: countdown + nearest checklist deadline; during: today mode
   const beforeTrip = /class="countdown"/.test(page);
@@ -296,10 +304,14 @@ test("prepare renders every checklist group, deadlines and booking gates", async
     assert.match(page, new RegExp(group.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
 
-  assert.match(page, /לקנות נעלי הליכה חדשות לארבעתנו/);
   assert.match(page, /Nintendo Museum/);
   assert.match(page, /Safety Tips/);
-  assert.match(page, /לקנות Mundo Pixar ל־4\.10/);
+  // The THING, not the sentence about it. This used to assert
+  // "לקנות Mundo Pixar ל־4.10" and went red the day the tickets were bought
+  // and the item legitimately became "Mundo Pixar נקנה … לתייק את האישור".
+  // A checklist item's wording is content that changes as the trip is
+  // prepared; that it appears at all is what this test is about.
+  assert.match(page, /Mundo Pixar/);
   assert.match(page, /class="prep-check"/);
   assert.match(page, /class="due due-/);
   assert.match(page, /ייצוא/);
@@ -320,7 +332,11 @@ test("guides index and a rendered guide keep the canonical documents readable", 
   // what is printed on the boarding pass and on the airport signage.
   const guide = await html("/guide/flights");
   assert.match(guide, /class="guide-content" dir="rtl"/);
-  assert.match(guide, /מוזמן: תל אביב \(TLV\) לטוקיו נריטה \(NRT\)/);
+  // The route, not the booking status. This used to assert on the whole
+  // headline including the word "מוזמן", and went red the day the tickets were
+  // actually issued and it became "הכרטיסים הונפקו" — a correct content change
+  // failing a rendering test. The airports are what this test is about.
+  assert.match(guide, /תל אביב \(TLV\) לטוקיו נריטה \(NRT\)/);
   assert.match(guide, /ET419/);
   assert.match(guide, /ET672/);
   assert.match(guide, /ET673/);

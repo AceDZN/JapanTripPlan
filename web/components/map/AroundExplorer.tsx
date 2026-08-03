@@ -26,14 +26,9 @@ import { usePreloadedQuery, type Preloaded } from "convex/react";
 import type { api } from "@/convex/_generated/api";
 import type { City, Place } from "@/lib/types";
 // Labels and URL builders only — no data. The places and days below come from
-// Convex; `trip-data.ts` keeps these pure helpers until the migration deletes
-// the legacy module wholesale.
-import {
-  cityLabels,
-  mapsDirectionsUrl,
-  placeCategoryLabels,
-  type TripDay,
-} from "@/lib/trip-data";
+// Convex.
+import { cityLabels, mapsDirectionsUrl, placeCategoryLabels } from "@/lib/labels";
+import type { TripDay } from "@/lib/types";
 import { isDuringTrip, todayTripDay } from "@/lib/trip-time";
 import { CategoryIcon, categoryTone } from "@/components/visuals";
 import { MapStyles } from "@/components/map/map-style";

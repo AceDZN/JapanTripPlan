@@ -2,7 +2,14 @@
 
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { Authenticated, AuthLoading, Unauthenticated, useMutation, useQuery } from "convex/react";
+import {
+  Authenticated,
+  AuthLoading,
+  Unauthenticated,
+  useAction,
+  useMutation,
+  useQuery,
+} from "convex/react";
 import { UserButton } from "@clerk/nextjs";
 import {
   AlertTriangle,
@@ -33,6 +40,8 @@ import {
   envelopeRange,
   methodLabels,
   money,
+  rateAgeDays,
+  rateAsOf,
   sortByDate,
   statusLabels,
   tripTotals,
@@ -54,9 +63,9 @@ import {
  *
  *  - PLANNED and ACTUAL never share a number. Envelopes are ranges from the
  *    guide; spend is receipts. They sit side by side, never summed.
- *  - PENDING is called out separately from PAID. The Nintendo Museum tickets
- *    are won and unpaid until 7 August: counting them as spent would overstate
- *    today, and ignoring them would understate what the trip owes.
+ *  - PENDING is called out separately from PAID. A booking that is held but not
+ *    yet charged is neither: counting it as spent would overstate today, and
+ *    ignoring it would understate what the trip owes.
  */
 
 const CURRENCIES: Currency[] = ["JPY", "ILS", "USD", "EUR"];
@@ -489,13 +498,39 @@ function ExpenseRow({ expense }: { expense: Expense }) {
 
 /* ------------------------------------------------------------------ rates */
 
+/** Past this, the rate on screen is old enough that it is worth saying so. */
+const STALE_AFTER_DAYS = 3;
+
 function RateEditor({ rates }: { rates: FxRate[] }) {
   const setRate = useMutation(api.money.setRate);
+  const refreshRates = useAction(api.fx.refreshNow);
   const [currency, setCurrency] = useState<Currency>("ILS");
   const [value, setValue] = useState("");
   const [source, setSource] = useState("");
   const [saving, setSaving] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [note, setNote] = useState<string | null>(null);
+
+  async function refresh() {
+    setRefreshing(true);
+    setError(null);
+    setNote(null);
+    try {
+      const result = await refreshRates({});
+      if (!result.ok) {
+        setError(`לא הצלחנו למשוך שער (${result.error}). השערים הקיימים נשארו.`);
+      } else if (result.rejected.length > 0) {
+        setNote(
+          result.rejected.map((row) => `${row.currency}: ${row.reason}`).join(" · "),
+        );
+      }
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "לא הצלחנו לרענן");
+    } finally {
+      setRefreshing(false);
+    }
+  }
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
@@ -503,6 +538,7 @@ function RateEditor({ rates }: { rates: FxRate[] }) {
     if (!(rate > 0)) return;
     setSaving(true);
     setError(null);
+    setNote(null);
     try {
       await setRate({ currency, jpyPerUnit: rate, source: source.trim() || undefined });
       setValue("");
@@ -516,57 +552,78 @@ function RateEditor({ rates }: { rates: FxRate[] }) {
 
   return (
     <section className="panel money-rates">
-      <h2>
-        <RefreshCcw size={16} />
-        שערי המרה
-      </h2>
+      <div className="money-rates-head">
+        <h2>
+          <RefreshCcw size={16} />
+          שערי המרה
+        </h2>
+        <button className="btn btn-sm" type="button" onClick={refresh} disabled={refreshing}>
+          {refreshing ? <Loader2 className="spin" size={13} /> : <RefreshCcw size={13} />}
+          {refreshing ? "מרענן" : "רענון"}
+        </button>
+      </div>
       <p>
-        כל הוצאה שומרת את השער שבו נרשמה, ולכן תיקון של שער היום לא משנה למפרע מה שכבר נרשם.
-        השער כאן משמש רק להוצאה הבאה.
+        השערים נמשכים אוטומטית פעם ביום. כל הוצאה שומרת את השער שבו נרשמה, ולכן עדכון שער
+        לא משנה למפרע מה שכבר נרשם — הוא משמש רק להוצאה הבאה.
       </p>
 
       <ul className="money-rate-list">
         {rates.length === 0 ? <li>עוד לא נקבע אף שער.</li> : null}
-        {rates.map((rate) => (
-          <li key={rate.currency}>
-            <span dir="ltr">
-              1 {rate.currency} = ¥{rate.jpyPerUnit.toFixed(3)}
-            </span>
-            <small>
-              {rate.source ?? "בלי מקור"} · עודכן{" "}
-              {new Date(rate.updatedAt).toLocaleDateString("he-IL")}
-            </small>
-          </li>
-        ))}
+        {rates.map((rate) => {
+          const age = rateAgeDays(rate);
+          return (
+            <li key={rate.currency}>
+              <span dir="ltr">
+                1 {rate.currency} = ¥{rate.jpyPerUnit.toFixed(3)}
+              </span>
+              <small>
+                {rate.source ?? "ידני"} · שער ל־
+                {new Date(rateAsOf(rate)).toLocaleDateString("he-IL")}
+                {age > STALE_AFTER_DAYS ? (
+                  <span className="money-rate-stale"> · בן {age} ימים</span>
+                ) : null}
+              </small>
+            </li>
+          );
+        })}
       </ul>
 
-      <form className="money-rate-form" onSubmit={submit}>
-        <select value={currency} onChange={(event) => setCurrency(event.target.value as Currency)}>
-          {CURRENCIES.filter((code) => code !== "JPY").map((code) => (
-            <option key={code} value={code}>
-              {currencyLabels[code]}
-            </option>
-          ))}
-        </select>
-        <input
-          aria-label="ין ליחידה"
-          dir="ltr"
-          inputMode="decimal"
-          value={value}
-          onChange={(event) => setValue(event.target.value.replace(/[^\d.]/g, ""))}
-          placeholder="51.8"
-        />
-        <input
-          aria-label="מקור"
-          value={source}
-          onChange={(event) => setSource(event.target.value)}
-          placeholder="מקור השער"
-        />
-        <button className="btn btn-sm" type="submit" disabled={saving}>
-          עדכון
-        </button>
-      </form>
+      {note ? <p className="money-form-hint">{note}</p> : null}
       {error ? <p className="money-form-warn">{error}</p> : null}
+
+      <details className="money-rate-manual">
+        <summary>עדכון ידני</summary>
+        <p className="money-form-hint">
+          למקרה שהמקור לא זמין, או כשרוצים את השער שהכרטיס באמת חייב בו — הוא בדרך כלל
+          אחוז-שניים גרוע יותר משער השוק.
+        </p>
+        <form className="money-rate-form" onSubmit={submit}>
+          <select value={currency} onChange={(event) => setCurrency(event.target.value as Currency)}>
+            {CURRENCIES.filter((code) => code !== "JPY").map((code) => (
+              <option key={code} value={code}>
+                {currencyLabels[code]}
+              </option>
+            ))}
+          </select>
+          <input
+            aria-label="ין ליחידה"
+            dir="ltr"
+            inputMode="decimal"
+            value={value}
+            onChange={(event) => setValue(event.target.value.replace(/[^\d.]/g, ""))}
+            placeholder="51.8"
+          />
+          <input
+            aria-label="מקור"
+            value={source}
+            onChange={(event) => setSource(event.target.value)}
+            placeholder="מקור השער"
+          />
+          <button className="btn btn-sm" type="submit" disabled={saving}>
+            עדכון
+          </button>
+        </form>
+      </details>
     </section>
   );
 }

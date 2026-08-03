@@ -1,6 +1,4 @@
-import type { BookingStatus, ChecklistItem } from "@/lib/types";
-import { tripDays } from "@/lib/trip-data";
-import { checklistItems } from "@/lib/checklist-data";
+import type { BookingStatus, ChecklistItem, TripDay } from "@/lib/types";
 
 export type BookingGate = {
   key: string;
@@ -22,7 +20,7 @@ const statusOrder: Record<BookingStatus, number> = {
   booked: 5,
 };
 
-function checklistByUrl(): Map<string, ChecklistItem> {
+function checklistByUrl(checklistItems: ChecklistItem[]): Map<string, ChecklistItem> {
   const map = new Map<string, ChecklistItem>();
   checklistItems.forEach((item) => {
     if (item.url && !map.has(item.url)) map.set(item.url, item);
@@ -34,9 +32,18 @@ function checklistByUrl(): Map<string, ChecklistItem> {
  * The booking gates panel: every `booking` entry across the 17 days, enriched
  * with the matching checklist deadline, plus critical checklist gates that have
  * no day block of their own (accommodation, documents…).
+ *
+ * Takes the days and items as arguments rather than importing them. It used to
+ * close over the hand-written `tripDays` and `checklistItems` modules, which
+ * meant the home page's "what must we book" panel was computed from a snapshot
+ * of the plan rather than from the plan: marking a ticket booked in Convex left
+ * the gate showing on the front page until someone re-typed the static file.
  */
-export function bookingGates(): BookingGate[] {
-  const byChecklist = checklistByUrl();
+export function bookingGates(
+  tripDays: TripDay[],
+  checklistItems: ChecklistItem[],
+): BookingGate[] {
+  const byChecklist = checklistByUrl(checklistItems);
   const gates = new Map<string, BookingGate>();
 
   tripDays.forEach((day) => {

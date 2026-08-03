@@ -47,16 +47,23 @@ async function post(path: string, body: unknown) {
 /**
  * Read off exchangerate-api on 1 August 2026 and cited as such.
  *
+ * A floor, not the live number: `convex/fx.ts` refreshes these daily from the
+ * same feed. The date belongs in `asOf`, not in the source string — otherwise
+ * the row reads "exchangerate-api, 1.8.2026 · 2.8.2026" and the reader has to
+ * work out which of the two dates the rate is actually for.
+ *
  * These convert the two shekel Airbnb charges into the single yen total. They
  * are a starting point, not a claim about what the card actually did: the guide
  * is explicit that the real number is "שער התשלום/הדוח בפועל", and each expense
  * keeps whatever rate it was recorded at, so correcting one row later does not
  * silently re-scale the rest.
  */
+const RATE_AS_OF = Date.parse("2026-08-01T00:00:00Z");
+
 const RATES: { currency: "ILS" | "USD" | "EUR"; jpyPerUnit: number; source: string }[] = [
-  { currency: "ILS", jpyPerUnit: 51.835159, source: "exchangerate-api, 1.8.2026" },
-  { currency: "USD", jpyPerUnit: 158.537858, source: "exchangerate-api, 1.8.2026" },
-  { currency: "EUR", jpyPerUnit: 182.5, source: "exchangerate-api, 1.8.2026" },
+  { currency: "ILS", jpyPerUnit: 51.835159, source: "exchangerate-api" },
+  { currency: "USD", jpyPerUnit: 158.537858, source: "exchangerate-api" },
+  { currency: "EUR", jpyPerUnit: 182.5, source: "exchangerate-api" },
 ];
 
 /* --------------------------------------------------------------- envelopes */
@@ -276,17 +283,20 @@ const EXPENSES: SeedExpense[] = [
     note: `${FROM_GUIDE} Standard עם חטיפים ×4 ב-¥11,000, ועוד ¥2,800 שירות ו-¥308 כרטוס. ${DATE_PLACEHOLDER}`,
   },
   {
-    title: "מוזיאון נינטנדו — זכייה בהגרלה",
+    title: "מוזיאון נינטנדו — כרטיסים",
     titleEn: "Nintendo Museum",
     category: "attractions",
     amount: 11000,
     currency: "JPY",
-    spentOn: "2026-08-07",
+    spentOn: "2026-08-02",
     dayN: 15,
-    status: "pending",
+    status: "paid",
+    method: "card",
+    reference: "M0715260779",
     note:
-      `${FROM_GUIDE} מבוגר ×2 ¥6,600 + נוער ×2 ¥4,400. זכייה — לתשלום עד 7.8.2026 ב-23:59 שעון יפן — ` +
-      "רשום כ'מוזמן, טרם חויב' עד שהתשלום עובר; אז יש לשנות ל'שולם' ולעדכן את התאריך בפועל.",
+      `${FROM_GUIDE} מבוגר ×2 ¥6,600 + נוער ×2 ¥4,400 = ¥11,000 כולל מס. שולם, מספר רכישה M0715260779, ` +
+      "חותמת הרכישה 3.8.2026 ב-01:36 שעון יפן — כלומר ערב 2.8 בישראל, וזה התאריך שנרשם כאן. " +
+      "לאמת מול דף האשראי אם החיוב נרשם ב-3.8. אין החזר ואי אפשר להעביר תאריך.",
   },
 ];
 
@@ -294,7 +304,7 @@ const EXPENSES: SeedExpense[] = [
 
 let rates = 0;
 for (const rate of RATES) {
-  await post("/agent/money/rate", { ...rate, updatedBy: "seed" });
+  await post("/agent/money/rate", { ...rate, asOf: RATE_AS_OF, updatedBy: "seed" });
   rates += 1;
 }
 

@@ -2,7 +2,35 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true,
+    /*
+     * Pictures live in Convex storage, so every one of them is a REMOTE image
+     * and has to be allow-listed by host.
+     *
+     * The path is scoped to `/api/storage/**` deliberately: the hostname is
+     * Convex's, not ours, and an unscoped wildcard would let anyone with a
+     * Convex deployment use our optimizer as a free CDN by handing us their
+     * URLs. Two deployments are listed because dev and prod are separate hosts.
+     *
+     * Optimisation used to be OFF here (`unoptimized: true`) while images were
+     * files in `public/`. Turning it on is what makes the migration pay off: a
+     * 1600px stored original is transformed once per (width, quality, format)
+     * and then served from the Vercel CDN for up to 31 days, so a phone in
+     * Japan fetches a ~30 kB WebP rather than the 840 kB source — and Convex's
+     * metered egress is touched roughly once a month per image rather than on
+     * every page view.
+     */
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "flippant-labrador-606.convex.cloud",
+        pathname: "/api/storage/**",
+      },
+      {
+        protocol: "https",
+        hostname: "fortunate-lyrebird-190.convex.cloud",
+        pathname: "/api/storage/**",
+      },
+    ],
   },
 
   logging: {
