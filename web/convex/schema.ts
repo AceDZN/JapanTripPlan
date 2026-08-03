@@ -200,6 +200,14 @@ export const paymentMethod = v.union(
  * dimensions, sha256 — lives once on `imageAssets`, keyed by the same
  * storageId. Only `alt` is repeated here, because alt text is a property of the
  * PLACE the picture is used, not of the picture.
+ *
+ * THE COST OF CACHING IT: the URL names the deployment it was minted on. Copy
+ * this data to another deployment (`npm run sync:to-prod`, any `convex import`)
+ * and every row still points back at the source — the pictures keep loading,
+ * which is precisely what makes it dangerous, until the source is wiped. The
+ * storageId survives the copy, so the fix is to re-derive:
+ *
+ *   npx convex run --prod images:internalRemintUrls '{"apply":true}'
  */
 export const storedImage = v.object({
   storageId: v.id("_storage"),

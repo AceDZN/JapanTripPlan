@@ -21,6 +21,7 @@ import { StatusChip } from "@/components/visuals";
 import { TripMap, type MapPoint } from "@/components/TripMap";
 import { DayWishes } from "@/components/DayWishes";
 import { DaySpend } from "@/components/DaySpend";
+import { DayTasks } from "@/components/DayTasks";
 import {
   CostList,
   LinkRow,
@@ -31,7 +32,12 @@ import {
 } from "@/components/day-ops";
 import { cityLabels, mapsSearchUrl } from "@/lib/labels";
 import { familyTotal, yen } from "@/lib/ops";
-import { getPlaceIndex, getTripDay, getTripDays } from "@/lib/trip-source";
+import {
+  getChecklist,
+  getPlaceIndex,
+  getTripDay,
+  getTripDays,
+} from "@/lib/trip-source";
 import type { Place } from "@/lib/types";
 
 /**
@@ -81,8 +87,13 @@ export default async function DayPage({
   const { n } = await params;
 
   // One round trip for the whole page: the day list covers this day plus its
-  // neighbours for the prev/next links.
-  const [days, placeIndex] = await Promise.all([getTripDays(), getPlaceIndex()]);
+  // neighbours for the prev/next links. The checklist rides along so the day's
+  // own preparation tasks render server-side and survive offline.
+  const [days, placeIndex, checklist] = await Promise.all([
+    getTripDays(),
+    getPlaceIndex(),
+    getChecklist(),
+  ]);
 
   const day = days.find((entry) => entry.day === Number(n));
   if (!day) notFound();
@@ -202,6 +213,12 @@ export default async function DayPage({
           </div>
 
           <aside className="side-panel">
+            {/* First in the sidebar on purpose: it renders on only a handful of
+                days, and on those days it is the most time-critical thing on
+                the page. Burying "collect the tickets today" under the map
+                would be the whole feature failing quietly. */}
+            <DayTasks date={day.date} checklist={checklist} />
+
             <TripMap
               points={mapPoints}
               color={day.color}

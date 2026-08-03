@@ -5,6 +5,7 @@ import type { CSSProperties } from "react";
 import { Preloaded, useConvexAuth, useMutation, usePreloadedQuery } from "convex/react";
 import {
   AlarmClock,
+  CalendarDays,
   Check,
   Download,
   ExternalLink,
@@ -56,6 +57,32 @@ type ChecklistPayload = {
   items: ChecklistItem[];
   state: DoneState;
 };
+
+/**
+ * Which trip days this item also appears on, as `{n, label}`.
+ *
+ * Computed here from a plain `[dayN, date]` list rather than from `TripDay[]`,
+ * so the board does not have to pull the whole day payload into the client just
+ * to render two chips.
+ */
+export type TripDayRef = { n: number; date: string };
+
+function DayChips({ item, tripDays }: { item: ChecklistItem; tripDays: TripDayRef[] }) {
+  if (!item.due) return null;
+  const from = item.doFrom && item.doFrom <= item.due ? item.doFrom : item.due;
+  const on = tripDays.filter((day) => day.date >= from && day.date <= item.due!);
+  if (on.length === 0) return null;
+  return (
+    <>
+      {on.map((day) => (
+        <Link className="due due-day" href={`/day/${day.n}`} key={day.n}>
+          <CalendarDays size={12} />
+          יום {day.n}
+        </Link>
+      ))}
+    </>
+  );
+}
 
 /* ------------------------------------------- the ticks this device still holds */
 
@@ -133,8 +160,11 @@ function DueBadge({ item, today }: { item: ChecklistItem; today: Date }) {
 
 export function ChecklistBoard({
   preloaded,
+  tripDays = [],
 }: {
   preloaded: Preloaded<typeof api.trip.listChecklist>;
+  /** Day number + date for all 17 days, so dated items can link to their day. */
+  tripDays?: TripDayRef[];
 }) {
   const data = usePreloadedQuery(preloaded) as unknown as ChecklistPayload;
   const { isAuthenticated } = useConvexAuth();
@@ -404,6 +434,7 @@ export function ChecklistBoard({
                     {item.detail ? <p className="prep-detail">{item.detail}</p> : null}
                     <div className="prep-tags">
                       <DueBadge item={item} today={today} />
+                      <DayChips item={item} tripDays={tripDays} />
                       {item.critical ? (
                         <span className="due due-critical">
                           <Flame size={12} />

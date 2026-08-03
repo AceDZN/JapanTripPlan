@@ -766,6 +766,121 @@ export const internalSetGuideHero = internalMutation({
   },
 });
 
+/**
+ * Re-mint every cached image URL against THIS deployment.
+ *
+ * ## Why this has to exist
+ *
+ * `storedImage.url` is cached rather than minted per read, because minting is a
+ * call per picture and a place list renders 154 of them. The cost of that
+ * choice is exactly one thing: the cached URL names the deployment it was
+ * minted on.
+ *
+ * So the moment data is copied between deployments — `npm run sync:to-prod`,
+ * or any `convex import` of a snapshot from elsewhere — every row still points
+ * at the deployment it came from. The images would still LOAD, which is what
+ * makes it dangerous: production would quietly serve its photographs out of the
+ * dev deployment, and keep working right up until dev is wiped.
+ *
+ * storageIds survive the copy, so re-deriving is enough. Run it on the target
+ * immediately after any import:
+ *
+ *   npx convex run --prod images:internalRemintUrls '{"apply":true}'
+ *
+ * Defaults to a dry run, because it rewrites every image reference in the app.
+ */
+export const internalRemintUrls = internalMutation({
+  args: { apply: v.optional(v.boolean()) },
+  handler: async (ctx, args) => {
+    let checked = 0;
+    let stale = 0;
+    const missing: string[] = [];
+
+    /** The URL this deployment would mint for a file, or null if it is gone. */
+    const current = async (storageId: Id<"_storage">): Promise<string | null> => {
+      checked += 1;
+      return await ctx.storage.getUrl(storageId);
+    };
+
+    const remint = async (
+      image: StoredImage | undefined,
+      label: string,
+    ): Promise<StoredImage | undefined> => {
+      if (!image) return image;
+      const url = await current(image.storageId);
+      if (!url) {
+        missing.push(label);
+        return image;
+      }
+      if (url === image.url) return image;
+      stale += 1;
+      return { ...image, url };
+    };
+
+    const remintAll = async (
+      images: StoredImage[] | undefined,
+      label: string,
+    ): Promise<StoredImage[] | undefined> => {
+      if (!images?.length) return images;
+      return await Promise.all(images.map((image, i) => remint(image, `${label}[${i}]`) as Promise<StoredImage>));
+    };
+
+    for (const row of await ctx.db.query("imageAssets").take(MAX_ASSETS)) {
+      const url = await current(row.storageId);
+      if (!url) {
+        missing.push(`imageAssets/${row._id}`);
+        continue;
+      }
+      if (url === row.url) continue;
+      stale += 1;
+      if (args.apply) await ctx.db.patch("imageAssets", row._id, { url });
+    }
+
+    for (const row of await ctx.db.query("places").take(MAX_ASSETS)) {
+      const hero = await remint(row.hero, `places/${row.slug}.hero`);
+      const gallery = await remintAll(row.gallery, `places/${row.slug}.gallery`);
+      if (args.apply && (hero !== row.hero || gallery !== row.gallery)) {
+        await ctx.db.patch("places", row._id, { hero, gallery });
+      }
+    }
+
+    for (const row of await ctx.db.query("days").take(MAX_ASSETS)) {
+      const hero = await remint(row.hero, `days/${row.n}.hero`);
+      const gallery = await remintAll(row.gallery, `days/${row.n}.gallery`);
+      if (args.apply && (hero !== row.hero || gallery !== row.gallery)) {
+        await ctx.db.patch("days", row._id, { hero, gallery });
+      }
+    }
+
+    for (const row of await ctx.db.query("blocks").take(MAX_ASSETS)) {
+      const gallery = await remintAll(row.gallery, `blocks/${row._id}.gallery`);
+      if (args.apply && gallery !== row.gallery) {
+        await ctx.db.patch("blocks", row._id, { gallery });
+      }
+    }
+
+    for (const row of await ctx.db.query("checklistItems").take(MAX_ASSETS)) {
+      const hero = await remint(row.hero, `checklistItems/${row.slug}.hero`);
+      if (args.apply && hero !== row.hero) await ctx.db.patch("checklistItems", row._id, { hero });
+    }
+
+    for (const row of await ctx.db.query("guides").take(MAX_ASSETS)) {
+      const hero = await remint(row.hero, `guides/${row.slug}.hero`);
+      if (args.apply && hero !== row.hero) await ctx.db.patch("guides", row._id, { hero });
+    }
+
+    return {
+      checked,
+      /** References whose cached URL names a different deployment. */
+      stale,
+      rewritten: args.apply === true ? stale : 0,
+      /** Files the row points at that do not exist here — a broken copy. */
+      missing,
+      applied: args.apply === true,
+    };
+  },
+});
+
 /** Provenance for one stored picture — who took it, where it came from. */
 export const internalAssetFor = internalQuery({
   args: { storageId: v.id("_storage") },

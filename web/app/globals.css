@@ -2858,6 +2858,91 @@ a.status-chip:hover {
   line-height: 1.6;
 }
 
+/* --- the day's own preparation tasks (components/DayTasks.tsx)
+   Reuses .prep-check / .due-* from the /prepare board so a task looks like the
+   same object in both places; only the layout is tighter for the sidebar. */
+
+.day-tasks {
+  border-inline-start: 4px solid var(--gold);
+}
+
+.day-tasks-lede {
+  margin-top: -2px;
+}
+
+.day-tasks-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.day-task {
+  align-items: start;
+  background: var(--surface-2, var(--surface));
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 30px 1fr;
+  padding: 12px 14px;
+  transition: opacity 200ms ease;
+}
+
+.day-task.is-critical {
+  border-inline-start: 3px solid var(--vermillion);
+}
+
+/* Done-state is read off the tick box rather than a class on the row, so the
+   row can stay a server component and still respond the instant it is clicked.
+   See components/DayTaskCheck.tsx. */
+.day-task:has(.prep-check[aria-pressed="true"]) {
+  opacity: 0.55;
+}
+
+.day-task:has(.prep-check[aria-pressed="true"]) .day-task-title {
+  text-decoration: line-through;
+}
+
+.day-task .prep-check {
+  height: 26px;
+  width: 26px;
+}
+
+.day-task-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.day-task-detail {
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.65;
+  margin-top: 4px;
+}
+
+.day-task .prep-tags {
+  grid-column: 1;
+}
+
+/* A dated task on /prepare links to the trip day(s) it will surface on. */
+.due-day {
+  background: color-mix(in srgb, var(--day-accent, var(--matcha)) 14%, transparent);
+  color: var(--day-accent, var(--matcha));
+  text-decoration: none;
+}
+
+.due-day:hover {
+  background: color-mix(in srgb, var(--day-accent, var(--matcha)) 24%, transparent);
+}
+
+.day-tasks-signin {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  font-size: 12.5px;
+}
+
 /* --- place facts */
 
 .place-facts {

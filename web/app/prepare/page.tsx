@@ -139,7 +139,10 @@ export default async function PreparePage() {
             רשימת ההכנות
           </h2>
         </div>
-        <ChecklistBoard preloaded={preloaded} />
+        <ChecklistBoard
+          preloaded={preloaded}
+          tripDays={tripDays.map((day) => ({ n: day.day, date: day.date }))}
+        />
       </section>
     </div>
   );

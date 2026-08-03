@@ -12,7 +12,15 @@
  * Treat the dev deployment as just as sensitive as prod.
  *
  * File storage travels too (`--include-file-storage`), so vault attachments
- * survive the trip.
+ * and every trip photograph survive the trip.
+ *
+ * AFTERWARDS, ALWAYS RE-MINT THE IMAGE URLS. `storedImage.url` is cached, and a
+ * cached URL names the deployment it was minted on — so straight after a copy
+ * the target still points its pictures at the SOURCE. They load, so nothing
+ * looks wrong, right up until the source deployment is wiped. This script runs
+ * it for you; if you ever import by hand, run it yourself:
+ *
+ *   npx convex run [--prod] images:internalRemintUrls '{"apply":true}'
  *
  * SAFETY: both directions are `--replace-all` on the target, which deletes
  * whatever the source does not have. So before writing anything, this script
@@ -105,8 +113,43 @@ convex(["export", ...deploymentFlags(source), "--include-file-storage", "--path"
 console.log(`        ${sourcePath} (${sizeMb(sourcePath)} MB)`);
 
 // 3. Replace the target wholesale.
-console.log(`  [3/3] Importing into ${target} (--replace-all)...`);
+console.log(`  [3/4] Importing into ${target} (--replace-all)...`);
 convex(["import", ...deploymentFlags(target), "--replace-all", "-y", sourcePath]);
+
+/*
+ * 4. Re-point the pictures at THIS deployment.
+ *
+ * `storedImage.url` is cached, and a cached URL names the deployment that
+ * minted it — so the rows just imported all still point at `source`. The
+ * images would load, which is exactly why this must not be left to whoever
+ * remembers: nothing looks broken until the source deployment is wiped.
+ *
+ * Needs the new code to be deployed to the target. On a target whose functions
+ * predate this step it will fail; the import has already succeeded by then, so
+ * the message says to deploy and re-run rather than implying data was lost.
+ */
+console.log(`  [4/4] Re-minting image URLs on ${target}...`);
+try {
+  const out = convex([
+    "run",
+    ...deploymentFlags(target),
+    "images:internalRemintUrls",
+    JSON.stringify({ apply: true }),
+  ]);
+  const rewritten = /"rewritten":\s*(\d+)/.exec(out)?.[1] ?? "?";
+  const missing = /"missing":\s*\[([^\]]*)\]/.exec(out)?.[1]?.trim();
+  console.log(`        ${rewritten} image references re-pointed at ${target}.`);
+  if (missing) console.log(`        WARNING — files not present on ${target}: ${missing.slice(0, 300)}`);
+} catch {
+  console.log("");
+  console.log(`        !! Could not re-mint image URLs on ${target}.`);
+  console.log(`        The data import SUCCEEDED — this is the follow-up step.`);
+  console.log(`        Until it runs, ${target} serves its photos from ${source}.`);
+  console.log(`        Deploy the functions, then run:`);
+  console.log(
+    `          npx convex run ${target === "prod" ? "--prod " : ""}images:internalRemintUrls '{"apply":true}'`,
+  );
+}
 
 console.log(
   [
