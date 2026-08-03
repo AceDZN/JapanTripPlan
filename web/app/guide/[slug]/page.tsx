@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Download, FileText } from "lucide-react";
-import { tripGuides } from "@/app/generated/trip-content";
+import { ArrowRight, FileText } from "lucide-react";
+import { getGuide, getGuides } from "@/lib/trip-source";
+import { isRtl, renderGuideHtml } from "@/lib/markdown";
 import { guideImage } from "@/components/guide-images";
+import { BudgetLive } from "@/components/BudgetLive";
 
-export function generateStaticParams() {
-  return tripGuides.map((guide) => ({ slug: guide.slug }));
+export async function generateStaticParams() {
+  const guides = await getGuides();
+  return guides.map((guide) => ({ slug: guide.slug }));
 }
 
 export async function generateMetadata({
@@ -15,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const guide = tripGuides.find((item) => item.slug === slug);
+  const guide = await getGuide(slug);
   return {
     title: guide?.title ?? "מדריך",
     description: guide?.description,
@@ -28,20 +32,19 @@ export default async function GuidePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const guide = tripGuides.find((item) => item.slug === slug);
+  const guide = await getGuide(slug);
   if (!guide) notFound();
+
+  // Direction follows the document, not the section: the guides are being
+  // translated to Hebrew one at a time, and a half-translated set needs both.
+  const rtl = isRtl(guide.body);
+  const html = renderGuideHtml(guide.body);
 
   return (
     <article>
       <header className="guide-doc-hero">
         <div className="hero-media">
-          <img
-            src={guideImage(guide.category)}
-            alt=""
-            fetchPriority="high"
-            width={1600}
-            height={900}
-          />
+          <Image src={guide.hero?.url ?? guideImage(guide.category)} alt="" fill sizes="100vw" priority />
         </div>
         <div className="hero-wash" />
         <div className="container guide-doc-body">
@@ -55,23 +58,28 @@ export default async function GuidePage({
           </span>
           <h1>{guide.title}</h1>
           <p>{guide.description}</p>
-          <a className="btn btn-glass btn-sm" href={`/markdown/${guide.file}`} download>
-            <Download size={16} />
-            הורדת קובץ המקור
-          </a>
         </div>
       </header>
 
-      <div className="doc-note">
-        <strong>המסמך המקורי נשאר מקור האמת.</strong>
-        <span>התוכן מופיע בשפת המקור ומתעדכן אוטומטית בכל בנייה של האתר.</span>
-      </div>
+      {rtl ? null : (
+        <div className="doc-note">
+          <strong>המדריך הזה עדיין באנגלית.</strong>
+          <span>התרגום לעברית בעבודה. התוכן המבצעי של כל יום כבר מופיע בעברית בעמודי הימים.</span>
+        </div>
+      )}
 
       <div className="container">
+        {/*
+          The budget guide is the one document whose subject has live numbers.
+          The panel reports the position; the prose below still argues the
+          policy, which is the half a ledger cannot hold.
+        */}
+        {guide.category === "budget" ? <BudgetLive /> : null}
+
         <div
           className="guide-content"
-          dir="ltr"
-          dangerouslySetInnerHTML={{ __html: guide.html }}
+          dir={rtl ? "rtl" : "ltr"}
+          dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
     </article>

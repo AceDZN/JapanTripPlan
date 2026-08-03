@@ -1,101 +1,117 @@
-import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+/**
+ * Convex -> `app/generated/ai-context.ts`.
+ *
+ *   npm run sync:content
+ *
+ * The chat's system prompt needs every guide's Markdown as a plain string at
+ * module scope rather than behind an await, so it is baked into a generated
+ * TypeScript file at build time. This script is what bakes it.
+ *
+ * ## Why this reads Convex and not the filesystem
+ *
+ * It used to read `../JAPAN2026/*.md` and also copy them into `public/markdown/`
+ * for the guide pages' download links. Both are gone: the trip lives in Convex,
+ * the app is Convex-only, and a copy of the guides on disk was a second source
+ * that could silently disagree with the first.
+ *
+ * ## Why the PUBLIC client, with no service key
+ *
+ * Guides are public data — `convex/lib/guards.ts` says so explicitly, and that
+ * is what lets every guide page be server-rendered and precached for offline
+ * use. So this needs only `NEXT_PUBLIC_CONVEX_URL`, which any build that can
+ * run the app already has. Deliberately NOT `AGENT_SERVICE_KEY`: a production
+ * build should never be hostage to a credential the app itself never uses. It
+ * was, briefly, and it broke the Vercel deploy.
+ */
+
+import { existsSync } from "node:fs";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { marked } from "marked";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "../convex/_generated/api.js";
 
-const projectDir = process.cwd();
-const workspaceSourceDir = path.resolve(projectDir, "..", "JAPAN2026");
 const generatedDir = path.resolve(process.cwd(), "app", "generated");
-const publicDir = path.resolve(process.cwd(), "public", "markdown");
-const sourceDir = await access(workspaceSourceDir)
-  .then(() => workspaceSourceDir)
-  .catch(() => publicDir);
+const outFile = path.join(generatedDir, "ai-context.ts");
 
-const guideMeta = {
-  "00-OVERVIEW.md": ["תמונת מצב", "המסלול המשפחתי השלם, סדרי העדיפויות ושערי ההזמנה", "overview"],
-  "01-FLIGHTS.md": ["טיסות", "מסלול הטיסות הסגור והפרטים שעוד צריך להשלים", "flights"],
-  "02-ACCOMMODATION.md": ["לינה", "המלונות המובילים, מחירים והחלטות פתוחות", "stay"],
-  "03-TRANSPORT.md": ["תחבורה", "כל המעברים של המסלול השלם, כולל קיוטו, אוסקה ואוג׳י", "transport"],
-  "04-ANIME-POKEMON-GHIBLI.md": ["אנימה, גיימינג וקוואי", "PokePark, נינטנדו, ג׳יבלי, UZUMASA, מנגה וחוויות קוואי", "anime"],
-  "05-FOOD-GUIDE.md": ["ראמן ואוכל", "חוויות ראמן, אוכל משפחתי וארוחות העוגן של כל יום", "food"],
-  "06-DAY-TRIPS.md": ["טיולי יום", "קמקורה ואנושימה, ויום טודורוקי־סטגאיה של פארקים, טוטורו ופסטיבל קארי", "daytrips"],
-  "07-BAR-MITZVAH.md": ["החגיגה המשפחתית", "Tokyo Dome City, זמן משפחתי וארוחת חגיגה", "mitzvah"],
-  "08-PRACTICAL-TIPS.md": ["טיפים שימושיים", "אריזה, אינטרנט, כסף, אפליקציות והתנהלות", "tips"],
-  "09-DAILY-ITINERARY.md": ["המסלול היומי", "17 ימים של אנימה, גיימינג, ראמן וקוואי בקצב משפחתי", "itinerary"],
-  "10-BUDGET.md": ["תקציב", "מעטפות עלות, רישום הזמנות ושליטה בהוצאות המשתנות", "budget"],
-  "11-PRE-TRIP-CHECKLIST.md": ["הכנות לטיול", "מה עושים, מתי ואיפה — כרטיסים, אפליקציות, מסמכים, מזג אוויר וציוד", "checklist"],
-};
-
-await mkdir(generatedDir, { recursive: true });
-await mkdir(publicDir, { recursive: true });
-
-marked.setOptions({ gfm: true, breaks: false });
-
-const files = (await readdir(sourceDir))
-  .filter((file) => guideMeta[file] && !file.includes("ARCHIVE"))
-  .sort();
-
-const guides = [];
-
-for (const file of files) {
-  const markdown = await readFile(path.join(sourceDir, file), "utf8");
-  const slug = file.replace(/^\d+-/, "").replace(/\.md$/, "").toLowerCase();
-  const [title, description, category] = guideMeta[file];
-  const html = await marked.parse(markdown);
-
-  guides.push({
-    slug,
-    file,
-    title,
-    description,
-    category,
-    html,
-    markdown,
-  });
-
-  await writeFile(path.join(publicDir, file), markdown, "utf8");
+/**
+ * Refreshing the chat's context must never take down a deploy.
+ *
+ * `ai-context.ts` is committed, so a build that cannot reach Convex can still
+ * ship with the last known-good guides. Exiting non-zero here has broken a
+ * Vercel deploy twice now — once on a missing `.env.local`, once on a wrong
+ * Convex host — and "the chat's context is a commit behind" beats "the site is
+ * not deployed" every time.
+ *
+ * The one case that still fails hard is having no committed file to fall back
+ * to, because then the alternative is shipping an assistant that confidently
+ * answers from nothing.
+ */
+function keepCommittedContext(reason) {
+  if (existsSync(outFile)) {
+    console.log(`sync:content: ${reason} — keeping the committed ai-context.ts`);
+    process.exit(0);
+  }
+  console.error(`sync:content: ${reason}, and no committed ai-context.ts to fall back to.`);
+  process.exit(1);
 }
 
-const output = `// Generated from ../JAPAN2026/*.md — do not edit by hand.
-export type TripGuide = {
-  slug: string;
-  file: string;
-  title: string;
-  description: string;
-  category: string;
-  html: string;
-  markdown: string;
-};
+const CONVEX_URL = process.env.NEXT_PUBLIC_CONVEX_URL;
+if (!CONVEX_URL) {
+  keepCommittedContext("NEXT_PUBLIC_CONVEX_URL is not set");
+}
 
-export const tripGuides: TripGuide[] = ${JSON.stringify(guides, null, 2)};
-`;
+const convex = new ConvexHttpClient(CONVEX_URL);
 
-await writeFile(path.join(generatedDir, "trip-content.ts"), output, "utf8");
+let index;
+try {
+  index = await convex.query(api.trip.listGuides, {});
+} catch (error) {
+  keepCommittedContext(`could not reach Convex at ${CONVEX_URL} (${error})`);
+}
 
-// ---------------------------------------------------------------------------
-// AI context: every guide's raw Markdown, for the /api/chat system prompt.
-// Uses the same file set as the guides (ARCHIVE files are already excluded).
-// ---------------------------------------------------------------------------
+/*
+ * One request per guide rather than one for everything: `listGuides` is
+ * metadata-only by design (see convex/trip.ts) so the listing stays small, and
+ * `getGuide` is the only thing that returns a body.
+ */
+let guides;
+try {
+  guides = await Promise.all(
+    index.map(async ({ slug }) => {
+      const guide = await convex.query(api.trip.getGuide, { slug });
+      if (!guide) throw new Error(`guide "${slug}" vanished between listing and fetch`);
+      return { file: guide.file, title: guide.title, markdown: guide.body };
+    }),
+  );
+} catch (error) {
+  keepCommittedContext(`could not read guide bodies (${error})`);
+}
 
-const aiContext = guides.map(({ file, title, markdown }) => ({ file, title, markdown }));
+// An empty context would leave the chat confidently answering from nothing,
+// which is worse than keeping yesterday's copy.
+if (guides.length === 0) {
+  keepCommittedContext("Convex returned no guides");
+}
 
-const aiContextText = aiContext
+const aiContextText = guides
   .map((entry) => `## FILE: ${entry.file}\n\n${entry.markdown}`)
   .join("\n\n---\n\n");
 
-const aiOutput = `// Generated from ../JAPAN2026/*.md — do not edit by hand.
+const aiOutput = `// Generated from Convex (\`trip.listGuides\` + \`trip.getGuide\`) — do not edit by hand.
 export type AiContextFile = {
   file: string;
   title: string;
   markdown: string;
 };
 
-export const aiContext: AiContextFile[] = ${JSON.stringify(aiContext, null, 2)};
+export const aiContext: AiContextFile[] = ${JSON.stringify(guides, null, 2)};
 
 export const aiContextText: string = ${JSON.stringify(aiContextText)};
 `;
 
+await mkdir(generatedDir, { recursive: true });
 await writeFile(path.join(generatedDir, "ai-context.ts"), aiOutput, "utf8");
 
 console.log(
-  `Synced ${guides.length} Markdown guides (trip-content.ts + ai-context.ts, ${aiContextText.length} context chars).`,
+  `Synced ${guides.length} guides from Convex into ai-context.ts (${aiContextText.length} context chars).`,
 );

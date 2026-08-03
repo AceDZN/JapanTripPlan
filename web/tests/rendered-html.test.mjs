@@ -50,7 +50,7 @@ async function startNext(env = {}, { nodeOptions } = {}) {
   const port = await freePort();
   const child = spawn(
     process.execPath,
-    [nextBin, "start", "--hostname", "127.0.0.1", "--port", String(port)],
+    [nextBin, "start", "--hostname", "localhost", "--port", String(port)],
     {
       cwd: root,
       stdio: ["ignore", "pipe", "pipe"],
@@ -76,7 +76,7 @@ async function startNext(env = {}, { nodeOptions } = {}) {
   child.stdout.on("data", (chunk) => (log += chunk));
   child.stderr.on("data", (chunk) => (log += chunk));
 
-  const origin = `http://127.0.0.1:${port}`;
+  const origin = `http://localhost:${port}`;
   const deadline = Date.now() + 90_000;
 
   for (;;) {
@@ -119,11 +119,11 @@ async function startStubEve() {
   });
 
   const port = await freePort();
-  await new Promise((resolve) => server.listen(port, "127.0.0.1", resolve));
+  await new Promise((resolve) => server.listen(port, "localhost", resolve));
   stubs.push(server);
 
   // Trailing slash on purpose: the relay must normalize it away.
-  return { calls, url: `http://127.0.0.1:${port}/` };
+  return { calls, url: `http://localhost:${port}/` };
 }
 
 /** The three server configurations plus the mid-trip clock. */
@@ -179,7 +179,15 @@ test("home page renders the hero, the next gate to close and the trip previews",
 
   assert.match(page, /המסע המשפחתי/);
   assert.match(page, /אנימה, גיימינג, פוקימון, נינטנדו, ראמן וקוואי/);
-  assert.match(page, /\/images\/cities\/tokyo\.jpg/);
+  // The hero is a real trip photo out of Convex storage, served through the
+  // Next.js optimiser. Both halves matter: `/_next/image` is what makes it
+  // same-origin (so the service worker can cache it for offline Japan) and
+  // resized (so a phone pulls ~30 kB, not the 800 kB source), and the
+  // `convex.cloud/api/storage` source is what proves no picture is a file in
+  // `public/` any more.
+  assert.match(page, /\/_next\/image\?url=/);
+  assert.match(page, /convex\.cloud%2Fapi%2Fstorage/);
+  assert.doesNotMatch(page, /\/images\/cities\//, "city photos were replaced by day heroes");
 
   // before the trip: countdown + nearest checklist deadline; during: today mode
   const beforeTrip = /class="countdown"/.test(page);
@@ -198,7 +206,12 @@ test("home page renders the hero, the next gate to close and the trip previews",
   }
   assert.match(page, /שערי הזמנה/);
   assert.match(page, /status-chip st-/);
-  assert.match(page, /Nintendo Museum/);
+  // Deliberately structural. This used to assert /Nintendo Museum/, which
+  // broke on 2026-08-01 when that item's 2026-07-31 deadline passed and it
+  // dropped out of the home page's top-6 gates — a false failure that says
+  // nothing about the rendering. Expiring content belongs in the data, not
+  // in an assertion.
+  assert.match(page, /class="card gate"/);
   assert.match(page, /class="day-card"/);
   assert.match(page, /href="\/day\/3"/);
   assert.match(page, /לכל המדריכים/);
@@ -291,10 +304,14 @@ test("prepare renders every checklist group, deadlines and booking gates", async
     assert.match(page, new RegExp(group.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
 
-  assert.match(page, /לקנות נעלי הליכה חדשות לארבעתנו/);
   assert.match(page, /Nintendo Museum/);
   assert.match(page, /Safety Tips/);
-  assert.match(page, /לקנות Mundo Pixar ל־4\.10/);
+  // The THING, not the sentence about it. This used to assert
+  // "לקנות Mundo Pixar ל־4.10" and went red the day the tickets were bought
+  // and the item legitimately became "Mundo Pixar נקנה … לתייק את האישור".
+  // A checklist item's wording is content that changes as the trip is
+  // prepared; that it appears at all is what this test is about.
+  assert.match(page, /Mundo Pixar/);
   assert.match(page, /class="prep-check"/);
   assert.match(page, /class="due due-/);
   assert.match(page, /ייצוא/);
@@ -310,18 +327,116 @@ test("guides index and a rendered guide keep the canonical documents readable", 
   assert.match(index, /href="\/guide\/daily-itinerary"/);
   assert.match(index, /href="\/guide\/pre-trip-checklist"/);
 
+  // The flights guide is translated, so it renders RTL — and the flight
+  // numbers, airport codes and terminals stay in Latin on purpose: those are
+  // what is printed on the boarding pass and on the airport signage.
   const guide = await html("/guide/flights");
-  assert.match(guide, /class="guide-content"/);
-  assert.match(guide, /BOOKED: Tel Aviv \(TLV\) to Tokyo Narita \(NRT\)/);
+  assert.match(guide, /class="guide-content" dir="rtl"/);
+  // The route, not the booking status. This used to assert on the whole
+  // headline including the word "מוזמן", and went red the day the tickets were
+  // actually issued and it became "הכרטיסים הונפקו" — a correct content change
+  // failing a rendering test. The airports are what this test is about.
+  assert.match(guide, /תל אביב \(TLV\) לטוקיו נריטה \(NRT\)/);
   assert.match(guide, /ET419/);
   assert.match(guide, /ET672/);
   assert.match(guide, /ET673/);
   assert.match(guide, /ET418/);
-  assert.match(guide, /Tabata/);
+  assert.match(guide, /TLV T3/);
+  assert.match(guide, /NRT T1/);
+  assert.match(guide, /טבטה/);
   assert.doesNotMatch(guide, /travel to Ueno/);
   assert.doesNotMatch(guide, /Pre-booking Research Archive/);
   assert.doesNotMatch(guide, /Best Value: Etihad Airways/);
   assert.doesNotMatch(guide, /TARGET BOOKING WINDOW/);
+});
+
+test("the suggestion queue shows a signed-out visitor no proposals", async () => {
+  // Approving a change to the shared plan is the one act gated on being the
+  // owner, so the queue is where a leak would matter most: it carries what each
+  // person asked for, including the exact text of edits they proposed. A
+  // signed-out request must reveal none of it.
+  const page = await html("/suggestions");
+
+  assert.match(page, /הצעות לשינוי/);
+  assert.match(page, /ממתין להחלטה/);
+  // Server-side, Convex auth is still resolving, so the queue renders its
+  // loading state and the sign-in card only appears once Clerk answers on the
+  // client — same as /wishes. What matters is that the server ships no rows
+  // either way.
+  assert.match(page, /בודק כניסה/);
+
+  // No proposal content, no proposer identities, no decision controls.
+  assert.doesNotMatch(page, /proposedByEmail/);
+  assert.doesNotMatch(page, /acedzn\.com/);
+  assert.doesNotMatch(page, /לאשר/);
+  assert.doesNotMatch(page, /לדחות/);
+});
+
+test("the wish list shows a signed-out visitor nothing but the sign-in prompt", async () => {
+  // The whole feature rests on one rule: shared wishes go to the family, and a
+  // private wish goes only to its owner. A signed-out request is the strongest
+  // version of "not the owner", so it is the one worth pinning in CI — if
+  // convex/wishes.ts ever stops filtering, this is what catches it.
+  const page = await html("/wishes");
+
+  assert.match(page, /מה אנחנו רוצים/);
+  assert.match(page, /רק למשפחה/);
+  // Server-side, Convex auth is still resolving, so the board renders its
+  // loading state and the sign-in card appears once Clerk answers on the
+  // client. What matters here is that the server ships no wish data either way.
+  assert.match(page, /בודק כניסה/);
+
+  // Nothing anybody has actually wished for may appear before sign-in — not
+  // the seeded shared wishes, and certainly not a private one.
+  assert.doesNotMatch(page, /פיקאצ׳ו/);
+  assert.doesNotMatch(page, /PDRN/);
+  assert.doesNotMatch(page, /ownerEmail/);
+  assert.doesNotMatch(page, /acedzn\.com/);
+});
+
+test("the money page shows a signed-out visitor no amounts at all", async () => {
+  // The ledger carries booking references, card amounts and — for a private
+  // row — the fact that somebody is buying somebody else a present. A
+  // signed-out request is the strongest version of "not the family", so it is
+  // the one pinned in CI: if convex/money.ts ever stops gating, this catches it.
+  const page = await html("/money");
+
+  assert.match(page, /כספים/);
+  assert.match(page, /רק למשפחה/);
+  // Convex auth is still resolving server-side, so the board ships its loading
+  // state and the sign-in card appears once Clerk answers on the client.
+  assert.match(page, /בודקים מי מחובר/);
+
+  // None of the seeded ledger may appear before sign-in.
+  assert.doesNotMatch(page, /DRUM TAO/);
+  assert.doesNotMatch(page, /Marble Tokyo Base/);
+  assert.doesNotMatch(page, /00003314/, "no booking reference");
+  assert.doesNotMatch(page, /¥\d/, "no amount, of any size");
+  assert.doesNotMatch(page, /acedzn\.com/);
+});
+
+test("the budget guide and the notebook stay public and stay silent about spend", async () => {
+  // Both pages carry a family-only panel. The guide's own prose is public and
+  // must keep rendering exactly as before; the live numbers must not.
+  const guide = await html("/guide/budget");
+  assert.match(guide, /תקציב/);
+  assert.match(guide, /מעטפות תכנון/, "the guide's own prose still renders");
+  assert.doesNotMatch(guide, /המצב בפועל/, "but the live panel needs a signed-in family member");
+
+  const index = await html("/guides");
+  assert.match(index, /מחברת המסע/);
+  assert.doesNotMatch(index, /המצב בפועל/);
+});
+
+test("a day page keeps its planned cost public and its receipts private", async () => {
+  const page = await html("/day/4");
+
+  // The planned figure comes from the block cost lines and has always been
+  // public — it is what the plan says the day costs.
+  assert.match(page, /עלות היום בתוכנית/);
+  // What was actually paid is not.
+  assert.doesNotMatch(page, /מה הוצאנו היום/);
+  assert.doesNotMatch(page, /teamLab Planets — Entrance Pass/);
 });
 
 test("map, around and chat render their full experiences", async () => {
@@ -536,11 +651,11 @@ test("the relay streams NDJSON as it arrives instead of buffering the response",
     setTimeout(() => response.end('{"type":"turn.completed"}\n'), 2000);
   });
   const port = await freePort();
-  await new Promise((resolve) => server.listen(port, "127.0.0.1", resolve));
+  await new Promise((resolve) => server.listen(port, "localhost", resolve));
   stubs.push(server);
 
   const slow = await startNext({
-    EVE_URL: `http://127.0.0.1:${port}`,
+    EVE_URL: `http://localhost:${port}`,
     EVE_SHARED_SECRET: "s3cret",
   });
 
@@ -600,38 +715,32 @@ test("serves the PWA manifest and service worker from the app origin", async () 
   assert.match(await worker.text(), /caches/);
 });
 
-test("keeps all generated guides synchronized with the canonical Markdown", async () => {
-  const sourceRoot = new URL("../../JAPAN2026/", import.meta.url);
-  const publicRoot = new URL("../public/markdown/", import.meta.url);
-  const files = (await readdir(sourceRoot))
-    .filter((file) => /^\d{2}-.*\.md$/.test(file) && !file.includes("ARCHIVE"))
-    .sort();
+// There is no Markdown on disk any more. Convex holds the guides, and the only
+// derived copy left is `app/generated/ai-context.ts`, which `sync:content`
+// regenerates from Convex on every build and which the chat uses as its system
+// prompt. So that file IS the thing worth guarding: if a guide loses a landmark
+// the family is relying on, the assistant is the first place it goes missing.
+test("the generated AI context still carries the trip's landmarks", async () => {
+  const { aiContext, aiContextText } = await import("../app/generated/ai-context.ts");
 
-  assert.equal(files.length, 12);
+  assert.equal(aiContext.length, 12);
+  // A plausible-but-empty context would pass every `match` below by accident.
+  assert.ok(aiContextText.length > 100_000, "AI context is suspiciously small");
 
-  for (const file of files) {
-    const [source, published] = await Promise.all([
-      readFile(new URL(file, sourceRoot), "utf8"),
-      readFile(new URL(file, publicRoot), "utf8"),
-    ]);
-    assert.equal(published, source, `${file} must be synchronized`);
-  }
-
-  const generated = await readFile(
-    new URL("../app/generated/trip-content.ts", import.meta.url),
-    "utf8",
-  );
+  const generated = (
+    aiContext.map((entry) => entry.markdown)
+  ).join("\n");
   assert.match(generated, /Nintendo Museum/);
   assert.match(generated, /KAWAII MONSTER LAND/);
-  assert.match(generated, /Todoroki Ravine/);
-  assert.match(generated, /Shimokitazawa Curry Festival/);
+  assert.match(generated, /ערוץ טודורוקי/);
+  assert.match(generated, /פסטיבל הקארי של שימוקיטזאווה/);
   assert.match(generated, /Shiro-Hige/);
   assert.match(generated, /Mizuekai/);
   assert.match(generated, /DRUM TAO HIBIKI/);
   assert.match(generated, /UZUMASA Kyoto Village/);
   assert.match(generated, /Fushimi Inari/);
   assert.match(generated, /Taiko-kan/);
-  assert.match(generated, /Buy new walking shoes for everyone/);
+  assert.match(generated, /לקנות נעלי הליכה חדשות לכולם/);
   assert.doesNotMatch(generated, /Light Manga-morning snack/);
   assert.doesNotMatch(generated, /CHECK IF STILL OPEN/);
   assert.doesNotMatch(generated, /Tokyo Oct 2–13 · Osaka Oct 13–15/);

@@ -15,6 +15,7 @@ import {
   Mic,
   Paperclip,
   RotateCw,
+  ShieldQuestion,
   Sparkles,
   Square,
   Volume2,
@@ -23,15 +24,18 @@ import {
   X,
 } from "lucide-react";
 import { Markdown } from "./Markdown";
-import { messageText, toolActivity } from "./tool-labels";
 import type { TripUIMessage } from "./agent";
 import {
+  ACTIVITY_LIVE_ROWS,
   VOICE_CONTEXT_CLAUSE,
   extractTextAttachments,
+  groupActivity,
   stripContextLines,
   type BubbleAttachment,
   type EveBubble,
+  type EvePrompt,
 } from "./eve-protocol";
+import { approvalCopy, messageText, toolActivity } from "./tool-labels";
 import { fetchAgentEnabled } from "./eve-client";
 import { useGeoContext, type GeoContext } from "./useGeoContext";
 import { useEveChat, type SendInput } from "./useEveChat";
@@ -200,6 +204,7 @@ function EveConversation() {
       onReset={chat.messages.length > 0 || chat.hasSession ? chat.newChat : undefined}
       // A failed turn parks the session; the same question goes back on it.
       onRetry={chat.canRetry ? () => void chat.retry() : undefined}
+      onRespond={(requestId, optionId) => void chat.respond(requestId, optionId)}
       geo={geo}
     />
   );
@@ -247,6 +252,9 @@ function SdkConversation() {
           audio: user && raw.includes(VOICE_CONTEXT_CLAUSE),
           attachments: user ? [...sdkAttachments(message), ...lifted.attachments] : [],
           activity: user ? [] : toolActivity(message),
+          // The stateless fallback transport has no approval gate to render:
+          // its tools run to completion inside one request.
+          prompts: [],
           streaming: message.role === "assistant" && last && busy,
           final: message.role === "assistant" && !(last && busy) && text.trim().length > 0,
         };
@@ -429,6 +437,7 @@ function ChatSurface({
   onStop,
   onReset,
   onRetry,
+  onRespond,
   geo,
 }: {
   messages: EveBubble[];
@@ -439,6 +448,8 @@ function ChatSurface({
   onStop: () => void;
   onReset?: () => void;
   onRetry?: () => void;
+  /** Answers a parked approval or question. Absent on the stateless transport. */
+  onRespond?: (requestId: string, optionId: string) => void;
   geo?: GeoContext;
 }) {
   const [input, setInput] = useState("");
@@ -773,11 +784,13 @@ function ChatSurface({
           key={message.id}
           message={message}
           speaking={speech.speakingId === message.id}
+          busy={busy}
           onSpeak={() =>
             speech.speakingId === message.id
               ? speech.stop()
               : void speech.speak(message.id, message.text)
           }
+          onRespond={onRespond}
         />
       ))}
 
@@ -930,15 +943,101 @@ function VoicePlayback({ transcript }: { transcript: string }) {
   return <audio className="chat-voice-player" controls preload="metadata" src={url} />;
 }
 
+/** `×3` next to a status line that stands for more than one call. */
+function ActivityCount({ count }: { count: number }) {
+  if (count < 2) return null;
+  // `dir` is forced: inside the RTL bubble the bidi algorithm would otherwise
+  // flip this to `3×`.
+  return (
+    <span className="chat-tool-count" dir="ltr">
+      ×{count}
+    </span>
+  );
+}
+
+/**
+ * The approve / reject card for a run parked on a tool approval.
+ *
+ * This is the only control that can resolve one. eve's text fallback (a reply
+ * matching an option label) cannot reach it through this app — the relay
+ * prepends a `[הקשר: …]` clause to every message, and an approval is
+ * `allowFreeform: false`, so unmatched text is held and the run stays parked
+ * forever. Without these buttons the chat simply stops, which is exactly what
+ * it used to do.
+ */
+function ApprovalCard({
+  prompt,
+  busy,
+  onRespond,
+}: {
+  prompt: EvePrompt;
+  busy: boolean;
+  onRespond: (requestId: string, optionId: string) => void;
+}) {
+  const copy = approvalCopy(prompt.toolName, prompt.toolInput);
+  // eve fixes these at `approve` / `deny`, but they are read off the request
+  // rather than hardcoded so a renamed option cannot silently send the wrong one.
+  const approve = prompt.options.find((option) => option.id === "approve") ?? prompt.options[0];
+  const deny = prompt.options.find((option) => option.id === "deny") ?? prompt.options[1];
+
+  return (
+    <div className={`chat-approval${prompt.answered ? " is-answered" : ""}`}>
+      <p className="chat-approval-title">
+        <ShieldQuestion size={15} />
+        {copy.title}
+      </p>
+
+      {copy.details.length > 0 ? (
+        <dl className="chat-approval-details">
+          {copy.details.map((detail) => (
+            <div key={detail.label}>
+              <dt>{detail.label}</dt>
+              <dd>{detail.value}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
+
+      {prompt.answered ? (
+        <p className="chat-approval-done">התשובה נשלחה.</p>
+      ) : (
+        <div className="chat-approval-actions">
+          <button
+            type="button"
+            className="chat-approval-yes"
+            disabled={busy || !approve}
+            onClick={() => approve && onRespond(prompt.requestId, approve.id)}
+          >
+            <Check size={14} />
+            {copy.confirm}
+          </button>
+          <button
+            type="button"
+            className="chat-approval-no"
+            disabled={busy || !deny}
+            onClick={() => deny && onRespond(prompt.requestId, deny.id)}
+          >
+            לא, בלי זה
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /** One bubble: user text, or assistant tool activity + markdown answer. */
 function ChatMessage({
   message,
   speaking,
+  busy,
   onSpeak,
+  onRespond,
 }: {
   message: EveBubble;
   speaking: boolean;
+  busy: boolean;
   onSpeak: () => void;
+  onRespond?: (requestId: string, optionId: string) => void;
 }) {
   if (message.role === "user") {
     return (
@@ -953,29 +1052,47 @@ function ChatMessage({
   const activity = message.activity;
   const answered = message.text.trim().length > 0;
 
+  // Repeats of one line fold into a count, so a fifteen-call research turn
+  // reads as a handful of steps instead of a wall of identical rows.
+  const groups = groupActivity(activity);
+  // While the agent is still working, only the tail is on screen: the newest
+  // row is what it is doing *now*, and that is the row worth reading.
+  const hiddenRows = Math.max(0, groups.length - ACTIVITY_LIVE_ROWS);
+  const liveRows = hiddenRows > 0 ? groups.slice(hiddenRows) : groups;
+
   return (
     <article className="chat-bubble chat-bubble-assistant" aria-live="polite">
-      {activity.length > 0 ? (
+      {groups.length > 0 ? (
         answered ? (
-          // Collapses into a source count once the answer starts streaming.
+          // Collapses into a step count once the answer starts streaming.
           <details className="chat-tools chat-tools-done">
             <summary>
               <Check size={13} />
-              {activity.length === 1 ? "מקור אחד" : `${activity.length} מקורות`}
+              {groups.length === 1 ? "צעד אחד" : `${groups.length} צעדים`}
             </summary>
             <ul>
-              {activity.map((item) => (
-                <li key={item.id}>{item.label}</li>
+              {groups.map((group) => (
+                <li key={group.id}>
+                  {group.label}
+                  <ActivityCount count={group.count} />
+                </li>
               ))}
             </ul>
           </details>
         ) : (
           <ul className="chat-tools chat-tools-live">
-            {activity.map((item) => (
-              <li key={item.id} className={item.done ? "is-done" : undefined}>
-                {item.done ? <Check size={13} /> : <span className="chat-tool-spinner" />}
-                {item.label}
-                {item.done ? null : "…"}
+            {hiddenRows > 0 ? (
+              <li className="is-done chat-tools-earlier">
+                <Check size={13} />
+                {hiddenRows === 1 ? "צעד קודם" : `${hiddenRows} צעדים קודמים`}
+              </li>
+            ) : null}
+            {liveRows.map((group) => (
+              <li key={group.id} className={group.done ? "is-done" : undefined}>
+                {group.done ? <Check size={13} /> : <span className="chat-tool-spinner" />}
+                {group.label}
+                <ActivityCount count={group.count} />
+                {group.done ? null : "…"}
               </li>
             ))}
           </ul>
@@ -984,13 +1101,42 @@ function ChatMessage({
 
       {answered ? (
         <Markdown text={message.text} />
-      ) : activity.length === 0 ? (
+      ) : activity.length === 0 && message.prompts.length === 0 ? (
         <span className="chat-typing" aria-label="כותב תשובה">
           <i />
           <i />
           <i />
         </span>
       ) : null}
+
+      {onRespond
+        ? message.prompts.map((prompt) =>
+            prompt.display === "confirmation" ? (
+              <ApprovalCard
+                key={prompt.requestId}
+                prompt={prompt}
+                busy={busy}
+                onRespond={onRespond}
+              />
+            ) : prompt.options.length > 0 ? (
+              // An `ask_question` with choices. The composer can answer it too,
+              // but only when the model allowed free text — offering the buttons
+              // costs nothing and is the only way through when it did not.
+              <div key={prompt.requestId} className="chat-choices">
+                {prompt.options.map((option) => (
+                  <button
+                    key={option.id}
+                    type="button"
+                    disabled={busy || prompt.answered}
+                    onClick={() => onRespond(prompt.requestId, option.id)}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            ) : null,
+          )
+        : null}
 
       {answered && !message.streaming ? (
         <button

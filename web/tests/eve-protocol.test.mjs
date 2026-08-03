@@ -14,6 +14,7 @@ import test from "node:test";
 
 import {
   AGENT_FAILURE_MESSAGE,
+  BACKGROUND_UPDATE_PREFIX,
   CONTEXT_PREFIX,
   EVE_INITIAL_STATE,
   FILE_TEXT_CLOSE,
@@ -25,9 +26,11 @@ import {
   VOICE_TEXT_PART,
   buildContextLine,
   contextTimeZone,
+  groupActivity,
   isContextPart,
   isFreshFix,
   isoWithOffset,
+  markPromptAnswered,
   parseNdjson,
   readUserMessage,
   reduceEve,
@@ -184,6 +187,121 @@ test("correlates incrementally streamed calls by call id instead of duplicating"
   assert.equal(activity[1].label, "קורא את מדריך");
 });
 
+// The agent does not only answer. Background research finishes on its own and
+// arrives as a whole turn with no `message.received` in front of it, on a
+// session that was sitting idle. That has to read as a new bubble, not as an
+// edit of the last answer and not as something the family said.
+test("an agent-initiated turn renders as its own assistant bubble", () => {
+  const answered = play(FIRST_TURN);
+  const before = visibleMessages(answered.messages).length;
+
+  const unsolicited = play(
+    [
+      { type: "turn.started", data: { sequence: 30, turnId: "turn_bg" } },
+      {
+        type: "actions.requested",
+        data: {
+          actions: [{ callId: "bg1", kind: "tool-call", toolName: "search_places", input: { query: "פיקאצ׳ו" } }],
+          turnId: "turn_bg",
+        },
+      },
+      { type: "action.result", data: { result: { callId: "bg1" }, turnId: "turn_bg" } },
+      {
+        type: "message.appended",
+        data: { messageDelta: "מצאתי", messageSoFar: "מצאתי", sequence: 32, stepIndex: 1, turnId: "turn_bg" },
+      },
+      {
+        type: "message.completed",
+        data: { message: "מצאתי בובה בפוקימון סנטר שיבויה", finishReason: "stop", sequence: 33, stepIndex: 1, turnId: "turn_bg" },
+      },
+      { type: "turn.completed", data: { sequence: 34, turnId: "turn_bg" } },
+      { type: "session.waiting", data: { continuationToken: "eve:token-bg", wait: "next-user-message" } },
+    ],
+    answered,
+  );
+
+  const rendered = visibleMessages(unsolicited.messages);
+  assert.equal(rendered.length, before + 1, "the push is added, not merged into the previous answer");
+
+  const pushed = rendered.at(-1);
+  assert.equal(pushed.role, "assistant", "an unprompted turn must not be attributed to the family");
+  assert.equal(pushed.text, "מצאתי בובה בפוקימון סנטר שיבויה");
+  assert.equal(pushed.final, true, "so it can be read aloud like any other answer");
+  assert.equal(pushed.streaming, false);
+  assert.equal(unsolicited.continuationToken, "eve:token-bg", "the composer is usable again afterwards");
+});
+
+// An approval gate (`edit_plan_doc`, `mark_done`) parks the run on a human and
+// emits `input.requested` — and no `session.waiting` ever follows, because the
+// turn has not ended. Leaving the status on "streaming" is what made the chat
+// spin forever: the agent asked a question and disabled the box to answer in.
+test("an approval prompt unlocks the composer instead of spinning forever", () => {
+  const parked = play([
+    ...FIRST_TURN.slice(0, 4),
+    {
+      type: "input.requested",
+      data: {
+        requests: [{ prompt: "לסמן בצ׳קליסט שקניתם כרטיסים ל-teamLab?", requestId: "req_1" }],
+        turnId: "turn_1",
+      },
+    },
+  ]);
+
+  assert.notEqual(parked.status, "streaming", "a run parked on a human is not streaming");
+  const last = visibleMessages(parked.messages).at(-1);
+  assert.equal(last.role, "assistant");
+  assert.match(last.text, /teamLab/, "the question itself has to be readable");
+});
+
+// The only way eve can wake a parked session is a follow-up on its continuation
+// token, which lands as a *user* message. So a background run reporting in puts
+// words in the family's mouth: a bubble they never typed, addressed to the agent
+// rather than to them. It has to vanish, and its answer has to stay.
+test("a background run's report never renders as a family message", () => {
+  const answered = play(FIRST_TURN);
+  const before = visibleMessages(answered.messages).length;
+
+  const pushed = play(
+    [
+      { type: "turn.started", data: { sequence: 40, turnId: "turn_bg2" } },
+      {
+        type: "message.received",
+        data: {
+          message: `${BACKGROUND_UPDATE_PREFIX} מחקר הסתיים: בובת פיקאצ׳ו ¥2,400, פוקימון סנטר שיבויה, יום 6`,
+          sequence: 40,
+          turnId: "turn_bg2",
+        },
+      },
+      {
+        type: "message.completed",
+        data: {
+          message: "מצאתי! בובת פיקאצ׳ו עולה בערך 2,400 ין",
+          finishReason: "stop",
+          sequence: 41,
+          stepIndex: 0,
+          turnId: "turn_bg2",
+        },
+      },
+      { type: "turn.completed", data: { sequence: 42, turnId: "turn_bg2" } },
+    ],
+    answered,
+  );
+
+  const rendered = visibleMessages(pushed.messages);
+  assert.equal(rendered.length, before + 1, "only the agent's answer is added");
+  assert.equal(
+    rendered.some((message) => message.text.includes(BACKGROUND_UPDATE_PREFIX)),
+    false,
+    "the machine payload must never reach the screen",
+  );
+  assert.equal(rendered.at(-1).role, "assistant");
+  assert.equal(rendered.at(-1).text, "מצאתי! בובת פיקאצ׳ו עולה בערך 2,400 ין");
+
+  // `received` gates the optimistic-bubble drop in useEveChat, so a background
+  // report must not look like confirmation of a send still in flight.
+  assert.equal(pushed.received, answered.received, "a background report is not a family send");
+});
+
 test("captures the continuation token from session.waiting", () => {
   const first = play(FIRST_TURN);
   assert.equal(first.continuationToken, "eve:token-1");
@@ -264,6 +382,141 @@ test("surfaces turn and session failures in Hebrew", () => {
 
   assert.equal(failed.status, "failed");
   assert.match(failed.error, /יותר מדי בקשות/);
+});
+
+/*
+ * A tool approval is NOT a question, and the difference is the whole bug it
+ * used to cause. eve emits it as `display: "confirmation"`, `allowFreeform:
+ * false`, options `approve`/`deny`, and a prompt reading `Approve tool call:
+ * edit_plan_doc`. Rendering that as text and pointing the family at the
+ * composer left the run parked forever: unmatched free text does not deny an
+ * approval, eve just holds it. So the request has to survive as structure.
+ */
+const APPROVAL_REQUEST = {
+  requestId: "appr_1",
+  prompt: "Approve tool call: edit_plan_doc",
+  display: "confirmation",
+  allowFreeform: false,
+  options: [
+    { id: "approve", label: "Yes" },
+    { id: "deny", label: "No" },
+  ],
+  action: {
+    kind: "tool-call",
+    callId: "call_edit_1",
+    toolName: "edit_plan_doc",
+    input: { file: "11-PRE-TRIP-CHECKLIST.md", summary: "להוסיף מתאמי תקע" },
+  },
+};
+
+test("an approval survives as a structured prompt, not as English boilerplate", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    { type: "input.requested", data: { requests: [APPROVAL_REQUEST], turnId: "t" } },
+  ]);
+
+  const bubble = parked.messages.at(-1);
+  assert.equal(bubble.prompts.length, 1, "the request has to be answerable, so it has to be kept");
+
+  const prompt = bubble.prompts[0];
+  assert.equal(prompt.requestId, "appr_1", "the answer is keyed by this and nothing else");
+  assert.equal(prompt.display, "confirmation");
+  assert.equal(prompt.allowFreeform, false);
+  assert.deepEqual(
+    prompt.options.map((option) => option.id),
+    ["approve", "deny"],
+  );
+  assert.equal(prompt.callId, "call_edit_1", "so the result event can retire the card");
+  assert.equal(prompt.toolName, "edit_plan_doc");
+  assert.equal(prompt.toolInput.summary, "להוסיף מתאמי תקע", "the card says what is being approved");
+  assert.equal(prompt.answered, false);
+
+  assert.doesNotMatch(
+    bubble.text,
+    /Approve tool call/,
+    "eve's English boilerplate names a function, not an act — the card writes its own Hebrew",
+  );
+  assert.notEqual(parked.status, "streaming", "a run parked on a human is not streaming");
+});
+
+test("a question and an approval in one pause are told apart", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    {
+      type: "input.requested",
+      data: {
+        requests: [
+          APPROVAL_REQUEST,
+          { requestId: "q_1", prompt: "לאיזה יום להוסיף את זה?", display: "text" },
+        ],
+        turnId: "t",
+      },
+    },
+  ]);
+
+  const bubble = parked.messages.at(-1);
+  assert.equal(bubble.prompts.length, 2);
+  assert.match(bubble.text, /לאיזה יום/, "a question can be replied to, so it stays readable text");
+  assert.doesNotMatch(bubble.text, /Approve tool call/);
+});
+
+test("the gated call's result retires its approval card", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    { type: "input.requested", data: { requests: [APPROVAL_REQUEST], turnId: "t" } },
+  ]);
+
+  const resumed = play(
+    [
+      {
+        type: "action.result",
+        data: { result: { callId: "call_edit_1", kind: "tool-result" }, turnId: "t" },
+      },
+    ],
+    parked,
+  );
+
+  assert.equal(
+    resumed.messages.at(-1).prompts[0].answered,
+    true,
+    "answered elsewhere is still answered — the buttons must not stay live",
+  );
+});
+
+test("a cancelled turn cannot leave a live approval behind", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    { type: "input.requested", data: { requests: [APPROVAL_REQUEST], turnId: "t" } },
+  ]);
+
+  const cancelled = play([{ type: "turn.cancelled", data: { turnId: "t" } }], parked);
+  assert.equal(
+    cancelled.messages.at(-1).prompts[0].answered,
+    true,
+    "the turn is over; a button that answers nothing is worse than no button",
+  );
+});
+
+test("marking one prompt answered leaves the others alone", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    {
+      type: "input.requested",
+      data: {
+        requests: [
+          APPROVAL_REQUEST,
+          { ...APPROVAL_REQUEST, requestId: "appr_2", action: { ...APPROVAL_REQUEST.action, callId: "call_edit_2" } },
+        ],
+        turnId: "t",
+      },
+    },
+  ]);
+
+  const after = markPromptAnswered(parked.messages, { requestId: "appr_1" });
+  assert.deepEqual(
+    after.at(-1).prompts.map((prompt) => prompt.answered),
+    [true, false],
+  );
 });
 
 test("shows an input request as answerable assistant text", () => {
@@ -702,4 +955,54 @@ test("a terminal session.failed is retryable too", () => {
   assert.equal(state.status, "failed");
   assert.equal(state.retryable, true);
   assert.equal(state.messages.every((message) => !message.streaming), true);
+});
+
+/* ------------------------------------------------------- activity grouping */
+
+/** Shorthand for one status line: `label` repeated `count` times, all settled. */
+function run(label, count, done = true) {
+  return Array.from({ length: count }, (_, index) => ({
+    id: `${label}:${index}`,
+    label,
+    done,
+  }));
+}
+
+test("a repeated status line folds into one row with a count", () => {
+  const groups = groupActivity(run("מחפש ברשת", 9));
+
+  assert.equal(groups.length, 1);
+  assert.equal(groups[0].count, 9);
+  assert.equal(groups[0].label, "מחפש ברשת");
+  assert.equal(groups[0].id, "מחפש ברשת:0", "the row keeps the first call's id while it grows");
+});
+
+test("a row is only done once every call behind it has returned", () => {
+  const [first, ...rest] = run("מחפש ברשת", 3);
+  const groups = groupActivity([{ ...first, done: false }, ...rest]);
+
+  assert.equal(groups.length, 1);
+  assert.equal(groups[0].done, false);
+});
+
+test("the same line after a different one is a second attempt, not the same run", () => {
+  const groups = groupActivity([
+    ...run("מחפש ברשת", 2),
+    ...run("קורא את מדריך האוכל", 1),
+    ...run("מחפש ברשת", 3),
+  ]);
+
+  assert.deepEqual(
+    groups.map((group) => [group.label, group.count]),
+    [
+      ["מחפש ברשת", 2],
+      ["קורא את מדריך האוכל", 1],
+      ["מחפש ברשת", 3],
+    ],
+  );
+});
+
+test("distinct lines are never merged, and an empty turn groups to nothing", () => {
+  assert.deepEqual(groupActivity([]), []);
+  assert.equal(groupActivity([...run("א", 1), ...run("ב", 1)]).length, 2);
 });

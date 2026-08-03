@@ -137,19 +137,23 @@ export function MapCanvas({
         .attribution({ position: "bottomleft", prefix: false })
         .addAttribution(TILE_ATTRIBUTION)
         .addTo(map);
-      const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const tileUrl = () =>
+        document.documentElement.dataset.theme === "dark" ? TILE_DARK : TILE_LIGHT;
       // No `detectRetina` here: Leaflet fills the `{r}` placeholder from
       // Browser.retina on its own, and enabling both would request @2x tiles at
       // half tile-size — double the bytes for no gain.
-      const tiles = L.tileLayer(darkQuery.matches ? TILE_DARK : TILE_LIGHT, {
+      const tiles = L.tileLayer(tileUrl(), {
         maxZoom: 19,
         subdomains: TILE_SUBDOMAINS,
       }).addTo(map);
-      const onThemeChange = (event: MediaQueryListEvent) => {
-        tiles.setUrl(event.matches ? TILE_DARK : TILE_LIGHT);
-      };
-      darkQuery.addEventListener("change", onThemeChange);
-      themeCleanupRef.current = () => darkQuery.removeEventListener("change", onThemeChange);
+      // Watching the attribute rather than the media query picks up both an OS
+      // flip and a manual choice from the header toggle, with no shared state
+      // between this imperative map and React.
+      const themeObserver = new MutationObserver(() => tiles.setUrl(tileUrl()));
+      themeObserver.observe(document.documentElement, {
+        attributeFilter: ["data-theme"],
+      });
+      themeCleanupRef.current = () => themeObserver.disconnect();
 
       markerLayerRef.current = L.layerGroup().addTo(map);
       routeLayerRef.current = L.layerGroup().addTo(map);

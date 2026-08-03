@@ -36,9 +36,7 @@ const CSS = `
 
 /* Dark mode swaps to CARTO's dark basemap in MapCanvas — no CSS inversion, so
    the Latin place labels stay readable. */
-@media (prefers-color-scheme: dark) {
-  .jm-canvas .leaflet-container { background: #12142a; }
-}
+:root[data-theme="dark"] .jm-canvas .leaflet-container { background: #12142a; }
 
 /* ------------------------------------------------------------ markers */
 .jm-mk-wrap { background: none !important; border: 0 !important; }
@@ -64,9 +62,7 @@ const CSS = `
   inset-inline-end: -7px; line-height: 1; min-width: 17px; padding: 3px 3.5px;
   position: absolute; text-align: center;
 }
-@media (prefers-color-scheme: dark) {
-  .jm-mk-extra { background: color-mix(in srgb, var(--mk) 26%, #12142a); }
-}
+:root[data-theme="dark"] .jm-mk-extra { background: color-mix(in srgb, var(--mk) 26%, #12142a); }
 .jm-user-wrap { background: none !important; border: 0 !important; }
 .jm-user {
   animation: jm-pulse 2.4s ease-out infinite; background: #2f6fd0; border: 3px solid #fff;

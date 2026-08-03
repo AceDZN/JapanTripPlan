@@ -1,40 +1,87 @@
-// Edit a canonical trip document from inside the chat.
+// Propose a change to a canonical trip document.
 //
-// The whole trip lives in JAPAN2026/*.md, so an edit here is an edit everywhere:
-// the webapp regenerates its guide pages and AI context from these files on its
-// next build, and this agent regenerates agent/data/content.ts from them on its
-// next deploy. Both deploys are triggered automatically by the commit this tool
-// makes.
+// ## What changed, and why
 //
-// Staleness window worth knowing while reading the model's behaviour: for the
-// rest of the conversation that made an edit, `read_guide` / `get_day` still
-// return the pre-edit bundle. instructions.md tells the model to trust its own
-// just-committed change over those tools until the redeploy lands.
+// This tool used to edit the markdown in GitHub and commit it. That made sense
+// when `JAPAN2026/*.md` was the source of truth. It is not any more: Convex is,
+// and those files are its git-tracked export. Committing to them would now be
+// writing to a build artefact — the next export would overwrite it.
 //
-// Safety: gated with approval `always()`. Nothing is fetched, replaced or
-// committed until the user confirms in chat.
+// So the tool writes to Convex instead. Three things fall out of that, all good:
+//
+//   * the change is live immediately, so the old "live in a few minutes" note
+//     and the staleness warning that went with it are both gone;
+//   * `read_guide` reads the same store, so a document read after an edit shows
+//     the edit;
+//   * the write lands as a PENDING SUGGESTION rather than an applied change.
+//
+// ## Why it only ever proposes
+//
+// The plan is shared. Changing it is not the same kind of act as adding your own
+// wish, and "Tommy asked the assistant to rewrite day 5" must not rewrite day 5.
+// So every call files a suggestion for the trip owner to decide on, whoever is
+// speaking — including Alex.
+//
+// Approving from this agent is deliberately impossible. eve authenticates to the
+// app with one shared family credential, so `session.auth.initiator` is "the
+// family", not the individual: this process genuinely cannot tell Alex from
+// Tommy, and a `משתמש:` clause in the prompt is a claim, not proof. Approval
+// therefore happens in the app, where Clerk proves who is signed in and
+// `convex/suggestions.ts:approve` checks `role === "owner"` server-side. See the
+// header of that file for the full argument.
 
 import { defineTool } from "eve/tools";
 import { always } from "eve/tools/approval";
 import { z } from "zod";
 import { guides } from "../data/content";
-import {
-  commitDoc,
-  countOccurrences,
-  githubConfig,
-  LIVE_IN_MINUTES_NOTE,
-  MISSING_TOKEN_ERROR,
-  readDoc,
-} from "../lib/github";
+import { CONVEX_UNCONFIGURED, convexConfigured, convexPost } from "../lib/convex";
 
 const files = guides.map((g) => g.file) as [string, ...string[]];
 const catalog = guides.map((g) => `- ${g.file}: ${g.title}`).join("\n");
 
+/** `09-DAILY-ITINERARY.md` -> `daily-itinerary`, matching `guides.slug`. */
+function slugFor(file: string): string {
+  return file
+    .replace(/^\d+-/, "")
+    .replace(/\.md$/, "")
+    .toLowerCase();
+}
+
+/**
+ * Turn a server-side validation failure into something the family can act on.
+ *
+ * The Convex mutation raises precise English errors (not found / appears N
+ * times). Those are exactly the cases the model can fix by itself, so they are
+ * worth translating rather than surfacing as a raw stack.
+ */
+function translateServerError(error: string, file: string): string {
+  if (error.includes("was not found")) {
+    return (
+      `לא מצאתי את הטקסט הזה ב-${file}, ולכן לא רשמתי כלום. ` +
+      "צריך להעתיק את הנוסח המדויק מהמסמך (אפשר לקרוא אותו קודם עם read_guide או get_day) — " +
+      "כולל ניקוד, מקפים וסימני טבלה."
+    );
+  }
+  if (error.includes("appears")) {
+    return (
+      `הטקסט הזה מופיע יותר מפעם אחת ב-${file}, אז לא ברור מה לשנות ולא רשמתי כלום. ` +
+      "צריך להוסיף עוד הקשר סביב הטקסט (שורה שלמה, או שורה והשורה שלפניה) כדי שיהיה ייחודי."
+    );
+  }
+  if (error.includes("not on the family list")) {
+    return "הכתובת הזאת לא ברשימת המשפחה, אז אי אפשר לרשום הצעה בשמה.";
+  }
+  return error;
+}
+
 export default defineTool({
   description: [
-    "Edit one of the canonical Japan 2026 trip documents and commit the change to the repo.",
-    "This is how the plan actually changes: the documents are the single source of truth, and the",
-    "trip website and this agent both rebuild from them automatically after the commit.",
+    "Propose a change to one of the canonical Japan 2026 trip documents.",
+    "",
+    "This does NOT change the plan straight away. It files a suggestion for Alex, the trip owner,",
+    "who approves or rejects it in the app. Say that plainly to whoever asked — never tell them the",
+    "plan has been updated. If Alex himself is asking, it still goes to his queue; tell him it is",
+    "waiting for him to approve there.",
     "",
     "The edit is an exact substring replacement: `old_string` must appear EXACTLY ONCE in the file.",
     "Include enough surrounding text (a whole line, or a line plus its neighbour) to be unique.",
@@ -44,19 +91,20 @@ export default defineTool({
     "",
     "Route changes for a specific trip day into 09-DAILY-ITINERARY.md — that file is the canonical route.",
     "For completing a checklist item prefer the mark_done tool.",
+    "For something a person wants to see or buy, prefer create_wish — that is not a change to the plan.",
     "",
-    "The user must approve this call before anything is written. `summary` becomes the commit message",
-    "('Trip update: <summary>') and is shown to the user, so write it as a short, plain description",
-    "of the change.",
+    "The user must approve this call before the suggestion is filed. `summary` is what Alex will read",
+    "in his queue, so write it as a short, plain description of the change.",
     "",
     "Editable documents:",
     catalog,
   ].join("\n"),
 
   inputSchema: z.object({
-    file: z
-      .enum(files)
-      .describe("Canonical document to edit, e.g. 09-DAILY-ITINERARY.md"),
+    proposedByEmail: z
+      .string()
+      .describe("Exactly the address from the `משתמש:` clause of this turn's context line."),
+    file: z.enum(files).describe("Canonical document to edit, e.g. 09-DAILY-ITINERARY.md"),
     old_string: z
       .string()
       .min(1)
@@ -69,65 +117,67 @@ export default defineTool({
     summary: z
       .string()
       .min(3)
-      .describe(
-        "Short plain description of the change, used as the commit message and shown to the user.",
-      ),
+      .describe("Short plain description of the change, shown to the owner in his review queue."),
+    rationale: z
+      .string()
+      .optional()
+      .describe("Hebrew: why the person wants this. Helps the owner decide without asking back."),
   }),
 
-  // Every call commits to the family's real trip documents — always ask first.
+  // Filing a suggestion against the family's real plan — always ask first.
   approval: always(),
 
-  async execute({ file, old_string, new_string, summary }) {
-    const cfg = githubConfig();
-    if (!cfg) return { ok: false as const, error: MISSING_TOKEN_ERROR };
+  async execute({ proposedByEmail, file, old_string, new_string, summary, rationale }) {
+    if (!convexConfigured()) return { ok: false as const, error: CONVEX_UNCONFIGURED };
 
     if (old_string === new_string) {
-      return {
-        ok: false as const,
-        error: "הטקסט הישן והחדש זהים — אין מה לשנות.",
-      };
+      return { ok: false as const, error: "הטקסט הישן והחדש זהים — אין מה לשנות." };
     }
 
-    const read = await readDoc(cfg, file);
-    if (!read.ok) return { ok: false as const, error: read.error };
-
-    const occurrences = countOccurrences(read.doc.content, old_string);
-    if (occurrences === 0) {
+    // Without a verified speaker there is nobody to attribute the suggestion to,
+    // and an unattributable proposal is not reviewable. The relay stamps this
+    // clause server-side; its absence means the person is not signed in.
+    if (!proposedByEmail.includes("@")) {
       return {
         ok: false as const,
         error:
-          `לא מצאתי את הטקסט הזה ב-${file}, ולכן לא שיניתי כלום. ` +
-          "צריך להעתיק את הנוסח המדויק מהמסמך (אפשר לקרוא אותו קודם עם read_guide או get_day) — כולל ניקוד, מקפים וסימני טבלה.",
-        occurrences: 0,
+          "אין לי כתובת מזוהה של מי שמבקש, אז אי אפשר לרשום את ההצעה על שמו. " +
+          "צריך להיות מחוברים לחשבון משפחתי כדי להציע שינוי בתוכנית.",
       };
     }
-    if (occurrences > 1) {
+
+    try {
+      const body = (await convexPost("/agent/suggestions/propose", {
+        proposedByEmail,
+        targetKind: "guide",
+        guideSlug: slugFor(file),
+        title: summary,
+        rationale,
+        oldString: old_string,
+        newString: new_string,
+      })) as { id?: string; proposedBy?: string; ok?: boolean; error?: string };
+
+      if (body?.ok === false) {
+        // The server does the authoritative uniqueness check against the live
+        // document, so its verdict wins over anything checked here.
+        return { ok: false as const, error: translateServerError(String(body.error ?? ""), file) };
+      }
+
       return {
-        ok: false as const,
-        error:
-          `הטקסט הזה מופיע ${occurrences} פעמים ב-${file}, אז לא ברור מה לשנות ולא נגעתי בכלום. ` +
-          "צריך להוסיף עוד הקשר סביב הטקסט (שורה שלמה, או שורה והשורה שלפניה) כדי שיהיה ייחודי.",
-        occurrences,
+        ok: true as const,
+        file,
+        suggestionId: body?.id,
+        proposedBy: body?.proposedBy,
+        summary,
+        replaced: old_string,
+        with: new_string,
+        status: "pending" as const,
+        note:
+          "ההצעה נרשמה וממתינה לאישור של אלכס. התוכנית עצמה עדיין לא השתנתה — " +
+          "אל תגידו למי שביקש שהשינוי בוצע.",
       };
+    } catch (error) {
+      return { ok: false as const, error: String(error) };
     }
-
-    const content = read.doc.content.replace(old_string, new_string);
-
-    const commit = await commitDoc(cfg, { doc: read.doc, content, summary });
-    if (!commit.ok) return { ok: false as const, error: commit.error };
-
-    return {
-      ok: true as const,
-      file,
-      branch: cfg.branch,
-      summary,
-      commitUrl: commit.commitUrl,
-      replaced: old_string,
-      with: new_string,
-      note: LIVE_IN_MINUTES_NOTE,
-      staleness:
-        "Your bundled copy of this document is now out of date for the rest of this conversation: " +
-        "trust this edit over read_guide / get_day output until the next deploy.",
-    };
   },
 });

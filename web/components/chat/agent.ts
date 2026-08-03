@@ -1,6 +1,6 @@
 import { InferAgentUIMessage, ToolLoopAgent, stepCountIs } from "ai";
 import { createGateway } from "@ai-sdk/gateway";
-import { TRIP_DIGEST, tripTools } from "./trip-tools";
+import { createTripTools, tripDigest, type TripSnapshot } from "./trip-tools";
 
 /** Overridable so the model can be swapped without a code change. */
 export const DEFAULT_CHAT_MODEL = "anthropic/claude-sonnet-5";
@@ -10,7 +10,8 @@ export const DEFAULT_CHAT_MODEL = "anthropic/claude-sonnet-5";
  * Gateway's automatic caching can reuse the prefix; the volatile date block is
  * appended after it.
  */
-const PERSONA = `You are "מדריך הטיול" — the family concierge for one specific trip: a family holiday to Japan, October 1–18 2026.
+function persona(trip: TripSnapshot): string {
+  return `You are "מדריך הטיול" — the family concierge for one specific trip: a family holiday to Japan, October 1–18 2026.
 
 The family: two adults, a 16-year-old daughter and a 12-year-old son. Route: Tokyo (Oct 2–11) → Kyoto (Oct 11–13) → Osaka (Oct 13–15) → Tokyo (Oct 15–17), flying home Oct 18. Themes: anime, gaming, Pokémon, Nintendo, ramen and kawaii culture.
 
@@ -28,11 +29,12 @@ How to answer:
 - Ground every claim in what the tools returned. Quote concrete details — days, times, place names, areas, booking statuses.
 - Include links returned by the tools when they are relevant. Name the guide when a fact lives in one (for example: "מפורט ב־09-DAILY-ITINERARY.md").
 - NEVER invent a price, an opening hour, an availability window or a booking confirmation. If the tools do not say, say so plainly in Hebrew and point at the guide that should be checked or updated.
-- Checklist completion state lives only in the family's browser. Never claim something is or is not already ticked off.
+- Checklist completion is shared across the family and comes back from getChecklist. Report it as fact when the tool says so.
 - Markdown is rendered by the app: **bold**, bullet lists and [links](url) work. Headings and tables do not — avoid them.
 
 TRIP DIGEST (always available, no tool call needed):
-${TRIP_DIGEST}`;
+${tripDigest(trip.days)}`;
+}
 
 /** Per-request block: the model needs "now" to answer "מה היום". */
 function nowBlock(now: Date): string {
@@ -60,18 +62,21 @@ function nowBlock(now: Date): string {
  * when it is present.
  */
 export function createTripAgent({
+  trip,
   apiKey,
   model = DEFAULT_CHAT_MODEL,
   now = new Date(),
 }: {
+  /** One request's read of the trip, from Convex. */
+  trip: TripSnapshot;
   apiKey?: string;
   model?: string;
   now?: Date;
 }) {
   return new ToolLoopAgent({
     model: apiKey ? createGateway({ apiKey })(model) : model,
-    instructions: PERSONA + nowBlock(now),
-    tools: tripTools,
+    instructions: persona(trip) + nowBlock(now),
+    tools: createTripTools(trip),
     stopWhen: stepCountIs(8),
     providerOptions: {
       gateway: {

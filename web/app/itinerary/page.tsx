@@ -3,20 +3,14 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { ArrowLeft, CalendarDays, Plane } from "lucide-react";
 import { Photo } from "@/components/visuals";
-import { getDay, routeChapters, tripDays } from "@/lib/trip-data";
-import type { TripDay } from "@/lib/trip-data";
+import { routeChapters } from "@/lib/route-chapters";
+import type { TripDay } from "@/lib/types";
+import { getTripDays } from "@/lib/trip-source";
 
 export const metadata: Metadata = {
   title: "המסלול היומי",
   description:
     "17 ימים מדויקים של אנימה, גיימינג, ראמן, קוואי וחוויות משפחתיות ביפן — יום אחרי יום.",
-};
-
-const cityImages: Record<string, string> = {
-  tokyo: "/images/cities/tokyo.jpg",
-  kyoto: "/images/cities/kyoto.jpg",
-  osaka: "/images/cities/osaka.jpg",
-  kamakura: "/images/cities/kamakura.jpg",
 };
 
 function DayRow({ day }: { day: TripDay }) {
@@ -48,7 +42,9 @@ function DayRow({ day }: { day: TripDay }) {
   );
 }
 
-export default function ItineraryPage() {
+export default async function ItineraryPage() {
+  const tripDays = await getTripDays();
+  const byDay = new Map(tripDays.map((day) => [day.day, day]));
   const prologue = tripDays.filter((day) => day.day === 1);
 
   return (
@@ -64,7 +60,13 @@ export default function ItineraryPage() {
 
       <section aria-labelledby="chapter-prologue">
         <div className="chapter">
-          <Photo className="chapter-photo" src="/images/days/day-01.jpg" alt="" tone="#c2553d" />
+          {/* The prologue is day 1 — take its own photo rather than a path. */}
+          <Photo
+            className="chapter-photo"
+            src={byDay.get(1)?.heroImage}
+            alt=""
+            tone={byDay.get(1)?.color ?? "#c2553d"}
+          />
           <div className="chapter-copy">
             <h2 id="chapter-prologue">
               <Plane size={22} style={{ display: "inline", marginInlineEnd: 8 }} />
@@ -81,17 +83,13 @@ export default function ItineraryPage() {
         </div>
       </section>
 
-      {routeChapters.map((chapter, index) => (
+      {routeChapters(tripDays).map((chapter, index) => (
         <section
           aria-labelledby={`chapter-${index}`}
           key={`${chapter.city}-${chapter.dates}`}
         >
           <div className="chapter">
-            <Photo
-              className="chapter-photo"
-              src={cityImages[chapter.city] ?? cityImages.tokyo}
-              alt=""
-            />
+            <Photo className="chapter-photo" src={chapter.image} alt="" />
             <div className="chapter-copy">
               <h2 id={`chapter-${index}`}>{chapter.label}</h2>
               <span>
@@ -102,7 +100,7 @@ export default function ItineraryPage() {
           </div>
           <div className="timeline">
             {chapter.days
-              .map((n) => getDay(n))
+              .map((n) => byDay.get(n))
               .filter((day): day is TripDay => Boolean(day))
               .map((day) => (
                 <DayRow day={day} key={day.day} />

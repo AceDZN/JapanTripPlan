@@ -16,13 +16,30 @@ cp .env.local.example .env.local   # then fill in the values
 npm run dev                        # http://localhost:3000
 ```
 
+`npm run dev` starts **two** processes: the Next dev server and the local eve
+agent from `../trip-agent`, on `127.0.0.1:2000`. They share a fate — Ctrl-C stops
+both, and if either dies the other is stopped too, because a live web server
+talking to a dead agent looks exactly like a bug in the app.
+
+**In development the chat always talks to the local agent**, whatever `EVE_URL`
+says in `.env.local`. That variable points at the deployment, and quietly testing
+localhost against a deployed agent is how you end up debugging your own working
+code: it once cost a long session where the deployment turned out to be 24
+commits behind and missing the wish tools entirely. To aim at the deployment on
+purpose:
+
+```bash
+EVE_USE_DEPLOYED=1 npm run dev
+```
+
 `npm run dev` and `npm run build` both run `scripts/sync-content.mjs` first,
 which copies `../JAPAN2026/*.md` into `public/markdown/` and regenerates
 `app/generated/`. Never edit the generated files by hand.
 
 ## Scripts
 
-- `npm run dev` — Next dev server
+- `npm run dev` — Next dev server **+ the local eve agent** (see above)
+- `npm run dev:web` — the Next dev server alone, when the agent is already running
 - `npm run build` — production build
 - `npm start` — serve the production build
 - `npm test` — build, then run `node --test tests/*.test.mjs`

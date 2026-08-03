@@ -178,6 +178,22 @@
   color: var(--matcha);
 }
 
+/* the folded head of a long run of steps */
+.chat-tools-live li.chat-tools-earlier {
+  color: var(--text-faint);
+}
+
+/* how many calls one status line stands for */
+.chat-tool-count {
+  background: color-mix(in srgb, currentColor 11%, transparent);
+  border-radius: 999px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  opacity: 0.85;
+  padding: 2px 5px;
+}
+
 .chat-tool-spinner {
   animation: chat-spin 700ms linear infinite;
   border: 2px solid color-mix(in srgb, var(--vermillion) 30%, transparent);
@@ -227,6 +243,138 @@
   gap: 3px;
   margin-top: 6px;
   padding-inline-start: 10px;
+}
+
+.chat-tools-done li {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+
+/* ------------------------------------------------------ approval prompt */
+
+/*
+ * The run is parked until one of these buttons is pressed, so the card is
+ * deliberately the loudest thing in the bubble — gold-edged and tinted, not
+ * another quiet status row. It is a question, not a report.
+ */
+.chat-approval {
+  background: color-mix(in srgb, var(--gold) 8%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--line));
+  border-radius: var(--r-sm);
+  display: grid;
+  gap: 9px;
+  margin-top: 10px;
+  padding: 12px;
+}
+
+.chat-approval.is-answered {
+  background: var(--surface-2);
+  border-color: var(--line);
+  opacity: 0.7;
+}
+
+.chat-approval-title {
+  align-items: center;
+  display: flex;
+  font-weight: 600;
+  gap: 7px;
+  line-height: 1.35;
+}
+
+.chat-approval-details {
+  border-inline-start: 2px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  display: grid;
+  font-size: 13px;
+  gap: 5px;
+  padding-inline-start: 10px;
+}
+
+.chat-approval-details div {
+  display: grid;
+  gap: 1px;
+}
+
+.chat-approval-details dt {
+  color: var(--text-faint);
+  font-size: 11.5px;
+}
+
+.chat-approval-details dd {
+  color: var(--text-muted);
+  /* An edit can be a table row or a long sentence; it must stay readable. */
+  overflow-wrap: anywhere;
+}
+
+.chat-approval-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chat-approval-actions button {
+  align-items: center;
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 6px;
+  padding: 8px 15px;
+}
+
+.chat-approval-actions button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.chat-approval-yes {
+  background: linear-gradient(140deg, var(--vermillion), var(--vermillion-deep));
+  border: 1px solid transparent;
+  color: #fff;
+}
+
+.chat-approval-no {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+}
+
+.chat-approval-no:not(:disabled):hover {
+  border-color: var(--text-faint);
+  color: var(--text);
+}
+
+.chat-approval-done {
+  color: var(--text-faint);
+  font-size: 12.5px;
+}
+
+/* choices offered by an `ask_question`, which the composer can also answer */
+.chat-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.chat-choices button {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 7px 14px;
+}
+
+.chat-choices button:not(:disabled):hover {
+  border-color: var(--vermillion);
+  color: var(--vermillion);
+}
+
+.chat-choices button:disabled {
+  cursor: default;
+  opacity: 0.55;
 }
 
 /* ----------------------------------------------------- markdown-lite body */
@@ -478,10 +626,8 @@
   background: var(--ink);
 }
 
-@media (prefers-color-scheme: dark) {
-  .chat-send-stop {
-    background: var(--surface-3);
-  }
+:root[data-theme="dark"] .chat-send-stop {
+  background: var(--surface-3);
 }
 
 .chat-note {

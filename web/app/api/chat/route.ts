@@ -8,6 +8,7 @@
 
 import { createAgentUIStreamResponse } from "ai";
 import { DEFAULT_CHAT_MODEL, createTripAgent } from "@/components/chat/agent";
+import { getChecklist, getPlaces, getTripDays } from "@/lib/trip-source";
 import { describeGatewayError } from "@/lib/gateway-error";
 import { gatewayApiKey, gatewayConfigured, jsonResponse } from "@/lib/server-env";
 
@@ -53,7 +54,25 @@ export async function POST(request: Request): Promise<Response> {
     return jsonResponse({ error: "לא נמצאה שאלה לשלוח. כתבו הודעה ונסו שוב." }, 400);
   }
 
+  // One read of the trip per request. The tools close over it, so every answer
+  // in this turn is grounded in the same consistent snapshot of Convex.
+  let trip;
+  try {
+    const [days, places, checklist] = await Promise.all([
+      getTripDays(),
+      getPlaces(),
+      getChecklist(),
+    ]);
+    trip = { days, places, checklist };
+  } catch {
+    return jsonResponse(
+      { error: "לא הצלחתי לקרוא את התוכנית כרגע. נסו שוב בעוד רגע." },
+      503,
+    );
+  }
+
   const agent = createTripAgent({
+    trip,
     apiKey: gatewayApiKey(),
     model: process.env.CHAT_MODEL || DEFAULT_CHAT_MODEL,
   });

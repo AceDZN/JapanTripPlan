@@ -22,17 +22,14 @@ import {
   RefreshCw,
   Sparkles,
 } from "lucide-react";
+import { usePreloadedQuery, type Preloaded } from "convex/react";
+import type { api } from "@/convex/_generated/api";
 import type { City, Place } from "@/lib/types";
-import {
-  cityLabels,
-  getDay,
-  getTodayTripDay,
-  isDuringTrip,
-  mapsDirectionsUrl,
-  placeCategoryLabels,
-  places as allPlaces,
-  type TripDay,
-} from "@/lib/trip-data";
+// Labels and URL builders only — no data. The places and days below come from
+// Convex.
+import { cityLabels, mapsDirectionsUrl, placeCategoryLabels } from "@/lib/labels";
+import type { TripDay } from "@/lib/types";
+import { isDuringTrip, todayTripDay } from "@/lib/trip-time";
 import { CategoryIcon, categoryTone } from "@/components/visuals";
 import { MapStyles } from "@/components/map/map-style";
 import { Thumb } from "@/components/map/Thumb";
@@ -70,11 +67,6 @@ import {
   useGeoLocation,
 } from "@/components/map/useGeoLocation";
 
-const MAPPABLE = allPlaces.filter(
-  (place) => Number.isFinite(place.lat) && Number.isFinite(place.lng),
-);
-
-const AREA_OPTIONS = buildAreaOptions(MAPPABLE);
 const PICKER_CITIES: City[] = ["tokyo", "kyoto", "osaka", "kamakura", "uji"];
 const PAGE_SIZE = 24;
 const MAP_MARKER_LIMIT = 26;
@@ -115,10 +107,36 @@ function GlyphTile({ category, className = "" }: { category: Place["category"]; 
   );
 }
 
-export function AroundExplorer() {
+type Props = {
+  preloadedPlaces: Preloaded<typeof api.trip.listPlaces>;
+  preloadedDays: Preloaded<typeof api.trip.listDays>;
+};
+
+export function AroundExplorer({ preloadedPlaces, preloadedDays }: Props) {
   const router = useRouter();
   const nonce = useRef(0);
   const next = () => (nonce.current += 1);
+
+  /* ------------------------------------------------------------- data */
+  // Server-rendered from the preloaded snapshot, then live: an edit made from
+  // the chat (or by another family member) reaches this screen without a
+  // reload, which is the whole point of moving the trip into Convex.
+  const places = usePreloadedQuery(preloadedPlaces) as unknown as Place[];
+  const days = usePreloadedQuery(preloadedDays) as unknown as TripDay[];
+
+  const mappable = useMemo(
+    () => places.filter((place) => Number.isFinite(place.lat) && Number.isFinite(place.lng)),
+    [places],
+  );
+  const areaOptions = useMemo(() => buildAreaOptions(mappable), [mappable]);
+  const daysByNumber = useMemo(
+    () => new Map(days.map((day) => [day.day, day])),
+    [days],
+  );
+  const getDay = useCallback(
+    (n: number): TripDay | null => daysByNumber.get(n) ?? null,
+    [daysByNumber],
+  );
 
   const [manual, setManual] = useState<Origin | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
@@ -137,11 +155,11 @@ export function AroundExplorer() {
   useEffect(() => {
     const timer = window.setTimeout(() => {
       const now = new Date();
-      setToday(getTodayTripDay(now));
+      setToday(todayTripDay(days, now));
       setDuringTrip(isDuringTrip(now));
     }, 0);
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [days]);
 
   /* --------------------------------------------------------- geolocation */
   // Live by default: the list is a walking-distance list, so it has to follow
@@ -197,14 +215,14 @@ export function AroundExplorer() {
     if (!origin || !originKey) return;
     let cancelled = false;
 
-    fetchDiscoveries({ lat: origin.lat, lng: origin.lng }, MAPPABLE).then((items) => {
+    fetchDiscoveries({ lat: origin.lat, lng: origin.lng }, mappable).then((items) => {
       if (!cancelled) setDiscovery({ key: originKey, items });
     });
 
     return () => {
       cancelled = true;
     };
-  }, [origin, originKey]);
+  }, [origin, originKey, mappable]);
 
   // Results are keyed by location, so a stale payload can never leak into a new
   // spot and "loading" needs no separate state.
@@ -217,10 +235,10 @@ export function AroundExplorer() {
   /* --------------------------------------------------------- ranking */
   const ranked = useMemo<Ranked[]>(() => {
     if (!origin) return [];
-    return MAPPABLE.map((place) => ({ place, meters: distanceMeters(origin, place) })).sort(
+    return mappable.map((place) => ({ place, meters: distanceMeters(origin, place) })).sort(
       (a, b) => a.meters - b.meters,
     );
-  }, [origin]);
+  }, [origin, mappable]);
 
   const todayNearby = useMemo<Ranked[]>(() => {
     if (!today || !duringTrip) return [];
@@ -302,7 +320,7 @@ export function AroundExplorer() {
     return segment === "discovery"
       ? discoveryMarkers
       : [...placeMarkers, ...discoveryMarkers];
-  }, [filtered, rankedDiscoveries, segment]);
+  }, [filtered, rankedDiscoveries, segment, getDay]);
 
   // Stateful and throttled, because the watch is live: re-framing on every GPS
   // tick would yank the map out from under anyone trying to pan it. We re-fit
@@ -354,7 +372,7 @@ export function AroundExplorer() {
         </span>
         <h1>מה יש עכשיו סביבכם</h1>
         <p className="lede">
-          כל {MAPPABLE.length} המקומות של המסע ממוינים לפי מרחק הליכה, ועוד גילויים חיים
+          כל {mappable.length} המקומות של המסע ממוינים לפי מרחק הליכה, ועוד גילויים חיים
           מהמפה הפתוחה ברדיוס {DISCOVERY_RADIUS_M} מטר.
         </p>
       </header>
@@ -375,9 +393,9 @@ export function AroundExplorer() {
               ? origin.kind === "gps"
                 ? `דיוק כ־${Math.round(origin.accuracy ?? 0)} מ׳ · ${
                     geo.fix ? formatFixAge(geo.fix.at) : "עכשיו"
-                  } · ${MAPPABLE.length} מקומות במאגר`
-                : `מרכז השכונה · ${MAPPABLE.length} מקומות במאגר`
-              : `${MAPPABLE.length} מקומות במאגר · אפשר לאשר מיקום או לבחור אזור ידנית`}
+                  } · ${mappable.length} מקומות במאגר`
+                : `מרכז השכונה · ${mappable.length} מקומות במאגר`
+              : `${mappable.length} מקומות במאגר · אפשר לאשר מיקום או לבחור אזור ידנית`}
           </small>
           {origin?.kind === "gps" && geo.watching ? (
             <small className="jm-live">
@@ -470,7 +488,7 @@ export function AroundExplorer() {
         <div className="jm-state jm-picker">
           <h2>אני ליד…</h2>
           {PICKER_CITIES.map((city) => {
-            const areas = AREA_OPTIONS.filter((area) => area.city === city).slice(0, 8);
+            const areas = areaOptions.filter((area) => area.city === city).slice(0, 8);
             if (areas.length === 0) return null;
             return (
               <div className="jm-picker-city" key={city}>
@@ -535,6 +553,7 @@ export function AroundExplorer() {
                   <PlaceRow
                     key={`today-${entry.place.id}`}
                     entry={entry}
+                    day={entry.place.days[0] ? getDay(entry.place.days[0]) : null}
                     onFocus={() => setFocus({ id: entry.place.id, nonce: next() })}
                   />
                 ))}
@@ -605,6 +624,7 @@ export function AroundExplorer() {
                   <PlaceRow
                     key={entry.place.id}
                     entry={entry}
+                    day={entry.place.days[0] ? getDay(entry.place.days[0]) : null}
                     onFocus={() => setFocus({ id: entry.place.id, nonce: next() })}
                   />
                 ))}
@@ -647,9 +667,17 @@ export function AroundExplorer() {
 
 /* ------------------------------------------------------------------ rows */
 
-function PlaceRow({ entry, onFocus }: { entry: Ranked; onFocus: () => void }) {
+function PlaceRow({
+  entry,
+  day,
+  onFocus,
+}: {
+  entry: Ranked;
+  /** Resolved by the parent — the day list is query data, not a module import. */
+  day: TripDay | null;
+  onFocus: () => void;
+}) {
   const { place, meters } = entry;
-  const day = place.days[0] ? getDay(place.days[0]) : null;
   const far = meters > WALK_LIMIT_M;
 
   return (

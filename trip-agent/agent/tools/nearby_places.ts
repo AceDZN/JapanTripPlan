@@ -3,10 +3,10 @@ import { z } from "zod";
 import {
   haversineMeters,
   mapsDirectionsUrl,
-  places,
   toCompact,
   walkingMinutes,
 } from "../lib/trip";
+import { getPlaces } from "../lib/content";
 
 const DEFAULT_LIMIT = 8;
 const MAX_LIMIT = 15;
@@ -28,9 +28,10 @@ export default defineTool({
       .optional()
       .describe(`How many places to return (default ${DEFAULT_LIMIT}).`),
   }),
-  execute({ lat, lng, limit }) {
+  async execute({ lat, lng, limit }) {
     const origin = { lat, lng };
     const take = limit ?? DEFAULT_LIMIT;
+    const { places, stale } = await getPlaces();
 
     const ranked = places
       .map((place) => {
@@ -50,6 +51,9 @@ export default defineTool({
       origin,
       returned: ranked.length,
       note: "Distances are straight-line; walking time assumes 80 m/min.",
+      ...(stale
+        ? { stale: true, staleNote: "לא הצלחתי להתחבר לנתונים החיים — זה מהעותק השמור." }
+        : {}),
       results: ranked,
     };
   },

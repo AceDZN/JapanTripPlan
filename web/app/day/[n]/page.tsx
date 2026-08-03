@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
@@ -13,22 +14,43 @@ import {
   Scissors,
   Sparkles,
   UtensilsCrossed,
+  Wallet,
 } from "lucide-react";
 import { PlaceCard } from "@/components/cards";
 import { StatusChip } from "@/components/visuals";
 import { TripMap, type MapPoint } from "@/components/TripMap";
+import { DayWishes } from "@/components/DayWishes";
+import { DaySpend } from "@/components/DaySpend";
+import { DayTasks } from "@/components/DayTasks";
 import {
-  cityLabels,
-  getDay,
-  getPlaces,
-  getPlacesForDay,
-  mapsSearchUrl,
-  tripDays,
-} from "@/lib/trip-data";
+  CostList,
+  LinkRow,
+  NeedsList,
+  RouteStrip,
+  StayPanel,
+  WarningList,
+} from "@/components/day-ops";
+import { cityLabels, mapsSearchUrl } from "@/lib/labels";
+import { familyTotal, yen } from "@/lib/ops";
+import {
+  getChecklist,
+  getPlaceIndex,
+  getTripDay,
+  getTripDays,
+} from "@/lib/trip-source";
 import type { Place } from "@/lib/types";
 
+/**
+ * The trip is 17 days. That is a fixed fact, not data.
+ *
+ * This used to fetch the day list from Convex, which made every build depend
+ * on the database being both reachable and already populated — so a fresh
+ * deployment could never be built against, and a Convex blip would fail the
+ * build rather than one request. The route list is now static; the pages
+ * themselves still render from Convex.
+ */
 export function generateStaticParams() {
-  return tripDays.map((day) => ({ n: String(day.day) }));
+  return Array.from({ length: 17 }, (_, i) => ({ n: String(i + 1) }));
 }
 
 export async function generateMetadata({
@@ -37,7 +59,7 @@ export async function generateMetadata({
   params: Promise<{ n: string }>;
 }): Promise<Metadata> {
   const { n } = await params;
-  const day = getDay(Number(n));
+  const day = await getTripDay(Number(n));
   if (!day) return { title: "יום לא נמצא" };
   return {
     title: `יום ${day.day} · ${day.title}`,
@@ -45,8 +67,8 @@ export async function generateMetadata({
   };
 }
 
-/** Ordered, de-duplicated places for the day's map + place grid. */
-function routePlaces(placeIdsInOrder: string[]): Place[] {
+/** Ordered, de-duplicated ids for the day's map + place grid. */
+function orderedPlaceIds(placeIdsInOrder: string[]): string[] {
   const seen = new Set<string>();
   const ordered: string[] = [];
   placeIdsInOrder.forEach((id) => {
@@ -54,7 +76,7 @@ function routePlaces(placeIdsInOrder: string[]): Place[] {
     seen.add(id);
     ordered.push(id);
   });
-  return getPlaces(ordered);
+  return ordered;
 }
 
 export default async function DayPage({
@@ -63,13 +85,25 @@ export default async function DayPage({
   params: Promise<{ n: string }>;
 }) {
   const { n } = await params;
-  const day = getDay(Number(n));
+
+  // One round trip for the whole page: the day list covers this day plus its
+  // neighbours for the prev/next links. The checklist rides along so the day's
+  // own preparation tasks render server-side and survive offline.
+  const [days, placeIndex, checklist] = await Promise.all([
+    getTripDays(),
+    getPlaceIndex(),
+    getChecklist(),
+  ]);
+
+  const day = days.find((entry) => entry.day === Number(n));
   if (!day) notFound();
 
-  const previous = getDay(day.day - 1);
-  const next = getDay(day.day + 1);
+  const previous = days.find((entry) => entry.day === day.day - 1) ?? null;
+  const next = days.find((entry) => entry.day === day.day + 1) ?? null;
 
-  const ordered = routePlaces(day.blocks.flatMap((block) => block.placeIds));
+  const ordered: Place[] = placeIndex.get(
+    orderedPlaceIds(day.blocks.flatMap((block) => block.placeIds)),
+  );
   const mapPoints: MapPoint[] = ordered
     .filter((place) => place.lat && place.lng)
     .map((place, index) => ({
@@ -83,21 +117,20 @@ export default async function DayPage({
       mapsUrl: mapsSearchUrl(place),
     }));
 
-  const foodAnchors = getPlaces(day.foodAnchors ?? []);
-  const dayPlaces = getPlacesForDay(day.day);
+  const foodAnchors = placeIndex.get(day.foodAnchors ?? []);
+  const dayPlaces = placeIndex.forDay(day.day);
   const style = { "--day-color": day.color } as CSSProperties;
+
+  // What the whole day costs, summed from the blocks rather than maintained as
+  // a second number that can disagree with them.
+  const dayCosts = day.blocks.flatMap((block) => block.costs ?? []);
+  const dayTotal = familyTotal(dayCosts);
 
   return (
     <article style={style}>
       <header className="day-hero">
         <div className="hero-media">
-          <img
-            src={day.heroImage}
-            alt={day.title}
-            fetchPriority="high"
-            width={1600}
-            height={900}
-          />
+          <Image src={day.heroImage} alt={day.title} fill sizes="100vw" priority />
         </div>
         <div className="day-hero-wash" />
         <div className="container day-hero-body">
@@ -134,7 +167,7 @@ export default async function DayPage({
                   {block.detail ? <p className="block-detail">{block.detail}</p> : null}
                   {block.placeIds.length > 0 ? (
                     <div className="block-places">
-                      {getPlaces(block.placeIds).map((place) => (
+                      {placeIndex.get(block.placeIds).map((place) => (
                         <a
                           className="place-pill"
                           href={mapsSearchUrl(place)}
@@ -166,18 +199,55 @@ export default async function DayPage({
                       ) : null}
                     </div>
                   ) : null}
+
+                  {block.warnings?.length ? (
+                    <WarningList warnings={block.warnings} />
+                  ) : null}
+                  {block.legs?.length ? <RouteStrip legs={block.legs} /> : null}
+                  {block.needs?.length ? <NeedsList needs={block.needs} /> : null}
+                  {block.costs?.length ? <CostList costs={block.costs} /> : null}
+                  {block.links?.length ? <LinkRow links={block.links} /> : null}
                 </section>
               ))}
             </div>
           </div>
 
           <aside className="side-panel">
+            {/* First in the sidebar on purpose: it renders on only a handful of
+                days, and on those days it is the most time-critical thing on
+                the page. Burying "collect the tickets today" under the map
+                would be the whole feature failing quietly. */}
+            <DayTasks date={day.date} checklist={checklist} />
+
             <TripMap
               points={mapPoints}
               color={day.color}
               route
               ariaLabel={`מפת יום ${day.day}`}
             />
+
+            <DayWishes dayN={day.day} />
+
+            {day.stay ? <StayPanel stay={day.stay} /> : null}
+
+            {dayTotal > 0 ? (
+              <section className="panel day-total-panel">
+                <h2>
+                  <Wallet size={16} />
+                  עלות היום בתוכנית
+                </h2>
+                <p className="day-total" dir="ltr">
+                  {yen(dayTotal)}
+                </p>
+                <small>
+                  סיכום כל שורות העלות של היום, למשפחה של ארבעה. לא כולל קניות,
+                  גאצ׳פון וכיבודים.
+                </small>
+              </section>
+            ) : null}
+
+            {/* What the plan predicted is above; what the receipts say is here. */}
+            <DaySpend dayN={day.day} date={day.date} plannedYen={dayTotal} />
 
             {day.discovery ? (
               <section className="panel discovery-panel" data-reveal>

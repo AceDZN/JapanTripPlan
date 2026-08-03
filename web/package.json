@@ -6,19 +6,29 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "sync:content": "node scripts/sync-content.mjs",
+    "sync:content": "node --env-file-if-exists=.env.local scripts/sync-content.mjs",
+    "content": "node --env-file-if-exists=.env.local scripts/content.mjs",
+    "sync:from-prod": "node scripts/sync-deployment.mjs from-prod",
+    "sync:to-prod": "node scripts/sync-deployment.mjs to-prod",
     "predev": "npm run sync:content",
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "next dev",
     "prebuild": "npm run sync:content",
     "build": "next build",
     "start": "next start",
     "test": "npm run build && node --test tests/*.test.mjs",
-    "lint": "eslint . --ignore-pattern .next"
+    "lint": "eslint . --ignore-pattern .next",
+    "seed:private": "tsx --env-file-if-exists=.env.local scripts/seed-private-slots.ts",
+    "seed:wishes": "tsx --env-file-if-exists=.env.local scripts/seed-wishes.ts",
+    "seed:money": "tsx --env-file-if-exists=.env.local scripts/seed-money.ts"
   },
   "dependencies": {
     "@ai-sdk/gateway": "^4.0.28",
     "@ai-sdk/react": "^4.0.40",
+    "@clerk/localizations": "^4.13.10",
+    "@clerk/nextjs": "^7.6.4",
     "ai": "^7.0.37",
+    "convex": "^1.43.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.26.0",
     "marked": "^18.0.7",
@@ -36,6 +46,7 @@
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "4.2.1",
+    "tsx": "^4.23.1",
     "typescript": "5.9.3"
   },
   "type": "module"

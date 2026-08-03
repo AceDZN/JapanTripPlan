@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   AlarmClock,
@@ -13,42 +14,53 @@ import { Countdown } from "@/components/Countdown";
 import { DayCard } from "@/components/cards";
 import { Photo, StatusChip } from "@/components/visuals";
 import { bookingGates, dueTone, formatDueHe } from "@/components/booking-gates";
-import { nextDeadline } from "@/lib/checklist-data";
-import {
-  daysUntilTrip,
-  getTodayTripDay,
-  routeChapters,
-  tripDays,
-} from "@/lib/trip-data";
-import { tripGuides } from "@/app/generated/trip-content";
+import { BudgetLive } from "@/components/BudgetLive";
+import { getChecklist, getGuides, getTripDays } from "@/lib/trip-source";
+import { dateKey, daysUntilTrip, todayTripDay } from "@/lib/trip-time";
+import { routeChapters } from "@/lib/route-chapters";
 
-const cityImages: Record<string, string> = {
-  tokyo: "/images/cities/tokyo.jpg",
-  kyoto: "/images/cities/kyoto.jpg",
-  osaka: "/images/cities/osaka.jpg",
-  kamakura: "/images/cities/kamakura.jpg",
-};
+export default async function Home() {
+  const [tripDays, checklist, tripGuides] = await Promise.all([
+    getTripDays(),
+    getChecklist(),
+    getGuides(),
+  ]);
 
-export default function Home() {
   const now = new Date();
-  const today = getTodayTripDay(now);
+  const today = todayTripDay(tripDays, now);
   const until = daysUntilTrip(now);
-  const deadline = nextDeadline(now);
-  const gates = bookingGates()
+
+  // The nearest checklist deadline still ahead of us. Computed here rather than
+  // in a Convex query, because a query is not re-run just because the clock
+  // moves and would happily serve yesterday's answer forever.
+  const todayKey = dateKey(now);
+  const deadline =
+    checklist.items
+      .filter((item) => item.due)
+      .sort((a, b) => a.due!.localeCompare(b.due!))
+      .find((item) => item.due! >= todayKey) ?? null;
+
+  // Day 2 is the first day in Japan; day 1 is spent entirely in the air.
+  const arrivalImage =
+    tripDays.find((day) => day.day === 2)?.heroImage ?? tripDays[0]?.heroImage ?? "";
+
+  const gates = bookingGates(tripDays, checklist.items)
     .filter((gate) => gate.status !== "booked")
     .slice(0, 6);
+  const chapters = routeChapters(tripDays);
   const previewDays = tripDays.filter((day) => day.day >= 3).slice(0, 8);
 
   return (
     <>
       <section className="hero">
         <div className="hero-media">
-          <img
-            src="/images/cities/tokyo.jpg"
-            alt="קו הרקיע של טוקיו"
-            fetchPriority="high"
-            width={1600}
-            height={900}
+          {/* The first day on the ground, rather than a stock skyline. */}
+          <Image
+            src={arrivalImage}
+            alt="יפן 2026"
+            fill
+            sizes="100vw"
+            priority
           />
         </div>
         <div className="hero-wash" />
@@ -195,18 +207,22 @@ export default function Home() {
           </Link>
         </div>
         <div className="route-strip">
-          {routeChapters.map((chapter, index) => (
+          {chapters.map((chapter, index) => (
             <Link
               className="route-card"
               href={`/day/${chapter.days[0]}`}
               key={`${chapter.city}-${chapter.dates}`}
               data-reveal
             >
-              <img
-                src={cityImages[chapter.city] ?? cityImages.tokyo}
-                alt={chapter.label}
-                loading="lazy"
-              />
+              {chapter.image ? (
+                <Image
+                  src={chapter.image}
+                  alt={chapter.label}
+                  fill
+                  sizes="(max-width: 640px) 80vw, 320px"
+                  loading="lazy"
+                />
+              ) : null}
               <span className="route-card-body">
                 <span>פרק {index + 1}</span>
                 <strong>{chapter.label}</strong>
@@ -258,6 +274,13 @@ export default function Home() {
               </article>
             ))}
           </div>
+
+          {/*
+            Right under the gates on purpose: "these tickets are about to
+            disappear" and "this is what the trip has cost so far" are the same
+            decision. Family-only, so a signed-out home page is unchanged.
+          */}
+          <BudgetLive compact />
         </div>
       </section>
 

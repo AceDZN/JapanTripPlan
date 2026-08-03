@@ -6,6 +6,7 @@ import {
   VOICE_BUBBLE_LABEL,
   VOICE_TEXT_PART,
   dropSupersededUser,
+  markPromptAnswered,
   reduceEve,
   visibleMessages,
   type BubbleAttachment,
@@ -21,7 +22,9 @@ import {
   createSession,
   fetchContinuationToken,
   sendFollowUp,
+  sendInputResponses,
   streamSession,
+  type EveInputResponse,
   type EveMessage,
   type EveMessagePart,
 } from "./eve-client";
@@ -42,6 +45,27 @@ import { toolStatusLabel } from "./tool-labels";
 
 const SESSION_KEY = "japan2026.eve.session.v1";
 const MAX_RECONNECTS = 5;
+
+/**
+ * How long a resumed session may stay silent before we stop believing in it.
+ *
+ * A session the agent no longer knows about does not 404 — it accepts the
+ * stream and then sends nothing, so the relay sits on an open body until it
+ * times out minutes later and 500s. The client reads that as a transient drop
+ * and reconnects behind the loading skeleton, so the chat looks like it is
+ * thinking, forever. (Seen for real: 5.6 minutes on a session created against
+ * a different agent deployment.)
+ *
+ * Replaying a durable transcript is fast, so silence this long means the
+ * session is gone, not slow.
+ *
+ * It is deliberately NOT proof of that, though: a cold relay plus a cold agent
+ * can eat this budget on a healthy session, and the agent now does work the
+ * family never asked for — background research that lands on this very stream.
+ * Throwing the session id away on a hunch would orphan that work permanently,
+ * so this only stops the skeleton and offers a re-attach. The id survives.
+ */
+const RESUME_SILENCE_MS = 20_000;
 
 /**
  * One turn's payload.
@@ -74,6 +98,7 @@ type ChatState = {
 type Action =
   | { kind: "event"; event: EveEvent }
   | { kind: "optimistic"; bubble: EveBubble }
+  | { kind: "answered"; requestId: string }
   | { kind: "retrying" }
   | { kind: "error"; message: string; errorKind: ChatErrorKind }
   | { kind: "clearError" }
@@ -94,13 +119,23 @@ const SETTLES = new Set([
   "session.completed",
   "turn.failed",
   "turn.cancelled",
+  // Not the end of a turn, but the end of *our* wait: the run is parked on a
+  // human answer (an `ask_question`, or an approval gate on `edit_plan_doc` /
+  // `mark_done`) and nothing moves until one is typed. No `session.waiting`
+  // ever follows, so without this the composer stayed locked behind a spinner
+  // for as long as the stream survived — the agent asking a question and
+  // simultaneously taking away the means to answer it.
+  "input.requested",
 ]);
 
 function reducer(state: ChatState, action: Action): ChatState {
   switch (action.kind) {
     case "event": {
       const eve = reduceEve(state.eve, action.event, toolStatusLabel);
-      const confirmed = action.event.type === "message.received";
+      // `received` only advances for a message the family actually sent, so a
+      // background run reporting into the session cannot drop an optimistic
+      // bubble whose send is still in flight.
+      const confirmed = eve.received > state.eve.received;
 
       return {
         eve:
@@ -122,6 +157,20 @@ function reducer(state: ChatState, action: Action): ChatState {
         retrying: false,
         localError: null,
         localErrorKind: null,
+      };
+    case "answered":
+      // The card goes inert on click rather than on the round trip: the answer
+      // resumes a run that can then think for a while, and two taps on "אישור"
+      // would file the suggestion twice.
+      return {
+        ...state,
+        sending: true,
+        localError: null,
+        localErrorKind: null,
+        eve: {
+          ...state.eve,
+          messages: markPromptAnswered(state.eve.messages, { requestId: action.requestId }),
+        },
       };
     case "retrying":
       // The failed bubble stays on screen; no optimistic copy is added.
@@ -154,23 +203,51 @@ function reducer(state: ChatState, action: Action): ChatState {
   }
 }
 
-function readStoredSession(): string | null {
+type StoredSession = { sessionId: string; continuationToken: string | null };
+
+function readStoredSession(): StoredSession | null {
   if (typeof window === "undefined") return null;
   try {
     const raw = window.localStorage.getItem(SESSION_KEY);
     if (!raw) return null;
-    const parsed: unknown = JSON.parse(raw);
-    const id = (parsed as { sessionId?: unknown }).sessionId;
-    return typeof id === "string" && id.length > 0 ? id : null;
+    const parsed = JSON.parse(raw) as { sessionId?: unknown; continuationToken?: unknown };
+    const id = parsed.sessionId;
+    if (typeof id !== "string" || id.length === 0) return null;
+    const token = parsed.continuationToken;
+    return { sessionId: id, continuationToken: typeof token === "string" && token ? token : null };
   } catch {
     return null;
   }
 }
 
-function writeStoredSession(sessionId: string | null): void {
+/**
+ * Persists the resume handle — id *and* token.
+ *
+ * The token used to be re-derived on resume from the replayed `session.waiting`,
+ * which is fine right up until the session is parked somewhere else. A run
+ * halted on an approval gate never emits `session.waiting`, so after a reload
+ * there was no token to be found: `fetchContinuationToken` reads the stream tail,
+ * finds `input.requested`, and that event carries none. The next send then died
+ * on "השיחה עוד נטענת מהסוכן" with nothing the family could do about it.
+ *
+ * Storing it is safe because the eve channel mints `eve:<uuid>` once at session
+ * creation and its continue route reuses whatever the client sends — the token is
+ * stable for the life of the session, not rotated per turn. Verified against the
+ * live agent: the token returned by `POST /eve/v1/session` is byte-identical to
+ * the one in that session's `session.waiting`.
+ */
+function writeStoredSession(sessionId: string | null, continuationToken?: string | null): void {
   try {
-    if (sessionId) window.localStorage.setItem(SESSION_KEY, JSON.stringify({ sessionId }));
-    else window.localStorage.removeItem(SESSION_KEY);
+    if (!sessionId) {
+      window.localStorage.removeItem(SESSION_KEY);
+      return;
+    }
+    // An omitted token keeps whatever is already stored; an explicit null clears it.
+    const token =
+      continuationToken === undefined
+        ? (readStoredSession()?.continuationToken ?? null)
+        : continuationToken;
+    window.localStorage.setItem(SESSION_KEY, JSON.stringify({ sessionId, continuationToken: token }));
   } catch {
     // Private mode: the chat still works, it just will not resume after reload.
   }
@@ -256,22 +333,37 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   const [state, dispatch] = useReducer(reducer, INITIAL);
   // Read once, lazily: this hook runs client-side only, behind the chat's
   // client-only gate, so there is no SSR markup to mismatch.
-  const [resumable] = useState<string | null>(readStoredSession);
+  const [stored] = useState<StoredSession | null>(readStoredSession);
+  const resumable = stored?.sessionId ?? null;
   const [sessionId, setSessionId] = useState<string | null>(resumable);
   const [hydrating, setHydrating] = useState<boolean>(Boolean(resumable));
+  /** Mirrors `hydrating` for the silence timer, which outlives its closure. */
+  const hydratingRef = useRef(Boolean(resumable));
+  useEffect(() => {
+    hydratingRef.current = hydrating;
+  }, [hydrating]);
 
   const sessionRef = useRef<string | null>(resumable);
-  const tokenRef = useRef<string | null>(null);
+  // Seeded from storage so a session parked on an approval — which never emits
+  // the `session.waiting` this used to be derived from — is still answerable
+  // after a reload.
+  const tokenRef = useRef<string | null>(stored?.continuationToken ?? null);
   const cursorRef = useRef(0);
   const streamRef = useRef<AbortController | null>(null);
+  /** Pending dead-session timer, cleared by the first event of an attach. */
+  const silenceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contextRef = useRef(resolveContext);
   /** The last thing the family asked, so a failed turn can be tried again. */
   const lastInputRef = useRef<SendInput | null>(null);
   /** Render-safe mirror of `lastInputRef` — refs must not be read during render. */
   const [hasLastInput, setHasLastInput] = useState(false);
 
+  // A replayed `session.waiting` refreshes the handle; a session parked
+  // elsewhere keeps the one from storage rather than being reset to null.
   useEffect(() => {
+    if (!state.eve.continuationToken) return;
     tokenRef.current = state.eve.continuationToken;
+    if (sessionRef.current) writeStoredSession(sessionRef.current, state.eve.continuationToken);
   }, [state.eve.continuationToken]);
 
   useEffect(() => {
@@ -279,6 +371,33 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   }, [resolveContext]);
 
   /* ------------------------------------------------------------- streaming */
+
+  const stopSilenceTimer = useCallback(() => {
+    if (silenceRef.current === null) return;
+    clearTimeout(silenceRef.current);
+    silenceRef.current = null;
+  }, []);
+
+  /**
+   * Starts the dead-session countdown for an attach that has to rebuild the
+   * whole transcript. Re-armable, so a manual re-attach gets its own window
+   * instead of inheriting an expired one.
+   */
+  const armSilenceTimer = useCallback(() => {
+    stopSilenceTimer();
+    silenceRef.current = setTimeout(() => {
+      silenceRef.current = null;
+      if (!hydratingRef.current) return;
+
+      streamRef.current?.abort();
+      setHydrating(false);
+      dispatch({
+        kind: "error",
+        message: "לא הצלחנו לטעון את השיחה הקודמת. אפשר לנסות שוב או להתחיל שיחה חדשה.",
+        errorKind: "agent",
+      });
+    }, RESUME_SILENCE_MS);
+  }, [stopSilenceTimer]);
 
   const startStream = useCallback((id: string, startIndex: number) => {
     streamRef.current?.abort();
@@ -299,6 +418,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
             dispatch({ kind: "event", event });
             // The backlog renders as it arrives; the skeleton is only for the
             // gap before the first event of a resumed session.
+            stopSilenceTimer();
             setHydrating(false);
           }
         } catch (error) {
@@ -333,7 +453,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
         await sleep(Math.min(1000 * 2 ** attempts, 15_000), controller.signal);
       }
     })();
-  }, []);
+  }, [stopSilenceTimer]);
 
   /* --------------------------------------------------- resume on first load */
 
@@ -341,13 +461,74 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
     if (!resumable) return;
 
     // Rebuild the whole transcript from the durable stream, then stay attached
-    // for live events. Nothing but the session id is kept locally.
+    // for live events. Nothing but the session id is kept locally — which is
+    // also what makes anything the agent pushed while the chat was unmounted
+    // (or the app closed) show up here: it is simply part of the replay.
     startStream(resumable, 0);
+    armSilenceTimer();
+  }, [resumable, startStream, armSilenceTimer]);
 
-    return () => {
-      streamRef.current?.abort();
+  /**
+   * Re-attaches to the durable stream from the cursor.
+   *
+   * Cheap and idempotent: events already folded in are never replayed, so this
+   * is safe to fire on any suspicion that the connection is stale. That matters
+   * more than it used to — the agent now speaks unprompted, and a stream that
+   * quietly stopped delivering is indistinguishable from an agent with nothing
+   * to say.
+   */
+  const reconnect = useCallback(() => {
+    const id = sessionRef.current;
+    if (!id) return;
+
+    dispatch({ kind: "clearError" });
+    // Still at zero on the session we loaded with means the transcript was
+    // never rebuilt: this is a second attempt at the resume, so the skeleton
+    // and the countdown both apply again. A session opened during this visit
+    // gets neither — it has no history to be slow about.
+    if (cursorRef.current === 0 && id === resumable) {
+      hydratingRef.current = true;
+      setHydrating(true);
+      armSilenceTimer();
+    }
+    startStream(id, cursorRef.current);
+  }, [armSilenceTimer, resumable, startStream]);
+
+  /**
+   * Revives the stream on every wake and every return of signal.
+   *
+   * Two ways the chat goes permanently deaf otherwise, both routine on a phone
+   * in Japan: the reconnect loop gives up after MAX_RECONNECTS and never tries
+   * again, and a backgrounded tab can be resumed holding a socket that will
+   * neither error nor deliver. Either way the family stops seeing anything the
+   * agent pushes on its own, with no sign that anything is wrong.
+   */
+  useEffect(() => {
+    const revive = () => {
+      if (document.visibilityState === "hidden") return;
+      reconnect();
     };
-  }, [resumable, startStream]);
+
+    window.addEventListener("online", revive);
+    document.addEventListener("visibilitychange", revive);
+    return () => {
+      window.removeEventListener("online", revive);
+      document.removeEventListener("visibilitychange", revive);
+    };
+  }, [reconnect]);
+
+  /**
+   * One teardown for both attach paths — a first send starts a stream too, and
+   * without this its reconnect loop outlived the chat page and kept hammering
+   * the relay for the rest of the session.
+   */
+  useEffect(
+    () => () => {
+      streamRef.current?.abort();
+      stopSilenceTimer();
+    },
+    [stopSilenceTimer],
+  );
 
   /* ------------------------------------------------------------------ send */
 
@@ -365,7 +546,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
           const handles = await createSession(message);
           sessionRef.current = handles.sessionId;
           tokenRef.current = handles.continuationToken;
-          writeStoredSession(handles.sessionId);
+          writeStoredSession(handles.sessionId, handles.continuationToken);
           setSessionId(handles.sessionId);
           startStream(handles.sessionId, 0);
           return;
@@ -415,6 +596,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
           audio: Boolean(input.spoken),
           attachments: toBubbleAttachments(attachments),
           activity: [],
+          prompts: [],
           streaming: false,
           final: true,
         },
@@ -432,11 +614,61 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
    */
   const retry = useCallback(async () => {
     const last = lastInputRef.current;
-    if (!last) return;
+    // Nothing to re-send: this load never got a question in, so the thing that
+    // failed was the attach itself. Try that again instead of dead-ending.
+    if (!last) {
+      reconnect();
+      return;
+    }
 
     dispatch({ kind: "retrying" });
     await deliver(last);
-  }, [deliver]);
+  }, [deliver, reconnect]);
+
+  /**
+   * Answers a pending approval or question and lets the parked run continue.
+   *
+   * Deliberately not routed through `deliver`: this is not a turn. It carries no
+   * message, adds no user bubble, and must not become `lastInput` — a retry
+   * after this should re-send the family's actual question, not re-approve
+   * something they already approved.
+   */
+  const respond = useCallback(
+    async (requestId: string, optionId: string) => {
+      const id = sessionRef.current;
+      if (!id) return;
+
+      dispatch({ kind: "answered", requestId });
+
+      try {
+        let token = tokenRef.current;
+        if (!token) token = await fetchContinuationToken(id);
+        if (!token) {
+          throw new EveTransportError("השיחה עוד נטענת מהסוכן. נסו שוב בעוד רגע.", 409);
+        }
+
+        const responses: EveInputResponse[] = [{ requestId, optionId }];
+        const rotated = await sendInputResponses(id, token, responses);
+        if (rotated) tokenRef.current = rotated;
+
+        // The stream this session was parked on has usually been torn down by
+        // now — a parked run sends nothing, and both the relay's fetch and any
+        // proxy in front of it time an idle body out (seen locally as
+        // UND_ERR_BODY_TIMEOUT after ~40s). Re-attaching from the cursor is
+        // cheap and idempotent, and without it the resumed run streams into a
+        // connection nobody is holding.
+        reconnect();
+      } catch (error) {
+        const failed = error instanceof EveTransportError ? error : null;
+        dispatch({
+          kind: "error",
+          message: failed?.message || "לא הצלחנו לשלוח את התשובה לסוכן. נסו שוב בעוד רגע.",
+          errorKind: failed?.status === NETWORK_FAILURE ? "offline" : "agent",
+        });
+      }
+    },
+    [reconnect],
+  );
 
   const cancel = useCallback(() => {
     if (sessionRef.current) void cancelTurn(sessionRef.current);
@@ -445,6 +677,8 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   const newChat = useCallback(() => {
     streamRef.current?.abort();
     streamRef.current = null;
+    stopSilenceTimer();
+    hydratingRef.current = false;
     sessionRef.current = null;
     tokenRef.current = null;
     cursorRef.current = 0;
@@ -454,7 +688,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
     setSessionId(null);
     setHydrating(false);
     dispatch({ kind: "reset" });
-  }, []);
+  }, [stopSilenceTimer]);
 
   const clearError = useCallback(() => dispatch({ kind: "clearError" }), []);
 
@@ -473,10 +707,17 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
     error: state.localError ?? state.eve.error,
     /** "offline" for a rejected fetch, "agent" for a failure eve reported. */
     errorKind: state.localErrorKind ?? (state.eve.error ? "agent" : null),
-    /** The error card can offer to send the question again. */
-    canRetry: hasLastInput && !busy && Boolean(state.eve.retryable || state.localError),
+    /**
+     * The error card can offer to send the question again — or, when this load
+     * never got a question in, to re-attach to the session it failed to read.
+     */
+    canRetry:
+      !busy &&
+      Boolean(state.eve.retryable || state.localError) &&
+      (hasLastInput || Boolean(sessionId)),
     hasSession: Boolean(sessionId),
     send,
+    respond,
     retry,
     cancel,
     newChat,

@@ -1,34 +1,93 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useSyncExternalStore } from "react";
+import { useCallback, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { CSSProperties } from "react";
+import { Preloaded, useConvexAuth, useMutation, usePreloadedQuery } from "convex/react";
 import {
   AlarmClock,
+  CalendarDays,
   Check,
   Download,
   ExternalLink,
   Flame,
-  RotateCcw,
+  Loader2,
+  LogIn,
   Upload,
+  Users,
 } from "lucide-react";
+import Link from "next/link";
+import { api } from "@/convex/_generated/api";
 import type { ChecklistItem } from "@/lib/types";
-import {
-  checklistItems,
-  checklistStorageKey,
-  criticalItems,
-  itemsByGroup,
-} from "@/lib/checklist-data";
+import { checklistStorageKey } from "@/lib/labels";
 import { dueTone, formatDueHe } from "@/components/booking-gates";
 
-type DoneMap = Record<string, boolean>;
+/**
+ * The pre-trip checklist, shared across the family.
+ *
+ * ## Why this is not localStorage any more
+ *
+ * It used to be: a `DoneMap` in `window.localStorage`, with export/import
+ * buttons as the sharing mechanism — you mailed yourself a JSON file. That made
+ * four people keep four different answers to "did anyone book the insurance
+ * yet", which is the one question a shared checklist exists to answer.
+ *
+ * Progress now lives in Convex `checklistState` (see `convex/checklist.ts`),
+ * so a tick on one phone is a tick on all of them, and it carries who did it.
+ *
+ * ## Reading is public, ticking is not
+ *
+ * `listChecklist` is a public query — the whole trip is, so the page can be
+ * server-rendered and precached for offline use in Japan. `setDone` goes
+ * through `requireFamily()`. So a signed-out visitor sees the real state and
+ * cannot change it, rather than being handed a private scratchpad that looks
+ * like the family's list but is not.
+ *
+ * ## The device-migration button
+ *
+ * Anyone who ticked things before this change still has them in localStorage,
+ * where nothing will ever read them again. Rather than dropping that silently,
+ * a signed-in member is offered a one-shot merge of the ticks their device
+ * holds that the shared list does not. It only ever adds.
+ */
 
-/* --------------------------------------------------------- storage store */
+type DoneState = Record<string, { done: boolean; doneAt?: number; doneBy?: string }>;
+
+type ChecklistPayload = {
+  groups: string[];
+  items: ChecklistItem[];
+  state: DoneState;
+};
+
+/**
+ * Which trip days this item also appears on, as `{n, label}`.
+ *
+ * Computed here from a plain `[dayN, date]` list rather than from `TripDay[]`,
+ * so the board does not have to pull the whole day payload into the client just
+ * to render two chips.
+ */
+export type TripDayRef = { n: number; date: string };
+
+function DayChips({ item, tripDays }: { item: ChecklistItem; tripDays: TripDayRef[] }) {
+  if (!item.due) return null;
+  const from = item.doFrom && item.doFrom <= item.due ? item.doFrom : item.due;
+  const on = tripDays.filter((day) => day.date >= from && day.date <= item.due!);
+  if (on.length === 0) return null;
+  return (
+    <>
+      {on.map((day) => (
+        <Link className="due due-day" href={`/day/${day.n}`} key={day.n}>
+          <CalendarDays size={12} />
+          יום {day.n}
+        </Link>
+      ))}
+    </>
+  );
+}
+
+/* ------------------------------------------- the ticks this device still holds */
 
 const listeners = new Set<() => void>();
-
-function emit() {
-  listeners.forEach((listener) => listener());
-}
+const emit = () => listeners.forEach((listener) => listener());
 
 function subscribe(listener: () => void) {
   listeners.add(listener);
@@ -39,7 +98,7 @@ function subscribe(listener: () => void) {
   };
 }
 
-function getRaw(): string {
+function getLegacyRaw(): string {
   try {
     return window.localStorage.getItem(checklistStorageKey) ?? "";
   } catch {
@@ -47,34 +106,30 @@ function getRaw(): string {
   }
 }
 
-function writeRaw(value: DoneMap) {
+function clearLegacy() {
   try {
-    window.localStorage.setItem(checklistStorageKey, JSON.stringify(value));
+    window.localStorage.removeItem(checklistStorageKey);
   } catch {
-    /* storage full or blocked — nothing else we can do */
+    /* blocked — the merge still succeeded, the prompt just comes back */
   }
   emit();
 }
 
-function parseRaw(raw: string): DoneMap {
-  if (!raw) return {};
+/** Slugs this device once ticked. Tolerates both payload shapes we ever wrote. */
+function parseLegacy(raw: string): string[] {
+  if (!raw) return [];
   try {
     const parsed = JSON.parse(raw) as unknown;
-    if (Array.isArray(parsed)) {
-      return Object.fromEntries(parsed.map((id) => [String(id), true]));
-    }
+    if (Array.isArray(parsed)) return parsed.map(String);
     if (parsed && typeof parsed === "object") {
-      return Object.fromEntries(
-        Object.entries(parsed as Record<string, unknown>).map(([id, value]) => [
-          id,
-          Boolean(value),
-        ]),
-      );
+      return Object.entries(parsed as Record<string, unknown>)
+        .filter(([, value]) => Boolean(value))
+        .map(([id]) => id);
     }
   } catch {
-    /* corrupt payload — start clean */
+    /* corrupt payload — treat as empty */
   }
-  return {};
+  return [];
 }
 
 function Ring({ percent, small = false }: { percent: number; small?: boolean }) {
@@ -103,27 +158,84 @@ function DueBadge({ item, today }: { item: ChecklistItem; today: Date }) {
   );
 }
 
-export function ChecklistBoard() {
-  const raw = useSyncExternalStore(subscribe, getRaw, () => "");
-  const done = useMemo(() => parseRaw(raw), [raw]);
-  const fileInput = useRef<HTMLInputElement>(null);
+export function ChecklistBoard({
+  preloaded,
+  tripDays = [],
+}: {
+  preloaded: Preloaded<typeof api.trip.listChecklist>;
+  /** Day number + date for all 17 days, so dated items can link to their day. */
+  tripDays?: TripDayRef[];
+}) {
+  const data = usePreloadedQuery(preloaded) as unknown as ChecklistPayload;
+  const { isAuthenticated } = useConvexAuth();
+  const setDone = useMutation(api.checklist.setDone);
+
   const today = useMemo(() => new Date(), []);
-  const groups = useMemo(() => itemsByGroup(), []);
+  const [pending, setPending] = useState<Set<string>>(new Set());
+  const [merging, setMerging] = useState(false);
+  const fileInput = useRef<HTMLInputElement>(null);
 
-  const setDone = useCallback((next: DoneMap) => writeRaw(next), []);
+  const { items, state } = data;
+  const isDone = useCallback((id: string) => Boolean(state[id]?.done), [state]);
 
-  const toggle = useCallback((id: string) => {
-    const current = parseRaw(getRaw());
-    writeRaw({ ...current, [id]: !current[id] });
-  }, []);
+  const groups = useMemo(
+    () =>
+      data.groups.map((group) => ({
+        group,
+        items: items.filter((item) => item.group === group),
+      })),
+    [data.groups, items],
+  );
 
-  const completed = checklistItems.filter((item) => done[item.id]).length;
-  const percent = Math.round((completed / checklistItems.length) * 100);
-  const openCritical = criticalItems.filter((item) => !done[item.id]);
+  const completed = items.filter((item) => isDone(item.id)).length;
+  const percent = items.length ? Math.round((completed / items.length) * 100) : 0;
+  const openCritical = items.filter((item) => item.critical && !isDone(item.id));
+
+  const toggle = useCallback(
+    async (id: string) => {
+      if (!isAuthenticated) return;
+      setPending((current) => new Set(current).add(id));
+      try {
+        await setDone({ itemSlug: id, done: !isDone(id) });
+      } finally {
+        setPending((current) => {
+          const next = new Set(current);
+          next.delete(id);
+          return next;
+        });
+      }
+    },
+    [isAuthenticated, isDone, setDone],
+  );
+
+  /* ---------------------------------------------------- legacy device ticks */
+
+  const legacyRaw = useSyncExternalStore(subscribe, getLegacyRaw, () => "");
+  const orphaned = useMemo(() => {
+    const known = new Set(items.map((item) => item.id));
+    return parseLegacy(legacyRaw).filter((id) => known.has(id) && !state[id]?.done);
+  }, [legacyRaw, items, state]);
+
+  const mergeDevice = async () => {
+    setMerging(true);
+    try {
+      for (const id of orphaned) {
+        await setDone({ itemSlug: id, done: true });
+      }
+      clearLegacy();
+    } finally {
+      setMerging(false);
+    }
+  };
 
   const exportState = () => {
     const payload = JSON.stringify(
-      { key: checklistStorageKey, savedAt: new Date().toISOString(), done },
+      {
+        savedAt: new Date().toISOString(),
+        done: Object.fromEntries(
+          items.filter((item) => isDone(item.id)).map((item) => [item.id, state[item.id]]),
+        ),
+      },
       null,
       2,
     );
@@ -135,20 +247,18 @@ export function ChecklistBoard() {
     URL.revokeObjectURL(url);
   };
 
-  const importState = async (file: File) => {
+  const importFile = async (file: File) => {
     try {
-      const parsed = JSON.parse(await file.text()) as { done?: DoneMap } | DoneMap;
-      const next =
-        parsed && typeof parsed === "object" && "done" in parsed && parsed.done
-          ? parsed.done
-          : (parsed as DoneMap);
-      setDone(
-        Object.fromEntries(
-          Object.entries(next).map(([id, value]) => [id, Boolean(value)]),
-        ),
-      );
+      const parsed = JSON.parse(await file.text()) as { done?: Record<string, unknown> };
+      const known = new Set(items.map((item) => item.id));
+      const ids = Object.entries(parsed.done ?? parsed)
+        .filter(([id, value]) => known.has(id) && Boolean(value))
+        .map(([id]) => id);
+      for (const id of ids) {
+        if (!isDone(id)) await setDone({ itemSlug: id, done: true });
+      }
     } catch {
-      /* ignore malformed files */
+      /* malformed file — nothing to do */
     }
   };
 
@@ -159,7 +269,7 @@ export function ChecklistBoard() {
           <Ring percent={percent} />
           <div style={{ flex: 1 }}>
             <strong style={{ fontSize: 14 }}>
-              {completed} מתוך {checklistItems.length} משימות
+              {completed} מתוך {items.length} משימות
             </strong>
             <div className="progress-track" style={{ marginTop: 8 }}>
               <i style={{ width: `${percent}%` }} />
@@ -171,36 +281,70 @@ export function ChecklistBoard() {
             <Download size={15} />
             ייצוא
           </button>
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            onClick={() => fileInput.current?.click()}
-          >
-            <Upload size={15} />
-            ייבוא
-          </button>
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            onClick={() => setDone({})}
-            disabled={completed === 0}
-          >
-            <RotateCcw size={15} />
-            איפוס
-          </button>
-          <input
-            ref={fileInput}
-            type="file"
-            accept="application/json"
-            hidden
-            onChange={(event) => {
-              const file = event.target.files?.[0];
-              if (file) void importState(file);
-              event.target.value = "";
-            }}
-          />
+          {isAuthenticated ? (
+            <>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                onClick={() => fileInput.current?.click()}
+              >
+                <Upload size={15} />
+                ייבוא
+              </button>
+              <input
+                ref={fileInput}
+                type="file"
+                accept="application/json"
+                hidden
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+                  if (file) void importFile(file);
+                  event.target.value = "";
+                }}
+              />
+            </>
+          ) : null}
         </div>
       </div>
+
+      {isAuthenticated ? (
+        <p className="prep-shared">
+          <Users size={13} />
+          הרשימה משותפת — סימון כאן נשמר לכל המשפחה בכל המכשירים.
+        </p>
+      ) : (
+        <p className="prep-shared">
+          <LogIn size={13} />
+          זו ההתקדמות המשותפת של המשפחה.{" "}
+          <Link className="text-link" href="/sign-in">
+            להתחבר
+          </Link>{" "}
+          כדי לסמן משימות.
+        </p>
+      )}
+
+      {isAuthenticated && orphaned.length > 0 ? (
+        <div className="pinned" style={{ marginTop: 14 }}>
+          <span className="eyebrow">
+            <Upload size={14} />
+            סימונים ישנים במכשיר הזה
+          </span>
+          <p style={{ margin: "8px 0 12px" }}>
+            נמצאו {orphaned.length} סימונים ששמורים רק בדפדפן הזה, מלפני שהרשימה הפכה
+            משותפת. אפשר להעביר אותם לרשימה המשפחתית — זה רק מוסיף, אף סימון קיים לא
+            נמחק.
+          </p>
+          <button
+            type="button"
+            className="btn btn-sm"
+            onClick={() => void mergeDevice()}
+            disabled={merging}
+          >
+            {merging ? <Loader2 size={15} className="spin" /> : <Upload size={15} />}
+            להעביר לרשימה המשותפת
+          </button>
+        </div>
+      ) : null}
 
       {openCritical.length > 0 ? (
         <section className="pinned" style={{ marginTop: 18 }} data-reveal>
@@ -216,7 +360,8 @@ export function ChecklistBoard() {
                   className="prep-check"
                   aria-pressed={false}
                   aria-label={`סימון: ${item.title}`}
-                  onClick={() => toggle(item.id)}
+                  disabled={!isAuthenticated || pending.has(item.id)}
+                  onClick={() => void toggle(item.id)}
                 >
                   <Check size={16} />
                 </button>
@@ -244,25 +389,26 @@ export function ChecklistBoard() {
         </section>
       ) : null}
 
-      {groups.map(({ group, items }) => {
-        const groupDone = items.filter((item) => done[item.id]).length;
-        const groupPercent = Math.round((groupDone / items.length) * 100);
+      {groups.map(({ group, items: groupItems }) => {
+        const groupDone = groupItems.filter((item) => isDone(item.id)).length;
+        const groupPercent = groupItems.length
+          ? Math.round((groupDone / groupItems.length) * 100)
+          : 0;
         return (
           <section className="prep-group" key={group} data-reveal>
             <div className="prep-group-head">
               <h2>{group}</h2>
-              <div
-                style={{ alignItems: "center", display: "flex", gap: 10 }}
-              >
+              <div style={{ alignItems: "center", display: "flex", gap: 10 }}>
                 <small>
-                  {groupDone}/{items.length}
+                  {groupDone}/{groupItems.length}
                 </small>
                 <Ring percent={groupPercent} small />
               </div>
             </div>
             <ul className="prep-items">
-              {items.map((item) => {
-                const checked = Boolean(done[item.id]);
+              {groupItems.map((item) => {
+                const checked = isDone(item.id);
+                const who = state[item.id]?.doneBy;
                 return (
                   <li
                     className={`prep-item${item.critical ? " is-critical" : ""}${
@@ -275,20 +421,27 @@ export function ChecklistBoard() {
                       className="prep-check"
                       aria-pressed={checked}
                       aria-label={`סימון: ${item.title}`}
-                      onClick={() => toggle(item.id)}
+                      disabled={!isAuthenticated || pending.has(item.id)}
+                      onClick={() => void toggle(item.id)}
                     >
-                      <Check size={16} />
+                      {pending.has(item.id) ? (
+                        <Loader2 size={15} className="spin" />
+                      ) : (
+                        <Check size={16} />
+                      )}
                     </button>
                     <div className="prep-title">{item.title}</div>
                     {item.detail ? <p className="prep-detail">{item.detail}</p> : null}
                     <div className="prep-tags">
                       <DueBadge item={item} today={today} />
+                      <DayChips item={item} tripDays={tripDays} />
                       {item.critical ? (
-                        <span className="due due-past">
+                        <span className="due due-critical">
                           <Flame size={12} />
                           קריטי
                         </span>
                       ) : null}
+                      {checked && who ? <span className="due due-done">סומן על ידי {who}</span> : null}
                       {item.url ? (
                         <a
                           className="text-link"

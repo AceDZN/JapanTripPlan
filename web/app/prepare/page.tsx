@@ -9,25 +9,31 @@ import {
 import { ChecklistBoard } from "@/components/ChecklistBoard";
 import { StatusChip } from "@/components/visuals";
 import { bookingGates, formatDueHe } from "@/components/booking-gates";
-import {
-  checklistItems,
-  criticalItems,
-  datedItems,
-  weatherCities,
-} from "@/lib/checklist-data";
-import { daysUntilTrip } from "@/lib/trip-data";
+import { weatherCities } from "@/lib/labels";
+import { getChecklist, getTripDays, preloadChecklist } from "@/lib/trip-source";
+import { daysUntilTrip } from "@/lib/trip-time";
 
 export const metadata: Metadata = {
   title: "הכנות לטיול",
   description:
-    "רשימת ההכנות המשפחתית ליפן: כרטיסים, מסמכים, אפליקציות, ציוד ומזג אוויר — עם סימון שנשמר במכשיר.",
+    "רשימת ההכנות המשפחתית ליפן: כרטיסים, מסמכים, אפליקציות, ציוד ומזג אוויר — עם התקדמות משותפת לכל המשפחה.",
 };
 
-export default function PreparePage() {
+export default async function PreparePage() {
   const now = new Date();
   const until = daysUntilTrip(now);
-  const gates = bookingGates().filter((gate) => gate.status !== "booked");
-  const openDated = datedItems.filter((item) => item.due! >= now.toISOString().slice(0, 10));
+
+  // Counts come from the same Convex read the board renders, so the header can
+  // never claim a different number of tasks than the list below it shows.
+  const [{ items }, tripDays, preloaded] = await Promise.all([
+    getChecklist(),
+    getTripDays(),
+    preloadChecklist(),
+  ]);
+  const gates = bookingGates(tripDays, items).filter((gate) => gate.status !== "booked");
+  const criticalItems = items.filter((item) => item.critical);
+  const today = now.toISOString().slice(0, 10);
+  const openDated = items.filter((item) => item.due && item.due >= today);
 
   return (
     <div className="container section">
@@ -36,8 +42,8 @@ export default function PreparePage() {
           <p className="eyebrow eyebrow-ltr">READY FOR JAPAN · OCTOBER 2026</p>
           <h1 className="display">מגיעים מוכנים</h1>
           <p className="lede">
-            כל מה שצריך לסגור לפני ההמראה, מקובץ לפי נושא. הסימון נשמר במכשיר
-            הזה, ואפשר לייצא אותו כדי לשתף עם השאר.
+            כל מה שצריך לסגור לפני ההמראה, מקובץ לפי נושא. ההתקדמות משותפת לכל
+            המשפחה — מה שאחד מסמן, כולם רואים.
           </p>
         </div>
         <div className="prep-stats">
@@ -46,7 +52,7 @@ export default function PreparePage() {
             <span>ימים להמראה</span>
           </div>
           <div className="stat">
-            <strong>{checklistItems.length}</strong>
+            <strong>{items.length}</strong>
             <span>משימות</span>
           </div>
           <div className="stat">
@@ -133,7 +139,10 @@ export default function PreparePage() {
             רשימת ההכנות
           </h2>
         </div>
-        <ChecklistBoard />
+        <ChecklistBoard
+          preloaded={preloaded}
+          tripDays={tripDays.map((day) => ({ n: day.day, date: day.date }))}
+        />
       </section>
     </div>
   );

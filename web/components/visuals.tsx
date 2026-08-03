@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import {
   BedDouble,
@@ -13,7 +14,7 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import type { BookingStatus, PlaceCategory } from "@/lib/types";
-import { bookingStatusLabels } from "@/lib/trip-data";
+import { bookingStatusLabels } from "@/lib/labels";
 
 /** Identity color per place category — also used for photo fallbacks. */
 export const categoryTone: Record<PlaceCategory, string> = {
@@ -89,12 +90,23 @@ export function Photo({
 
   return (
     <div className={`photo ${className}`.trim()} style={style}>
-      <img
+      {/*
+        `fill` rather than explicit dimensions: `.photo` is already
+        `position: relative` with a 100%/`object-fit: cover` child, so the
+        wrapper decides the size and the intrinsic dimensions of a stored
+        picture are neither known here nor relevant.
+
+        `sizes` is what stops the optimiser generating a 3840px variant for a
+        thumbnail. These are the real breakpoints the grids use — getting it
+        wrong is billed per transformation and downloaded by a phone in Japan.
+      */}
+      <Image
         src={src}
         alt={alt}
-        loading={priority ? "eager" : "lazy"}
-        decoding={priority ? "sync" : "async"}
-        fetchPriority={priority ? "high" : "auto"}
+        fill
+        sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw"
+        priority={priority}
+        loading={priority ? undefined : "lazy"}
       />
     </div>
   );

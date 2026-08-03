@@ -7,7 +7,7 @@
     "#evals/*": "./evals/*"
   },
   "scripts": {
-    "sync-data": "node scripts/sync-data.mjs",
+    "sync-data": "node --env-file-if-exists=.env.local scripts/sync-data.mjs",
     "prebuild": "npm run sync-data",
     "build": "eve build",
     "predev": "npm run sync-data",

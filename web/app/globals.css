@@ -44,6 +44,10 @@
   --st-on-sale-soon: #2f6fd0;
   --st-fallback: #6c7192;
 
+  /* ops accents — warnings and confirmations in the day's operational layer */
+  --ops-warn-ink: var(--vermillion-deep);
+  --ops-ok-ink: #17705a;
+
   /* shape */
   --r-sm: 12px;
   --r: 16px;
@@ -64,32 +68,38 @@
   --font-jp: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
+/* Dark palette. Keyed off the attribute rather than a media query: the theme
+   boot script (lib/theme.ts) resolves the OS preference before first paint and
+   stamps data-theme, so this one block covers both "follow the system" and an
+   explicit choice from the header toggle. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
 
-    --bg: #0f1120;
-    --bg-tint: #14172a;
-    --surface: #191d33;
-    --surface-2: #20253f;
-    --surface-3: #2a3052;
-    --text: #f3f1ec;
-    --text-muted: #a8adc9;
-    --text-faint: #838aab;
-    --line: rgba(255, 255, 255, 0.12);
-    --line-strong: rgba(255, 255, 255, 0.24);
-    --vermillion: #ff5c4a;
-    --vermillion-deep: #e34234;
-    --st-buy-now: #ff5c4a;
-    --st-booked: #3bbd93;
-    --st-lottery: #efb547;
-    --st-monitor: #efb547;
-    --st-on-sale-soon: #6fa4f5;
-    --st-fallback: #8b90ab;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-    --shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
-    --shadow-lg: 0 26px 64px rgba(0, 0, 0, 0.55);
-  }
+  --bg: #0f1120;
+  --bg-tint: #14172a;
+  --surface: #191d33;
+  --surface-2: #20253f;
+  --surface-3: #2a3052;
+  --text: #f3f1ec;
+  --text-muted: #a8adc9;
+  --text-faint: #838aab;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.24);
+  --vermillion: #ff5c4a;
+  --vermillion-deep: #e34234;
+  /* Lifted well above the brand colours: both sit on tinted dark surfaces,
+     where #e34234 and the light-mode matcha both fall under 4.5:1. */
+  --ops-warn-ink: #ff9182;
+  --ops-ok-ink: #57d6ab;
+  --st-buy-now: #ff5c4a;
+  --st-booked: #3bbd93;
+  --st-lottery: #efb547;
+  --st-monitor: #efb547;
+  --st-on-sale-soon: #6fa4f5;
+  --st-fallback: #8b90ab;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
+  --shadow-lg: 0 26px 64px rgba(0, 0, 0, 0.55);
 }
 
 * {
@@ -346,10 +356,8 @@ main {
   color: #fff;
 }
 
-@media (prefers-color-scheme: dark) {
-  .nav-desktop a.active {
-    background: var(--vermillion);
-  }
+:root[data-theme="dark"] .nav-desktop a.active {
+  background: var(--vermillion);
 }
 
 .flight-chip {
@@ -373,11 +381,42 @@ main {
   padding: 3px 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .flight-chip strong {
-    background: var(--surface-3);
-  }
+:root[data-theme="dark"] .flight-chip strong {
+  background: var(--surface-3);
 }
+
+/* ------------------------------------------------- header actions + theme */
+
+.header-actions {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+}
+
+.theme-toggle {
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 36px;
+  justify-content: center;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  width: 36px;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-2);
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+
+/* Which of the three icons is visible is decided by `themeBootStyle` in
+   lib/theme.ts, inlined into the document head — see the note there. Deliberately
+   not repeated here: two copies of that rule would be a silent drift hazard. */
 
 @media (max-width: 1000px) {
   :root {
@@ -1618,6 +1657,7 @@ a.status-chip:hover {
 }
 
 .place-card-body {
+  align-content: start;
   display: grid;
   gap: 7px;
   padding: 14px 15px;
@@ -1938,6 +1978,56 @@ a.status-chip:hover {
   color: var(--text-muted);
 }
 
+/**
+ * "Critical" is not "overdue". The critical chip used to borrow `.due-past`,
+ * which painted every must-do item in the overdue red and left the two items
+ * that had genuinely slipped indistinguishable from the twelve that had not.
+ * Outlined amber reads as "this one cannot be skipped" without competing with
+ * a real missed deadline.
+ */
+.due-critical {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  color: color-mix(in srgb, var(--gold) 62%, var(--text));
+}
+
+/** Attribution on a ticked item — quiet, because it is provenance, not status. */
+.due-done {
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding-inline: 0;
+}
+
+/**
+ * The one line that says the list is shared. It sits under the progress bar
+ * rather than in the page header because that is where somebody is standing
+ * when they are about to tick something and wondering who else will see it.
+ */
+.prep-shared {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 13px;
+  gap: 7px;
+  margin: 12px 2px 0;
+}
+
+.prep-check:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .pinned {
   background: linear-gradient(140deg, color-mix(in srgb, var(--vermillion) 9%, var(--surface)), var(--surface));
   border: 1px solid color-mix(in srgb, var(--vermillion) 26%, transparent);
@@ -2149,18 +2239,45 @@ a.status-chip:hover {
   color: var(--vermillion);
 }
 
-.guide-content table {
-  border-collapse: collapse;
-  display: block;
+/*
+ * The scroller lives on the wrapper (added by `wrapTables` in lib/markdown.ts),
+ * not on the table. That split is the whole point: the wrapper stays inside the
+ * column and clips, while the table is free to be as wide as its content needs.
+ * Putting both jobs on the table makes the PAGE scroll sideways instead.
+ *
+ * `tabindex="0"` on the wrapper comes from the renderer so the table is
+ * keyboard-scrollable; the focus ring is toned down since it is a scroll
+ * region rather than a control.
+ */
+.guide-content .table-scroll {
   max-width: 100%;
   overflow-x: auto;
   overscroll-behavior-x: contain;
+}
+
+.guide-content .table-scroll:focus-visible {
+  outline: 2px solid var(--line);
+  outline-offset: 2px;
+}
+
+.guide-content table {
+  border-collapse: collapse;
+  /* Size to content, then let the wrapper scroll. */
+  width: max-content;
+  max-width: none;
 }
 
 .guide-content th,
 .guide-content td {
   border: 1px solid var(--line);
   min-width: 130px;
+  /*
+   * The cap that stops a route description becoming one enormous line. Columns
+   * of short values (flight numbers, times, fares) stay narrow because the
+   * table sizes to content; only prose columns reach this and then wrap
+   * normally, which is what keeps rows a readable height.
+   */
+  max-width: 44ch;
   padding: 9px 12px;
   text-align: start;
   vertical-align: top;
@@ -2409,4 +2526,1527 @@ a.status-chip:hover {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ------------------------------------------------------------------ ops --
+   The operational layer of a day: routes, fares, deadlines, addresses.
+
+   Visually subordinate to the block heading but denser than prose — these
+   are scanned standing up, so every row is a short line with a leading icon
+   rather than a paragraph to read.
+*/
+
+.ops {
+  border-radius: var(--r-sm);
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.ops-head {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  font-weight: 800;
+  gap: 6px;
+  letter-spacing: 0.02em;
+}
+
+.ops-head-aside {
+  color: var(--text-faint);
+  font-weight: 600;
+  margin-inline-start: auto;
+}
+
+.ops-route {
+  background: color-mix(in srgb, var(--day-color, var(--indigo)) 7%, var(--surface-2));
+}
+
+.ops-cost {
+  background: var(--surface-2);
+}
+
+.ops-needs {
+  background: color-mix(in srgb, var(--matcha) 8%, var(--surface-2));
+}
+
+.ops-warn {
+  background: color-mix(in srgb, var(--vermillion) 9%, var(--surface-2));
+}
+
+.ops-warn .ops-head {
+  color: var(--ops-warn-ink);
+}
+
+.ops-bullets {
+  display: grid;
+  gap: 5px;
+  font-size: 13px;
+  line-height: 1.6;
+  padding-inline-start: 16px;
+}
+
+.ops-bullets li {
+  list-style: disc;
+}
+
+/* --- legs */
+
+.legs {
+  display: grid;
+  gap: 10px;
+}
+
+.leg {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 24px 1fr;
+}
+
+.leg-icon {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--day-color, var(--indigo)) 70%, var(--text));
+  display: inline-flex;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
+}
+
+.leg-body {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.leg-route {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 6px;
+  line-height: 1.45;
+}
+
+.leg-arrow {
+  color: var(--text-faint);
+}
+
+.name-label {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.name-foreign {
+  color: var(--text-faint);
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.leg-line,
+.leg-times,
+.leg-meta,
+.leg-exit,
+.leg-note,
+.leg-gotcha {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  gap: 4px 8px;
+}
+
+.leg-line {
+  color: var(--text-muted);
+}
+
+.leg-mode {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+}
+
+.leg-direction {
+  align-items: center;
+  color: var(--text-faint);
+  display: inline-flex;
+  gap: 4px;
+}
+
+.leg-times {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.leg-meta {
+  color: var(--text-faint);
+}
+
+.leg-meta span:not(:last-child)::after {
+  content: "·";
+  padding-inline-start: 8px;
+}
+
+.leg-exit {
+  color: var(--ops-ok-ink);
+  font-weight: 600;
+}
+
+.leg-note {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.leg-gotcha {
+  align-items: flex-start;
+  background: color-mix(in srgb, var(--vermillion) 10%, transparent);
+  border-radius: var(--r-sm);
+  color: var(--ops-warn-ink);
+  line-height: 1.55;
+  padding: 6px 8px;
+}
+
+.leg-gotcha svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+/* --- costs */
+
+.cost-lines {
+  display: grid;
+  gap: 5px;
+  font-size: 13px;
+}
+
+.cost-lines li {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.cost-label {
+  display: grid;
+}
+
+.cost-label small,
+.cost-amount small {
+  color: var(--text-faint);
+  font-size: 11px;
+}
+
+.cost-amount {
+  align-items: baseline;
+  display: flex;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.cost-total {
+  border-top: 1px solid var(--line);
+  font-weight: 800;
+  margin-top: 3px;
+  padding-top: 6px;
+}
+
+/* --- links */
+
+.ops-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ops-link {
+  align-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 12px;
+  gap: 6px;
+  padding: 4px 10px;
+  transition: background 160ms ease;
+}
+
+.ops-link:hover {
+  background: var(--surface-3);
+}
+
+.ops-link-kind {
+  color: var(--text-faint);
+  font-size: 10.5px;
+  font-weight: 800;
+}
+
+/* --- stay + day total panels */
+
+.stay-label {
+  font-weight: 700;
+}
+
+.stay-times {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.stay-address,
+.place-address {
+  align-items: center;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--font-jp);
+  font-size: 13px;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 8px 10px;
+}
+
+.stay-note {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.copy-btn {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  gap: 5px;
+  padding: 4px 10px;
+}
+
+.copy-btn:hover {
+  background: var(--surface-3);
+}
+
+.day-total {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.day-total-panel small {
+  color: var(--text-faint);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* --- the day's own preparation tasks (components/DayTasks.tsx)
+   Reuses .prep-check / .due-* from the /prepare board so a task looks like the
+   same object in both places; only the layout is tighter for the sidebar. */
+
+.day-tasks {
+  border-inline-start: 4px solid var(--gold);
+}
+
+.day-tasks-lede {
+  margin-top: -2px;
+}
+
+.day-tasks-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.day-task {
+  align-items: start;
+  background: var(--surface-2, var(--surface));
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 30px 1fr;
+  padding: 12px 14px;
+  transition: opacity 200ms ease;
+}
+
+.day-task.is-critical {
+  border-inline-start: 3px solid var(--vermillion);
+}
+
+/* Done-state is read off the tick box rather than a class on the row, so the
+   row can stay a server component and still respond the instant it is clicked.
+   See components/DayTaskCheck.tsx. */
+.day-task:has(.prep-check[aria-pressed="true"]) {
+  opacity: 0.55;
+}
+
+.day-task:has(.prep-check[aria-pressed="true"]) .day-task-title {
+  text-decoration: line-through;
+}
+
+.day-task .prep-check {
+  height: 26px;
+  width: 26px;
+}
+
+.day-task-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.day-task-detail {
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.65;
+  margin-top: 4px;
+}
+
+.day-task .prep-tags {
+  grid-column: 1;
+}
+
+/* A dated task on /prepare links to the trip day(s) it will surface on. */
+.due-day {
+  background: color-mix(in srgb, var(--day-accent, var(--matcha)) 14%, transparent);
+  color: var(--day-accent, var(--matcha));
+  text-decoration: none;
+}
+
+.due-day:hover {
+  background: color-mix(in srgb, var(--day-accent, var(--matcha)) 24%, transparent);
+}
+
+.day-tasks-signin {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  font-size: 12.5px;
+}
+
+/* --- place facts */
+
+.place-facts {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.place-facts li {
+  align-items: flex-start;
+  color: var(--text-muted);
+  display: flex;
+  gap: 6px;
+  line-height: 1.5;
+}
+
+.place-facts li svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.place-facts li span {
+  display: grid;
+}
+
+.place-facts li[data-tone="warn"] {
+  color: var(--ops-warn-ink);
+  font-weight: 600;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+@media (max-width: 620px) {
+  .leg {
+    grid-template-columns: 20px 1fr;
+  }
+
+  .ops-head-aside {
+    margin-inline-start: 0;
+    width: 100%;
+  }
+}
+
+/* ---------------------------------------------------------------- wishes --
+   The family wish list. Shared items feed planning; "רק אני" items are
+   visible only to their owner and are marked clearly enough that nobody
+   posts a surprise into the shared column by accident.
+*/
+
+.wish-board {
+  display: grid;
+  gap: 16px;
+}
+
+.wish-signed-in {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.wish-form {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.wish-form-row {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.wish-form label {
+  display: grid;
+  gap: 5px;
+}
+
+.wish-form input,
+.wish-form select,
+.wish-form textarea {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 9px 11px;
+  width: 100%;
+}
+
+.wish-form textarea {
+  resize: vertical;
+}
+
+.wish-private-toggle {
+  align-content: end;
+}
+
+.wish-error {
+  color: var(--ops-warn-ink);
+  font-size: 13px;
+}
+
+.wish-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.wish-filters .chip {
+  background: none;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.wish-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.wish-card {
+  align-content: start;
+  display: grid;
+  gap: 7px;
+  padding: 15px 16px;
+}
+
+.wish-card[data-status="done"] {
+  opacity: 0.72;
+}
+
+.wish-card[data-status="dropped"] {
+  opacity: 0.5;
+}
+
+.wish-card h3 {
+  font-size: 16.5px;
+  line-height: 1.35;
+}
+
+.wish-card-head {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wish-private {
+  background: color-mix(in srgb, var(--indigo) 22%, var(--surface-2));
+  font-weight: 700;
+}
+
+.wish-pri-must {
+  background: color-mix(in srgb, var(--vermillion) 18%, var(--surface-2));
+  font-weight: 700;
+}
+
+.wish-foreign {
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.wish-owner,
+.wish-note {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.wish-owner {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+
+.wish-actions {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.wish-actions select {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  padding: 5px 10px;
+}
+
+@media (max-width: 620px) {
+  .wish-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- wishes on a day page */
+
+.day-wish-list {
+  display: grid;
+  gap: 10px;
+}
+
+.day-wish {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto 1fr;
+}
+
+.day-wish > img {
+  border-radius: var(--r-sm);
+  height: 52px;
+  object-fit: cover;
+  width: 52px;
+}
+
+.day-wish-body {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.day-wish-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 6px;
+}
+
+.day-wish-busy {
+  background: color-mix(in srgb, var(--indigo) 22%, var(--surface-2));
+  font-size: 10.5px;
+}
+
+.day-wish-owner {
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.day-wish-shops {
+  display: grid;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.day-wish-shops li {
+  align-items: center;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 6px;
+  padding: 5px 8px;
+}
+
+.day-wish-area,
+.day-wish-price {
+  align-items: center;
+  color: var(--text-faint);
+  display: inline-flex;
+  gap: 3px;
+}
+
+.day-wish-price {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  margin-inline-start: auto;
+}
+
+/* --- eve intake + research results on a wish */
+
+.wish-add-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wish-ask {
+  border-color: color-mix(in srgb, var(--vermillion) 40%, var(--line));
+}
+
+.wish-ask-lede {
+  align-items: flex-start;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 13.5px;
+  gap: 7px;
+  line-height: 1.6;
+}
+
+.wish-ask-lede svg {
+  color: var(--vermillion);
+  flex: none;
+  margin-top: 3px;
+}
+
+.wish-ask-note {
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.wish-ask-note a {
+  text-decoration: underline;
+}
+
+.wish-busy {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 12.5px;
+  gap: 6px;
+}
+
+.wish-busy svg {
+  animation: wish-spin 1.4s linear infinite;
+}
+
+@keyframes wish-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wish-busy svg {
+    animation: none;
+  }
+}
+
+.wish-images {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.wish-images img {
+  border-radius: var(--r-sm);
+  height: 64px;
+  object-fit: cover;
+  width: 64px;
+}
+
+.wish-shops {
+  display: grid;
+  gap: 4px;
+}
+
+.wish-shops li {
+  align-items: center;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 6px;
+  padding: 5px 8px;
+}
+
+.wish-shop-area {
+  align-items: center;
+  color: var(--text-faint);
+  display: inline-flex;
+  gap: 3px;
+}
+
+.wish-shop-price {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  margin-inline-start: auto;
+}
+
+.wish-sources {
+  color: var(--text-faint);
+  font-size: 11.5px;
+}
+
+.wish-sources a {
+  text-decoration: underline;
+}
+
+/**
+ * The shared/private control.
+ *
+ * It used `.btn-glass`, which is white text on translucent white — correct on
+ * the dark hero images, invisible on the light wish page. Given this is the
+ * control that decides whether a surprise stays a surprise, it now gets an
+ * explicit width and border so it always reads as a real, legible toggle.
+ */
+.wish-vis {
+  justify-content: center;
+  min-width: 132px;
+}
+
+/**
+ * A wish nobody has researched yet.
+ *
+ * Deliberately visible rather than an empty card: "just a title" is what the
+ * family could already write themselves, so the card should name the gap and
+ * point at the way to close it.
+ */
+.wish-unresearched {
+  align-items: flex-start;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  color: var(--text-muted);
+  display: flex;
+  font-size: 12.5px;
+  gap: 6px;
+  line-height: 1.55;
+  padding: 7px 9px;
+}
+
+.wish-unresearched svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.wish-unresearched a {
+  color: var(--vermillion-deep);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* =========================================================================
+   Money — planning envelopes vs. what actually left the card.
+   The visual rule mirrors the data rule: planned and actual never share a
+   number, and "מוזמן וטרם חויב" is always called out separately from "שולם".
+   ========================================================================= */
+
+.money-loading,
+.money-empty {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-size: 14px;
+  gap: 8px;
+  padding: 18px 0;
+}
+
+.money-signin {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  padding: 24px;
+}
+
+.money-stats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-bottom: 14px;
+}
+
+.money-stat {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+}
+
+.money-stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.4vw, 30px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.money-stat small {
+  color: var(--text-faint);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.money-stat.is-ok .money-stat-value {
+  color: var(--ops-ok-ink);
+}
+
+.money-stat.is-over .money-stat-value {
+  color: var(--ops-warn-ink);
+}
+
+/* A bar that can exceed 100% has to say so, not silently cap. */
+.money-bar {
+  background: var(--surface-3);
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.money-bar-fill {
+  background: linear-gradient(90deg, var(--matcha), var(--gold));
+  display: block;
+  height: 100%;
+}
+
+.money-bar-fill.is-over {
+  background: linear-gradient(90deg, var(--gold), var(--vermillion));
+}
+
+.money-bar-over {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--vermillion) 0 4px,
+    transparent 4px 8px
+  );
+  inset: 0;
+  position: absolute;
+}
+
+.money-currencies {
+  align-items: baseline;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.money-currencies span {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.money-currencies small {
+  color: var(--text-faint);
+  font-size: 11.5px;
+}
+
+.money-section {
+  margin-top: 40px;
+}
+
+.money-list-head {
+  align-items: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: space-between;
+}
+
+.money-categories {
+  display: grid;
+  gap: 16px;
+}
+
+.money-categories > li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  display: grid;
+  gap: 7px;
+  padding: 14px 16px;
+}
+
+.money-cat-head {
+  align-items: baseline;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.money-cat-head span {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+
+.money-cat-meta {
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  gap: 12px;
+}
+
+.money-cat-note {
+  border-inline-start: 3px solid var(--line);
+  color: var(--text-faint);
+  font-size: 12px;
+  line-height: 1.6;
+  padding-inline-start: 9px;
+}
+
+.money-payers {
+  margin-top: 28px;
+}
+
+.money-payers ul {
+  display: grid;
+  font-size: 13.5px;
+  gap: 6px;
+}
+
+.money-payers li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.money-payers li span:last-child {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.money-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 16px 0;
+}
+
+.money-rows {
+  display: grid;
+  gap: 10px;
+}
+
+.money-row {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  padding: 13px 16px;
+}
+
+/* A refund stays in the list so the trail survives — greyed, never deleted. */
+.money-row.is-refunded {
+  opacity: 0.55;
+}
+
+.money-row.is-refunded .money-row-amount strong {
+  text-decoration: line-through;
+}
+
+.money-row-main {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.money-row-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.money-row-meta {
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 10px;
+}
+
+.money-row-meta a {
+  color: var(--vermillion-deep);
+  font-weight: 700;
+}
+
+.money-row-note {
+  color: var(--text-faint);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.money-row-files {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 10px;
+}
+
+.money-row-files a {
+  align-items: center;
+  color: var(--vermillion-deep);
+  display: inline-flex;
+  gap: 4px;
+}
+
+.money-row-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.money-row-danger {
+  color: var(--ops-warn-ink);
+}
+
+.money-row-error {
+  color: var(--ops-warn-ink);
+  font-size: 11.5px;
+}
+
+.money-row-amount {
+  display: grid;
+  gap: 2px;
+  justify-items: end;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.money-row-amount strong {
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.money-row-amount small {
+  color: var(--text-faint);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.money-chip-private,
+.money-chip-pending,
+.money-chip-refunded {
+  align-items: center;
+  display: inline-flex;
+  font-size: 11px;
+  gap: 4px;
+}
+
+.money-chip-pending {
+  background: color-mix(in srgb, var(--st-lottery) 16%, transparent);
+  color: #8a5a05;
+}
+
+.money-chip-refunded {
+  background: var(--surface-3);
+  color: var(--text-muted);
+}
+
+.money-chip-private {
+  background: var(--ink);
+  color: var(--on-dark);
+}
+
+.money-form-warn {
+  align-items: flex-start;
+  background: color-mix(in srgb, var(--vermillion) 10%, transparent);
+  border-radius: var(--r-sm);
+  color: var(--ops-warn-ink);
+  display: flex;
+  font-size: 12.5px;
+  gap: 6px;
+  line-height: 1.55;
+  padding: 8px 10px;
+}
+
+.money-form-warn svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.money-form-hint {
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.money-rates {
+  margin-top: 40px;
+}
+
+.money-rates-head {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.money-rates-head h2 {
+  margin: 0;
+}
+
+.money-rate-stale {
+  color: var(--warn, #b4541a);
+}
+
+.money-rate-manual > summary {
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: 12.5px;
+  margin-bottom: 8px;
+  width: fit-content;
+}
+
+.money-rate-list {
+  display: grid;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.money-rate-list li {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.money-rate-list small {
+  color: var(--text-faint);
+  font-size: 11.5px;
+}
+
+.money-rate-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.money-rate-form input,
+.money-rate-form select {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-size: 13px;
+  min-width: 0;
+  padding: 7px 10px;
+}
+
+.money-rate-form input {
+  flex: 1 1 110px;
+}
+
+/* --- the day page's spend panel */
+
+.day-spend-total {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.day-spend-compare {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  gap: 10px;
+}
+
+.day-spend-over,
+.day-spend-under {
+  align-items: center;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 4px;
+}
+
+.day-spend-over {
+  color: var(--ops-warn-ink);
+}
+
+.day-spend-under {
+  color: var(--ops-ok-ink);
+}
+
+.day-spend-pending {
+  align-items: center;
+  color: #8a5a05;
+  display: flex;
+  font-size: 12px;
+  gap: 5px;
+}
+
+.day-spend-list {
+  display: grid;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.day-spend-list li {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.day-spend-list li.is-refunded {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+.day-spend-what {
+  display: grid;
+  min-width: 0;
+}
+
+.day-spend-what small {
+  align-items: center;
+  color: var(--text-faint);
+  display: flex;
+  font-size: 11px;
+  gap: 3px;
+}
+
+.day-spend-amount {
+  display: grid;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  justify-items: end;
+  white-space: nowrap;
+}
+
+.day-spend-amount small {
+  color: var(--text-faint);
+  font-size: 10.5px;
+  font-weight: 500;
+}
+
+.day-spend-empty {
+  color: var(--text-faint);
+  font-size: 12.5px;
+}
+
+.day-spend-add {
+  display: grid;
+  gap: 7px;
+  grid-template-columns: 1fr 84px;
+}
+
+.day-spend-add input,
+.day-spend-add select {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-size: 13px;
+  min-width: 0;
+  padding: 7px 9px;
+}
+
+.day-spend-add select,
+.day-spend-add button {
+  grid-column: span 1;
+}
+
+.day-spend-error {
+  color: var(--ops-warn-ink);
+  font-size: 12px;
+  grid-column: 1 / -1;
+}
+
+/* --- live numbers on the budget guide */
+
+.budget-live {
+  margin: 0 0 28px;
+}
+
+.budget-live-total {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4vw, 34px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.budget-live-sub {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.budget-live-list {
+  display: grid;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.budget-live-list li {
+  align-items: baseline;
+  border-bottom: 1px dashed var(--line);
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.budget-live-list li span:last-child {
+  display: grid;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  justify-items: end;
+}
+
+.budget-live-list small {
+  color: var(--text-faint);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* --- "we bought it", on a wish card */
+
+.wish-bought {
+  align-items: center;
+  background: color-mix(in srgb, var(--matcha) 12%, transparent);
+  border-radius: var(--r-sm);
+  color: var(--ops-ok-ink);
+  display: flex;
+  font-size: 12.5px;
+  font-weight: 700;
+  gap: 5px;
+  padding: 6px 9px;
+}
+
+.wish-bought a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.wish-buy {
+  justify-self: start;
+}
+
+.wish-buy-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wish-buy-form input,
+.wish-buy-form select {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  flex: 1 1 90px;
+  font: inherit;
+  font-size: 13px;
+  min-width: 0;
+  padding: 7px 9px;
+}
+
+@media (max-width: 640px) {
+  .money-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .money-row-amount {
+    justify-items: start;
+    text-align: start;
+  }
+
+  .day-spend-add {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------- place gallery */
+
+/*
+ * The extra angles under a place, as a swipeable row. Scroll-snap so a thumb
+ * flick lands on a picture rather than between two, and `scrollbar-width: none`
+ * because on a phone the strip is obviously scrollable and on a desktop a
+ * scrollbar under three photos is noise.
+ */
+.place-gallery {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 2px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.place-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.place-gallery-shot {
+  background: var(--surface-2);
+  border-radius: 10px;
+  flex: 0 0 auto;
+  height: 92px;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: start;
+  width: 132px;
+}
+
+.place-gallery-shot img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }

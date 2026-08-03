@@ -8,12 +8,16 @@ import {
   CalendarDays,
   ClipboardCheck,
   Compass,
+  Heart,
   House,
   MapPinned,
   MessageCircle,
   Plane,
+  ShieldCheck,
   Sparkles,
+  Wallet,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const primaryNav = [
   { href: "/", label: "בית", icon: House },
@@ -25,7 +29,10 @@ const primaryNav = [
 const moreNav = [
   { href: "/chat", label: "צ׳אט", icon: MessageCircle, hint: "לשאול הכול על הטיול" },
   { href: "/prepare", label: "הכנות", icon: ClipboardCheck, hint: "רשימת המשימות לפני הטיסה" },
+  { href: "/wishes", label: "רשימות", icon: Heart, hint: "מה כל אחד רוצה — משותף ופרטי" },
+  { href: "/money", label: "כספים", icon: Wallet, hint: "מעטפות התקציב מול מה שבאמת שולם" },
   { href: "/guides", label: "מדריכים", icon: BookOpenText, hint: "כל מסמכי התכנון" },
+  { href: "/private", label: "כספת", icon: ShieldCheck, hint: "כרטיסים, אישורים וקודים — רק למשפחה" },
 ];
 
 const desktopNav = [...primaryNav, ...moreNav];
@@ -122,10 +129,13 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
 
-        <div className="flight-chip">
-          <Plane size={14} />
-          <span>TLV → NRT</span>
-          <strong>1.10</strong>
+        <div className="header-actions">
+          <ThemeToggle />
+          <div className="flight-chip">
+            <Plane size={14} />
+            <span>TLV → NRT</span>
+            <strong>1.10</strong>
+          </div>
         </div>
       </header>
 
