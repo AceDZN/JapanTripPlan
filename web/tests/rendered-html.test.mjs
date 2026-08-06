@@ -715,21 +715,33 @@ test("serves the PWA manifest and service worker from the app origin", async () 
   assert.match(await worker.text(), /caches/);
 });
 
-// There is no Markdown on disk any more. Convex holds the guides, and the only
-// derived copy left is `app/generated/ai-context.ts`, which `sync:content`
-// regenerates from Convex on every build and which the chat uses as its system
-// prompt. So that file IS the thing worth guarding: if a guide loses a landmark
-// the family is relying on, the assistant is the first place it goes missing.
-test("the generated AI context still carries the trip's landmarks", async () => {
-  const { aiContext, aiContextText } = await import("../app/generated/ai-context.ts");
+// There is no Markdown on disk any more, and no generated copy either: the
+// guides live in Convex and every reader — the guide pages, the eve agent's
+// `read_guide`, the fallback chat's `readGuide` — fetches them from there.
+//
+// This used to import `app/generated/ai-context.ts` and assert on the baked
+// markdown. With that file deleted, the equivalent guard is the rendered pages
+// themselves, which is the stronger test anyway: it exercises Convex, the
+// query, the markdown renderer and the page, and it fails if a landmark the
+// family is relying on goes missing from any of them.
+//
+// Matching runs on visible text with the tags stripped, so a landmark that
+// happens to be bolded or linked in one guide and plain in another is still one
+// assertion rather than two spellings of it.
+test("the rendered guides still carry the trip's landmarks", async () => {
+  const index = await html("/guides");
+  const slugs = [...new Set([...index.matchAll(/href="\/guide\/([a-z0-9-]+)"/g)].map((m) => m[1]))];
+  assert.equal(slugs.length, 12, `expected 12 guides, got ${slugs.length}`);
 
-  assert.equal(aiContext.length, 12);
-  // A plausible-but-empty context would pass every `match` below by accident.
-  assert.ok(aiContextText.length > 100_000, "AI context is suspiciously small");
+  const pages = await Promise.all(slugs.map((slug) => html(`/guide/${slug}`)));
+  const generated = pages
+    .join("\n")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ");
 
-  const generated = (
-    aiContext.map((entry) => entry.markdown)
-  ).join("\n");
+  // A plausible-but-empty set of pages would pass every `match` below by accident.
+  assert.ok(generated.length > 100_000, "rendered guides are suspiciously small");
+
   assert.match(generated, /Nintendo Museum/);
   assert.match(generated, /KAWAII MONSTER LAND/);
   assert.match(generated, /ערוץ טודורוקי/);

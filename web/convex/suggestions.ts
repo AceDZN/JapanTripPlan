@@ -565,6 +565,45 @@ export const internalDiscard = internalMutation({
 });
 
 /**
+ * Rewrite a guide's prose, leaving everything else on the row alone.
+ *
+ * MAINTENANCE ONLY, same gate as `internalUpsertGuide` below — and the reason
+ * both exist is that `internalUpsertGuide` calls `db.replace`, so using it to
+ * edit prose silently drops `hero`, `preamble` and `postamble`. Every guide
+ * currently carries a hero, which made that a guaranteed loss rather than a
+ * theoretical one. Editing a body is by far the common case, so it gets a verb
+ * that cannot take the rest of the row with it.
+ */
+export const internalPatchGuideBody = internalMutation({
+  args: {
+    slug: v.string(),
+    bodyHe: v.optional(v.string()),
+    /** The index subtitle. Drifts out of date with the prose it summarises. */
+    descriptionHe: v.optional(v.string()),
+    titleHe: v.optional(v.string()),
+    updatedBy: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db
+      .query("guides")
+      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
+      .unique();
+    if (!existing) throw new Error(`No guide "${args.slug}".`);
+
+    const patch: Record<string, unknown> = {
+      updatedAt: Date.now(),
+      updatedBy: args.updatedBy ?? "maintenance",
+    };
+    if (args.bodyHe !== undefined) patch.bodyHe = args.bodyHe;
+    if (args.descriptionHe !== undefined) patch.descriptionHe = args.descriptionHe;
+    if (args.titleHe !== undefined) patch.titleHe = args.titleHe;
+
+    await ctx.db.patch("guides", existing._id, patch);
+    return { slug: args.slug, patched: Object.keys(patch) };
+  },
+});
+
+/**
  * Create or replace a guide outright.
  *
  * MAINTENANCE ONLY — deliberately `internalMutation` with no HTTP route, so it

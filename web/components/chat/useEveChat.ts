@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import {
   EVE_INITIAL_STATE,
   VOICE_BUBBLE_LABEL,
@@ -28,7 +30,7 @@ import {
   type EveMessage,
   type EveMessagePart,
 } from "./eve-client";
-import { toolStatusLabel } from "./tool-labels";
+import { guideTitles, toolStatusLabel, type GuideTitles } from "./tool-labels";
 
 /**
  * Durable-session chat state.
@@ -96,7 +98,10 @@ type ChatState = {
 };
 
 type Action =
-  | { kind: "event"; event: EveEvent }
+  // The guide titles ride along with the event rather than being read from
+  // module scope: they come from Convex, so the reducer must not close over a
+  // copy that was correct when this file was written.
+  | { kind: "event"; event: EveEvent; guides: GuideTitles }
   | { kind: "optimistic"; bubble: EveBubble }
   | { kind: "answered"; requestId: string }
   | { kind: "retrying" }
@@ -131,7 +136,9 @@ const SETTLES = new Set([
 function reducer(state: ChatState, action: Action): ChatState {
   switch (action.kind) {
     case "event": {
-      const eve = reduceEve(state.eve, action.event, toolStatusLabel);
+      const eve = reduceEve(state.eve, action.event, (name, input) =>
+        toolStatusLabel(name, input, action.guides),
+      );
       // `received` only advances for a message the family actually sent, so a
       // background run reporting into the session cannot drop an optimistic
       // bubble whose send is still in flight.
@@ -353,6 +360,19 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
   /** Pending dead-session timer, cleared by the first event of an attach. */
   const silenceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contextRef = useRef(resolveContext);
+  /**
+   * Guide titles for the status lines, live from Convex.
+   *
+   * Mirrored into a ref because the events are dispatched from inside a stream
+   * loop that outlives the render it started in — reading `titles` there would
+   * pin whatever was loaded when the stream was opened.
+   */
+  const guides = useQuery(api.trip.listGuides);
+  const titles = useMemo(() => guideTitles(guides), [guides]);
+  const titlesRef = useRef<GuideTitles>(titles);
+  useEffect(() => {
+    titlesRef.current = titles;
+  }, [titles]);
   /** The last thing the family asked, so a failed turn can be tried again. */
   const lastInputRef = useRef<SendInput | null>(null);
   /** Render-safe mirror of `lastInputRef` — refs must not be read during render. */
@@ -415,7 +435,7 @@ export function useEveChat({ resolveContext }: UseEveChatOptions = {}) {
             // Every consumed event advances the absolute reconnect cursor.
             cursorRef.current += 1;
             attempts = 0;
-            dispatch({ kind: "event", event });
+            dispatch({ kind: "event", event, guides: titlesRef.current });
             // The backlog renders as it arrives; the skeleton is only for the
             // gap before the first event of a resumed session.
             stopSilenceTimer();
