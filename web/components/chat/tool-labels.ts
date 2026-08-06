@@ -6,20 +6,35 @@ import type { UIMessage } from "ai";
  * family can see what the agent is doing instead of staring at a spinner.
  */
 
-export const GUIDE_LABELS: Record<string, string> = {
-  "00-OVERVIEW.md": "תמונת המצב",
-  "01-FLIGHTS.md": "מדריך הטיסות",
-  "02-ACCOMMODATION.md": "מדריך הלינה",
-  "03-TRANSPORT.md": "מדריך התחבורה",
-  "04-ANIME-POKEMON-GHIBLI.md": "מדריך האנימה והפוקימון",
-  "05-FOOD-GUIDE.md": "מדריך האוכל",
-  "06-DAY-TRIPS.md": "מדריך הטיולים",
-  "07-BAR-MITZVAH.md": "מדריך בר המצווה",
-  "08-PRACTICAL-TIPS.md": "הטיפים הפרקטיים",
-  "09-DAILY-ITINERARY.md": "המסלול היומי",
-  "10-BUDGET.md": "מדריך התקציב",
-  "11-PRE-TRIP-CHECKLIST.md": "רשימת ההכנות",
-};
+/**
+ * `09-DAILY-ITINERARY.md` -> `המסלול היומי`, from Convex.
+ *
+ * This used to be a hand-written map of all twelve titles. By the time it was
+ * replaced, ELEVEN of the twelve disagreed with `guides.titleHe`: the chat was
+ * saying "קורא את מדריך האוכל" about a guide Convex calls "ראמן ואוכל", and —
+ * worse — the approval card for a plan change was headed "להציע שינוי במדריך
+ * האוכל", asking the family to approve an edit to a document under a name that
+ * no longer exists anywhere else in the app.
+ *
+ * Callers pass the live index (`api.trip.listGuides`). An empty map is a valid
+ * argument and means "not loaded yet": labels fall back to the generic status
+ * line for the moment before the query resolves, which is what they already did
+ * before a tool's input had streamed.
+ */
+export type GuideTitles = Record<string, string>;
+
+/** Build the lookup from whatever `listGuides` returned (or nothing yet). */
+export function guideTitles(
+  guides: readonly { file: string; title: string }[] | undefined,
+): GuideTitles {
+  return Object.fromEntries((guides ?? []).map((guide) => [guide.file, guide.title]));
+}
+
+/** Tolerates both `05-FOOD-GUIDE` and `05-FOOD-GUIDE.md`, as the tools send both. */
+function titleOf(titles: GuideTitles, file: string | undefined): string | undefined {
+  if (!file) return undefined;
+  return titles[file] ?? titles[`${file}.md`];
+}
 
 /**
  * What each tool is doing, when its input has not streamed yet (or carries
@@ -132,15 +147,18 @@ function hostOf(url: string): string | undefined {
 }
 
 /** Human label for one tool call, using its input when it has already streamed. */
-export function toolStatusLabel(toolName: string, input: AnyInput): string {
+export function toolStatusLabel(
+  toolName: string,
+  input: AnyInput,
+  titles: GuideTitles = {},
+): string {
   const name = normalizeToolName(toolName);
 
   switch (name) {
     /* ------------------------------------------------ the trip's own content */
 
     case "readGuide": {
-      const file = pickString(input, ["file", "guide", "name", "slug"]);
-      const label = file ? (GUIDE_LABELS[file] ?? GUIDE_LABELS[`${file}.md`]) : undefined;
+      const label = titleOf(titles, pickString(input, ["file", "guide", "name", "slug"]));
       return label ? `קורא את ${label}` : FALLBACKS.readGuide;
     }
     case "getDay": {
@@ -184,8 +202,7 @@ export function toolStatusLabel(toolName: string, input: AnyInput): string {
     /* ---------------------------------- the plan, the checklist, the money */
 
     case "editPlanDoc": {
-      const file = pickString(input, ["file"]);
-      const label = file ? (GUIDE_LABELS[file] ?? GUIDE_LABELS[`${file}.md`]) : undefined;
+      const label = titleOf(titles, pickString(input, ["file"]));
       return label ? `מכין הצעת עדכון ל${label}` : FALLBACKS.editPlanDoc;
     }
     case "searchImage": {
@@ -327,18 +344,31 @@ function clip(value: string): string {
   return clean.length > VALUE_MAX ? `${clean.slice(0, VALUE_MAX - 1)}…` : clean;
 }
 
-/** `09-DAILY-ITINERARY.md` -> `המסלול היומי`, falling back to the filename. */
-function guideLabel(file: string | undefined): string | undefined {
-  if (!file) return undefined;
-  return GUIDE_LABELS[file] ?? GUIDE_LABELS[`${file}.md`] ?? file;
+/** The guide's Hebrew title, falling back to the filename it was called by. */
+function guideLabel(titles: GuideTitles, file: string | undefined): string | undefined {
+  return file ? (titleOf(titles, file) ?? file) : undefined;
 }
 
 const MONEY = new Intl.NumberFormat("he-IL", { maximumFractionDigits: 2 });
 
-export function approvalCopy(toolName: string | undefined, input: AnyInput): ApprovalCopy {
+export function approvalCopy(
+  toolName: string | undefined,
+  input: AnyInput,
+  titles: GuideTitles = {},
+): ApprovalCopy {
   switch (toolName ? normalizeToolName(toolName) : "") {
+    case "sessionLimitContinuation":
+      // Legacy durable sessions may still carry the finite token budget from
+      // the deployment that created them. New sessions are uncapped, but an
+      // old one needs one final continuation response before it can resume.
+      return {
+        title: "השיחה ארוכה — להמשיך מאותה נקודה?",
+        details: [],
+        confirm: "להמשיך בשיחה",
+      };
+
     case "editPlanDoc": {
-      const guide = guideLabel(text(input, "file"));
+      const guide = guideLabel(titles, text(input, "file"));
       const details: ApprovalCopy["details"] = [];
       const summary = text(input, "summary");
       const rationale = text(input, "rationale");

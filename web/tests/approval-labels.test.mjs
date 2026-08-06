@@ -12,7 +12,20 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { approvalCopy } from "../components/chat/tool-labels.ts";
+import { approvalCopy, guideTitles } from "../components/chat/tool-labels.ts";
+
+/**
+ * Guide titles as `api.trip.listGuides` returns them.
+ *
+ * The card used to read these from a map hand-written in `tool-labels.ts`,
+ * which had drifted from Convex in eleven of twelve entries — so the family
+ * was being asked to approve an edit to a document under a name the app no
+ * longer used anywhere else. They are passed in now, and this is that list.
+ */
+const TITLES = guideTitles([
+  { file: "09-DAILY-ITINERARY.md", title: "המסלול היומי" },
+  { file: "11-PRE-TRIP-CHECKLIST.md", title: "הכנות לטיול" },
+]);
 
 /** Every tool carrying `approval: always()` in trip-agent/agent/tools. */
 const GATED = ["edit_plan_doc", "edit_content", "set_image", "mark_done", "record_spend", "set_price"];
@@ -31,14 +44,18 @@ test("every gated tool has its own Hebrew title", () => {
 });
 
 test("an edit shows the summary and both sides of the change", () => {
-  const copy = approvalCopy("edit_plan_doc", {
-    file: "11-PRE-TRIP-CHECKLIST.md",
-    summary: "להוסיף מתאמי תקע",
-    old_string: "- [ ] מטענים",
-    new_string: "- [ ] מטענים\n- [ ] 3 מתאמי תקע",
-  });
+  const copy = approvalCopy(
+    "edit_plan_doc",
+    {
+      file: "11-PRE-TRIP-CHECKLIST.md",
+      summary: "להוסיף מתאמי תקע",
+      old_string: "- [ ] מטענים",
+      new_string: "- [ ] מטענים\n- [ ] 3 מתאמי תקע",
+    },
+    TITLES,
+  );
 
-  assert.match(copy.title, /רשימת ההכנות/, "the guide is named as a person would name it");
+  assert.match(copy.title, /הכנות לטיול/, "the guide is named as a person would name it");
   const rows = Object.fromEntries(copy.details.map((detail) => [detail.label, detail.value]));
   assert.equal(rows["השינוי"], "להוסיף מתאמי תקע");
   assert.match(rows["במקום"], /מטענים/);
@@ -107,6 +124,18 @@ test("an unknown gated tool still names itself rather than rendering blank", () 
   const copy = approvalCopy("some_future_tool", {});
   assert.match(copy.title, /some_future_tool/);
   assert.match(copy.confirm, /אישור/);
+});
+
+test("a legacy session budget gate is presented as continuing the conversation", () => {
+  const copy = approvalCopy("session_limit_continuation", {
+    kind: "input",
+    limit: 2_000_000,
+    usedTokens: 2_073_057,
+  });
+
+  assert.equal(copy.title, "השיחה ארוכה — להמשיך מאותה נקודה?");
+  assert.equal(copy.confirm, "להמשיך בשיחה");
+  assert.deepEqual(copy.details, []);
 });
 
 test("a content edit never claims more than it will do", () => {

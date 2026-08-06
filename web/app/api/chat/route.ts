@@ -8,7 +8,7 @@
 
 import { createAgentUIStreamResponse } from "ai";
 import { DEFAULT_CHAT_MODEL, createTripAgent } from "@/components/chat/agent";
-import { getChecklist, getPlaces, getTripDays } from "@/lib/trip-source";
+import { getChecklist, getGuides, getPlaces, getTripDays } from "@/lib/trip-source";
 import { describeGatewayError } from "@/lib/gateway-error";
 import { gatewayApiKey, gatewayConfigured, jsonResponse } from "@/lib/server-env";
 
@@ -58,12 +58,15 @@ export async function POST(request: Request): Promise<Response> {
   // in this turn is grounded in the same consistent snapshot of Convex.
   let trip;
   try {
-    const [days, places, checklist] = await Promise.all([
+    const [days, places, guides, checklist] = await Promise.all([
       getTripDays(),
       getPlaces(),
+      // The guide INDEX only — twelve metadata rows. `readGuide` fetches the
+      // body of the one guide the model actually opens.
+      getGuides(),
       getChecklist(),
     ]);
-    trip = { days, places, checklist };
+    trip = { days, places, guides, checklist };
   } catch {
     return jsonResponse(
       { error: "לא הצלחתי לקרוא את התוכנית כרגע. נסו שוב בעוד רגע." },

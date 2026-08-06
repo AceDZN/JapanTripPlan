@@ -439,6 +439,17 @@ test("an approval survives as a structured prompt, not as English boilerplate", 
   assert.notEqual(parked.status, "streaming", "a run parked on a human is not streaming");
 });
 
+test("a prompt-only approval bubble remains visible and answerable", () => {
+  const parked = play([
+    { type: "turn.started", data: { turnId: "t" } },
+    { type: "input.requested", data: { requests: [APPROVAL_REQUEST], turnId: "t" } },
+  ]);
+
+  const visible = visibleMessages(parked.messages);
+  assert.equal(visible.length, 1);
+  assert.equal(visible[0].prompts[0].requestId, "appr_1");
+});
+
 test("a question and an approval in one pause are told apart", () => {
   const parked = play([
     { type: "turn.started", data: { turnId: "t" } },

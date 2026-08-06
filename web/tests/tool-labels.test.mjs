@@ -14,7 +14,10 @@ import { dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { GENERIC_STATUS, toolStatusLabel } from "../components/chat/tool-labels.ts";
+import { GENERIC_STATUS, guideTitles, toolStatusLabel } from "../components/chat/tool-labels.ts";
+
+/** One guide's live title, shaped exactly as `api.trip.listGuides` returns it. */
+const FOOD_GUIDE = guideTitles([{ file: "05-FOOD-GUIDE.md", title: "ראמן ואוכל" }]);
 
 const TOOLS_DIR = join(dirname(fileURLToPath(import.meta.url)), "../../trip-agent/agent/tools");
 
@@ -52,7 +55,15 @@ test("no two tools share a status line, so repeats mean a real repeat", () => {
 
 test("a call names what it is working on once its input has streamed", () => {
   assert.equal(toolStatusLabel("get_day", { day: 5 }), "בודק את יום 5");
-  assert.equal(toolStatusLabel("read_guide", { file: "05-FOOD-GUIDE.md" }), "קורא את מדריך האוכל");
+  // Guide titles come from Convex now, so the caller supplies them. This used
+  // to assert a hand-written map that had drifted from `guides.titleHe` in
+  // eleven of twelve entries — the test was green and the chat was wrong.
+  assert.equal(
+    toolStatusLabel("read_guide", { file: "05-FOOD-GUIDE.md" }, FOOD_GUIDE),
+    "קורא את ראמן ואוכל",
+  );
+  // Titles the family has not loaded yet must not invent one.
+  assert.equal(toolStatusLabel("read_guide", { file: "05-FOOD-GUIDE.md" }), "קורא במדריכים");
   assert.equal(toolStatusLabel("web_search", { query: "פוקימון סנטר" }), "מחפש ברשת ״פוקימון סנטר״");
   assert.equal(toolStatusLabel("search_places", { query: "ראמן" }), "מחפש ״ראמן״ בין המקומות");
   assert.equal(toolStatusLabel("money_report", { dayN: 12 }), "מסכם את ההוצאות של יום 12");

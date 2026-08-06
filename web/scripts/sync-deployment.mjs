@@ -160,7 +160,7 @@ console.log(
     "",
     direction === "from-prod"
       ? "   Reminder: dev now holds the family's real private records. Same care as prod."
-      : "   Reminder: run `npm run sync:content` so the chat's baked context matches the guides you just pushed.",
+      : "   The app and both chats read Convex live, so the guides you just pushed are already what they answer from.",
     "",
   ].join("\n"),
 );

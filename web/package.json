@@ -6,14 +6,11 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "sync:content": "node --env-file-if-exists=.env.local scripts/sync-content.mjs",
     "content": "node --env-file-if-exists=.env.local scripts/content.mjs",
     "sync:from-prod": "node scripts/sync-deployment.mjs from-prod",
     "sync:to-prod": "node scripts/sync-deployment.mjs to-prod",
-    "predev": "npm run sync:content",
     "dev": "node scripts/dev.mjs",
     "dev:web": "next dev",
-    "prebuild": "npm run sync:content",
     "build": "next build",
     "start": "next start",
     "test": "npm run build && node --test tests/*.test.mjs",

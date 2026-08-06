@@ -900,14 +900,18 @@ export function groupActivity(activity: EveActivity[]): ActivityGroup[] {
   return groups;
 }
 
-/** Drops turn placeholders that never produced text or a status line. */
+/** Drops turn placeholders that never produced visible or actionable content. */
 export function visibleMessages(messages: EveBubble[]): EveBubble[] {
   return messages.filter(
     (message) =>
       message.role === "user" ||
       message.streaming ||
       message.text.trim().length > 0 ||
-      message.activity.length > 0,
+      message.activity.length > 0 ||
+      // An approval can be the only thing in its assistant bubble. Dropping
+      // that bubble removes the only control capable of resuming the parked
+      // run, so the chat looks dead while free-text replies are held forever.
+      message.prompts.length > 0,
   );
 }
 

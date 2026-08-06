@@ -4,6 +4,8 @@ import type { ReactNode, RefObject } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import {
   AlertTriangle,
   ArrowUp,
@@ -35,7 +37,7 @@ import {
   type EveBubble,
   type EvePrompt,
 } from "./eve-protocol";
-import { approvalCopy, messageText, toolActivity } from "./tool-labels";
+import { approvalCopy, guideTitles, messageText, toolActivity } from "./tool-labels";
 import { fetchAgentEnabled } from "./eve-client";
 import { useGeoContext, type GeoContext } from "./useGeoContext";
 import { useEveChat, type SendInput } from "./useEveChat";
@@ -974,7 +976,14 @@ function ApprovalCard({
   busy: boolean;
   onRespond: (requestId: string, optionId: string) => void;
 }) {
-  const copy = approvalCopy(prompt.toolName, prompt.toolInput);
+  // Live guide titles, so "להציע שינוי ב…" names the document the way the rest
+  // of the app does. Convex's `useQuery` shares one subscription with the chat
+  // hook's, so asking again here costs nothing.
+  const copy = approvalCopy(
+    prompt.toolName,
+    prompt.toolInput,
+    guideTitles(useQuery(api.trip.listGuides)),
+  );
   // eve fixes these at `approve` / `deny`, but they are read off the request
   // rather than hardcoded so a renamed option cannot silently send the wrong one.
   const approve = prompt.options.find((option) => option.id === "approve") ?? prompt.options[0];

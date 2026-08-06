@@ -7,7 +7,9 @@ import { marked } from "marked";
  * `app/generated/trip-content.ts`. That made the guide pages a THIRD copy of
  * the trip — Convex, the markdown export, and a checked-in TypeScript blob —
  * and only the first is authoritative. Rendering here lets the pages read
- * Convex like every other page does.
+ * Convex like every other page does. That script is gone entirely now: its
+ * last output, `app/generated/ai-context.ts`, went the same way once the
+ * fallback chat's `readGuide` started reading Convex too.
  */
 export function renderGuideHtml(markdown: string): string {
   const html = marked.parse(markdown, { async: false, gfm: true, breaks: false });

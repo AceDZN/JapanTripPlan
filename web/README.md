@@ -32,9 +32,12 @@ purpose:
 EVE_USE_DEPLOYED=1 npm run dev
 ```
 
-`npm run dev` and `npm run build` both run `scripts/sync-content.mjs` first,
-which copies `../JAPAN2026/*.md` into `public/markdown/` and regenerates
-`app/generated/`. Never edit the generated files by hand.
+Nothing is generated at build time any more. `dev` and `build` used to run
+`scripts/sync-content.mjs` first, which baked the twelve guides into
+`app/generated/ai-context.ts` for the chat to read. Every reader — the guide
+pages, `/api/chat`'s `readGuide`, the eve agent's `read_guide` — now fetches
+guides from Convex per request, so the script, the generated file and the whole
+`app/generated/` directory are gone. Convex is the only copy of the trip.
 
 ## Scripts
 
@@ -44,7 +47,6 @@ which copies `../JAPAN2026/*.md` into `public/markdown/` and regenerates
 - `npm start` — serve the production build
 - `npm test` — build, then run `node --test tests/*.test.mjs`
 - `npm run lint` — ESLint (`eslint-config-next`)
-- `npm run sync:content` — regenerate content from `../JAPAN2026/`
 
 ## Server endpoints
 

@@ -1,9 +1,9 @@
 import { tool } from "ai";
 import { z } from "zod";
-import { aiContext } from "@/app/generated/ai-context";
 import { bookingStatusLabels } from "@/lib/labels";
 import { routeChapters } from "@/lib/route-chapters";
 import { bookingGates } from "@/components/booking-gates";
+import { getGuide, type GuideSummary } from "@/lib/trip-source";
 import type { ChecklistItem, Place, TripDay } from "@/lib/types";
 
 /**
@@ -24,6 +24,12 @@ import type { ChecklistItem, Place, TripDay } from "@/lib/types";
 export type TripSnapshot = {
   days: TripDay[];
   places: Place[];
+  /**
+   * Guide metadata only — no bodies. `listGuides` is metadata-only by design
+   * (see `convex/trip.ts`), so a request that never reads a guide pays twelve
+   * short rows; `readGuide` fetches the ~15KB body only when asked.
+   */
+  guides: GuideSummary[];
   checklist: {
     groups: string[];
     items: ChecklistItem[];
@@ -59,26 +65,62 @@ export function tripDigest(days: TripDay[]): string {
 /* Tools                                                                       */
 /* ========================================================================== */
 
-const GUIDE_FILES = aiContext.map((entry) => entry.file);
+/**
+ * Reading one planning guide, live.
+ *
+ * This used to serve `app/generated/ai-context.ts` — twelve guide bodies baked
+ * into the bundle at build time by `sync:content`. That made this assistant
+ * answer from the plan as it stood at the last deploy while `getDay` beside it
+ * answered from Convex, so a single reply could describe the same day two
+ * different ways. The eve agent had already moved to a live read
+ * (`trip-agent/agent/tools/read_guide.ts`); this is the same fix on this side,
+ * and it is what let the generated file be deleted.
+ *
+ * No offline fallback here, deliberately. Every page of this app reads Convex,
+ * so a Convex outage is not a degraded site — it is no site. A baked copy of
+ * the guides would have protected nothing while guaranteeing the chat drifted
+ * from the plan between deploys.
+ *
+ * The catalogue in the description comes from the same live list, so a guide
+ * that is added, renamed or retitled in Convex is described correctly to the
+ * model without a code change.
+ */
+function makeReadGuide(guides: GuideSummary[]) {
+  const files = guides.map((guide) => guide.file);
+  const byFile = new Map(guides.map((guide) => [guide.file, guide]));
 
-const readGuide = tool({
-  description: [
-    "Read one full planning guide (markdown). These documents are the source of truth for the trip.",
-    "Use it whenever the answer needs detail the digest does not contain — prices, transport passes, booking rules, food picks, packing.",
-    `Valid file values: ${GUIDE_FILES.join(", ")}.`,
-    "Guide topics: 00 overview/booking gates · 01 flights · 02 accommodation · 03 transport & passes · 04 anime/Pokémon/Ghibli · 05 food · 06 day trips · 07 bar mitzvah · 08 practical tips · 09 the canonical daily itinerary · 10 budget · 11 pre-trip checklist.",
-  ].join(" "),
-  inputSchema: z.object({
-    file: z.enum(GUIDE_FILES as [string, ...string[]]).describe("Exact guide file name"),
-  }),
-  execute: async ({ file }) => {
-    const entry = aiContext.find((doc) => doc.file === file);
-    if (!entry) {
-      return { error: `Unknown guide "${file}". Valid values: ${GUIDE_FILES.join(", ")}` };
-    }
-    return { file: entry.file, title: entry.title, markdown: entry.markdown };
-  },
-});
+  return tool({
+    description: [
+      "Read one full planning guide (markdown). These documents are the source of truth for the trip.",
+      "Use it whenever the answer needs detail the digest does not contain — prices, transport passes, booking rules, food picks, packing.",
+      "Available guides:",
+      ...guides.map((guide) => `- ${guide.file}: ${guide.title} — ${guide.description}`),
+    ].join("\n"),
+    inputSchema: z.object({
+      // A live list can in principle come back empty; `z.enum` cannot express
+      // that, and an empty enum would throw while building the tool rather than
+      // when calling it. The plain string keeps the failure inside `execute`,
+      // where it turns into a message the model can act on.
+      file:
+        files.length > 0
+          ? z.enum(files as [string, ...string[]]).describe("Exact guide file name")
+          : z.string().describe("Exact guide file name"),
+    }),
+    execute: async ({ file }) => {
+      const entry = byFile.get(file);
+      if (!entry) {
+        return { error: `Unknown guide "${file}". Valid values: ${files.join(", ")}` };
+      }
+
+      const guide = await getGuide(entry.slug);
+      if (!guide?.body) {
+        return { error: `לא הצלחתי לקרוא את ${entry.file} כרגע. נסו שוב בעוד רגע.` };
+      }
+
+      return { file: entry.file, title: guide.title, markdown: guide.body };
+    },
+  });
+}
 
 function makeGetDay({ days, places }: TripSnapshot) {
   const placesById = new Map(places.map((place) => [place.id, place]));
@@ -325,7 +367,7 @@ function makeNearbyPlaces({ places }: TripSnapshot) {
 /** Bind every tool to one request's snapshot of the trip. */
 export function createTripTools(trip: TripSnapshot) {
   return {
-    readGuide,
+    readGuide: makeReadGuide(trip.guides),
     getDay: makeGetDay(trip),
     searchPlaces: makeSearchPlaces(trip),
     getChecklist: makeGetChecklist(trip),

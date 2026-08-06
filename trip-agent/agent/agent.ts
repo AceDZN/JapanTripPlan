@@ -48,11 +48,16 @@ export default defineAgent({
     },
   },
 
-  // Family app: a runaway loop should stop and ask instead of quietly burning
-  // budget. Hitting a limit pauses the session and offers approve / stop.
+  // This is one durable conversation per family member, potentially kept for
+  // the whole trip. Eve's session limits count every provider input again on
+  // every turn (not just the current context), so a healthy long conversation
+  // eventually hits any finite total. That used to surface Eve's internal
+  // Approve / Stop budget prompt in the family chat and every later message was
+  // held behind it. Per-turn/model context remains bounded by compaction below;
+  // the lifetime counters must not be a user-facing gate.
   limits: {
-    maxInputTokensPerSession: 2_000_000,
-    maxOutputTokensPerSession: 120_000,
+    maxInputTokensPerSession: false,
+    maxOutputTokensPerSession: false,
   },
 
   // Guide markdown is long; compact a little earlier than the 0.9 default so a
