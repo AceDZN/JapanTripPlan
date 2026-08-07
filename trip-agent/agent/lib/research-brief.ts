@@ -16,8 +16,7 @@
  * Opening marker of every prompt that starts a background run.
  *
  * `hooks/live-sessions.ts` matches on it to flag the session, which is what
- * stops a background run from queueing further background runs. The schedule
- * prompt opens with the same marker for the same reason.
+ * stops a background run from queueing further background runs.
  */
 export const BACKGROUND_MARKER = "[משימת רקע";
 

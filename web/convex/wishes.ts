@@ -323,11 +323,9 @@ export const internalCreateFor = internalMutation({
      * Only ever `"researching"`, and only when the agent has already handed the
      * wish to a background run in the same breath as creating it.
      *
-     * Without this the wish lands as `"idea"` and two things break: the board
-     * shows no in-progress state for a wish the family was just told is being
-     * researched, and the sweep in `trip-agent/agent/schedules/wish-research.ts`
-     * cannot retry it if that run dies — the sweep only picks up `"researching"`.
-     * `internalApplyResearch` is what moves it back out.
+     * Without this the wish lands as `"idea"` and the board shows no in-progress
+     * state for work the family was just told is running. `internalApplyResearch`
+     * is what moves it back out.
      */
     researching: v.optional(v.boolean()),
   },
@@ -476,10 +474,9 @@ export const internalApplyResearch = internalMutation({
  * `/agent/wishes/mark-researching`.
  *
  * Called when the chat agent hands a wish to a background run. It is the same
- * state the "ask eve to research it" button sets, reached from the other side,
- * and it buys two things: the board shows the wish in flight instead of looking
- * untouched, and the sweep in `trip-agent/agent/schedules/wish-research.ts` can
- * pick the wish back up if that run dies — the sweep only sees `"researching"`.
+ * state used for work in progress, and it lets the board show the wish in flight
+ * instead of looking untouched. There is deliberately no periodic queue sweep;
+ * the background session that marks this state owns completing the research.
  *
  * Deliberately one-way. `internalApplyResearch` is the only way back out, so a
  * wish the family has already decided on cannot be dragged backwards into a
@@ -498,45 +495,6 @@ export const internalMarkResearching = internalMutation({
       updatedAt: Date.now(),
     });
     return { ok: true as const };
-  },
-});
-
-/**
- * Create a wish from a family member's prompt and park it for eve.
- *
- * This is what the "ask eve to research it" button calls: it records who asked
- * and what they said, marks the wish `researching` so the UI can show it is in
- * flight, and returns the id for the agent to fill in.
- */
-export const requestResearch = mutation({
-  args: {
-    promptText: v.string(),
-    kind: v.optional(kindValidator),
-    priority: v.optional(priorityValidator),
-    visibility: v.optional(visibilityValidator),
-    dayN: v.optional(v.number()),
-  },
-  handler: async (ctx, args) => {
-    const { email, name } = await caller(ctx);
-    const promptText = args.promptText.trim();
-    if (!promptText) throw new Error("Tell eve what you are after.");
-
-    const now = Date.now();
-    return await ctx.db.insert("wishes", {
-      kind: args.kind ?? "other",
-      // Until eve answers, the prompt IS the title — a placeholder here would
-      // read as though the app had lost what you typed.
-      title: promptText.slice(0, 120),
-      promptText,
-      priority: args.priority ?? "want",
-      visibility: args.visibility ?? "shared",
-      dayN: args.dayN,
-      ownerEmail: email,
-      ownerName: name,
-      status: "researching",
-      createdAt: now,
-      updatedAt: now,
-    });
   },
 });
 

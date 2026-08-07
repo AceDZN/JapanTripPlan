@@ -109,11 +109,10 @@ export default defineTool({
 
     const started = await startBackgroundSession(message);
 
-    // Park the wish as `researching` once the run is genuinely under way. Two
-    // reasons, and the second is the important one: the board can show it in
-    // flight instead of looking untouched, and `schedules/wish-research.ts`
-    // only sweeps wishes in that state — so if this background run dies, the
-    // cron is what picks it back up. Without this the hand-off is fire-and-hope.
+    // Park the wish as `researching` once the run is genuinely under way so the
+    // board shows it in flight instead of looking untouched. The background
+    // session itself is the worker; there is deliberately no polling schedule
+    // burning an agent run while the queue is empty.
     //
     // Best-effort on purpose: a wish that will not park is a missing spinner,
     // not a reason to fail research that already started.

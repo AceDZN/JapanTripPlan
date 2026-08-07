@@ -189,102 +189,6 @@ function AddWishForm({ onDone }: { onDone: () => void }) {
   );
 }
 
-/**
- * Hand a half-formed idea to eve.
- *
- * This is the interesting way in. "פיגורת פיקאצ׳ו" is not a wish anyone can
- * act on; eve turns it into a price, a shop, and — when the shop happens to be
- * on a day we are already walking — an entry on that day's page.
- *
- * The wish is created HERE rather than by the agent, so it carries the right
- * owner and visibility from the first moment: ownership comes from the signed-in
- * session, and eve is never allowed to change it.
- */
-function AskEveForm({ onDone }: { onDone: () => void }) {
-  const request = useMutation(api.wishes.requestResearch);
-  const [promptText, setPromptText] = useState("");
-  const [isPrivate, setIsPrivate] = useState(false);
-  const [priority, setPriority] = useState<Priority>("want");
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function submit(event: React.FormEvent) {
-    event.preventDefault();
-    if (!promptText.trim()) return;
-    setSaving(true);
-    setError(null);
-    try {
-      await request({
-        promptText: promptText.trim(),
-        priority,
-        visibility: isPrivate ? "private" : "shared",
-      });
-      onDone();
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "לא הצלחנו לשמור");
-    } finally {
-      setSaving(false);
-    }
-  }
-
-  return (
-    <form className="card wish-form wish-ask" onSubmit={submit}>
-      <p className="wish-ask-lede">
-        <Sparkles size={15} />
-        תארו מה אתם רוצים — eve תבדוק מה זה בדיוק, כמה זה עולה ואיפה משיגים את זה
-        על המסלול שלנו.
-      </p>
-
-      <label>
-        <span className="eyebrow">מה אתם מחפשים</span>
-        <textarea
-          value={promptText}
-          onChange={(e) => setPromptText(e.target.value)}
-          rows={3}
-          placeholder="פיגורה של פיקאצ׳ו, לא ענקית, עד בערך ¥4,000"
-          required
-        />
-      </label>
-
-      <div className="wish-form-row">
-        <label>
-          <span className="eyebrow">כמה חשוב</span>
-          <select value={priority} onChange={(e) => setPriority(e.target.value as Priority)}>
-            {PRIORITIES.map((p) => (
-              <option key={p.value} value={p.value}>
-                {p.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="wish-private-toggle">
-          <span className="eyebrow">מי רואה</span>
-          <button
-            type="button"
-            className={`btn btn-sm wish-vis ${isPrivate ? "btn-dark" : "btn-ghost"}`}
-            onClick={() => setIsPrivate((v) => !v)}
-            aria-pressed={isPrivate}
-          >
-            {isPrivate ? <Lock size={14} /> : <Eye size={14} />}
-            {isPrivate ? "רק אני" : "כל המשפחה"}
-          </button>
-        </label>
-      </div>
-
-      {error ? <p className="wish-error">{error}</p> : null}
-
-      <button className="btn btn-primary" type="submit" disabled={saving}>
-        {saving ? "שולח…" : "לשלוח ל־eve"}
-      </button>
-
-      <p className="wish-ask-note">
-        יש לכם צילום מסך? שלחו אותו ל־eve ב<Link href="/chat">צ׳אט</Link> — שם היא רואה
-        תמונות ויכולה להוסיף מהן משאלה.
-      </p>
-    </form>
-  );
-}
-
 type Wish = {
   id: Id<"wishes">;
   kind: string;
@@ -624,7 +528,6 @@ function Board() {
    */
   const expenses = useQuery(api.money.listExpenses, {}) as Expense[] | undefined;
   const [adding, setAdding] = useState(false);
-  const [asking, setAsking] = useState(false);
   const [person, setPerson] = useState<string>("all");
   const [showDropped, setShowDropped] = useState(false);
 
@@ -673,18 +576,17 @@ function Board() {
           {visible.length} דברים ברשימה. מה שמסומן ״רק אני״ לא מופיע אצל אף אחד אחר.
         </p>
         <div className="wish-add-actions">
-          <button className="btn btn-primary" type="button" onClick={() => { setAsking((v) => !v); setAdding(false); }}>
+          <Link className="btn btn-primary" href="/chat">
             <Sparkles size={16} />
-            {asking ? "סגירה" : "לבקש מ־eve"}
-          </button>
-          <button className="btn btn-ghost" type="button" onClick={() => { setAdding((v) => !v); setAsking(false); }}>
+            לבקש מ־eve בצ׳אט
+          </Link>
+          <button className="btn btn-ghost" type="button" onClick={() => setAdding((v) => !v)}>
             <Plus size={16} />
             {adding ? "סגירה" : "להוסיף ידנית"}
           </button>
         </div>
       </div>
 
-      {asking ? <AskEveForm onDone={() => setAsking(false)} /> : null}
       {adding ? <AddWishForm onDone={() => setAdding(false)} /> : null}
 
       <div className="wish-filters">

@@ -66,8 +66,8 @@ export function rememberSession(
  * `queue_background_research` refuses to run inside a flagged session.
  *
  * Same process-local caveat as above, and the same direction of failure: the
- * brief and the schedule prompt both tell the run not to delegate further, so
- * a lost flag falls back to instruction rather than to nothing.
+ * research brief also tells the run not to delegate further, so a lost flag
+ * falls back to instruction rather than to nothing.
  */
 const backgroundSessions = new Set<string>();
 
